@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="static_shortcut_long_label">long static label</string>
+    <string name="static_shortcut_short_label">short static</string>
+
+    <string name="dynamic_shortcut_long_label">Go to Google\'s Website</string>
+    <string name="dynamic_shortcut_short_label">Google</string>
+</resources>

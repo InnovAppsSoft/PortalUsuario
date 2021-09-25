@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: james.signalstrengths:signalstrengths:0.0.4@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4a819f12ac181ecadaa27b7a78f70677/transformed/jetified-signalstrengths-0.0.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e6c9a53739be3480e80b9bf3161ee20f/transformed/jetified-signalstrengths-0.0.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e6c9a53739be3480e80b9bf3161ee20f/transformed/jetified-signalstrengths-0.0.4/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/e6c9a53739be3480e80b9bf3161ee20f/transformed/jetified-signalstrengths-0.0.4/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/james.signalstrengths/signalstrengths/0.0.4/3ee4a7b169b79c7ec30825c5cc0280a8eece94c/signalstrengths-0.0.4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/james.signalstrengths/signalstrengths/0.0.4/b856c0eb9915f024fb1b361d7eb9519fa5e3111c/signalstrengths-0.0.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

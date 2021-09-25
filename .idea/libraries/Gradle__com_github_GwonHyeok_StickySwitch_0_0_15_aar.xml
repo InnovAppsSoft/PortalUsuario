@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.GwonHyeok:StickySwitch:0.0.15@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/56bfba56da093ba5512090057fca0fed/transformed/jetified-StickySwitch-0.0.15/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/56bfba56da093ba5512090057fca0fed/transformed/jetified-StickySwitch-0.0.15/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/56bfba56da093ba5512090057fca0fed/transformed/jetified-StickySwitch-0.0.15/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.GwonHyeok/StickySwitch/0.0.15/8d86fc066f8a6435b84927ede29cbadfb3cf476/StickySwitch-0.0.15-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

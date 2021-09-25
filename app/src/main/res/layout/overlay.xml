@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.marlon.portalusuario.datastats.MyRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+    <com.marlon.portalusuario.datastats.MySurfaceView
+        android:id="@+id/mySurfaceView"
+        android:layout_width="@dimen/initialWidgetWidth"
+        android:layout_height="@dimen/initialWidgetHeight"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+</com.marlon.portalusuario.datastats.MyRelativeLayout>

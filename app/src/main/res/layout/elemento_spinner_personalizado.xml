@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheckedTextView
+    android:textColor="@color/colorDes"
+    style="?android:attr/spinnerDropDownItemStyle"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:ellipsize="marquee"
+    android:fontFamily="@font/displaybold"
+    android:textSize="@dimen/_12ssp"
+    android:singleLine="true">
+
+</CheckedTextView>

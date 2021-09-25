@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fitsSystemWindows="true">
+
+    <ScrollView
+        android:scrollbars="none"
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:src="@drawable/wifietecsa" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/displaybold"
+            android:gravity="center"
+            android:text="Wifi Etecsa - Nauta Hogar"
+            android:textColor="@color/colorDes"
+            android:textSize="@dimen/_20ssp" />
+
+        <soup.neumorphism.NeumorphCardView
+            style="@style/Widget.Neumorph.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:neumorph_shapeType="flat">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/editUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:drawablePadding="2dp"
+                    android:fontFamily="@font/displaybold"
+                    android:hint="@string/usuario"
+                    android:importantForAutofill="no"
+                    android:inputType="textAutoComplete"
+                    android:textColor="@color/colorDes"
+                    android:textColorHint="@color/colorDes"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:drawablePadding="2dp"
+                    android:fontFamily="@font/displaybold"
+                    android:hint="@string/contrase_a"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:textColor="@color/colorDes"
+                    android:textColorHint="@color/colorDes"
+                    android:textStyle="bold" />
+
+                <soup.neumorphism.NeumorphButton
+                    android:id="@+id/buttonConnect"
+                    style="@style/ShapeAppearance.Neumorph.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/displaybold"
+                    android:gravity="center"
+                    android:text="@string/conectarse"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorDes"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="bold"
+                    app:neumorph_shapeType="flat" />
+
+
+            </LinearLayout>
+        </soup.neumorphism.NeumorphCardView>
+
+
+        <TextView
+            android:id="@+id/errorTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/displaybold"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@color/colorDes"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold" />
+
+        <soup.neumorphism.NeumorphImageButton
+            android:id="@+id/portalavanzar"
+            style="@style/ShapeAppearance.Neumorph.ImageButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/logo_nauta_45"
+            app:neumorph_shapeType="flat" />
+
+    </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

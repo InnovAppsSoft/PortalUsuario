@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.an.deviceinfo:deviceinfo:0.1.5@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c1323d74e1e5751cd7101ce00bac0c9e/transformed/jetified-deviceinfo-0.1.5/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2f234b137d5007a7e12c47fbe31bda50/transformed/jetified-deviceinfo-0.1.5/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/2f234b137d5007a7e12c47fbe31bda50/transformed/jetified-deviceinfo-0.1.5/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2f234b137d5007a7e12c47fbe31bda50/transformed/jetified-deviceinfo-0.1.5/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.an.deviceinfo/deviceinfo/0.1.5/2280203aded12dcf98ea6c4cc824efcd8a27ab12/deviceinfo-0.1.5-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.an.deviceinfo/deviceinfo/0.1.5/27f5a4c0027d7bcdbd14a4a7fac8c0fbb09e4089/deviceinfo-0.1.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

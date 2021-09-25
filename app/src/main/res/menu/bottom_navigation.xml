@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/servicios"
+        android:icon="@drawable/ic_round_home_24"
+        android:title="@string/servicios" />
+
+    <item
+        android:id="@+id/paquete"
+        android:icon="@drawable/ic_data_usage_24"
+        android:title="@string/planes" />
+
+    <item
+        android:id="@+id/wifi"
+        android:icon="@drawable/ic_wifi_ok_24"
+        android:title="@string/internet" />
+
+    <item
+        android:id="@+id/web"
+        android:icon="@drawable/ic_baseline_build_24"
+        android:title="@string/herramientas" />
+
+    <item
+        android:id="@+id/confi"
+        android:icon="@drawable/ic_settings_24"
+        android:title="@string/configuraci_n" />
+</menu>

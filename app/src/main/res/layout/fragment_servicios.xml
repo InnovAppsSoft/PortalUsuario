@@ -1,0 +1,985 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    tools:context=".ServiciosFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/TextTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_14sdp"
+                android:layout_marginEnd="@dimen/_14sdp"
+                android:text="@string/portal_usuario"
+                android:textColor="@color/colorDes"
+                android:textSize="@dimen/_20ssp"
+                android:fontFamily="@font/displaybold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <LinearLayout
+                android:id="@+id/lien"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/TextTitle"
+                tools:ignore="SpeakableTextPresentCheck">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvCarousel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="6dp">
+
+                <com.smarteist.autoimageslider.SliderView
+                    android:visibility="gone"
+                    android:id="@+id/imageSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    app:sliderAnimationDuration="600"
+                    app:sliderAutoCycleDirection="back_and_forth"
+                    app:sliderAutoCycleEnabled="true"
+                    app:sliderIndicatorAnimationDuration="600"
+                    app:sliderIndicatorGravity="center_horizontal|bottom"
+                    app:sliderIndicatorMargin="15dp"
+                    app:sliderIndicatorOrientation="horizontal"
+                    app:sliderIndicatorPadding="3dp"
+                    app:sliderIndicatorRadius="2dp"
+                    app:sliderIndicatorSelectedColor="#5A5A5A"
+                    app:sliderIndicatorUnselectedColor="#FFF"
+                    app:sliderScrollTimeInSec="1"
+                    app:sliderStartAutoCycle="true" />
+
+                    <LinearLayout
+                        android:id="@+id/error"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_baseline_error_24"
+                        app:tint="@color/colorbanner" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="25dp"
+                        android:gravity="center_horizontal"
+                        android:text="@string/comprueba_su_conexi_n_para_cargar_el_banner"
+                        android:textColor="@color/colorbanner"
+                        android:textSize="@dimen/_10ssp"
+                        android:fontFamily="@font/displaybold"
+                        android:textStyle="bold" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/cardview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@+id/lien"
+                app:neumorph_backgroundColor="@color/background"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeType="flat"
+                app:neumorph_shapeAppearance="@style/NeumorphismCard">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/servicios"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/primary"
+                        android:fontFamily="@font/displaybold"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:text="@string/consultar_llamar"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_13sdp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <LinearLayout
+                        android:layout_below="@+id/servicios"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
+
+                            <soup.neumorphism.NeumorphCardView
+                                android:id="@+id/cvDatos"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:layout_marginRight="@dimen/_4sdp"
+                                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                android:layout_weight="1"
+                                app:neumorph_backgroundColor="@color/background"
+                                app:neumorph_shadowElevation="@dimen/_5sdp"
+                                app:neumorph_shapeType="flat"
+                                app:neumorph_shapeAppearance="@style/NeumorphismCard">
+
+                                <RelativeLayout
+                                    android:id="@+id/saldo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:id="@+id/imBtnSaldoBolsaNauta"
+                                        android:layout_width="32dp"
+                                        android:layout_height="32dp"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                        android:contentDescription="@string/app_name"
+                                        android:src="@drawable/saldo1" />
+
+                                    <TextView
+                                        android:id="@+id/enseñar"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:layout_marginLeft="16dp"
+                                        android:layout_marginRight="16dp"
+                                        android:layout_toEndOf="@+id/imBtnSaldoBolsaNauta"
+                                        android:fontFamily="@font/displaybold"
+                                        android:text="@string/saldo1"
+                                        android:textAllCaps="false"
+                                        android:textColor="@color/colorDes"
+                                        android:textSize="@dimen/_13ssp" />
+
+                                </RelativeLayout>
+                            </soup.neumorphism.NeumorphCardView>
+
+                            <soup.neumorphism.NeumorphCardView
+                                android:id="@+id/cvPlanSMS"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:layout_marginRight="@dimen/_4sdp"
+                                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                android:layout_weight="1"
+                                app:neumorph_backgroundColor="@color/background"
+                                app:neumorph_shadowElevation="@dimen/_5sdp"
+                                app:neumorph_shapeType="flat"
+                                app:neumorph_shapeAppearance="@style/NeumorphismCard">
+
+
+                                <RelativeLayout
+                                    android:id="@+id/megas"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:id="@+id/imBtnSaldoSMS"
+                                        android:layout_width="32dp"
+                                        android:layout_height="32dp"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                        android:contentDescription="@string/app_name"
+                                        android:src="@drawable/dato1" />
+
+                                    <TextView
+                                        android:id="@+id/tvSMS"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:layout_marginLeft="16dp"
+                                        android:layout_marginRight="16dp"
+                                        android:layout_toEndOf="@+id/imBtnSaldoSMS"
+                                        android:fontFamily="@font/displaybold"
+                                        android:text="@string/datos1"
+                                        android:textAllCaps="false"
+                                        android:textColor="@color/colorDes"
+                                        android:textSize="@dimen/_13sdp" />
+                                </RelativeLayout>
+                            </soup.neumorphism.NeumorphCardView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llPlan2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
+
+                            <soup.neumorphism.NeumorphCardView
+                                android:id="@+id/cvPlanVoz"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:layout_marginRight="@dimen/_4sdp"
+                                android:layout_marginBottom="@dimen/_4sdp"
+                                android:layout_weight="1"
+                                app:neumorph_backgroundColor="@color/background"
+                                app:neumorph_shadowElevation="@dimen/_5sdp"
+                                app:neumorph_shapeType="flat"
+                                app:neumorph_shapeAppearance="@style/NeumorphismCard">
+
+
+                                <RelativeLayout
+                                    android:id="@+id/bono"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:id="@+id/imBtnSaldoVoz"
+                                        android:layout_width="32dp"
+                                        android:layout_height="32dp"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                        android:contentDescription="@string/app_name"
+                                        android:src="@drawable/bonos1" />
+
+                                    <TextView
+                                        android:id="@+id/tvVoz"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:layout_toEndOf="@+id/imBtnSaldoVoz"
+                                        android:fontFamily="@font/displaybold"
+                                        android:text="@string/bonos"
+                                        android:textAllCaps="false"
+                                        android:textColor="@color/colorDes"
+                                        android:textSize="@dimen/_13sdp" />
+
+                                </RelativeLayout>
+                            </soup.neumorphism.NeumorphCardView>
+
+                            <soup.neumorphism.NeumorphCardView
+                                android:id="@+id/cvPlanAmigo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:layout_marginRight="@dimen/_4sdp"
+                                android:layout_marginBottom="@dimen/_4sdp"
+                                android:layout_weight="1"
+                                app:neumorph_backgroundColor="@color/background"
+                                app:neumorph_shadowElevation="@dimen/_5sdp"
+                                app:neumorph_shapeType="flat"
+                                app:neumorph_shapeAppearance="@style/NeumorphismCard">
+
+                                <RelativeLayout
+                                    android:id="@+id/llamarPrivado"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:id="@+id/imBtnSaldoFriend"
+                                        android:layout_width="32dp"
+                                        android:layout_height="32dp"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                        android:contentDescription="@string/app_name"
+                                        android:src="@drawable/telefono1" />
+
+                                    <TextView
+                                        android:id="@+id/tvAmigo"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:layout_toEndOf="@+id/imBtnSaldoFriend"
+                                        android:fontFamily="@font/displaybold"
+                                        android:text="@string/privado1"
+                                        android:textAllCaps="false"
+                                        android:textColor="@color/colorDes"
+                                        android:textSize="@dimen/_13sdp" />
+                                </RelativeLayout>
+                            </soup.neumorphism.NeumorphCardView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
+
+                            <soup.neumorphism.NeumorphCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:layout_marginRight="@dimen/_4sdp"
+                                android:layout_marginBottom="@dimen/_4sdp"
+                                android:layout_weight="1"
+                                app:neumorph_backgroundColor="@color/background"
+                                app:neumorph_shadowElevation="@dimen/_5sdp"
+                                app:neumorph_shapeType="flat"
+                                app:neumorph_shapeAppearance="@style/NeumorphismCard">
+
+                                <RelativeLayout
+                                    android:id="@+id/llamar99"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:id="@+id/imBtnSaldoVoz1"
+                                        android:layout_width="32dp"
+                                        android:layout_height="32dp"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                        android:contentDescription="@string/app_name"
+                                        android:src="@drawable/telefono1" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:layout_toEndOf="@+id/imBtnSaldoVoz1"
+                                        android:fontFamily="@font/displaybold"
+                                        android:text="@string/_99"
+                                        android:textAllCaps="false"
+                                        android:textColor="@color/colorDes"
+                                        android:textSize="@dimen/_13sdp" />
+
+                                </RelativeLayout>
+                            </soup.neumorphism.NeumorphCardView>
+
+                            <soup.neumorphism.NeumorphCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:layout_marginRight="@dimen/_4sdp"
+                                android:layout_marginBottom="@dimen/_4sdp"
+                                android:layout_weight="1"
+                                app:neumorph_backgroundColor="@color/background"
+                                app:neumorph_shadowElevation="@dimen/_5sdp"
+                                app:neumorph_shapeType="flat"
+                                app:neumorph_shapeAppearance="@style/NeumorphismCard">
+
+                                <RelativeLayout
+                                    android:id="@+id/microfono"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:id="@+id/imBtnSaldoFriend1"
+                                        android:layout_width="32dp"
+                                        android:layout_height="32dp"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                        android:contentDescription="@string/app_name"
+                                        android:src="@drawable/voz1" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:layout_toEndOf="@+id/imBtnSaldoFriend1"
+                                        android:fontFamily="@font/displaybold"
+                                        android:text="@string/voz1"
+                                        android:textColor="@color/colorDes"
+                                        android:textSize="@dimen/_13sdp" />
+                                </RelativeLayout>
+                            </soup.neumorphism.NeumorphCardView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
+
+                            <soup.neumorphism.NeumorphCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:layout_marginRight="@dimen/_4sdp"
+                                android:layout_marginBottom="@dimen/_4sdp"
+                                app:cardBackgroundColor="@color/colorFondo1"
+                                android:layout_weight="1"
+                                app:neumorph_backgroundColor="@color/background"
+                                app:neumorph_shadowElevation="@dimen/_5sdp"
+                                app:neumorph_shapeType="flat"
+                                app:neumorph_shapeAppearance="@style/NeumorphismCard">
+
+                                <RelativeLayout
+                                    android:id="@+id/amigosplan"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:id="@+id/imBtnSaldoVoz2"
+                                        android:layout_width="32dp"
+                                        android:layout_height="32dp"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                        android:contentDescription="@string/app_name"
+                                        android:src="@drawable/amigos1" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:layout_toEndOf="@+id/imBtnSaldoVoz2"
+                                        android:fontFamily="@font/displaybold"
+                                        android:text="@string/amigo1"
+                                        android:textAllCaps="false"
+                                        android:textColor="@color/colorDes"
+                                        android:textSize="@dimen/_13sdp" />
+
+                                </RelativeLayout>
+                            </soup.neumorphism.NeumorphCardView>
+
+                            <soup.neumorphism.NeumorphCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:layout_marginRight="@dimen/_4sdp"
+                                android:layout_marginBottom="@dimen/_4sdp"
+                                android:layout_weight="1"
+                                app:neumorph_backgroundColor="@color/background"
+                                app:neumorph_shadowElevation="@dimen/_5sdp"
+                                app:neumorph_shapeType="flat"
+                                app:neumorph_shapeAppearance="@style/NeumorphismCard">
+
+                                <RelativeLayout
+                                    android:id="@+id/smsplan"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:id="@+id/imBtnSaldoFriend3"
+                                        android:layout_width="32dp"
+                                        android:layout_height="32dp"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                        android:contentDescription="@string/app_name"
+                                        android:src="@drawable/sms1" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/_5sdp"
+                                        android:layout_toEndOf="@+id/imBtnSaldoFriend3"
+                                        android:fontFamily="@font/displaybold"
+                                        android:text="@string/sms1"
+                                        android:textColor="@color/colorDes"
+                                        android:textSize="@dimen/_13sdp" />
+                                </RelativeLayout>
+                            </soup.neumorphism.NeumorphCardView>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/cardview3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@id/cardview"
+                app:neumorph_backgroundColor="@color/background"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeAppearance="@style/NeumorphismCard">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv2345"
+                        android:layout_width="match_parent"
+                        android:layout_height="26dp"
+                        android:background="@color/primary"
+                        android:fontFamily="@font/displaybold"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:text="@string/recargar_saldo"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_13sdp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <ImageView
+                        android:id="@+id/Enviar1"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_below="@+id/tv2345"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginLeft="@dimen/_8sdp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_marginRight="@dimen/_8sdp"
+                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                        android:src="@drawable/enviar1" />
+
+                    <EditText
+                        android:id="@+id/recargartelefono"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv2345"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_toLeftOf="@+id/Enviar1"
+                        android:fontFamily="@font/displaybold"
+                        android:hint="@string/_6666_6666_6666_6666"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:textColor="@color/colorDes"
+                        android:textColorHint="@color/colorDes"
+                        android:textSize="@dimen/_13ssp"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <ImageView
+                        android:id="@+id/camera"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_below="@+id/Enviar1"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginLeft="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_marginRight="@dimen/_8sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:src="@drawable/codigoqr" />
+
+                </RelativeLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/cardview4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@id/cardview3"
+                app:neumorph_backgroundColor="@color/background"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeAppearance="@style/NeumorphismCard">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv23456"
+                        android:layout_width="match_parent"
+                        android:layout_height="26dp"
+                        android:background="@color/primary"
+                        android:fontFamily="@font/displaybold"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:text="@string/adelantar_saldo"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_13sdp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <ImageView
+                        android:id="@+id/adelantar"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_below="@+id/tv23456"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginLeft="@dimen/_8sdp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_marginRight="@dimen/_8sdp"
+                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                        android:src="@drawable/enviar1"
+                        android:contentDescription="@string/app_name" />
+
+                    <EditText
+                        android:id="@+id/adesaldo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv23456"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_toStartOf="@+id/adelantar"
+                        android:fontFamily="@font/displaybold"
+                        android:hint="@string/_25_50"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:textColor="@color/colorDes"
+                        android:textColorHint="@color/colorDes"
+                        android:textSize="@dimen/_13ssp"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+
+                </RelativeLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/cardview5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@id/cardview4"
+                app:neumorph_backgroundColor="@color/background"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeAppearance="@style/NeumorphismCard">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv234"
+                        android:layout_width="match_parent"
+                        android:layout_height="26dp"
+                        android:background="@color/primary"
+                        android:fontFamily="@font/displaybold"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:text="@string/transferir_mi_saldo"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_13sdp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <ImageView
+                        android:id="@+id/Contactos"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_below="@+id/tv234"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginLeft="@dimen/_8sdp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_marginRight="@dimen/_8sdp"
+                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                        app:srcCompat="@drawable/contactos1" />
+
+
+                    <EditText
+                        android:id="@+id/telefono"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv234"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_toLeftOf="@+id/Contactos"
+                        android:fontFamily="@font/displaybold"
+                        android:hint="@string/_55555555"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:textColor="@color/colorDes"
+                        android:textColorHint="@color/colorDes"
+                        android:textSize="@dimen/_13ssp" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/telefono"
+                        android:layout_toStartOf="@+id/Contactos"
+                        android:layout_toLeftOf="@+id/Contactos"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/Clave"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:layout_weight="1"
+                            android:textColorHint="@color/colorDes"
+                            android:fontFamily="@font/displaybold"
+                            android:imeOptions="actionNext"
+                            android:textColor="@color/colorDes"
+                            android:inputType="numberPassword"
+                            android:hint="@string/_1234"
+                            android:maxLength="4"
+                            android:maxLines="1"
+                            android:textSize="@dimen/_13ssp" />
+
+                        <EditText
+                            android:id="@+id/Monto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/displaybold"
+                            android:hint="@string/_0_00"
+                            android:imeOptions="actionDone"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1"
+                            android:textColorHint="@color/colorDes"
+                            android:textColor="@color/colorDes"
+                            android:textSize="@dimen/_13ssp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/Enviar"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_below="@+id/Contactos"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginLeft="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_marginRight="@dimen/_8sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:src="@drawable/enviar1" />
+
+                </RelativeLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/cardview1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                app:constraint_referenced_ids=" cardWeight, cardRun, cardYoga, card1"
+                app:flow_horizontalGap="@dimen/_3sdp"
+                app:flow_maxElementsWrap="2"
+                app:flow_verticalGap="@dimen/_3sdp"
+                app:flow_wrapMode="chain"
+                android:layout_marginBottom="@dimen/_8sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardview5" />
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/cardWeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:neumorph_shapeType="flat"
+                app:neumorph_backgroundColor="@color/background"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeAppearance="@style/NeumorphismCard"
+                tools:ignore="MissingConstraints">
+
+                <LinearLayout
+                    android:id="@+id/PlanAmigos1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_15sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:src="@drawable/amigos1" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="@string/plan_amigo"
+                        android:textColor="@color/colorDes"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/displaybold"
+                        android:textSize="@dimen/_13ssp"
+                        />
+
+
+                </LinearLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/cardRun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:neumorph_shapeType="flat"
+                app:neumorph_backgroundColor="@color/background"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeAppearance="@style/NeumorphismCard"
+                tools:ignore="MissingConstraints">
+
+                <LinearLayout
+                    android:id="@+id/voz"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_15sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:src="@drawable/voz1" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="@string/plan_voz"
+                        android:textColor="@color/colorDes"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/displaybold"
+                        android:textSize="@dimen/_13ssp"/>
+
+                </LinearLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/cardYoga"
+                app:neumorph_shapeType="flat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:neumorph_backgroundColor="@color/background"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeAppearance="@style/NeumorphismCard"
+                tools:ignore="MissingConstraints">
+
+                <LinearLayout
+                    android:id="@+id/sms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_15sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:src="@drawable/sms1" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="@string/plan_sms"
+                        android:textColor="@color/colorDes"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/displaybold"
+                        android:textSize="@dimen/_13ssp"/>
+
+
+                </LinearLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/card1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:neumorph_shapeType="flat"
+                app:neumorph_backgroundColor="@color/background"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeAppearance="@style/NeumorphismCard"
+                tools:ignore="MissingConstraints">
+
+                <LinearLayout
+                    android:id="@+id/emergancia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_15sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:src="@drawable/emergencia1" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="@string/emergencias"
+                        android:textColor="@color/colorDes"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/displaybold"
+                        android:textSize="@dimen/_13ssp"/>
+
+                </LinearLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

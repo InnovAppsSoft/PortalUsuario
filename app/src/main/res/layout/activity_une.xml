@@ -1,0 +1,212 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/virarhaciatras"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/app_name"
+            android:padding="10dp"
+            app:srcCompat="@drawable/ic_ios" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/displaybold"
+            android:text="@string/atr_s"
+            android:textColor="@color/colorTest2"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_below="@+id/topbar"
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:orientation="vertical">
+
+            <soup.neumorphism.NeumorphImageView
+                android:id="@+id/ivLogLogo"
+                style="@style/Widget.Neumorph.ImageView"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/unnamed">
+            </soup.neumorphism.NeumorphImageView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/cardview5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:neumorph_backgroundColor="@color/background"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeAppearance="@style/NeumorphismCard">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv234"
+                        android:layout_width="match_parent"
+                        android:layout_height="26dp"
+                        android:background="@color/primary"
+                        android:fontFamily="@font/displaybold"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:text="@string/consumo_el_ctrico"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_13sdp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <LinearLayout
+                        android:id="@+id/layout1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv234"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/lecturaAnteriorTf"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/displaybold"
+                            android:hint="@string/lectura_anterior"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/colorDes"
+                            android:textColorHint="@color/colorDes"
+                            android:textSize="@dimen/_13ssp"
+                            tools:ignore="TouchTargetSizeCheck" />
+
+                        <EditText
+                            android:id="@+id/lecturaActualTf"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/displaybold"
+                            android:hint="@string/lectura_actual"
+                            android:imeOptions="actionDone"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1"
+                            android:textColor="@color/colorDes"
+                            android:textColorHint="@color/colorDes"
+                            android:textSize="@dimen/_13ssp"
+                            tools:ignore="TouchTargetSizeCheck" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout2"
+                        android:layout_below="@+id/layout1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <Button
+                            android:id="@+id/LimpiarBt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_paginas"
+                            android:fontFamily="@font/displaybold"
+                            android:hint="@string/borrar"
+                            android:textColorHint="@color/colorWhite"
+                            android:textSize="@dimen/_13ssp"
+                            tools:ignore="ButtonStyle,TouchTargetSizeCheck" />
+
+                        <Button
+                            android:id="@+id/CalcularBt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_paginas"
+                            android:fontFamily="@font/displaybold"
+                            android:hint="@string/calcular"
+                            android:textColorHint="@color/colorWhite"
+                            android:textSize="@dimen/_13ssp"
+                            tools:ignore="ButtonStyle,TouchTargetSizeCheck" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout3"
+                        android:layout_below="@id/layout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:id="@+id/vertical5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:orientation="vertical"
+                            android:padding="4dp"
+                            tools:ignore="UselessParent">
+
+                            <TextView
+                                android:id="@+id/consumoTV"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="@string/consumoTV"
+                                android:textSize="@dimen/_10ssp"
+                                android:fontFamily="@font/displaybold"
+                                android:textColor="@color/colorDes"
+                                android:textStyle="normal|bold|italic" />
+
+                            <TextView
+                                android:textSize="@dimen/_10ssp"
+                                android:fontFamily="@font/displaybold"
+                                android:textColor="@color/colorDes"
+                                android:id="@+id/aPagarTV"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="@string/aPagarTV"
+                                android:textStyle="normal|bold|italic" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

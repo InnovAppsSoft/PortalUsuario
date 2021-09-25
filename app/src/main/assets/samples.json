@@ -1,0 +1,189 @@
+[
+  {
+    "id": "1",
+    "categoryName": "samples_tv",
+    "items": [
+      {
+        "id": "1",
+        "name": "samples_tv_24",
+        "watts": "40"
+      },
+      {
+        "id": "2",
+        "name": "samples_tv_32",
+        "watts": "55"
+      },
+      {
+        "id": "3",
+        "name": "samples_tv_50",
+        "watts": "100"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "categoryName": "samples_light",
+    "items": [
+      {
+        "id": "1",
+        "name": "samples_led_bulb",
+        "watts": "10"
+      },
+      {
+        "id": "2",
+        "name": "samples_led_bulb",
+        "watts": "15"
+      },
+      {
+        "id": "3",
+        "name": "samples_led_bulb",
+        "watts": "20"
+      },
+      {
+        "id": "3",
+        "name": "samples_incandescent",
+        "watts": "60"
+      },
+      {
+        "id": "4",
+        "name": "samples_incandescent",
+        "watts": "100"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "categoryName": "samples_fan",
+    "items": [
+      {
+        "id": "1",
+        "name": "samples_small_fan",
+        "watts": "25"
+      },
+      {
+        "id": "2",
+        "name": "samples_med_fan",
+        "watts": "50"
+      },
+      {
+        "id": "3",
+        "name": "samples_big_fan",
+        "watts": "80"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "categoryName": "samples_ac",
+    "items": [
+      {
+        "id": "1",
+        "name": "AC 6000 BTU (0.5 Ton)",
+        "watts": "600"
+      },
+      {
+        "id": "2",
+        "name": "AC 12000 BTU (1 Ton)",
+        "watts": "1200"
+      },
+      {
+        "id": "3",
+        "name": "AC 24000 BTU (2 Ton)",
+        "watts": "2400"
+      },
+      {
+        "id": "4",
+        "name": "AC 48000 BTU (4 Ton)",
+        "watts": "2400"
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "categoryName": "samples_kitchen",
+    "items": [
+      {
+        "id": "1",
+        "name": "samples_refrigerator",
+        "watts": "50"
+      },
+      {
+        "id": "2",
+        "name": "samples_microwave",
+        "watts": "1000"
+      },
+      {
+        "id": "3",
+        "name": "samples_blender",
+        "watts": "1500"
+      },
+      {
+        "id": "4",
+        "name": "samples_coffemaker",
+        "watts": "1500"
+      },
+      {
+        "id": "5",
+        "name": "samples_stove",
+        "watts": "1500"
+      },
+      {
+        "id": "6",
+        "name": "samples_dishwasher",
+        "watts": "1800"
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "categoryName": "samples_home",
+    "items": [
+      {
+        "id": "1",
+        "name": "samples_washing_machine",
+        "watts": "500"
+      },
+      {
+        "id": "2",
+        "name": "samples_dryer",
+        "watts": "3000"
+      },
+      {
+        "id": "3",
+        "name": "samples_hair_dryer",
+        "watts": "1500"
+      },
+      {
+        "id": "4",
+        "name": "samples_vacuum",
+        "watts": "1400"
+      },
+      {
+        "id": "5",
+        "name": "samples_phone",
+        "watts": "2"
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "categoryName": "samples_computer",
+    "items": [
+      {
+        "id": "1",
+        "name": "samples_desktop_computer",
+        "watts": "200"
+      },
+      {
+        "id": "2",
+        "name": "samples_gaming_computer",
+        "watts": "500"
+      },
+      {
+        "id": "3",
+        "name": "samples_laptop",
+        "watts": "50"
+      }
+    ]
+  }
+]

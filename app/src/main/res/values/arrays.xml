@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_rate_plan">
+        <item>@string/settings_fixed_rate</item>
+        <item>@string/settings_tiered_rate</item>
+    </string-array>
+    <string-array name="pref_rate_plan_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="sort">
+        <item>Tiempo de uso</item>
+        <item>Último uso</item>
+        <item>Frecuencia de uso</item>
+        <item>Uso del tráfico móvil</item>
+    </string-array>
+    <string-array name="duration">
+        <item>Hoy</item>
+        <item>Ayer</item>
+    </string-array>
+    <integer-array name="duration_int">
+        <item>0</item>
+        <item>1</item>
+    </integer-array>
+
+    <array name="cabecera_tabla">
+        <item>Rango(Consumo)</item>
+        <item>Consumo(kWh)</item>
+        <item>Precio(Pesos)</item>
+        <item>Importe(Pesos)</item>
+    </array>
+
+    <string-array name="egg_array">
+        <item>Test only, better not use it for cooking :)</item>
+        <item>Soft Boiled</item>
+        <item>Slightly Firmer</item>
+        <item>Firm Yolk</item>
+        <item>Hard Boiled</item>
+    </string-array>
+
+    <declare-styleable name="CodeScannerView">
+        <attr format="color" name="maskColor"/>
+        <attr format="color" name="frameColor"/>
+        <attr format="color" name="autoFocusButtonColor"/>
+        <attr format="color" name="flashButtonColor"/>
+        <attr format="boolean" name="autoFocusButtonVisible"/>
+        <attr format="boolean" name="flashButtonVisible"/>
+        <attr format="dimension" name="frameThickness"/>
+        <attr format="dimension" name="frameCornersSize"/>
+        <attr format="dimension" name="frameCornersRadius"/>
+        <attr format="float" name="frameAspectRatioWidth"/>
+        <attr format="float" name="frameAspectRatioHeight"/>
+        <attr format="float" name="frameSize"/>
+    </declare-styleable>
+
+
+</resources>

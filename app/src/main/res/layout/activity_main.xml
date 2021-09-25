@@ -1,0 +1,408 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin">
+
+        <LinearLayout
+            android:background="@color/dark_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:ignore="UselessParent">
+
+                <LinearLayout
+                    android:id="@+id/ll_recharge"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:id="@+id/autoStartOnBoot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/displaybold"
+                        android:text="@string/config_auto_start_on_boot"
+                        android:textColor="@color/colorDes"
+                        android:theme="@style/SCBSwitch"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <!-- hide when in fullscreen -->
+                    <CheckBox
+                        android:id="@+id/hideWhenInFullscreen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/displaybold"
+                        android:text="@string/config_hide_when_in_fullscreen"
+                        android:textColor="@color/colorDes"
+                        android:theme="@style/SCBSwitch" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@color/dark_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:ignore="UselessParent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/captionMarginTop"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="@dimen/leftCaptionWidth"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0"
+                            android:fontFamily="@font/displaybold"
+                            android:gravity="center_vertical|start"
+                            android:text="@string/config_text_size"
+                            android:textColor="@color/colorDes"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/text_size_value"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0"
+                            android:fontFamily="@font/displaybold"
+                            android:gravity="center"
+                            android:textColor="@color/colorDes"
+                            android:textSize="13sp"
+                            tools:text="10sp" />
+
+                        <ImageButton
+                            android:id="@+id/minusButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/btn_gradient_style"
+                            android:contentDescription="@string/app_name"
+                            app:srcCompat="@drawable/ic_remove_24" />
+
+                        <ImageButton
+                            android:id="@+id/plusButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/btn_gradient_style"
+                            android:contentDescription="@string/app_name"
+                            app:srcCompat="@drawable/ic_add_24" />
+
+                    </LinearLayout>
+
+                    <!-- Pos -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/captionMarginTop"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="@dimen/leftCaptionWidth"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:fontFamily="@font/displaybold"
+                            android:gravity="center_vertical|start"
+                            android:text="@string/config_pos"
+                            android:textColor="@color/colorDes"
+                            android:textSize="13sp" />
+
+                        <SeekBar
+                            android:id="@+id/posSeekBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:max="100" />
+
+                        <TextView
+                            android:id="@+id/pos_text"
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0"
+                            android:gravity="center_vertical|end"
+                            android:textColor="@color/colorDes" />
+
+                    </LinearLayout>
+
+                    <!-- Interval -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/captionMarginTop"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="@dimen/leftCaptionWidth"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/displaybold"
+                            android:gravity="center_vertical|start"
+                            android:text="@string/config_interval"
+                            android:textColor="@color/colorDes"
+                            android:textSize="13sp" />
+
+                        <Spinner
+                            android:id="@+id/intervalSpinner"
+                            android:fontFamily="@font/displaybold"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:backgroundTint="@color/colorDes"
+                            android:textColor="@color/colorDes" />
+
+                    </LinearLayout>
+
+                    <!-- Bar Max [KB] -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/captionMarginTop"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="@dimen/leftCaptionWidth"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/displaybold"
+                            android:gravity="center_vertical|start"
+                            android:text="@string/config_bar_max_kb"
+                            android:textColor="@color/colorDes"
+                            android:textSize="13sp" />
+
+                        <Spinner
+                            android:fontFamily="@font/displaybold"
+                            android:id="@+id/maxSpeedSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:backgroundTint="@color/colorDes"
+                            android:textColor="@color/colorDes" />
+
+                    </LinearLayout>
+
+                    <!-- Unit Type "KB/s" or "kbps" -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/captionMarginTop"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="@dimen/leftCaptionWidth"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/displaybold"
+                            android:gravity="center_vertical|start"
+                            android:text="@string/config_unit_type"
+                            android:textColor="@color/colorDes"
+                            android:textSize="13sp" />
+
+                        <Spinner
+                            android:id="@+id/unitTypeSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:backgroundTint="@color/colorDes"
+                            android:fontFamily="@font/displaybold"
+                            android:textColor="@color/colorDes"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@color/dark_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:ignore="UselessParent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="vertical">
+
+                    <!-- Logarithm Bar -->
+                    <CheckBox
+                        android:id="@+id/logarithmCheckbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/captionMarginTop"
+                        android:fontFamily="@font/displaybold"
+                        android:text="@string/mostrar_barra_de_velocidad_del_tr_fico_de_red"
+                        android:textColor="@color/colorDes"
+                        android:theme="@style/SCBSwitch" />
+
+                    <!-- interpolate -->
+                    <CheckBox
+                        android:id="@+id/interpolateCheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/captionMarginTop"
+                        android:fontFamily="@font/displaybold"
+                        android:text="@string/mostrar_animaci_n_de_la_barra"
+                        android:textColor="@color/colorDes"
+                        android:theme="@style/SCBSwitch" />
+
+                    <!-- Preview -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/displaybold"
+                        android:text="@string/preview"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/colorDes"
+                        android:textSize="20sp" />
+
+                    <LinearLayout
+                        android:id="@+id/preset_button_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <Button
+                            android:id="@+id/sample_1kb_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/background_contador_une"
+                            android:fontFamily="@font/displaybold"
+                            android:text="1KB"
+                            android:textColor="@color/colorDes"
+                            android:textSize="@dimen/sampleButtonTextSize"
+                            tools:ignore="HardcodedText" />
+
+                        <Button
+                            android:id="@+id/sample_20kb_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/background_contador_une"
+                            android:fontFamily="@font/displaybold"
+                            android:text="20KB"
+                            android:textColor="@color/colorDes"
+                            android:textSize="@dimen/sampleButtonTextSize"
+                            tools:ignore="HardcodedText" />
+
+                        <Button
+                            android:id="@+id/sample_50kb_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/background_contador_une"
+                            android:fontFamily="@font/displaybold"
+                            android:text="50KB"
+                            android:textColor="@color/colorDes"
+                            android:textSize="@dimen/sampleButtonTextSize"
+                            tools:ignore="HardcodedText" />
+
+                        <Button
+                            android:id="@+id/sample_80kb_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/background_contador_une"
+                            android:fontFamily="@font/displaybold"
+                            android:text="80KB"
+                            android:textColor="@color/colorDes"
+                            android:textSize="@dimen/sampleButtonTextSize"
+                            tools:ignore="HardcodedText" />
+
+                        <Button
+                            android:id="@+id/sample_100kb_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/background_contador_une"
+                            android:fontFamily="@font/displaybold"
+                            android:text="100KB"
+                            android:textColor="@color/colorDes"
+                            android:textSize="@dimen/sampleButtonTextSize"
+                            tools:ignore="HardcodedText" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <SeekBar
+                            android:id="@+id/seekBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:max="1200"
+                            android:progressBackgroundTint="@color/colorpink"
+                            android:theme="@style/SCBSwitch" />
+
+                        <TextView
+                            android:id="@+id/preview_kb_text"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0"
+                            android:gravity="center_vertical|start"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

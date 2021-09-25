@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: ./app/libs/selibrary-0.0.1-r0.4-BETA.jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/selibrary-0.0.1-r0.4-BETA.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

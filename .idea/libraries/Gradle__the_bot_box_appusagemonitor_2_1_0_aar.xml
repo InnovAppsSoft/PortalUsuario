@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="Gradle: the.bot.box:appusagemonitor:2.1.0@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/afd01fd970fa46c4690ee3223699f2e4/transformed/jetified-appusagemonitor-2.1.0/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c5670a247144dfad90103704d14889f4/transformed/jetified-appusagemonitor-2.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/afd01fd970fa46c4690ee3223699f2e4/transformed/jetified-appusagemonitor-2.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/afd01fd970fa46c4690ee3223699f2e4/transformed/jetified-appusagemonitor-2.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/afd01fd970fa46c4690ee3223699f2e4/transformed/jetified-appusagemonitor-2.1.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/the.bot.box/appusagemonitor/2.1.0/9106b0382150a7f975dbbb1f5653a9b35180bd48/appusagemonitor-2.1.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/the.bot.box/appusagemonitor/2.1.0/b74e21dda27a47c17591e7718cfee6388ecba5ef/appusagemonitor-2.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
