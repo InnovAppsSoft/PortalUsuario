@@ -6,6 +6,23 @@
         <item name="colorAccent">@color/accent</item>
         <item name="android:windowBackground">@color/background</item>
         <item name="android:navigationBarColor">@color/background</item>
+        <item name="android:alertDialogTheme">@style/YourAlertDialogTheme</item>
+    </style>
+
+    <style name="YourAlertDialogTheme">
+        <item name="colorPrimary">@color/background</item>
+        <item name="colorPrimaryDark">@color/background</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
+        <item name="android:windowTitleStyle" />
+        <item name="android:textAppearanceMedium" />
+        <item name="android:borderlessButtonStyle" />
+        <item name="android:buttonBarStyle" />
     </style>
 
     <style name="mySpinnerItemStyle" parent="Base.Widget.AppCompat.Spinner">
@@ -34,9 +51,6 @@
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
-
-
-
 
 
     <style name="UsoDatos" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -173,13 +187,6 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
-
-        <item name="colorControlNormal">@color/colorWhite</item>
-
-    </style>
-
-
     <style name="Tab" parent="Theme.MaterialComponents.Light.NoActionBar">
 
     </style>
@@ -237,22 +244,38 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
+    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
+
+
+    <style name="BaseBottomSheetDialog" parent="@style/Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">true</item>
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+    </style>
+
+    <!-- set the rounded drawable as background to your bottom sheet -->
+    <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_bottom_sheet</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="AppTheme.Toolbar" parent="ThemeOverlay.AppCompat.ActionBar" />
+    <style name="CustomTheme" parent="BottomDialogTheme">
+        <item name="bottom_sheet_extra_padding">4dp</item>
+        <item name="should_draw_under_status_bar">true</item>
+    </style>
 
     <style name="SCBSwitch" parent="Theme.AppCompat.Light">
         <!-- active thumb & track color (30% transparency) -->
-        <item name="colorControlActivated">#00BFA5</item>
+        <item name="colorControlActivated">#2196F3</item>
 
         <!-- inactive thumb color -->
         <item name="colorSwitchThumbNormal">#f1f1f1
         </item>
 
         <!-- inactive track color (30% transparency) -->
-        <item name="android:colorForeground">#42221f1f
+        <item name="android:colorForeground">#f1f1f1
         </item>
     </style>
 
@@ -286,8 +309,8 @@
     </style>
 
     <style name="Firewall" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/downloadBackgroundStart</item>
+        <item name="colorPrimaryDark">@color/downloadBackgroundEnd</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowDisablePreview">true</item>
     </style>
@@ -306,12 +329,35 @@
         <item name="android:tint">?attr/colorControlNormal</item>
     </style>
 
-    <style name="Cosumo" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="floatingActionButtonStyle">@style/Widget.Design.FloatingActionButton</item>
-        <item name="textInputStyle">@style/Widget.Design.TextInputLayout</item>
+    <!-- Base application theme. -->
+    <style name="Toolbar" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!-- android:textColorPrimary is the color of the title text in the Toolbar  -->
+        <item name="android:textColorPrimary">@android:color/holo_blue_light</item>
+        <!-- actionMenuTextColor is the color of the text of action (menu) items  -->
+        <item name="actionMenuTextColor">@android:color/holo_green_light</item>
+        <!-- Tints the input fields like checkboxes and text fields -->
+        <item name="colorAccent">@color/accent</item>
+        <!-- Applies to views in their normal state. -->
+        <item name="colorControlNormal">@color/nav_bar_scrim</item>
+        <!-- Applies to views in their activated state (i.e checked or switches) -->
+        <item name="colorControlActivated">@color/yellow</item>
+        <!-- Applied to framework control highlights (i.e ripples or list selectors) -->
+        <item name="colorControlHighlight">@color/colorRed1</item>
+
+        <!-- Enable these below if you want clicking icons to trigger a ripple effect -->
+        <!--
+        <item name="selectableItemBackground">?android:selectableItemBackground</item>
+        <item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>
+        -->
+    </style>
+
+    <!-- This configures the styles for the title within the Toolbar  -->
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">21sp</item>
+        <item name="android:textStyle">italic</item>
     </style>
 
     <!-- Base application theme. -->

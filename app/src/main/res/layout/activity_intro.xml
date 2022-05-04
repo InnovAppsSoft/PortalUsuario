@@ -78,7 +78,7 @@
             android:layout_marginRight="16dp"
             android:background="@drawable/rounded"
             android:fontFamily="@font/displaybold"
-            android:text="@string/empezar"
+            android:text="Continuar"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/_13sdp" />

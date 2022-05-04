@@ -1,16 +1,11 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:id="@+id/toolbar_firewall"
+    android:minHeight="?attr/actionBarSize"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
+    android:layout_alignParentTop="true"
     android:orientation="horizontal">
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/swEnabled"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:theme="@style/SCBSwitch"
-        tools:ignore="TouchTargetSizeCheck" />
-
-</LinearLayout>
+</androidx.appcompat.widget.Toolbar>

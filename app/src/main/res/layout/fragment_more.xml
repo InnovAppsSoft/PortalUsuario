@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".Fragments.MoreFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingRight="@dimen/_10sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
+
+                <soup.neumorphism.NeumorphTextView
+                    style="@style/Widget.Neumorph.TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/background"
+                    android:fontFamily="@font/displaybold"
+                    android:text="Más de Portal Usuario"
+                    android:textColor="@color/colorDes"
+                    android:textSize="@dimen/_20ssp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+            <!-- CONTENEDOR -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/dark_shadow"
+                android:orientation="vertical">
+                <!-- ACERCA DE PORTAL USUARIO -->
+
+                <!-- REDES SOCIALES -->
+                <soup.neumorphism.NeumorphTextView
+                    style="@style/Widget.Neumorph.TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingTop="20dp"
+                    android:background="@color/background"
+                    android:fontFamily="@font/displaybold"
+                    android:text="@string/redes_sociales"
+                    android:textColor="@color/colorDes"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"/>
+                <!-- CANAL DE TELEGRAM -->
+                <LinearLayout
+                    android:id="@+id/canaloficial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/dark_shadow"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivWifiOn"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/circleshape"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/canal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/displaybold"
+                        android:text="@string/canal_oficial_telegram"
+                        android:textColor="@color/colorDes"
+                        android:textSize="@dimen/_13ssp" />
+
+                </LinearLayout>
+                <!-- SEPARADOR -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/colorTest1" />
+                <!-- PAGINA DE FACEBOOK -->
+                <LinearLayout
+                    android:id="@+id/pgface"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/dark_shadow"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/circleshape"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/canal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/displaybold"
+                        android:text="@string/p_gina_oficial_facebook"
+                        android:textColor="@color/colorDes"
+                        android:textSize="@dimen/_13ssp" />
+
+                </LinearLayout>
+                <!-- SEPARADOR -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/colorTest1" />
+                <!-- BETA TESTERS -->
+                <LinearLayout
+                    android:id="@+id/grupobeta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/dark_shadow"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/circleshape"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/ic_baseline_developer_mode_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/displaybold"
+                        android:text="@string/grupo_betatester"
+                        android:textColor="@color/colorDes"
+                        android:textSize="@dimen/_13ssp" />
+
+                </LinearLayout>
+
+
+                <!-- REPORTE DE ERRORES -->
+                <soup.neumorphism.NeumorphTextView
+                    style="@style/Widget.Neumorph.TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingTop="20dp"
+                    android:background="@color/background"
+                    android:fontFamily="@font/displaybold"
+                    android:text="@string/feedback"
+                    android:textColor="@color/colorDes"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"/>
+                <!-- LOGGING -->
+                <LinearLayout
+                    android:id="@+id/logconfi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/dark_shadow"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/circleshape"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/ic_baseline_bug_report_24"
+                        android:tint="@color/white"
+                        tools:ignore="UseAppTint" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/displaybold"
+                        android:text="@string/registro_de_errores"
+                        android:textColor="@color/colorDes"
+                        android:textSize="@dimen/_13ssp" />
+
+                </LinearLayout>
+                <!-- SEPARADOR -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/colorTest1" />
+                <!-- FEEDBACK -->
+                <LinearLayout
+                    android:id="@+id/Feedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/dark_shadow"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivOtherOn"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/circleshape"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/faeeback" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/displaybold"
+                        android:text="@string/reporte"
+                        android:textColor="@color/colorDes"
+                        android:textSize="@dimen/_13ssp" />
+
+                </LinearLayout>
+
+
+                <!-- MAS -->
+                <soup.neumorphism.NeumorphTextView
+                    style="@style/Widget.Neumorph.TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingTop="20dp"
+                    android:background="@color/background"
+                    android:fontFamily="@font/displaybold"
+                    android:text="@string/otros"
+                    android:textColor="@color/colorDes"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"/>
+                <!-- RATING -->
+                <LinearLayout
+                    android:id="@+id/rating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/dark_shadow"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivWifiOff"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/circleshape"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/valorar" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/displaybold"
+                        android:text="@string/valorar_aplicaci_n"
+                        android:textColor="@color/colorDes"
+                        android:textSize="@dimen/_13ssp" />
+
+                </LinearLayout>
+                <!-- SEPARADOR -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/colorTest1" />
+                <!-- PRIVACIDAD -->
+                <LinearLayout
+                    android:id="@+id/politicade"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/dark_shadow"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/circleshape"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/politica1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/displaybold"
+                        android:text="@string/pol_tica_de_privacidad"
+                        android:textColor="@color/colorDes"
+                        android:textSize="@dimen/_13ssp" />
+                </LinearLayout>
+                <!-- SEPARADOR -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/colorTest1" />
+                <!-- PRIVACIDAD WEB -->
+                <LinearLayout
+                    android:id="@+id/politicadeprivacidad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/dark_shadow"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/circleshape"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/politica1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/displaybold"
+                        android:text="@string/pol_tica_de_privacidad_web"
+                        android:textColor="@color/colorDes"
+                        android:textSize="@dimen/_13ssp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                style="@style/viewParent.headerText.settingsMiniTitle"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:fontFamily="@font/displaybold"
+                android:text="@string/portal_usuario_para_android"
+                android:textAlignment="center"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

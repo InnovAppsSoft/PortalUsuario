@@ -1,0 +1,24 @@
+<component name="libraryTable">
+  <library name="Gradle: com.larswerkman:lobsterpicker:1.0.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/96cfe74fdd64017f2222696cfa5e9bed/transformed/jetified-lobsterpicker-1.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/96cfe74fdd64017f2222696cfa5e9bed/transformed/jetified-lobsterpicker-1.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/96cfe74fdd64017f2222696cfa5e9bed/transformed/jetified-lobsterpicker-1.0.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f9a203ba1c3fadf3dd117cef59e2f8bf/transformed/jetified-lobsterpicker-1.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f9a203ba1c3fadf3dd117cef59e2f8bf/transformed/jetified-lobsterpicker-1.0.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f9a203ba1c3fadf3dd117cef59e2f8bf/transformed/jetified-lobsterpicker-1.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8f6c00186bda81c005cac1f9fa91f36d/transformed/jetified-lobsterpicker-1.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8f6c00186bda81c005cac1f9fa91f36d/transformed/jetified-lobsterpicker-1.0.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/8f6c00186bda81c005cac1f9fa91f36d/transformed/jetified-lobsterpicker-1.0.1/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/72f80766c8e9e6e57ed5258057f34644/transformed/jetified-lobsterpicker-1.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/72f80766c8e9e6e57ed5258057f34644/transformed/jetified-lobsterpicker-1.0.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/72f80766c8e9e6e57ed5258057f34644/transformed/jetified-lobsterpicker-1.0.1/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.larswerkman/lobsterpicker/1.0.1/556b247078cee0c6b7594ffab6f24fde0d839a77/lobsterpicker-1.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.larswerkman/lobsterpicker/1.0.1/a40bbb77d54b2ab66b7e0ba6f613b1edd8c53eb2/lobsterpicker-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

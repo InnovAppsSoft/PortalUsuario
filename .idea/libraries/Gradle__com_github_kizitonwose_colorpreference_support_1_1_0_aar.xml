@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.kizitonwose.colorpreference:support:1.1.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/283e3de9b83d2e7f77cf8bca93e891e1/transformed/jetified-support-1.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/283e3de9b83d2e7f77cf8bca93e891e1/transformed/jetified-support-1.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/283e3de9b83d2e7f77cf8bca93e891e1/transformed/jetified-support-1.1.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.kizitonwose.colorpreference/support/1.1.0/61a89674bee8f14598784aa960590e3c56885f86/support-1.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

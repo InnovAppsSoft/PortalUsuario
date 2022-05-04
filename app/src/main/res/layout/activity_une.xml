@@ -6,38 +6,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:gravity="center_vertical"
-        android:padding="16dp">
-
-        <ImageView
-            android:id="@+id/virarhaciatras"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:contentDescription="@string/app_name"
-            android:padding="10dp"
-            app:srcCompat="@drawable/ic_ios" />
-
-        <TextView
+        android:padding="10dp">
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/displaybold"
-            android:text="@string/atr_s"
-            android:textColor="@color/colorTest2"
-            android:textSize="@dimen/_13ssp"
-            android:textStyle="bold" />
+            android:gravity="center_vertical"
+            android:layout_alignParentStart="true">
+            <ImageView
+                android:id="@+id/virarhaciatras"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/app_name"
+                android:padding="10dp"
+                app:srcCompat="@drawable/ic_ios" />
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/displaybold"
+                android:text="@string/atr_s"
+                android:textColor="@color/colorTest2"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/resumen"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="right"
+            android:src="@drawable/info" />
+
+    </RelativeLayout>
 
     <ScrollView
         android:layout_below="@+id/topbar"
         android:fillViewport="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginBottom="10dp">
 
         <LinearLayout
@@ -47,17 +61,14 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:orientation="vertical">
 
-            <soup.neumorphism.NeumorphImageView
+            <ImageView
                 android:id="@+id/ivLogLogo"
-                style="@style/Widget.Neumorph.ImageView"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_marginTop="18dp"
+                android:layout_height="@dimen/_50sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:contentDescription="@string/app_name"
-                android:scaleType="fitCenter"
                 android:src="@drawable/unnamed">
-            </soup.neumorphism.NeumorphImageView>
+            </ImageView>
 
             <soup.neumorphism.NeumorphCardView
                 android:id="@+id/cardview5"
@@ -203,6 +214,21 @@
                 </RelativeLayout>
 
             </soup.neumorphism.NeumorphCardView>
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swiperefreshune"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_une"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:layout_editor_absoluteX="30dp"
+                    tools:layout_editor_absoluteY="0dp"
+                    android:layoutAnimation="@anim/layout_animation"
+                    tools:listitem="@layout/une_item"/>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
         </LinearLayout>

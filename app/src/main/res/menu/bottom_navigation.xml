@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/servicios"
@@ -17,12 +18,8 @@
         android:title="@string/internet" />
 
     <item
-        android:id="@+id/web"
-        android:icon="@drawable/ic_baseline_build_24"
-        android:title="@string/herramientas" />
-
-    <item
-        android:id="@+id/confi"
-        android:icon="@drawable/ic_settings_24"
-        android:title="@string/configuraci_n" />
+        android:id="@+id/more"
+        android:icon="@drawable/ic_baseline_menu_24"
+        android:title="Más"
+        app:showAsAction="ifRoom"/>
 </menu>

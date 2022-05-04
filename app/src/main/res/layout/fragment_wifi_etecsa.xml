@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:src="@drawable/wifietecsa" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="2">
+            <TextView
+                android:id="@+id/no_users"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sin usuarios registrados"
+                android:textColor="@color/colorDes"
+                android:textSize="@dimen/_13sdp"
+                android:fontFamily="@font/displaybold"
+                android:textAlignment="center"
+                android:layout_weight="1"/>
+            <Spinner
+                android:id="@+id/select_user_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/add_user_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_person_add_24"
+                    android:background="?android:attr/selectableItemBackground"
+                    />
+                <ImageView
+                    android:layout_marginLeft="8dp"
+                    android:id="@+id/edit_user_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_edit_24"
+                    android:background="?android:attr/selectableItemBackground" />
+                <ImageView
+                    android:layout_marginLeft="8dp"
+                    android:id="@+id/del_user_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_delete_24"
+                    android:background="?android:attr/selectableItemBackground" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp">
+            <CheckBox
+                android:id="@+id/connection_limiter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/displaybold"
+                android:text="Limitar tiempo de conexión"
+                android:textColor="@color/colorDes"
+                android:textSize="@dimen/_10sdp"
+                tools:ignore="TouchTargetSizeCheck"/>
+            <LinearLayout
+                android:id="@+id/limiter_params_layout"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_gravity="center">
+                <EditText
+                    android:id="@+id/limiter_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:layout_weight="1"
+                    android:text="1"
+                    android:textAlignment="center"
+                    />
+                <Spinner
+                    android:id="@+id/limiter_type"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:orientation="vertical">
+
+                <soup.neumorphism.NeumorphButton
+                    android:id="@+id/connect_button"
+                    style="@style/ShapeAppearance.Neumorph.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/displaybold"
+                    android:text="@string/conectarse"
+                    android:textColor="@color/colorDes"
+                    android:textSize="@dimen/_10sdp"
+                    android:drawableLeft="@drawable/wifi_icon"
+                    app:neumorph_shapeType="flat" />
+                <soup.neumorphism.NeumorphButton
+                    android:id="@+id/user_info_button"
+                    style="@style/ShapeAppearance.Neumorph.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/displaybold"
+                    android:drawableLeft="@drawable/ic_nauta"
+                    android:text="Datos del usuario"
+                    android:textColor="@color/colorDes"
+                    android:textSize="@dimen/_10sdp"
+                    app:neumorph_shapeType="flat" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/error_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal|bottom"
+                android:layout_gravity="center">
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/error_lottie"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitCenter"
+                    app:lottie_autoPlay="true"
+                    app:lottie_rawRes="@raw/userlogin"
+                    app:lottie_loop="true"/>
+                <TextView
+                    android:id="@+id/error_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryLight"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -53,6 +53,17 @@
         <attr format="float" name="frameAspectRatioHeight"/>
         <attr format="float" name="frameSize"/>
     </declare-styleable>
+    <!-- Reply Preference -->
+    <string-array name="temas_ui">
+        <item>Sistema</item>
+        <item>Claro</item>
+        <item>Oscuro</item>
+    </string-array>
 
+    <string-array name="temas_ui_values">
+        <item>sistema</item>
+        <item>claro</item>
+        <item>oscuro</item>
+    </string-array>
 
 </resources>

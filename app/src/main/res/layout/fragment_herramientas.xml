@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:layout_marginEnd="@dimen/_14sdp"
+                android:text="@string/herramientas"
+                android:textColor="@color/colorDes"
+                android:textSize="@dimen/_20ssp"
+                android:fontFamily="@font/displaybold"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textStyle="bold">
+            </TextView>
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/cardview1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                app:constraint_referenced_ids=" card1, card2, card4, card5"
+                app:flow_horizontalGap="@dimen/_3sdp"
+                app:flow_maxElementsWrap="1"
+                app:flow_verticalGap="@dimen/_3sdp"
+                app:flow_wrapMode="chain"
+                android:layout_marginBottom="@dimen/_8sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textTitle" />
+
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/card1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:neumorph_shapeType="flat"
+                app:neumorph_backgroundColor="@color/background"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeAppearance="@style/NeumorphismCard"
+                tools:ignore="MissingConstraints">
+
+                <LinearLayout
+                    android:id="@+id/cotafuegos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_8sdp"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        app:tint="@color/red"
+                        android:src="@drawable/burn" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="@string/cortafuegos"
+                        android:textColor="@color/colorDes"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/displaybold"
+                        android:textSize="@dimen/_13ssp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="@string/ahorra"
+                        android:textColor="@color/colorDes"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/displaybold"
+                        android:textSize="@dimen/_10ssp"
+                        />
+
+
+                </LinearLayout>
+
+                </LinearLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/card2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:neumorph_shapeType="flat"
+                app:neumorph_backgroundColor="@color/background"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeAppearance="@style/NeumorphismCard"
+                tools:ignore="MissingConstraints">
+
+                <LinearLayout
+                    android:id="@+id/une"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_8sdp"
+
+                    >
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        app:tint="@color/red"
+                        android:src="@drawable/smiles_panel_objects" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="@string/une"
+                        android:textColor="@color/colorDes"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/displaybold"
+                        android:textSize="@dimen/_13ssp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="@string/consumo_el_ctrico_manual"
+                        android:textColor="@color/colorDes"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/displaybold"
+                        android:textSize="@dimen/_10ssp"/>
+
+                </LinearLayout>
+
+                </LinearLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/card4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:neumorph_shapeType="flat"
+                app:neumorph_backgroundColor="@color/background"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeAppearance="@style/NeumorphismCard"
+                tools:ignore="MissingConstraints">
+
+                <LinearLayout
+                    android:id="@+id/info12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_8sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        app:tint="@color/red"
+                        android:src="@drawable/msg_bio" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="@string/informaci_n"
+                        android:textColor="@color/colorDes"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/displaybold"
+                        android:textSize="@dimen/_13ssp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="@string/informaci_n_til_sobre_la_sim"
+                        android:textColor="@color/colorDes"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/displaybold"
+                        android:textSize="@dimen/_10ssp"/>
+
+
+
+                </LinearLayout>
+
+                </LinearLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/card5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:neumorph_shapeType="flat"
+                app:neumorph_backgroundColor="@color/background"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeAppearance="@style/NeumorphismCard"
+                tools:ignore="MissingConstraints">
+
+                <LinearLayout
+                    android:id="@+id/forzar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_8sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        app:tint="@color/red"
+                        android:src="@drawable/msg_pollstop" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="@string/forzar_4g_lte"
+                        android:textColor="@color/colorDes"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/displaybold"
+                        android:textSize="@dimen/_13ssp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="@string/sacale_m_s_provecho_a_tu_cobertura"
+                        android:textColor="@color/colorDes"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/displaybold"
+                        android:textSize="@dimen/_10ssp"/>
+
+                </LinearLayout>
+
+                </LinearLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

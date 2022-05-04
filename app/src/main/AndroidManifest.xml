@@ -15,12 +15,20 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions" />
-
+<!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
+<!--    <uses-permission-->
+<!--        android:name="android.permission.WRITE_EXTERNAL_STORAGE"-->
+<!--        tools:ignore="ScopedStorage" />-->
+<!--    <uses-permission-->
+<!--        android:name="android.permission.PACKAGE_USAGE_STATS"-->
+<!--        tools:ignore="ProtectedPermissions" />-->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <queries>
         <intent>
@@ -50,7 +58,7 @@
     <uses-feature android:name="android.hardware.screen.landscape" />
 
     <application
-        android:allowBackup="true"
+        tools:replace="android:icon"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -58,11 +66,31 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-
+        <activity
+            android:name=".PermissionActivity"
+            android:exported="true" />
+        <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" -->
+        <activity
+            android:name=".PUNotifications.PUNotificationsActivity"
+            android:exported="false" />
+        <!--
+     Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_event" />
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" /> <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" -->
         <activity
             android:name=".onboard.IntroActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -71,57 +99,42 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".Main3Activity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".cortafuegos.ActivityMain"
-            android:label="@string/Cortafuegos"
-            android:screenOrientation="portrait"
-            android:theme="@style/Firewall"
-            tools:ignore="LockedOrientationActivity" />
-
+            android:name=".SettingsActivity"
+            android:label="Configuración" />
         <activity
-            android:name=".JavierActivity"
-            android:exported="true" />
+            android:name=".logging.LogFileViewerActivity"
+            android:theme="@style/Traffic" />
         <activity
             android:name=".DonarActivity"
             android:exported="true" />
         <activity
-            android:name=".InfoSim"
+            android:name=".InfoSimActivity"
             android:exported="true" />
         <activity
-            android:name=".PaginasActivity"
-            android:exported="true" />
-        <activity
-            android:name=".PaquetesActivity"
-            android:exported="true" />
-        <activity
-            android:name=".WifiEtecsa"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".Splach"
+            android:name=".SplashActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity android:name=".codescanner.ScannerActivity" />
-        <activity android:name=".ActivityCell" />
+        <activity android:name=".SetLTEModeActivity" />
         <activity
-            android:name=".PortalUsuarioActivity"
+            android:name=".ui.connectivity.WifiAccountDetailsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".Creditos"
+            android:name=".AboutActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".Sms"
+            android:name=".SmsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".Voz"
+            android:name=".VozActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
@@ -132,74 +145,31 @@
         <activity android:name=".Llamada_99Activity" />
         <activity android:name=".EmergenciaActivity" />
         <activity
-            android:name=".DatosUsuario"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".UserInfo"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".ApparenceActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".une.UneActivity"
+            android:name=".PortalNautaActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity android:name=".ui.PrivacyActivity" />
         <activity
-            android:name=".usodedatos.activities.settings.SettingsActivity"
-            android:parentActivityName=".usodedatos.activities.summary.SummaryActivity"
-            android:theme="@style/AppTheme.DayNight"></activity>
+            android:name=".firewall.ActivityMain"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop"
+            android:theme="@style/Firewall"
+            android:exported="true">
+<!--            <meta-data-->
+<!--                android:name="android.app.searchable"-->
+<!--                android:resource="@xml/searchable" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
         <activity
-            android:name=".usodedatos.activities.summary.SummaryActivity"
-            android:theme="@style/AppTheme.DayNight" />
-        <activity
-            android:name=".datastats.WidgetActivity"
-            android:label="@string/medidor_flotante"
-            android:screenOrientation="fullSensor"
-            android:theme="@style/Traffic" /> <!-- cache directory file provider paths -->
-        <!-- /////////////////////////////////////////////////// -->
-        <service
-            android:name=".cortafuegos.BlackHoleService"
-            android:permission="android.permission.BIND_VPN_SERVICE">
-            <intent-filter>
-                <action android:name="android.net.VpnService" />
-            </intent-filter>
-        </service>
+            android:name=".une.UneActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
 
-        <receiver android:name=".cortafuegos.Receiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
-            </intent-filter>
-        </receiver>
-
-
-        <service android:name=".usodedatos.services.TrafficStatusService" />
-
-        <receiver android:name=".usodedatos.broadcastreceiver.BReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-
-        <service
-            android:name=".datastats.LayerService"
-            android:enabled="true"
-            android:exported="false" />
-
-        <receiver android:name=".datastats.BootReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name=".datastats.SwitchButtonReceiver" />
-
-        <receiver android:name=".PrincipalWidget">
+        <receiver
+            android:name=".PrincipalWidget"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -210,12 +180,50 @@
         </receiver>
 
         <service
-            android:name=".firebase.MyFirebaseMessagingService"
-            android:exported="false">
+            android:name=".firebase.FirebaseService"
+            android:enabled="true"
+            android:exported="true"
+            android:stopWithTask="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+        <service
+            android:name=".apklis.ApklisUpdatesJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"></service>
+        <service
+            android:name=".floating_window.FloatingBubbleService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <receiver
+            android:name=".floating_window.BootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".firewall.BlackHoleService"
+            android:exported="true"
+            android:permission="android.permission.BIND_VPN_SERVICE">
+            <intent-filter>
+                <action android:name="android.net.VpnService" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name=".firewall.Receiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

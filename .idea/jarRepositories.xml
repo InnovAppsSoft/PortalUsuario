@@ -41,5 +41,305 @@
       <option name="name" value="maven3" />
       <option name="url" value="https://oss.jfrog.org/libs-snapshot" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_ant" />
+      <option name="name" value="injected_offline_ant" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/ant/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_logkit" />
+      <option name="name" value="injected_offline_logkit" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/logkit/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_junit" />
+      <option name="name" value="injected_offline_junit" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/junit/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_nekohtml" />
+      <option name="name" value="injected_offline_nekohtml" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/nekohtml/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_plexus" />
+      <option name="name" value="injected_offline_plexus" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/plexus/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_avalon-framework" />
+      <option name="name" value="injected_offline_avalon-framework" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/avalon-framework/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_net" />
+      <option name="name" value="injected_offline_net" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/net/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_commons-codec" />
+      <option name="name" value="injected_offline_commons-codec" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/commons-codec/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_jakarta" />
+      <option name="name" value="injected_offline_jakarta" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/jakarta/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_me" />
+      <option name="name" value="injected_offline_me" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/me/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_jakarta-regexp" />
+      <option name="name" value="injected_offline_jakarta-regexp" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/jakarta-regexp/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_commons-beanutils" />
+      <option name="name" value="injected_offline_commons-beanutils" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/commons-beanutils/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_commons-validator" />
+      <option name="name" value="injected_offline_commons-validator" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/commons-validator/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_jtidy" />
+      <option name="name" value="injected_offline_jtidy" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/jtidy/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_xerces" />
+      <option name="name" value="injected_offline_xerces" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/xerces/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_commons-logging" />
+      <option name="name" value="injected_offline_commons-logging" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/commons-logging/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_it" />
+      <option name="name" value="injected_offline_it" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/it/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_javax" />
+      <option name="name" value="injected_offline_javax" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/javax/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_bsh" />
+      <option name="name" value="injected_offline_bsh" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/bsh/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_joda-time" />
+      <option name="name" value="injected_offline_joda-time" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/joda-time/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_jdom" />
+      <option name="name" value="injected_offline_jdom" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/jdom/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_oro" />
+      <option name="name" value="injected_offline_oro" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/oro/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_ognl" />
+      <option name="name" value="injected_offline_ognl" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/ognl/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_regexp" />
+      <option name="name" value="injected_offline_regexp" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/regexp/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_xmlpull" />
+      <option name="name" value="injected_offline_xmlpull" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/xmlpull/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_mobi" />
+      <option name="name" value="injected_offline_mobi" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/mobi/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_sslext" />
+      <option name="name" value="injected_offline_sslext" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/sslext/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_aopalliance" />
+      <option name="name" value="injected_offline_aopalliance" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/aopalliance/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_commons-net" />
+      <option name="name" value="injected_offline_commons-net" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/commons-net/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_ch" />
+      <option name="name" value="injected_offline_ch" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/ch/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_com" />
+      <option name="name" value="injected_offline_com" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/com/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_org" />
+      <option name="name" value="injected_offline_org" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/org/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_slide" />
+      <option name="name" value="injected_offline_slide" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/slide/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_xpp3" />
+      <option name="name" value="injected_offline_xpp3" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/xpp3/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_asm" />
+      <option name="name" value="injected_offline_asm" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/asm/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_xml-apis" />
+      <option name="name" value="injected_offline_xml-apis" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/xml-apis/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_pl" />
+      <option name="name" value="injected_offline_pl" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/pl/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_commons-lang" />
+      <option name="name" value="injected_offline_commons-lang" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/commons-lang/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_antlr" />
+      <option name="name" value="injected_offline_antlr" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/antlr/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_log4j" />
+      <option name="name" value="injected_offline_log4j" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/log4j/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_androidx" />
+      <option name="name" value="injected_offline_androidx" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/androidx/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_classworlds" />
+      <option name="name" value="injected_offline_classworlds" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/classworlds/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_commons-httpclient" />
+      <option name="name" value="injected_offline_commons-httpclient" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/commons-httpclient/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_commons-io" />
+      <option name="name" value="injected_offline_commons-io" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/commons-io/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_jmock" />
+      <option name="name" value="injected_offline_jmock" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/jmock/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_commons-cli" />
+      <option name="name" value="injected_offline_commons-cli" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/commons-cli/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_commons-digester" />
+      <option name="name" value="injected_offline_commons-digester" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/commons-digester/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_xml-resolver" />
+      <option name="name" value="injected_offline_xml-resolver" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/xml-resolver/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_commons-chain" />
+      <option name="name" value="injected_offline_commons-chain" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/commons-chain/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_backport-util-concurrent" />
+      <option name="name" value="injected_offline_backport-util-concurrent" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/backport-util-concurrent/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_dom4j" />
+      <option name="name" value="injected_offline_dom4j" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/dom4j/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_doxia" />
+      <option name="name" value="injected_offline_doxia" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/doxia/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_info" />
+      <option name="name" value="injected_offline_info" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/info/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_io" />
+      <option name="name" value="injected_offline_io" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/io/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_velocity" />
+      <option name="name" value="injected_offline_velocity" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/velocity/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_commons-collections" />
+      <option name="name" value="injected_offline_commons-collections" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/commons-collections/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_android" />
+      <option name="name" value="injected_offline_android" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/android/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_cc" />
+      <option name="name" value="injected_offline_cc" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/cc/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_no" />
+      <option name="name" value="injected_offline_no" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/no/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="injected_offline_de" />
+      <option name="name" value="injected_offline_de" />
+      <option name="url" value="file:/G:/Programacion/ANDROID/MavenAndroidOfflineRepoUnited/repository/de/" />
+    </remote-repository>
   </component>
 </project>

@@ -1,0 +1,55 @@
+<!-- JalexCode -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet_update"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <LinearLayout
+        android:id="@+id/cView"
+        android:background="@drawable/buttom_sheep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="42dp"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resumen"
+            style="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"/>
+        <TextView
+            android:id="@+id/total_consumption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Consumo total: 0.0 kW/h"
+            style="@style/TextAppearance.AppCompat.Medium"
+            
+            android:layout_weight="1"
+            android:gravity="left" />
+
+        <TextView
+            android:id="@+id/total_to_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Importe total: $0.0"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_weight="1"
+            android:gravity="right"/>
+    </LinearLayout>
+
+</LinearLayout>

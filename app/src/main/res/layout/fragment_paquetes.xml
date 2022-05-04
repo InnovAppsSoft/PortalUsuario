@@ -1,725 +1,1694 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".PaquetesActivity"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="wrap_content">
 
-        <androidx.core.widget.NestedScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/displaybold"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:text="@string/paquetes_combinados"
+                    android:textSize="@dimen/_15ssp" />
+
+            </LinearLayout>
+
+            <soup.neumorphism.NeumorphCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="8dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/package_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/plan_b_sico"
+                            android:textAlignment="center"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:textSize="@dimen/_15sdp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/_10ssp"
+                                android:text="Todas las Redes" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/international_all_value"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="800"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:textStyle="bold" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/international_all_unit"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:text="MB"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/_10ssp"
+                                android:text="@string/lte_4g" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/international_lte_value"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="600"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:textStyle="bold" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/international_lte_unit"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:text="MB"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/_10ssp"
+                                android:text="@string/bono_nacional" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/national_value"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="300"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:textStyle="bold" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/national_unit"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:text="MB"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/minutos" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/minutes_value"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="15"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:textStyle="bold" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:text="min"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/sms" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/sms_value"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="20"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:textStyle="bold" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:text="sms"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="$"
+                                android:textSize="16sp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/_110"
+                                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                                android:textSize="@dimen/_20sdp"
+                                android:textStyle="bold" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginRight="10dp"
+                                android:text="CUP"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/planbasico"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_rounded_shape"
+                        android:text="@string/comprar"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10ssp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <com.lid.lib.LabelTextView
+                    android:id="@+id/ltvNautaMoney"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:textColor="@color/white"
+                    app:label_backgroundColor="@color/yellow"
+                    app:label_distance="20dp"
+                    app:label_orientation="LEFT_TOP"
+                    app:label_text="Básico"
+                    app:label_textSize="10sp" />
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="8dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/package_title1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Plan Medio"
+                            android:textAlignment="center"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:textSize="@dimen/_15sdp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/_10ssp"
+                                android:text="@string/todas_las_redes" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/international_all_value1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="1.5"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:textStyle="bold" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/international_all_unit1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="3dp"
+                                    android:text="GB"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/_10ssp"
+                                android:text="@string/lte_4g" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/international_lte_value1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="2"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:textStyle="bold" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/international_lte_unit1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:text="GB"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/_10ssp"
+                                android:text="@string/bono_nacional" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/national_value1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="300"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:textStyle="bold" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/national_unit1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:text="MB"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/minutos" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/minutes_value1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="35"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:textStyle="bold" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:text="min"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/sms" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/sms_value1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="40"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:textStyle="bold" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:text="sms"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="$"
+                                android:textSize="16sp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/price1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/_250"
+                                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                                android:textSize="@dimen/_20sdp"
+                                android:textStyle="bold" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/cup"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/planmedio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_rounded_shape"
+                        android:text="@string/comprar"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10ssp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <com.lid.lib.LabelTextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:textColor="@color/white"
+                    app:label_backgroundColor="@color/deeppurple"
+                    app:label_distance="20dp"
+                    app:label_orientation="LEFT_TOP"
+                    app:label_text="Medio"
+                    app:label_textSize="10sp" />
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="8dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/package_title2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Plan Extra"
+                            android:textAlignment="center"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:textSize="@dimen/_15sdp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Todas las Redes" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/international_all_value2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="3.5"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:textStyle="bold" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/international_all_unit2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:text="GB"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="(LTE - 4G)" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/international_lte_value2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="4.5"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:textStyle="bold" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/international_lte_unit2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:text="GB"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Bono Nacional" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/national_value2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="300"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:textStyle="bold" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/national_unit2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:text="MB"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Minutos" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/minutes_value2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="75"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:textStyle="bold" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:text="min"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="SMS" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/sms_value2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="80"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:textStyle="bold" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:text="sms"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="$"
+                                android:textSize="16sp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/price2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/_500"
+                                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                                android:textSize="@dimen/_20sdp"
+                                android:textStyle="bold" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/cup"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/planextra"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_rounded_shape"
+                        android:text="@string/comprar"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10ssp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <com.lid.lib.LabelTextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:textColor="@color/white"
+                    app:label_backgroundColor="@color/progressbarLow"
+                    app:label_distance="20dp"
+                    app:label_orientation="LEFT_TOP"
+                    app:label_text="Extra"
+                    app:label_textSize="10sp" />
+
+
+            </soup.neumorphism.NeumorphCardView>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_marginStart="@dimen/_8sdp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_16sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginRight="@dimen/_16sdp"
-                    android:layout_marginBottom="@dimen/_8sdp"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/herramientas"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:fontFamily="@font/displaybold"
-                            android:text="@string/paquetes_combinados"
-                            android:textColor="@color/colorDes"
-                            android:textSize="@dimen/_18ssp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
-
-                    <soup.neumorphism.NeumorphCardView
-                        android:id="@+id/planbasico"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        android:background="@color/background"
-                        style="@style/Widget.Neumorph.CardView">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_8sdp"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:layout_marginRight="@dimen/_8sdp"
-                                android:layout_marginBottom="@dimen/_8sdp">
-
-                                <com.makeramen.roundedimageview.RoundedImageView
-                                    android:id="@+id/image"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/_100sdp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/photo1"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:riv_corner_radius="@dimen/_8sdp">
-
-                                </com.makeramen.roundedimageview.RoundedImageView>
-
-
-                            </RelativeLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/_8sdp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="@dimen/_4sdp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/plan_b_sico"
-                                    android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/comprar"
-                                    android:textColor="@color/primary"
-                                    android:textSize="@dimen/_10sdp" />
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                    </soup.neumorphism.NeumorphCardView>
-
-                    <soup.neumorphism.NeumorphCardView
-                        android:id="@+id/planmedio"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        android:background="@color/background"
-                        style="@style/Widget.Neumorph.CardView" >
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_8sdp"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:layout_marginRight="@dimen/_8sdp"
-                                android:layout_marginBottom="@dimen/_8sdp">
-
-                                <com.makeramen.roundedimageview.RoundedImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/_100sdp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/photo2"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:riv_corner_radius="@dimen/_8sdp">
-
-                                </com.makeramen.roundedimageview.RoundedImageView>
-
-                            </RelativeLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/_8sdp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="@dimen/_4sdp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/plan_medio"
-                                    android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/comprar"
-                                    android:textColor="@color/primary"
-                                    android:textSize="@dimen/_10sdp" />
-                            </LinearLayout>
-
-                        </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
-
-                    <soup.neumorphism.NeumorphCardView
-                        android:layout_width="0dp"
-                        android:id="@+id/planextra"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        android:background="@color/background"
-                        style="@style/Widget.Neumorph.CardView" >
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_8sdp"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:layout_marginRight="@dimen/_8sdp"
-                                android:layout_marginBottom="@dimen/_8sdp">
-
-                                <com.makeramen.roundedimageview.RoundedImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/_100sdp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/photo3"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:riv_corner_radius="@dimen/_8sdp">
-
-                                </com.makeramen.roundedimageview.RoundedImageView>
-
-                            </RelativeLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/_8sdp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="@dimen/_4sdp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/plan_extra"
-                                    android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/comprar"
-                                    android:textColor="@color/primary"
-                                    android:textSize="@dimen/_10sdp" />
-                            </LinearLayout>
-
-                        </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_16sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginRight="@dimen/_16sdp"
-                    android:layout_marginBottom="@dimen/_8sdp"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:fontFamily="@font/displaybold"
-                            android:text="@string/paquetes_solo_4g_lte"
-                            android:textColor="@color/colorDes"
-                            android:textSize="@dimen/_18ssp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
-
-                    <soup.neumorphism.NeumorphCardView
-                        android:id="@+id/plan1gb"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        android:background="@color/background"
-                        style="@style/Widget.Neumorph.CardView">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_8sdp"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:layout_marginRight="@dimen/_8sdp"
-                                android:layout_marginBottom="@dimen/_8sdp">
-
-                                <ImageView
-                                    android:layout_width="@dimen/_25sdp"
-                                    android:layout_height="@dimen/_25sdp"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/gg4" />
-
-                                <TextView
-                                    android:id="@+id/mb400lte"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
-                                    android:fontFamily="@font/displaybold"
-                                    android:padding="@dimen/_8sdp"
-                                    android:text="@string/comprar"
-                                    android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
-                            </RelativeLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/_8sdp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="@dimen/_4sdp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="1 GB"
-                                    android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/_100_cup"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10sdp" />
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                    </soup.neumorphism.NeumorphCardView>
-
-
-                    <soup.neumorphism.NeumorphCardView
-                        android:id="@+id/plan2gb"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        android:background="@color/background"
-                        style="@style/Widget.Neumorph.CardView">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_8sdp"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:layout_marginRight="@dimen/_8sdp"
-                                android:layout_marginBottom="@dimen/_8sdp">
-
-                                <ImageView
-                                    android:layout_width="@dimen/_25sdp"
-                                    android:layout_height="@dimen/_25sdp"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/gg4" />
-
-                                <TextView
-                                    android:id="@+id/mb600lte"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
-                                    android:fontFamily="@font/displaybold"
-                                    android:padding="@dimen/_8sdp"
-                                    android:text="@string/comprar"
-                                    android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
-                            </RelativeLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/_8sdp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="@dimen/_4sdp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/_2_5_gb"
-                                    android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/_200_cup"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10sdp" />
-                            </LinearLayout>
-
-                        </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
-
-                    <soup.neumorphism.NeumorphCardView
-                        android:id="@+id/plan16"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        android:background="@color/background"
-                        style="@style/Widget.Neumorph.CardView">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_8sdp"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:layout_marginRight="@dimen/_8sdp"
-                                android:layout_marginBottom="@dimen/_8sdp">
-
-                                <ImageView
-                                    android:layout_width="@dimen/_25sdp"
-                                    android:layout_height="@dimen/_25sdp"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/gg4" />
-
-                                <TextView
-                                    android:id="@+id/gb1lte"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
-                                    android:fontFamily="@font/raleway_bold"
-                                    android:padding="@dimen/_8sdp"
-                                    android:text="@string/comprar"
-                                    android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
-                            </RelativeLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/_8sdp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="@dimen/_4sdp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/_16_gb"
-                                    android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/_950_cup"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10sdp" />
-                            </LinearLayout>
-
-                        </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
-
-
-                    <soup.neumorphism.NeumorphCardView
-                        android:id="@+id/bolsad"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        android:background="@color/background"
-                        style="@style/Widget.Neumorph.CardView">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_8sdp"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:layout_marginRight="@dimen/_8sdp"
-                                android:layout_marginBottom="@dimen/_8sdp">
-
-                                <ImageView
-                                    android:layout_width="@dimen/_25sdp"
-                                    android:layout_height="@dimen/_25sdp"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/gg4" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
-                                    android:fontFamily="@font/raleway_bold"
-                                    android:padding="@dimen/_8sdp"
-                                    android:text="@string/comprar"
-                                    android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
-                            </RelativeLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/_8sdp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="@dimen/_4sdp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/bolsa_diaria_lte"
-                                    android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/_25_cup_200_mb_24h"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10sdp" />
-                            </LinearLayout>
-
-                        </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
-
-                    <soup.neumorphism.NeumorphCardView
-                        android:id="@+id/bolsac"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        android:background="@color/background"
-                        style="@style/Widget.Neumorph.CardView">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_8sdp"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:layout_marginRight="@dimen/_8sdp"
-                                android:layout_marginBottom="@dimen/_8sdp">
-
-                                <ImageView
-                                    android:layout_width="@dimen/_25sdp"
-                                    android:layout_height="@dimen/_25sdp"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/ic_bolsa2" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
-                                    android:fontFamily="@font/raleway_bold"
-                                    android:padding="@dimen/_8sdp"
-                                    android:text="@string/comprar"
-                                    android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
-                            </RelativeLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/_8sdp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="4dp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/bolsa_correo"
-                                    android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/_50_mb_x_25_cup"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10sdp" />
-                            </LinearLayout>
-
-                        </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
-
-                    <soup.neumorphism.NeumorphCardView
-                        android:id="@+id/tarifa"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        android:background="@color/background"
-                        style="@style/Widget.Neumorph.CardView">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_8sdp"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:layout_marginRight="@dimen/_8sdp"
-                                android:layout_marginBottom="@dimen/_8sdp">
-
-                                <ImageView
-                                    android:layout_width="@dimen/_25sdp"
-                                    android:layout_height="@dimen/_25sdp"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/ic_bolsa" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
-                                    android:fontFamily="@font/raleway_bold"
-                                    android:padding="@dimen/_8sdp"
-                                    android:text="@string/comprar"
-                                    android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
-                            </RelativeLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/_8sdp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="4dp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/tarifa_por_consumo"
-                                    android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="0.50 CUP/MB"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10sdp" />
-                            </LinearLayout>
-
-                        </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
-                </LinearLayout>
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/displaybold"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:text="@string/paquetes_solo_4g_lte"
+                    android:textSize="@dimen/_15ssp" />
 
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
-    </LinearLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <soup.neumorphism.NeumorphCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/title2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Paquete solo LTE"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toTopOf="@+id/divider7"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.06"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp"
+                        android:text="$"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/text2"
+                        app:layout_constraintEnd_toStartOf="@+id/text2"
+                        app:layout_constraintTop_toTopOf="@+id/text2"
+                        app:layout_constraintVertical_bias="0.75" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="100"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="@dimen/_15sdp"
+                        app:layout_constraintEnd_toStartOf="@+id/text_price7"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_price7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CUP"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/text2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.94"
+                        app:layout_constraintStart_toStartOf="@+id/title2"
+                        app:layout_constraintTop_toTopOf="@+id/text2"
+                        app:layout_constraintVertical_bias="0.8" />
+
+                    <View
+                        android:id="@+id/divider7"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="?android:attr/listDivider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_price7" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/h_mb_lte7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:text="@string/v_lidos_por_30d"
+                        app:layout_constraintEnd_toStartOf="@+id/plan1gb"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/divider7" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/value_mb_lte7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="1 GB + 300MB.Cu"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="@+id/h_mb_lte7"
+                        app:layout_constraintStart_toStartOf="@+id/h_mb_lte7"
+                        app:layout_constraintTop_toBottomOf="@+id/h_mb_lte7" />
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/plan1gb"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:text="@string/comprar"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/blue_rounded_shape"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.7"
+                        app:layout_constraintStart_toEndOf="@+id/value_mb_lte7"
+                        app:layout_constraintTop_toBottomOf="@+id/divider7" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/title1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Paquete solo LTE"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toTopOf="@+id/divider6"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.06"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp"
+                        android:text="$"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/text1"
+                        app:layout_constraintEnd_toStartOf="@+id/text1"
+                        app:layout_constraintTop_toTopOf="@+id/text1"
+                        app:layout_constraintVertical_bias="0.75" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="200"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="@dimen/_15sdp"
+                        app:layout_constraintEnd_toStartOf="@+id/text_price6"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_price6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CUP"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/text1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.94"
+                        app:layout_constraintStart_toStartOf="@+id/title1"
+                        app:layout_constraintTop_toTopOf="@+id/text1"
+                        app:layout_constraintVertical_bias="0.8" />
+
+                    <View
+                        android:id="@+id/divider6"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="?android:attr/listDivider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_price6" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/h_mb_lte6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:text="@string/v_lidos_por_30d"
+                        app:layout_constraintEnd_toStartOf="@+id/plan2gb"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/divider6" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/value_mb_lte6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="2.5GB + 300MB.Cu"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="@+id/h_mb_lte6"
+                        app:layout_constraintStart_toStartOf="@+id/h_mb_lte6"
+                        app:layout_constraintTop_toBottomOf="@+id/h_mb_lte6" />
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/plan2gb"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:text="@string/comprar"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/blue_rounded_shape"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.7"
+                        app:layout_constraintStart_toEndOf="@+id/value_mb_lte6"
+                        app:layout_constraintTop_toBottomOf="@+id/divider6" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Paquete 3G - LTE"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toTopOf="@+id/divider5"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.06"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp"
+                        android:text="$"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/text"
+                        app:layout_constraintEnd_toStartOf="@+id/text"
+                        app:layout_constraintTop_toTopOf="@+id/text"
+                        app:layout_constraintVertical_bias="0.75" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="950"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="@dimen/_15sdp"
+                        app:layout_constraintEnd_toStartOf="@+id/text_price5"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_price5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CUP"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.94"
+                        app:layout_constraintStart_toStartOf="@+id/title"
+                        app:layout_constraintTop_toTopOf="@+id/text"
+                        app:layout_constraintVertical_bias="0.8" />
+
+                    <View
+                        android:id="@+id/divider5"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="?android:attr/listDivider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_price5" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/h_mb_lte5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:text="Válidos por 30d"
+                        app:layout_constraintEnd_toStartOf="@+id/plan16"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/divider5" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/value_mb_lte5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="4GB + 12GB(LTE)"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="@+id/h_mb_lte5"
+                        app:layout_constraintStart_toStartOf="@+id/h_mb_lte5"
+                        app:layout_constraintTop_toBottomOf="@+id/h_mb_lte5" />
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/plan16"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:text="@string/comprar"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/blue_rounded_shape"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.7"
+                        app:layout_constraintStart_toEndOf="@+id/value_mb_lte5"
+                        app:layout_constraintTop_toBottomOf="@+id/divider5" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <LinearLayout
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/displaybold"
+                    android:text="Bolsas - Tarifa"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textSize="@dimen/_15ssp" />
+
+            </LinearLayout>
+
+            <soup.neumorphism.NeumorphCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/title_package"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Bolsa de Diaria (LTE)"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toTopOf="@+id/divider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.06"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp"
+                        android:text="$"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_price"
+                        app:layout_constraintEnd_toStartOf="@+id/text_price"
+                        app:layout_constraintTop_toTopOf="@+id/text_price"
+                        app:layout_constraintVertical_bias="0.75" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="25"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="@dimen/_15sdp"
+                        app:layout_constraintEnd_toStartOf="@+id/text_price_unit"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_price_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CUP"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_price"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.94"
+                        app:layout_constraintStart_toStartOf="@+id/title_package"
+                        app:layout_constraintTop_toTopOf="@+id/text_price"
+                        app:layout_constraintVertical_bias="0.8" />
+
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="?android:attr/listDivider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_price" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/h_mb_lte"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:text="Válidos por 24h"
+                        app:layout_constraintEnd_toStartOf="@+id/bolsad"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/value_mb_lte"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="200 MB"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="@+id/h_mb_lte"
+                        app:layout_constraintStart_toStartOf="@+id/h_mb_lte"
+                        app:layout_constraintTop_toBottomOf="@+id/h_mb_lte" />
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/bolsad"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:text="@string/comprar"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/blue_rounded_shape"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.7"
+                        app:layout_constraintStart_toEndOf="@+id/value_mb_lte"
+                        app:layout_constraintTop_toBottomOf="@+id/divider" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/title_package4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Bolsa de Mensajeria"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toTopOf="@+id/divider4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.06"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp"
+                        android:text="$"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_price4"
+                        app:layout_constraintEnd_toStartOf="@+id/text_price4"
+                        app:layout_constraintTop_toTopOf="@+id/text_price4"
+                        app:layout_constraintVertical_bias="0.75" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_price4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="25"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="@dimen/_15sdp"
+                        app:layout_constraintEnd_toStartOf="@+id/text_price_unit4"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_price_unit4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CUP"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_price4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.94"
+                        app:layout_constraintStart_toStartOf="@+id/title_package4"
+                        app:layout_constraintTop_toTopOf="@+id/text_price4"
+                        app:layout_constraintVertical_bias="0.8" />
+
+                    <View
+                        android:id="@+id/divider4"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="?android:attr/listDivider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_price4" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/h_mb_lte4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:text="Válidos por 30d"
+                        app:layout_constraintEnd_toStartOf="@+id/bolsac"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/value_mb_lte4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="600 MB"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="@+id/h_mb_lte4"
+                        app:layout_constraintStart_toStartOf="@+id/h_mb_lte4"
+                        app:layout_constraintTop_toBottomOf="@+id/h_mb_lte4" />
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/bolsac"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:text="@string/comprar"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/blue_rounded_shape"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.7"
+                        app:layout_constraintStart_toEndOf="@+id/value_mb_lte4"
+                        app:layout_constraintTop_toBottomOf="@+id/divider4" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/title_package3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Tarifa por Consumo"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toTopOf="@+id/divider3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.06"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp"
+                        android:text="$"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_price3"
+                        app:layout_constraintEnd_toStartOf="@+id/text_price3"
+                        app:layout_constraintTop_toTopOf="@+id/text_price3"
+                        app:layout_constraintVertical_bias="0.75" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_price3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="0.50"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="@dimen/_15sdp"
+                        app:layout_constraintEnd_toStartOf="@+id/text_price_unit3"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_price_unit3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CUP"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_price3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.94"
+                        app:layout_constraintStart_toStartOf="@+id/title_package3"
+                        app:layout_constraintTop_toTopOf="@+id/text_price3"
+                        app:layout_constraintVertical_bias="0.8" />
+
+                    <View
+                        android:id="@+id/divider3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="?android:attr/listDivider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_price3" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/tarifa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:text="@string/activar"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/blue_rounded_shape"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.7"
+                        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

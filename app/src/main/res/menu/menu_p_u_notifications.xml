@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.marlon.portalusuario.PUNotifications.PUNotificationsActivity">
+    <item
+        android:id="@+id/delete_notifications"
+        android:orderInCategory="100"
+        android:title="@string/eliminar_todos_los_mensajes"
+        android:icon="@drawable/ic_delete"
+        app:showAsAction="never" />
+</menu>

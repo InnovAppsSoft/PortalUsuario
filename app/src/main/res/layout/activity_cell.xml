@@ -34,7 +34,7 @@
                 android:text="@string/informaci_n1"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/_10sdp"
-                tools:ignore="RtlSymmetry" />
+                tools:ignore="RtlSymmetry,TextContrastCheck" />
 
             <TextView
                 android:id="@+id/t1"

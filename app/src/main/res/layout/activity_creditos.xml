@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".Creditos">
+    tools:context=".AboutActivity">
 
     <LinearLayout
         android:id="@+id/topbar"
@@ -73,7 +73,8 @@
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
                         android:orientation="vertical">
 
                         <TextView
@@ -90,14 +91,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/displaybold"
-                            android:text="Desarrollador y Creador de Portal Usuario"
+                            android:text="Creador de Portal Usuario"
                             android:textColor="@color/colorDes"
                             android:textSize="13sp" />
 
 
                     </LinearLayout>
-
-                    <LinearLayout
+                    <!-- Tiles Table -->
+                    <TableLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -105,85 +106,432 @@
                         android:paddingBottom="10dp">
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:gravity="center"
-                            android:padding="8dp">
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_25sdp"
-                                android:contentDescription="@string/app_name"
-                                android:src="@drawable/version2" />
-
-                            <LinearLayout
+                            <TableRow
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:orientation="vertical">
+                                android:gravity="center_vertical"
+                                tools:ignore="UseCompoundDrawables">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="6.4"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="12sp"
-                                    android:textStyle="bold"
-                                    tools:ignore="HardcodedText" />
+                                    android:orientation="horizontal">
+                                    <!-- FACEBOOK -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="2dp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/versi_n"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="13sp" />
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            android:contentDescription="@string/app_name"
+                                            android:src="@drawable/facebook" />
+
+                                        <TextView
+                                            android:id="@+id/marlon_facebook"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginLeft="10dp"
+                                            android:fontFamily="@font/displaybold"
+                                            android:gravity="center_vertical"
+                                            android:text="@string/facebook"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+
+                                    </LinearLayout>
+                                    <!-- INSTAGRAM -->
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:gravity="center_vertical"
+                                        tools:ignore="UseCompoundDrawables">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            android:contentDescription="@string/app_name"
+                                            android:src="@drawable/instagram" />
+
+                                        <TextView
+                                            android:id="@+id/marlon_instagram"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginStart="10dp"
+                                            android:fontFamily="@font/displaybold"
+                                            android:gravity="center_vertical"
+                                            android:text="@string/instagram"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+                                    <!-- TWITTER -->
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:gravity="center_vertical"
+                                        tools:ignore="UseCompoundDrawables">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            android:contentDescription="@string/app_name"
+                                            android:src="@drawable/twitter" />
+
+                                        <TextView
+                                            android:id="@+id/marlon_twitter"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginStart="10dp"
+                                            android:fontFamily="@font/displaybold"
+                                            android:gravity="center_vertical"
+                                            android:text="@string/twitter"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </TableRow>
+                            <!-- SEPARATOR -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="@color/colorTest1" />
+                            <!-- SEPARATOR -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp">
+
                             </LinearLayout>
-                        </LinearLayout>
 
-                        <LinearLayout
+                        </LinearLayout>
+                    </TableLayout>
+                </LinearLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                style="@style/Widget.Neumorph.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background"
+                android:orientation="vertical"
+                app:neumorph_shapeType="flat">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/jalex2" />
+                    <!-- Who Am I -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:gravity="center"
-                            android:padding="8dp">
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/displaybold"
+                            android:text="@string/javier_alejandro_gonz_lez_casellas"
+                            android:textColor="@color/colorEscrito"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
-                            <ImageView
-                                android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_25sdp"
-                                android:contentDescription="@string/app_name"
-                                android:src="@drawable/porciento" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/displaybold"
+                            android:text="@string/desarrollador_de_portal_usuario_para_android_windows"
+                            android:textColor="@color/colorDes"
+                            android:textSize="13sp" />
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/_4_5_5"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="12sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="2dp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/calificaciones"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="12sp" />
-                            </LinearLayout>
-                        </LinearLayout>
 
                     </LinearLayout>
+                    <!-- Tiles Table -->
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:baselineAligned="false"
+                        android:paddingBottom="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+                            <TableRow
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                tools:ignore="UseCompoundDrawables">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+                                    <!-- FACEBOOK -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            android:contentDescription="@string/app_name"
+                                            android:src="@drawable/facebook" />
+
+                                        <TextView
+                                            android:id="@+id/javier_facebook"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:layout_marginLeft="10dp"
+                                            android:fontFamily="@font/displaybold"
+                                            android:text="@string/facebook"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+
+                                    </LinearLayout>
+                                    <!-- TELEGRAM USER -->
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:layout_marginStart="10dp"
+                                        tools:ignore="UseCompoundDrawables">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            android:contentDescription="@string/app_name"
+                                            android:src="@drawable/telegram" />
+
+                                        <TextView
+                                            android:id="@+id/javier_telegram"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginStart="10dp"
+                                            android:gravity="center_vertical"
+                                            android:fontFamily="@font/displaybold"
+                                            android:text="@string/javier_Telegram"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+                                    <!-- TWITTER -->
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:layout_marginStart="10dp"
+                                        tools:ignore="UseCompoundDrawables">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            android:contentDescription="@string/app_name"
+                                            android:src="@drawable/twitter" />
+
+                                        <TextView
+                                            android:id="@+id/javier_twitter"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:layout_marginStart="10dp"
+                                            android:fontFamily="@font/displaybold"
+                                            android:text="@string/twitter"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+                            </TableRow>
+                            <!-- SEPARATOR -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="@color/colorTest1" />
+                            <!-- SEPARATOR -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="@color/colorTest1" />
+                            <TableRow
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                tools:ignore="UseCompoundDrawables">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+                                    <!-- FACEBOOK PAGE -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            android:contentDescription="@string/app_name"
+                                            android:src="@drawable/instagram" />
+
+                                        <TextView
+                                            android:id="@+id/javier_insta"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:layout_marginLeft="10dp"
+                                            android:fontFamily="@font/displaybold"
+                                            android:text="@string/instagram"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+
+                                    </LinearLayout>
+
+                                    <!-- TELEGRAM CHANNEL -->
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:layout_marginStart="10dp"
+                                        tools:ignore="UseCompoundDrawables">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            android:contentDescription="@string/app_name"
+                                            android:src="@drawable/telegram" />
+
+                                        <TextView
+                                            android:id="@+id/javier_canal_telegram"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:layout_marginStart="10dp"
+                                            android:fontFamily="@font/displaybold"
+                                            android:text="@string/javier_canal_telegram"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+
+                                    <!-- GITHUB -->
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:layout_marginStart="32dp"
+                                        tools:ignore="UseCompoundDrawables">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            android:contentDescription="@string/app_name"
+                                            android:src="@drawable/icon_github" />
+
+                                        <TextView
+                                            android:id="@+id/javier_github"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginStart="10dp"
+                                            android:gravity="center_vertical"
+                                            android:fontFamily="@font/displaybold"
+                                            android:text="@string/javier_github"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </TableRow>
+                            <!-- SEPARATOR -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="@color/colorTest1" />
+                            <!-- SEPARATOR -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="@color/colorTest1" />
+                            <TableRow
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                tools:ignore="UseCompoundDrawables">
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+                                    <!-- GMAIL -->
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        tools:ignore="UseCompoundDrawables">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            android:contentDescription="@string/app_name"
+                                            android:src="@drawable/correo" />
+
+                                        <TextView
+                                            android:id="@+id/javier_gmail"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:layout_marginLeft="10dp"
+                                            android:fontFamily="@font/displaybold"
+                                            android:text="@string/gmail_javier"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+                                    <!-- ADDRESS -->
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:layout_marginStart="36dp"
+                                        tools:ignore="UseCompoundDrawables">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            android:contentDescription="@string/app_name"
+                                            android:src="@drawable/pin" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:layout_marginLeft="10dp"
+                                            android:fontFamily="@font/displaybold"
+                                            android:text="@string/address_javier"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+                            </TableRow>
+                        </LinearLayout>
+                    </TableLayout>
 
                 </LinearLayout>
 
@@ -203,7 +551,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/personalinfobtn"
+                        android:id="@+id/experiencebtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -213,26 +561,7 @@
                         android:text="@string/informacion"
                         android:textAllCaps="true"
                         android:textColor="@color/colorDes"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorDes" />
-
-                    <TextView
-                        android:id="@+id/experiencebtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:fontFamily="@font/displaybold"
-                        android:gravity="center"
-                        android:padding="13dp"
-                        android:text="@string/descargas"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorDes"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/_10sdp"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -248,20 +577,19 @@
                         android:fontFamily="@font/displaybold"
                         android:gravity="center"
                         android:padding="13dp"
-                        android:text="DEVELOPERS"
+                        android:text="@string/descargas"
                         android:textAllCaps="true"
                         android:textColor="@color/colorDes"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/_10sdp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
 
             </soup.neumorphism.NeumorphCardView>
 
-
             <!--Bootom Cards with sections-->
             <LinearLayout
-                android:id="@+id/personalinfo"
+                android:id="@+id/experience"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -292,12 +620,10 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/displaybold"
-                                    android:text="@string/sobre_m"
+                                    android:text="@string/sobre_nosotros"
                                     android:textColor="@color/colorEscrito"
                                     android:textSize="13sp"
                                     android:textStyle="bold" />
-
-
                             </LinearLayout>
 
                             <TextView
@@ -320,7 +646,6 @@
                     android:layout_height="wrap_content"
                     style="@style/Widget.Neumorph.CardView"
                     app:neumorph_shapeType="flat">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -328,167 +653,115 @@
                         android:layout_marginBottom="15dp"
                         android:orientation="vertical"
                         android:padding="16dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/displaybold"
-                                android:text="@string/contacto"
+                                android:text="@string/acerca_de_la_app"
                                 android:textColor="@color/colorEscrito"
                                 android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                tools:ignore="UseCompoundDrawables">
-
-                                <ImageView
-                                    android:layout_width="@dimen/_25sdp"
-                                    android:layout_height="@dimen/_25sdp"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/facebook" />
-
-                                <TextView
-                                    android:id="@+id/facebook"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="20dp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/facebook"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="13sp" />
-                            </LinearLayout>
-
+                            <!-- About the APP -->
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:background="@color/colorTest1" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
-                                android:gravity="center_vertical"
-                                tools:ignore="UseCompoundDrawables">
+                                android:baselineAligned="false"
+                                android:paddingBottom="10dp">
 
-                                <ImageView
-                                    android:layout_width="@dimen/_25sdp"
-                                    android:layout_height="@dimen/_25sdp"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/correo" />
-
-                                <TextView
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="20dp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/marlonrivero1999_gmail_com"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="13sp" />
+                                    android:layout_weight="2"
+                                    android:gravity="center"
+                                    android:padding="8dp">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_25sdp"
+                                        android:layout_height="@dimen/_25sdp"
+                                        android:contentDescription="@string/app_name"
+                                        android:src="@drawable/version2" />
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/version"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/displaybold"
+                                            android:text="6.+"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp"
+                                            android:textStyle="bold"
+                                            tools:ignore="HardcodedText" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="2dp"
+                                            android:fontFamily="@font/displaybold"
+                                            android:text="@string/versi_n"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="13sp" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:gravity="center"
+                                    android:padding="8dp">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_25sdp"
+                                        android:layout_height="@dimen/_25sdp"
+                                        android:contentDescription="@string/app_name"
+                                        android:src="@drawable/porciento" />
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/displaybold"
+                                            android:text="+270K"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="2dp"
+                                            android:fontFamily="@font/displaybold"
+                                            android:text="Descargas"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
                             </LinearLayout>
 
-                            <LinearLayout
+                            <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:background="@color/colorTest1" />
-
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:gravity="center_vertical"
-                                tools:ignore="UseCompoundDrawables">
-
-                                <ImageView
-                                    android:layout_width="@dimen/_25sdp"
-                                    android:layout_height="@dimen/_25sdp"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/pin" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="20dp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/camaguey_la_caridad"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="13sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:background="@color/colorTest1" />
-
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:gravity="center_vertical"
-                                tools:ignore="UseCompoundDrawables">
-
-                                <ImageView
-                                    android:layout_width="@dimen/_25sdp"
-                                    android:layout_height="@dimen/_25sdp"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/instagram" />
-
-                                <TextView
-                                    android:id="@+id/instagram"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="20dp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/instagram"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="13sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:background="@color/colorTest1" />
-
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:gravity="center_vertical"
-                                tools:ignore="UseCompoundDrawables">
-
-                                <ImageView
-                                    android:layout_width="@dimen/_25sdp"
-                                    android:layout_height="@dimen/_25sdp"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/twitter" />
-
-                                <TextView
-                                    android:id="@+id/twitter"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="20dp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/twitter"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="13sp" />
-                            </LinearLayout>
-
+                                android:fontFamily="@font/displaybold"
+                                android:text="@string/hecha_con_amor"
+                                android:textColor="@color/colorEscrito"
+                                android:gravity="center_horizontal"
+                                android:textSize="13sp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -646,7 +919,7 @@
 
             <!--Experience Bottom Cards-->
             <LinearLayout
-                android:id="@+id/experience"
+                android:id="@+id/review"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -904,130 +1177,6 @@
                                 android:textColor="@color/colorDes"
                                 android:textSize="@dimen/_10ssp"
                                 android:textStyle="bold" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </soup.neumorphism.NeumorphCardView>
-
-            </LinearLayout>
-
-            <!--Review Bottom Cards-->
-            <LinearLayout
-                android:id="@+id/review"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <soup.neumorphism.NeumorphCardView
-                    style="@style/Widget.Neumorph.CardView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/background"
-                    android:orientation="vertical"
-                    app:neumorph_shapeType="flat">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/javier" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:fontFamily="@font/displaybold"
-                                android:text="@string/jalexcode"
-                                android:textColor="@color/colorEscrito"
-                                android:textSize="15sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/displaybold"
-                                android:text="@string/desarrollador_de_portal_usuario_para_android_windows"
-                                android:textColor="@color/colorDes"
-                                android:textSize="13sp" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:baselineAligned="false"
-                            android:paddingBottom="10dp">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:gravity="center"
-                                android:padding="8dp">
-
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="10dp"
-                                    android:orientation="vertical">
-
-                                    <Button
-                                        android:id="@+id/donarjavier"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:background="@drawable/btn_gradient_style"
-                                        android:text="@string/donar"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/_10ssp"
-                                        android:textStyle="normal"
-                                        tools:ignore="TooDeepLayout" />
-
-                                </LinearLayout>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:gravity="center"
-                                android:padding="8dp">
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="10dp"
-                                    android:orientation="vertical">
-
-                                    <Button
-                                        android:id="@+id/telegram"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:background="@drawable/btn_gradient_style"
-                                        android:text="Telegram"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/_10ssp"
-                                        android:textStyle="normal"
-                                        tools:ignore="TooDeepLayout" />
-
-
-                                </LinearLayout>
-                            </LinearLayout>
-
                         </LinearLayout>
 
                     </LinearLayout>

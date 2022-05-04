@@ -1,52 +1,64 @@
 package com.marlon.portalusuario;
 
-public class User {
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
+@Entity(tableName = "user")
+public class User implements Serializable {
+    //
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private String username;
     private String password;
+    private String nautaEmailPassword;
     private String ATTRIBUTE_UUID;
     private String CSRFHW;
+    private int accountNavegationType;
     private String leftTime;
-    private String saldoCuenta;
-    private String estadoCuenta;
-    private static User my_user;
-
+    private String accountCredit;
+    private String accountState;
+    private long lastConnectionDateTime;
+    // added 25-3-2022
+    private String blockDate;
+    private String delDate;
+    private String accountType;
+    private String serviceType;
+    private String emailAccount;
+    @Ignore
+    private static User myUser;
+    //
+    @Ignore
     public User() {
-        this.username = "prp";
+        username = "prp";
     }
 
-    public static User getUser(){
-        if (my_user==null){
-            my_user = new User();
-        }
-            return my_user;
-    }
-
-    public void setUser(User user){
-        my_user = user;
-    }
-
-    public User(String username, String password, String ATTRIBUTE_UUID, String CSRFHW, String leftTime, String saldoCuenta, String estadoCuenta) {
+    public User(final String username, final String password, final String nautaEmailPassword, final String ATTRIBUTE_UUID, final String CSRFHW, final int accountNavegationType, final String leftTime, final String accountCredit, final String accountState, final long lastConnectionDateTime, final String blockDate, final String delDate, final String accountType, final String serviceType, final String emailAccount) {
         this.username = username;
         this.password = password;
+        this.nautaEmailPassword = nautaEmailPassword;
         this.ATTRIBUTE_UUID = ATTRIBUTE_UUID;
         this.CSRFHW = CSRFHW;
+        this.accountNavegationType = accountNavegationType;
         this.leftTime = leftTime;
-        this.saldoCuenta = saldoCuenta;
-        this.estadoCuenta = estadoCuenta;
+        this.accountCredit = accountCredit;
+        this.accountState = accountState;
+        this.lastConnectionDateTime = lastConnectionDateTime;
+        this.blockDate = blockDate;
+        this.delDate = delDate;
+        this.accountType = accountType;
+        this.serviceType = serviceType;
+        this.emailAccount = emailAccount;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", ATTRIBUTE_UUID='" + ATTRIBUTE_UUID + '\'' +
-                ", CSRFHW='" + CSRFHW + '\'' +
-                ", leftTime='" + leftTime + '\'' +
-                ", saldoCuenta='" + saldoCuenta + '\'' +
-                ", estadoCuenta='" + estadoCuenta + '\'' +
-                '}';
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(final int id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -56,6 +68,11 @@ public class User {
     public void setUsername(String username)
     {
         this.username = username;
+    }
+
+    public String getFullUsername() {
+        String mail = getAccountNavegationType() == 0 ? "@nauta.com.cu" : "@nauta.co.cu";
+        return username + mail;
     }
 
     public String getPassword()
@@ -98,23 +115,102 @@ public class User {
         this.leftTime = leftTime;
     }
 
-    public String getSaldoCuenta()
+    public String getAccountCredit()
     {
-        return saldoCuenta;
+        return accountCredit;
     }
 
-    public void setSaldoCuenta(String saldoCuenta)
+    public void setAccountCredit(String accountCredit)
     {
-        this.saldoCuenta = saldoCuenta;
+        this.accountCredit = accountCredit;
     }
 
-    public String getEstadoCuenta()
+    public String getAccountState()
     {
-        return estadoCuenta;
+        return accountState;
     }
 
-    public void setEstadoCuenta(String estadoCuenta) {
-        this.estadoCuenta = estadoCuenta;
+    public void setAccountState(String accountState) {
+        this.accountState = accountState;
     }
 
+    public int getAccountNavegationType() {
+        return this.accountNavegationType;
+    }
+
+    public void setAccountNavegationType(final int accountNavegationType) {
+        this.accountNavegationType = accountNavegationType;
+    }
+
+    public String getNautaEmailPassword() {
+        return this.nautaEmailPassword;
+    }
+
+    public void setNautaEmailPassword(final String nautaEmailPassword) {
+        this.nautaEmailPassword = nautaEmailPassword;
+    }
+
+    public long getLastConnectionDateTime() {
+        return this.lastConnectionDateTime;
+    }
+
+    public void setLastConnectionDateTime(final long lastConnectionDateTime) {
+        this.lastConnectionDateTime = lastConnectionDateTime;
+    }
+
+    public static User getUser(){
+        if (myUser ==null){
+            myUser = new User();
+        }
+        return myUser;
+    }
+
+    public void setUser(User user){
+        myUser = user;
+    }
+
+    public String getBlockDate() {
+        return this.blockDate;
+    }
+
+    public void setBlockDate(final String blockDate) {
+        this.blockDate = blockDate;
+    }
+
+    public String getDelDate() {
+        return this.delDate;
+    }
+
+    public void setDelDate(final String delDate) {
+        this.delDate = delDate;
+    }
+
+    public String getAccountType() {
+        return this.accountType;
+    }
+
+    public void setAccountType(final String accountType) {
+        this.accountType = accountType;
+    }
+
+    public String getServiceType() {
+        return this.serviceType;
+    }
+
+    public void setServiceType(final String serviceType) {
+        this.serviceType = serviceType;
+    }
+
+    public String getEmailAccount() {
+        return this.emailAccount;
+    }
+
+    public void setEmailAccount(final String emailAccount) {
+        this.emailAccount = emailAccount;
+    }
+
+    @Override
+    public String toString() {
+        return username;
+    }
 }

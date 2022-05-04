@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/dark_shadow"
-    tools:context=".Splach">
+    android:background="@color/background"
+    tools:context=".SplashActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,8 @@
         android:orientation="vertical">
 
         <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_width="match_parent"
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/_100sdp"
             android:src="@drawable/portal"
             app:riv_corner_radius="@dimen/_8sdp" />
@@ -32,5 +33,23 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:gravity="center">-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/_20sdp"-->
+<!--            android:fontFamily="@font/displaybold"-->
+<!--            android:text="versión ?.?"-->
+<!--            android:textColor="@color/colorDes"-->
+<!--            android:textSize="@dimen/_12ssp"/>-->
+<!--    </LinearLayout>-->
 
 </RelativeLayout>

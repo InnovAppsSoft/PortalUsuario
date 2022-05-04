@@ -1,10 +1,18 @@
 <component name="libraryTable">
   <library name="Gradle: com.felipecsl:gifimageview:2.1.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/decc28df7e0318d59f6d0989ab0009a9/transformed/jetified-gifimageview-2.1.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/68448451f1bea1ac7cd88f9fc4cbdcd9/transformed/jetified-gifimageview-2.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/68448451f1bea1ac7cd88f9fc4cbdcd9/transformed/jetified-gifimageview-2.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/68448451f1bea1ac7cd88f9fc4cbdcd9/transformed/jetified-gifimageview-2.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c2c426c0e3407b60e9f2611ba2b8b846/transformed/jetified-gifimageview-2.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c2c426c0e3407b60e9f2611ba2b8b846/transformed/jetified-gifimageview-2.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c2c426c0e3407b60e9f2611ba2b8b846/transformed/jetified-gifimageview-2.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/dc6aa6c21b344fd000ee8443e87c4177/transformed/jetified-gifimageview-2.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/dc6aa6c21b344fd000ee8443e87c4177/transformed/jetified-gifimageview-2.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/dc6aa6c21b344fd000ee8443e87c4177/transformed/jetified-gifimageview-2.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6d27659f8a2f848b27958043f5b257cc/transformed/jetified-gifimageview-2.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/6d27659f8a2f848b27958043f5b257cc/transformed/jetified-gifimageview-2.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6d27659f8a2f848b27958043f5b257cc/transformed/jetified-gifimageview-2.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a8e2fec35e227d10417a230027ab164c/transformed/jetified-gifimageview-2.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/a8e2fec35e227d10417a230027ab164c/transformed/jetified-gifimageview-2.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a8e2fec35e227d10417a230027ab164c/transformed/jetified-gifimageview-2.1.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.felipecsl/gifimageview/2.1.0/123be12d9cf8d2378d8934e1a5d9744b94fda2be/gifimageview-2.1.0-javadoc.jar!/" />

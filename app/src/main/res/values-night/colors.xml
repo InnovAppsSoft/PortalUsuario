@@ -8,10 +8,20 @@
     <color name="colorblue">#000000</color>
     <color name="colorModoNoche">#ffffff</color>
 
+    <color name="downloadBackgroundStart">#000000</color>
+    <color name="downloadBackgroundEnd">#000000</color>
+
+    <color name="transparent_white">#99000000</color>
+
     <color name="colorTextHit">#ffffff</color>
 
     <color name="colorbanner">#ffffff</color>
 
+    <color name="colorButtom">#212121</color>
+    <color name="color1">#4E4E4E</color>
+    <color name="color2">#4E4E4E</color>
+
+    <color name="red">#ff1aafff</color>
 
     <color name="colorProgress">#304FFE</color>
 

@@ -7,13 +7,23 @@
         android:title="@string/menu_search"
         netguard:actionViewClass="androidx.appcompat.widget.SearchView"
         netguard:showAsAction="ifRoom|collapseActionView" />
+
     <item
         android:id="@+id/menu_network"
         android:title="@string/menu_network"
         netguard:showAsAction="always" />
+
     <item
         android:id="@+id/menu_refresh"
         android:title="@string/menu_refresh" />
+
+    <!-- MOSTRAR LAS APKS DEL SISTEMA -->
+    <item
+        android:id="@+id/menu_show_system_apps"
+        android:checkable="true"
+        android:checked="false"
+        android:title="@string/menu_show_system_apps" />
+
     <item
         android:id="@+id/menu_whitelist_wifi"
         android:checkable="true"
@@ -28,7 +38,6 @@
     <item
         android:id="@+id/menu_reset_other"
         android:title="@string/menu_reset_other" />
-
     <item
         android:id="@+id/menu_vpn_settings"
         android:title="@string/menu_vpn_settings" />

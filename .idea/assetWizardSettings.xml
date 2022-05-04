@@ -318,7 +318,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/D:/TELEFONOS/ANDROID/AndroidStudio/Sdk/icons/material/materialicons/error/baseline_error_24.xml" />
+                                      <entry key="url" value="file:/G:/Programacion/ANDROID/SDK/icons/material/materialicons/sync/baseline_sync_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -328,8 +328,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_baseline_error_24" />
+                            <entry key="color" value="487bf3" />
+                            <entry key="outputName" value="ic_baseline_sync_24" />
                             <entry key="sourceFile" value="C:\Users\Marlon\Desktop\settings.svg" />
                           </map>
                         </option>

@@ -1,6 +1,7 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Portal Usuario</string>
     <string name="acerca_de">Acerca de</string>
+    <string name="redes_sociales">Redes sociales</string>
     <string name="portal_usuario">Portal Usuario</string>
     <string name="inf_de_la_aplicaci_n">Inf.de la aplicación</string>
     <string name="night_mode">NIGHT MODE</string>
@@ -38,7 +39,7 @@
     <string name="solicitar_1_o_2_cuc">Solicitar 1 o 2 CUC</string>
     <string name="recargar_saldo_del_m_vil">Recargar saldo del móvil</string>
     <string name="pesquisa_en_l_nea">Pesquisa en Línea</string>
-    <string name="las_donaciones_sirven_para_motivar_a_los_desarrolladores_y_apreciar_su_trabajo_como_aplicaci_n_libre_es_un_proyecto_llevado_a_cabo_en_mis_tiempos_libres">Las donaciones sirven para motivar a los desarrolladores y apreciar su trabajo.Como aplicación libre es un proyecto llevado a cabo en mis tiempos libres</string>
+    <string name="texto_donacion">Si te gusta esta aplicación y deseas motivarnos a seguirla mejorando, realiza una donación. No importa que tan modesta sea, la intención cuenta. Gracias</string>
     <string name="monto_a_donar">Monto a donar</string>
     <string name="cancel">cancel</string>
     <string name="voz">VOZ</string>
@@ -82,10 +83,10 @@
     <string name="go_to_settings">GOTO SETTINGS</string>
 
 
-    <string name="msg_sure">¿Estas seguro?</string>
+    <string name="msg_sure">¿Estás seguro?</string>
 
     <string name="send_feedback">Enviar Feedback</string>
-    <string name="feedback_email" translatable="false">marlonrivero1999@gmail.com</string>
+    <string name="feedback_email" translatable="false">portalusuarioapk@gmail.com</string>
     <string name="feedback_subject">Feedback sobre la aplicación Portal Usuario</string>
 
 
@@ -101,7 +102,10 @@
     <string name="t_rminos_y_condiciones">Términos y Condiciones</string>
     <string name="youtube">YouTube</string>
     <string name="instagram">Instagram</string>
+    <string name="javier_github">GitHub</string>
+    <string name="javier_Telegram">Telegram</string>
     <string name="facebook">Facebook</string>
+    <string name="javier_pagina_facebook">Página</string>
     <string name="_1cuc_200mb_x_24h">1CUC + 200MB x 24h</string>
 
 
@@ -115,7 +119,7 @@
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
-    <string name="hello_world">Hello Square World!</string>
+    <string name="otros">Otros</string>
     <string name="appName">Nauta Connect</string>
     <string name="appDescription">Conectarse nunca fue tan simple ...</string>
     <string name="otros_sitios">Sitios de interes</string>
@@ -166,7 +170,7 @@
 
     /////////////////
 
-    <string name="my_desc">Cuando te levantas tienes dos opciones... regresar a dormir y soñar tus sueños o levantarte y alcanzarlos</string>
+    <string name="my_desc">Somos un equipo de desarrollo de aplicaciones para la plataforma Android que aspira poder entregar al usuario una experiencia agradable y satisfactoria con nuestros productos digitales</string>
 
     <string name="permission_location">Se requiere permiso de ubicación para proporcionarle la mejor información sobre su dispositivo</string>
     <string name="iniciar">Iniciar</string>
@@ -177,16 +181,16 @@
     <string name="datos_nacionales">Datos Nacionales</string>
     <string name="cobro_revertido">Cobro Revertido</string>
     <string name="recargar_saldo">Recargar Saldo</string>
-    <string name="_6666_6666_6666_6666">6666 6666 6666 6666</string>
+    <string name="recharge_credit_hint">xxxx xxxx xxxx xxxx</string>
     <string name="adelantar_saldo">Adelantar Saldo</string>
     <string name="_25_50">25 - 50</string>
     <string name="enviar">Enviar</string>
     <string name="transferir_saldo">Transferir Saldo</string>
     <string name="mn">MN</string>
     <string name="clave">Clave</string>
-    <string name="_1234">1234</string>
+    <string name="_1234">xxxx</string>
     <string name="_0_00">0.00</string>
-    <string name="_55555555">55555555</string>
+    <string name="phone_number_hint">xxxxxxxx</string>
     <string name="wifi_etecsa">WiFi-ETECSA</string>
     <string name="portal_nauta">Portal Nauta</string>
     <string name="p_ginas_web">Páginas Web</string>
@@ -232,6 +236,7 @@
     <string name="_25_cup_200_mb_24h">25 CUP + 200 MB + 24H</string>
     <string name="_2_50_cup_x_mb">2.50 CUP X MB</string>
     <string name="configuraci_n">Configuración</string>
+    <string name="ajustes">Ajustes</string>
     <string name="ambulacia">Ambulacia</string>
     <string name="_104">104</string>
     <string name="polic_a">Policía</string>
@@ -277,19 +282,23 @@
     <string name="calificaciones">Calificaciones</string>
     <string name="info">Info.</string>
     <string name="colab">Colab.</string>
-    <string name="sobre_m">Sobre mí</string>
+    <string name="sobre_nosotros">Sobre nosotros</string>
 
-    <string name="contacto">Contacto</string>
+    <string name="acerca_de_la_app">Acerca de Portal Usuario</string>
+    <string name="hecha_con_amor">Hecha con ♥ para la comunidad cubana</string>
 
-    <string name="camaguey_la_caridad">Camaguey, La Caridad</string>
-    <string name="marlonrivero1999_gmail_com">marlonrivero1999@gmail.com</string>
+    <string name="address_marlon">Camagüey, La Caridad</string>
+    <string name="address_javier">Camagüey, El Retiro</string>
+    <string name="gmail_marlon">Email</string> <!-- marlonrivero1999@gmail.com -->
+    <string name="gmail_javier">Email</string> <!-- javierglez9910@gmail.com -->
     <string name="twitter">Twitter</string>
+    <string name="javier_canal_telegram">Canal</string>
     <string name="descargar">Descargar</string>
     <string name="google_play">Google Play</string>
     <string name="_4_5_5">4.5/5</string>
     <string name="desde_diciembre_2019">Desde diciembre 2019</string>
     <string name="erikpercusionapp_psoftcu">ErikPercusionApp_PSoftCu</string>
-    <string name="percusionista_inform_tico_y_electr_nico">Percusionista informático y electrónico</string>
+    <string name="percusionista_inform_tico_y_electr_nico">Percusionista, informático y electrónico</string>
     <string name="aliens_fascinados_por_la_inform_tica_y_la_tecnolog_a">Aliens fascinados por la informática y la tecnología</string>
     <string name="lesly_cintra">Lesly Cintra</string>
     <string name="desarrollador_de_portal_usuario">Desarrollador de Portal Usuario</string>
@@ -512,9 +521,9 @@ Aplicación de búsqueda</string>
     <string name="resident_notification">Residente</string>
     <string name="portalwidget">PortalWidget</string>
     <string name="usuario_logueado">Usuario Logueado</string>
-    <string name="aceptar">aceptar</string>
+    <string name="aceptar">Aceptar</string>
     <string name="main_dialog_permissions">Portal Usuario necesita permisos concedidos por usted que no tiene actualmente para su correcto funcionamiento, de no conceder los permisos requeridos la aplicación podría sufrir fallos, para más información de ellos consulte la Política de Privacidad de Portal Usuario</string>
-    <string name="cancelar">cancelar</string>
+    <string name="cancelar">Cancelar</string>
     <string name="main_iscubacel">Esta aplicación está destinada solo a las funciones de las líneas de cubacel, pueden no ser compatibles con su línea</string>
     <string name="colaborador">Colaborador</string>
     <string name="main_isprimera_ejecucion_title">Términos y Usos</string>
@@ -523,23 +532,6 @@ Aplicación de búsqueda</string>
     <string name="main_dialog_donate_title">Donación a Portal Usuario</string>
     <string name="main_action_about_donar_text">Si le agrada Portal Usuario y desea que continúe perfeccionándose haga una donación y motive al desarrollador</string>
     <string name="main_action_about_donar_button">Enviar Donación</string>
-    <string name="main_isprimera_ejecucion_terminosuso">
-                "○Portal Usuario: es una aplicación creada por Marlon de Jesus Milanes Rivero, para terminales android, que facilita el acceso a los diferentes servicios que brinda la Empresa de Telecomunicaciones ETECSA.\n"
-                "○Reconozco la importancia que existe en administrar y proteger correctamente la información de mis usuarios.Por este motivo cuento con política de privacidad, describe cómo los servicios prestados a la aplicación Portal Usuario gestionan y aseguran la información que obtienen .\n"
-                "○Existe un solo tipo de usuario en Portal Usuario:\n"
-                "Usuario: hace uso total de la aplicación.\n"
-                "○Los servicios solicitados mediante Portal Usuario responde de ETECSA o sea la aplicación solo los solicita por usted,no me hago responsable por demora o mal funcionamiento de los servicios de esta compañía. No me hago responsable del mal uso que le den a la aplicación.\n"
-                "○Solicitudes de permiso: \n"
-                "permiso CALL_PHONE: Se utiliza para generar los códigos ussd.\n"
-                "permiso INTERNET: Se utiliza para que usted acceda a los webview implementados en la aplicación.\n"
-                "permiso para leer sus contactos  READ_CONTACTS y pueda acceder mas rapidos a la hora de transferir su saldo.\n"
-                "permiso ACCESS_COARSE_LOCATION: Localización GPS detallada. Localización basada en satélites GPS. Al dar este permiso también estamos permitiendo la localización basada en telefonía móvil y Wi-Fi\n"
-                "permiso CAMERA: Este permiso se utiliza para el lector de los codigos QR en las tarjetas de recarga \n"
-                "○Cambios a esta política de privacidad Podemos actualizar nuestra Política de privacidad de vez en cuando. Le notificaremos cualquier cambio publicando la nueva Política de privacidad en esta página. \n"
-                "○Contacto:\n"
-                "○Pueden ponerse en contacto conmigo en : marlonrivero1999@gmail.com\n"
-                "○Última actualización : 01 de junio de 2021 "
-    </string>
     <string name="red_milinea_operador">OPERADOR:</string>
     <string name="red_milinea_numero">NUMERO:</string>
     <string name="red_milinea_pais">PAIS:</string>
@@ -592,7 +584,6 @@ Aplicación de búsqueda</string>
     <string name="covid_19">COVID-19</string>
     <string name="visitar">Visitar</string>
     <string name="pesquisador_virtual1">Pesquisador Virtual</string>
-    <string name="portal_nauta1">PORTAL NAUTA</string>
     <string name="wifi1">WiFi</string>
     <string name="delete">Delete</string>
     <string name="save">Save</string>
@@ -690,7 +681,8 @@ Aplicación de búsqueda</string>
     <string name="sencillo">Sencillo</string>
     <string name="acceda_desde_la_comodidad_de_su_casa_de_los_servicios_que_brinda_etecsa">Acceda desde la comodidad de su casa,de los servicios que brinda ETECSA</string>
     <string name="configurar_solo_4g">Configurar solo 4G</string>
-    <string name="se_al1">Este apartado le ayudará a cambiar la red a 4G / 3G / 2G y permanecer en la red elegida.No más cambio automático entre 4G / 3G.Si tiene paquetes de datos 4G y no desea mas 3G o estas conectado y no deseas que nadie te llame para no interrumpir la conexión 4G , configure su red solo para LTE.Este apartado no es compatible con todos los teléfonos. Depende de la marca de su teléfono.Algunas marcas de teléfonos bloquean la oportunidad de forzar el cambio de red.Por favor, no califique esta aplicación si no funciona en su teléfono porque no depende de mi</string>
+    <string name="se_al1" tools:ignore="Typos">Configure su teléfono para capturar solo la red 4G/LTE en caso de que en este momento no sea capaz de conectarse a esta. Debe tener en cuenta que si selecciona el modo Solo LTE su teléfono no recibirá ni podrá realizar llamadas o SMS. Fíjese bien en el tipo de red preferida que trae su teléfono por defecto para luego restaurar la configuración. El tipo de red preferida por defecto puede ser LTE/TD-SCDMA/UMTS o LTE/TD-SCDMA/WCDMA.
+\n* No todos los teléfonos pueden usar esta herramienta. Depende de la marca de su teléfono. Algunas marcas de teléfonos bloquean la oportunidad de forzar el cambio de red *</string>
     <string name="informaci_n1">Información</string>
     <string name="by_marlon_de_jes_s_milan_s_rivero">By Marlon de Jesús Milanés Rivero</string>
     <string name="itecnogeek1">ITECNOGEEK</string>
@@ -773,7 +765,7 @@ Aplicación de búsqueda</string>
     <string name="total_label">Total :</string>
     <string name="speed_label">Velocidad :</string>
 
-    <string name="label_enable_notifications">Mostrar icono de barra de estado</string>
+    <string name="label_enable_notifications">Mostrar ícono de barra de estado</string>
     <string name="label_enable_persistent_notification">Notificación persistente</string>
     <string name="hint_choose_email">Choose Email Client</string>
     <string name="subject_feedback">Feedback</string>
@@ -794,6 +786,7 @@ Aplicación de búsqueda</string>
     <string name="enable_apps_monitoring">Monitoreo de aplicaciones</string>
 
     <string name="feedback">Feedback</string>
+    <string name="reporte">Reportar errores</string>
 
     <string name="grant_success">Gran permiso con éxito</string>
 
@@ -831,11 +824,11 @@ Aplicación de búsqueda</string>
 
     <string name="version">v %1$s</string>
     <string name="wifi_data">WiFi:%1$s · Datos:%2$s</string>
-    <string name="saca_el_mayor_provecho_de_tus_megas">Sacale el mayor provecho a tus megas</string>
+    <string name="ahorra">Ahorra tus datos móviles</string>
     <string name="widget_velocidad_de_red">Widget velocidad de red</string>
     <string name="consumo_el_ctrico_manual">Consumo Eléctrico Manual</string>
     <string name="informaci_n_til_sobre_la_sim">Información útil sobre la SIM</string>
-    <string name="sacale_m_s_provecho_a_tu_cobertura">Sacale más provecho a tu cobertura</string>
+    <string name="sacale_m_s_provecho_a_tu_cobertura">No perderás la alta velocidad de la red 4G</string>
     <string name="opciones_avanzadas">Opciones Avanzadas</string>
     <string name="disponible_solo_para_android_8_0">Disponible solo para Android 8.0+</string>
     <string name="usado_hoy">Usado hoy</string>
@@ -857,7 +850,104 @@ Aplicación de búsqueda</string>
     <string name="informacion">INFORMACION</string>
     <string name="jalexcode">JalexCode</string>
     <string name="donar">Donar</string>
-    <string name="desarrollador_de_portal_usuario_para_android_windows">Desarrollador de Portal Usuario para Android - Windows</string>
+    <string name="desarrollador_de_portal_usuario_para_android_windows">Coautor y desarrollador de Portal Usuario</string>
+    <string name="compruebe_su_conexi_n">Compruebe su conexión</string>
+    <string name="volver_a_intentar">Volver a intentar</string>
+    <string name="qu_hay_de_nuevo">¿Qué hay de nuevo?</string>
+    <string name="nada">• Nada</string>
+    <string name="descargar_en_apklis">Descargar en Apklis</string>
+    <string name="descargar_en_google_play">Descargar en Google Play</string>
+    <string name="versi_n_x_x_mb">Versión x.x • ?? MB</string>
+    <string name="usuario_nauta_com_co_cu">usuario@nauta.com/co.cu</string>
+    <string name="web_cu">Web .CU</string>
+    <string name="recordar_usuario">Recordar Usuario</string>
+    <string name="menu_show_system_apps">Mostrar aplicaciones del sistema</string>
+    <string name="no_existen_registros">No existen registros</string>
+    <string name="recordar_m_s_tarde">Recordar más tarde</string>
+    <string name="registro_de_errores">Registro de Errores</string>
+    <string name="preferencias">Preferencias</string>
+    <string name="grupo_betatester">Grupo BetaTester</string>
 
+    <string name="noticias">Noticias</string>
+    <string name="codigo_captcha">Codigo captcha</string>
+    <string name="contrase_a1">contraseña</string>
 
+    <string name="apariecia_settings">Estilo de interfaz</string>
+    <string name="_0_0_kb">0.0 Kb</string>
+    <string name="combinados">Combinados</string>
+    <string name="bolsa_de_mensajeria">Bolsa de Mensajeria</string>
+    <string name="_600mb_x_25_cup">600MB x 25 CUP</string>
+    <string name="activar">Activar</string>
+    <string name="_200_mb_x_25_cup">200 MB X 25 CUP</string>
+    <string name="todas_las_redes">Todas las Redes</string>
+    <string name="v_lidos_por_30d">Válidos por 30d</string>
+    <string name="bloquear_wifi_data">Bloquear WiFi - Data</string>
+    <string name="biometric_failed">Fingerprint not recognized</string>
+    <string name="btn_authenticate">Login</string>
+
+    <string name="biometric_title">Verificación de seguridad</string>
+    <string name="biometric_subtitle">Portal Usuario Security</string>
+    <string name="biometric_description">Coloque su dedo en el controlador de la huella digital para verificar su identidad</string>
+    <string name="biometric_negative_button_text">CANCELAR</string>
+    <string name="biometric_error_sdk_not_supported">Versión de android no compatible</string>
+    <string name="biometric_error_hardware_not_supported">El dispositivo no admite la autenticación biométrica</string>
+    <string name="biometric_error_fingerprint_not_available">La huella dactilar no está registrada en el dispositivo</string>
+    <string name="biometric_error_permission_not_granted">El usuario no otorga el permiso</string>
+    <string name="bono_nacional">Bono Nacional</string>
+    <string name="lte_4g">(LTE - 4G)</string>
+    <string name="minutos">Minutos</string>
+    <string name="_110">110</string>
+    <string name="_250">250</string>
+    <string name="_500">500</string>
+    <string name="yapase">XIOAMI REDMI 8</string>
+    <string name="cancele">CANCELO</string>
+    <string name="pasesintocar">PASE SIN TOCAR</string>
+    <string name="pase">PORTAL USUARIO PASE</string>
+    <string name="paseerror">ERROR PASE</string>
+    <string name="eliminar_todos_los_mensajes">Eliminar todos los mensajes</string>
+    <string name="sin_datos">Sin datos</string>
+    <string name="detalles">Detalles</string>
+    <string name="lorem_ipsum_dolor_sit_anem_ostra">Lorem ipsum dolor sit anem ostra</string>
+    <string name="portal_usuario_oficial">Portal Usuario Oficial</string>
+    <string name="en_l_nea">En Línea</string>
+    <string name="no_hay_notificaciones_almacenadas">No hay notificaciones guardadas</string>
+    <string name="javier_alejandro_gonz_lez_casellas">Javier González Casellas (JalexCode)</string>
+
+    <!-- Vertical Stepper View Sample Item -->
+    <string name="content_step_0">Necesario para realizar llamadas y ejecutar códigos USSD a través de la aplicación</string>
+    <string name="content_step_1">Necesario para escanear códigos de recarga, por ejemplo</string>
+    <string name="content_step_2">Necesario para mostrarle y seleccionar contactos de su lista de contactos para transferencias de saldo, por ejemplo</string>
+    <string name="content_step_3">Necesario para poderle mostrar el estado de la red móvil</string>
+    <string name="content_step_4">Necesario para mostrar la burbuja flotante</string>
+    <string name="content_step_5">Portal Usuario está listo para su primer uso</string>
+
+    <string name="terminos" tools:ignore="Typos">¡Gracias por instalar la aplicación Portal Usuario!\n
+Antes de empezar a usarlo primero necesitamos que leas lo descrito a continuación y decidas si estás de acuerdo o no con nuestra política de privacidad y uso de la aplicación.\n
+• Portal Usuario es una aplicación gratis y libre de malwares, creada por Marlon de Jesús Milanés Rivero y actualmente desarrollada por Javier Alejandro González Casellas.\n
+• Tiene como objetivo:\n
+    - Facilitar a los usuarios cubanos la accesibilidad a diferentes servicios brindados por Etecsa\n
+    - Asistir el manejo de los datos involucrados en dichos servicios\n
+    - Brindar herramientas que permitan:\n
+        + Consultar rápidamente el estado de servicios contratados\n
+        + Asistir procesos de conectividad (conección a WifiEtecsa, NautaHogar, etc.)\n
+        + Consultar rápidamente el estado de la red\n
+        + Ahorrar datos móviles (servicio cortafuegos)\n
+        + De manera auxiliar, el cálculo de consumo eléctrico de su hogar.\n
+• Existe un solo tipo de usuario en Portal Usuario:\n
+    - Usuario: hace uso total de la aplicación.\n
+• Los servicios solicitados mediante Portal Usuario reciben respuesta de ETECSA, o sea, la aplicación solo los solicita por usted para ahorrarle tiempo y brindarle comodidad. No me hago responsable por demora o mal funcionamiento de los servicios de esta compañía.\n
+• No me hago responsable del mal uso que le den a la aplicación.\n
+• Los datos manejados en Portal Usuario, dígase credenciales (usuarios o contraseñas), datos de cuentas o comportamiento del usuario quedan almacenados en su dispositivo de manera segura.\n
+• Reconozco la importancia que existe en administrar y proteger correctamente la información de mis usuarios. Por este motivo cuento con esta política de privacidad, la cual describe cómo los servicios prestados por la aplicación Portal Usuario gestionan y aseguran la información que obtienen.\n
+• Los permisos requeridos por Portal Usuario son los siguientes:\n
+    - ACCESS_NETWORK_STATE: permite a la aplicación consultar el estado de la conectividad por datos móviles. Se usa, por ejemplo, para ocultar o mostrar la Burbuja flotante automáticamente.\n
+    - ACCESS_WIFI_STATE: permite a la aplicación consultar el estado de la conectividad por wifi. Se usa en funcionalidades como cargar el banner o iniciar sesión en WifiEtecsa.\n
+    - ACCESS_NOTIFICATION_POLICY: permite a la aplicación mostrarle notificaciones.\n
+    - CAMERA: permite a la aplicación usar la Cámara. Se usa para, por ejemplo, escanear códigos para recarga.\n
+    - FOREGROUND_SERVICE: permite a la aplicación muestrarse por encima de otras. Es necesario para mostrar la Burbuja flotante.\n
+    - READ_PHONE_STATE: permite a la aplicación consultar datos de su SIM. Datos que puede usted consultar con la herramienta Información de la SIM.\n
+    - READ_CONTACTS: permite a la aplicación acceder y leer de la lista de contactos. Por ejemplo, en caso de que el usuario desee seleccionar alguno de sus contactos cuando desee realizar una transferenia.\n
+    - USE_BIOMETRIC: permite a la aplicación usar los sensores biométricos. Se usa para, por ejemplo, escanear su huella como medida de seguridad de la aplicación.\n
+    - VIBRATE: permite a la aplicación hacer que su dispositivo vibre. Se usa para, por ejemplo, el momento en que va a eliminar la Burbuja flotante.\n
+Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el botón Aceptar.</string>
 </resources>

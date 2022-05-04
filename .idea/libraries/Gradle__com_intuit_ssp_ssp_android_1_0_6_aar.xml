@@ -1,9 +1,21 @@
 <component name="libraryTable">
   <library name="Gradle: com.intuit.ssp:ssp-android:1.0.6@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8f69801b3ab11278d41a422883ab3d63/transformed/jetified-ssp-android-1.0.6/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/8f69801b3ab11278d41a422883ab3d63/transformed/jetified-ssp-android-1.0.6/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8f69801b3ab11278d41a422883ab3d63/transformed/jetified-ssp-android-1.0.6/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/03adaff44ca17dc483ba4847d5fa36f2/transformed/jetified-ssp-android-1.0.6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/03adaff44ca17dc483ba4847d5fa36f2/transformed/jetified-ssp-android-1.0.6/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/03adaff44ca17dc483ba4847d5fa36f2/transformed/jetified-ssp-android-1.0.6/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/03adaff44ca17dc483ba4847d5fa36f2/transformed/jetified-ssp-android-1.0.6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/03adaff44ca17dc483ba4847d5fa36f2/transformed/jetified-ssp-android-1.0.6/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/03adaff44ca17dc483ba4847d5fa36f2/transformed/jetified-ssp-android-1.0.6/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/03adaff44ca17dc483ba4847d5fa36f2/transformed/jetified-ssp-android-1.0.6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/03adaff44ca17dc483ba4847d5fa36f2/transformed/jetified-ssp-android-1.0.6/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/03adaff44ca17dc483ba4847d5fa36f2/transformed/jetified-ssp-android-1.0.6/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/03adaff44ca17dc483ba4847d5fa36f2/transformed/jetified-ssp-android-1.0.6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/03adaff44ca17dc483ba4847d5fa36f2/transformed/jetified-ssp-android-1.0.6/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/03adaff44ca17dc483ba4847d5fa36f2/transformed/jetified-ssp-android-1.0.6/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/03adaff44ca17dc483ba4847d5fa36f2/transformed/jetified-ssp-android-1.0.6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/03adaff44ca17dc483ba4847d5fa36f2/transformed/jetified-ssp-android-1.0.6/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/03adaff44ca17dc483ba4847d5fa36f2/transformed/jetified-ssp-android-1.0.6/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
