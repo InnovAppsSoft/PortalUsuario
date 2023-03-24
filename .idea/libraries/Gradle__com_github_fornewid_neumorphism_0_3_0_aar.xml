@@ -1,21 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.fornewid:neumorphism:0.3.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/a41e6d9dccd92c069d7dec92d4b9d65d/transformed/jetified-neumorphism-0.3.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a41e6d9dccd92c069d7dec92d4b9d65d/transformed/jetified-neumorphism-0.3.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a41e6d9dccd92c069d7dec92d4b9d65d/transformed/jetified-neumorphism-0.3.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a41e6d9dccd92c069d7dec92d4b9d65d/transformed/jetified-neumorphism-0.3.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a41e6d9dccd92c069d7dec92d4b9d65d/transformed/jetified-neumorphism-0.3.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/a41e6d9dccd92c069d7dec92d4b9d65d/transformed/jetified-neumorphism-0.3.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a41e6d9dccd92c069d7dec92d4b9d65d/transformed/jetified-neumorphism-0.3.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a41e6d9dccd92c069d7dec92d4b9d65d/transformed/jetified-neumorphism-0.3.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/a41e6d9dccd92c069d7dec92d4b9d65d/transformed/jetified-neumorphism-0.3.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a41e6d9dccd92c069d7dec92d4b9d65d/transformed/jetified-neumorphism-0.3.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a41e6d9dccd92c069d7dec92d4b9d65d/transformed/jetified-neumorphism-0.3.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/a41e6d9dccd92c069d7dec92d4b9d65d/transformed/jetified-neumorphism-0.3.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a41e6d9dccd92c069d7dec92d4b9d65d/transformed/jetified-neumorphism-0.3.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a41e6d9dccd92c069d7dec92d4b9d65d/transformed/jetified-neumorphism-0.3.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/a41e6d9dccd92c069d7dec92d4b9d65d/transformed/jetified-neumorphism-0.3.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1cbba22e7a00b3d55230bb8592709fc9/transformed/jetified-neumorphism-0.3.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1cbba22e7a00b3d55230bb8592709fc9/transformed/jetified-neumorphism-0.3.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/1cbba22e7a00b3d55230bb8592709fc9/transformed/jetified-neumorphism-0.3.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

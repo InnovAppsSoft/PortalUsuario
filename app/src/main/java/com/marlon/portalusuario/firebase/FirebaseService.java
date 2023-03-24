@@ -27,7 +27,7 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.marlon.portalusuario.MainActivity;
+import com.marlon.portalusuario.view.activities.MainActivity;
 import com.marlon.portalusuario.PUNotifications.PUNotification;
 import com.marlon.portalusuario.PUNotifications.PUNotificationsActivity;
 import com.marlon.portalusuario.R;

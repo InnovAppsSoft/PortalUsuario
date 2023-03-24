@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.marlon.portalusuario.PUNotifications.PUNotification;
-import com.marlon.portalusuario.User;
+import com.marlon.portalusuario.model.User;
 import com.marlon.portalusuario.database.notifications.PunRepository;
 import com.marlon.portalusuario.database.une.UneRepository;
 import com.marlon.portalusuario.database.users.UserRepository;

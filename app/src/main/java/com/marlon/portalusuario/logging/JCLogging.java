@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.core.content.SharedPreferencesCompat;
 import androidx.preference.PreferenceManager;
@@ -61,7 +62,11 @@ public final class JCLogging {
 //            ex.printStackTrace();
 //        }
 //        return context.getFilesDir();
-        return context.getExternalFilesDir(Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath();
+        if (context != null) {
+            return context.getExternalFilesDir(Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath();
+        }else{
+            return "";
+        }
     }
 
     private static boolean externalStorageAvilable() {
@@ -162,13 +167,17 @@ public final class JCLogging {
             }
         }
         if (print_on_file) {
-            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
-            if ( pref.getBoolean("save_logs", true)) {
-                String format_string = "%s | %c | %s: %s\n";
-                writer.format(format_string, date.format(new Date()), type, msg, obj);
-                if (type == 'E' && th != null) {
-                    th.printStackTrace(writer);
+            try {
+                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+                if (pref.getBoolean("save_logs", true)) {
+                    String format_string = "%s | %c | %s: %s\n";
+                    writer.format(format_string, date.format(new Date()), type, msg, obj);
+                    if (type == 'E' && th != null) {
+                        th.printStackTrace(writer);
+                    }
                 }
+            }catch (final Exception e){
+                e.printStackTrace();
             }
         }
         if (print_on_logcat) {
@@ -185,6 +194,8 @@ public final class JCLogging {
                 Log.e(log_title, str2, th);
             }
         }
-        //Toast.makeText(context, "Ha ocurrido un error. Revise el Registro de actividades", Toast.LENGTH_SHORT);
+//        if (context != null) {
+//            Toast.makeText(context, "Ha ocurrido un error. Revise el Registro de actividades", Toast.LENGTH_SHORT).show();
+//        }
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".ui.connectivity.PortalNautaFragment">
+    tools:context=".view.Fragments.connectivity.PortalNautaFragment">
 
     <ScrollView
         android:layout_width="match_parent"

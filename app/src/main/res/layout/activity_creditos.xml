@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".AboutActivity">
+    tools:context=".view.activities.AboutActivity">
 
     <LinearLayout
         android:id="@+id/topbar"
@@ -49,173 +49,6 @@
             android:paddingLeft="@dimen/_5sdp"
             android:paddingTop="@dimen/_5sdp"
             android:paddingRight="@dimen/_5sdp">
-
-            <soup.neumorphism.NeumorphCardView
-                style="@style/Widget.Neumorph.CardView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/background"
-                android:orientation="vertical"
-                app:neumorph_shapeType="flat">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/marlon" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/displaybold"
-                            android:text="@string/marlon_de_jes_s_milan_s_rivero"
-                            android:textColor="@color/colorEscrito"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/displaybold"
-                            android:text="Creador de Portal Usuario"
-                            android:textColor="@color/colorDes"
-                            android:textSize="13sp" />
-
-
-                    </LinearLayout>
-                    <!-- Tiles Table -->
-                    <TableLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:baselineAligned="false"
-                        android:paddingBottom="10dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:orientation="vertical">
-
-                            <TableRow
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                tools:ignore="UseCompoundDrawables">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-                                    <!-- FACEBOOK -->
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal">
-
-                                        <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/facebook" />
-
-                                        <TextView
-                                            android:id="@+id/marlon_facebook"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:layout_marginLeft="10dp"
-                                            android:fontFamily="@font/displaybold"
-                                            android:gravity="center_vertical"
-                                            android:text="@string/facebook"
-                                            android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
-
-                                    </LinearLayout>
-                                    <!-- INSTAGRAM -->
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="10dp"
-                                        android:gravity="center_vertical"
-                                        tools:ignore="UseCompoundDrawables">
-
-                                        <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/instagram" />
-
-                                        <TextView
-                                            android:id="@+id/marlon_instagram"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:layout_marginStart="10dp"
-                                            android:fontFamily="@font/displaybold"
-                                            android:gravity="center_vertical"
-                                            android:text="@string/instagram"
-                                            android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
-                                    </LinearLayout>
-                                    <!-- TWITTER -->
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="10dp"
-                                        android:gravity="center_vertical"
-                                        tools:ignore="UseCompoundDrawables">
-
-                                        <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/twitter" />
-
-                                        <TextView
-                                            android:id="@+id/marlon_twitter"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:layout_marginStart="10dp"
-                                            android:fontFamily="@font/displaybold"
-                                            android:gravity="center_vertical"
-                                            android:text="@string/twitter"
-                                            android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
-                                    </LinearLayout>
-
-                                </LinearLayout>
-
-                            </TableRow>
-                            <!-- SEPARATOR -->
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:background="@color/colorTest1" />
-                            <!-- SEPARATOR -->
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="2dp">
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-                    </TableLayout>
-                </LinearLayout>
-
-            </soup.neumorphism.NeumorphCardView>
 
             <soup.neumorphism.NeumorphCardView
                 style="@style/Widget.Neumorph.CardView"
@@ -503,36 +336,179 @@
                                             android:textColor="@color/colorDes"
                                             android:textSize="12sp" />
                                     </LinearLayout>
-                                    <!-- ADDRESS -->
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center_vertical"
-                                        android:layout_marginStart="36dp"
-                                        tools:ignore="UseCompoundDrawables">
-
-                                        <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/pin" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:gravity="center_vertical"
-                                            android:layout_marginLeft="10dp"
-                                            android:fontFamily="@font/displaybold"
-                                            android:text="@string/address_javier"
-                                            android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
-                                    </LinearLayout>
 
                                 </LinearLayout>
                             </TableRow>
                         </LinearLayout>
                     </TableLayout>
 
+                </LinearLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                style="@style/Widget.Neumorph.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background"
+                android:orientation="vertical"
+                app:neumorph_shapeType="flat">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/marlon" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/displaybold"
+                            android:text="@string/marlon_de_jes_s_milan_s_rivero"
+                            android:textColor="@color/colorEscrito"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/displaybold"
+                            android:text="Creador de Portal Usuario"
+                            android:textColor="@color/colorDes"
+                            android:textSize="13sp" />
+
+
+                    </LinearLayout>
+                    <!-- Tiles Table -->
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:baselineAligned="false"
+                        android:paddingBottom="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+                            <TableRow
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                tools:ignore="UseCompoundDrawables">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+                                    <!-- FACEBOOK -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            android:contentDescription="@string/app_name"
+                                            android:src="@drawable/facebook" />
+
+                                        <TextView
+                                            android:id="@+id/marlon_facebook"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginLeft="10dp"
+                                            android:fontFamily="@font/displaybold"
+                                            android:gravity="center_vertical"
+                                            android:text="@string/facebook"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+
+                                    </LinearLayout>
+                                    <!-- INSTAGRAM -->
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:gravity="center_vertical"
+                                        tools:ignore="UseCompoundDrawables">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            android:contentDescription="@string/app_name"
+                                            android:src="@drawable/instagram" />
+
+                                        <TextView
+                                            android:id="@+id/marlon_instagram"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginStart="10dp"
+                                            android:fontFamily="@font/displaybold"
+                                            android:gravity="center_vertical"
+                                            android:text="@string/instagram"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+                                    <!-- TWITTER -->
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:gravity="center_vertical"
+                                        tools:ignore="UseCompoundDrawables">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            android:contentDescription="@string/app_name"
+                                            android:src="@drawable/twitter" />
+
+                                        <TextView
+                                            android:id="@+id/marlon_twitter"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginStart="10dp"
+                                            android:fontFamily="@font/displaybold"
+                                            android:gravity="center_vertical"
+                                            android:text="@string/twitter"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </TableRow>
+                            <!-- SEPARATOR -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="@color/colorTest1" />
+                            <!-- SEPARATOR -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp">
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </TableLayout>
                 </LinearLayout>
 
             </soup.neumorphism.NeumorphCardView>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    android:checkableBehavior="single" -->
+<item
+    android:id="@+id/donate"
+    android:icon="@drawable/ic_widget_money"
+    android:title="Donar al proyecto"/>
+<item android:title="Servicios">
+    <menu>
+        <item
+            android:id="@+id/services"
+            android:icon="@drawable/ic_phonewigdet"
+            android:title="Servicios"/>
+        <item
+            android:id="@+id/plans"
+            android:icon="@drawable/ic_data_usage_24"
+            android:title="Planes"/>
+        <item
+            android:id="@+id/connectivity"
+            android:icon="@drawable/wifi_icon"
+            android:title="Conectividad"/>
+    </menu>
+</item>
+<item android:title="Herramientas">
+    <menu>
+        <item
+            android:id="@+id/firewall"
+            android:icon="@drawable/ic_firewall"
+            android:title="Firewall"/>
+        <item
+            android:id="@+id/networkChange"
+            android:icon="@drawable/ic_data_usage_24"
+            android:title="Cambiar red preferida"/>
+        <item
+            android:id="@+id/une"
+            android:icon="@drawable/ic_une"
+            android:title="Calculador UNE"/>
+        <item
+            android:id="@+id/sim_info"
+            android:icon="@drawable/ic_signal_cellular"
+            android:title="Medidor de señal"/>
+        <item
+            android:id="@+id/tutos"
+            android:icon="@drawable/ic_baseline_help_24"
+            android:title="Información útil"/>
+    </menu>
+</item>
+<item android:title="Feedback">
+    <menu>
+        <item
+            android:id="@+id/errors_register"
+            android:icon="@drawable/ic_baseline_bug_report_24"
+            android:title="Registro de errores"/>
+        <item
+            android:id="@+id/feedback"
+            android:icon="@drawable/faeeback"
+            android:title="Reportar..."/>
+    </menu>
+</item>
+<item android:title="Redes sociales">
+    <menu>
+        <item
+            android:id="@+id/telegram_channel"
+            android:icon="@drawable/canal"
+            android:title="Canal de Telegram"/>
+        <item
+            android:id="@+id/facebook"
+            android:icon="@drawable/canal"
+            android:title="Página Oficial Facebook"/>
+        <item
+            android:id="@+id/betatesters"
+            android:icon="@drawable/ic_baseline_developer_mode_24"
+            android:title="Grupo de Testers en Telegram"/>
+    </menu>
+</item>
+<item android:title="Preferencias">
+    <menu>
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Preferencias"/>
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/ic_info"
+            android:title="Acerca de"/>
+    </menu>
+</item>
+</menu>

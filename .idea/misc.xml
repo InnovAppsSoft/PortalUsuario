@@ -95,6 +95,32 @@
         <entry key="..\:/Users/Jalex/Apklis/Portal-Usuario/app/src/main/res/layout/widget_v1.xml" value="0.33" />
         <entry key="..\:/Users/Jalex/Apklis/Portal-Usuario/app/src/main/res/menu/bottom_navigation.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Jalex/Apklis/Portal-Usuario/app/src/main/res/xml/root_preferences.xml" value="0.18" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/drawable/bg_overlay_down.xml" value="0.1385" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/drawable/ic_menu.xml" value="0.1385" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/activity_cell.xml" value="0.33" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/activity_creditos.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/activity_info_sim.xml" value="0.1453125" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/activity_main.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/activity_plan_amigos.xml" value="0.2528205128205128" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/activity_privacy.xml" value="0.2528205128205128" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/activity_splash.xml" value="0.1453125" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/activity_wifietecsa_account.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/bottom_sheet_dialog_layout.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/dialog_info_sim.xml" value="0.24537037037037038" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/dialog_plan_amigos.xml" value="0.1" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/dialog_set_only_lte.xml" value="0.1" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/fragment_how_to.xml" value="0.1" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/fragment_more.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/fragment_servicios.xml" value="0.2" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/fragment_wifi_etecsa.xml" value="0.25" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/header_navigation_drawer.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/layout_screen.xml" value="0.1453125" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/main_content.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/promo_slider_layout.xml" value="0.1453125" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/layout/slider_layout.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/menu/bottom_navigation.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/menu/menu_navigation_drawer.xml" value="0.25885416666666666" />
+        <entry key="..\:/Users/Jalex/Portal Usuario APK/Portal-Usuario/app/src/main/res/xml/root_preferences.xml" value="0.16458333333333333" />
         <entry key="..\:/Users/Marlon/AndroidStudioProjects/Portal-Usuario/app/src/main/res/drawable-ldpi/dash.xml" value="0.1783783783783784" />
         <entry key="..\:/Users/Marlon/AndroidStudioProjects/Portal-Usuario/app/src/main/res/drawable-xhdpi/wifi.xml" value="0.165234375" />
         <entry key="..\:/Users/Marlon/AndroidStudioProjects/Portal-Usuario/app/src/main/res/drawable-xxxhdpi/download_background.xml" value="0.18796296296296297" />
@@ -330,5 +356,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>

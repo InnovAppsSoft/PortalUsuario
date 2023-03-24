@@ -133,7 +133,7 @@
 
 
     <style name="Platform.Theme.Neumorphism" parent="Theme.Neumorph.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@color/status_bar_scrim</item>
+        <item name="android:statusBarColor">@color/accent</item>
         <item name="android:navigationBarColor">@color/nav_bar_scrim</item>
     </style>
 

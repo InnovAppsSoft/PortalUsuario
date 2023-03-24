@@ -17,4 +17,3 @@
 	+ Se puede acceder al Portal Nauta con mayor facilidad
 	+ Los datos recibidos por el Portal Nauta quedan almacenados en la Base de Datos y el usuario puede revisarlos en cualquier momento (para evitar el requerimiento constante de conexión a Internet)
 	+ Límite de tiempo de conexión
-* Cambios en la sección Acerca De

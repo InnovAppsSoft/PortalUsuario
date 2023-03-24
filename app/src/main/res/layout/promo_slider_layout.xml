@@ -26,22 +26,4 @@
         android:layout_margin="50dp"
         tools:ignore="RtlHardcoded" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@drawable/bg_overlay">
-
-        <TextView
-            android:id="@+id/tv_auto_image_slider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:paddingStart="6dp"
-            android:fontFamily="@font/displaybold"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_10ssp"
-            tools:ignore="RtlSymmetry" />
-    </FrameLayout>
-
 </FrameLayout>

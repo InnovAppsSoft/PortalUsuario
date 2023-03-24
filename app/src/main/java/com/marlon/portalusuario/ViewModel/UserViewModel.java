@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.marlon.portalusuario.User;
+import com.marlon.portalusuario.model.User;
 import com.marlon.portalusuario.database.users.UserRepository;
 
 import java.util.List;

@@ -67,7 +67,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
-            android:name=".PermissionActivity"
+            android:name=".view.activities.PermissionActivity"
             android:exported="true" />
         <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" -->
         <activity
@@ -100,55 +100,47 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".view.activities.MainActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".view.activities.SettingsActivity"
             android:label="Configuración" />
         <activity
             android:name=".logging.LogFileViewerActivity"
             android:theme="@style/Traffic" />
         <activity
-            android:name=".DonarActivity"
+            android:name=".view.activities.InfoSimActivity"
             android:exported="true" />
         <activity
-            android:name=".InfoSimActivity"
-            android:exported="true" />
-        <activity
-            android:name=".SplashActivity"
+            android:name=".view.activities.SplashActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity android:name=".codescanner.ScannerActivity" />
-        <activity android:name=".SetLTEModeActivity" />
         <activity
-            android:name=".ui.connectivity.WifiAccountDetailsActivity"
+            android:name=".view.activities.AboutActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".AboutActivity"
+            android:name=".view.activities.SmsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".SmsActivity"
+            android:name=".view.activities.VozActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".VozActivity"
+            android:name=".view.activities.PlanAmigosActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
+        <activity android:name=".view.activities.LlamadaOcultoActivity" />
+        <activity android:name=".view.activities.Llamada_99Activity" />
+        <activity android:name=".view.activities.EmergenciaActivity" />
         <activity
-            android:name=".PlanAmigos"
+            android:name=".view.activities.PortalNautaActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".LlamadaOcultoActivity" />
-        <activity android:name=".Llamada_99Activity" />
-        <activity android:name=".EmergenciaActivity" />
-        <activity
-            android:name=".PortalNautaActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".ui.PrivacyActivity" />
+        <activity android:name=".view.activities.PrivacyActivity" />
         <activity
             android:name=".firewall.ActivityMain"
             android:configChanges="orientation|screenSize"
@@ -168,7 +160,7 @@
             tools:ignore="LockedOrientationActivity" />
 
         <receiver
-            android:name=".PrincipalWidget"
+            android:name=".view.widgets.PrincipalWidget"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -189,7 +181,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".apklis.ApklisUpdatesJobService"
+            android:name=".util.apklis.ApklisUpdatesJobService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE"></service>
         <service

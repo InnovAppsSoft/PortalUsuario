@@ -3,12 +3,10 @@ package com.marlon.portalusuario.database.users;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
-import androidx.preference.PreferenceManager;
 
-import com.marlon.portalusuario.User;
+import com.marlon.portalusuario.model.User;
 
 import java.util.List;
 

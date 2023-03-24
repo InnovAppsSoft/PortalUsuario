@@ -24,9 +24,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.google.android.material.tabs.TabLayout;
-import com.marlon.portalusuario.PermissionActivity;
+import com.marlon.portalusuario.view.activities.PermissionActivity;
 import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.SplashActivity;
+import com.marlon.portalusuario.view.activities.SplashActivity;
 
 import java.util.ArrayList;
 import java.util.List;

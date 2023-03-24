@@ -20,23 +20,4 @@
         android:layout_margin="50dp"
         tools:ignore="RtlHardcoded"
         android:contentDescription="@string/app_name" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@drawable/bg_overlay">
-
-        <TextView
-            android:id="@+id/tv_auto_image_slider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:paddingStart="6dp"
-            android:paddingLeft="6dp"
-            android:textColor="#fff"
-            android:textIsSelectable="true"
-            android:textSize="@dimen/_10ssp"
-            tools:ignore="RtlHardcoded,RtlSymmetry,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-    </FrameLayout>
 </FrameLayout>

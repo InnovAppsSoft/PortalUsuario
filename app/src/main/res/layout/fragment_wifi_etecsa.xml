@@ -10,13 +10,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="10dp">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:src="@drawable/wifietecsa" />
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="WifiEtecsa - NautaHogar"-->
+<!--            android:textSize="22sp"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="@color/colorDes"-->
+<!--            android:fontFamily="@font/displaybold"/>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -125,31 +126,222 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginTop="@dimen/_8sdp"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                >
 
                 <soup.neumorphism.NeumorphButton
                     android:id="@+id/connect_button"
                     style="@style/ShapeAppearance.Neumorph.Button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:fontFamily="@font/displaybold"
                     android:text="@string/conectarse"
                     android:textColor="@color/colorDes"
                     android:textSize="@dimen/_10sdp"
                     android:drawableLeft="@drawable/wifi_icon"
-                    app:neumorph_shapeType="flat" />
+                    app:neumorph_shapeType="flat"
+                    android:layout_weight="1"/>
+                <soup.neumorphism.NeumorphButton
+                    android:id="@+id/logout_button"
+                    style="@style/ShapeAppearance.Neumorph.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/displaybold"
+                    android:text="Desconectarse"
+                    android:textColor="@color/colorDes"
+                    android:textSize="@dimen/_10sdp"
+                    android:drawableLeft="@drawable/wifi_off"
+                    app:drawableTint="@color/white"
+                    app:neumorph_shapeType="flat"
+                    android:layout_weight="1"
+                    android:visibility="gone"/>
                 <soup.neumorphism.NeumorphButton
                     android:id="@+id/user_info_button"
                     style="@style/ShapeAppearance.Neumorph.Button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:fontFamily="@font/displaybold"
                     android:drawableLeft="@drawable/ic_nauta"
                     android:text="Datos del usuario"
                     android:textColor="@color/colorDes"
                     android:textSize="@dimen/_10sdp"
-                    app:neumorph_shapeType="flat" />
+                    app:neumorph_shapeType="flat"
+                    android:layout_weight="1"/>
             </LinearLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/sessionInfoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <androidx.constraintlayout.helper.widget.Flow
+                    android:id="@+id/cardview1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:constraint_referenced_ids="cardPunch, cardWeight, cardRun, cardYoga"
+                    app:flow_horizontalGap="@dimen/_3sdp"
+                    app:flow_maxElementsWrap="2"
+                    app:flow_verticalGap="@dimen/_3sdp"
+                    app:flow_wrapMode="chain"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <soup.neumorphism.NeumorphCardView
+                    app:neumorph_shapeAppearance="@style/NeumorphismCard"
+                    android:id="@+id/cardPunch"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:neumorph_shapeType="flat"
+                    app:neumorph_backgroundColor="@color/background"
+                    app:neumorph_shadowElevation="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:id="@+id/datosLi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_15sdp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/_32sdp"
+                            android:layout_height="@dimen/_32sdp"
+                            android:src="@drawable/saldo1" />
+
+                        <TextView
+                            android:id="@+id/editSaldoCuenta"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:text="@string/_0_00"
+                            android:textColor="@color/colorDes"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/displaybold"
+                            android:textSize="@dimen/_13ssp" />
+
+
+                    </LinearLayout>
+
+                </soup.neumorphism.NeumorphCardView>
+
+                <soup.neumorphism.NeumorphCardView
+                    android:id="@+id/cardWeight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:neumorph_shapeType="flat"
+                    app:neumorph_backgroundColor="@color/background"
+                    app:neumorph_shadowElevation="@dimen/_5sdp"
+                    app:neumorph_shapeAppearance="@style/NeumorphismCard"
+                    tools:ignore="MissingConstraints">
+
+                    <LinearLayout
+                        android:id="@+id/PlanAmigos1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_15sdp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/_32sdp"
+                            android:layout_height="@dimen/_32sdp"
+                            android:src="@drawable/estado" />
+
+                        <TextView
+                            android:id="@+id/editEstadoCuenta"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:text="@string/estado_cuenta"
+                            android:textColor="@color/colorDes"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/displaybold"
+                            android:textSize="@dimen/_13ssp"
+                            />
+
+
+                    </LinearLayout>
+
+                </soup.neumorphism.NeumorphCardView>
+
+                <soup.neumorphism.NeumorphCardView
+                    android:id="@+id/cardRun"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:neumorph_shapeType="flat"
+                    app:neumorph_backgroundColor="@color/background"
+                    app:neumorph_shadowElevation="@dimen/_5sdp"
+                    app:neumorph_shapeAppearance="@style/NeumorphismCard"
+                    tools:ignore="MissingConstraints">
+
+                    <LinearLayout
+                        android:id="@+id/voz"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_15sdp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/_32sdp"
+                            android:layout_height="@dimen/_32sdp"
+                            android:src="@drawable/reloj" />
+
+                        <TextView
+                            android:id="@+id/textLeftTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:text="@string/tiempo_restante"
+                            android:textColor="@color/colorDes"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/displaybold"
+                            android:textSize="@dimen/_13ssp"/>
+
+                    </LinearLayout>
+
+                </soup.neumorphism.NeumorphCardView>
+
+                <soup.neumorphism.NeumorphCardView
+                    android:id="@+id/cardYoga"
+                    app:neumorph_shapeType="flat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:neumorph_backgroundColor="@color/background"
+                    app:neumorph_shadowElevation="@dimen/_5sdp"
+                    app:neumorph_shapeAppearance="@style/NeumorphismCard"
+                    tools:ignore="MissingConstraints">
+
+                    <LinearLayout
+                        android:id="@+id/sms"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_15sdp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/_32sdp"
+                            android:layout_height="@dimen/_32sdp"
+                            android:src="@drawable/temporizador" />
+
+                        <Chronometer
+                            android:id="@+id/simpleChronometer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:text="@string/tiempo_consumido"
+                            android:textColor="@color/colorDes"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/displaybold"
+                            android:textSize="@dimen/_13ssp"/>
+
+
+                    </LinearLayout>
+
+                </soup.neumorphism.NeumorphCardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
             <LinearLayout
                 android:id="@+id/error_layout"
                 android:layout_width="wrap_content"
