@@ -1,31 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.an.deviceinfo:deviceinfo:0.1.5@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/8453d3574bb8008f5153c5c976c0ae39/transformed/jetified-deviceinfo-0.1.5/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8453d3574bb8008f5153c5c976c0ae39/transformed/jetified-deviceinfo-0.1.5/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8453d3574bb8008f5153c5c976c0ae39/transformed/jetified-deviceinfo-0.1.5/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4f7322c80fe399a4b4c3c749be3a7fa0/transformed/jetified-deviceinfo-0.1.5/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4f7322c80fe399a4b4c3c749be3a7fa0/transformed/jetified-deviceinfo-0.1.5/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4f7322c80fe399a4b4c3c749be3a7fa0/transformed/jetified-deviceinfo-0.1.5/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c934a71a655428f2c93cd5c0f182c454/transformed/jetified-deviceinfo-0.1.5/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c934a71a655428f2c93cd5c0f182c454/transformed/jetified-deviceinfo-0.1.5/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c934a71a655428f2c93cd5c0f182c454/transformed/jetified-deviceinfo-0.1.5/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b64ae7d4f7aa256528ddfd6c226e804b/transformed/jetified-deviceinfo-0.1.5/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b64ae7d4f7aa256528ddfd6c226e804b/transformed/jetified-deviceinfo-0.1.5/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/b64ae7d4f7aa256528ddfd6c226e804b/transformed/jetified-deviceinfo-0.1.5/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/419a693fbce0442172a337bc3d350701/transformed/jetified-deviceinfo-0.1.5/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/419a693fbce0442172a337bc3d350701/transformed/jetified-deviceinfo-0.1.5/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/419a693fbce0442172a337bc3d350701/transformed/jetified-deviceinfo-0.1.5/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2eb7071492ee2a6d3998a00fe1fce027/transformed/jetified-deviceinfo-0.1.5/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0425c220c49874de9ee1844930e7ceed/transformed/jetified-deviceinfo-0.1.5/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/0425c220c49874de9ee1844930e7ceed/transformed/jetified-deviceinfo-0.1.5/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0425c220c49874de9ee1844930e7ceed/transformed/jetified-deviceinfo-0.1.5/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/17248ab7a471e944891e3b82aa3fd0db/transformed/jetified-deviceinfo-0.1.5/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/17248ab7a471e944891e3b82aa3fd0db/transformed/jetified-deviceinfo-0.1.5/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/17248ab7a471e944891e3b82aa3fd0db/transformed/jetified-deviceinfo-0.1.5/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/1e858d13fea0a83d360d61589d914f6c/transformed/jetified-deviceinfo-0.1.5/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1e858d13fea0a83d360d61589d914f6c/transformed/jetified-deviceinfo-0.1.5/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1e858d13fea0a83d360d61589d914f6c/transformed/jetified-deviceinfo-0.1.5/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5ce4efb71919ddaf7ee9767585dbbc37/transformed/jetified-deviceinfo-0.1.5/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/5ce4efb71919ddaf7ee9767585dbbc37/transformed/jetified-deviceinfo-0.1.5/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.an.deviceinfo/deviceinfo/0.1.5/2280203aded12dcf98ea6c4cc824efcd8a27ab12/deviceinfo-0.1.5-javadoc.jar!/" />

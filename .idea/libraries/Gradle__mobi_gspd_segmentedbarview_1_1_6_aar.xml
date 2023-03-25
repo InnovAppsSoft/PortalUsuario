@@ -1,30 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: mobi.gspd:segmentedbarview:1.1.6@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/5aef1ee48f9c1b056e5d7ce35a3781d6/transformed/jetified-segmentedbarview-1.1.6/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5aef1ee48f9c1b056e5d7ce35a3781d6/transformed/jetified-segmentedbarview-1.1.6/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5aef1ee48f9c1b056e5d7ce35a3781d6/transformed/jetified-segmentedbarview-1.1.6/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d9d0da6efa0ec4807c55526c4f6bb405/transformed/jetified-segmentedbarview-1.1.6/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/d9d0da6efa0ec4807c55526c4f6bb405/transformed/jetified-segmentedbarview-1.1.6/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d9d0da6efa0ec4807c55526c4f6bb405/transformed/jetified-segmentedbarview-1.1.6/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/32c3eacec976dca401cc3f5079926ca6/transformed/jetified-segmentedbarview-1.1.6/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/32c3eacec976dca401cc3f5079926ca6/transformed/jetified-segmentedbarview-1.1.6/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/32c3eacec976dca401cc3f5079926ca6/transformed/jetified-segmentedbarview-1.1.6/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a7513aab251e465ee69995d5f5b9e0a3/transformed/jetified-segmentedbarview-1.1.6/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a7513aab251e465ee69995d5f5b9e0a3/transformed/jetified-segmentedbarview-1.1.6/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/a7513aab251e465ee69995d5f5b9e0a3/transformed/jetified-segmentedbarview-1.1.6/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0756f9f3dc19694d165dd65f5f319b4d/transformed/jetified-segmentedbarview-1.1.6/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/0756f9f3dc19694d165dd65f5f319b4d/transformed/jetified-segmentedbarview-1.1.6/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0756f9f3dc19694d165dd65f5f319b4d/transformed/jetified-segmentedbarview-1.1.6/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c70aed0ae56cd1447fa113742e83ed41/transformed/jetified-segmentedbarview-1.1.6/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c70aed0ae56cd1447fa113742e83ed41/transformed/jetified-segmentedbarview-1.1.6/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c70aed0ae56cd1447fa113742e83ed41/transformed/jetified-segmentedbarview-1.1.6/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7a50541830ffdd4793280417d7668392/transformed/jetified-segmentedbarview-1.1.6/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7a50541830ffdd4793280417d7668392/transformed/jetified-segmentedbarview-1.1.6/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/7a50541830ffdd4793280417d7668392/transformed/jetified-segmentedbarview-1.1.6/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/de6937daa59b1c351fe519944647362a/transformed/jetified-segmentedbarview-1.1.6/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/de6937daa59b1c351fe519944647362a/transformed/jetified-segmentedbarview-1.1.6/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/de6937daa59b1c351fe519944647362a/transformed/jetified-segmentedbarview-1.1.6/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/b7f8434f7ab481eb4cd1afe944f781f7/transformed/jetified-segmentedbarview-1.1.6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b7f8434f7ab481eb4cd1afe944f781f7/transformed/jetified-segmentedbarview-1.1.6/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b7f8434f7ab481eb4cd1afe944f781f7/transformed/jetified-segmentedbarview-1.1.6/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

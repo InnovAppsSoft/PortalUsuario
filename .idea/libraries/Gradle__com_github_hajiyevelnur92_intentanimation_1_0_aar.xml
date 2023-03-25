@@ -1,24 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.hajiyevelnur92:intentanimation:1.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/6aa61cfef9818a25efe6d2062ec70876/transformed/jetified-intentanimation-1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6aa61cfef9818a25efe6d2062ec70876/transformed/jetified-intentanimation-1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6aa61cfef9818a25efe6d2062ec70876/transformed/jetified-intentanimation-1.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6aa61cfef9818a25efe6d2062ec70876/transformed/jetified-intentanimation-1.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/6aa61cfef9818a25efe6d2062ec70876/transformed/jetified-intentanimation-1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6aa61cfef9818a25efe6d2062ec70876/transformed/jetified-intentanimation-1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6aa61cfef9818a25efe6d2062ec70876/transformed/jetified-intentanimation-1.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/6aa61cfef9818a25efe6d2062ec70876/transformed/jetified-intentanimation-1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6aa61cfef9818a25efe6d2062ec70876/transformed/jetified-intentanimation-1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6aa61cfef9818a25efe6d2062ec70876/transformed/jetified-intentanimation-1.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/6aa61cfef9818a25efe6d2062ec70876/transformed/jetified-intentanimation-1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6aa61cfef9818a25efe6d2062ec70876/transformed/jetified-intentanimation-1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6aa61cfef9818a25efe6d2062ec70876/transformed/jetified-intentanimation-1.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/6aa61cfef9818a25efe6d2062ec70876/transformed/jetified-intentanimation-1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6aa61cfef9818a25efe6d2062ec70876/transformed/jetified-intentanimation-1.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/1331855d9f969f09a59b3f32063d8341/transformed/jetified-intentanimation-1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1331855d9f969f09a59b3f32063d8341/transformed/jetified-intentanimation-1.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1331855d9f969f09a59b3f32063d8341/transformed/jetified-intentanimation-1.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/2ecd6ae2de62c118533a95aee0c94283/transformed/jetified-intentanimation-1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2ecd6ae2de62c118533a95aee0c94283/transformed/jetified-intentanimation-1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2ecd6ae2de62c118533a95aee0c94283/transformed/jetified-intentanimation-1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -1,30 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.GwonHyeok:StickySwitch:0.0.15@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9f7a08b5671ce22b102c7293e76dbf20/transformed/jetified-StickySwitch-0.0.15/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9f7a08b5671ce22b102c7293e76dbf20/transformed/jetified-StickySwitch-0.0.15/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9f7a08b5671ce22b102c7293e76dbf20/transformed/jetified-StickySwitch-0.0.15/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0e8a775395db7a17443e1827d7352cd7/transformed/jetified-StickySwitch-0.0.15/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/0e8a775395db7a17443e1827d7352cd7/transformed/jetified-StickySwitch-0.0.15/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0e8a775395db7a17443e1827d7352cd7/transformed/jetified-StickySwitch-0.0.15/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5b6ffc80ba334c4aa618301fe91ecbb1/transformed/jetified-StickySwitch-0.0.15/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/5b6ffc80ba334c4aa618301fe91ecbb1/transformed/jetified-StickySwitch-0.0.15/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5b6ffc80ba334c4aa618301fe91ecbb1/transformed/jetified-StickySwitch-0.0.15/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/bfcb28d4f898de5a9d650733d97f5fd6/transformed/jetified-StickySwitch-0.0.15/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/bfcb28d4f898de5a9d650733d97f5fd6/transformed/jetified-StickySwitch-0.0.15/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/bfcb28d4f898de5a9d650733d97f5fd6/transformed/jetified-StickySwitch-0.0.15/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e4bb1dc9dc29ff9e22d73f59f3814ba3/transformed/jetified-StickySwitch-0.0.15/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/e4bb1dc9dc29ff9e22d73f59f3814ba3/transformed/jetified-StickySwitch-0.0.15/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e4bb1dc9dc29ff9e22d73f59f3814ba3/transformed/jetified-StickySwitch-0.0.15/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/45ae94b393b49f9c8f11bf1c1e794eea/transformed/jetified-StickySwitch-0.0.15/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/45ae94b393b49f9c8f11bf1c1e794eea/transformed/jetified-StickySwitch-0.0.15/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/45ae94b393b49f9c8f11bf1c1e794eea/transformed/jetified-StickySwitch-0.0.15/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e2feff969c142f9b77b834a2bfc5b7b2/transformed/jetified-StickySwitch-0.0.15/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/e2feff969c142f9b77b834a2bfc5b7b2/transformed/jetified-StickySwitch-0.0.15/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e2feff969c142f9b77b834a2bfc5b7b2/transformed/jetified-StickySwitch-0.0.15/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e4fb956e18d0b298f3bd272ef53e7466/transformed/jetified-StickySwitch-0.0.15/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e4fb956e18d0b298f3bd272ef53e7466/transformed/jetified-StickySwitch-0.0.15/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/e4fb956e18d0b298f3bd272ef53e7466/transformed/jetified-StickySwitch-0.0.15/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/03a71da7ebb4e6f6435bec15a185f99a/transformed/jetified-StickySwitch-0.0.15/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/03a71da7ebb4e6f6435bec15a185f99a/transformed/jetified-StickySwitch-0.0.15/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/03a71da7ebb4e6f6435bec15a185f99a/transformed/jetified-StickySwitch-0.0.15/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

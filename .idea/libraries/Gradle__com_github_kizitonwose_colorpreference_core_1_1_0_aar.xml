@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.kizitonwose.colorpreference:core:1.1.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c5cf07cfbf33c675f314f9ab8f235fec/transformed/jetified-core-1.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c5cf07cfbf33c675f314f9ab8f235fec/transformed/jetified-core-1.1.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c5cf07cfbf33c675f314f9ab8f235fec/transformed/jetified-core-1.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b2090b62bdc604a45daaf72d6bb9aca0/transformed/jetified-core-1.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b2090b62bdc604a45daaf72d6bb9aca0/transformed/jetified-core-1.1.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/b2090b62bdc604a45daaf72d6bb9aca0/transformed/jetified-core-1.1.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
