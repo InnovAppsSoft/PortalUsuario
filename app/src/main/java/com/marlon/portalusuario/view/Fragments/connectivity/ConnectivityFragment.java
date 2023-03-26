@@ -27,7 +27,7 @@ public class ConnectivityFragment extends Fragment {
         //
         TabLayout.Tab wifiEtecsaTab = tabLayout.newTab();
         wifiEtecsaTab.setText("Conectividad");
-        wifiEtecsaTab.setIcon(R.drawable.wifi_icon);
+        wifiEtecsaTab.setIcon(R.drawable.round_wifi_lock_24);
         tabLayout.addTab(wifiEtecsaTab, true);
         //
 //        TabLayout.Tab nautaTab = tabLayout.newTab();
@@ -37,7 +37,7 @@ public class ConnectivityFragment extends Fragment {
         //
         TabLayout.Tab nationalTab = tabLayout.newTab();
         nationalTab.setText("Sitios Nacionales");
-        nationalTab.setIcon(R.drawable.ic_baseline_web_24);
+        nationalTab.setIcon(R.drawable.round_web_24);
         tabLayout.addTab(nationalTab);
         //
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

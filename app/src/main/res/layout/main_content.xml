@@ -10,7 +10,7 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/accent">
+        android:background="@color/colorPrimary">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar_layout"
@@ -50,7 +50,7 @@
                         android:layout_height="25dp"
                         android:contentDescription="@string/app_name"
                         android:src="@drawable/ic_baseline_error_24"
-                        app:tint="@color/colorbanner" />
+                        app:tint="@color/white" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -63,8 +63,8 @@
                         android:fontFamily="@font/displaybold"
                         android:gravity="center_horizontal"
                         android:text="@string/compruebe_su_conexi_n"
-                        android:textColor="@color/colorbanner"
-                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_13sdp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
 
@@ -80,8 +80,8 @@
                         android:fontFamily="@font/displaybold"
                         android:gravity="center_horizontal"
                         android:text="@string/volver_a_intentar"
-                        android:textColor="@color/colorbanner"
-                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_13sdp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
                 </LinearLayout>
@@ -114,7 +114,7 @@
                 android:layout_height="50dp"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight"
-                android:background="@color/accent"
+                android:background="@color/colorPrimary"
                 >
                 <LinearLayout
                     android:id="@+id/titleLayout"

@@ -72,7 +72,7 @@ public class ServiciosFragment<b> extends Fragment {
 
     private SharedPreferences salva,nochesalva;
 
-    private NeumorphCardView SMS, VOZ, PlanAmigos1, Emergencia;
+    private CardView SMS, VOZ, PlanAmigos1, Emergencia;
     private RelativeLayout creditBtn, bonusBtn, mobileDataBtn, callPrivateBtn, call99Btn, voicePlansBtn, friendsPlanBtn, smsPlansBtn;
     private EditText donateMount, donateKey, rechargeCode, adelantaSaldoMount;
     public static EditText phoneNumber;

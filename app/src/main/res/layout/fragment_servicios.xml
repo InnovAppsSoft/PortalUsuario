@@ -24,7 +24,7 @@
                 android:id="@+id/services"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/primary"
+                android:background="@color/colorPrimary"
                 android:fontFamily="@font/displaybold"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin"
@@ -51,7 +51,7 @@
                         android:layout_weight="2"
                         android:orientation="horizontal">
 
-                        <soup.neumorphism.NeumorphCardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/cvCredit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -59,10 +59,8 @@
                             android:layout_marginRight="@dimen/_4sdp"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
                             android:layout_weight="1"
-                            app:neumorph_backgroundColor="@color/background"
-                            app:neumorph_shadowElevation="@dimen/_5sdp"
-                            app:neumorph_shapeAppearance="@style/NeumorphismCard"
-                            app:neumorph_shapeType="flat">
+                            app:cardBackgroundColor="@color/background_color_50"
+                            app:cardCornerRadius="@dimen/_16sdp">
 
                             <RelativeLayout
                                 android:id="@+id/saldo"
@@ -81,7 +79,7 @@
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/payment_card"
-                                    app:tint="@color/red" />
+                                    app:tint="@color/botoncolorStart" />
 
                                 <TextView
                                     android:id="@+id/enseñar"
@@ -96,12 +94,12 @@
                                     android:text="@string/saldo1"
                                     android:textAllCaps="false"
                                     android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_13ssp" />
+                                    android:textSize="@dimen/_13sdp" />
 
                             </RelativeLayout>
-                        </soup.neumorphism.NeumorphCardView>
+                        </androidx.cardview.widget.CardView>
 
-                        <soup.neumorphism.NeumorphCardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/cvCall99"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -109,10 +107,9 @@
                             android:layout_marginRight="@dimen/_4sdp"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
                             android:layout_weight="1"
-                            app:neumorph_backgroundColor="@color/background"
-                            app:neumorph_shadowElevation="@dimen/_5sdp"
-                            app:neumorph_shapeAppearance="@style/NeumorphismCard"
-                            app:neumorph_shapeType="flat">
+                            app:cardBackgroundColor="@color/background_color_50"
+                            app:cardCornerRadius="@dimen/_16sdp"
+                            >
 
                             <RelativeLayout
                                 android:id="@+id/megas"
@@ -130,7 +127,8 @@
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/msg_language"
-                                    app:tint="@color/red" />
+                                    app:tint="@color/botoncolorStart"
+                                    />
 
                                 <TextView
                                     android:id="@+id/tvSMS"
@@ -147,7 +145,7 @@
                                     android:textColor="@color/colorDes"
                                     android:textSize="@dimen/_13sdp" />
                             </RelativeLayout>
-                        </soup.neumorphism.NeumorphCardView>
+                        </androidx.cardview.widget.CardView>
 
                     </LinearLayout>
 
@@ -157,7 +155,7 @@
                         android:layout_weight="2"
                         android:orientation="horizontal">
 
-                        <soup.neumorphism.NeumorphCardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/cvPlanVoz"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -165,10 +163,9 @@
                             android:layout_marginRight="@dimen/_4sdp"
                             android:layout_marginBottom="@dimen/_4sdp"
                             android:layout_weight="1"
-                            app:neumorph_backgroundColor="@color/background"
-                            app:neumorph_shadowElevation="@dimen/_5sdp"
-                            app:neumorph_shapeAppearance="@style/NeumorphismCard"
-                            app:neumorph_shapeType="flat">
+                            app:cardBackgroundColor="@color/background_color_50"
+                            app:cardCornerRadius="@dimen/_16sdp"
+                           >
 
 
                             <RelativeLayout
@@ -186,7 +183,7 @@
                                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:contentDescription="@string/app_name"
-                                    app:tint="@color/red"
+                                    app:tint="@color/botoncolorStart"
                                     android:src="@drawable/msg_fave" />
 
                                 <TextView
@@ -203,19 +200,18 @@
                                     android:textSize="@dimen/_13sdp" />
 
                             </RelativeLayout>
-                        </soup.neumorphism.NeumorphCardView>
+                        </androidx.cardview.widget.CardView>
 
-                        <soup.neumorphism.NeumorphCardView
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_4sdp"
                             android:layout_marginRight="@dimen/_4sdp"
                             android:layout_marginBottom="@dimen/_4sdp"
                             android:layout_weight="1"
-                            app:neumorph_backgroundColor="@color/background"
-                            app:neumorph_shadowElevation="@dimen/_5sdp"
-                            app:neumorph_shapeAppearance="@style/NeumorphismCard"
-                            app:neumorph_shapeType="flat">
+                            app:cardBackgroundColor="@color/background_color_50"
+                            app:cardCornerRadius="@dimen/_16sdp"
+                            >
 
                             <RelativeLayout
                                 android:id="@+id/microfono"
@@ -233,7 +229,7 @@
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/menu_calls"
-                                    app:tint="@color/red" />
+                                    app:tint="@color/botoncolorStart"/>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -246,7 +242,7 @@
                                     android:textColor="@color/colorDes"
                                     android:textSize="@dimen/_13sdp" />
                             </RelativeLayout>
-                        </soup.neumorphism.NeumorphCardView>
+                        </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
                     <LinearLayout
@@ -255,18 +251,16 @@
                         android:layout_weight="2"
                         android:orientation="horizontal">
 
-                        <soup.neumorphism.NeumorphCardView
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_4sdp"
                             android:layout_marginRight="@dimen/_4sdp"
                             android:layout_marginBottom="@dimen/_4sdp"
                             android:layout_weight="1"
-                            app:cardBackgroundColor="@color/colorFondo1"
-                            app:neumorph_backgroundColor="@color/background"
-                            app:neumorph_shadowElevation="@dimen/_5sdp"
-                            app:neumorph_shapeAppearance="@style/NeumorphismCard"
-                            app:neumorph_shapeType="flat">
+                            app:cardBackgroundColor="@color/background_color_50"
+                            app:cardCornerRadius="@dimen/_16sdp"
+                            >
 
                             <RelativeLayout
                                 android:id="@+id/amigosplan"
@@ -284,7 +278,8 @@
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/actions_viewmembers"
-                                    app:tint="@color/red" />
+                                    app:tint="@color/botoncolorStart"
+                                    />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -299,19 +294,18 @@
                                     android:textSize="@dimen/_13sdp" />
 
                             </RelativeLayout>
-                        </soup.neumorphism.NeumorphCardView>
+                        </androidx.cardview.widget.CardView>
 
-                        <soup.neumorphism.NeumorphCardView
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_4sdp"
                             android:layout_marginRight="@dimen/_4sdp"
                             android:layout_marginBottom="@dimen/_4sdp"
                             android:layout_weight="1"
-                            app:neumorph_backgroundColor="@color/background"
-                            app:neumorph_shadowElevation="@dimen/_5sdp"
-                            app:neumorph_shapeAppearance="@style/NeumorphismCard"
-                            app:neumorph_shapeType="flat">
+                            app:cardBackgroundColor="@color/background_color_50"
+                            app:cardCornerRadius="@dimen/_16sdp"
+                            >
 
                             <RelativeLayout
                                 android:id="@+id/smsplan"
@@ -329,7 +323,7 @@
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/msg_markunread"
-                                    app:tint="@color/red"
+                                    app:tint="@color/botoncolorStart"
                                     />
 
                                 <TextView
@@ -343,7 +337,7 @@
                                     android:textColor="@color/colorDes"
                                     android:textSize="@dimen/_13sdp" />
                             </RelativeLayout>
-                        </soup.neumorphism.NeumorphCardView>
+                        </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -353,7 +347,7 @@
                 android:id="@+id/call"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/primary"
+                android:background="@color/colorPrimary"
                 android:fontFamily="@font/displaybold"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin"
@@ -379,17 +373,15 @@
                         android:layout_weight="2"
                         android:orientation="horizontal">
 
-                        <soup.neumorphism.NeumorphCardView
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_4sdp"
                             android:layout_marginRight="@dimen/_4sdp"
                             android:layout_marginBottom="@dimen/_4sdp"
                             android:layout_weight="1"
-                            app:neumorph_backgroundColor="@color/background"
-                            app:neumorph_shadowElevation="@dimen/_5sdp"
-                            app:neumorph_shapeAppearance="@style/NeumorphismCard"
-                            app:neumorph_shapeType="flat">
+                            app:cardBackgroundColor="@color/background_color_50"
+                            app:cardCornerRadius="@dimen/_16sdp">
 
                             <RelativeLayout
                                 android:id="@+id/llamar99"
@@ -406,7 +398,7 @@
                                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:contentDescription="@string/app_name"
-                                    app:tint="@color/red"
+                                    app:tint="@color/botoncolorStart"
                                     android:src="@drawable/msg_voice_phone" />
 
                                 <TextView
@@ -422,8 +414,9 @@
                                     android:textSize="@dimen/_13sdp" />
 
                             </RelativeLayout>
-                        </soup.neumorphism.NeumorphCardView>
-                        <soup.neumorphism.NeumorphCardView
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/cvPlanAmigo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -431,10 +424,9 @@
                             android:layout_marginRight="@dimen/_4sdp"
                             android:layout_marginBottom="@dimen/_4sdp"
                             android:layout_weight="1"
-                            app:neumorph_backgroundColor="@color/background"
-                            app:neumorph_shadowElevation="@dimen/_5sdp"
-                            app:neumorph_shapeAppearance="@style/NeumorphismCard"
-                            app:neumorph_shapeType="flat">
+                            app:cardBackgroundColor="@color/background_color_50"
+                            app:cardCornerRadius="@dimen/_16sdp"
+                            >
 
                             <RelativeLayout
                                 android:id="@+id/llamarPrivado"
@@ -451,7 +443,7 @@
                                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:contentDescription="@string/app_name"
-                                    app:tint="@color/red"
+                                    app:tint="@color/botoncolorStart"
                                     android:src="@drawable/msg_voice_phone" />
 
                                 <TextView
@@ -467,7 +459,7 @@
                                     android:textColor="@color/colorDes"
                                     android:textSize="@dimen/_13sdp" />
                             </RelativeLayout>
-                        </soup.neumorphism.NeumorphCardView>
+                        </androidx.cardview.widget.CardView>
                     </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
@@ -476,7 +468,7 @@
                 android:id="@+id/plans"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/primary"
+                android:background="@color/colorPrimary"
                 android:fontFamily="@font/displaybold"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin"
@@ -504,7 +496,7 @@
                         android:layout_weight="2"
                         android:orientation="horizontal">
 
-                        <soup.neumorphism.NeumorphCardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/PlanAmigos1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -512,10 +504,10 @@
                             android:layout_marginRight="@dimen/_4sdp"
                             android:layout_marginBottom="@dimen/_4sdp"
                             android:layout_weight="1"
-                            app:neumorph_backgroundColor="@color/background"
-                            app:neumorph_shadowElevation="@dimen/_5sdp"
-                            app:neumorph_shapeAppearance="@style/NeumorphismCard"
-                            app:neumorph_shapeType="flat">
+                            app:cardBackgroundColor="@color/background_color_50"
+                            app:cardCornerRadius="@dimen/_16sdp"
+
+                           >
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -531,9 +523,10 @@
                                     android:layout_marginStart="16dp"
                                     android:layout_marginLeft="16dp"
                                     android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                    app:tint="@color/botoncolorStart"
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:src="@drawable/actions_viewmembers"
-                                    app:tint="@color/red" />
+                                   />
 
                                 <TextView
                                     android:id="@+id/tvdatos"
@@ -547,12 +540,12 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/plan_amigo"
                                     android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10ssp" />
+                                    android:textSize="@dimen/_13ssp" />
                             </RelativeLayout>
 
-                        </soup.neumorphism.NeumorphCardView>
+                        </androidx.cardview.widget.CardView>
 
-                        <soup.neumorphism.NeumorphCardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/voz"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -560,10 +553,9 @@
                             android:layout_marginRight="@dimen/_4sdp"
                             android:layout_marginBottom="@dimen/_4sdp"
                             android:layout_weight="1"
-                            app:neumorph_backgroundColor="@color/background"
-                            app:neumorph_shadowElevation="@dimen/_5sdp"
-                            app:neumorph_shapeAppearance="@style/NeumorphismCard"
-                            app:neumorph_shapeType="flat">
+                            app:cardBackgroundColor="@color/background_color_50"
+                            app:cardCornerRadius="@dimen/_16sdp"
+                            >
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -580,7 +572,8 @@
                                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:src="@drawable/menu_calls"
-                                    app:tint="@color/red" />
+                                    app:tint="@color/botoncolorStart"
+                                     />
 
                                 <TextView
                                     android:id="@+id/tvSMS1"
@@ -594,9 +587,9 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/plan_voz"
                                     android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10ssp" />
+                                    android:textSize="@dimen/_13ssp" />
                             </RelativeLayout>
-                        </soup.neumorphism.NeumorphCardView>
+                        </androidx.cardview.widget.CardView>
 
                     </LinearLayout>
 
@@ -605,7 +598,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:orientation="horizontal">
-                        <soup.neumorphism.NeumorphCardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/sms"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -613,10 +606,9 @@
                             android:layout_marginRight="@dimen/_4sdp"
                             android:layout_marginBottom="@dimen/_4sdp"
                             android:layout_weight="1"
-                            app:neumorph_backgroundColor="@color/background"
-                            app:neumorph_shadowElevation="@dimen/_5sdp"
-                            app:neumorph_shapeAppearance="@style/NeumorphismCard"
-                            app:neumorph_shapeType="flat">
+                            app:cardBackgroundColor="@color/background_color_50"
+                            app:cardCornerRadius="@dimen/_16sdp"
+                            >
 
                             <RelativeLayout
                                 android:layout_width="wrap_content"
@@ -633,7 +625,8 @@
                                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:src="@drawable/msg_markunread"
-                                    app:tint="@color/red" />
+                                    app:tint="@color/botoncolorStart"
+                                    />
 
                                 <TextView
                                     android:id="@+id/tvVoz1"
@@ -646,11 +639,11 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/plan_sms"
                                     android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10ssp" />
+                                    android:textSize="@dimen/_13ssp" />
                             </RelativeLayout>
-                        </soup.neumorphism.NeumorphCardView>
+                        </androidx.cardview.widget.CardView>
 
-                        <soup.neumorphism.NeumorphCardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/emergancia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -658,10 +651,9 @@
                             android:layout_marginRight="@dimen/_4sdp"
                             android:layout_marginBottom="@dimen/_4sdp"
                             android:layout_weight="1"
-                            app:neumorph_backgroundColor="@color/background"
-                            app:neumorph_shadowElevation="@dimen/_5sdp"
-                            app:neumorph_shapeAppearance="@style/NeumorphismCard"
-                            app:neumorph_shapeType="flat">
+                            app:cardBackgroundColor="@color/background_color_50"
+                            app:cardCornerRadius="@dimen/_16sdp"
+                          >
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -678,7 +670,8 @@
                                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:src="@drawable/group_admin"
-                                    app:tint="@color/red" />
+                                    app:tint="@color/botoncolorStart"
+                                     />
 
                                 <TextView
                                     android:id="@+id/tvAmigo1"
@@ -691,9 +684,9 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/emergencias"
                                     android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10ssp" />
+                                    android:textSize="@dimen/_13ssp" />
                             </RelativeLayout>
-                        </soup.neumorphism.NeumorphCardView>
+                        </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -704,7 +697,7 @@
                 android:id="@+id/tv2345"
                 android:layout_width="match_parent"
                 android:layout_height="26dp"
-                android:background="@color/primary"
+                android:background="@color/colorPrimary"
                 android:fontFamily="@font/displaybold"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin"
@@ -740,20 +733,22 @@
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:src="@drawable/wallet_qr"
-                    app:tint="@color/red" />
+                    app:tint="@color/botoncolorStart"
+                     />
                 <ImageView
                     android:id="@+id/Enviar1"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:src="@drawable/outline_send"
-                    app:tint="@color/red" />
+                    app:tint="@color/botoncolorStart"
+                    />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tv23456"
                 android:layout_width="match_parent"
                 android:layout_height="26dp"
-                android:background="@color/primary"
+                android:background="@color/colorPrimary"
                 android:fontFamily="@font/displaybold"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin"
@@ -779,7 +774,8 @@
                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/outline_send"
-                    app:tint="@color/red" />
+                    app:tint="@color/botoncolorStart"
+                     />
                 <EditText
                     android:id="@+id/adesaldo"
                     android:layout_width="match_parent"
@@ -803,7 +799,7 @@
                 android:id="@+id/tv234"
                 android:layout_width="match_parent"
                 android:layout_height="26dp"
-                android:background="@color/primary"
+                android:background="@color/colorPrimary"
                 android:fontFamily="@font/displaybold"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin"
@@ -828,7 +824,8 @@
                     android:layout_marginRight="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                     app:srcCompat="@drawable/msg_openprofile"
-                    app:tint="@color/red" />
+                    app:tint="@color/botoncolorStart"
+                     />
                 <EditText
                     android:id="@+id/telefono"
                     android:layout_width="match_parent"
@@ -898,7 +895,8 @@
                     android:layout_marginRight="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:src="@drawable/outline_send"
-                    app:tint="@color/red" />
+                    app:tint="@color/botoncolorStart"
+                     />
 
             </RelativeLayout>
         </LinearLayout>
