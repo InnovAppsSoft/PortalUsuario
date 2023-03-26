@@ -17,12 +17,13 @@
         <TextView
             android:layout_gravity="end|top"
             android:id="@+id/info"
+            android:fontFamily="@font/displaybold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_round_info_24"
             tools:ignore="UseAppTint"
-            android:text="Información"
-            android:layout_marginBottom="10dp"/>
+            android:text="@string/informaci_n2"
+            android:layout_marginBottom="@dimen/_13sdp"
+            app:drawableLeftCompat="@drawable/ic_round_info_24" />
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_username"
             android:layout_width="match_parent"
@@ -32,15 +33,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-
                 android:background="@drawable/edittextstyle"
                 android:fontFamily="@font/displaybold"
-                android:hint="Nombre de usuario"
+                android:hint="@string/nombre_de_usuario"
                 android:imeOptions="actionNext"
                 android:inputType="textWebEmailAddress"
                 android:textColor="@color/colorDes"
-                android:textSize="@dimen/_10sdp"
-                tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+                android:textSize="@dimen/_13sdp"
+                tools:ignore="ContentDescription,TextContrastCheck,TouchTargetSizeCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -61,7 +61,7 @@
                 android:inputType="textPassword"
                 android:singleLine="false"
                 android:textColor="@color/colorDes"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_13sdp"
                 android:hint="Contraseña"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -70,6 +70,8 @@
             android:id="@+id/account_type_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            android:minHeight="48dp"
+            android:minWidth="48dp"
+            android:layout_marginTop="@dimen/_13sdp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

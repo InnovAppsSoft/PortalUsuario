@@ -4,7 +4,7 @@
     android:id="@+id/news_main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF0000"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <ImageView

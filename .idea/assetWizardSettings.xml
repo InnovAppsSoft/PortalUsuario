@@ -319,7 +319,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/G:/Programacion/ANDROID/SDK/icons/material/materialicons/notifications_none/baseline_notifications_none_24.xml" />
+                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/info/baseline_info_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -330,8 +330,9 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="487bf3" />
-                            <entry key="outputName" value="ic_baseline_notifications_none_24" />
-                            <entry key="sourceFile" value="C:\Users\Marlon\Desktop\settings.svg" />
+                            <entry key="opacityPercent" value="90" />
+                            <entry key="outputName" value="baseline_info_24" />
+                            <entry key="sourceFile" value="/C:\Users\Marlon\Desktop\settings.svg" />
                           </map>
                         </option>
                       </PersistentState>

@@ -1,10 +1,12 @@
 package com.marlon.portalusuario.util.apklis;
 
+import android.Manifest;
 import android.app.ActivityManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.job.JobParameters;
 import android.app.job.JobService;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -21,6 +23,7 @@ import android.util.Log;
 //import android.support.v4.content.LocalBroadcastManager;   // API 29+: import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -40,6 +43,8 @@ import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class ApklisUpdatesJobService extends JobService {
+
+    private Context context;
 
     private Handler ApklisUpdateServiceHandler;
     private JCLogging Logging;
@@ -96,6 +101,16 @@ public class ApklisUpdatesJobService extends JobService {
                                         .setPriority(NotificationCompat.PRIORITY_HIGH);
 
                                 NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
+                                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                                    // TODO: Consider calling
+                                    //    ActivityCompat#requestPermissions
+                                    // here to request the missing permissions, and then overriding
+                                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                    //                                          int[] grantResults)
+                                    // to handle the case where the user grants the permission. See the documentation
+                                    // for ActivityCompat#requestPermissions for more details.
+                                    return;
+                                }
                                 notificationManagerCompat.notify(0, builder.build());
                             } else {
                                 Logging.message("Launching Update Intent", null);

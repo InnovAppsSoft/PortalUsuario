@@ -14,8 +14,9 @@
         app:tabMode="fixed"
         app:tabGravity="fill"
         app:tabIndicatorAnimationMode="elastic"
-        app:tabIconTint="@color/color1"
-        app:tabTextAppearance="@style/TextAppearance.AppCompat.Small"/>
+        app:tabIconTint="@color/colorPrimary"
+        android:contentDescription="null"
+        tools:ignore="HardcodedText" />
     <FrameLayout
         android:id="@+id/simpleFrameLayout"
         android:layout_width="match_parent"
