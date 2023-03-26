@@ -49,7 +49,7 @@ public class IntroActivity extends AppCompatActivity {
             CosumoBateria();
         }
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         if (restorePreData()){
             Intent mainActivity = new Intent(getApplicationContext(), SplashActivity.class);
@@ -144,7 +144,8 @@ public class IntroActivity extends AppCompatActivity {
                 ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED
+                ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
 
         ){
 
@@ -156,13 +157,16 @@ public class IntroActivity extends AppCompatActivity {
             dialogo1.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    ActivityCompat.requestPermissions(IntroActivity.this, new String[]{
-                            Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE,
-                            Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.CALL_PHONE, Manifest.permission.CAMERA,
-                            Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE,
-                            Manifest.permission.CALL_PHONE, Manifest.permission.READ_CONTACTS}, ResultCall);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        ActivityCompat.requestPermissions(IntroActivity.this, new String[]{
+                                Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE,
+                                Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_COARSE_LOCATION,
+                                Manifest.permission.CALL_PHONE, Manifest.permission.CAMERA,
+                                Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE,
+                                Manifest.permission.CALL_PHONE, Manifest.permission.POST_NOTIFICATIONS,
+                                Manifest.permission.CALL_PHONE, Manifest.permission.READ_CONTACTS}, ResultCall);
+                    }
 
                 }
 

@@ -31,7 +31,8 @@
                     android:layout_marginRight="@dimen/_16sdp"
                     android:layout_marginBottom="@dimen/_8sdp"
                     android:orientation="horizontal"
-                    android:weightSum="100">
+                    android:weightSum="100"
+                    tools:ignore="UselessLeaf">
                 </LinearLayout>
 
                 <LinearLayout
@@ -40,13 +41,13 @@
                     android:orientation="horizontal"
                     android:weightSum="100">
 
-                    <soup.neumorphism.NeumorphCardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        style="@style/Widget.Neumorph.CardView"
-                        app:neumorph_shapeType="flat">
-
+                        app:cardBackgroundColor="@color/background_color_50"
+                        app:cardCornerRadius="@dimen/_16sdp"
+                        >
 
                     <LinearLayout
                             android:layout_width="match_parent"
@@ -65,19 +66,20 @@
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/web2" />
+                                    android:src="@drawable/round_web_24" />
 
                                 <TextView
                                     android:id="@+id/micubacel"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
+                                    android:background="@drawable/custom_button"
                                     android:fontFamily="@font/displaybold"
                                     android:padding="@dimen/_8sdp"
                                     android:text="@string/visitar1"
                                     android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp"
+                                    tools:ignore="RelativeOverlap" />
                             </RelativeLayout>
 
                             <LinearLayout
@@ -93,7 +95,7 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/uci"
                                     android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -102,18 +104,18 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/de_cobro"
                                     android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp" />
                             </LinearLayout>
 
                         </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <soup.neumorphism.NeumorphCardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        style="@style/Widget.Neumorph.CardView"
-                        app:neumorph_shapeType="flat">
+                        app:cardBackgroundColor="@color/background_color_50"
+                        app:cardCornerRadius="@dimen/_16sdp">
 
 
                     <LinearLayout
@@ -133,19 +135,20 @@
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/web2" />
+                                    android:src="@drawable/round_web_24"/>
 
                                 <TextView
                                     android:id="@+id/etecsa"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
+                                    android:background="@drawable/custom_button"
                                     android:fontFamily="@font/displaybold"
                                     android:padding="@dimen/_8sdp"
                                     android:text="@string/visitar1"
                                     android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp"
+                                    tools:ignore="RelativeOverlap" />
                             </RelativeLayout>
 
                             <LinearLayout
@@ -161,7 +164,7 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/etecsa"
                                     android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -170,12 +173,12 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/libre_de_costo"
                                     android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp" />
                             </LinearLayout>
 
                         </LinearLayout>
 
-                    </soup.neumorphism.NeumorphCardView>
+                    </androidx.cardview.widget.CardView>
                 </LinearLayout>
 
                 <LinearLayout
@@ -184,12 +187,13 @@
                     android:orientation="horizontal"
                     android:weightSum="100">
 
-                    <soup.neumorphism.NeumorphCardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        style="@style/Widget.Neumorph.CardView"
-                        app:neumorph_shapeType="flat">
+                        app:cardBackgroundColor="@color/background_color_50"
+                        app:cardCornerRadius="@dimen/_16sdp"
+                        >
 
 
                     <LinearLayout
@@ -209,19 +213,22 @@
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/web2" />
+                                    android:src="@drawable/round_web_24"
+
+                                    />
 
                                 <TextView
                                     android:id="@+id/correo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
+                                    android:background="@drawable/custom_button"
                                     android:fontFamily="@font/displaybold"
                                     android:padding="@dimen/_8sdp"
                                     android:text="@string/visitar1"
                                     android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp"
+                                    tools:ignore="RelativeOverlap" />
                             </RelativeLayout>
 
                             <LinearLayout
@@ -237,7 +244,7 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/bandeja_correo"
                                     android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -246,20 +253,18 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/de_cobro"
                                     android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp" />
                             </LinearLayout>
 
                         </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <soup.neumorphism.NeumorphCardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        app:cardBackgroundColor="@color/colorFondo"
-                        app:cardCornerRadius="@dimen/_4sdp"
-                        app:cardElevation="@dimen/_4sdp"
-                        app:cardUseCompatPadding="true">
+                        app:cardBackgroundColor="@color/background_color_50"
+                        app:cardCornerRadius="@dimen/_16sdp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -278,19 +283,22 @@
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/web2" />
+                                    android:src="@drawable/round_web_24"
+
+                                    />
 
                                 <TextView
                                     android:id="@+id/saldo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
+                                    android:background="@drawable/custom_button"
                                     android:fontFamily="@font/displaybold"
                                     android:padding="@dimen/_8sdp"
                                     android:text="@string/visitar1"
                                     android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp"
+                                    tools:ignore="RelativeOverlap" />
                             </RelativeLayout>
 
                             <LinearLayout
@@ -306,7 +314,7 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/paginas_amarillas"
                                     android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -315,11 +323,11 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/libre_de_costo"
                                     android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp" />
                             </LinearLayout>
 
                         </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
+                    </androidx.cardview.widget.CardView>
                 </LinearLayout>
 
                 <LinearLayout
@@ -328,12 +336,13 @@
                     android:orientation="horizontal"
                     android:weightSum="100">
 
-                    <soup.neumorphism.NeumorphCardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        style="@style/Widget.Neumorph.CardView"
-                        app:neumorph_shapeType="flat">
+                        app:cardBackgroundColor="@color/background_color_50"
+                        app:cardCornerRadius="@dimen/_16sdp"
+                     >
 
 
                     <LinearLayout
@@ -353,19 +362,22 @@
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/web2" />
+                                    android:src="@drawable/round_web_24"
+
+                                    />
 
                                 <TextView
                                     android:id="@+id/bono"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
+                                    android:background="@drawable/custom_button"
                                     android:fontFamily="@font/displaybold"
                                     android:padding="@dimen/_8sdp"
                                     android:text="@string/visitar1"
                                     android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp"
+                                    tools:ignore="RelativeOverlap" />
                             </RelativeLayout>
 
                             <LinearLayout
@@ -381,7 +393,7 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/todus"
                                     android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -390,18 +402,19 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/libre_de_costo"
                                     android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp" />
                             </LinearLayout>
 
                         </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <soup.neumorphism.NeumorphCardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        style="@style/Widget.Neumorph.CardView"
-                        app:neumorph_shapeType="flat">
+                        app:cardBackgroundColor="@color/background_color_50"
+                        app:cardCornerRadius="@dimen/_16sdp"
+                        >
 
                     <LinearLayout
                             android:layout_width="match_parent"
@@ -420,19 +433,22 @@
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/web2" />
+                                    android:src="@drawable/round_web_24"
+
+                                    />
 
                                 <TextView
                                     android:id="@+id/megas"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
+                                    android:background="@drawable/custom_button"
                                     android:fontFamily="@font/displaybold"
                                     android:padding="@dimen/_8sdp"
                                     android:text="@string/visitar1"
                                     android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp"
+                                    tools:ignore="RelativeOverlap" />
                             </RelativeLayout>
 
                             <LinearLayout
@@ -448,7 +464,7 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/apklis"
                                     android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -457,11 +473,11 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/de_cobro"
                                     android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp" />
                             </LinearLayout>
 
                         </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
+                    </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
 
@@ -471,12 +487,12 @@
                     android:orientation="horizontal"
                     android:weightSum="100">
 
-                    <soup.neumorphism.NeumorphCardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        style="@style/Widget.Neumorph.CardView"
-                        app:neumorph_shapeType="flat">
+                        app:cardBackgroundColor="@color/background_color_50"
+                        app:cardCornerRadius="@dimen/_16sdp">
 
 
                     <LinearLayout
@@ -496,19 +512,22 @@
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/web2" />
+                                    android:src="@drawable/round_web_24"
+
+                                    />
 
                                 <TextView
                                     android:id="@+id/transferir"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
+                                    android:background="@drawable/custom_button"
                                     android:fontFamily="@font/displaybold"
                                     android:padding="@dimen/_8sdp"
                                     android:text="@string/visitar1"
                                     android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp"
+                                    tools:ignore="RelativeOverlap" />
                             </RelativeLayout>
 
                             <LinearLayout
@@ -524,7 +543,7 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/picta"
                                     android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -533,18 +552,18 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/de_cobro"
                                     android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp" />
                             </LinearLayout>
 
                         </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <soup.neumorphism.NeumorphCardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        style="@style/Widget.Neumorph.CardView"
-                        app:neumorph_shapeType="flat">
+                        app:cardBackgroundColor="@color/background_color_50"
+                        app:cardCornerRadius="@dimen/_16sdp">
 
 
                     <LinearLayout
@@ -564,19 +583,21 @@
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/web2" />
+                                    android:src="@drawable/round_web_24"
+                                    />
 
                                 <TextView
                                     android:id="@+id/recargar"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
+                                    android:background="@drawable/custom_button"
                                     android:fontFamily="@font/displaybold"
                                     android:padding="@dimen/_8sdp"
                                     android:text="@string/visitar1"
                                     android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp"
+                                    tools:ignore="RelativeOverlap" />
                             </RelativeLayout>
 
                             <LinearLayout
@@ -592,7 +613,7 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/cubadebate"
                                     android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -601,11 +622,11 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/de_cobro"
                                     android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp" />
                             </LinearLayout>
 
                         </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
+                    </androidx.cardview.widget.CardView>
                 </LinearLayout>
 
                 <LinearLayout
@@ -614,13 +635,12 @@
                     android:orientation="horizontal"
                     android:weightSum="100">
 
-                    <soup.neumorphism.NeumorphCardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        style="@style/Widget.Neumorph.CardView"
-                        app:neumorph_shapeType="flat">
-
+                        app:cardBackgroundColor="@color/background_color_50"
+                        app:cardCornerRadius="@dimen/_16sdp">
 
                     <LinearLayout
                             android:layout_width="match_parent"
@@ -639,19 +659,20 @@
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/web2" />
+                                    android:src="@drawable/round_web_24"
+                                    />
 
                                 <TextView
                                     android:id="@+id/adelantar"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
+                                    android:background="@drawable/custom_button"
                                     android:fontFamily="@font/displaybold"
                                     android:padding="@dimen/_8sdp"
                                     android:text="@string/visitar1"
                                     android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp" />
                             </RelativeLayout>
 
                             <LinearLayout
@@ -667,7 +688,7 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/la_mochila"
                                     android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -676,18 +697,19 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/de_cobro"
                                     android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp" />
                             </LinearLayout>
 
                         </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <soup.neumorphism.NeumorphCardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        style="@style/Widget.Neumorph.CardView"
-                        app:neumorph_shapeType="flat">
+                        app:cardBackgroundColor="@color/background_color_50"
+                        app:cardCornerRadius="@dimen/_16sdp"
+                        >
 
 
                     <LinearLayout
@@ -707,19 +729,20 @@
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/web2" />
+                                    android:src="@drawable/round_web_24"
+                                    />
 
                                 <TextView
                                     android:id="@+id/tuenvio"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
+                                    android:background="@drawable/custom_button"
                                     android:fontFamily="@font/displaybold"
                                     android:padding="@dimen/_8sdp"
                                     android:text="@string/visitar1"
                                     android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp" />
                             </RelativeLayout>
 
                             <LinearLayout
@@ -735,7 +758,7 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/tu_envio"
                                     android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -744,11 +767,11 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/de_cobro"
                                     android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp" />
                             </LinearLayout>
 
                         </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
+                    </androidx.cardview.widget.CardView>
                 </LinearLayout>
 
                 <LinearLayout
@@ -757,12 +780,12 @@
                     android:orientation="horizontal"
                     android:weightSum="100">
 
-                    <soup.neumorphism.NeumorphCardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        style="@style/Widget.Neumorph.CardView"
-                        app:neumorph_shapeType="flat">
+                        app:cardBackgroundColor="@color/background_color_50"
+                        app:cardCornerRadius="@dimen/_16sdp">
 
 
                     <LinearLayout
@@ -782,19 +805,21 @@
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/web2" />
+                                    android:src="@drawable/round_web_24"
+
+                                    />
 
                                 <TextView
                                     android:id="@+id/ecured"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
+                                    android:background="@drawable/custom_button"
                                     android:fontFamily="@font/displaybold"
                                     android:padding="@dimen/_8sdp"
                                     android:text="@string/visitar1"
                                     android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp" />
                             </RelativeLayout>
 
                             <LinearLayout
@@ -810,7 +835,7 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/ecured"
                                     android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -823,14 +848,14 @@
                             </LinearLayout>
 
                         </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <soup.neumorphism.NeumorphCardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        style="@style/Widget.Neumorph.CardView"
-                        app:neumorph_shapeType="flat">
+                        app:cardBackgroundColor="@color/background_color_50"
+                        app:cardCornerRadius="@dimen/_16sdp">
 
 
                     <LinearLayout
@@ -850,19 +875,21 @@
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/web2" />
+                                    android:src="@drawable/round_web_24"
+
+                                    />
 
                                 <TextView
                                     android:id="@+id/enzona"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
+                                    android:background="@drawable/custom_button"
                                     android:fontFamily="@font/displaybold"
                                     android:padding="@dimen/_8sdp"
                                     android:text="@string/visitar1"
                                     android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp" />
                             </RelativeLayout>
 
                             <LinearLayout
@@ -878,7 +905,7 @@
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/enzona"
                                     android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10sdp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -891,7 +918,7 @@
                             </LinearLayout>
 
                         </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
+                    </androidx.cardview.widget.CardView>
                 </LinearLayout>
 
                 <LinearLayout
@@ -900,12 +927,13 @@
                     android:orientation="horizontal"
                     android:weightSum="100">
 
-                    <soup.neumorphism.NeumorphCardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        style="@style/Widget.Neumorph.CardView"
-                        app:neumorph_shapeType="flat">
+                        app:cardBackgroundColor="@color/background_color_50"
+                        app:cardCornerRadius="@dimen/_16sdp"
+                        >
 
 
                     <LinearLayout
@@ -925,19 +953,21 @@
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/web2" />
+                                    android:src="@drawable/round_web_24"
+
+                                    />
 
                                 <TextView
                                     android:id="@+id/juventud"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
+                                    android:background="@drawable/custom_button"
                                     android:fontFamily="@font/displaybold"
                                     android:padding="@dimen/_8sdp"
                                     android:text="@string/visitar1"
                                     android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp" />
                             </RelativeLayout>
 
                             <LinearLayout
@@ -966,14 +996,14 @@
                             </LinearLayout>
 
                         </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <soup.neumorphism.NeumorphCardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
-                        style="@style/Widget.Neumorph.CardView"
-                        app:neumorph_shapeType="flat">
+                        app:cardBackgroundColor="@color/background_color_50"
+                        app:cardCornerRadius="@dimen/_16sdp">
 
 
                     <LinearLayout
@@ -993,19 +1023,20 @@
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/web2" />
+                                    android:src="@drawable/round_web_24"
+                                    />
 
                                 <TextView
                                     android:id="@+id/tecno"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentEnd="true"
-                                    android:background="@drawable/blue_rounded_shape"
+                                    android:background="@drawable/custom_button"
                                     android:fontFamily="@font/displaybold"
                                     android:padding="@dimen/_8sdp"
                                     android:text="@string/visitar1"
                                     android:textColor="#ffffff"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="11sp" />
                             </RelativeLayout>
 
                             <LinearLayout
@@ -1034,7 +1065,7 @@
                             </LinearLayout>
 
                         </LinearLayout>
-                    </soup.neumorphism.NeumorphCardView>
+                    </androidx.cardview.widget.CardView>
                 </LinearLayout>
 
             </LinearLayout>

@@ -950,4 +950,11 @@ Antes de empezar a usarlo primero necesitamos que leas lo descrito a continuaci�
     - USE_BIOMETRIC: permite a la aplicación usar los sensores biométricos. Se usa para, por ejemplo, escanear su huella como medida de seguridad de la aplicación.\n
     - VIBRATE: permite a la aplicación hacer que su dispositivo vibre. Se usa para, por ejemplo, el momento en que va a eliminar la Burbuja flotante.\n
 Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el botón Aceptar.</string>
+    <string name="datos_del_usuario">Datos del usuario</string>
+    <string name="sin_usuarios_registrados">Sin usuarios registrados</string>
+    <string name="limitar_tiempo_de_conexi_n">Limitar tiempo de conexión</string>
+    <string name="informaci_n2">Información</string>
+    <string name="nombre_de_usuario">Nombre de usuario</string>
+    <string name="_1">1</string>
+    <string name="desconectarse">Desconectarse</string>
 </resources>

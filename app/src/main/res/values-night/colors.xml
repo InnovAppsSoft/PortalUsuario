@@ -7,6 +7,7 @@
     <color name="colorpink">#000000</color>
     <color name="colorblue">#000000</color>
     <color name="colorModoNoche">#ffffff</color>
+    <color name="background_color_50">#212121</color>
 
     <color name="downloadBackgroundStart">#000000</color>
     <color name="downloadBackgroundEnd">#000000</color>

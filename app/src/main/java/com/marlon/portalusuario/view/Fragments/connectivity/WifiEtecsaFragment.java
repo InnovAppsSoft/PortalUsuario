@@ -79,7 +79,8 @@ public class WifiEtecsaFragment extends Fragment {
     private CheckBox connectionLimiter;
     private Spinner limiterType;
     private EditText limiterTime;
-    private NeumorphButton connectBtn, logOutBtn, userInfoBtn;
+
+    private Button  logOutBtn,connectBtn,userInfoBtn;
     public LinearLayout errorLayout;
     private ConstraintLayout sessionInfoLayout;
     private LottieAnimationView lottieAnimationView;
@@ -454,7 +455,7 @@ public class WifiEtecsaFragment extends Fragment {
             editUserDialog.setCancelable(true)
             .setView(inflate)
             .setTitle("Editar usuario")
-            .setIcon(R.drawable.baseline_account_circle_black_48);
+            .setIcon(R.drawable.round_person_24);
 
             usernameEditText = inflate.findViewById(R.id.username_et);
             passwordEditText = inflate.findViewById(R.id.password_et);
@@ -482,7 +483,7 @@ public class WifiEtecsaFragment extends Fragment {
             editUserDialog.setPositiveButton("Guardar", (dialogInterface, i) -> {
                 String username = usernameEditText.getText().toString();
                 String passw = passwordEditText.getText().toString();
-                if (!username.matches("[A-Za-z0-9_.]+")){
+                if (!username.matches("[A-Za-z0-9_.@]+")){
                     Toast.makeText(context, "El nombre de usuario no puede contener símbolos", Toast.LENGTH_SHORT).show();
                     return;
                 }

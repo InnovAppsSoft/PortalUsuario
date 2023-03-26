@@ -6,7 +6,7 @@
     </corners>
 
 
-    <gradient android:startColor="@color/pink"
-        android:endColor="@color/pink"/>
+    <gradient android:startColor="@color/botoncolorStart"
+        android:endColor="@color/botoncolorStart"/>
 
 </shape>
