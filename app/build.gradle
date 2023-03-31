@@ -43,6 +43,7 @@ android {
     }
 
     ndkVersion '22.0.7026061'
+    namespace 'com.marlon.portalusuario'
 }
 
 dependencies {
