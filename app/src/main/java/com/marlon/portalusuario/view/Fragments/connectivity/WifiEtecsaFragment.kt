@@ -56,7 +56,7 @@ class WifiEtecsaFragment : Fragment() {
     private var userInfoBtn: Button? = null
     var errorLayout: LinearLayout? = null
     private var sessionInfoLayout: ConstraintLayout? = null
-    private var lottieAnimationView: LottieAnimationView? = null
+
 
     //private AutoCompleteTextView usernameEditText;
     private lateinit var usernameEditText: EditText
@@ -238,7 +238,7 @@ class WifiEtecsaFragment : Fragment() {
                 errorDialog.show()
             }
         })
-        lottieAnimationView = view.findViewById(R.id.error_lottie)
+
         loadingBar = ProgressDialog(getContext())
         saldo = view.findViewById(R.id.editSaldoCuenta)
         leftTime = view.findViewById(R.id.textLeftTime)
@@ -827,8 +827,7 @@ class WifiEtecsaFragment : Fragment() {
     fun setErrorMessage(message: String?, r: Int) {
         errorLayout!!.visibility = View.VISIBLE
         errorsTextView!!.text = message
-        lottieAnimationView!!.setAnimation(r)
-        lottieAnimationView!!.playAnimation()
+
     }
 
     override fun onResume() {
