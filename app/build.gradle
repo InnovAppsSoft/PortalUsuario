@@ -22,8 +22,8 @@ android {
         applicationId "com.marlon.portalusuario"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 50
-        versionName '7.0.0'
+        versionCode 49
+        versionName '6.9'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         signingConfig signingConfigs.debug
@@ -43,6 +43,7 @@ android {
     }
 
     ndkVersion '22.0.7026061'
+    namespace 'com.marlon.portalusuario'
 }
 
 dependencies {

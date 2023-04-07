@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.linger1216:labelview:v1.1.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/461f9487f593f0284b52e6a71df02f8b/transformed/jetified-labelview-v1.1.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/461f9487f593f0284b52e6a71df02f8b/transformed/jetified-labelview-v1.1.2/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/461f9487f593f0284b52e6a71df02f8b/transformed/jetified-labelview-v1.1.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8d2d2d8e076ea198fe42405ba6e6d739/transformed/jetified-labelview-v1.1.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8d2d2d8e076ea198fe42405ba6e6d739/transformed/jetified-labelview-v1.1.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/8d2d2d8e076ea198fe42405ba6e6d739/transformed/jetified-labelview-v1.1.2/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.linger1216/labelview/v1.1.2/4e88f5c0c9b0f81adbda3b2d51f47f09097c6e71/labelview-v1.1.2-javadoc.jar!/" />

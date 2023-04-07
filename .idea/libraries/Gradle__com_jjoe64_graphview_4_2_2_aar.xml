@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.jjoe64:graphview:4.2.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/91d46b0f54614da1630240419941095c/transformed/jetified-graphview-4.2.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/91d46b0f54614da1630240419941095c/transformed/jetified-graphview-4.2.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/91d46b0f54614da1630240419941095c/transformed/jetified-graphview-4.2.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4bb5a1591ddac7c5442bc3c7561101de/transformed/jetified-graphview-4.2.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4bb5a1591ddac7c5442bc3c7561101de/transformed/jetified-graphview-4.2.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4bb5a1591ddac7c5442bc3c7561101de/transformed/jetified-graphview-4.2.2/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jjoe64/graphview/4.2.2/f99aaac74cae0d1bfad1e46354e7fbbe7fb49206/graphview-4.2.2-javadoc.jar!/" />

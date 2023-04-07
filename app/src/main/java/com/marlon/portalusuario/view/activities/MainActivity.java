@@ -407,7 +407,7 @@ public class MainActivity extends AppCompatActivity implements BiometricCallback
         // CHECK FOR UPDATES
         BroadcastReceiver apklis_update;
         if (settings.getBoolean("start_checking_for_updates", true)) {
-            //
+
             // BROADCAST
             apklis_update = new BroadcastReceiver() {
                 @SuppressLint("SetTextI18n")
@@ -454,7 +454,7 @@ public class MainActivity extends AppCompatActivity implements BiometricCallback
             LocalBroadcastManager.getInstance(this).registerReceiver(apklis_update, new IntentFilter("apklis_app_info"));
             apklis = new ApklisUtil(this, APP_NAME);
             startService(apklis, 0);
-            //
+
             // etecsa carousel
             carouselLayout = findViewById(R.id.carouselLayout);
             sliderView = findViewById(R.id.imageSlider);

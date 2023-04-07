@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: mobi.gspd:segmentedbarview:1.1.6@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/b7f8434f7ab481eb4cd1afe944f781f7/transformed/jetified-segmentedbarview-1.1.6/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b7f8434f7ab481eb4cd1afe944f781f7/transformed/jetified-segmentedbarview-1.1.6/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b7f8434f7ab481eb4cd1afe944f781f7/transformed/jetified-segmentedbarview-1.1.6/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4853d385815401bc7c1a954947df3162/transformed/jetified-segmentedbarview-1.1.6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4853d385815401bc7c1a954947df3162/transformed/jetified-segmentedbarview-1.1.6/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4853d385815401bc7c1a954947df3162/transformed/jetified-segmentedbarview-1.1.6/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
