@@ -329,9 +329,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="487bf3" />
+                            <entry key="color" value="ee5117" />
                             <entry key="opacityPercent" value="90" />
-                            <entry key="outputName" value="baseline_info_24" />
+                            <entry key="outputName" value="info" />
                             <entry key="sourceFile" value="/C:\Users\Marlon\Desktop\settings.svg" />
                           </map>
                         </option>

@@ -143,17 +143,20 @@
                     android:background="@drawable/custom_button"
                     android:fontFamily="@font/displaybold"
                     android:text="@string/conectarse"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
                     android:textColor="@color/white"
                     android:layout_weight="1"
                     style="?android:attr/buttonBarButtonStyle" />
 
                 <Button
                     android:id="@+id/logout_button"
-                    style="@style/ShapeAppearance.Neumorph.Button"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/displaybold"
                     android:text="@string/desconectarse"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
                     android:textColor="@color/white"
                     android:textSize="11sp"
                     android:background="@drawable/custom_button"
@@ -163,6 +166,8 @@
                 <Button
                     android:id="@+id/user_info_button"
                     android:layout_width="match_parent"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/displaybold"
                     android:text="@string/datos_del_usuario"

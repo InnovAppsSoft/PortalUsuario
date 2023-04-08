@@ -32,7 +32,7 @@
         android:text="@string/acceda_desde_la_comodidad_de_su_casa_de_los_servicios_que_brinda_etecsa"
         android:textAlignment="center"
         android:textColor="@color/colorTest10"
-        android:textSize="@dimen/_12sdp"
+        android:textSize="13sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

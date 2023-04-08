@@ -405,7 +405,7 @@ public class ServiciosFragment<b> extends Fragment {
     }
 
     public class PlanAmigosDialog {
-        private NeumorphCardView activar,adicionar,consultar;
+        private CardView activar,adicionar,consultar;
         public PlanAmigosDialog(final Context context) {
             final Dialog plamAmigosDialog = new Dialog(getContext());
 
@@ -430,7 +430,7 @@ public class ServiciosFragment<b> extends Fragment {
 
             if (Build.VERSION.SDK_INT >= 23) {
                 if (context.checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_DENIED ) {
-                    requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, 1000);
+                    ServiciosFragment.this.requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, 1000);
                 } else {
                     startActivity(r);
                 }

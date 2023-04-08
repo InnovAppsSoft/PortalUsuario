@@ -119,9 +119,10 @@
 
                     <Button
                         android:id="@+id/arrowBtn"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="48sp"
+                        android:layout_height="48sp"
                         android:layout_marginEnd="12dp"
+                        android:contentDescription="@string/app_name"
                         android:background="@drawable/ic_keyboard_arrow_down_black_24dp"/>
                 </LinearLayout>
 
