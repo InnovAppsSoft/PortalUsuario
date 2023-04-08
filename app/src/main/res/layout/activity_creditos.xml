@@ -132,6 +132,7 @@
                                             android:layout_width="@dimen/_25sdp"
                                             android:layout_height="@dimen/_25sdp"
                                             android:contentDescription="@string/app_name"
+                                            app:tint="@color/botoncolorStart"
                                             android:src="@drawable/facebook" />
 
                                         <TextView
@@ -157,6 +158,7 @@
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
                                             android:layout_height="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:contentDescription="@string/app_name"
                                             android:src="@drawable/instagram" />
 
@@ -182,8 +184,9 @@
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
                                             android:layout_height="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:contentDescription="@string/app_name"
-                                            android:src="@drawable/twitter" />
+                                            android:src="@drawable/gorjeo" />
 
                                         <TextView
                                             android:id="@+id/marlon_twitter"
@@ -294,6 +297,7 @@
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
                                             android:layout_height="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:contentDescription="@string/app_name"
                                             android:src="@drawable/facebook" />
 
@@ -320,8 +324,9 @@
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
                                             android:layout_height="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:contentDescription="@string/app_name"
-                                            android:src="@drawable/telegram" />
+                                            android:src="@drawable/telegrama" />
 
                                         <TextView
                                             android:id="@+id/javier_telegram"
@@ -344,9 +349,10 @@
 
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:layout_height="@dimen/_25sdp"
                                             android:contentDescription="@string/app_name"
-                                            android:src="@drawable/twitter" />
+                                            android:src="@drawable/gorjeo" />
 
                                         <TextView
                                             android:id="@+id/javier_twitter"
@@ -390,6 +396,7 @@
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
                                             android:layout_height="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:contentDescription="@string/app_name"
                                             android:src="@drawable/instagram" />
 
@@ -417,8 +424,9 @@
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
                                             android:layout_height="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:contentDescription="@string/app_name"
-                                            android:src="@drawable/telegram" />
+                                            android:src="@drawable/telegrama" />
 
                                         <TextView
                                             android:id="@+id/javier_canal_telegram"
@@ -443,8 +451,9 @@
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
                                             android:layout_height="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:contentDescription="@string/app_name"
-                                            android:src="@drawable/icon_github" />
+                                            android:src="@drawable/github" />
 
                                         <TextView
                                             android:id="@+id/javier_github"
@@ -489,9 +498,10 @@
 
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:layout_height="@dimen/_25sdp"
                                             android:contentDescription="@string/app_name"
-                                            android:src="@drawable/correo" />
+                                            android:src="@drawable/gmail" />
 
                                         <TextView
                                             android:id="@+id/javier_gmail"
@@ -585,53 +595,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
-                                    <!-- FACEBOOK -->
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal">
 
-                                        <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/facebook" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:layout_marginLeft="10dp"
-                                            android:fontFamily="@font/displaybold"
-                                            android:gravity="center_vertical"
-                                            android:text="@string/facebook"
-                                            android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
-
-                                    </LinearLayout>
-                                    <!-- INSTAGRAM -->
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="10dp"
-                                        android:gravity="center_vertical"
-                                        tools:ignore="UseCompoundDrawables">
-
-                                        <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/instagram" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:layout_marginStart="10dp"
-                                            android:fontFamily="@font/displaybold"
-                                            android:gravity="center_vertical"
-                                            android:text="@string/instagram"
-                                            android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
-                                    </LinearLayout>
                                     <!-- TWITTER -->
                                     <LinearLayout
                                         android:layout_width="wrap_content"
@@ -643,8 +607,9 @@
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
                                             android:layout_height="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:contentDescription="@string/app_name"
-                                            android:src="@drawable/twitter" />
+                                            android:src="@drawable/telegrama" />
 
                                         <TextView
                                             android:layout_width="wrap_content"
@@ -652,7 +617,7 @@
                                             android:layout_marginStart="10dp"
                                             android:fontFamily="@font/displaybold"
                                             android:gravity="center_vertical"
-                                            android:text="@string/twitter"
+                                            android:text="Telegram"
                                             android:textColor="@color/colorDes"
                                             android:textSize="12sp" />
                                     </LinearLayout>
@@ -825,9 +790,10 @@
 
                                     <ImageView
                                         android:layout_width="@dimen/_25sdp"
+                                        app:tint="@color/botoncolorStart"
                                         android:layout_height="@dimen/_25sdp"
                                         android:contentDescription="@string/app_name"
-                                        android:src="@drawable/version2" />
+                                        android:src="@drawable/unir" />
 
                                     <LinearLayout
                                         android:layout_width="wrap_content"
@@ -867,8 +833,9 @@
                                     <ImageView
                                         android:layout_width="@dimen/_25sdp"
                                         android:layout_height="@dimen/_25sdp"
+                                        app:tint="@color/botoncolorStart"
                                         android:contentDescription="@string/app_name"
-                                        android:src="@drawable/porciento" />
+                                        android:src="@drawable/descarga" />
 
                                     <LinearLayout
                                         android:layout_width="wrap_content"
@@ -1064,8 +1031,9 @@
                          <ImageView
                              android:layout_width="@dimen/_25sdp"
                              android:layout_height="@dimen/_25sdp"
+                             app:tint="@color/botoncolorStart"
                              android:contentDescription="@string/app_name"
-                             android:src="@drawable/playstore" />
+                             android:src="@drawable/google" />
 
                          <LinearLayout
                              android:layout_width="wrap_content"

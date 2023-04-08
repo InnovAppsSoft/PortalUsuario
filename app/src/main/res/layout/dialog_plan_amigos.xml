@@ -40,7 +40,7 @@
                     android:src="@drawable/actions_viewmembers"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/red" />
+                    app:tint="@color/botoncolorStart" />
 
                 <TextView
                     android:id="@+id/Title1"
@@ -97,13 +97,14 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="12dp"
+                    app:tint="@color/botoncolorStart"
                     android:layout_marginTop="12dp"
                     android:contentDescription="@string/app_name"
                     android:padding="6dp"
                     android:src="@drawable/actions_viewmembers"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/red" />
+                    />
 
                 <TextView
                     android:id="@+id/Title4"
@@ -164,10 +165,10 @@
                     android:layout_marginTop="12dp"
                     android:contentDescription="@string/app_name"
                     android:padding="6dp"
+                    app:tint="@color/botoncolorStart"
                     android:src="@drawable/actions_viewmembers"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/red" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/Title3"
