@@ -959,4 +959,12 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="desconectarse">Desconectarse</string>
     <string name="coautor_y_desarrollador">Coautor y Desarrollador</string>
     <string name="creador_y_desarrollador">Creador y Desarrollador</string>
+    <string name="cargando_captcha_por_favor_espere">Cargando captcha, por favor, espere</string>
+    <string name="escanee_el_siguiente_c_digo_qr_n">Escanee el siguiente código QR\n</string>
+    <string name="gracias_por_su_aporte_n">Gracias por su aporte\n</string>
+    <string name="saltar">Saltar</string>
+    <string name="conceder">Conceder</string>
+    <string name="donacion_a_javier">Donacion a Javier</string>
+    <string name="donaciones_via_zelle_en_estados_unidos">Donaciones via Zelle en Estados Unidos</string>
+    <string name="donaciones_via_saldo_movil">Donaciones via saldo movil</string>
 </resources>

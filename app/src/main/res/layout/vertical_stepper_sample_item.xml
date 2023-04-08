@@ -25,14 +25,14 @@
             android:backgroundTint="@color/material_blue_500"
             android:textColor="@android:color/white"
             android:textAllCaps="false"
-            android:text="Conceder"/>
+            android:text="@string/conceder"/>
 
         <Button
             android:id="@+id/button_prev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Saltar"
+            android:text="@string/saltar"
             android:background="@drawable/bg_button"
             android:textAllCaps="false"
             android:visibility="gone"/>

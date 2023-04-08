@@ -300,7 +300,8 @@ public class MainActivity extends AppCompatActivity implements BiometricCallback
                         break;
                     // CONFIGURACION
                     case R.id.donate:
-                        new DonationDialog(MainActivity.this);
+                        i = new Intent(MainActivity.this,Donacion.class);
+                        startActivity(i);
                         break;
                 }
                 drawer.closeDrawer(GravityCompat.START);
@@ -1128,7 +1129,6 @@ public class MainActivity extends AppCompatActivity implements BiometricCallback
         private TextView tvSignal;
         private com.marlon.portalusuario.Utils Utils;
         private SegmentedBarView bv;
-        private NeumorphImageView info;
         private Connectivity Conn;
         private Activity activity;
 
@@ -1441,7 +1441,7 @@ public class MainActivity extends AppCompatActivity implements BiometricCallback
     }
 
     public class SetLTEModeDialog {
-        private NeumorphButton set4GBtn;
+        private Button set4GBtn;
 
         public SetLTEModeDialog(final Context context) {
             final Dialog simDialog = new Dialog(context);

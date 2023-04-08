@@ -50,7 +50,7 @@
                     android:fontFamily="@font/displaybold"
                     android:text="*Para consultar si posee SIM o USIM mande un sms de libre costo al 2266 con el texto SIM"
                     android:textColor="@color/colorDes"
-                    android:textSize="@dimen/_13ssp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/t2"
@@ -63,7 +63,7 @@
                     android:fontFamily="@font/displaybold"
                     android:text="*Para consultar si móvil puede operar en las 3G y 4G mande un sms libre de costo al 2266 con loa 8 primeros digitos de su IMEI"
                     android:textColor="@color/colorDes"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/t3"
@@ -76,7 +76,7 @@
                     android:layout_marginTop="3dp"
                     android:text="*Para consultar su IMEI puede marcar *#06#"
                     android:textColor="@color/colorDes"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/t4"
@@ -90,7 +90,7 @@
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:text="*Para activar la 4G en su móvil tiene que poseer una línea USIM y un móvil compatible con la frecuencia que opera ETECSA, envie un sms libre costo al 2266 con el texto LTE"
                     android:textColor="@color/colorDes"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="13sp" />
 
             </RelativeLayout>
 
@@ -131,7 +131,7 @@
                     android:fontFamily="@font/displaybold"
                     android:text="*Abrir los ajustes del teléfono"
                     android:textColor="@color/colorDes"
-                    android:textSize="@dimen/_13ssp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/l2"
@@ -144,7 +144,7 @@
                     android:layout_marginTop="3dp"
                     android:text="*Conexiones y Redes"
                     android:textColor="@color/colorDes"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/l3"
@@ -157,7 +157,7 @@
                     android:layout_marginTop="3dp"
                     android:text="*Redes Móviles"
                     android:textColor="@color/colorDes"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/l4"
@@ -170,7 +170,7 @@
                     android:layout_marginTop="3dp"
                     android:text="*Nombre de puntos de accesos"
                     android:textColor="@color/colorDes"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/l5"
@@ -183,7 +183,7 @@
                     android:layout_marginTop="3dp"
                     android:text="*Añadir un nuevo APN"
                     android:textColor="@color/colorDes"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/l6"
@@ -196,7 +196,7 @@
                     android:layout_marginTop="3dp"
                     android:text="*Nombre: Nauta APN: Nauta"
                     android:textColor="@color/colorDes"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/l7"
@@ -209,7 +209,7 @@
                     android:layout_marginTop="3dp"
                     android:text="*Guardar APN"
                     android:textColor="@color/colorDes"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/l8"
@@ -222,7 +222,7 @@
                     android:layout_marginTop="3dp"
                     android:text="*Seleccionar APN creado"
                     android:textColor="@color/colorDes"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/l9"
@@ -236,7 +236,7 @@
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:text="*Activar los datos móviles"
                     android:textColor="@color/colorDes"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="13sp" />
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>

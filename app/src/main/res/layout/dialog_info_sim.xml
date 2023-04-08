@@ -125,7 +125,7 @@
                     android:fontFamily="@font/displaybold"
                     android:text="--"
                     android:textColor="@color/colorDes"
-                    android:textSize="@dimen/_10sdp" />
+                    android:textSize="13sp" />
 
 
             </LinearLayout>
@@ -152,7 +152,7 @@
                     android:fontFamily="@font/displaybold"
                     android:text="--"
                     android:textColor="@color/colorDes"
-                    android:textSize="@dimen/_10sdp" />
+                    android:textSize="13sp" />
 
             </LinearLayout>
 

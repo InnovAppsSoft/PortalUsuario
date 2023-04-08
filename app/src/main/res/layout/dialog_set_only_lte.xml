@@ -18,12 +18,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <soup.neumorphism.NeumorphButton
+
+    <Button
         android:id="@+id/set_4g"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/widget_4"
         android:layout_margin="10dp"
-        style="@style/Widget.Neumorph.Button"
+        android:textSize="13sp"
+        android:textColor="@color/white"
         android:fontFamily="@font/displaybold"
         android:text="@string/configurar_solo_4g" />
     <androidx.core.widget.NestedScrollView
@@ -37,8 +40,9 @@
             android:layout_margin="10dp">
 
 
-            <soup.neumorphism.NeumorphCardView
-                app:neumorph_shapeAppearance="@style/NeumorphismCard"
+            <androidx.cardview.widget.CardView
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
                 android:layout_width="match_parent"
                 app:neumorph_backgroundColor="@color/background"
                 android:layout_height="wrap_content"
@@ -55,13 +59,13 @@
                         android:id="@+id/tvLTE"
                         android:layout_width="match_parent"
                         android:layout_height="26dp"
-                        android:background="@color/primary"
+                        android:background="@color/colorPrimary"
                         android:fontFamily="@font/displaybold"
                         android:gravity="center_vertical"
                         android:paddingStart="@dimen/activity_horizontal_margin"
                         android:text="Configurar modo Solo LTE"
                         android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="13sp"
                         tools:ignore="RtlSymmetry,TextContrastCheck" />
 
                     <TextView
@@ -74,10 +78,10 @@
                         android:fontFamily="@font/displaybold"
                         android:text="@string/se_al1"
                         android:textColor="@color/colorDes"
-                        android:textSize="@dimen/_10sdp" />
+                        android:textSize="13sp" />
 
                 </RelativeLayout>
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"

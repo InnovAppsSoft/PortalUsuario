@@ -69,31 +69,31 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <soup.neumorphism.NeumorphCardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/plan"
-                    style="@style/Widget.Neumorph.CardView"
+                    app:cardUseCompatPadding="true"
+                    app:cardBackgroundColor="@color/background_color_50"
+                    app:cardCornerRadius="@dimen/_16sdp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp">
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/background">
+                        android:layout_height="wrap_content">
 
                         <ImageView
                             android:id="@+id/compra"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
+                            app:tint="@color/botoncolorStart"
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="12dp"
                             android:contentDescription="@string/app_name"
                             android:padding="6dp"
                             android:src="@drawable/msg_markunread"
-                            app:tint="@color/red"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -131,22 +131,22 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </soup.neumorphism.NeumorphCardView>
+                </androidx.cardview.widget.CardView>
 
-                <soup.neumorphism.NeumorphCardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/plan20"
-                    style="@style/Widget.Neumorph.CardView"
+                    app:cardUseCompatPadding="true"
+                    app:cardBackgroundColor="@color/background_color_50"
+                    app:cardCornerRadius="@dimen/_16sdp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp">
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/background">
+                        android:layout_height="wrap_content">
 
                         <ImageView
                             android:id="@+id/compra3"
@@ -154,10 +154,10 @@
                             android:layout_height="40dp"
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="12dp"
+                            app:tint="@color/botoncolorStart"
                             android:contentDescription="@string/app_name"
                             android:padding="6dp"
                             android:src="@drawable/msg_markunread"
-                            app:tint="@color/red"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -195,22 +195,22 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </soup.neumorphism.NeumorphCardView>
+                </androidx.cardview.widget.CardView>
 
-                <soup.neumorphism.NeumorphCardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/plan35"
-                    style="@style/Widget.Neumorph.CardView"
+                    app:cardUseCompatPadding="true"
+                    app:cardBackgroundColor="@color/background_color_50"
+                    app:cardCornerRadius="@dimen/_16sdp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp">
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/background">
+                        android:layout_height="wrap_content">
 
                         <ImageView
                             android:id="@+id/compra2"
@@ -221,7 +221,7 @@
                             android:contentDescription="@string/app_name"
                             android:padding="6dp"
                             android:src="@drawable/msg_markunread"
-                            app:tint="@color/red"
+                            app:tint="@color/botoncolorStart"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -259,22 +259,22 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </soup.neumorphism.NeumorphCardView>
+                </androidx.cardview.widget.CardView>
 
-                <soup.neumorphism.NeumorphCardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/plan45"
-                    style="@style/Widget.Neumorph.CardView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    app:cardUseCompatPadding="true"
+                    app:cardBackgroundColor="@color/background_color_50"
+                    app:cardCornerRadius="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp">
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/background">
+                        android:layout_height="wrap_content">
 
                         <ImageView
                             android:id="@+id/compra4"
@@ -285,7 +285,7 @@
                             android:contentDescription="@string/app_name"
                             android:padding="6dp"
                             android:src="@drawable/msg_markunread"
-                            app:tint="@color/red"
+                            app:tint="@color/botoncolorStart"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -323,7 +323,7 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </soup.neumorphism.NeumorphCardView>
+                </androidx.cardview.widget.CardView>
 
             </LinearLayout>
 

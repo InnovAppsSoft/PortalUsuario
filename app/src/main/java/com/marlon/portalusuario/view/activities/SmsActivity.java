@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.marlon.portalusuario.R;
 
@@ -18,7 +19,7 @@ import soup.neumorphism.NeumorphCardView;
 
 public class SmsActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private NeumorphCardView plan,plan20,plan35,plan45;
+    private CardView plan,plan20,plan35,plan45;
     private ImageView Atras;
 
     @Override
@@ -27,10 +28,10 @@ public class SmsActivity extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_sms);
 
         //Definiendo Card
-        plan = (NeumorphCardView) findViewById(R.id.plan);
-        plan20 = (NeumorphCardView) findViewById(R.id.plan20);
-        plan35 = (NeumorphCardView) findViewById(R.id.plan35);
-        plan45 = (NeumorphCardView) findViewById(R.id.plan45);
+        plan = (CardView) findViewById(R.id.plan);
+        plan20 = (CardView) findViewById(R.id.plan20);
+        plan35 = (CardView) findViewById(R.id.plan35);
+        plan45 = (CardView) findViewById(R.id.plan45);
         Atras = findViewById(R.id.atras1);
 
         //Añadiendo Clic a los Card

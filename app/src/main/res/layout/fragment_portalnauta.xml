@@ -18,8 +18,9 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <soup.neumorphism.NeumorphCardView
-                style="@style/Widget.Neumorph.CardView"
+            <androidx.cardview.widget.CardView
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
@@ -34,24 +35,10 @@
                     android:padding="10dp">
 
                     <ImageView
-                        style="@style/Widget.Neumorph.ImageView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/background"
                         android:src="@drawable/logo_nauta_45"
-                        app:neumorph_shapeType="flat"
                         android:layout_marginTop="@dimen/_15sdp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/portal_nauta"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:textColor="@color/colorDes"
-                        android:textSize="@dimen/_15sdp"
-                        android:fontFamily="@font/displaybold"
-                        android:textAlignment="center"/>
-
 
                     <AutoCompleteTextView
                         android:id="@+id/actv"
@@ -67,7 +54,7 @@
                         android:imeOptions="actionNext"
                         android:inputType="textWebEmailAddress"
                         android:textColor="@color/colorDes"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="13sp"
                         tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -89,7 +76,7 @@
                             android:inputType="textPassword"
                             android:singleLine="false"
                             android:textColor="@color/colorDes"
-                            android:textSize="@dimen/_10sdp"
+                            android:textSize="13sp"
                             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,7 +100,7 @@
                             android:hint="@string/codigo_captcha"
                             android:singleLine="false"
                             android:textColor="@color/colorDes"
-                            android:textSize="@dimen/_10sdp"
+                            android:textSize="13sp"
                             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -152,8 +139,7 @@
 
                     </RelativeLayout>
 
-                    <soup.neumorphism.NeumorphButton
-                        style="@style/Widget.Neumorph.Button"
+                    <Button
                         android:id="@+id/bt_login"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -161,13 +147,13 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="20dp"
                         android:fontFamily="@font/displaybold"
-                        app:neumorph_shapeType="flat"
                         android:paddingLeft="50dp"
                         android:paddingRight="50dp"
+                        android:background="@drawable/widget_4"
                         android:text="@string/btn_acept"
-                        android:textColor="@color/colorDes" />
+                        android:textColor="@color/white" />
                 </LinearLayout>
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </ScrollView>
 

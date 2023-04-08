@@ -18,6 +18,7 @@
         android:text="Actualización disponible"
         android:textColor="@color/white"
         android:textAllCaps="false"
+        android:textSize="13sp"
         android:textAlignment="center"
         android:background="@drawable/button_main"/>
     <LinearLayout
@@ -84,7 +85,7 @@
                         android:gravity="center_horizontal"
                         android:text="@string/versi_n_x_x_mb"
                         android:textColor="@color/colorDes"
-                        android:textSize="@dimen/_10sdp" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -105,7 +106,7 @@
                     android:gravity="left"
                     android:text="@string/qu_hay_de_nuevo"
                     android:textColor="@color/colorDes"
-                    android:textSize="@dimen/_10sdp"
+                    android:textSize="13sp"
                     android:textStyle="bold"
                     tools:ignore="RtlHardcoded" />
 
@@ -117,7 +118,7 @@
                     android:gravity="left"
                     android:text="@string/nada"
                     android:textColor="@color/colorDes"
-                    android:textSize="@dimen/_10sdp"
+                    android:textSize="13sp"
                     tools:ignore="RtlHardcoded" />
             </LinearLayout>
 
@@ -126,13 +127,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginBottom="@dimen/_2sdp"
-                android:background="@drawable/drawable_bottom"
+                android:background="@drawable/widget_4"
                 android:fontFamily="@font/displaybold"
                 android:text="@string/descargar_en_apklis"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_10sdp" />
+                android:textSize="13sp" />
 
             <Button
                 android:id="@+id/download_ps"
@@ -140,18 +141,18 @@
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginBottom="@dimen/_2sdp"
                 android:layout_marginTop="@dimen/_2sdp"
-                android:background="@drawable/drawable_bottom1"
+                android:background="@drawable/widget_4"
                 android:fontFamily="@font/displaybold"
                 android:text="@string/descargar_en_google_play"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_10sdp">
+                android:textSize="13sp">
             </Button>
 
 
             <Button
-                android:background="@drawable/drawable_bottom1"
+                android:background="@drawable/widget_4"
                 android:fontFamily="@font/displaybold"
                 android:id="@+id/remind_me_later"
                 android:layout_height="@dimen/_40sdp"
@@ -162,7 +163,7 @@
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="13sp"
                 tools:ignore="RtlCompat">
 
             </Button>
