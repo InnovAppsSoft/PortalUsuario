@@ -49,8 +49,8 @@ public class UneActivity extends AppCompatActivity {
     private ImageView Virar;
     private RecyclerView recyclerView;
     private List<Une> uneRegisters;
-    private TextView totalConsumption;
-    private TextView totalToPay;
+    private TextView totalConsumption = findViewById(R.id.total_consumption);
+    private TextView totalToPay = findViewById(R.id.total_to_pay);
     
     private UneViewModel uneViewModel;
 
@@ -68,8 +68,6 @@ public class UneActivity extends AppCompatActivity {
         Borrar = (Button) findViewById(R.id.LimpiarBt);
         Calcular = (Button) findViewById(R.id.CalcularBt);
         Virar = (ImageView)findViewById(R.id.virarhaciatras);
-        totalConsumption = findViewById(R.id.total_consumption);
-        totalToPay = findViewById(R.id.total_to_pay);
 
         consumoTotal = 0.0;
         consumoElectrico = 0;

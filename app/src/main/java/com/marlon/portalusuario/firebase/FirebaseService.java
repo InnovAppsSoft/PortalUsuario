@@ -1,5 +1,6 @@
 package com.marlon.portalusuario.firebase;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -7,6 +8,7 @@ import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -18,6 +20,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.preference.PreferenceManager;
@@ -46,7 +49,7 @@ public class FirebaseService extends FirebaseMessagingService {
     private SharedPreferences sharedPreferences;
 
     @Override
-    public void onNewToken (String token){
+    public void onNewToken(String token) {
         super.onNewToken(token);
     }
 
@@ -68,7 +71,7 @@ public class FirebaseService extends FirebaseMessagingService {
                 Log.e(TAG, "Message Notification Title: " + remoteMessage.getNotification().getTitle());
                 Log.e(TAG, "Message Notification Image Icon: " + remoteMessage.getNotification().getImageUrl());
                 Log.e(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
             sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -78,7 +81,7 @@ public class FirebaseService extends FirebaseMessagingService {
             String title = remoteMessage.getNotification().getTitle() != null ? remoteMessage.getNotification().getTitle() : "";
             String body = remoteMessage.getNotification().getBody() != null ? remoteMessage.getNotification().getBody() : "";
             String imageUrl = "";
-            if (remoteMessage.getNotification().getImageUrl() != null){
+            if (remoteMessage.getNotification().getImageUrl() != null) {
                 imageUrl = remoteMessage.getNotification().getImageUrl().toString();
             }
             final PUNotification pun = new PUNotification(title, body, imageUrl, new GregorianCalendar().getTimeInMillis());
@@ -144,9 +147,9 @@ public class FirebaseService extends FirebaseMessagingService {
     }
     // [END receive_message]
 
-//    }
+    //    }
     @SuppressLint("NewApi")
-    public void sendNotification(PUNotification pun){
+    public void sendNotification(PUNotification pun) {
         if (sharedPreferences.getBoolean("show_notifications", true)) {
             // INTENT QUE LANZARA LA ACTIVITY
             // PUEDE MODIFICARSE PARA LANZAR CUALQUIER OTRA ACTIVIDAD
@@ -182,6 +185,16 @@ public class FirebaseService extends FirebaseMessagingService {
             //We only need to call this for SDK 26+, since startForeground always has to be called after startForegroundService.
             //startForeground(NOTIFICATION_ID, builder.build());
             notificationManagerCompat = NotificationManagerCompat.from(this);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             notificationManagerCompat.notify(0, builder.build());
         }
     }

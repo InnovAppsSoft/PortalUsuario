@@ -957,4 +957,6 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="nombre_de_usuario">Nombre de usuario</string>
     <string name="_1">1</string>
     <string name="desconectarse">Desconectarse</string>
+    <string name="coautor_y_desarrollador">Coautor y Desarrollador</string>
+    <string name="creador_y_desarrollador">Creador y Desarrollador</string>
 </resources>

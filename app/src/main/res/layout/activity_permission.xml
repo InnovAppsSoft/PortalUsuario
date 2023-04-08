@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activities.PermissionActivity"
-    >
+    tools:context=".view.activities.PermissionActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,20 +25,20 @@
             android:textColor="@color/colorDes"
             android:textSize="@dimen/_20ssp"
             android:layout_marginBottom="10dp"/>
-        <soup.neumorphism.NeumorphCardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:neumorph_backgroundColor="@color/background"
-            app:neumorph_shadowElevation="@dimen/_5sdp"
-            app:neumorph_shapeAppearance="@style/NeumorphismCard"
-            app:neumorph_shapeType="flat">
+            app:cardUseCompatPadding="true"
+            app:cardBackgroundColor="@color/background_color_50"
+            app:cardCornerRadius="@dimen/_16sdp"
+            >
             <moe.feng.common.stepperview.VerticalStepperView
                 android:id="@+id/vertical_stepper_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:step_done_icon="@drawable/ic_done_white_16dp"
                 app:step_animation_duration="@android:integer/config_mediumAnimTime"/>
-        </soup.neumorphism.NeumorphCardView>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

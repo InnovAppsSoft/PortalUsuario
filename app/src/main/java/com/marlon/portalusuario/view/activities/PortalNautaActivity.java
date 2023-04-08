@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.marlon.portalusuario.util.AutoCompleteAdapter;
 import com.marlon.portalusuario.R;
@@ -52,7 +53,7 @@ public class PortalNautaActivity extends AppCompatActivity {
     EditText et_recharge_code;
     EditText et_mont;
     AutoCompleteTextView actv_accountToTransfer;
-    Button bt_recharge;
+    AppCompatButton bt_recharge, bt_transfer;
 
     UserPortal userPortal = new UserPortal();
 
@@ -95,6 +96,7 @@ public class PortalNautaActivity extends AppCompatActivity {
 
         et_recharge_code = findViewById(R.id.et_recharge_code);
         bt_recharge = findViewById(R.id.bt_recharge);
+        bt_transfer = findViewById(R.id.bt_transfer);
         et_mont = findViewById(R.id.et_mont);
         actv_accountToTransfer = findViewById(R.id.actv_accountToTransfer);
 
@@ -103,6 +105,20 @@ public class PortalNautaActivity extends AppCompatActivity {
         AutoCompleteAdapter adapter = new AutoCompleteAdapter(this,
                 android.R.layout.simple_expandable_list_item_1);
         actv_accountToTransfer.setAdapter(adapter);
+
+        bt_recharge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recharge(v);
+            }
+        });
+
+        bt_transfer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transfer(v);
+            }
+        });
     }
 
     public void recharge(View v) {

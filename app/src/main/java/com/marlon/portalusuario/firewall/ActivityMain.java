@@ -3,6 +3,7 @@ package com.marlon.portalusuario.firewall;
 import static androidx.core.view.MenuItemCompat.getActionView;
 import static java.util.Objects.requireNonNull;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
@@ -16,6 +17,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.VpnService;
@@ -41,6 +43,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.view.MenuItemCompat;
@@ -72,7 +75,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
     private static final int REQUEST_VPN = 1;
 
-    String titulo= "Cortafuegos";
+    String titulo = "Cortafuegos";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +90,6 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
         Wifi = findViewById(R.id.lock_wifi_icon);
         Datos = findViewById(R.id.lock_data_icon);
-
 
 
         // On/off switch
@@ -292,7 +294,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                if (searchView.getQuery() == ""){
+                if (searchView.getQuery() == "") {
 
                 }
                 return true;
@@ -418,14 +420,14 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             // Start service
             if (resultCode == RESULT_OK)
                 BlackHoleService.start(this);
-                 createNotification(this);
+            createNotification(this);
         } else
             super.onActivityResult(requestCode, resultCode, data);
 
 
     }
 
-    public void createNotification(Context context){
+    public void createNotification(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // INTENT QUE LANZARA LA ACTIVITY
             // PUEDE MODIFICARSE PARA LANZAR CUALQUIER OTRA ACTIVIDAD
@@ -455,6 +457,16 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             //We only need to call this for SDK 26+, since startForeground always has to be called after startForegroundService.
             //startForeground(NOTIFICATION_ID, builder.build());
             notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             notificationManagerCompat.notify(0, builder.build());
         }
     }
