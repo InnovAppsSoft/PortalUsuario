@@ -1,5 +1,6 @@
 package com.marlon.portalusuario.PUNotifications;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,12 +17,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.marlon.portalusuario.R;
 import com.marlon.portalusuario.ViewModel.PunViewModel;
+import com.marlon.portalusuario.database.notifications.PunDAO;
 
 import java.util.List;
+
+import co.dift.ui.SwipeToAction;
 
 public class PUNotificationsActivity extends AppCompatActivity {
     private PunViewModel punViewModel;
@@ -30,6 +36,7 @@ public class PUNotificationsActivity extends AppCompatActivity {
     private List<PUNotification> notifications;
     private Toolbar toolbar;
     private AppBarLayout appBarLayout;
+    private PunDAO dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,29 +93,29 @@ public class PUNotificationsActivity extends AppCompatActivity {
         recyclerView.setAdapter(punAdapter);
         recyclerView.scheduleLayoutAnimation();
         //
-//        SwipeToAction swipeToAction = new SwipeToAction(recyclerView, new SwipeToAction.SwipeListener<PUNAdapter>() {
-//            @Override
-//            public boolean swipeLeft(final PUNAdapter itemData) {
-//                //do something
-//                return true; //true will move the front view to its starting position
-//            }
-//
-//            @Override
-//            public boolean swipeRight(PUNAdapter itemData) {
-//                //do something
-//                return true;
-//            }
-//
-//            @Override
-//            public void onClick(PUNAdapter itemData) {
-//                //do something
-//            }
-//
-//            @Override
-//            public void onLongClick(PUNAdapter itemData) {
-//                //do something
-//            }
-//        });
+        SwipeToAction swipeToAction = new SwipeToAction(recyclerView, new SwipeToAction.SwipeListener<PUNAdapter>() {
+            @Override
+            public boolean swipeLeft(final PUNAdapter itemData) {
+                //do something
+                return true; //true will move the front view to its starting position
+            }
+
+            @Override
+            public boolean swipeRight(PUNAdapter itemData) {
+                //do something
+                return true;
+            }
+
+            @Override
+            public void onClick(PUNAdapter itemData) {
+                //do something
+            }
+
+            @Override
+            public void onLongClick(PUNAdapter itemData) {
+                //do something
+            }
+        });
     }
 
     @Override
@@ -128,26 +135,29 @@ public class PUNotificationsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.delete_notifications:
-//                if (notifications.isEmpty()){
-//                    Toast.makeText(this, "No hay mensajes almacenados", Toast.LENGTH_SHORT).show();
-//                    return true;
-//                }
-//                new AlertDialog.Builder(this)
-//                        .setMessage(R.string.msg_sure)
-//                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                dbHandler.deleteAllPUNotification();
-//                                Toast.makeText(PUNotificationsActivity.this, "Mensajes eliminados", Toast.LENGTH_LONG).show();
-//                                refresh();
-//                            }
-//                        })
-//                        .setNegativeButton(android.R.string.no, null)
-//                        .show();
+                if (notifications.isEmpty()){
+                    Toast.makeText(this, "No hay mensajes almacenados", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                new AlertDialog.Builder(this)
+                        .setMessage(R.string.msg_sure)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dbHandler.deleteAllPUNotification();
+                                Toast.makeText(PUNotificationsActivity.this, "Mensajes eliminados", Toast.LENGTH_LONG).show();
+                                refresh();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null)
+                        .show();
                 break;
             default:
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private void refresh() {
     }
 }

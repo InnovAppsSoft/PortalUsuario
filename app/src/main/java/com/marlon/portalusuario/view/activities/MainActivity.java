@@ -477,8 +477,8 @@ public class MainActivity extends AppCompatActivity implements BiometricCallback
             notificationBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent i = new Intent(MainActivity.this, PUNotificationsActivity.class);
-//                    startActivity(i);
+                   Intent i = new Intent(MainActivity.this, PUNotificationsActivity.class);
+                    startActivity(i);
                     Toast.makeText(MainActivity.this, "Espera la nueva funcionalidad en próximas versiones 😉", Toast.LENGTH_SHORT).show();
                 }
             });

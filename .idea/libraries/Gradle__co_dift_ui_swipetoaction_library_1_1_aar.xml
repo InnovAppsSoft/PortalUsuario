@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: co.dift.ui.swipetoaction:library:1.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9a41c3331ee45776420c6a59f96deb06/transformed/jetified-library-1.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9a41c3331ee45776420c6a59f96deb06/transformed/jetified-library-1.1/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/b49847ae905bf6026dbaff0b8cd971ce/transformed/jetified-library-1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b49847ae905bf6026dbaff0b8cd971ce/transformed/jetified-library-1.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.dift.ui.swipetoaction/library/1.1/a590753d6b78f36647cae306c9f4dcec5cd625d2/library-1.1-javadoc.jar!/" />

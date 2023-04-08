@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.HeyAlex:BottomDrawer:v1.0.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9f7a1150d1dce026637c0fd937f448de/transformed/jetified-BottomDrawer-v1.0.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9f7a1150d1dce026637c0fd937f448de/transformed/jetified-BottomDrawer-v1.0.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9f7a1150d1dce026637c0fd937f448de/transformed/jetified-BottomDrawer-v1.0.0/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/941c71200fb5008602525da23288b218/transformed/jetified-BottomDrawer-v1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/941c71200fb5008602525da23288b218/transformed/jetified-BottomDrawer-v1.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/941c71200fb5008602525da23288b218/transformed/jetified-BottomDrawer-v1.0.0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

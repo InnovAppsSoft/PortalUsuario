@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.marlon.portalusuario.R;
 
@@ -17,7 +18,7 @@ import soup.neumorphism.NeumorphCardView;
 
 public class EmergenciaActivity extends AppCompatActivity {
 
-    private NeumorphCardView Ambulancia,Policia,Bomberos,Antidrogas,Maritimo,Cubacel;
+    private CardView Ambulancia,Policia,Bomberos,Antidrogas,Maritimo,Cubacel;
 
     private ImageView Atras;
 
@@ -27,12 +28,12 @@ public class EmergenciaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_emergencia);
 
 
-        Ambulancia = (NeumorphCardView) findViewById(R.id.ambulancia);
-        Policia = (NeumorphCardView) findViewById(R.id.policia);
-        Bomberos = (NeumorphCardView) findViewById(R.id.bomberos);
-        Antidrogas= (NeumorphCardView) findViewById(R.id.antidrogas);
-        Maritimo = (NeumorphCardView) findViewById(R.id.Mar);
-        Cubacel = (NeumorphCardView) findViewById(R.id.cubacel);
+        Ambulancia = (CardView) findViewById(R.id.ambulancia);
+        Policia = (CardView) findViewById(R.id.policia);
+        Bomberos = (CardView) findViewById(R.id.bomberos);
+        Antidrogas= (CardView) findViewById(R.id.antidrogas);
+        Maritimo = (CardView) findViewById(R.id.Mar);
+        Cubacel = (CardView) findViewById(R.id.cubacel);
 
         Atras = findViewById(R.id.atras4);
 

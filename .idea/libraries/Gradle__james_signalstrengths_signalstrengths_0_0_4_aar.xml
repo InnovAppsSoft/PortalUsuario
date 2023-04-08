@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: james.signalstrengths:signalstrengths:0.0.4@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f574475ec57096839d1549f1431cce41/transformed/jetified-signalstrengths-0.0.4/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f574475ec57096839d1549f1431cce41/transformed/jetified-signalstrengths-0.0.4/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/3018f9b5b9a9e7ae66c3e482401d9fe7/transformed/jetified-signalstrengths-0.0.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/3018f9b5b9a9e7ae66c3e482401d9fe7/transformed/jetified-signalstrengths-0.0.4/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/james.signalstrengths/signalstrengths/0.0.4/3ee4a7b169b79c7ec30825c5cc0280a8eece94c/signalstrengths-0.0.4-javadoc.jar!/" />

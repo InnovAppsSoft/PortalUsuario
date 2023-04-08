@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.praween.signalview:signalview:1.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/81218c027e2b8146b991c2a6510f4a4a/transformed/jetified-signalview-1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/81218c027e2b8146b991c2a6510f4a4a/transformed/jetified-signalview-1.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/81218c027e2b8146b991c2a6510f4a4a/transformed/jetified-signalview-1.0/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9859d4d96e2341d2f8f4495ae90a8663/transformed/jetified-signalview-1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9859d4d96e2341d2f8f4495ae90a8663/transformed/jetified-signalview-1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9859d4d96e2341d2f8f4495ae90a8663/transformed/jetified-signalview-1.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.praween.signalview/signalview/1.0/f89a30b33f29f3865dcd1a08c5bf02e03a9ac6c7/signalview-1.0-javadoc.jar!/" />

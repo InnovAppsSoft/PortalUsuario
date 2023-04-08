@@ -83,7 +83,6 @@ public class WifiEtecsaFragment extends Fragment {
     private Button  logOutBtn,connectBtn,userInfoBtn;
     public LinearLayout errorLayout;
     private ConstraintLayout sessionInfoLayout;
-    private LottieAnimationView lottieAnimationView;
 
     //private AutoCompleteTextView usernameEditText;
     private EditText usernameEditText, captchaEditText;
@@ -255,7 +254,6 @@ public class WifiEtecsaFragment extends Fragment {
                 }
             }
         });
-        lottieAnimationView = view.findViewById(R.id.error_lottie);
         loadingBar = new ProgressDialog(getContext());
         saldo = view.findViewById(R.id.editSaldoCuenta);
         leftTime = view.findViewById(R.id.textLeftTime);
@@ -787,8 +785,6 @@ public class WifiEtecsaFragment extends Fragment {
     public void setErrorMessage(String message, int r){
         errorLayout.setVisibility(View.VISIBLE);
         errorsTextView.setText(message);
-        lottieAnimationView.setAnimation(r);
-        lottieAnimationView.playAnimation();
     }
 
     @Override

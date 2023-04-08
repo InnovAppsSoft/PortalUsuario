@@ -1,5 +1,6 @@
 package com.marlon.portalusuario.util.apklis;
 
+import android.annotation.SuppressLint;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
@@ -92,6 +93,7 @@ public class ApklisUtil {
         }
     }
 
+    @SuppressLint("Range")
     public boolean checkPaymentApp() {
         boolean paid = false;
         Uri provider_URI = Uri.parse("content://cu.uci.android.apklis.payment.provider/app/" + APP_PACKAGE);
@@ -119,6 +121,7 @@ public class ApklisUtil {
         return paid;
     }
 
+    @SuppressLint("Range")
     public String getUserName() {
         String username = null;
         Uri provider_URI = Uri.parse("content://cu.uci.android.apklis.payment.provider/app/" + APP_PACKAGE);
