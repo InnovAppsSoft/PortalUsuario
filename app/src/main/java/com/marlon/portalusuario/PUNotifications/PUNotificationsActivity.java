@@ -117,47 +117,47 @@ public class PUNotificationsActivity extends AppCompatActivity {
             }
         });
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_p_u_notifications, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.delete_notifications:
-                if (notifications.isEmpty()){
-                    Toast.makeText(this, "No hay mensajes almacenados", Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-                new AlertDialog.Builder(this)
-                        .setMessage(R.string.msg_sure)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dbHandler.deleteAllPUNotification();
-                                Toast.makeText(PUNotificationsActivity.this, "Mensajes eliminados", Toast.LENGTH_LONG).show();
-                                refresh();
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, null)
-                        .show();
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-        return true;
-    }
-
-    private void refresh() {
-    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_p_u_notifications, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onPrepareOptionsMenu(Menu menu) {
+//        return super.onPrepareOptionsMenu(menu);
+//    }
+//
+//    @SuppressLint("NonConstantResourceId")
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.delete_notifications:
+//                if (notifications.isEmpty()){
+//                    Toast.makeText(this, "No hay mensajes almacenados", Toast.LENGTH_SHORT).show();
+//                    return true;
+//                }
+//                new AlertDialog.Builder(this)
+//                        .setMessage(R.string.msg_sure)
+//                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                dbHandler.deleteAllPUNotification();
+//                                Toast.makeText(PUNotificationsActivity.this, "Mensajes eliminados", Toast.LENGTH_LONG).show();
+//                                refresh();
+//                            }
+//                        })
+//                        .setNegativeButton(android.R.string.no, null)
+//                        .show();
+//                break;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//        return true;
+//    }
+//
+//    private void refresh() {
+//    }
 }
