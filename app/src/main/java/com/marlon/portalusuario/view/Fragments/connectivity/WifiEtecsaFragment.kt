@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import com.google.android.material.textfield.TextInputEditText
+import com.marlon.portalusuario.PortalUsuarioApplication.Companion.client
 import com.marlon.portalusuario.PortalUsuarioApplication.Companion.sessionPref
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ViewModel.UserViewModel
@@ -97,18 +98,10 @@ class WifiEtecsaFragment : Fragment() {
     var mailAccount: String? = null
     var transitionIntent: Intent? = null
 
-    // suitetecsa-sdk-kotlin
-    private val session = DefaultNautaSession()
-    private var scrapper = JSoupNautaScrapper(session)
-    private lateinit var client: NautaClient
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         logger = JCLogging(getContext())
         pref = PreferenceManager.getDefaultSharedPreferences(requireContext())
-
-        // setUp nauta client
-        client = NautaClient(scrapper)
 
         // Account types list
         accountTypes = mutableListOf()
@@ -342,6 +335,7 @@ class WifiEtecsaFragment : Fragment() {
                     loadingBar!!.dismiss()
                 } catch (ex: Exception) {
                     ex.printStackTrace()
+                    loadingBar!!.dismiss()
                 }
             }
         } else {
@@ -742,14 +736,6 @@ class WifiEtecsaFragment : Fragment() {
                                 transitionIntent!!.putExtra(
                                     "mailAccount",
                                     mailAccount
-                                )
-                                transitionIntent!!.putExtra(
-                                    "session",
-                                    session.userCookies["session"]
-                                )
-                                transitionIntent!!.putExtra(
-                                    "nauta_lang",
-                                    session.userCookies["nauta_lang"]
                                 )
                                 //
                                 val user = currentUser()
