@@ -13,6 +13,7 @@
     <color name="downloadBackgroundEnd">#000000</color>
 
     <color name="transparent_white">#99000000</color>
+    <color name="botoncolorStart">#FF5722</color>
 
     <color name="colorTextHit">#ffffff</color>
 
