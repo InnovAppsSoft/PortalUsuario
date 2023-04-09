@@ -1,30 +1,20 @@
-package com.marlon.portalusuario.net;
+package com.marlon.portalusuario.net
 
+import android.os.AsyncTask
 
-import android.os.AsyncTask;
+class RunTask(var communicator: Communicator) :
+    AsyncTask<Void?, Void?, Void?>() {
 
-import cu.suitetecsa.sdk.nauta.domain.service.NautaClient;
-
-public class RunTask extends AsyncTask<Void, Void, Void> {
-    Communicator communicator;
-    NautaClient session;
-    String status;
-
-    public RunTask(Communicator communicator2, NautaClient client) {
-        this.communicator = communicator2;
-        this.session = client;
-        this.status = "";
+    /* access modifiers changed from: protected */
+    @Deprecated("Deprecated in Java")
+    override fun doInBackground(vararg p0: Void?): Void? {
+        this.communicator.communicate()
+        return null
     }
 
     /* access modifiers changed from: protected */
-    public Void doInBackground(Void... voidArr) {
-        this.communicator.Communicate();
-        this.communicator.Communicate(this.session);
-        return null;
-    }
-
-    /* access modifiers changed from: protected */
-    public void onPostExecute(Void r1) {
-        this.communicator.communicate();
+    @Deprecated("Deprecated in Java", ReplaceWith("communicator.postCommunicate(error)"))
+    public override fun onPostExecute(r1: Void?) {
+        communicator.postCommunicate()
     }
 }

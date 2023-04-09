@@ -84,7 +84,7 @@ class PortalNautaActivity : AppCompatActivity() {
             android.R.layout.simple_expandable_list_item_1
         )
         actv_accountToTransfer?.setAdapter(adapter)
-        bt_recharge?.setOnClickListener { recharge() }
+//        bt_recharge?.setOnClickListener { recharge() }
 
 //        bt_transfer.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -94,35 +94,35 @@ class PortalNautaActivity : AppCompatActivity() {
 //        });
     }
 
-    fun recharge() {
-        if (et_recharge_code!!.text.toString().length != 12 &&
-            et_recharge_code!!.text.toString().length != 16
-        ) {
-            et_recharge_code!!.error = "El código de recarga debe ser de 12 o 16 dígitos."
-        } else {
-            progressDialog!!.setTitle("Portal Usuario")
-            progressDialog!!.setIcon(R.mipmap.ic_launcher)
-            progressDialog!!.setMessage("Recargando...")
-            progressDialog!!.show()
-            recharge_code = et_recharge_code!!.text.toString()
-            RunTask(object : Communicator {
-                override fun Communicate() {}
-                override fun Communicate(client: NautaClient) {
-                    client.toUpBalance(recharge_code!!)
-                }
-
-                override fun communicate() {
-                    progressDialog!!.dismiss()
-                    val builder = AlertDialog.Builder(this@PortalNautaActivity)
-                    builder.setTitle("Portal Usuario").setMessage("Cuenta recargada!")
-                    builder.setPositiveButton("OK", null)
-                    val success = builder.create()
-                    success.setCancelable(false)
-                    success.show()
-                }
-            }, PortalUsuarioApplication.client).execute()
-        }
-    }
+//    fun recharge() {
+//        if (et_recharge_code!!.text.toString().length != 12 &&
+//            et_recharge_code!!.text.toString().length != 16
+//        ) {
+//            et_recharge_code!!.error = "El código de recarga debe ser de 12 o 16 dígitos."
+//        } else {
+//            progressDialog!!.setTitle("Portal Usuario")
+//            progressDialog!!.setIcon(R.mipmap.ic_launcher)
+//            progressDialog!!.setMessage("Recargando...")
+//            progressDialog!!.show()
+//            recharge_code = et_recharge_code!!.text.toString()
+//            RunTask(object : Communicator {
+//                override fun communicate() {}
+//                override fun communicate(client: NautaClient) {
+//                    client.toUpBalance(recharge_code!!)
+//                }
+//
+//                override fun communicate() {
+//                    progressDialog!!.dismiss()
+//                    val builder = AlertDialog.Builder(this@PortalNautaActivity)
+//                    builder.setTitle("Portal Usuario").setMessage("Cuenta recargada!")
+//                    builder.setPositiveButton("OK", null)
+//                    val success = builder.create()
+//                    success.setCancelable(false)
+//                    success.show()
+//                }
+//            }, PortalUsuarioApplication.client).execute()
+//        }
+//    }
 
     //    public void transfer(View v) {
     //        int validate = 0;

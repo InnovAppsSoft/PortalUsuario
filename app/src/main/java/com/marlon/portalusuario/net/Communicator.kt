@@ -1,12 +1,8 @@
-package com.marlon.portalusuario.net;
+package com.marlon.portalusuario.net
 
+import cu.suitetecsa.sdk.nauta.domain.service.NautaClient
 
-import cu.suitetecsa.sdk.nauta.domain.service.NautaClient;
-
-public interface Communicator {
-    void Communicate();
-
-    void Communicate(NautaClient client);
-
-    void communicate();
+interface Communicator {
+    fun communicate()
+    fun postCommunicate()
 }
