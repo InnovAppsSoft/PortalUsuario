@@ -1,12 +1,12 @@
 package com.marlon.portalusuario.net;
 
 
-import cu.marilasoft.selibrary.UserPortal;
+import cu.suitetecsa.sdk.nauta.domain.service.NautaClient;
 
 public interface Communicator {
     void Communicate();
 
-    void Communicate(UserPortal userPortal);
+    void Communicate(NautaClient client);
 
     void communicate();
 }

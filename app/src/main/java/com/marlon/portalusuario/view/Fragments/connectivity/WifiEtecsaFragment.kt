@@ -19,8 +19,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
-import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.textfield.TextInputEditText
+import com.marlon.portalusuario.PortalUsuarioApplication.Companion.sessionPref
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ViewModel.UserViewModel
 import com.marlon.portalusuario.logging.JCLogging
@@ -29,8 +29,9 @@ import com.marlon.portalusuario.net.Communicator
 import com.marlon.portalusuario.net.RunTask
 import com.marlon.portalusuario.util.Util
 import com.marlon.portalusuario.view.activities.PortalNautaActivity
-import cu.marilasoft.selibrary.UserPortal
-import cu.suitetecsa.kotlibsuitetecsa.NautaSession
+import cu.suitetecsa.sdk.nauta.data.repository.DefaultNautaSession
+import cu.suitetecsa.sdk.nauta.data.repository.JSoupNautaScrapper
+import cu.suitetecsa.sdk.nauta.domain.service.NautaClient
 import trikita.log.Log
 import java.io.ByteArrayInputStream
 import java.io.IOException
@@ -42,7 +43,6 @@ class WifiEtecsaFragment : Fragment() {
     private val internationalAccountText = "Cuenta Internacional"
     private var context: Context? = null
     private var pref: SharedPreferences? = null
-    var nautaSession: NautaSession? = null
     private var errorsTextView: TextView? = null
     private var selectUserSpinner: Spinner? = null
     private var addUserBtn: ImageView? = null
@@ -75,7 +75,6 @@ class WifiEtecsaFragment : Fragment() {
     private var logger: JCLogging? = null
     var cookies: Map<String, String>? = null
     var status: Map<Any, Any>? = null
-    var userPortal = UserPortal()
     private val errors = StringBuilder()
     var saldo: TextView? = null
     var leftTime: TextView? = null
@@ -97,10 +96,19 @@ class WifiEtecsaFragment : Fragment() {
     var credit: String? = null
     var mailAccount: String? = null
     var transitionIntent: Intent? = null
+
+    // suitetecsa-sdk-kotlin
+    private val session = DefaultNautaSession()
+    private var scrapper = JSoupNautaScrapper(session)
+    private lateinit var client: NautaClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         logger = JCLogging(getContext())
         pref = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+        // setUp nauta client
+        client = NautaClient(scrapper)
 
         // Account types list
         accountTypes = mutableListOf()
@@ -109,8 +117,8 @@ class WifiEtecsaFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         context = getContext()
 
@@ -153,8 +161,8 @@ class WifiEtecsaFragment : Fragment() {
         userInfoBtn = view.findViewById(R.id.user_info_button)
         userInfoBtn?.setOnClickListener {
             FastInfoUserDialog(
-                context,
-                currentUser()
+                    context,
+                    currentUser()
             )
         }
         //
@@ -170,33 +178,33 @@ class WifiEtecsaFragment : Fragment() {
         addUserBtn = view.findViewById(R.id.add_user_btn)
         addUserBtn?.setOnClickListener {
             EditUserDialog(
-                context,
-                null
+                    context,
+                    null
             )
         }
         editUserBtn = view.findViewById(R.id.edit_user_btn)
         editUserBtn?.setOnClickListener {
             EditUserDialog(
-                context,
-                currentUser()
+                    context,
+                    currentUser()
             )
         }
         delUserBtn = view.findViewById(R.id.del_user_btn)
         delUserBtn?.setOnClickListener {
             AlertDialog.Builder(context)
-                .setMessage("¿Desea eliminar este usuario?")
-                .setPositiveButton(android.R.string.yes) { _, _ ->
-                    userViewModel!!.deleteUser(
-                        currentUser()
-                    )
-                }
-                .setNegativeButton(android.R.string.no, null)
-                .show()
+                    .setMessage("¿Desea eliminar este usuario?")
+                    .setPositiveButton(android.R.string.yes) { _, _ ->
+                        userViewModel!!.deleteUser(
+                                currentUser()
+                        )
+                    }
+                    .setNegativeButton(android.R.string.no, null)
+                    .show()
         }
         connectionLimiter = view.findViewById(R.id.connection_limiter)
         connectionLimiter?.setOnCheckedChangeListener { _: CompoundButton?, b: Boolean ->
             val limiterParamsLayout = view.findViewById<LinearLayout>(
-                R.id.limiter_params_layout
+                    R.id.limiter_params_layout
             )
             if (b) {
                 limiterParamsLayout.visibility = View.VISIBLE
@@ -214,13 +222,13 @@ class WifiEtecsaFragment : Fragment() {
         limiterTypes.add("minutos")
         limiterTypes.add("segundos")
         val limiterTypeSpinnerAdapter: ArrayAdapter<String>? =
-            getContext()?.let {
-                ArrayAdapter<String>(
-                    it,
-                    android.R.layout.simple_list_item_1,
-                    limiterTypes
-                )
-            }
+                getContext()?.let {
+                    ArrayAdapter<String>(
+                            it,
+                            android.R.layout.simple_list_item_1,
+                            limiterTypes
+                    )
+                }
         limiterType?.adapter = limiterTypeSpinnerAdapter
 
         //
@@ -232,9 +240,9 @@ class WifiEtecsaFragment : Fragment() {
             if (errors.isNotEmpty()) {
                 val errorDialog = AlertDialog.Builder(context)
                 errorDialog.setCancelable(true)
-                    .setTitle("Errores")
-                    .setIcon(R.drawable.error)
-                    .setMessage(errors.toString())
+                        .setTitle("Errores")
+                        .setIcon(R.drawable.error)
+                        .setMessage(errors.toString())
                 errorDialog.show()
             }
         })
@@ -249,50 +257,50 @@ class WifiEtecsaFragment : Fragment() {
     private fun initChronometer(view: View) {
         simpleChronometer = view.findViewById(R.id.simpleChronometer) // initiate a chronometer
         simpleChronometer?.onChronometerTickListener =
-            OnChronometerTickListener { cArg: Chronometer ->
-                val time = SystemClock.elapsedRealtime() - cArg.base
-                val h = (time / 3600000).toInt()
-                val m = (time - h * 3600000).toInt() / 60000
-                val s = (time - h * 3600000 - m * 60000).toInt() / 1000
-                val hh = if (h < 10) "0$h" else h.toString() + ""
-                val mm = if (m < 10) "0$m" else m.toString() + ""
-                val ss = if (s < 10) "0$s" else s.toString() + ""
-                val formattedTime = String.format("%s:%s:%s", hh, mm, ss)
-                if (firstTime) {
-                    initialH = h
-                    initialM = m
-                    initialS = s
-                    firstTime = false
-                }
-                //            if (prefs.getBoolean("show_traffic_speed_bubble", false)) {
-                //                MainActivity.setConnectedTime(formatted_time);
-                //            }
-                cArg.text = formattedTime
-                //
-                try {
-                    if (maxTime > 0) {
-                        if (timeType == "horas") {
-                            if (h - initialH == maxTime) {
-                                sendDisconnect()
-                                return@OnChronometerTickListener
-                            }
-                        } else if (timeType == "minutos") {
-                            if (m - initialM == maxTime) {
-                                sendDisconnect()
-                                return@OnChronometerTickListener
-                            }
-                        } else if (timeType == "segundos") {
-                            if (s - initialS == maxTime) {
-                                sendDisconnect()
-                                return@OnChronometerTickListener
+                OnChronometerTickListener { cArg: Chronometer ->
+                    val time = SystemClock.elapsedRealtime() - cArg.base
+                    val h = (time / 3600000).toInt()
+                    val m = (time - h * 3600000).toInt() / 60000
+                    val s = (time - h * 3600000 - m * 60000).toInt() / 1000
+                    val hh = if (h < 10) "0$h" else h.toString() + ""
+                    val mm = if (m < 10) "0$m" else m.toString() + ""
+                    val ss = if (s < 10) "0$s" else s.toString() + ""
+                    val formattedTime = String.format("%s:%s:%s", hh, mm, ss)
+                    if (firstTime) {
+                        initialH = h
+                        initialM = m
+                        initialS = s
+                        firstTime = false
+                    }
+                    //            if (prefs.getBoolean("show_traffic_speed_bubble", false)) {
+                    //                MainActivity.setConnectedTime(formatted_time);
+                    //            }
+                    cArg.text = formattedTime
+                    //
+                    try {
+                        if (maxTime > 0) {
+                            if (timeType == "horas") {
+                                if (h - initialH == maxTime) {
+                                    sendDisconnect()
+                                    return@OnChronometerTickListener
+                                }
+                            } else if (timeType == "minutos") {
+                                if (m - initialM == maxTime) {
+                                    sendDisconnect()
+                                    return@OnChronometerTickListener
+                                }
+                            } else if (timeType == "segundos") {
+                                if (s - initialS == maxTime) {
+                                    sendDisconnect()
+                                    return@OnChronometerTickListener
+                                }
                             }
                         }
+                    } catch (ex: Exception) {
+                        ex.printStackTrace()
+                        JCLogging.error(null, null, ex)
                     }
-                } catch (ex: Exception) {
-                    ex.printStackTrace()
-                    JCLogging.error(null, null, ex)
                 }
-            }
         simpleChronometer?.base = SystemClock.elapsedRealtime()
         simpleChronometer?.start()
     }
@@ -310,14 +318,18 @@ class WifiEtecsaFragment : Fragment() {
             loadingBar!!.show()
             Thread {
                 try {
-                    nautaSession = NautaSession()
-                    nautaSession!!.init()
                     //
                     loadingBar!!.setMessage("Iniciando sesión...")
                     val username = currentUser().username
                     val pwd = currentUser().password
-                    //
-                    nautaSession!!.login(username, pwd, nautaSession!!.cookies)
+
+                    // login to captive portal
+                    client.setCredentials(username, pwd)
+                    client.connect()
+
+                    // Saving data session
+                    sessionPref.saveSession(client.dataSession)
+
                     //
                     setUserDataOnDashboard()
                     initChronometer(view)
@@ -342,17 +354,17 @@ class WifiEtecsaFragment : Fragment() {
     }
 
     private fun countDown() {
-        val time = nautaSession!!.getUserTime(currentUser().username, nautaSession!!.cookies)
+        val time = client.remainingTime
         JCLogging.message("Initial time value", time)
         var millisecondsLeft: Long = 0
         //
         try {
             millisecondsLeft = (time.split(":".toRegex()).dropLastWhile { it.isEmpty() }
-                .toTypedArray()[0].toInt() * 60 * 60 * 1000 + time.split(":".toRegex())
-                .dropLastWhile { it.isEmpty() }
-                .toTypedArray()[1].toInt() * 60 * 1000 + time.split(":".toRegex())
-                .dropLastWhile { it.isEmpty() }
-                .toTypedArray()[2].toInt() * 1000).toLong()
+                    .toTypedArray()[0].toInt() * 60 * 60 * 1000 + time.split(":".toRegex())
+                    .dropLastWhile { it.isEmpty() }
+                    .toTypedArray()[1].toInt() * 60 * 1000 + time.split(":".toRegex())
+                    .dropLastWhile { it.isEmpty() }
+                    .toTypedArray()[2].toInt() * 1000).toLong()
         } catch (e: Exception) {
             e.printStackTrace()
             JCLogging.error(null, null, null)
@@ -387,7 +399,7 @@ class WifiEtecsaFragment : Fragment() {
         loadingBar!!.setCanceledOnTouchOutside(true)
         loadingBar!!.show()
         Thread {
-            nautaSession!!.logout(currentUser().username, nautaSession!!.cookies)
+            client.disconnect()
             // hidding loading bar
             loadingBar!!.dismiss()
             // update UI
@@ -402,7 +414,7 @@ class WifiEtecsaFragment : Fragment() {
     }
 
     inner class UsersSpinnerAdapter : ArrayAdapter<User?>(
-        context!!.applicationContext, R.layout.user_item_layout, userList
+            context!!.applicationContext, R.layout.user_item_layout, userList
     ) {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
             var convertView = convertView
@@ -422,31 +434,31 @@ class WifiEtecsaFragment : Fragment() {
     inner class EditUserDialog(context: Context?, user: User?) {
         init {
             val inflate = layoutInflater.inflate(
-                R.layout.nauta_accounts_edit_dialog,
-                null as ViewGroup?,
-                false
+                    R.layout.nauta_accounts_edit_dialog,
+                    null as ViewGroup?,
+                    false
             )
             val editUserDialog = AlertDialog.Builder(context)
             editUserDialog.setCancelable(true)
-                .setView(inflate)
-                .setTitle("Editar usuario")
-                .setIcon(R.drawable.round_person_24)
+                    .setView(inflate)
+                    .setTitle("Editar usuario")
+                    .setIcon(R.drawable.round_person_24)
             usernameEditText = inflate.findViewById(R.id.username_et)
             passwordEditText = inflate.findViewById(R.id.password_et)
             accountTypeSpinner = inflate.findViewById(R.id.account_type_spinner)
             info = inflate.findViewById(R.id.info)
             info.setOnClickListener {
                 Toast.makeText(
-                    context,
-                    "El nombre de usuario no puede contener el nombre de dominio @nauta.com.cu\nEjemplo: Si su cuenta es juan@nauta.com.cu, solo debe poner juan",
-                    Toast.LENGTH_LONG
+                        context,
+                        "El nombre de usuario no puede contener el nombre de dominio @nauta.com.cu\nEjemplo: Si su cuenta es juan@nauta.com.cu, solo debe poner juan",
+                        Toast.LENGTH_LONG
                 ).show()
             }
 
 //            AutoCompleteAdapter adapter = new AutoCompleteAdapter(getContext(), android.R.layout.simple_expandable_list_item_1);
 //            usernameEditText.setAdapter(adapter);
             val accountTypeSpinnerAdapter = ArrayAdapter(
-                requireContext(), android.R.layout.simple_list_item_1, accountTypes!!
+                    requireContext(), android.R.layout.simple_list_item_1, accountTypes!!
             )
             accountTypeSpinner.adapter = accountTypeSpinnerAdapter
             if (user != null) {
@@ -459,31 +471,31 @@ class WifiEtecsaFragment : Fragment() {
                 val pwd = passwordEditText.text.toString()
                 if (!username.matches(Regex("[A-Za-z\\d_.@]+"))) {
                     Toast.makeText(
-                        context,
-                        "El nombre de usuario no puede contener símbolos",
-                        Toast.LENGTH_SHORT
+                            context,
+                            "El nombre de usuario no puede contener símbolos",
+                            Toast.LENGTH_SHORT
                     ).show()
                     return@setPositiveButton
                 }
                 if (user == null) {
                     userViewModel!!.insertUser(
-                        User(
-                            username,
-                            pwd,
-                            "",
-                            "",
-                            "",
-                            accountTypeSpinner.selectedItemPosition,
-                            "",
-                            "",
-                            "",
-                            0,
-                            "",
-                            "",
-                            "",
-                            "",
-                            ""
-                        )
+                            User(
+                                    username,
+                                    pwd,
+                                    "",
+                                    "",
+                                    "",
+                                    accountTypeSpinner.selectedItemPosition,
+                                    "",
+                                    "",
+                                    "",
+                                    0,
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    ""
+                            )
                     )
                 } else {
                     user.username = username
@@ -528,25 +540,25 @@ class WifiEtecsaFragment : Fragment() {
             info += """
                 Última conexión: ${
                 if (user.lastConnectionDateTime != 0L) Util.date2String(
-                    Util.long2Date(
-                        user.lastConnectionDateTime
-                    )
+                        Util.long2Date(
+                                user.lastConnectionDateTime
+                        )
                 ) else "-"
             }
                 
                 """.trimIndent()
             val fastInfoUserDialog = AlertDialog.Builder(context)
             fastInfoUserDialog.setCancelable(true)
-                .setMessage(info)
-                .setTitle("Información de usuario")
-                .setIcon(R.drawable.info)
-                .setPositiveButton("Portal Nauta") { _, _ ->
-                    CaptchaUserDialog(
-                        context,
-                        user
-                    )
-                }
-                .setNegativeButton("Atrás", null)
+                    .setMessage(info)
+                    .setTitle("Información de usuario")
+                    .setIcon(R.drawable.info)
+                    .setPositiveButton("Portal Nauta") { _, _ ->
+                        CaptchaUserDialog(
+                                context,
+                                user
+                        )
+                    }
+                    .setNegativeButton("Atrás", null)
             fastInfoUserDialog.show()
         }
     }
@@ -560,11 +572,11 @@ class WifiEtecsaFragment : Fragment() {
             val inflate = layoutInflater.inflate(R.layout.captcha_dialog, null, false)
             val editUserDialog = AlertDialog.Builder(context)
             editUserDialog.setCancelable(true)
-                .setView(inflate)
-                .setTitle("Escriba el código Captcha")
-                .setIcon(R.drawable.ic_security)
-                .setPositiveButton("Conectar") { _: DialogInterface?, _: Int -> login() }
-                .setNegativeButton("Cancelar", null)
+                    .setView(inflate)
+                    .setTitle("Escriba el código Captcha")
+                    .setIcon(R.drawable.ic_security)
+                    .setPositiveButton("Conectar") { _: DialogInterface?, _: Int -> login() }
+                    .setNegativeButton("Cancelar", null)
             reLoadCaptcha()
             //
             progressLayout = inflate.findViewById(R.id.progress_layout)
@@ -603,69 +615,51 @@ class WifiEtecsaFragment : Fragment() {
         fun reLoadCaptcha() {
             RunTask(object : Communicator {
                 override fun Communicate() {}
-                override fun Communicate(userPortal: UserPortal) {
-                    var userPortal = userPortal
+                override fun Communicate(client: NautaClient) {
                     setCaptchaLoaded(false)
                     try {
-                        if (cookies == null) {
-                            UserPortal.preLogin()
-                            cookies = userPortal.cookies()
-                            userPortal = userPortal
-                        }
-                        userPortal.loadCAPTCHA(cookies)
+                        client.captchaImage
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
                 }
 
                 override fun communicate() {
-                    if (userPortal.captchaImg() != null) {
+                    try {
                         val bitmap = BitmapFactory.decodeStream(
-                            ByteArrayInputStream(userPortal.captchaImg())
-                        )
+                                ByteArrayInputStream(client.captchaImage))
                         setCaptchaLoaded(true)
                         captchaImg.setImageBitmap(bitmap)
-                    } else {
+                    } catch (_: IOException) {
                         setError(true)
                         Toast.makeText(
-                            getContext(),
-                            "No se pudo cargar la imagen CAPTCHA", Toast.LENGTH_LONG
+                                getContext(),
+                                "No se pudo cargar la imagen CAPTCHA", Toast.LENGTH_LONG
                         ).show()
                     }
                 }
-            }, userPortal).execute()
+            }, client).execute()
         }
 
         fun preLoad() {
             RunTask(object : Communicator {
                 override fun Communicate() {}
-                override fun Communicate(userPortal: UserPortal) {
-                    var userPortal = userPortal
-                    try {
-                        UserPortal.preLogin()
-                        var cookies = userPortal.cookies()
-                        userPortal.loadCAPTCHA(cookies)
-                        cookies = cookies
-                        userPortal = userPortal
-                    } catch (e: IOException) {
-                        e.printStackTrace()
-                    }
-                }
+                override fun Communicate(client: NautaClient) {}
 
                 override fun communicate() {
-                    if (userPortal.captchaImg() != null) {
+                    try {
                         val bitmap = BitmapFactory.decodeStream(
-                            ByteArrayInputStream(userPortal.captchaImg())
+                                ByteArrayInputStream(client.captchaImage)
                         )
                         captchaImg.setImageBitmap(bitmap)
-                    } else {
+                    } catch (e: IOException) {
                         Toast.makeText(
-                            getContext(),
-                            "No se pudo cargar la imagen CAPTCHA", Toast.LENGTH_LONG
+                                getContext(),
+                                "No se pudo cargar la imagen CAPTCHA", Toast.LENGTH_LONG
                         ).show()
                     }
                 }
-            }, userPortal).execute()
+            }, client).execute()
         }
 
         private fun login(): Boolean {
@@ -684,30 +678,21 @@ class WifiEtecsaFragment : Fragment() {
                     loadingBar!!.show()
                     RunTask(object : Communicator {
                         override fun Communicate() {}
-                        override fun Communicate(userPortal: UserPortal) {
+                        override fun Communicate(client: NautaClient) {
                             try {
                                 val current = currentUser()
                                 val username = current.fullUsername
                                 val password = current.password
-                                userPortal.login(
-                                    username,
-                                    password,
-                                    captchaEditText.text.toString(),
-                                    cookies
-                                )
-                                status = userPortal.status()
-                                if (userPortal.status()["status"] == "success") {
-                                    account = userPortal.userName()
-                                    remainingTime = userPortal.time()
-                                    blockDate = userPortal.blockDate()
-                                    deleteDate = userPortal.delDate()
-                                    accountType1 = userPortal.accountType()
-                                    serviceType = userPortal.serviceType()
-                                    credit = userPortal.credit()
-                                    mailAccount = userPortal.mailAccount()
-                                    //
-                                    //
-                                }
+                                client.setCredentials(username, password)
+                                val nautaUser = client.login(captchaEditText.text.toString())
+                                account = nautaUser.userName
+                                remainingTime = nautaUser.time
+                                blockDate = nautaUser.blockingDate
+                                deleteDate = nautaUser.dateOfElimination
+                                accountType1 = nautaUser.accountType
+                                serviceType = nautaUser.serviceType
+                                credit = nautaUser.credit
+                                mailAccount = nautaUser.mailAccount
                             } catch (e: Exception) {
                                 e.printStackTrace()
                                 JCLogging.error(null, null, e)
@@ -719,103 +704,95 @@ class WifiEtecsaFragment : Fragment() {
                             var errors = ""
                             try {
                                 loadingBar!!.dismiss()
-                                if (status!!["status"] == "success") {
-                                    transitionIntent =
+                                transitionIntent =
                                         Intent(context, PortalNautaActivity::class.java)
-                                    transitionIntent!!.putExtra(
+                                transitionIntent!!.putExtra(
                                         "userName",
                                         account
-                                    )
-                                    transitionIntent!!.putExtra(
+                                )
+                                transitionIntent!!.putExtra(
                                         "password",
                                         currentUser().password
-                                    )
-                                    transitionIntent!!.putExtra(
+                                )
+                                transitionIntent!!.putExtra(
                                         "blockDate",
                                         blockDate
-                                    )
-                                    transitionIntent!!.putExtra(
+                                )
+                                transitionIntent!!.putExtra(
                                         "delDate",
                                         deleteDate
-                                    )
-                                    transitionIntent!!.putExtra(
+                                )
+                                transitionIntent!!.putExtra(
                                         "accountType",
                                         accountType1
-                                    )
-                                    transitionIntent!!.putExtra(
+                                )
+                                transitionIntent!!.putExtra(
                                         "serviceType",
                                         serviceType
-                                    )
-                                    transitionIntent!!.putExtra(
+                                )
+                                transitionIntent!!.putExtra(
                                         "credit",
                                         credit
-                                    )
-                                    transitionIntent!!.putExtra(
+                                )
+                                transitionIntent!!.putExtra(
                                         "time",
                                         remainingTime
-                                    )
-                                    transitionIntent!!.putExtra(
+                                )
+                                transitionIntent!!.putExtra(
                                         "mailAccount",
                                         mailAccount
-                                    )
-                                    transitionIntent!!.putExtra(
+                                )
+                                transitionIntent!!.putExtra(
                                         "session",
                                         cookies!!["session"]
-                                    )
-                                    transitionIntent!!.putExtra(
+                                )
+                                transitionIntent!!.putExtra(
                                         "nauta_lang",
                                         cookies!!["nauta_lang"]
-                                    )
-                                    //
-                                    val user = currentUser()
-                                    user.blockDate = blockDate
-                                    user.delDate = deleteDate
-                                    user.accountType = accountType1
-                                    user.serviceType = serviceType
-                                    user.accountCredit = credit
-                                    user.leftTime = remainingTime
-                                    user.emailAccount = mailAccount
-                                    userViewModel!!.updateUser(user)
-                                    //
-                                    val prefEditor = pref!!.edit()
-                                    prefEditor.putString(
+                                )
+                                //
+                                val user = currentUser()
+                                user.blockDate = blockDate
+                                user.delDate = deleteDate
+                                user.accountType = accountType1
+                                user.serviceType = serviceType
+                                user.accountCredit = credit
+                                user.leftTime = remainingTime
+                                user.emailAccount = mailAccount
+                                userViewModel!!.updateUser(user)
+                                //
+                                val prefEditor = pref!!.edit()
+                                prefEditor.putString(
                                         "last_portal_nauta_update", Util.date2String(
-                                            Util.currentDate()
-                                        )
-                                    )
-                                    prefEditor.apply()
-                                    //
-                                    startActivity(transitionIntent)
-                                } else if (status!!["status"] == "error") {
-                                    for (error in (status!!["msg"] as List<String>?)!!) {
-                                        errors += """
-                                            
-                                            $error
-                                            """.trimIndent()
-                                        if (error.contains("Usuario")) {
-                                            errors += "Puede que el nombre de usuario sea incorrecto\n"
-                                        }
-                                        if (error.contains("contraseña")) {
-                                            errors += "Puede que la contraseña sea incorrecta\n"
-                                        }
-                                        if (error.contains("Captcha")) {
-                                            captchaEditText.error = error
-                                        }
-                                    }
-                                    reLoadCaptcha()
-                                }
+                                        Util.currentDate()
+                                )
+                                )
+                                prefEditor.apply()
+                                //
+                                startActivity(transitionIntent)
                             } catch (ex: Exception) {
+                                val error = ex.message.toString()
+                                if (error.contains("Usuario")) {
+                                    errors += "Puede que el nombre de usuario sea incorrecto\n"
+                                }
+                                if (error.contains("contraseña")) {
+                                    errors += "Puede que la contraseña sea incorrecta\n"
+                                }
+                                if (error.contains("Captcha")) {
+                                    captchaEditText.error = error
+                                }
+                                reLoadCaptcha()
                                 setErrorMessage("Ha ocurrido un error :-(", R.raw.wronganswer)
                                 ex.printStackTrace()
                                 Toast.makeText(
-                                    getContext(),
-                                    "Ha ocurrido un error :-(\n$errors",
-                                    Toast.LENGTH_LONG
+                                        getContext(),
+                                        "Ha ocurrido un error :-(\n$errors",
+                                        Toast.LENGTH_LONG
                                 ).show()
                                 JCLogging.error(null, null, ex)
                             }
                         }
-                    }, userPortal).execute()
+                    }, client).execute()
                 } else {
                     Toast.makeText(context, "No está conectado", Toast.LENGTH_SHORT).show()
                 }
@@ -851,8 +828,8 @@ class WifiEtecsaFragment : Fragment() {
             connectionLimiter!!.isChecked = false
             connectionLimiter!!.visibility = View.GONE
             setErrorMessage(
-                "Agrega al menos un usuario para usar esta funcionalidad",
-                R.raw.userlogin
+                    "Agrega al menos un usuario para usar esta funcionalidad",
+                    R.raw.userlogin
             )
         } else {
             noUsers!!.visibility = View.GONE

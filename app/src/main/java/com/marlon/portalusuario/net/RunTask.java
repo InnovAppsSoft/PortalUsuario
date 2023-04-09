@@ -2,15 +2,18 @@ package com.marlon.portalusuario.net;
 
 
 import android.os.AsyncTask;
-import cu.marilasoft.selibrary.UserPortal;
+
+import cu.suitetecsa.sdk.nauta.domain.service.NautaClient;
 
 public class RunTask extends AsyncTask<Void, Void, Void> {
     Communicator communicator;
-    UserPortal session;
+    NautaClient session;
+    String status;
 
-    public RunTask(Communicator communicator2, UserPortal userPortal) {
+    public RunTask(Communicator communicator2, NautaClient client) {
         this.communicator = communicator2;
-        this.session = userPortal;
+        this.session = client;
+        this.status = "";
     }
 
     /* access modifiers changed from: protected */
