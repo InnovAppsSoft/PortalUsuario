@@ -8,83 +8,80 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import com.marlon.portalusuario.PortalUsuarioApplication
+import com.marlon.portalusuario.PortalUsuarioApplication.Companion.client
 import com.marlon.portalusuario.R
-import com.marlon.portalusuario.net.Communicator
-import com.marlon.portalusuario.net.RunTask
 import com.marlon.portalusuario.util.AutoCompleteAdapter
-import cu.suitetecsa.sdk.nauta.domain.service.NautaClient
 
 class PortalNautaActivity : AppCompatActivity() {
     var userName: String? = null
     var password: String? = null
-    var _time: String? = null
-    var block_date: String? = null
-    var delete_date: String? = null
-    var account_type: String? = null
-    var service_type: String? = null
+    private var remainingTime: String? = null
+    private var blockingDate: String? = null
+    private var dateOfElimination: String? = null
+    var accountType: String? = null
+    private var serviceType: String? = null
     var credit: String? = null
-    var mail_account: String? = null
-    var recharge_code: String? = null
+    var mailAccount: String? = null
+    var rechargeCode: String? = null
     var mont: String? = null
     var accountToTransfer: String? = null
-    var tv_time: TextView? = null
-    var tv_account: TextView? = null
-    var tv_block_date: TextView? = null
-    var tv_delete_date: TextView? = null
-    var tv_account_type: TextView? = null
-    var tv_service_type: TextView? = null
-    var tv_credit: TextView? = null
-    var tv_mail_account: TextView? = null
+    private var tvTime: TextView? = null
+    private var tvAccount: TextView? = null
+    var tvBlockingDate: TextView? = null
+    var tvDateOfElimination: TextView? = null
+    var tvAccountType: TextView? = null
+    var tvServiceType: TextView? = null
+    var tvCredit: TextView? = null
+    var tvMailAccount: TextView? = null
     var progressDialog: ProgressDialog? = null
-    var et_recharge_code: EditText? = null
-    var et_mont: EditText? = null
-    var actv_accountToTransfer: AutoCompleteTextView? = null
-    var bt_recharge: AppCompatButton? = null
-    var bt_transfer: AppCompatButton? = null
+    var etRechargeCode: EditText? = null
+    var etAmount: EditText? = null
+    private var autoCompleteTextViewAccountToTransfer: AutoCompleteTextView? = null
+    var btRecharge: AppCompatButton? = null
+    var btTransfer: AppCompatButton? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_portal_nauta)
-        tv_time = findViewById(R.id.tv_info_time)
-        tv_account = findViewById(R.id.tv_info_user)
-        tv_block_date = findViewById(R.id.tv_block_date)
-        tv_delete_date = findViewById(R.id.tv_delete_date)
-        tv_account_type = findViewById(R.id.tv_account_type)
-        tv_service_type = findViewById(R.id.tv_service_type)
-        tv_credit = findViewById(R.id.tv_account_credit)
-        tv_mail_account = findViewById(R.id.tv_mail_account)
+        tvTime = findViewById(R.id.tv_info_time)
+        tvAccount = findViewById(R.id.tv_info_user)
+        tvBlockingDate = findViewById(R.id.tv_block_date)
+        tvDateOfElimination = findViewById(R.id.tv_delete_date)
+        tvAccountType = findViewById(R.id.tv_account_type)
+        tvServiceType = findViewById(R.id.tv_service_type)
+        tvCredit = findViewById(R.id.tv_account_credit)
+        tvMailAccount = findViewById(R.id.tv_mail_account)
 
-        val datos = intent.extras
-        userName = datos!!.getString("userName")
-        password = datos.getString("password")
-        block_date = datos.getString("blockDate")
-        delete_date = datos.getString("delDate")
-        account_type = datos.getString("accountType")
-        service_type = datos.getString("serviceType")
-        credit = datos.getString("credit")
-        _time = datos.getString("time")
-        mail_account = datos.getString("mailAccount")
+        val data = intent.extras
+        userName = data!!.getString("userName")
+        password = data.getString("password")
+        blockingDate = data.getString("blockDate")
+        dateOfElimination = data.getString("delDate")
+        accountType = data.getString("accountType")
+        serviceType = data.getString("serviceType")
+        credit = data.getString("credit")
+        remainingTime = data.getString("time")
+        mailAccount = data.getString("mailAccount")
 
-        tv_time?.text = _time
-        tv_account?.text = userName
-        tv_block_date?.text = block_date
-        tv_delete_date?.text = delete_date
-        tv_account_type?.text = account_type
-        tv_service_type?.text = service_type
-        tv_credit?.text = credit
-        tv_mail_account?.text = mail_account
-        et_recharge_code = findViewById(R.id.et_recharge_code)
-        bt_recharge = findViewById(R.id.bt_recharge)
-        bt_transfer = findViewById(R.id.bt_transfer)
-        et_mont = findViewById(R.id.et_mont)
-        actv_accountToTransfer = findViewById(R.id.actv_accountToTransfer)
+        tvTime?.text = remainingTime
+        tvAccount?.text = userName
+        tvBlockingDate?.text = blockingDate
+        tvDateOfElimination?.text = dateOfElimination
+        tvAccountType?.text = accountType
+        tvServiceType?.text = serviceType
+        tvCredit?.text = credit
+        tvMailAccount?.text = mailAccount
+        etRechargeCode = findViewById(R.id.et_recharge_code)
+        btRecharge = findViewById(R.id.bt_recharge)
+        btTransfer = findViewById(R.id.bt_transfer)
+        etAmount = findViewById(R.id.et_mont)
+        autoCompleteTextViewAccountToTransfer = findViewById(R.id.actv_accountToTransfer)
         progressDialog = ProgressDialog(this)
         val adapter = AutoCompleteAdapter(
             this,
             android.R.layout.simple_expandable_list_item_1
         )
-        actv_accountToTransfer?.setAdapter(adapter)
-//        bt_recharge?.setOnClickListener { recharge() }
+        autoCompleteTextViewAccountToTransfer?.setAdapter(adapter)
+        btRecharge?.setOnClickListener { recharge() }
 
 //        bt_transfer.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -94,35 +91,39 @@ class PortalNautaActivity : AppCompatActivity() {
 //        });
     }
 
-//    fun recharge() {
-//        if (et_recharge_code!!.text.toString().length != 12 &&
-//            et_recharge_code!!.text.toString().length != 16
-//        ) {
-//            et_recharge_code!!.error = "El código de recarga debe ser de 12 o 16 dígitos."
-//        } else {
-//            progressDialog!!.setTitle("Portal Usuario")
-//            progressDialog!!.setIcon(R.mipmap.ic_launcher)
-//            progressDialog!!.setMessage("Recargando...")
-//            progressDialog!!.show()
-//            recharge_code = et_recharge_code!!.text.toString()
-//            RunTask(object : Communicator {
-//                override fun communicate() {}
-//                override fun communicate(client: NautaClient) {
-//                    client.toUpBalance(recharge_code!!)
-//                }
-//
-//                override fun communicate() {
-//                    progressDialog!!.dismiss()
-//                    val builder = AlertDialog.Builder(this@PortalNautaActivity)
-//                    builder.setTitle("Portal Usuario").setMessage("Cuenta recargada!")
-//                    builder.setPositiveButton("OK", null)
-//                    val success = builder.create()
-//                    success.setCancelable(false)
-//                    success.show()
-//                }
-//            }, PortalUsuarioApplication.client).execute()
-//        }
-//    }
+    fun recharge() {
+        if (etRechargeCode!!.text.toString().length != 12 &&
+            etRechargeCode!!.text.toString().length != 16
+        ) {
+            etRechargeCode!!.error = "El código de recarga debe ser de 12 o 16 dígitos."
+        } else {
+            progressDialog!!.setTitle("Portal Usuario")
+            progressDialog!!.setIcon(R.mipmap.ic_launcher)
+            progressDialog!!.setMessage("Recargando...")
+            progressDialog!!.show()
+            rechargeCode = etRechargeCode!!.text.toString()
+            Thread {
+                val builder = AlertDialog.Builder(this@PortalNautaActivity)
+                builder.setTitle("Portal Usuario")
+                builder.setPositiveButton("OK", null)
+                try {
+                    client.toUpBalance(rechargeCode!!)
+                    progressDialog!!.dismiss()
+                    builder.setMessage("Cuenta recargada!")
+                    val success = builder.create()
+                    success.setCancelable(false)
+                    success.show()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    progressDialog!!.dismiss()
+                    builder.setMessage("No se pudo recargar la cuenta: ${e.message}")
+                    val success = builder.create()
+                    success.setCancelable(false)
+                    success.show()
+                }
+            }.start()
+        }
+    }
 
     //    public void transfer(View v) {
     //        int validate = 0;

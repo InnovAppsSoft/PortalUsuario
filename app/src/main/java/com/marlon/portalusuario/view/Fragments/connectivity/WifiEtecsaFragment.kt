@@ -336,7 +336,6 @@ class WifiEtecsaFragment : Fragment() {
                     setUserDataOnDashboard()
                     initChronometer(view)
                     sendLeftTime()
-
                     loadingBar!!.dismiss()
 
                     if (isOk) {
