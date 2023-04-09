@@ -117,8 +117,8 @@ class WifiEtecsaFragment : Fragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         context = getContext()
 
@@ -161,8 +161,8 @@ class WifiEtecsaFragment : Fragment() {
         userInfoBtn = view.findViewById(R.id.user_info_button)
         userInfoBtn?.setOnClickListener {
             FastInfoUserDialog(
-                    context,
-                    currentUser()
+                context,
+                currentUser()
             )
         }
         //
@@ -178,33 +178,33 @@ class WifiEtecsaFragment : Fragment() {
         addUserBtn = view.findViewById(R.id.add_user_btn)
         addUserBtn?.setOnClickListener {
             EditUserDialog(
-                    context,
-                    null
+                context,
+                null
             )
         }
         editUserBtn = view.findViewById(R.id.edit_user_btn)
         editUserBtn?.setOnClickListener {
             EditUserDialog(
-                    context,
-                    currentUser()
+                context,
+                currentUser()
             )
         }
         delUserBtn = view.findViewById(R.id.del_user_btn)
         delUserBtn?.setOnClickListener {
             AlertDialog.Builder(context)
-                    .setMessage("¿Desea eliminar este usuario?")
-                    .setPositiveButton(android.R.string.yes) { _, _ ->
-                        userViewModel!!.deleteUser(
-                                currentUser()
-                        )
-                    }
-                    .setNegativeButton(android.R.string.no, null)
-                    .show()
+                .setMessage("¿Desea eliminar este usuario?")
+                .setPositiveButton(android.R.string.yes) { _, _ ->
+                    userViewModel!!.deleteUser(
+                        currentUser()
+                    )
+                }
+                .setNegativeButton(android.R.string.no, null)
+                .show()
         }
         connectionLimiter = view.findViewById(R.id.connection_limiter)
         connectionLimiter?.setOnCheckedChangeListener { _: CompoundButton?, b: Boolean ->
             val limiterParamsLayout = view.findViewById<LinearLayout>(
-                    R.id.limiter_params_layout
+                R.id.limiter_params_layout
             )
             if (b) {
                 limiterParamsLayout.visibility = View.VISIBLE
@@ -222,13 +222,13 @@ class WifiEtecsaFragment : Fragment() {
         limiterTypes.add("minutos")
         limiterTypes.add("segundos")
         val limiterTypeSpinnerAdapter: ArrayAdapter<String>? =
-                getContext()?.let {
-                    ArrayAdapter<String>(
-                            it,
-                            android.R.layout.simple_list_item_1,
-                            limiterTypes
-                    )
-                }
+            getContext()?.let {
+                ArrayAdapter<String>(
+                    it,
+                    android.R.layout.simple_list_item_1,
+                    limiterTypes
+                )
+            }
         limiterType?.adapter = limiterTypeSpinnerAdapter
 
         //
@@ -240,9 +240,9 @@ class WifiEtecsaFragment : Fragment() {
             if (errors.isNotEmpty()) {
                 val errorDialog = AlertDialog.Builder(context)
                 errorDialog.setCancelable(true)
-                        .setTitle("Errores")
-                        .setIcon(R.drawable.error)
-                        .setMessage(errors.toString())
+                    .setTitle("Errores")
+                    .setIcon(R.drawable.error)
+                    .setMessage(errors.toString())
                 errorDialog.show()
             }
         })
@@ -257,50 +257,50 @@ class WifiEtecsaFragment : Fragment() {
     private fun initChronometer(view: View) {
         simpleChronometer = view.findViewById(R.id.simpleChronometer) // initiate a chronometer
         simpleChronometer?.onChronometerTickListener =
-                OnChronometerTickListener { cArg: Chronometer ->
-                    val time = SystemClock.elapsedRealtime() - cArg.base
-                    val h = (time / 3600000).toInt()
-                    val m = (time - h * 3600000).toInt() / 60000
-                    val s = (time - h * 3600000 - m * 60000).toInt() / 1000
-                    val hh = if (h < 10) "0$h" else h.toString() + ""
-                    val mm = if (m < 10) "0$m" else m.toString() + ""
-                    val ss = if (s < 10) "0$s" else s.toString() + ""
-                    val formattedTime = String.format("%s:%s:%s", hh, mm, ss)
-                    if (firstTime) {
-                        initialH = h
-                        initialM = m
-                        initialS = s
-                        firstTime = false
-                    }
-                    //            if (prefs.getBoolean("show_traffic_speed_bubble", false)) {
-                    //                MainActivity.setConnectedTime(formatted_time);
-                    //            }
-                    cArg.text = formattedTime
-                    //
-                    try {
-                        if (maxTime > 0) {
-                            if (timeType == "horas") {
-                                if (h - initialH == maxTime) {
-                                    sendDisconnect()
-                                    return@OnChronometerTickListener
-                                }
-                            } else if (timeType == "minutos") {
-                                if (m - initialM == maxTime) {
-                                    sendDisconnect()
-                                    return@OnChronometerTickListener
-                                }
-                            } else if (timeType == "segundos") {
-                                if (s - initialS == maxTime) {
-                                    sendDisconnect()
-                                    return@OnChronometerTickListener
-                                }
+            OnChronometerTickListener { cArg: Chronometer ->
+                val time = SystemClock.elapsedRealtime() - cArg.base
+                val h = (time / 3600000).toInt()
+                val m = (time - h * 3600000).toInt() / 60000
+                val s = (time - h * 3600000 - m * 60000).toInt() / 1000
+                val hh = if (h < 10) "0$h" else h.toString() + ""
+                val mm = if (m < 10) "0$m" else m.toString() + ""
+                val ss = if (s < 10) "0$s" else s.toString() + ""
+                val formattedTime = String.format("%s:%s:%s", hh, mm, ss)
+                if (firstTime) {
+                    initialH = h
+                    initialM = m
+                    initialS = s
+                    firstTime = false
+                }
+                //            if (prefs.getBoolean("show_traffic_speed_bubble", false)) {
+                //                MainActivity.setConnectedTime(formatted_time);
+                //            }
+                cArg.text = formattedTime
+                //
+                try {
+                    if (maxTime > 0) {
+                        if (timeType == "horas") {
+                            if (h - initialH == maxTime) {
+                                sendDisconnect()
+                                return@OnChronometerTickListener
+                            }
+                        } else if (timeType == "minutos") {
+                            if (m - initialM == maxTime) {
+                                sendDisconnect()
+                                return@OnChronometerTickListener
+                            }
+                        } else if (timeType == "segundos") {
+                            if (s - initialS == maxTime) {
+                                sendDisconnect()
+                                return@OnChronometerTickListener
                             }
                         }
-                    } catch (ex: Exception) {
-                        ex.printStackTrace()
-                        JCLogging.error(null, null, ex)
                     }
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                    JCLogging.error(null, null, ex)
                 }
+            }
         simpleChronometer?.base = SystemClock.elapsedRealtime()
         simpleChronometer?.start()
     }
@@ -360,11 +360,11 @@ class WifiEtecsaFragment : Fragment() {
         //
         try {
             millisecondsLeft = (time.split(":".toRegex()).dropLastWhile { it.isEmpty() }
-                    .toTypedArray()[0].toInt() * 60 * 60 * 1000 + time.split(":".toRegex())
-                    .dropLastWhile { it.isEmpty() }
-                    .toTypedArray()[1].toInt() * 60 * 1000 + time.split(":".toRegex())
-                    .dropLastWhile { it.isEmpty() }
-                    .toTypedArray()[2].toInt() * 1000).toLong()
+                .toTypedArray()[0].toInt() * 60 * 60 * 1000 + time.split(":".toRegex())
+                .dropLastWhile { it.isEmpty() }
+                .toTypedArray()[1].toInt() * 60 * 1000 + time.split(":".toRegex())
+                .dropLastWhile { it.isEmpty() }
+                .toTypedArray()[2].toInt() * 1000).toLong()
         } catch (e: Exception) {
             e.printStackTrace()
             JCLogging.error(null, null, null)
@@ -414,7 +414,7 @@ class WifiEtecsaFragment : Fragment() {
     }
 
     inner class UsersSpinnerAdapter : ArrayAdapter<User?>(
-            context!!.applicationContext, R.layout.user_item_layout, userList
+        context!!.applicationContext, R.layout.user_item_layout, userList
     ) {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
             var convertView = convertView
@@ -434,31 +434,31 @@ class WifiEtecsaFragment : Fragment() {
     inner class EditUserDialog(context: Context?, user: User?) {
         init {
             val inflate = layoutInflater.inflate(
-                    R.layout.nauta_accounts_edit_dialog,
-                    null as ViewGroup?,
-                    false
+                R.layout.nauta_accounts_edit_dialog,
+                null as ViewGroup?,
+                false
             )
             val editUserDialog = AlertDialog.Builder(context)
             editUserDialog.setCancelable(true)
-                    .setView(inflate)
-                    .setTitle("Editar usuario")
-                    .setIcon(R.drawable.round_person_24)
+                .setView(inflate)
+                .setTitle("Editar usuario")
+                .setIcon(R.drawable.round_person_24)
             usernameEditText = inflate.findViewById(R.id.username_et)
             passwordEditText = inflate.findViewById(R.id.password_et)
             accountTypeSpinner = inflate.findViewById(R.id.account_type_spinner)
             info = inflate.findViewById(R.id.info)
             info.setOnClickListener {
                 Toast.makeText(
-                        context,
-                        "El nombre de usuario no puede contener el nombre de dominio @nauta.com.cu\nEjemplo: Si su cuenta es juan@nauta.com.cu, solo debe poner juan",
-                        Toast.LENGTH_LONG
+                    context,
+                    "El nombre de usuario no puede contener el nombre de dominio @nauta.com.cu\nEjemplo: Si su cuenta es juan@nauta.com.cu, solo debe poner juan",
+                    Toast.LENGTH_LONG
                 ).show()
             }
 
 //            AutoCompleteAdapter adapter = new AutoCompleteAdapter(getContext(), android.R.layout.simple_expandable_list_item_1);
 //            usernameEditText.setAdapter(adapter);
             val accountTypeSpinnerAdapter = ArrayAdapter(
-                    requireContext(), android.R.layout.simple_list_item_1, accountTypes!!
+                requireContext(), android.R.layout.simple_list_item_1, accountTypes!!
             )
             accountTypeSpinner.adapter = accountTypeSpinnerAdapter
             if (user != null) {
@@ -471,31 +471,31 @@ class WifiEtecsaFragment : Fragment() {
                 val pwd = passwordEditText.text.toString()
                 if (!username.matches(Regex("[A-Za-z\\d_.@]+"))) {
                     Toast.makeText(
-                            context,
-                            "El nombre de usuario no puede contener símbolos",
-                            Toast.LENGTH_SHORT
+                        context,
+                        "El nombre de usuario no puede contener símbolos",
+                        Toast.LENGTH_SHORT
                     ).show()
                     return@setPositiveButton
                 }
                 if (user == null) {
                     userViewModel!!.insertUser(
-                            User(
-                                    username,
-                                    pwd,
-                                    "",
-                                    "",
-                                    "",
-                                    accountTypeSpinner.selectedItemPosition,
-                                    "",
-                                    "",
-                                    "",
-                                    0,
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    ""
-                            )
+                        User(
+                            username,
+                            pwd,
+                            "",
+                            "",
+                            "",
+                            accountTypeSpinner.selectedItemPosition,
+                            "",
+                            "",
+                            "",
+                            0,
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""
+                        )
                     )
                 } else {
                     user.username = username
@@ -540,25 +540,25 @@ class WifiEtecsaFragment : Fragment() {
             info += """
                 Última conexión: ${
                 if (user.lastConnectionDateTime != 0L) Util.date2String(
-                        Util.long2Date(
-                                user.lastConnectionDateTime
-                        )
+                    Util.long2Date(
+                        user.lastConnectionDateTime
+                    )
                 ) else "-"
             }
                 
                 """.trimIndent()
             val fastInfoUserDialog = AlertDialog.Builder(context)
             fastInfoUserDialog.setCancelable(true)
-                    .setMessage(info)
-                    .setTitle("Información de usuario")
-                    .setIcon(R.drawable.info)
-                    .setPositiveButton("Portal Nauta") { _, _ ->
-                        CaptchaUserDialog(
-                                context,
-                                user
-                        )
-                    }
-                    .setNegativeButton("Atrás", null)
+                .setMessage(info)
+                .setTitle("Información de usuario")
+                .setIcon(R.drawable.info)
+                .setPositiveButton("Portal Nauta") { _, _ ->
+                    CaptchaUserDialog(
+                        context,
+                        user
+                    )
+                }
+                .setNegativeButton("Atrás", null)
             fastInfoUserDialog.show()
         }
     }
@@ -572,11 +572,11 @@ class WifiEtecsaFragment : Fragment() {
             val inflate = layoutInflater.inflate(R.layout.captcha_dialog, null, false)
             val editUserDialog = AlertDialog.Builder(context)
             editUserDialog.setCancelable(true)
-                    .setView(inflate)
-                    .setTitle("Escriba el código Captcha")
-                    .setIcon(R.drawable.ic_security)
-                    .setPositiveButton("Conectar") { _: DialogInterface?, _: Int -> login() }
-                    .setNegativeButton("Cancelar", null)
+                .setView(inflate)
+                .setTitle("Escriba el código Captcha")
+                .setIcon(R.drawable.ic_security)
+                .setPositiveButton("Conectar") { _: DialogInterface?, _: Int -> login() }
+                .setNegativeButton("Cancelar", null)
             reLoadCaptcha()
             //
             progressLayout = inflate.findViewById(R.id.progress_layout)
@@ -627,14 +627,15 @@ class WifiEtecsaFragment : Fragment() {
                 override fun communicate() {
                     try {
                         val bitmap = BitmapFactory.decodeStream(
-                                ByteArrayInputStream(client.captchaImage))
+                            ByteArrayInputStream(client.captchaImage)
+                        )
                         setCaptchaLoaded(true)
                         captchaImg.setImageBitmap(bitmap)
                     } catch (_: IOException) {
                         setError(true)
                         Toast.makeText(
-                                getContext(),
-                                "No se pudo cargar la imagen CAPTCHA", Toast.LENGTH_LONG
+                            getContext(),
+                            "No se pudo cargar la imagen CAPTCHA", Toast.LENGTH_LONG
                         ).show()
                     }
                 }
@@ -649,13 +650,13 @@ class WifiEtecsaFragment : Fragment() {
                 override fun communicate() {
                     try {
                         val bitmap = BitmapFactory.decodeStream(
-                                ByteArrayInputStream(client.captchaImage)
+                            ByteArrayInputStream(client.captchaImage)
                         )
                         captchaImg.setImageBitmap(bitmap)
                     } catch (e: IOException) {
                         Toast.makeText(
-                                getContext(),
-                                "No se pudo cargar la imagen CAPTCHA", Toast.LENGTH_LONG
+                            getContext(),
+                            "No se pudo cargar la imagen CAPTCHA", Toast.LENGTH_LONG
                         ).show()
                     }
                 }
@@ -705,50 +706,50 @@ class WifiEtecsaFragment : Fragment() {
                             try {
                                 loadingBar!!.dismiss()
                                 transitionIntent =
-                                        Intent(context, PortalNautaActivity::class.java)
+                                    Intent(context, PortalNautaActivity::class.java)
                                 transitionIntent!!.putExtra(
-                                        "userName",
-                                        account
+                                    "userName",
+                                    account
                                 )
                                 transitionIntent!!.putExtra(
-                                        "password",
-                                        currentUser().password
+                                    "password",
+                                    currentUser().password
                                 )
                                 transitionIntent!!.putExtra(
-                                        "blockDate",
-                                        blockDate
+                                    "blockDate",
+                                    blockDate
                                 )
                                 transitionIntent!!.putExtra(
-                                        "delDate",
-                                        deleteDate
+                                    "delDate",
+                                    deleteDate
                                 )
                                 transitionIntent!!.putExtra(
-                                        "accountType",
-                                        accountType1
+                                    "accountType",
+                                    accountType1
                                 )
                                 transitionIntent!!.putExtra(
-                                        "serviceType",
-                                        serviceType
+                                    "serviceType",
+                                    serviceType
                                 )
                                 transitionIntent!!.putExtra(
-                                        "credit",
-                                        credit
+                                    "credit",
+                                    credit
                                 )
                                 transitionIntent!!.putExtra(
-                                        "time",
-                                        remainingTime
+                                    "time",
+                                    remainingTime
                                 )
                                 transitionIntent!!.putExtra(
-                                        "mailAccount",
-                                        mailAccount
+                                    "mailAccount",
+                                    mailAccount
                                 )
                                 transitionIntent!!.putExtra(
-                                        "session",
-                                        cookies!!["session"]
+                                    "session",
+                                    session.userCookies["session"]
                                 )
                                 transitionIntent!!.putExtra(
-                                        "nauta_lang",
-                                        cookies!!["nauta_lang"]
+                                    "nauta_lang",
+                                    session.userCookies["nauta_lang"]
                                 )
                                 //
                                 val user = currentUser()
@@ -763,9 +764,9 @@ class WifiEtecsaFragment : Fragment() {
                                 //
                                 val prefEditor = pref!!.edit()
                                 prefEditor.putString(
-                                        "last_portal_nauta_update", Util.date2String(
+                                    "last_portal_nauta_update", Util.date2String(
                                         Util.currentDate()
-                                )
+                                    )
                                 )
                                 prefEditor.apply()
                                 //
@@ -785,9 +786,9 @@ class WifiEtecsaFragment : Fragment() {
                                 setErrorMessage("Ha ocurrido un error :-(", R.raw.wronganswer)
                                 ex.printStackTrace()
                                 Toast.makeText(
-                                        getContext(),
-                                        "Ha ocurrido un error :-(\n$errors",
-                                        Toast.LENGTH_LONG
+                                    getContext(),
+                                    "Ha ocurrido un error :-(\n$errors",
+                                    Toast.LENGTH_LONG
                                 ).show()
                                 JCLogging.error(null, null, ex)
                             }
@@ -828,8 +829,8 @@ class WifiEtecsaFragment : Fragment() {
             connectionLimiter!!.isChecked = false
             connectionLimiter!!.visibility = View.GONE
             setErrorMessage(
-                    "Agrega al menos un usuario para usar esta funcionalidad",
-                    R.raw.userlogin
+                "Agrega al menos un usuario para usar esta funcionalidad",
+                R.raw.userlogin
             )
         } else {
             noUsers!!.visibility = View.GONE
