@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/chat_bubble_right_margin"
+    android:layout_marginStart="@dimen/chat_bubble_left_margin"
+    android:layout_marginTop="@dimen/chat_bubble_top_margin"
+    android:minHeight="@dimen/message_bubble_min_height"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/receivedMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/rounded_chat_received_background"
+        android:padding="@dimen/chat_message_padding"
+        android:text="@string/test_message"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/timeStamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/chat_message_padding"
+        android:paddingStart="@dimen/chat_message_padding"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/receivedMessage"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/grey"
+        android:text="@string/test_stamp"
+        android:textSize="15sp"
+        />
+
+</RelativeLayout>

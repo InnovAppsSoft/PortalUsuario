@@ -77,6 +77,7 @@ import com.marlon.cz.mroczis.netmonster.core.model.cell.ICellProcessor;
 import com.marlon.portalusuario.PUNotifications.PUNotificationsActivity;
 import com.marlon.portalusuario.R;
 import com.marlon.portalusuario.Utils;
+import com.marlon.portalusuario.blueChat.ActivityChat;
 import com.marlon.portalusuario.etecsa_scraping.Promo;
 import com.marlon.portalusuario.etecsa_scraping.PromoSliderAdapter;
 import com.marlon.portalusuario.firewall.ActivityMain;
@@ -301,6 +302,11 @@ public class MainActivity extends AppCompatActivity implements BiometricCallback
                     // CONFIGURACION
                     case R.id.donate:
                         i = new Intent(MainActivity.this,Donacion.class);
+                        startActivity(i);
+                        break;
+                    // CONFIGURACION
+                    case R.id.bluechat:
+                        i = new Intent(MainActivity.this, ActivityChat.class);
                         startActivity(i);
                         break;
                 }
