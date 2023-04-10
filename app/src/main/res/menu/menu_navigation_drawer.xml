@@ -3,21 +3,27 @@
 <!--    android:checkableBehavior="single" -->
 <item
     android:id="@+id/donate"
-    android:icon="@drawable/ic_widget_money"
+    android:icon="@drawable/baseline_monetization_on_24"
     android:title="Donar al proyecto"/>
+
+    <item
+    android:id="@+id/bluechat"
+    android:icon="@drawable/baseline_bluetooth_connected_24"
+    android:title="Bluetooth PUChat"/>
+
 <item android:title="Servicios">
     <menu>
         <item
             android:id="@+id/services"
-            android:icon="@drawable/ic_phonewigdet"
+            android:icon="@drawable/round_phone_forwarded_24"
             android:title="Servicios"/>
         <item
             android:id="@+id/plans"
-            android:icon="@drawable/ic_data_usage_24"
+            android:icon="@drawable/baseline_data_saver_off_24"
             android:title="Planes"/>
         <item
             android:id="@+id/connectivity"
-            android:icon="@drawable/wifi_icon"
+            android:icon="@drawable/round_cell_wifi_24"
             android:title="Conectividad"/>
     </menu>
 </item>
@@ -25,23 +31,24 @@
     <menu>
         <item
             android:id="@+id/firewall"
-            android:icon="@drawable/ic_firewall"
+            android:icon="@drawable/baseline_local_fire_department_24"
             android:title="Firewall"/>
         <item
             android:id="@+id/networkChange"
-            android:icon="@drawable/ic_data_usage_24"
+            android:icon="@drawable/round_perm_data_setting_24"
             android:title="Cambiar red preferida"/>
         <item
             android:id="@+id/une"
             android:icon="@drawable/ic_une"
+            android:iconTint="#EE5117"
             android:title="Calculador UNE"/>
         <item
             android:id="@+id/sim_info"
-            android:icon="@drawable/ic_signal_cellular"
+            android:icon="@drawable/round_signal_cellular_connected_no_internet_4_bar_24"
             android:title="Medidor de señal"/>
         <item
             android:id="@+id/tutos"
-            android:icon="@drawable/ic_baseline_help_24"
+            android:icon="@drawable/baseline_info_24"
             android:title="Información útil"/>
     </menu>
 </item>
@@ -49,11 +56,11 @@
     <menu>
         <item
             android:id="@+id/errors_register"
-            android:icon="@drawable/ic_baseline_bug_report_24"
+            android:icon="@drawable/baseline_bug_report_24"
             android:title="Registro de errores"/>
         <item
             android:id="@+id/feedback"
-            android:icon="@drawable/faeeback"
+            android:icon="@drawable/baseline_sms_failed_24"
             android:title="Reportar..."/>
     </menu>
 </item>
@@ -62,13 +69,16 @@
         <item
             android:id="@+id/telegram_channel"
             android:icon="@drawable/canal"
+            android:iconTint="#EE5117"
             android:title="Canal de Telegram"/>
         <item
             android:id="@+id/facebook"
             android:icon="@drawable/canal"
+            android:iconTint="#EE5117"
             android:title="Página Oficial Facebook"/>
         <item
             android:id="@+id/betatesters"
+            android:iconTint="#EE5117"
             android:icon="@drawable/ic_baseline_developer_mode_24"
             android:title="Grupo de Testers en Telegram"/>
     </menu>
@@ -77,11 +87,12 @@
     <menu>
         <item
             android:id="@+id/settings"
+            android:iconTint="#EE5117"
             android:icon="@drawable/ic_settings_black_24dp"
             android:title="Preferencias"/>
         <item
             android:id="@+id/about"
-            android:icon="@drawable/ic_info"
+            android:icon="@drawable/baseline_info_24"
             android:title="Acerca de"/>
     </menu>
 </item>

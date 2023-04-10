@@ -21,6 +21,12 @@
         <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
     </style>
 
+    <style name="AppThemeChat" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryLightDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
     <style name="mySpinnerItemStyle" parent="Base.Widget.AppCompat.Spinner">
         <item name="android:textColor">@color/colorDes</item>
     </style>

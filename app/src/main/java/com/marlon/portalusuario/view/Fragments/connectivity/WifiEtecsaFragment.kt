@@ -332,13 +332,13 @@ class WifiEtecsaFragment : Fragment() {
 
                 override fun postCommunicate() {
                     val (isOk, err) = status
-                    //
-                    setUserDataOnDashboard()
-                    initChronometer(view)
-                    sendLeftTime()
                     loadingBar!!.dismiss()
 
                     if (isOk) {
+                        //
+                        setUserDataOnDashboard()
+                        initChronometer(view)
+                        sendLeftTime()
                         connectBtn!!.visibility = View.GONE
                         logOutBtn!!.visibility = View.VISIBLE
                         sessionInfoLayout!!.visibility = View.VISIBLE
@@ -346,7 +346,7 @@ class WifiEtecsaFragment : Fragment() {
                         Toast.makeText(context, err, Toast.LENGTH_LONG).show()
                     }
                 }
-            } )
+            } ).execute()
         } else {
             Toast.makeText(context, "No está conectado", Toast.LENGTH_SHORT).show()
         }
