@@ -45,7 +45,6 @@ public class IntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            //PermisoLlamada();
             CosumoBateria();
         }
 
@@ -138,44 +137,6 @@ public class IntroActivity extends AppCompatActivity {
         }
     }
 
-    public void PermisoLlamada(){
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
-
-        ){
-
-            AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
-            dialogo1.setTitle("Permisos Necesarios");
-            dialogo1.setMessage("Portal Usuario requiere de permisos concedidos por usted para su correcto funcionamiento");
-            dialogo1.setIcon(R.drawable.portal);
-            dialogo1.setCancelable(false);
-            dialogo1.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                        ActivityCompat.requestPermissions(IntroActivity.this, new String[]{
-                                Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE,
-                                Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_FINE_LOCATION,
-                                Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_COARSE_LOCATION,
-                                Manifest.permission.CALL_PHONE, Manifest.permission.CAMERA,
-                                Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE,
-                                Manifest.permission.CALL_PHONE, Manifest.permission.POST_NOTIFICATIONS,
-                                Manifest.permission.CALL_PHONE, Manifest.permission.READ_CONTACTS}, ResultCall);
-                    }
-
-                }
-
-            });
-
-            dialogo1.create().show();
-
-        }
-    }
 
 
     private boolean restorePreData(){
@@ -202,7 +163,6 @@ public class IntroActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == ResultCall){
 
-            //PermisoLlamada();
 
         }
 

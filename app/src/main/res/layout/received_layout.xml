@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/chat_bubble_right_margin"
     android:layout_marginStart="@dimen/chat_bubble_left_margin"
-    android:layout_marginTop="@dimen/chat_bubble_top_margin"
+    android:layout_marginTop="8sp"
     android:minHeight="@dimen/message_bubble_min_height"
     android:orientation="vertical">
 
@@ -16,6 +16,7 @@
         android:background="@drawable/rounded_chat_received_background"
         android:padding="@dimen/chat_message_padding"
         android:text="@string/test_message"
+        android:textSize="13sp"
         android:textColor="@color/white" />
 
     <TextView
@@ -24,12 +25,12 @@
         android:layout_height="wrap_content"
         android:paddingEnd="@dimen/chat_message_padding"
         android:paddingStart="@dimen/chat_message_padding"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="2dp"
         android:layout_below="@id/receivedMessage"
         android:layout_alignParentStart="true"
-        android:textColor="@color/grey"
+        android:textColor="@color/colorDes"
         android:text="@string/test_stamp"
-        android:textSize="15sp"
+        android:textSize="13sp"
         />
 
 </RelativeLayout>

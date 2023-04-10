@@ -19,6 +19,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -49,7 +50,7 @@ class ActivityChat : AppCompatActivity(), DevicesRecyclerViewAdapter.ItemClickLi
     private var mChatService: BluetoothChatService? = null
     private lateinit var chatFragment: ChatFragment
 
-    @SuppressLint("MissingPermission")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
@@ -113,6 +114,20 @@ class ActivityChat : AppCompatActivity(), DevicesRecyclerViewAdapter.ItemClickLi
 
             if (mBtAdapter?.isEnabled == false) {
                 val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+                if (ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.BLUETOOTH_CONNECT
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return
+                }
                 startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
             } else {
                 status.text = getString(R.string.not_connected)
@@ -143,11 +158,25 @@ class ActivityChat : AppCompatActivity(), DevicesRecyclerViewAdapter.ItemClickLi
 
     }
 
-    @SuppressLint("MissingPermission")
+
     private fun makeVisible() {
 
         val discoverableIntent = Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE)
         discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300)
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.BLUETOOTH_ADVERTISE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return
+        }
         startActivity(discoverableIntent)
 
     }
@@ -162,7 +191,7 @@ class ActivityChat : AppCompatActivity(), DevicesRecyclerViewAdapter.ItemClickLi
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             // Android M Permission check 
             if (this.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) !=
-                    PackageManager.PERMISSION_GRANTED) {
+                PackageManager.PERMISSION_GRANTED) {
 
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle(getString(R.string.need_loc_access))
@@ -172,13 +201,14 @@ class ActivityChat : AppCompatActivity(), DevicesRecyclerViewAdapter.ItemClickLi
                     // the dialog will be opened so we have to save that
                     alreadyAskedForPermission = true
                     requestPermissions(arrayOf(
-                            Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.ACCESS_FINE_LOCATION
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION
                     ), PERMISSION_REQUEST_LOCATION)
                 }
                 builder.show()
 
             } else {
+
                 startDiscovery()
             }
         } else {
@@ -202,7 +232,7 @@ class ActivityChat : AppCompatActivity(), DevicesRecyclerViewAdapter.ItemClickLi
         checkPermissions()
     }
 
-    @SuppressLint("MissingPermission")
+
     private fun startDiscovery() {
 
         headerLabelContainer.visibility = View.VISIBLE
@@ -211,6 +241,20 @@ class ActivityChat : AppCompatActivity(), DevicesRecyclerViewAdapter.ItemClickLi
         mDeviceList.clear()
 
         // If we're already discovering, stop it
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.BLUETOOTH_SCAN
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return
+        }
         if (mBtAdapter?.isDiscovering ?: false)
             mBtAdapter?.cancelDiscovery()
 
@@ -320,10 +364,24 @@ class ActivityChat : AppCompatActivity(), DevicesRecyclerViewAdapter.ItemClickLi
         connectDevice(deviceData)
     }
 
-    @SuppressLint("MissingPermission")
+
     private fun connectDevice(deviceData: DeviceData) {
 
         // Cancel discovery because it's costly and we're about to connect
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.BLUETOOTH_SCAN
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return
+        }
         mBtAdapter?.cancelDiscovery()
         val deviceAddress = deviceData.deviceHardwareAddress
 

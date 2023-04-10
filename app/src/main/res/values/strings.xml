@@ -919,7 +919,9 @@ Aplicación de búsqueda</string>
     <string name="content_step_2">Necesario para mostrarle y seleccionar contactos de su lista de contactos para transferencias de saldo, por ejemplo</string>
     <string name="content_step_3">Necesario para poderle mostrar el estado de la red móvil</string>
     <string name="content_step_4">Necesario para mostrar la burbuja flotante</string>
-    <string name="content_step_5">Portal Usuario está listo para su primer uso</string>
+    <string name="content_step_5">Necesario para conectarse por Bluetooth</string>
+    <string name="content_step_6">Necesario para ver notificaciones</string>
+    <string name="content_step_7">Portal Usuario está listo para su primer uso</string>
 
     <string name="terminos" tools:ignore="Typos">¡Gracias por instalar la aplicación Portal Usuario!\n
 Antes de empezar a usarlo primero necesitamos que leas lo descrito a continuación y decidas si estás de acuerdo o no con nuestra política de privacidad y uso de la aplicación.\n

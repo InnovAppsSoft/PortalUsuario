@@ -37,8 +37,8 @@
                 android:layout_weight="5"
                 android:background="@color/transparent"
                 android:hint="@string/write_something"
-                android:textColorHint="@color/colorDes"
-                android:textSize="15sp" />
+                android:textColorHint="@color/white"
+                android:textSize="13sp" />
 
         </LinearLayout>
 
@@ -59,7 +59,7 @@
                 android:layout_height="32dp"
                 android:layout_gravity="center"
                 android:src="@drawable/outline_send"
-                app:tint="@color/botoncolorStart" />
+                app:tint="@color/white" />
 
         </FrameLayout>
 

@@ -82,6 +82,7 @@ import com.marlon.portalusuario.etecsa_scraping.Promo;
 import com.marlon.portalusuario.etecsa_scraping.PromoSliderAdapter;
 import com.marlon.portalusuario.firewall.ActivityMain;
 import com.marlon.portalusuario.logging.LogFileViewerActivity;
+import com.marlon.portalusuario.onboard.IntroActivity;
 import com.marlon.portalusuario.une.UneActivity;
 import com.marlon.portalusuario.util.Connectivity;
 import com.marlon.portalusuario.util.SSLHelper;
@@ -193,6 +194,7 @@ public class MainActivity extends AppCompatActivity implements BiometricCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         punViewModel = new ViewModelProvider(this).get(PunViewModel.class);
 
@@ -626,6 +628,8 @@ public class MainActivity extends AppCompatActivity implements BiometricCallback
         }
     }
 
+
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void startService(ApklisUtil apklis, int latency) {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
@@ -905,7 +909,6 @@ public class MainActivity extends AppCompatActivity implements BiometricCallback
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == ResultCall) {
-            //PermisoLlamada();
         }
 
     }

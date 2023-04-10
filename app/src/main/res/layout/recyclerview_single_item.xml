@@ -17,7 +17,7 @@
         android:paddingRight="24dp"
         android:paddingTop="14dp"
         android:text="@string/app_name"
-        android:textColor="@color/colorSecondaryText" />
+        android:textColor="@color/colorDes" />
 
     <View
         android:layout_width="match_parent"
