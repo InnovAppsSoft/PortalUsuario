@@ -1,4 +1,4 @@
-package com.marlon.portalusuario.view.Fragments;
+package com.marlon.portalusuario.view.fragments;
 
 
 import android.Manifest;
@@ -10,22 +10,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,37 +28,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.preference.PreferenceManager;
 
 import com.google.android.datatransport.runtime.logging.Logging;
 import com.marlon.portalusuario.view.activities.EmergenciaActivity;
 import com.marlon.portalusuario.view.activities.LlamadaOcultoActivity;
 import com.marlon.portalusuario.view.activities.Llamada_99Activity;
-import com.marlon.portalusuario.PUNotifications.PUNotificationsActivity;
-import com.marlon.portalusuario.view.activities.PlanAmigosActivity;
 import com.marlon.portalusuario.R;
 import com.marlon.portalusuario.view.activities.SmsActivity;
 import com.marlon.portalusuario.view.activities.VozActivity;
-import com.marlon.portalusuario.etecsa_scraping.Promo;
-import com.marlon.portalusuario.etecsa_scraping.PromoSliderAdapter;
 import com.marlon.portalusuario.codescanner.ScannerActivity;
 import com.marlon.portalusuario.logging.JCLogging;
 import com.marlon.portalusuario.senal.AppConfiguracionTool;
-import com.marlon.portalusuario.util.SSLHelper;
 import com.marlon.portalusuario.util.Util;
-import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
-import com.smarteist.autoimageslider.SliderAnimations;
-import com.smarteist.autoimageslider.SliderView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.jsoup.Connection;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import soup.neumorphism.NeumorphCardView;
 
 public class ServiciosFragment<b> extends Fragment {
 

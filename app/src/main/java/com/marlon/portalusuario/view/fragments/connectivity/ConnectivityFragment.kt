@@ -1,4 +1,4 @@
-package com.marlon.portalusuario.view.Fragments.connectivity
+package com.marlon.portalusuario.view.fragments.connectivity
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.marlon.portalusuario.R
-import com.marlon.portalusuario.view.Fragments.SitiosNacionalesFragment
+import com.marlon.portalusuario.view.fragments.SitiosNacionalesFragment
 
 class ConnectivityFragment : Fragment() {
     private var tabLayout: TabLayout? = null

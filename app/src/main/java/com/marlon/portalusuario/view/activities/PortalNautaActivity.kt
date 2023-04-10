@@ -23,7 +23,7 @@ class PortalNautaActivity : AppCompatActivity() {
     var credit: String? = null
     var mailAccount: String? = null
     var rechargeCode: String? = null
-    var mont: String? = null
+    var amount: String? = null
     var accountToTransfer: String? = null
     private var tvTime: TextView? = null
     private var tvAccount: TextView? = null
@@ -83,12 +83,7 @@ class PortalNautaActivity : AppCompatActivity() {
         autoCompleteTextViewAccountToTransfer?.setAdapter(adapter)
         btRecharge?.setOnClickListener { recharge() }
 
-//        bt_transfer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                transfer(v);
-//            }
-//        });
+        btTransfer?.setOnClickListener { transfer() }
     }
 
     fun recharge() {
@@ -125,76 +120,56 @@ class PortalNautaActivity : AppCompatActivity() {
         }
     }
 
-    //    public void transfer(View v) {
-    //        int validate = 0;
-    //        if (et_mont.getText().toString().length() == 0) {
-    //            et_mont.setError("Introduzca un monto válido");
-    //            validate = 1;
-    //        }
-    //        if (actv_accountToTransfer.getText().toString().equals("")) {
-    //            actv_accountToTransfer.setError("Introduzca un nombre de usuario");
-    //            validate = 1;
-    //        } else if (!actv_accountToTransfer.getText().toString().endsWith("@nauta.com.cu") &&
-    //                !actv_accountToTransfer.getText().toString().endsWith("@nauta.co.cu")) {
-    //            actv_accountToTransfer.setError("Introduzca un nombre de usuario válido");
-    //            validate = 1;
-    //        }
-    //        if (validate != 1) {
-    //            if (credit.equals("$0,00 CUP")) {
-    //                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    //                builder.setTitle("Portal Usuario").setMessage("Su saldo es insuficiente!");
-    //                builder.setPositiveButton("OK", null);
-    //                AlertDialog success = builder.create();
-    //                success.setCancelable(false);
-    //                success.show();
-    //            } else {
-    //                progressDialog.setTitle("Portal Usuario");
-    //                progressDialog.setMessage("Transfiriendo...");
-    //                progressDialog.show();
-    //                mont = et_mont.getText().toString();
-    //                accountToTransfer = actv_accountToTransfer.getText().toString();
-    //                new RunTask(new Communicator() {
-    //                    @Override
-    //                    public void Communicate() {
-    //
-    //                    }
-    //
-    //                    @Override
-    //                    public void Communicate(NautaClient client) {
-    //                        try {
-    //                            client.transferBalance(mont,
-    //                                    password,
-    //                                    accountToTransfer,
-    //                                    cookies);
-    //                        } catch (IOException e) {
-    //                            e.printStackTrace();
-    //                        }
-    //                    }
-    //
-    //                    @Override
-    //                    public void communicate() {
-    //                        progressDialog.dismiss();
-    //                        AlertDialog.Builder builder = new AlertDialog.Builder(PortalNautaActivity.this);
-    //                        if (userPortal.status().get("status").equals("error")) {
-    //                            List<String> errors = (List<String>) userPortal.status().get("msg");
-    //                            String errors_ = "Se encontraron los siguientes errores al intentar" +
-    //                                    " transferir el saldo:";
-    //                            for (String error : errors) {
-    //                                errors_ = errors_ + "\n" + error;
-    //                            }
-    //                            builder.setTitle("Portal Usuario").setMessage(errors_);
-    //                            AlertDialog success = builder.create();
-    //                            success.show();
-    //                        } else {
-    //                            builder.setTitle("Portal Usuario").setMessage("Transferencia realizada!");
-    //                            AlertDialog success = builder.create();
-    //                            success.show();
-    //                        }
-    //                    }
-    //                }, userPortal).execute();
-    //            }
-    //        }
-    //    }
+    fun transfer() {
+            var validate = 0
+            if (etAmount!!.text.toString().isEmpty()) {
+                etAmount!!.error = "Introduzca un monto válido";
+                validate = 1;
+            }
+            if (autoCompleteTextViewAccountToTransfer!!.text.toString() == "") {
+                autoCompleteTextViewAccountToTransfer!!.error = "Introduzca un nombre de usuario";
+                validate = 1;
+            } else if (!autoCompleteTextViewAccountToTransfer!!.text.toString().endsWith("@nauta.com.cu") &&
+                    !autoCompleteTextViewAccountToTransfer!!.text.toString().endsWith("@nauta.co.cu")) {
+                autoCompleteTextViewAccountToTransfer!!.error = "Introduzca un nombre de usuario válido";
+                validate = 1;
+            }
+            if (validate != 1) {
+                if (credit.equals("$0,00 CUP")) {
+                    val builder = AlertDialog.Builder(this);
+                    builder.setTitle("Portal Usuario").setMessage("Su saldo es insuficiente!");
+                    builder.setPositiveButton("OK", null);
+                    val success = builder.create();
+                    success.setCancelable(false);
+                    success.show();
+                } else {
+                    progressDialog!!.setTitle("Portal Usuario");
+                    progressDialog!!.setMessage("Transfiriendo...");
+                    progressDialog!!.show();
+                    amount = etAmount!!.text.toString();
+                    accountToTransfer = autoCompleteTextViewAccountToTransfer!!.text.toString();
+
+                    Thread {
+                        val builder = AlertDialog.Builder(this@PortalNautaActivity);
+
+                        try {
+                            client.transferBalance(amount!!.toFloat(), accountToTransfer!!)
+                            progressDialog!!.dismiss()
+
+                            builder.setTitle("Portal Usuario").setMessage("Transferencia realizada!");
+                            val success = builder.create()
+                            success.show()
+                        } catch (e: Exception) {
+                            progressDialog!!.dismiss()
+                            e.printStackTrace()
+                            builder.setTitle("Portal Usuario").setMessage(e.message)
+                            val success = builder.create()
+                            success.show()
+                        }
+                    }
+                }
+            }
+        }
     //----SHOWING ALERT DIALOG FOR EXITING THE APP----
     override fun onBackPressed() {
         super.onBackPressed()

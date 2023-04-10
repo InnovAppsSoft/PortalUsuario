@@ -1,4 +1,4 @@
-package com.marlon.portalusuario.view.Fragments.connectivity
+package com.marlon.portalusuario.view.fragments.connectivity
 
 import android.app.ProgressDialog
 import android.content.SharedPreferences

@@ -6,7 +6,7 @@
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.Fragments.ServiciosFragment"
+    tools:context=".view.fragments.ServiciosFragment"
     android:layout_marginStart="@dimen/_8sdp"
     android:layout_marginTop="@dimen/_8sdp"
     android:layout_marginEnd="@dimen/_8sdp"
