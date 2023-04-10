@@ -16,7 +16,7 @@ import com.marlon.portalusuario.R;
 
 public class AboutActivity extends AppCompatActivity {
 
-    private LinearLayout personalinfo, experience, review, Google,Apklis,Politica,BagData;
+    private LinearLayout personalinfo, experience, review, Google,Apklis,Politica;
     private TextView experiencebtn, reviewbtn, javierFacebook,
     javierTwitter, javierInsta, javierGitHub, javierTelegram, javierTelegramChannel;
 
@@ -45,7 +45,6 @@ public class AboutActivity extends AppCompatActivity {
         Google = (LinearLayout) findViewById(R.id.google);
         Apklis = (LinearLayout) findViewById(R.id.apklis);
         Politica = (LinearLayout) findViewById(R.id.politicadeprivacidad);
-        BagData = (LinearLayout) findViewById(R.id.bagdata);
 
         javierFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,18 +181,6 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
 
-        BagData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String bagdata = ("https://play.google.com/store/apps/details?id=com.marlon.trustatlas");
-
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(bagdata));
-                startActivity(i);
-
-            }
-
-            });
 
         TextView version = findViewById(R.id.version);
         PackageInfo pinfo = null;

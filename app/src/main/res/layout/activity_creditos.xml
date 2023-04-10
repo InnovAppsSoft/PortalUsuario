@@ -50,13 +50,184 @@
             android:paddingTop="@dimen/_5sdp"
             android:paddingRight="@dimen/_5sdp">
 
-            <soup.neumorphism.NeumorphCardView
-                style="@style/Widget.Neumorph.CardView"
+
+            <androidx.cardview.widget.CardView
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/background"
-                android:orientation="vertical"
-                app:neumorph_shapeType="flat">
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/marlon1" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/displaybold"
+                            android:text="@string/marlon_de_jes_s_milan_s_rivero"
+                            android:textColor="@color/colorEscrito"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/displaybold"
+                            android:text="@string/creador_y_desarrollador"
+                            android:textColor="@color/colorDes"
+                            android:textSize="13sp" />
+
+
+                    </LinearLayout>
+                    <!-- Tiles Table -->
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:baselineAligned="false"
+                        android:paddingBottom="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+                            <TableRow
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                tools:ignore="UseCompoundDrawables">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+                                    <!-- FACEBOOK -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            android:contentDescription="@string/app_name"
+                                            app:tint="@color/botoncolorStart"
+                                            android:src="@drawable/facebook" />
+
+                                        <TextView
+                                            android:id="@+id/marlon_facebook"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginLeft="10dp"
+                                            android:fontFamily="@font/displaybold"
+                                            android:gravity="center_vertical"
+                                            android:text="@string/facebook"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+
+                                    </LinearLayout>
+                                    <!-- INSTAGRAM -->
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:gravity="center_vertical"
+                                        tools:ignore="UseCompoundDrawables">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
+                                            android:contentDescription="@string/app_name"
+                                            android:src="@drawable/instagram" />
+
+                                        <TextView
+                                            android:id="@+id/marlon_instagram"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginStart="10dp"
+                                            android:fontFamily="@font/displaybold"
+                                            android:gravity="center_vertical"
+                                            android:text="@string/instagram"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+                                    <!-- TWITTER -->
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:gravity="center_vertical"
+                                        tools:ignore="UseCompoundDrawables">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
+                                            android:contentDescription="@string/app_name"
+                                            android:src="@drawable/gorjeo" />
+
+                                        <TextView
+                                            android:id="@+id/marlon_twitter"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginStart="10dp"
+                                            android:fontFamily="@font/displaybold"
+                                            android:gravity="center_vertical"
+                                            android:text="@string/twitter"
+                                            android:textColor="@color/colorDes"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </TableRow>
+                            <!-- SEPARATOR -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="@color/colorTest1" />
+                            <!-- SEPARATOR -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp">
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </TableLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -90,7 +261,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/displaybold"
-                            android:text="@string/desarrollador_de_portal_usuario_para_android_windows"
+                            android:text="@string/coautor_y_desarrollador"
                             android:textColor="@color/colorDes"
                             android:textSize="13sp" />
 
@@ -126,6 +297,7 @@
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
                                             android:layout_height="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:contentDescription="@string/app_name"
                                             android:src="@drawable/facebook" />
 
@@ -152,8 +324,9 @@
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
                                             android:layout_height="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:contentDescription="@string/app_name"
-                                            android:src="@drawable/telegram" />
+                                            android:src="@drawable/telegrama" />
 
                                         <TextView
                                             android:id="@+id/javier_telegram"
@@ -176,9 +349,10 @@
 
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:layout_height="@dimen/_25sdp"
                                             android:contentDescription="@string/app_name"
-                                            android:src="@drawable/twitter" />
+                                            android:src="@drawable/gorjeo" />
 
                                         <TextView
                                             android:id="@+id/javier_twitter"
@@ -222,6 +396,7 @@
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
                                             android:layout_height="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:contentDescription="@string/app_name"
                                             android:src="@drawable/instagram" />
 
@@ -249,8 +424,9 @@
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
                                             android:layout_height="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:contentDescription="@string/app_name"
-                                            android:src="@drawable/telegram" />
+                                            android:src="@drawable/telegrama" />
 
                                         <TextView
                                             android:id="@+id/javier_canal_telegram"
@@ -275,8 +451,9 @@
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
                                             android:layout_height="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:contentDescription="@string/app_name"
-                                            android:src="@drawable/icon_github" />
+                                            android:src="@drawable/github" />
 
                                         <TextView
                                             android:id="@+id/javier_github"
@@ -321,9 +498,10 @@
 
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:layout_height="@dimen/_25sdp"
                                             android:contentDescription="@string/app_name"
-                                            android:src="@drawable/correo" />
+                                            android:src="@drawable/gmail" />
 
                                         <TextView
                                             android:id="@+id/javier_gmail"
@@ -344,15 +522,15 @@
 
                 </LinearLayout>
 
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
-            <soup.neumorphism.NeumorphCardView
-                style="@style/Widget.Neumorph.CardView"
+            <androidx.cardview.widget.CardView
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/background"
-                android:orientation="vertical"
-                app:neumorph_shapeType="flat">
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -365,7 +543,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/marlon" />
+                        android:src="@drawable/lesly" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -378,7 +556,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/displaybold"
-                            android:text="@string/marlon_de_jes_s_milan_s_rivero"
+                            android:text="Lesly Cintra"
                             android:textColor="@color/colorEscrito"
                             android:textSize="15sp"
                             android:textStyle="bold" />
@@ -387,7 +565,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/displaybold"
-                            android:text="Creador de Portal Usuario"
+                            android:text="Desarrollador"
                             android:textColor="@color/colorDes"
                             android:textSize="13sp" />
 
@@ -417,55 +595,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
-                                    <!-- FACEBOOK -->
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal">
 
-                                        <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/facebook" />
-
-                                        <TextView
-                                            android:id="@+id/marlon_facebook"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:layout_marginLeft="10dp"
-                                            android:fontFamily="@font/displaybold"
-                                            android:gravity="center_vertical"
-                                            android:text="@string/facebook"
-                                            android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
-
-                                    </LinearLayout>
-                                    <!-- INSTAGRAM -->
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="10dp"
-                                        android:gravity="center_vertical"
-                                        tools:ignore="UseCompoundDrawables">
-
-                                        <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/instagram" />
-
-                                        <TextView
-                                            android:id="@+id/marlon_instagram"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:layout_marginStart="10dp"
-                                            android:fontFamily="@font/displaybold"
-                                            android:gravity="center_vertical"
-                                            android:text="@string/instagram"
-                                            android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
-                                    </LinearLayout>
                                     <!-- TWITTER -->
                                     <LinearLayout
                                         android:layout_width="wrap_content"
@@ -477,17 +607,17 @@
                                         <ImageView
                                             android:layout_width="@dimen/_25sdp"
                                             android:layout_height="@dimen/_25sdp"
+                                            app:tint="@color/botoncolorStart"
                                             android:contentDescription="@string/app_name"
-                                            android:src="@drawable/twitter" />
+                                            android:src="@drawable/telegrama" />
 
                                         <TextView
-                                            android:id="@+id/marlon_twitter"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_marginStart="10dp"
                                             android:fontFamily="@font/displaybold"
                                             android:gravity="center_vertical"
-                                            android:text="@string/twitter"
+                                            android:text="Telegram"
                                             android:textColor="@color/colorDes"
                                             android:textSize="12sp" />
                                     </LinearLayout>
@@ -511,18 +641,19 @@
                     </TableLayout>
                 </LinearLayout>
 
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
-            <soup.neumorphism.NeumorphCardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Widget.Neumorph.CardView"
-                app:neumorph_shapeType="flat">
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
+                android:layout_margin="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/background"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -537,7 +668,7 @@
                         android:text="@string/informacion"
                         android:textAllCaps="true"
                         android:textColor="@color/colorDes"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="13sp"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -556,12 +687,12 @@
                         android:text="@string/descargas"
                         android:textAllCaps="true"
                         android:textColor="@color/colorDes"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="13sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
 
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
             <!--Bootom Cards with sections-->
             <LinearLayout
@@ -570,11 +701,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <soup.neumorphism.NeumorphCardView
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.Neumorph.CardView"
-                    app:neumorph_shapeType="flat">
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    app:cardBackgroundColor="@color/background_color_50"
+                    app:cardCornerRadius="@dimen/_16sdp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -614,14 +746,15 @@
 
                     </LinearLayout>
 
-                </soup.neumorphism.NeumorphCardView>
+                </androidx.cardview.widget.CardView>
 
 
-                <soup.neumorphism.NeumorphCardView
+                <androidx.cardview.widget.CardView
+                    android:layout_marginBottom="@dimen/_8sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.Neumorph.CardView"
-                    app:neumorph_shapeType="flat">
+                    app:cardBackgroundColor="@color/background_color_50"
+                    app:cardCornerRadius="@dimen/_16sdp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -657,9 +790,10 @@
 
                                     <ImageView
                                         android:layout_width="@dimen/_25sdp"
+                                        app:tint="@color/botoncolorStart"
                                         android:layout_height="@dimen/_25sdp"
                                         android:contentDescription="@string/app_name"
-                                        android:src="@drawable/version2" />
+                                        android:src="@drawable/unir" />
 
                                     <LinearLayout
                                         android:layout_width="wrap_content"
@@ -672,7 +806,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="@font/displaybold"
-                                            android:text="6.+"
+                                            android:text="7.0.1"
                                             android:textColor="@color/colorDes"
                                             android:textSize="12sp"
                                             android:textStyle="bold"
@@ -699,8 +833,9 @@
                                     <ImageView
                                         android:layout_width="@dimen/_25sdp"
                                         android:layout_height="@dimen/_25sdp"
+                                        app:tint="@color/botoncolorStart"
                                         android:contentDescription="@string/app_name"
-                                        android:src="@drawable/porciento" />
+                                        android:src="@drawable/descarga" />
 
                                     <LinearLayout
                                         android:layout_width="wrap_content"
@@ -741,13 +876,14 @@
                         </LinearLayout>
                     </LinearLayout>
 
-                </soup.neumorphism.NeumorphCardView>
+                </androidx.cardview.widget.CardView>
 
-                <soup.neumorphism.NeumorphCardView
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.Neumorph.CardView"
-                    app:neumorph_shapeType="flat">
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    app:cardBackgroundColor="@color/background_color_50"
+                    app:cardCornerRadius="@dimen/_16sdp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -832,36 +968,6 @@
                                 android:layout_height="2dp"
                                 android:background="@color/colorTest1" />
 
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:gravity="center_vertical"
-                                tools:ignore="UseCompoundDrawables">
-
-                                <ImageView
-                                    android:layout_width="@dimen/_25sdp"
-                                    android:layout_height="@dimen/_25sdp"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/lesly" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="20dp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/lesly_cintra"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="13sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:background="@color/colorTest1" />
-
-
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -888,7 +994,7 @@
                         </LinearLayout>
                     </LinearLayout>
 
-                </soup.neumorphism.NeumorphCardView>
+                </androidx.cardview.widget.CardView>
 
 
             </LinearLayout>
@@ -900,11 +1006,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-             <soup.neumorphism.NeumorphCardView
+             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.Neumorph.CardView"
-                app:neumorph_shapeType="flat">
+                 android:layout_marginBottom="@dimen/_8sdp"
+                 app:cardBackgroundColor="@color/background_color_50"
+                 app:cardCornerRadius="@dimen/_16sdp"
+                >
 
                  <LinearLayout
                      android:id="@+id/google"
@@ -923,8 +1031,9 @@
                          <ImageView
                              android:layout_width="@dimen/_25sdp"
                              android:layout_height="@dimen/_25sdp"
+                             app:tint="@color/botoncolorStart"
                              android:contentDescription="@string/app_name"
-                             android:src="@drawable/playstore" />
+                             android:src="@drawable/google" />
 
                          <LinearLayout
                              android:layout_width="wrap_content"
@@ -955,13 +1064,14 @@
 
                  </LinearLayout>
 
-             </soup.neumorphism.NeumorphCardView>
+             </androidx.cardview.widget.CardView>
 
-                <soup.neumorphism.NeumorphCardView
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.Neumorph.CardView"
-                    app:neumorph_shapeType="flat">
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    app:cardBackgroundColor="@color/background_color_50"
+                    app:cardCornerRadius="@dimen/_16sdp">
 
                     <LinearLayout
                         android:id="@+id/apklis"
@@ -1012,14 +1122,14 @@
 
                     </LinearLayout>
 
-                </soup.neumorphism.NeumorphCardView>
+                </androidx.cardview.widget.CardView>
 
-
-                <soup.neumorphism.NeumorphCardView
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.Neumorph.CardView"
-                    app:neumorph_shapeType="flat">
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    app:cardBackgroundColor="@color/background_color_50"
+                    app:cardCornerRadius="@dimen/_16sdp">
 
                     <LinearLayout
                         android:id="@+id/politicadeprivacidad"
@@ -1073,91 +1183,8 @@
 
                     </LinearLayout>
 
-                </soup.neumorphism.NeumorphCardView>
+                </androidx.cardview.widget.CardView>
 
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/displaybold"
-                    android:textSize="@dimen/_10ssp"
-                    android:text="@string/otras_aplicaciones_del_desarrollador"
-                    android:textColor="@color/colorDes" />
-
-                <soup.neumorphism.NeumorphCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.Neumorph.CardView"
-                    app:neumorph_shapeType="flat">
-
-                    <LinearLayout
-                        android:id="@+id/bagdata"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:baselineAligned="false"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/_10sdp">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:gravity="center_vertical">
-
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_25sdp"
-                                android:contentDescription="@string/app_name"
-                                android:src="@drawable/logo" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/trust_atlas"
-                                    android:textColor="@color/colorEscrito"
-                                    android:textSize="@dimen/_10ssp"
-                                    android:textStyle="bold" />
-
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:gravity="center_vertical"
-                            tools:ignore="UseCompoundDrawables">
-
-                            <ImageView
-                                android:layout_width="9dp"
-                                android:layout_height="9dp"
-                                android:contentDescription="@string/app_name"
-                                android:padding="1dp"
-                                android:src="@drawable/circleyellowfil" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:fontFamily="@font/displaybold"
-                                android:text="@string/descargar"
-                                android:textColor="@color/colorDes"
-                                android:textSize="@dimen/_10ssp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </soup.neumorphism.NeumorphCardView>
 
             </LinearLayout>
 

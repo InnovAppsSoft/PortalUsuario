@@ -31,13 +31,14 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:text="@string/paquetes_combinados"
                     android:textSize="@dimen/_15ssp" />
-
             </LinearLayout>
 
-            <soup.neumorphism.NeumorphCardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
                 app:contentPadding="8dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -107,7 +108,7 @@
                                     android:id="@+id/international_all_unit"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="3dp"
+                                    android:layout_marginStart="3dp"
                                     android:text="MB"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
@@ -146,7 +147,7 @@
                                     android:id="@+id/international_lte_unit"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="3dp"
+                                    android:layout_marginStart="3dp"
                                     android:text="MB"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
@@ -237,7 +238,7 @@
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="3dp"
+                                    android:layout_marginStart="3dp"
                                     android:text="min"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
@@ -274,7 +275,7 @@
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="3dp"
+                                    android:layout_marginStart="3dp"
                                     android:text="sms"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
@@ -307,8 +308,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="4dp"
-                                android:layout_marginRight="10dp"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginEnd="10dp"
                                 android:text="CUP"
                                 android:textAlignment="center"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -351,12 +352,14 @@
                     app:label_text="Básico"
                     app:label_textSize="10sp" />
 
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
-            <soup.neumorphism.NeumorphCardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
                 app:contentPadding="8dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -626,8 +629,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="4dp"
-                                android:layout_marginRight="10dp"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginEnd="10dp"
                                 android:text="@string/cup"
                                 android:textAlignment="center"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -669,12 +672,14 @@
                     app:label_text="Medio"
                     app:label_textSize="10sp" />
 
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
-            <soup.neumorphism.NeumorphCardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
                 app:contentPadding="8dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -743,7 +748,7 @@
                                     android:id="@+id/international_all_unit2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="3dp"
+                                    android:layout_marginStart="3dp"
                                     android:text="GB"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
@@ -781,7 +786,7 @@
                                     android:id="@+id/international_lte_unit2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="3dp"
+                                    android:layout_marginStart="3dp"
                                     android:text="GB"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
@@ -819,7 +824,7 @@
                                     android:id="@+id/national_unit2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="3dp"
+                                    android:layout_marginStart="3dp"
                                     android:text="MB"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
@@ -908,7 +913,7 @@
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="3dp"
+                                    android:layout_marginStart="3dp"
                                     android:text="sms"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
@@ -941,8 +946,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="4dp"
-                                android:layout_marginRight="10dp"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginEnd="10dp"
                                 android:text="@string/cup"
                                 android:textAlignment="center"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -985,7 +990,7 @@
                     app:label_textSize="10sp" />
 
 
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
 
             <LinearLayout
@@ -1005,8 +1010,12 @@
 
             </LinearLayout>
 
-            <soup.neumorphism.NeumorphCardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
+                app:contentPadding="8dp"
+                android:layout_marginBottom="8sp"
                 android:layout_height="wrap_content">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -1118,10 +1127,14 @@
                         app:layout_constraintTop_toBottomOf="@+id/divider7" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
-            <soup.neumorphism.NeumorphCardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
+                app:contentPadding="8dp"
+                android:layout_marginBottom="8sp"
                 android:layout_height="wrap_content">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -1233,10 +1246,14 @@
                         app:layout_constraintTop_toBottomOf="@+id/divider6" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
-            <soup.neumorphism.NeumorphCardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
+                app:contentPadding="8dp"
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
+                android:layout_marginBottom="8sp"
                 android:layout_height="wrap_content">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -1348,7 +1365,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/divider5" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_marginStart="@dimen/_8sdp"
@@ -1367,8 +1384,11 @@
 
             </LinearLayout>
 
-            <soup.neumorphism.NeumorphCardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
+                android:layout_marginBottom="8sp"
                 android:layout_height="wrap_content">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -1480,10 +1500,14 @@
                         app:layout_constraintTop_toBottomOf="@+id/divider" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
-            <soup.neumorphism.NeumorphCardView
+            <androidx.cardview.widget.CardView
+                app:contentPadding="8dp"
                 android:layout_width="match_parent"
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
+                android:layout_marginBottom="8sp"
                 android:layout_height="wrap_content">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -1595,10 +1619,14 @@
                         app:layout_constraintTop_toBottomOf="@+id/divider4" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
-            <soup.neumorphism.NeumorphCardView
+            <androidx.cardview.widget.CardView
+                app:contentPadding="8dp"
                 android:layout_width="match_parent"
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
+                android:layout_marginBottom="8sp"
                 android:layout_height="wrap_content">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -1684,8 +1712,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/divider3" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </soup.neumorphism.NeumorphCardView>
-
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 

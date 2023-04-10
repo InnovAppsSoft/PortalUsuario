@@ -46,14 +46,13 @@
                 app:layout_constraintTop_toBottomOf="@id/TextTitle"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <soup.neumorphism.NeumorphCardView
-                app:neumorph_shapeAppearance="@style/NeumorphismCard"
+            <androidx.cardview.widget.CardView
+                app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
                 android:id="@+id/cardPunch"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:neumorph_shapeType="flat"
-                app:neumorph_backgroundColor="@color/background"
-                app:neumorph_shadowElevation="@dimen/_5sdp">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:id="@+id/datosLi"
@@ -81,17 +80,16 @@
 
                 </LinearLayout>
 
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
 
-            <soup.neumorphism.NeumorphCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardWeight"
+                app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:neumorph_shapeType="flat"
-                app:neumorph_backgroundColor="@color/background"
-                app:neumorph_shadowElevation="@dimen/_5sdp"
-                app:neumorph_shapeAppearance="@style/NeumorphismCard"
                 tools:ignore="MissingConstraints">
 
                 <LinearLayout
@@ -121,17 +119,16 @@
 
                 </LinearLayout>
 
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
 
-            <soup.neumorphism.NeumorphCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardRun"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:neumorph_shapeType="flat"
-                app:neumorph_backgroundColor="@color/background"
-                app:neumorph_shadowElevation="@dimen/_5sdp"
-                app:neumorph_shapeAppearance="@style/NeumorphismCard"
+                app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
                 tools:ignore="MissingConstraints">
 
                 <LinearLayout
@@ -159,17 +156,16 @@
 
                 </LinearLayout>
 
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
 
-            <soup.neumorphism.NeumorphCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardYoga"
-                app:neumorph_shapeType="flat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:neumorph_backgroundColor="@color/background"
-                app:neumorph_shadowElevation="@dimen/_5sdp"
-                app:neumorph_shapeAppearance="@style/NeumorphismCard"
+                app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
                 tools:ignore="MissingConstraints">
 
                 <LinearLayout
@@ -198,22 +194,22 @@
 
                 </LinearLayout>
 
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
 
-            <soup.neumorphism.NeumorphButton
+            <Button
                 android:id="@+id/buttonDisconnect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:background="@drawable/widget_4"
                 android:text="@string/btn_desconnect"
-                style="@style/Widget.Neumorph.Button"
                 android:fontFamily="@font/displaybold"
                 android:textSize="@dimen/_13ssp"
                 android:textStyle="bold"
-                android:textColor="@color/colorDes"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardYoga" />

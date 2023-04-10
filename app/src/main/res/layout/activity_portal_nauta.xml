@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -58,15 +59,16 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp" />
 
-            <soup.neumorphism.NeumorphCardView
-                style="@style/Widget.Neumorph.CardView"
+            <androidx.cardview.widget.CardView
+                app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="20dp"
-                app:cardCornerRadius="5dp"
                 app:cardElevation="10dp">
 
                 <LinearLayout
@@ -230,10 +232,11 @@
                         android:layout_marginRight="10dp"
                         app:fontFamily="@font/ubuntu" />
                 </LinearLayout>
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
-            <soup.neumorphism.NeumorphCardView
-                style="@style/Widget.Neumorph.CardView"
+            <androidx.cardview.widget.CardView
+                app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="@color/background_color_50"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
@@ -288,15 +291,14 @@
                         android:inputType="number" />
 
 
-                    <soup.neumorphism.NeumorphButton
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/bt_recharge"
-                        style="@style/Widget.Neumorph.Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
                         android:layout_margin="10dp"
-                        android:onClick="recharge"
-                        android:textColor="@color/colorDes"
+                        android:background="@drawable/blue_rounded_shape"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/displaybold"
                         android:textSize="@dimen/_13ssp"
                         android:paddingLeft="25dp"
@@ -305,9 +307,11 @@
 
                 </LinearLayout>
 
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
-            <soup.neumorphism.NeumorphCardView
+            <androidx.cardview.widget.CardView
+                app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="@color/background_color_50"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
@@ -390,22 +394,24 @@
                         android:textColorHint="@color/colorDes"
                         android:completionThreshold="1" />
 
-                    <soup.neumorphism.NeumorphButton
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/bt_transfer"
-                        style="@style/Widget.Neumorph.Button"
+                        app:cardUseCompatPadding="true"
+                        app:cardBackgroundColor="@color/background_color_50"
+                        app:cardCornerRadius="@dimen/_16sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
+                        android:background="@drawable/blue_rounded_shape"
                         android:layout_margin="10dp"
-                        android:onClick="transfer"
-                        android:textColor="@color/colorDes"
+                        android:textColor="@color/white"
                         android:fontFamily="@font/displaybold"
                         android:textSize="@dimen/_13ssp"
                         android:paddingLeft="25dp"
                         android:paddingRight="25dp"
                         android:text="@string/transfer" />
                 </LinearLayout>
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

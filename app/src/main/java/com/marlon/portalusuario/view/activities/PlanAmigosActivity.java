@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.marlon.portalusuario.R;
 
@@ -18,7 +19,7 @@ import soup.neumorphism.NeumorphCardView;
 
 public class PlanAmigosActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private NeumorphCardView activar,adicionar,consultar;
+    private CardView activar,adicionar,consultar;
     private ImageView Atras;
 
     @Override

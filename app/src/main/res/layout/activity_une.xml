@@ -70,13 +70,14 @@
                 android:src="@drawable/unnamed">
             </ImageView>
 
-            <soup.neumorphism.NeumorphCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardview5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:neumorph_backgroundColor="@color/background"
-                app:neumorph_shadowElevation="@dimen/_5sdp"
-                app:neumorph_shapeAppearance="@style/NeumorphismCard">
+                app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="@color/background_color_50"
+                app:cardCornerRadius="@dimen/_16sdp"
+          >
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -86,7 +87,7 @@
                         android:id="@+id/tv234"
                         android:layout_width="match_parent"
                         android:layout_height="26dp"
-                        android:background="@color/primary"
+                        android:background="@color/colorPrimary"
                         android:fontFamily="@font/displaybold"
                         android:gravity="center_vertical"
                         android:paddingStart="@dimen/activity_horizontal_margin"
@@ -148,7 +149,7 @@
                             android:layout_height="35dp"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/btn_paginas"
+                            android:background="@drawable/widget_4"
                             android:fontFamily="@font/displaybold"
                             android:hint="@string/borrar"
                             android:textColorHint="@color/colorWhite"
@@ -161,7 +162,7 @@
                             android:layout_height="35dp"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/btn_paginas"
+                            android:background="@drawable/widget_4"
                             android:fontFamily="@font/displaybold"
                             android:hint="@string/calcular"
                             android:textColorHint="@color/colorWhite"
@@ -213,7 +214,7 @@
 
                 </RelativeLayout>
 
-            </soup.neumorphism.NeumorphCardView>
+            </androidx.cardview.widget.CardView>
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swiperefreshune"

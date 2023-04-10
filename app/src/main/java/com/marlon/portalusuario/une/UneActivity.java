@@ -49,11 +49,12 @@ public class UneActivity extends AppCompatActivity {
     private ImageView Virar;
     private RecyclerView recyclerView;
     private List<Une> uneRegisters;
-    private TextView totalConsumption;
-    private TextView totalToPay;
+    public TextView totalConsumption;
+    public TextView totalToPay;
     
     private UneViewModel uneViewModel;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);

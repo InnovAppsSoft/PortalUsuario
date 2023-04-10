@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#7041FF</color>
     <color name="colorPrimaryDark">#7041FF</color>
-    <color name="colorAccent">#A36FFF</color>
+    <color name="colorAccent">#64983cff</color>
     <color name="color_accent">#7041FF</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBackground">#ECECEC</color>
@@ -14,8 +14,15 @@
     <color name="data_usage_high">#81C784</color>
 
     <color name="botoncolorStart">#7041FF</color>
-    <color name="botoncolorEnd">#7041ff</color>
+    <color name="botoncolorEnd">#7041FF</color>
+    <color name="botoncolor">#00B0FF</color>
     <color name="colorfondoapp">#171E29</color>
+
+    <color name="colorPrimaryLightDark">#F0F0F0</color>
+    <color name="colorSecondaryText">#757575</color>
+    <color name="light">#DDDDDD</color>
+    <color name="transparent">#00ffffff</color>
+
 
 
 

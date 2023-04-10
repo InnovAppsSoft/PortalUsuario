@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.marlon.portalusuario.R;
 
@@ -18,7 +19,7 @@ import soup.neumorphism.NeumorphCardView;
 
 public class VozActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private NeumorphCardView min5,min10,min15,min25,min40;
+    private CardView min5,min10,min15,min25,min40;
     private ImageView Atras;
 
     @Override
@@ -27,11 +28,11 @@ public class VozActivity extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_voz);
 
         //Definiendo Card
-        min5 = (NeumorphCardView) findViewById(R.id.min5);
-        min10 = (NeumorphCardView) findViewById(R.id.min10);
-        min15 = (NeumorphCardView) findViewById(R.id.min15);
-        min25 = (NeumorphCardView) findViewById(R.id.min25);
-        min40 = (NeumorphCardView) findViewById(R.id.min40);
+        min5 = (CardView) findViewById(R.id.min5);
+        min10 = (CardView) findViewById(R.id.min10);
+        min15 = (CardView) findViewById(R.id.min15);
+        min25 = (CardView) findViewById(R.id.min25);
+        min40 = (CardView) findViewById(R.id.min40);
         Atras = findViewById(R.id.atras2);
 
 
