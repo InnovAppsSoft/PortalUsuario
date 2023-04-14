@@ -44,6 +44,7 @@ class CellLocationSource {
         private val simStateListener: CellLocationListener.(state: CellLocation) -> Unit
     ) : PhoneStateListenerPort(subId) {
 
+        @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION])
         override fun onCellLocationChanged(location: CellLocation?) {
             super.onCellLocationChanged(location)
             if (location != null) {
