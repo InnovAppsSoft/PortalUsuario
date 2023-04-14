@@ -309,7 +309,6 @@ class WifiEtecsaFragment : Fragment() {
             loadingBar!!.show()
 
             loadingBar!!.setMessage("Iniciando sesión...")
-
             val username = currentUser().fullUsername
             val pwd = currentUser().password
 
@@ -324,6 +323,7 @@ class WifiEtecsaFragment : Fragment() {
 
                         // Saving data session
                         sessionPref.saveSession(client.dataSession)
+
                         Pair(true, null)
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -336,7 +336,6 @@ class WifiEtecsaFragment : Fragment() {
                     loadingBar!!.dismiss()
 
                     if (isOk) {
-                        //
                         setUserDataOnDashboard()
                         initChronometer(view)
                         sendLeftTime()
@@ -347,7 +346,7 @@ class WifiEtecsaFragment : Fragment() {
                         Toast.makeText(context, err, Toast.LENGTH_LONG).show()
                     }
                 }
-            } ).execute()
+            }).execute()
         } else {
             Toast.makeText(context, "No está conectado", Toast.LENGTH_SHORT).show()
         }
@@ -417,15 +416,14 @@ class WifiEtecsaFragment : Fragment() {
                 loadingBar!!.dismiss()
 
                 if (isOk) {
+                    // update UI
                     connectBtn!!.visibility = View.VISIBLE
                     logOutBtn!!.visibility = View.GONE
                     sessionInfoLayout!!.visibility = View.GONE
                     // toast
-                    requireActivity().runOnUiThread {
-                        Toast.makeText(activity, "Desconectado", Toast.LENGTH_SHORT).show()
-                    }
+                    Toast.makeText(activity, "Desconectado", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(context, err, Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, err, Toast.LENGTH_SHORT).show()
                 }
             }
         }).execute()
@@ -630,24 +628,25 @@ class WifiEtecsaFragment : Fragment() {
             }
         }
 
-        fun loadCaptcha() {
+        private fun loadCaptcha() {
             RunTask(object : Communicator {
-                private var captchaImage: ByteArray? = null
                 private lateinit var status: Pair<Boolean, String?>
+                private lateinit var captchaImage: ByteArray
 
                 override fun communicate() {
                     setCaptchaLoaded(false)
                     status = try {
                         captchaImage = client.captchaImage
                         Pair(true, null)
-                    } catch (e: IOException) {
+                    } catch (e: Exception) {
                         e.printStackTrace()
                         Pair(false, e.message)
                     }
                 }
 
                 override fun postCommunicate() {
-                    val (isOk, _) = status
+                    val (isOk, err) = status
+
                     if (isOk) {
                         val bitmap = BitmapFactory.decodeStream(
                             ByteArrayInputStream(captchaImage)
@@ -655,9 +654,7 @@ class WifiEtecsaFragment : Fragment() {
                         setCaptchaLoaded(true)
                         captchaImg.setImageBitmap(bitmap)
                     } else {
-                        setError(true);
-                        Toast.makeText(getContext(),
-                            "No se pudo cargar la imagen CAPTCHA", Toast.LENGTH_LONG).show()
+                        Toast.makeText(getContext(), err, Toast.LENGTH_LONG).show()
                     }
                 }
             }).execute()
@@ -681,14 +678,16 @@ class WifiEtecsaFragment : Fragment() {
             if (validate != 1) {
                 if (Util.isConnected(context)) {
                     loadingBar!!.show()
+
                     RunTask(object : Communicator {
                         private lateinit var status: Pair<Boolean, String?>
 
+                        val current = currentUser()
+                        val username = current.fullUsername
+                        val password = current.password
+
                         override fun communicate() {
                             status = try {
-                                val current = currentUser()
-                                val username = current.fullUsername
-                                val password = current.password
                                 client.setCredentials(username, password)
                                 val nautaUser = client.login(captchaEditText.text.toString())
                                 account = nautaUser.userName
@@ -699,90 +698,79 @@ class WifiEtecsaFragment : Fragment() {
                                 serviceType = nautaUser.serviceType
                                 credit = nautaUser.credit
                                 mailAccount = nautaUser.mailAccount
+
                                 Pair(true, null)
                             } catch (e: Exception) {
                                 e.printStackTrace()
-                                JCLogging.error(null, null, e)
                                 Pair(false, e.message)
                             }
                         }
 
                         override fun postCommunicate() {
                             val (isOk, err) = status
-                            val errors = ""
-
                             loadingBar!!.dismiss()
 
-                            try {
-                                if (isOk) {
-                                    transitionIntent =
-                                        Intent(context, PortalNautaActivity::class.java)
-                                    transitionIntent!!.putExtra(
-                                        "userName",
-                                        account
+                            if (isOk) {
+                                transitionIntent =
+                                    Intent(context, PortalNautaActivity::class.java)
+                                transitionIntent!!.putExtra(
+                                    "userName",
+                                    account
+                                )
+                                transitionIntent!!.putExtra(
+                                    "password",
+                                    currentUser().password
+                                )
+                                transitionIntent!!.putExtra(
+                                    "blockDate",
+                                    blockDate
+                                )
+                                transitionIntent!!.putExtra(
+                                    "delDate",
+                                    deleteDate
+                                )
+                                transitionIntent!!.putExtra(
+                                    "accountType",
+                                    accountType1
+                                )
+                                transitionIntent!!.putExtra(
+                                    "serviceType",
+                                    serviceType
+                                )
+                                transitionIntent!!.putExtra(
+                                    "credit",
+                                    credit
+                                )
+                                transitionIntent!!.putExtra(
+                                    "time",
+                                    remainingTime
+                                )
+                                transitionIntent!!.putExtra(
+                                    "mailAccount",
+                                    mailAccount
+                                )
+                                //
+                                val user = currentUser()
+                                user.blockDate = blockDate
+                                user.delDate = deleteDate
+                                user.accountType = accountType1
+                                user.serviceType = serviceType
+                                user.accountCredit = credit
+                                user.leftTime = remainingTime
+                                user.emailAccount = mailAccount
+                                userViewModel!!.updateUser(user)
+                                //
+                                val prefEditor = pref!!.edit()
+                                prefEditor.putString(
+                                    "last_portal_nauta_update", Util.date2String(
+                                        Util.currentDate()
                                     )
-                                    transitionIntent!!.putExtra(
-                                        "password",
-                                        currentUser().password
-                                    )
-                                    transitionIntent!!.putExtra(
-                                        "blockDate",
-                                        blockDate
-                                    )
-                                    transitionIntent!!.putExtra(
-                                        "delDate",
-                                        deleteDate
-                                    )
-                                    transitionIntent!!.putExtra(
-                                        "accountType",
-                                        accountType1
-                                    )
-                                    transitionIntent!!.putExtra(
-                                        "serviceType",
-                                        serviceType
-                                    )
-                                    transitionIntent!!.putExtra(
-                                        "credit",
-                                        credit
-                                    )
-                                    transitionIntent!!.putExtra(
-                                        "time",
-                                        remainingTime
-                                    )
-                                    transitionIntent!!.putExtra(
-                                        "mailAccount",
-                                        mailAccount
-                                    )
-                                    //
-                                    val user = currentUser()
-                                    user.blockDate = blockDate
-                                    user.delDate = deleteDate
-                                    user.accountType = accountType1
-                                    user.serviceType = serviceType
-                                    user.accountCredit = credit
-                                    user.leftTime = remainingTime
-                                    user.emailAccount = mailAccount
-                                    userViewModel!!.updateUser(user)
-                                    //
-                                    val prefEditor = pref!!.edit()
-                                    prefEditor.putString(
-                                        "last_portal_nauta_update", Util.date2String(
-                                            Util.currentDate()
-                                        )
-                                    )
-                                    prefEditor.apply()
-                                    //
-                                    startActivity(transitionIntent)
-                                } else {
-                                    captchaEditText.error = err
-                                    loadCaptcha()
-                                }
-                            } catch (ex: Exception) {
-                                setErrorMessage("Ha ocurrido un error :-(", R.raw.wronganswer);
-                                ex.printStackTrace();
-                                Toast.makeText(getContext(),
-                                    "Ha ocurrido un error :-(\n${ex.message}", Toast.LENGTH_LONG).show();
-                                JCLogging.error(null, null, ex);
+                                )
+                                prefEditor.apply()
+                                //
+                                startActivity(transitionIntent)
+                            } else {
+                                Toast.makeText(context, err, Toast.LENGTH_SHORT).show()
                             }
                         }
                     }).execute()

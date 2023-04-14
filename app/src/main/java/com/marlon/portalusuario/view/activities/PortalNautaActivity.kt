@@ -126,7 +126,7 @@ class PortalNautaActivity : AppCompatActivity() {
                         success.setCancelable(false)
                         success.show()
                     } else {
-                        builder.setMessage("No se pudo recargar la cuenta: ${err}")
+                        builder.setMessage("No se pudo recargar la cuenta: $err")
                         val success = builder.create()
                         success.setCancelable(false)
                         success.show()
@@ -145,12 +145,9 @@ class PortalNautaActivity : AppCompatActivity() {
         if (autoCompleteTextViewAccountToTransfer!!.text.toString() == "") {
             autoCompleteTextViewAccountToTransfer!!.error = "Introduzca un nombre de usuario";
             validate = 1;
-        } else if (!autoCompleteTextViewAccountToTransfer!!.text.toString()
-                .endsWith("@nauta.com.cu") &&
-            !autoCompleteTextViewAccountToTransfer!!.text.toString().endsWith("@nauta.co.cu")
-        ) {
-            autoCompleteTextViewAccountToTransfer!!.error =
-                "Introduzca un nombre de usuario válido";
+        } else if (!autoCompleteTextViewAccountToTransfer!!.text.toString().endsWith("@nauta.com.cu") &&
+            !autoCompleteTextViewAccountToTransfer!!.text.toString().endsWith("@nauta.co.cu")) {
+            autoCompleteTextViewAccountToTransfer!!.error = "Introduzca un nombre de usuario válido";
             validate = 1;
         }
         if (validate != 1) {
@@ -163,14 +160,16 @@ class PortalNautaActivity : AppCompatActivity() {
                 success.show();
             } else {
                 progressDialog!!.setTitle("Portal Usuario");
-                progressDialog!!.setMessage("Transfiriendo...")
-                progressDialog!!.show()
-                amount = etAmount!!.text.toString()
-                accountToTransfer = autoCompleteTextViewAccountToTransfer!!.text.toString()
+                progressDialog!!.setMessage("Transfiriendo...");
+                progressDialog!!.show();
+                amount = etAmount!!.text.toString();
+                accountToTransfer = autoCompleteTextViewAccountToTransfer!!.text.toString();
+                val builder = AlertDialog.Builder(this@PortalNautaActivity);
+                builder.setTitle("Portal Usuario")
+                builder.setPositiveButton("OK", null)
 
                 RunTask(object : Communicator {
                     private lateinit var status: Pair<Boolean, String?>
-                    val builder = AlertDialog.Builder(this@PortalNautaActivity)
 
                     override fun communicate() {
                         status = try {
@@ -186,12 +185,14 @@ class PortalNautaActivity : AppCompatActivity() {
                         val (isOk, err) = status
                         progressDialog!!.dismiss()
                         if (isOk) {
-                            builder.setTitle("Portal Usuario").setMessage("Transferencia realizada!");
+                            builder.setMessage("Transferencia realizada!")
                             val success = builder.create()
+                            success.setCancelable(false)
                             success.show()
                         } else {
-                            builder.setTitle("Portal Usuario").setMessage(err)
+                            builder.setMessage(err)
                             val success = builder.create()
+                            success.setCancelable(false)
                             success.show()
                         }
                     }
