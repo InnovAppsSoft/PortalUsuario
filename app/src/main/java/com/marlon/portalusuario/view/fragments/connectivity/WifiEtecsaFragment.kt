@@ -309,7 +309,8 @@ class WifiEtecsaFragment : Fragment() {
             loadingBar!!.show()
 
             loadingBar!!.setMessage("Iniciando sesión...")
-            val username = currentUser().username
+
+            val username = currentUser().fullUsername
             val pwd = currentUser().password
 
             RunTask(object : Communicator {
@@ -708,11 +709,12 @@ class WifiEtecsaFragment : Fragment() {
 
                         override fun postCommunicate() {
                             val (isOk, err) = status
-                            var errors = ""
+                            val errors = ""
+
+                            loadingBar!!.dismiss()
 
                             try {
                                 if (isOk) {
-                                    loadingBar!!.dismiss()
                                     transitionIntent =
                                         Intent(context, PortalNautaActivity::class.java)
                                     transitionIntent!!.putExtra(
