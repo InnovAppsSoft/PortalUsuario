@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.marlon.portalusuario.R
+import com.marlon.portalusuario.view.fragments.connectivity.WifiEtecsaFragment
 import com.marlon.portalusuario.view.fragments.SitiosNacionalesFragment
 
 class ConnectivityFragment : Fragment() {
@@ -46,7 +47,6 @@ class ConnectivityFragment : Fragment() {
         //
         tabLayout?.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                val fragment: Fragment? = null
                 when (tab.position) {
                     0 -> setFragment(WifiEtecsaFragment())
                     1 -> setFragment(SitiosNacionalesFragment())
