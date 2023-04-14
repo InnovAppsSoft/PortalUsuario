@@ -78,7 +78,7 @@ public class PermissionActivity extends AppCompatActivity implements IStepperAda
         View inflateView = LayoutInflater.from(context).inflate(R.layout.vertical_stepper_sample_item, parent, false);
         TextView contentView = inflateView.findViewById(R.id.item_content);
         contentView.setText(
-                index == 0 ? R.string.content_step_0 : (index == 1 ? R.string.content_step_1 : (index == 2 ? R.string.content_step_2 : (index == 3 ? R.string.content_step_3 : (index == 4 ? R.string.content_step_4 : R.string.content_step_5))))
+                index == 0 ? R.string.content_step_0 : (index == 1 ? R.string.content_step_1 : (index == 2 ? R.string.content_step_2 : (index == 3 ? R.string.content_step_3 : (index == 4 ? R.string.content_step_4 : R.string.content_step_7))))
         );
         Button nextButton = inflateView.findViewById(R.id.button_next);
         nextButton.setText(index == size() - 1 ? "Comenzar" : "Conceder");
@@ -106,6 +106,7 @@ public class PermissionActivity extends AppCompatActivity implements IStepperAda
                     case 4:
                         startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName())), REQUEST_OVERLAY);
                         break;
+
                     default:
                         startActivity(new Intent(PermissionActivity.this, MainActivity.class));
                         finish();

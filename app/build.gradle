@@ -2,19 +2,19 @@ plugins {
     id 'com.android.application'
     id 'com.jakewharton.butterknife'
     id 'com.google.gms.google-services'
-    id 'kotlin-android'
+    id 'org.jetbrains.kotlin.android'
 
 }
 
 android {
-    signingConfigs {
-        debug {
-            storeFile file('/Users/marlon/Documents/AndroidStudioProjects/keystore.jks')
-            storePassword '54871663'
-            keyAlias 'upload'
-            keyPassword '54871663'
-        }
-    }
+//    signingConfigs {
+//        debug {
+//            storeFile file('/Users/marlon/Documents/AndroidStudioProjects/keystore.jks')
+//            storePassword '54871663'
+//            keyAlias 'upload'
+//            keyPassword '54871663'
+//        }
+//    }
     compileSdkVersion 33
 //    31.0.0 rc4
     buildToolsVersion '30.0.3'
@@ -22,8 +22,8 @@ android {
         applicationId "com.marlon.portalusuario"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 49
-        versionName '6.9'
+        versionCode 51
+        versionName '7.0.1'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         signingConfig signingConfigs.debug
@@ -53,6 +53,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.android.play:core:1.10.3'
     implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation 'androidx.core:core-ktx:1.10.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
 
@@ -83,9 +84,9 @@ dependencies {
     implementation 'com.android.support:customtabs:28.0.0'
 
     // wifietecsa
-
-    implementation 'org.jsoup:jsoup:1.14.2'
-    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.github.suitetecsa:suitetecsa-sdk-kotlin:0.1.5'
+    implementation 'org.jsoup:jsoup:1.15.4'
+    implementation 'com.google.code.gson:gson:2.10.1'
 
     //Tap Tarjet
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'

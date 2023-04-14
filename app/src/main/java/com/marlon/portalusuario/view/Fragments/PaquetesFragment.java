@@ -1,4 +1,4 @@
-package com.marlon.portalusuario.view.Fragments;
+package com.marlon.portalusuario.view.fragments;
 
 import android.Manifest;
 import android.content.Context;

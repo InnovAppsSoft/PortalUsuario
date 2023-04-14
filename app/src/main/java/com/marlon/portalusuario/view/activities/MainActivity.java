@@ -11,12 +11,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.DrawableContainer;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -77,6 +74,7 @@ import com.marlon.cz.mroczis.netmonster.core.model.cell.ICellProcessor;
 import com.marlon.portalusuario.PUNotifications.PUNotificationsActivity;
 import com.marlon.portalusuario.R;
 import com.marlon.portalusuario.Utils;
+import com.marlon.portalusuario.blueChat.ActivityChat;
 import com.marlon.portalusuario.etecsa_scraping.Promo;
 import com.marlon.portalusuario.etecsa_scraping.PromoSliderAdapter;
 import com.marlon.portalusuario.firewall.ActivityMain;
@@ -85,11 +83,11 @@ import com.marlon.portalusuario.une.UneActivity;
 import com.marlon.portalusuario.util.Connectivity;
 import com.marlon.portalusuario.util.SSLHelper;
 import com.marlon.portalusuario.util.Util;
-import com.marlon.portalusuario.view.Fragments.BottomSheetDialog;
-import com.marlon.portalusuario.view.Fragments.HowToFragment;
-import com.marlon.portalusuario.view.Fragments.PaquetesFragment;
-import com.marlon.portalusuario.view.Fragments.ServiciosFragment;
-import com.marlon.portalusuario.view.Fragments.connectivity.ConnectivityFragment;
+import com.marlon.portalusuario.view.fragments.BottomSheetDialog;
+import com.marlon.portalusuario.view.fragments.HowToFragment;
+import com.marlon.portalusuario.view.fragments.PaquetesFragment;
+import com.marlon.portalusuario.view.fragments.ServiciosFragment;
+import com.marlon.portalusuario.view.fragments.connectivity.ConnectivityFragment;
 import com.marlon.portalusuario.PUNotifications.PUNotification;
 import com.marlon.portalusuario.ViewModel.PunViewModel;
 import com.marlon.portalusuario.util.apklis.ApklisUtil;
@@ -117,10 +115,6 @@ import kotlin.Unit;
 import mobi.gspd.segmentedbarview.Segment;
 import mobi.gspd.segmentedbarview.SegmentedBarView;
 import mobi.gspd.segmentedbarview.SegmentedBarViewSideStyle;
-import soup.neumorphism.NeumorphButton;
-import soup.neumorphism.NeumorphCardView;
-import soup.neumorphism.NeumorphImageButton;
-import soup.neumorphism.NeumorphImageView;
 
 public class MainActivity extends AppCompatActivity implements BiometricCallback {
 
@@ -192,6 +186,7 @@ public class MainActivity extends AppCompatActivity implements BiometricCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         punViewModel = new ViewModelProvider(this).get(PunViewModel.class);
 
@@ -301,6 +296,11 @@ public class MainActivity extends AppCompatActivity implements BiometricCallback
                     // CONFIGURACION
                     case R.id.donate:
                         i = new Intent(MainActivity.this,Donacion.class);
+                        startActivity(i);
+                        break;
+                    // CONFIGURACION
+                    case R.id.bluechat:
+                        i = new Intent(MainActivity.this, ActivityChat.class);
                         startActivity(i);
                         break;
                 }
@@ -620,6 +620,8 @@ public class MainActivity extends AppCompatActivity implements BiometricCallback
         }
     }
 
+
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void startService(ApklisUtil apklis, int latency) {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
@@ -899,7 +901,6 @@ public class MainActivity extends AppCompatActivity implements BiometricCallback
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == ResultCall) {
-            //PermisoLlamada();
         }
 
     }

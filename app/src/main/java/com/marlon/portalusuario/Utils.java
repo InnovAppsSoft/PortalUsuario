@@ -45,7 +45,7 @@ public class Utils {
     public boolean openLocation(Context context2) {
         boolean z;
         boolean z2;
-        LocationManager locationManager = (LocationManager) context2.getSystemService("location");
+        LocationManager locationManager = (LocationManager) context2.getSystemService(Context.LOCATION_SERVICE);
         try {
             z = locationManager.isProviderEnabled("gps");
         } catch (Exception e) {
