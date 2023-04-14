@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import com.marlon.portalusuario.PortalUsuarioApplication.Companion.client
 import com.marlon.portalusuario.R
+import com.marlon.portalusuario.net.Communicator
+import com.marlon.portalusuario.net.RunTask
 import com.marlon.portalusuario.util.AutoCompleteAdapter
 
 class PortalNautaActivity : AppCompatActivity() {
@@ -97,79 +99,107 @@ class PortalNautaActivity : AppCompatActivity() {
             progressDialog!!.setMessage("Recargando...")
             progressDialog!!.show()
             rechargeCode = etRechargeCode!!.text.toString()
-            Thread {
-                val builder = AlertDialog.Builder(this@PortalNautaActivity)
-                builder.setTitle("Portal Usuario")
-                builder.setPositiveButton("OK", null)
-                try {
-                    client.toUpBalance(rechargeCode!!)
-                    progressDialog!!.dismiss()
-                    builder.setMessage("Cuenta recargada!")
-                    val success = builder.create()
-                    success.setCancelable(false)
-                    success.show()
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    progressDialog!!.dismiss()
-                    builder.setMessage("No se pudo recargar la cuenta: ${e.message}")
-                    val success = builder.create()
-                    success.setCancelable(false)
-                    success.show()
+
+            val builder = AlertDialog.Builder(this@PortalNautaActivity)
+            builder.setTitle("Portal Usuario")
+            builder.setPositiveButton("OK", null)
+
+            RunTask(object : Communicator {
+                private lateinit var status: Pair<Boolean, String?>
+
+                override fun communicate() {
+                    status = try {
+                        client.toUpBalance(rechargeCode!!)
+                        Pair(true, null)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        Pair(false, e.message)
+                    }
                 }
-            }.start()
+
+                override fun postCommunicate() {
+                    val (isOk, err) = status
+                    progressDialog!!.dismiss()
+                    if (isOk) {
+                        builder.setMessage("Cuenta recargada!")
+                        val success = builder.create()
+                        success.setCancelable(false)
+                        success.show()
+                    } else {
+                        builder.setMessage("No se pudo recargar la cuenta: ${err}")
+                        val success = builder.create()
+                        success.setCancelable(false)
+                        success.show()
+                    }
+                }
+            }).execute()
         }
     }
 
     fun transfer() {
-            var validate = 0
-            if (etAmount!!.text.toString().isEmpty()) {
-                etAmount!!.error = "Introduzca un monto válido";
-                validate = 1;
-            }
-            if (autoCompleteTextViewAccountToTransfer!!.text.toString() == "") {
-                autoCompleteTextViewAccountToTransfer!!.error = "Introduzca un nombre de usuario";
-                validate = 1;
-            } else if (!autoCompleteTextViewAccountToTransfer!!.text.toString().endsWith("@nauta.com.cu") &&
-                    !autoCompleteTextViewAccountToTransfer!!.text.toString().endsWith("@nauta.co.cu")) {
-                autoCompleteTextViewAccountToTransfer!!.error = "Introduzca un nombre de usuario válido";
-                validate = 1;
-            }
-            if (validate != 1) {
-                if (credit.equals("$0,00 CUP")) {
-                    val builder = AlertDialog.Builder(this);
-                    builder.setTitle("Portal Usuario").setMessage("Su saldo es insuficiente!");
-                    builder.setPositiveButton("OK", null);
-                    val success = builder.create();
-                    success.setCancelable(false);
-                    success.show();
-                } else {
-                    progressDialog!!.setTitle("Portal Usuario");
-                    progressDialog!!.setMessage("Transfiriendo...");
-                    progressDialog!!.show();
-                    amount = etAmount!!.text.toString();
-                    accountToTransfer = autoCompleteTextViewAccountToTransfer!!.text.toString();
+        var validate = 0
+        if (etAmount!!.text.toString().isEmpty()) {
+            etAmount!!.error = "Introduzca un monto válido";
+            validate = 1;
+        }
+        if (autoCompleteTextViewAccountToTransfer!!.text.toString() == "") {
+            autoCompleteTextViewAccountToTransfer!!.error = "Introduzca un nombre de usuario";
+            validate = 1;
+        } else if (!autoCompleteTextViewAccountToTransfer!!.text.toString()
+                .endsWith("@nauta.com.cu") &&
+            !autoCompleteTextViewAccountToTransfer!!.text.toString().endsWith("@nauta.co.cu")
+        ) {
+            autoCompleteTextViewAccountToTransfer!!.error =
+                "Introduzca un nombre de usuario válido";
+            validate = 1;
+        }
+        if (validate != 1) {
+            if (credit.equals("$0,00 CUP")) {
+                val builder = AlertDialog.Builder(this);
+                builder.setTitle("Portal Usuario").setMessage("Su saldo es insuficiente!");
+                builder.setPositiveButton("OK", null);
+                val success = builder.create();
+                success.setCancelable(false);
+                success.show();
+            } else {
+                progressDialog!!.setTitle("Portal Usuario");
+                progressDialog!!.setMessage("Transfiriendo...")
+                progressDialog!!.show()
+                amount = etAmount!!.text.toString()
+                accountToTransfer = autoCompleteTextViewAccountToTransfer!!.text.toString()
 
-                    Thread {
-                        val builder = AlertDialog.Builder(this@PortalNautaActivity);
+                RunTask(object : Communicator {
+                    private lateinit var status: Pair<Boolean, String?>
+                    val builder = AlertDialog.Builder(this@PortalNautaActivity)
 
-                        try {
+                    override fun communicate() {
+                        status = try {
                             client.transferBalance(amount!!.toFloat(), accountToTransfer!!)
-                            progressDialog!!.dismiss()
+                            Pair(true, null)
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            Pair(false, e.message)
+                        }
+                    }
 
+                    override fun postCommunicate() {
+                        val (isOk, err) = status
+                        progressDialog!!.dismiss()
+                        if (isOk) {
                             builder.setTitle("Portal Usuario").setMessage("Transferencia realizada!");
                             val success = builder.create()
                             success.show()
-                        } catch (e: Exception) {
-                            progressDialog!!.dismiss()
-                            e.printStackTrace()
-                            builder.setTitle("Portal Usuario").setMessage(e.message)
+                        } else {
+                            builder.setTitle("Portal Usuario").setMessage(err)
                             val success = builder.create()
                             success.show()
                         }
                     }
-                }
+                }).execute()
             }
         }
+    }
+
     //----SHOWING ALERT DIALOG FOR EXITING THE APP----
     override fun onBackPressed() {
         super.onBackPressed()
