@@ -4,9 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Portal_Usuario.iml" filepath="$PROJECT_DIR$/.idea/modules/Portal_Usuario.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Portal_Usuario.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Portal_Usuario.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Portal_Usuario.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Portal_Usuario.app.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Portal_Usuario.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Portal_Usuario.app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Portal_Usuario.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Portal_Usuario.app.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.Portal_Usuario.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.Portal_Usuario.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.Portal_Usuario.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.Portal_Usuario.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.Portal_Usuario.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.Portal_Usuario.app.unitTest.iml" />

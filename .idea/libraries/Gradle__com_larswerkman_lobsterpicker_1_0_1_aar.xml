@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.larswerkman:lobsterpicker:1.0.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/776eb8b2ed20e16d496c91c7a79db744/transformed/jetified-lobsterpicker-1.0.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/776eb8b2ed20e16d496c91c7a79db744/transformed/jetified-lobsterpicker-1.0.1/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/776eb8b2ed20e16d496c91c7a79db744/transformed/jetified-lobsterpicker-1.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/776eb8b2ed20e16d496c91c7a79db744/transformed/jetified-lobsterpicker-1.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/776eb8b2ed20e16d496c91c7a79db744/transformed/jetified-lobsterpicker-1.0.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.larswerkman/lobsterpicker/1.0.1/556b247078cee0c6b7594ffab6f24fde0d839a77/lobsterpicker-1.0.1-javadoc.jar!/" />

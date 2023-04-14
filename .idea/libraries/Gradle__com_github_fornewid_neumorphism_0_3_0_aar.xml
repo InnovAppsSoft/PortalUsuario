@@ -2,8 +2,8 @@
   <library name="Gradle: com.github.fornewid:neumorphism:0.3.0@aar">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/89850cc225f37c680b6069920d8da757/transformed/jetified-neumorphism-0.3.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/89850cc225f37c680b6069920d8da757/transformed/jetified-neumorphism-0.3.0/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/89850cc225f37c680b6069920d8da757/transformed/jetified-neumorphism-0.3.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/89850cc225f37c680b6069920d8da757/transformed/jetified-neumorphism-0.3.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
