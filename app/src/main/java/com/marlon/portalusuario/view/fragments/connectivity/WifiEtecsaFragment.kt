@@ -780,7 +780,8 @@ class WifiEtecsaFragment : Fragment() {
                             } catch (ex: Exception) {
                                 setErrorMessage("Ha ocurrido un error :-(", R.raw.wronganswer);
                                 ex.printStackTrace();
-                                Toast.makeText(getContext(), "Ha ocurrido un error :-(\n" + errors, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(),
+                                    "Ha ocurrido un error :-(\n${ex.message}", Toast.LENGTH_LONG).show();
                                 JCLogging.error(null, null, ex);
                             }
                         }
