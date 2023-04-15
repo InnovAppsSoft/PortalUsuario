@@ -7,14 +7,14 @@ plugins {
 }
 
 android {
-//    signingConfigs {
-//        debug {
-//            storeFile file('/Users/marlon/Documents/AndroidStudioProjects/keystore.jks')
-//            storePassword '54871663'
-//            keyAlias 'upload'
-//            keyPassword '54871663'
-//        }
-//    }
+    signingConfigs {
+        debug {
+            storeFile file('/Users/marlon/Documents/AndroidStudioProjects/keystore.jks')
+            storePassword '54871663'
+            keyAlias 'upload'
+            keyPassword '54871663'
+        }
+    }
     compileSdkVersion 33
 //    31.0.0 rc4
     buildToolsVersion '30.0.3'
