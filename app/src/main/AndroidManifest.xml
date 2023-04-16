@@ -151,7 +151,7 @@
         <activity android:name=".view.activities.Llamada_99Activity" />
         <activity android:name=".view.activities.EmergenciaActivity" />
         <activity
-            android:name=".view.activities.PortalNautaActivity"
+            android:name=".nauta.ui.PortalNautaActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity android:name=".view.activities.PrivacyActivity" />
