@@ -85,8 +85,10 @@ class WifiEtecsaFragment @Inject constructor(
         // Initialize UI
         initUi()
 
-        accountTypes[0] = resources.getString(R.string.international_navigation)
-        accountTypes[1] = resources.getString(R.string.national_navigation)
+        if (accountTypes.isEmpty()) {
+            accountTypes.add(resources.getString(R.string.international_navigation))
+            accountTypes.add(resources.getString(R.string.national_navigation))
+        }
 
         // Initialize viewModel
         nautaViewModel.onCreate()

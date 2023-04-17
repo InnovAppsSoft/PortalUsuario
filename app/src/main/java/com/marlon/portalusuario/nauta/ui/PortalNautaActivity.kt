@@ -34,11 +34,6 @@ class PortalNautaActivity : AppCompatActivity() {
         // Initialize progressDialog
         progressDialog = ProgressDialog(this)
 
-        // Obtain user from Room
-        val data = intent.extras
-        val userId = data!!.getString("userId")
-        nautaViewModel.getUser(userId!!.toInt())
-
         // Observe variables
         nautaViewModel.currentUser.observe(this) {
             // Assign variables values
@@ -82,6 +77,11 @@ class PortalNautaActivity : AppCompatActivity() {
                 error.show()
             }
         }
+
+        // Obtain user from Room
+        val data = intent.extras
+        val userId = data!!.getInt("userId")
+        nautaViewModel.getUser(userId)
 
         val adapter = AutoCompleteAdapter(this, android.R.layout.simple_expandable_list_item_1)
         binding.autoCompleteTextViewAccountToTransfer.setAdapter(adapter)
