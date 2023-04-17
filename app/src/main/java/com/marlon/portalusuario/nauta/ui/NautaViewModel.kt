@@ -1,18 +1,13 @@
 package com.marlon.portalusuario.nauta.ui
 
 import android.os.CountDownTimer
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.marlon.portalusuario.Pref
 import com.marlon.portalusuario.commons.toLocalUser
 import com.marlon.portalusuario.logging.JCLogging
 import com.marlon.portalusuario.nauta.data.entities.User
 import com.marlon.portalusuario.nauta.data.network.NautaService
 import com.marlon.portalusuario.nauta.data.repository.UserRepository
-import com.marlon.portalusuario.nauta.data.repository.Users
-import cu.suitetecsa.sdk.nauta.domain.service.NautaClient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,10 +24,24 @@ class NautaViewModel @Inject constructor(
 
     val leftTime = MutableLiveData<String>()
     val isLoggedIn = MutableLiveData<Boolean>()
-    val users = MutableLiveData<Users>()
+    val users = repository.getUsersFromRoom().asLiveData()
     private val _currentUser = MutableLiveData<User>()
     val currentUser: LiveData<User> = _currentUser
     val status = MutableLiveData<Pair<Boolean, String?>>()
+
+    fun onCreate() {
+        viewModelScope.launch {
+            // Set init value for the variables
+            isLoggedIn.postValue(false)
+
+            // Getting data session if exists
+            val dataSession = pref.getSession()
+            if (dataSession.isNotEmpty()) {
+                service.setDataSession(dataSession)
+                isLoggedIn.postValue(true)
+            }
+        }
+    }
 
     fun onUserSelected(userIndex: () -> Int) {
         _currentUser.postValue((users.value?.get(userIndex()) ?: 0) as User?)
@@ -141,7 +150,6 @@ class NautaViewModel @Inject constructor(
             }
         }
     }
-
 
     // Database
     fun addUser(user: User) {

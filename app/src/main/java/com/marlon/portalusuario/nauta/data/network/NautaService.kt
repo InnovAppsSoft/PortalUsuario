@@ -54,6 +54,12 @@ class NautaService @Inject constructor(
         }
     }
 
+    suspend fun setDataSession(value: Map<String, String>) {
+        return withContext(Dispatchers.IO) {
+            client.dataSession = value
+        }
+    }
+
     suspend fun disconnect() {
         withContext(Dispatchers.IO) {
             client.disconnect()

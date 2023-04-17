@@ -104,10 +104,9 @@ import java.util.concurrent.RejectedExecutionException
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity @Inject constructor(
-    private var connectivityFragment: ConnectivityFragment
-) : AppCompatActivity(), BiometricCallback {
+class MainActivity : AppCompatActivity(), BiometricCallback {
     private lateinit var binding: ActivityMainBinding
+    @Inject lateinit var connectivityFragment: ConnectivityFragment
 
     private var details: TextView? = null
     private var titleTextView: TextView? = null
@@ -157,8 +156,8 @@ class MainActivity @Inject constructor(
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         punViewModel = ViewModelProvider(this)[PunViewModel::class.java]
         APP_NAME = packageName

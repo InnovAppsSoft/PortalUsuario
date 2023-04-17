@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.marlon.portalusuario.nauta.ui
 
 import android.app.AlertDialog
@@ -11,21 +13,10 @@ import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.Chronometer
+import android.widget.*
 import android.widget.Chronometer.OnChronometerTickListener
-import android.widget.CompoundButton
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.Spinner
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.textfield.TextInputEditText
 import com.marlon.portalusuario.Pref
 import com.marlon.portalusuario.R
@@ -36,14 +27,16 @@ import com.marlon.portalusuario.logging.JCLogging
 import com.marlon.portalusuario.nauta.data.entities.User
 import com.marlon.portalusuario.nauta.data.repository.Users
 import com.marlon.portalusuario.util.Util
+import dagger.hilt.android.AndroidEntryPoint
 import trikita.log.Log
 import java.io.ByteArrayInputStream
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class WifiEtecsaFragment @Inject constructor(
     private val pref: Pref
 ) : Fragment() {
-    private val nautaViewModel: NautaViewModel by viewModels()
+    private val nautaViewModel: NautaViewModel by activityViewModels()
 
     private var _binding: FragmentWifiEtecsaBinding? = null
     private val binding get() = _binding!!
@@ -52,19 +45,11 @@ class WifiEtecsaFragment @Inject constructor(
 
     private lateinit var currentUser: User
 
-    val accountTypes = listOf(
-        resources.getString(R.string.international_navigation),
-        resources.getString(R.string.national_navigation)
-    )
+    val accountTypes = mutableListOf<String>()
     val navigationTypes = listOf(
         NavigationType.INTERNATIONAL,
         NavigationType.NATIONAL
     )
-
-    private var editUserBtn: ImageView? = null
-    private var delUserBtn: ImageView? = null
-    private var connectionLimiter: CheckBox? = null
-
 
     //private AutoCompleteTextView usernameEditText;
     private lateinit var usernameEditText: EditText
@@ -83,8 +68,7 @@ class WifiEtecsaFragment @Inject constructor(
     private var initialH = 0
     private var initialM = 0
     private var initialS = 0
-    private val maxTime = 0
-    private val timeType: String? = null
+//    private val timeType: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,6 +84,12 @@ class WifiEtecsaFragment @Inject constructor(
 
         // Initialize UI
         initUi()
+
+        accountTypes[0] = resources.getString(R.string.international_navigation)
+        accountTypes[1] = resources.getString(R.string.national_navigation)
+
+        // Initialize viewModel
+        nautaViewModel.onCreate()
 
         // Observe the viewModel variables
         nautaViewModel.leftTime.observe(viewLifecycleOwner) {
@@ -236,29 +226,29 @@ class WifiEtecsaFragment @Inject constructor(
                     firstTime = false
                 }
                 cArg.text = formattedTime
-                try {
-                    if (maxTime > 0) {
-                        if (timeType == resources.getString(R.string.hours)) {
-                            if (h - initialH == maxTime) {
-                                sendDisconnect()
-                                return@OnChronometerTickListener
-                            }
-                        } else if (timeType == resources.getString(R.string.minutos).lowercase()) {
-                            if (m - initialM == maxTime) {
-                                sendDisconnect()
-                                return@OnChronometerTickListener
-                            }
-                        } else if (timeType == resources.getString(R.string.seconds)) {
-                            if (s - initialS == maxTime) {
-                                sendDisconnect()
-                                return@OnChronometerTickListener
-                            }
-                        }
-                    }
-                } catch (ex: Exception) {
-                    ex.printStackTrace()
-                    JCLogging.error(null, null, ex)
-                }
+//                try {
+//                    if (maxTime > 0) {
+//                        if (timeType == resources.getString(R.string.hours)) {
+//                            if (h - initialH == maxTime) {
+//                                sendDisconnect()
+//                                return@OnChronometerTickListener
+//                            }
+//                        } else if (timeType == resources.getString(R.string.minutos).lowercase()) {
+//                            if (m - initialM == maxTime) {
+//                                sendDisconnect()
+//                                return@OnChronometerTickListener
+//                            }
+//                        } else if (timeType == resources.getString(R.string.seconds)) {
+//                            if (s - initialS == maxTime) {
+//                                sendDisconnect()
+//                                return@OnChronometerTickListener
+//                            }
+//                        }
+//                    }
+//                } catch (ex: Exception) {
+//                    ex.printStackTrace()
+//                    JCLogging.error(null, null, ex)
+//                }
             }
         binding.simpleChronometer.base = SystemClock.elapsedRealtime()
         binding.simpleChronometer.start()
@@ -474,21 +464,18 @@ class WifiEtecsaFragment @Inject constructor(
             loadingBar!!.setMessage(resources.getString(R.string.connecting_please_wait))
             loadingBar!!.setCancelable(false)
             loadingBar!!.setCanceledOnTouchOutside(false)
-            val validate = 0
             if (captchaEditText.text.toString() == "") {
                 Toast.makeText(context, resources.getString(R.string.input_catpcha_code), Toast.LENGTH_SHORT).show()
             }
-            if (validate != 1) {
-                if (Util.isConnected(context)) {
-                    loadingBar!!.show()
-                    val current = currentUser
-                    val username = current.fullUserName()
-                    val password = current.password
+            if (Util.isConnected(context)) {
+                loadingBar!!.show()
+                val current = currentUser
+                val username = current.fullUserName()
+                val password = current.password
 
-                    nautaViewModel.login(username, password, captchaEditText.text.toString())
-                } else {
-                    Toast.makeText(context, resources.getString(R.string.you_not_are_connected), Toast.LENGTH_SHORT).show()
-                }
+                nautaViewModel.login(username, password, captchaEditText.text.toString())
+            } else {
+                Toast.makeText(context, resources.getString(R.string.you_not_are_connected), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -513,12 +500,12 @@ class WifiEtecsaFragment @Inject constructor(
         if (b) {
             binding.noUsers.visibility = View.VISIBLE
             binding.selectUserSpinner.visibility = View.GONE
-            editUserBtn!!.visibility = View.GONE
-            delUserBtn!!.visibility = View.GONE
+            binding.editUserBtn.visibility = View.GONE
+            binding.delUserBtn.visibility = View.GONE
             binding.userInfoButton.visibility = View.GONE
             binding.connectButton.visibility = View.GONE
-            connectionLimiter!!.isChecked = false
-            connectionLimiter!!.visibility = View.GONE
+            binding.connectionLimiter.isChecked = false
+            binding.connectionLimiter.visibility = View.GONE
             setErrorMessage(
                 resources.getString(R.string.err_message_add_user)
             )
