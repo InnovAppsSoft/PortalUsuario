@@ -7,7 +7,7 @@
     android:background="@color/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activities.PortalNautaActivity">
+    tools:context=".nauta.ui.PortalNautaActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -360,7 +360,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:id="@+id/et_mont"
+                            android:id="@+id/et_amount"
                             android:layout_width="130dp"
                             android:layout_height="wrap_content"
                             android:ems="10"
@@ -384,7 +384,7 @@
                     </LinearLayout>
 
                     <AutoCompleteTextView
-                        android:id="@+id/actv_accountToTransfer"
+                        android:id="@+id/auto_complete_text_view_account_to_transfer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/destinatario"

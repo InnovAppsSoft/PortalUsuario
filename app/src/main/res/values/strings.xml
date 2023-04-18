@@ -601,7 +601,7 @@ Aplicación de búsqueda</string>
     <string name="banda">Banda</string>
 
 
-    <string name="ocr_engine_init_dialog_body">\"Enfoque el código de la tarjeta para efectuar la recarga..\"</string>
+    <string name="ocr_engine_init_dialog_body">Enfoque el código de la tarjeta para efectuar la recarga..</string>
     <string name="null_ocr_result_info">Por favor enfoque el código de recarga en la zona rectangular.</string>
     <string name="progres_dialog_title">Espere por favor</string>
     <string name="progres_dialog_message">Reconociendo el código de recarga...</string>
@@ -708,11 +708,11 @@ Aplicación de búsqueda</string>
     <string name="plan_datos">Plan Datos</string>
     <string name="web_s">Web\'s</string>
     <string name="vpn">VPN</string>
-    <string name="tiempo_restante">Tiempo Restante</string>
+    <string name="remaining_time">Tiempo Restante</string>
     <string name="tiempo_consumido">Tiempo Consumido</string>
     <string name="estado_cuenta">Estado Cuenta</string>
     <string name="contrase_a">Contraseña</string>
-    <string name="usuario">Usuario</string>
+    <string name="user">Usuario</string>
     <string name="cup">CUP</string>
     <string name="destinatario">Destinatario</string>
     <string name="una_experiencia_nica">Una experiencia única</string>
@@ -992,6 +992,45 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="write_something">Escribe algo...</string>
     <string name="test_message">Mensaje de prueba?</string>
     <string name="test_stamp">15 Jun, 2017, 4:25 A.M.</string>
+    <string name="edit_user">Editar usuario</string>
+    <string name="no_suffix_permited">El nombre de usuario no puede contener el nombre de dominio @nauta.com.cu\\nEjemplo: Si su cuenta es juan@nauta.com.cu, solo debe poner juan</string>
+    <string name="not_symbols">El nombre de usuario no puede contener símbolos</string>
+    <string name="international_navigation">Navegación Internacional</string>
+    <string name="national_navigation">Navegación Nacional</string>
+    <string name="ask_user_dalete">¿Desea eliminar este usuario?</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="err_message_add_user">Agrega al menos un usuario para usar esta funcionalidad</string>
+    <string name="connectivity">Conectividad</string>
+    <string name="national_sites">Sitios Nacionales</string>
+    <string name="last_update">Última actualización</string>
+    <string name="associated_email_account">Cuenta de correo asociada</string>
+    <string name="credit">Crédito</string>
+    <string name="last_connection">Última conexión</string>
+    <string name="user_info">Información de usuario</string>
+    <string name="write_captcha_code">Escriba el código Captcha</string>
+    <string name="connect">Conectar</string>
+    <string name="connecting_please_wait">Conectando, por favor, espere...</string>
+    <string name="input_catpcha_code">Introduzca el código captcha</string>
+    <string name="you_not_are_connected">No está conectado</string>
+    <string name="hours">horas</string>
+    <string name="seconds">segundos</string>
+    <string name="errors">Errores</string>
+    <string name="logging">Iniciando sesión...</string>
+    <string name="disconnecting">Desconectando...</string>
+    <string name="wait_please">Por favor espere....</string>
+    <string name="save_">Guardar</string>
+    <string name="error_bad_recharge_code">El código de recarga debe ser de 12 o 16 dígitos.</string>
+    <string name="recharging">Recargando...</string>
+    <string name="success_recharge">Cuenta recargada!</string>
+    <string name="not_recharged">No se pudo recargar la cuenta</string>
+    <string name="input_a_valid_amount">Introduzca un monto válido</string>
+    <string name="input_a_destination_account">Introduzca una cuenta de destino</string>
+    <string name="input_a_valid_username">Introduzca un nombre de usuario válido</string>
+    <string name="insufficient_balance">Su saldo es insuficiente!</string>
+    <string name="transfering">Transfiriendo...</string>
+    <string name="success_transfer">Transferencia realizada!</string>
+    <string name="fail_transfer">Transferencia fallida</string>
 
 
 </resources>

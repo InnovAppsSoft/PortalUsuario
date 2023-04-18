@@ -148,7 +148,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_4sdp"
-                        android:text="@string/tiempo_restante"
+                        android:text="@string/remaining_time"
                         android:textColor="@color/colorDes"
                         android:textStyle="bold"
                         android:fontFamily="@font/displaybold"
