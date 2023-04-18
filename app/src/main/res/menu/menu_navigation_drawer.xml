@@ -6,10 +6,6 @@
     android:icon="@drawable/baseline_monetization_on_24"
     android:title="Donar al proyecto"/>
 
-    <item
-    android:id="@+id/bluechat"
-    android:icon="@drawable/baseline_bluetooth_connected_24"
-    android:title="Bluetooth PUChat"/>
 
 <item android:title="Servicios">
     <menu>
