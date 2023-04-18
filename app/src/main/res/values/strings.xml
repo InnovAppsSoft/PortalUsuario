@@ -1032,5 +1032,29 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="success_transfer">Transferencia realizada!</string>
     <string name="fail_transfer">Transferencia fallida</string>
 
+    <!--For the new interface-->
+    <string name="new_account_credit">Saldo restante</string>
+    <string name="new_blocking_date">Fecha de bloqueo</string>
+    <string name="new_date_of_elimination">Fecha de eliminación</string>
+    <string name="new_account_type">Tipo de cuenta</string>
+    <string name="new_service_type">Tipo de servicio</string>
+    <string name="new_mail_account">Cuenta de correo</string>
+    <string name="new_nauta">Nauta</string>
+    <string name="new_link">Enlace</string>
+    <string name="new_offer">Oferta</string>
+    <string name="new_monthly_fee">Cuota mensual</string>
+    <string name="new_download_speed">Velocidad de bajada</string>
+    <string name="new_upload_speed">Velocidad de subida</string>
+    <string name="new_phone">Teléfono</string>
+    <string name="new_link_identifier">Identificador del enlace</string>
+    <string name="new_link_status">Estado del enlace</string>
+    <string name="new_activation_date">Fecha de activación</string>
+    <string name="new_quote_fund">Fondo de cuota</string>
+    <string name="new_voucher">Bono</string>
+    <string name="new_debt">Deuda</string>
+    <string name="new_recharge_content_description">Recargar saldo de la cuenta</string>
+    <string name="new_recharge_text_field_placeholder_one">Recargar saldo</string>
+    <string name="new_recharge_text_field_placeholder_two">1234 5678 9012 3456</string>
+
 
 </resources>
