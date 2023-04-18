@@ -38,6 +38,7 @@ class NautaViewModel @Inject constructor(
             val dataSession = pref.getSession()
             if (dataSession.isNotEmpty()) {
                 service.setDataSession(dataSession)
+                _currentUser.postValue(repository.getUserFromRoom(dataSession["username"]!!.split("@")[0]))
                 isLoggedIn.postValue(true)
             }
         }
@@ -49,14 +50,11 @@ class NautaViewModel @Inject constructor(
 
     fun countDown() {
         viewModelScope.launch {
-            val time = service.getRemainingTime()
-            JCLogging.message("Initial time value", time)
-            val millisecondsLeft: Long
-            //
             try {
+                val time = service.getRemainingTime()
+                JCLogging.message("Initial time value", time)
                 val (hours, minutes, seconds) = time.split(":")
-                millisecondsLeft =
-                    (hours.toInt() * 3600000) + (minutes.toInt() * 60000) + (seconds.toInt() * 1000).toLong()
+                val millisecondsLeft: Long = (hours.toInt() * 3600000) + (minutes.toInt() * 60000) + (seconds.toInt() * 1000).toLong()
                 object : CountDownTimer(millisecondsLeft, 1000) {
                     override fun onTick(millisUntilFinished: Long) {
                         val h = (millisUntilFinished / 3600000).toInt()
@@ -119,8 +117,8 @@ class NautaViewModel @Inject constructor(
                 val user = service.login(userName, password, captchaCode)
                 status.postValue(Pair(true, null))
                 isLogged.postValue(true)
-                updateUser(user.toLocalUser(_currentUser.value!!))
-                _currentUser.postValue(user.toLocalUser(_currentUser.value!!))
+                repository.updateUserInRoom(user.toLocalUser(_currentUser.value!!))
+                _currentUser.postValue(repository.getUserFromRoom(_currentUser.value!!.id))
             } catch (e: Exception) {
                 status.postValue(Pair(false, e.message))
             }

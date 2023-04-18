@@ -9,6 +9,7 @@ import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.marlon.portalusuario.R
+import com.marlon.portalusuario.commons.fullUserName
 import com.marlon.portalusuario.databinding.ActivityPortalNautaBinding
 import com.marlon.portalusuario.util.AutoCompleteAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,13 +38,13 @@ class PortalNautaActivity : AppCompatActivity() {
         // Observe variables
         nautaViewModel.currentUser.observe(this) {
             // Assign variables values
-            userName = it.userName
+            userName = it.fullUserName()
             password = it.password
             credit = it.credit
 
             // Assign textViews values
             binding.tvInfoTime.text = it.time
-            binding.tvInfoUser.text = it.userName
+            binding.tvInfoUser.text = it.fullUserName()
             binding.tvBlockDate.text = it.blockingDate
             binding.tvDeleteDate.text = it.dateOfElimination
             binding.tvAccountType.text = it.accountType

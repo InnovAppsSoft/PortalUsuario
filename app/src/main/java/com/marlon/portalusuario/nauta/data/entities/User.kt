@@ -34,4 +34,8 @@ data class User(
     @ColumnInfo(name = "quote_paid") val quotePaid: String? = null,
     @ColumnInfo(name = "voucher") val voucher: String? = null,
     @ColumnInfo(name = "debt") val debt: String? = null
-)
+) {
+    override fun toString(): String {
+        return "$userName@nauta.${if (accountNavigationType == NavigationType.INTERNATIONAL) "com.cu" else "co.cu"}"
+    }
+}

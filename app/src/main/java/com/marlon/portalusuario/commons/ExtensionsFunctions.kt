@@ -5,6 +5,7 @@ import cu.suitetecsa.sdk.nauta.domain.model.NautaUser
 
 fun NautaUser.toLocalUser(user: User): User {
     return User(
+        id = user.id,
         userName = user.userName,
         password = user.password,
         accountNavigationType = user.accountNavigationType,
