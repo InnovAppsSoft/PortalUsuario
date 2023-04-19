@@ -1,4 +1,4 @@
-package com.marlon.portalusuario.view.fragments;
+package com.marlon.portalusuario.view.Fragments;
 
 
 import android.Manifest;
@@ -45,6 +45,7 @@ public class ServiciosFragment<b> extends Fragment {
 
     private static Context context;
 
+    private CardView activar,adicionar,consultar;
     private SharedPreferences salva,nochesalva;
 
     private CardView SMS, VOZ, PlanAmigos1, Emergencia;
@@ -380,7 +381,7 @@ public class ServiciosFragment<b> extends Fragment {
     }
 
     public class PlanAmigosDialog {
-        private CardView activar,adicionar,consultar;
+
         public PlanAmigosDialog(final Context context) {
             final Dialog plamAmigosDialog = new Dialog(getContext());
 
@@ -397,23 +398,6 @@ public class ServiciosFragment<b> extends Fragment {
             consultar.setOnClickListener(v -> USSDcall("*133*4*3%23"));
 
             plamAmigosDialog.show();
-        }
-
-        public void USSDcall(String ussd){
-            Intent r = new Intent();
-            r.setAction(Intent.ACTION_CALL); r.setData(Uri.parse("tel:"+ussd + ""));
-
-            if (Build.VERSION.SDK_INT >= 23) {
-                if (context.checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_DENIED ) {
-                    ServiciosFragment.this.requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, 1000);
-                } else {
-                    startActivity(r);
-                }
-            } else {
-                startActivity(r);
-
-            }
-
         }
 
     }

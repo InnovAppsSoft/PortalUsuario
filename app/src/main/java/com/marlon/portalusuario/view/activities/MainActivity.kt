@@ -70,7 +70,6 @@ import com.marlon.portalusuario.Utils
 import com.marlon.portalusuario.ViewModel.PunViewModel
 import com.marlon.portalusuario.biometric.BiometricCallback
 import com.marlon.portalusuario.biometric.BiometricManager
-import com.marlon.portalusuario.blueChat.ActivityChat
 import com.marlon.portalusuario.databinding.ActivityMainBinding
 import com.marlon.portalusuario.etecsa_scraping.Promo
 import com.marlon.portalusuario.etecsa_scraping.PromoSliderAdapter
@@ -79,17 +78,16 @@ import com.marlon.portalusuario.floating_window.BootReceiver
 import com.marlon.portalusuario.floating_window.FloatingBubbleService
 import com.marlon.portalusuario.logging.JCLogging
 import com.marlon.portalusuario.logging.LogFileViewerActivity
-import com.marlon.portalusuario.nauta.ui.WifiEtecsaFragment
 import com.marlon.portalusuario.senal.AppConfiguracionTool
 import com.marlon.portalusuario.une.UneActivity
 import com.marlon.portalusuario.util.Connectivity
 import com.marlon.portalusuario.util.SSLHelper
 import com.marlon.portalusuario.util.Util
 import com.marlon.portalusuario.util.apklis.ApklisUtil
+import com.marlon.portalusuario.view.Fragments.HowToFragment
+import com.marlon.portalusuario.view.Fragments.PaquetesFragment
+import com.marlon.portalusuario.view.Fragments.ServiciosFragment
 import com.marlon.portalusuario.view.fragments.BottomSheetDialog
-import com.marlon.portalusuario.view.fragments.HowToFragment
-import com.marlon.portalusuario.view.fragments.PaquetesFragment
-import com.marlon.portalusuario.view.fragments.ServiciosFragment
 import com.marlon.portalusuario.view.fragments.connectivity.ConnectivityFragment
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
@@ -259,11 +257,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
 
                 R.id.donate -> {
                     i = Intent(this@MainActivity, Donacion::class.java)
-                    startActivity(i)
-                }
-
-                R.id.bluechat -> {
-                    i = Intent(this@MainActivity, ActivityChat::class.java)
                     startActivity(i)
                 }
             }
