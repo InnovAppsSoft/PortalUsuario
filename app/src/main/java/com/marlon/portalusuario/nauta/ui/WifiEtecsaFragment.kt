@@ -154,7 +154,7 @@ class WifiEtecsaFragment @Inject constructor(
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     adapterView: AdapterView<*>?,
-                    view: View,
+                    view: View?,
                     i: Int,
                     l: Long
                 ) {
@@ -439,6 +439,11 @@ class WifiEtecsaFragment @Inject constructor(
             captchaImg = inflate.findViewById(R.id.iv_captcha)
             editUserDialog.setPositiveButton(resources.getString(R.string.connect)) { _: DialogInterface?, _: Int -> login() }
 
+            nautaViewModel.status.observe(viewLifecycleOwner) {
+                val (isOk, _) = it
+                setError(isOk)
+            }
+
             nautaViewModel.captchaImage.observe(viewLifecycleOwner) {
                 val bitmap = BitmapFactory.decodeStream(
                     ByteArrayInputStream(it)
@@ -459,6 +464,16 @@ class WifiEtecsaFragment @Inject constructor(
             nautaViewModel.getCaptcha()
 
             editUserDialog.show()
+        }
+
+        private fun setError(b: Boolean){
+            if (!b){
+                progressLayout.visibility = View.GONE
+                errorLayout.visibility = View.VISIBLE
+            }else{
+                progressLayout.visibility = View.VISIBLE
+                errorLayout.visibility = View.GONE
+            }
         }
 
         private fun login() {

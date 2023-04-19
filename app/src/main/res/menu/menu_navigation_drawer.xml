@@ -6,7 +6,6 @@
     android:icon="@drawable/baseline_monetization_on_24"
     android:title="Donar al proyecto"/>
 
-
 <item android:title="Servicios">
     <menu>
         <item
