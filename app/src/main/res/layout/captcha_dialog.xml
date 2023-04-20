@@ -31,7 +31,7 @@
             android:id="@+id/bt_reload"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/ic_baseline_sync_24"
+            android:background="@drawable/outline_autorenew_24"
             tools:ignore="SpeakableTextPresentCheck"
             />
     </LinearLayout>
@@ -47,7 +47,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/error"
+            android:background="@drawable/outline_dangerous_24"
             tools:ignore="SpeakableTextPresentCheck"
 
             />
@@ -72,7 +72,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
+                android:textSize="13sp"
             android:layout_width="wrap_content"
+            android:fontFamily="@font/dosislight"
             android:layout_height="wrap_content"
             android:text="@string/cargando_captcha_por_favor_espere"/>
     </LinearLayout>

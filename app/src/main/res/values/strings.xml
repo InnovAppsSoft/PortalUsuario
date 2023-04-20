@@ -1031,6 +1031,7 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="transfering">Transfiriendo...</string>
     <string name="success_transfer">Transferencia realizada!</string>
     <string name="fail_transfer">Transferencia fallida</string>
+    <string name="sencillo_r_pido_y_cubano">Sencillo, rápido y cubano</string>
 
 
 </resources>

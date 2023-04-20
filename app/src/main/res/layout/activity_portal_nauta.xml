@@ -29,8 +29,8 @@
                 android:text="@string/infoTime"
                 android:layout_marginTop="24dp"
                 android:textColor="@color/colorDes"
-                android:fontFamily="@font/displaybold"
-                android:textSize="@dimen/_13ssp"
+                android:fontFamily="@font/dosisbold"
+                android:textSize="@dimen/_15ssp"
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp"
                 android:textAlignment="center" />
@@ -54,7 +54,7 @@
                 android:text="@string/infoUser"
                 android:textAlignment="center"
                 android:textColor="@color/colorDes"
-                android:fontFamily="@font/displaybold"
+                android:fontFamily="@font/dosislight"
                 android:textSize="@dimen/_13ssp"
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp" />

@@ -31,19 +31,19 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/displaybold"
                 android:text="@string/atr_s"
-                android:textColor="@color/colorTest2"
+                android:textColor="@color/colorDes"
                 android:textSize="@dimen/_13ssp"
                 android:textStyle="bold"/>
         </LinearLayout>
 
         <ImageView
             android:id="@+id/resumen"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="24sp"
+            android:layout_height="24sp"
             android:layout_alignParentEnd="true"
-            android:background="?android:attr/selectableItemBackground"
             android:gravity="right"
-            android:src="@drawable/info" />
+            app:tint="@color/colorDes"
+            android:src="@drawable/outline_info_24" />
 
     </RelativeLayout>
 
@@ -87,14 +87,13 @@
                         android:id="@+id/tv234"
                         android:layout_width="match_parent"
                         android:layout_height="26dp"
-                        android:background="@color/colorPrimary"
-                        android:fontFamily="@font/displaybold"
+                        android:fontFamily="@font/dosisbold"
                         android:gravity="center_vertical"
                         android:paddingStart="@dimen/activity_horizontal_margin"
                         android:text="@string/consumo_el_ctrico"
                         android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_13sdp"
+                        android:textColor="@color/colorDes"
+                        android:textSize="@dimen/_16sdp"
                         tools:ignore="RtlSymmetry" />
 
                     <LinearLayout
@@ -149,7 +148,7 @@
                             android:layout_height="35dp"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/widget_4"
+                            android:background="@drawable/rounded"
                             android:fontFamily="@font/displaybold"
                             android:hint="@string/borrar"
                             android:textColorHint="@color/colorWhite"
@@ -162,7 +161,7 @@
                             android:layout_height="35dp"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/widget_4"
+                            android:background="@drawable/rounded"
                             android:fontFamily="@font/displaybold"
                             android:hint="@string/calcular"
                             android:textColorHint="@color/colorWhite"

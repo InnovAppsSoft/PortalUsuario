@@ -17,21 +17,21 @@
     <TextView
         android:id="@+id/tv_title"
         android:layout_marginTop="@dimen/_10sdp"
-        android:fontFamily="@font/displaybold"
+        android:fontFamily="@font/dosisbold"
         android:text="@string/sencillo"
         android:textAlignment="center"
-        android:textColor="@color/botoncolorStart"
-        android:textSize="@dimen/_13sdp"
+        android:textColor="@color/colorDes"
+        android:textSize="@dimen/_16sdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/tv_description"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/displaybold"
+        android:fontFamily="@font/dosislight"
         android:text="@string/acceda_desde_la_comodidad_de_su_casa_de_los_servicios_que_brinda_etecsa"
         android:textAlignment="center"
-        android:textColor="@color/botoncolorStart"
+        android:textColor="@color/colorDes"
         android:textSize="13sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

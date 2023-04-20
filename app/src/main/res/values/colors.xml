@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#7041FF</color>
-    <color name="colorPrimaryDark">#7041FF</color>
-    <color name="colorAccent">#64983cff</color>
+    <color name="colorPrimary">#535353</color>
+    <color name="colorPrimaryDark">#535353</color>
+    <color name="colorAccent">#618287</color>
     <color name="color_accent">#7041FF</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBackground">#ECECEC</color>
@@ -14,6 +14,7 @@
     <color name="data_usage_high">#81C784</color>
 
     <color name="botoncolorStart">#7041FF</color>
+    <color name="colorboton">#535353</color>
     <color name="botoncolorEnd">#7041FF</color>
     <color name="botoncolor">#00B0FF</color>
     <color name="colorfondoapp">#171E29</color>
@@ -66,7 +67,7 @@
 
     <color name="transparent_white_hex_7">#77ffffff</color>
 
-    <color name="background">#E4EBF5</color>
+    <color name="background">#FFFFFF</color>
     <color name="dark_shadow">#CDD5EA</color>
     <color name="light_shodow">#F8F9FE</color>
     <color name="dark_icon">#212121</color>
@@ -85,7 +86,7 @@
     <color name="black">#FF000000</color>
 
     <color name="background_color">#FBFBFD</color>
-    <color name="background_color_50">#B3FFFFFF</color>
+    <color name="background_color_50">#E4EBF5</color>
     <color name="text_color_header">#323232</color>
     <color name="text_color_description">#616161</color>
 

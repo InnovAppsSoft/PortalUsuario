@@ -22,7 +22,7 @@
         <ListPreference
             app:defaultValue="sistema"
             app:entries="@array/temas_ui"
-            app:icon="@drawable/ic_baseline_bedtime_24"
+            app:icon="@drawable/outline_nights_stay_24"
             app:entryValues="@array/temas_ui_values"
             app:key="keynoche"
             app:title="@string/apariecia_settings"
@@ -33,7 +33,7 @@
 
         <SwitchPreferenceCompat
             app:key="show_etecsa_promo_carousel"
-            app:icon="@drawable/ic_actu"
+            app:icon="@drawable/outline_settings_24_confi"
             app:defaultValue="true"
             app:title="Mostar promociones de Etecsa"/>
 
@@ -44,7 +44,7 @@
         <SwitchPreferenceCompat
             app:key="start_checking_for_updates"
             app:defaultValue="true"
-            app:icon="@drawable/ic_actu"
+            app:icon="@drawable/outline_settings_24_confi"
             app:title="Buscar actualizaciones" />
 
         <!-- <SwitchPreferenceCompat
@@ -54,7 +54,7 @@
         <SwitchPreferenceCompat
             app:key="show_update_window"
             app:defaultValue="true"
-            app:icon="@drawable/ic_actu"
+            app:icon="@drawable/outline_settings_24_confi"
             app:title="Mostrar actualización" />
 
         <!--<SwitchPreferenceCompat
@@ -69,7 +69,7 @@
     <SwitchPreferenceCompat
         app:key="save_logs"
         app:defaultValue="true"
-        app:icon="@drawable/ic_baseline_bug_report_24"
+        app:icon="@drawable/outline_bug_report_24_errr"
         app:title="Guardar errores en Registro de Errores" />
     </PreferenceCategory>
     <PreferenceCategory app:title="Servicios">
@@ -77,19 +77,19 @@
         <SwitchPreferenceCompat
             app:key="show_traffic_speed_bubble"
             app:defaultValue="false"
-            app:icon="@drawable/ic_baseline_swap_vertical_circle_24"
+            app:icon="@drawable/outline_mobiledata_off_24"
             app:title="Mostrar burbuja flotante" />
 
         <SwitchPreferenceCompat
             app:key="show_notifications"
             app:defaultValue="true"
-            app:icon="@drawable/ic_baseline_notifications_245"
+            app:icon="@drawable/outline_notifications_active_24"
             app:title="Mostrar Notificaciones" />
 
         <SwitchPreferenceCompat
             app:key="storage_ads"
             app:defaultValue="true"
-            app:icon="@drawable/ic_baseline_notifications_245"
+            app:icon="@drawable/outline_notifications_active_24"
             app:title="Guardar Notificaciones" />
 
     </PreferenceCategory>
@@ -99,7 +99,7 @@
         <SwitchPreferenceCompat
             app:key="show_fingerprint"
             app:defaultValue="false"
-            app:icon="@drawable/ic_baseline_fingerprint_24"
+            app:icon="@drawable/outline_fingerprint_24"
             app:title="Huella Dactilar" />
 
     </PreferenceCategory>

@@ -6,11 +6,9 @@
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.fragments.ServiciosFragment"
     android:layout_marginStart="@dimen/_8sdp"
     android:layout_marginTop="@dimen/_8sdp"
     android:layout_marginEnd="@dimen/_8sdp"
-    app:layout_constraintTop_toTopOf="@id/TextTitle"
     app:cardCornerRadius="10dp"
     app:cardBackgroundColor="@color/background"
     app:neumorph_shadowElevation="@dimen/_5sdp">
@@ -42,8 +40,8 @@
                     android:text="@string/cubacel"
                     android:textSize="@dimen/_15sdp"
                     android:textStyle="bold"
-                    android:fontFamily="@font/displaybold"
-                    android:textColor="@color/colorTest7"/>
+                    android:fontFamily="@font/dosisbold"
+                    android:textColor="@color/colorDes"/>
 
             </LinearLayout>
 
@@ -67,9 +65,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/displaybold"
+                    android:fontFamily="@font/dosisbold"
                     android:text="@string/tecnolog_a"
-                    android:textColor="@color/colorTest7"
+                    android:textColor="@color/colorDes"
                     android:textSize="@dimen/_13sdp" />
 
 
@@ -85,9 +83,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:fontFamily="@font/displaybold"
+                    android:fontFamily="@font/dosisbold"
                     android:text="@string/banda"
-                    android:textColor="@color/colorTest7"
+                    android:textColor="@color/colorDes"
                     android:textSize="@dimen/_13sdp" />
 
             </LinearLayout>
@@ -122,7 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:fontFamily="@font/displaybold"
+                    android:fontFamily="@font/dosislight"
                     android:text="--"
                     android:textColor="@color/colorDes"
                     android:textSize="13sp" />
@@ -149,7 +147,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:fontFamily="@font/displaybold"
+                    android:fontFamily="@font/dosislight"
                     android:text="--"
                     android:textColor="@color/colorDes"
                     android:textSize="13sp" />
@@ -161,10 +159,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/displaybold"
+            android:fontFamily="@font/dosisbold"
             android:layout_marginTop="@dimen/_2sdp"
             android:layout_marginBottom="@dimen/_2sdp"
-            android:textColor="@color/colorTest7"
+            android:textColor="@color/colorDes"
             android:text="@string/calidad_de_se_al"
             android:textSize="@dimen/_13sdp" />
 

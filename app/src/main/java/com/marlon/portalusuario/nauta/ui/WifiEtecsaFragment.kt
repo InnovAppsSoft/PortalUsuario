@@ -204,7 +204,7 @@ class WifiEtecsaFragment @Inject constructor(
                 val errorDialog = AlertDialog.Builder(context)
                 errorDialog.setCancelable(true)
                     .setTitle(resources.getString(R.string.errors))
-                    .setIcon(R.drawable.error)
+                    .setIcon(R.drawable.outline_dangerous_24)
                     .setMessage(errors.toString())
                 errorDialog.show()
             }
@@ -319,7 +319,7 @@ class WifiEtecsaFragment @Inject constructor(
             editUserDialog.setCancelable(true)
                 .setView(inflate)
                 .setTitle(resources.getString(R.string.edit_user))
-                .setIcon(R.drawable.round_person_24)
+                .setIcon(R.drawable.outline_person_24_wifi)
             usernameEditText = inflate.findViewById(R.id.username_et)
             passwordEditText = inflate.findViewById(R.id.password_et)
             accountTypeSpinner = inflate.findViewById(R.id.account_type_spinner)
@@ -404,7 +404,7 @@ class WifiEtecsaFragment @Inject constructor(
             fastInfoUserDialog.setCancelable(true)
                 .setMessage(info)
                 .setTitle(resources.getString(R.string.user_info))
-                .setIcon(R.drawable.info)
+                .setIcon(R.drawable.outline_info_24_wifi)
                 .setPositiveButton(resources.getString(R.string.portal_nauta)) { _, _ ->
                     CaptchaUserDialog(
                         context
@@ -426,7 +426,7 @@ class WifiEtecsaFragment @Inject constructor(
             editUserDialog.setCancelable(true)
                 .setView(inflate)
                 .setTitle(resources.getString(R.string.write_captcha_code))
-                .setIcon(R.drawable.ic_security)
+                .setIcon(R.drawable.outline_warning_amber_24)
                 .setPositiveButton(resources.getString(R.string.connect)) { _: DialogInterface?, _: Int -> login() }
                 .setNegativeButton(resources.getString(R.string.cancel), null)
 
@@ -477,7 +477,7 @@ class WifiEtecsaFragment @Inject constructor(
         }
 
         private fun login() {
-            loadingBar!!.setIcon(R.drawable.ic_wifi)
+            loadingBar!!.setIcon(R.drawable.outline_signal_wifi_0_bar_24)
             loadingBar!!.setMessage(resources.getString(R.string.connecting_please_wait))
             loadingBar!!.setCancelable(false)
             loadingBar!!.setCanceledOnTouchOutside(false)
