@@ -28,6 +28,7 @@ class NautaViewModel @Inject constructor(
     private val _currentUser = MutableLiveData<User>()
     val currentUser: LiveData<User> = _currentUser
     val status = MutableLiveData<Pair<Boolean, String?>>()
+    val captchaLoadStatus = MutableLiveData<Pair<Boolean, String?>>()
 
     fun onCreate() {
         viewModelScope.launch {
@@ -108,7 +109,7 @@ class NautaViewModel @Inject constructor(
                 isCaptchaLoaded.postValue(true)
             } catch (e: Exception) {
                 e.printStackTrace()
-                status.postValue(Pair(false, e.message))
+                captchaLoadStatus.postValue(Pair(false, e.message))
             }
         }
     }

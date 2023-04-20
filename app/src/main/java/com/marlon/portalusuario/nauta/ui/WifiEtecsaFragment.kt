@@ -419,6 +419,7 @@ class WifiEtecsaFragment @Inject constructor(
         private val progressLayout: LinearLayout
         private val errorLayout: LinearLayout
         private val captchaParamsLayout: LinearLayout
+        private val errorLoadCaptcha: TextView
 
         init {
             val inflate = layoutInflater.inflate(R.layout.captcha_dialog, null, false)
@@ -432,6 +433,7 @@ class WifiEtecsaFragment @Inject constructor(
 
             progressLayout = inflate.findViewById(R.id.progress_layout)
             errorLayout = inflate.findViewById(R.id.error_layout)
+            errorLoadCaptcha = inflate.findViewById(R.id.load_captcha_eError_text)
             captchaParamsLayout = inflate.findViewById(R.id.captcha_params_layout)
             captchaEditText = inflate.findViewById(R.id.captcha_et)
             reloadCaptcha = inflate.findViewById(R.id.bt_reload)
@@ -439,9 +441,9 @@ class WifiEtecsaFragment @Inject constructor(
             captchaImg = inflate.findViewById(R.id.iv_captcha)
             editUserDialog.setPositiveButton(resources.getString(R.string.connect)) { _: DialogInterface?, _: Int -> login() }
 
-            nautaViewModel.status.observe(viewLifecycleOwner) {
-                val (isOk, _) = it
-                setError(isOk)
+            nautaViewModel.captchaLoadStatus.observe(viewLifecycleOwner) {
+                val (isOk, err) = it
+                setError(!isOk, err)
             }
 
             nautaViewModel.captchaImage.observe(viewLifecycleOwner) {
@@ -466,9 +468,10 @@ class WifiEtecsaFragment @Inject constructor(
             editUserDialog.show()
         }
 
-        private fun setError(b: Boolean){
-            if (!b){
+        private fun setError(isFoundErrors: Boolean, errMessage: String?){
+            if (isFoundErrors){
                 progressLayout.visibility = View.GONE
+                errorLoadCaptcha.text = errMessage
                 errorLayout.visibility = View.VISIBLE
             }else{
                 progressLayout.visibility = View.VISIBLE

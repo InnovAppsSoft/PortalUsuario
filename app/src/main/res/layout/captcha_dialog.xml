@@ -52,9 +52,9 @@
 
             />
         <TextView
+            android:id="@+id/load_captcha_eError_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Ha ocurrido un error"
             android:textColor="@color/colorPrimaryLight"
             android:textAlignment="center"
             android:gravity="center"
