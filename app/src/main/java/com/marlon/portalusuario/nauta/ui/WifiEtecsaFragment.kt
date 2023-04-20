@@ -154,7 +154,7 @@ class WifiEtecsaFragment @Inject constructor(
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     adapterView: AdapterView<*>?,
-                    view: View,
+                    view: View?,
                     i: Int,
                     l: Long
                 ) {
@@ -204,7 +204,7 @@ class WifiEtecsaFragment @Inject constructor(
                 val errorDialog = AlertDialog.Builder(context)
                 errorDialog.setCancelable(true)
                     .setTitle(resources.getString(R.string.errors))
-                    .setIcon(R.drawable.error)
+                    .setIcon(R.drawable.outline_dangerous_24)
                     .setMessage(errors.toString())
                 errorDialog.show()
             }
@@ -319,7 +319,7 @@ class WifiEtecsaFragment @Inject constructor(
             editUserDialog.setCancelable(true)
                 .setView(inflate)
                 .setTitle(resources.getString(R.string.edit_user))
-                .setIcon(R.drawable.round_person_24)
+                .setIcon(R.drawable.outline_person_24_wifi)
             usernameEditText = inflate.findViewById(R.id.username_et)
             passwordEditText = inflate.findViewById(R.id.password_et)
             accountTypeSpinner = inflate.findViewById(R.id.account_type_spinner)
@@ -404,7 +404,7 @@ class WifiEtecsaFragment @Inject constructor(
             fastInfoUserDialog.setCancelable(true)
                 .setMessage(info)
                 .setTitle(resources.getString(R.string.user_info))
-                .setIcon(R.drawable.info)
+                .setIcon(R.drawable.outline_info_24_wifi)
                 .setPositiveButton(resources.getString(R.string.portal_nauta)) { _, _ ->
                     CaptchaUserDialog(
                         context
@@ -419,6 +419,7 @@ class WifiEtecsaFragment @Inject constructor(
         private val progressLayout: LinearLayout
         private val errorLayout: LinearLayout
         private val captchaParamsLayout: LinearLayout
+        private val errorLoadCaptcha: TextView
 
         init {
             val inflate = layoutInflater.inflate(R.layout.captcha_dialog, null, false)
@@ -426,18 +427,24 @@ class WifiEtecsaFragment @Inject constructor(
             editUserDialog.setCancelable(true)
                 .setView(inflate)
                 .setTitle(resources.getString(R.string.write_captcha_code))
-                .setIcon(R.drawable.ic_security)
+                .setIcon(R.drawable.outline_warning_amber_24)
                 .setPositiveButton(resources.getString(R.string.connect)) { _: DialogInterface?, _: Int -> login() }
                 .setNegativeButton(resources.getString(R.string.cancel), null)
 
             progressLayout = inflate.findViewById(R.id.progress_layout)
             errorLayout = inflate.findViewById(R.id.error_layout)
+            errorLoadCaptcha = inflate.findViewById(R.id.load_captcha_eError_text)
             captchaParamsLayout = inflate.findViewById(R.id.captcha_params_layout)
             captchaEditText = inflate.findViewById(R.id.captcha_et)
             reloadCaptcha = inflate.findViewById(R.id.bt_reload)
             reloadCaptcha.setOnClickListener { nautaViewModel.getCaptcha() }
             captchaImg = inflate.findViewById(R.id.iv_captcha)
             editUserDialog.setPositiveButton(resources.getString(R.string.connect)) { _: DialogInterface?, _: Int -> login() }
+
+            nautaViewModel.captchaLoadStatus.observe(viewLifecycleOwner) {
+                val (isOk, err) = it
+                setError(!isOk, err)
+            }
 
             nautaViewModel.captchaImage.observe(viewLifecycleOwner) {
                 val bitmap = BitmapFactory.decodeStream(
@@ -461,8 +468,19 @@ class WifiEtecsaFragment @Inject constructor(
             editUserDialog.show()
         }
 
+        private fun setError(isFoundErrors: Boolean, errMessage: String?){
+            if (isFoundErrors){
+                progressLayout.visibility = View.GONE
+                errorLoadCaptcha.text = errMessage
+                errorLayout.visibility = View.VISIBLE
+            }else{
+                progressLayout.visibility = View.VISIBLE
+                errorLayout.visibility = View.GONE
+            }
+        }
+
         private fun login() {
-            loadingBar!!.setIcon(R.drawable.ic_wifi)
+            loadingBar!!.setIcon(R.drawable.outline_signal_wifi_0_bar_24)
             loadingBar!!.setMessage(resources.getString(R.string.connecting_please_wait))
             loadingBar!!.setCancelable(false)
             loadingBar!!.setCanceledOnTouchOutside(false)

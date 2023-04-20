@@ -2,9 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission
@@ -74,10 +71,6 @@
         tools:replace="android:icon"
         tools:targetApi="m">
 
-        <activity
-            android:name=".blueChat.ActivityChat"
-            android:theme="@style/AppThemeChat"
-            android:exported="false" />
         <activity
             android:name=".view.activities.Donacion"
             android:exported="false" />

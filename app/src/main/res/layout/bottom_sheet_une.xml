@@ -27,15 +27,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Resumen"
-            style="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorDes"
+            android:fontFamily="@font/dosisbold"
             android:textStyle="bold"
             android:layout_weight="1"
+            android:textSize="@dimen/_16sdp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"/>
         <TextView
             android:id="@+id/total_consumption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorDes"
+            android:fontFamily="@font/dosislight"
             android:text="Consumo total: 0.0 kW/h"
             style="@style/TextAppearance.AppCompat.Medium"
             
@@ -47,6 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Importe total: $0.0"
+            android:textColor="@color/colorDes"
+            android:fontFamily="@font/dosislight"
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_weight="1"
             android:gravity="right"/>

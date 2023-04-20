@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:text="Actualización disponible"
         android:textColor="@color/white"
+        android:fontFamily="@font/dosisbold"
         android:textAllCaps="false"
         android:textSize="13sp"
         android:textAlignment="center"

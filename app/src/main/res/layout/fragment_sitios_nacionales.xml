@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.fragments.SitiosNacionalesFragment"
     android:background="@color/background">
 
     <LinearLayout
@@ -69,6 +68,7 @@
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
                                     android:contentDescription="@string/app_name"
+                                    app:tint="@color/colorDes"
                                     android:src="@drawable/round_web_24" />
 
                                 <TextView
@@ -139,6 +139,7 @@
                                 <ImageView
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
+                                    app:tint="@color/colorDes"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/round_web_24"/>
 
@@ -219,6 +220,7 @@
 
                                 <ImageView
                                     android:layout_width="@dimen/_20sdp"
+                                    app:tint="@color/colorDes"
                                     android:layout_height="@dimen/_20sdp"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/round_web_24"
@@ -291,6 +293,7 @@
 
                                 <ImageView
                                     android:layout_width="@dimen/_20sdp"
+                                    app:tint="@color/colorDes"
                                     android:layout_height="@dimen/_20sdp"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/round_web_24"
@@ -374,6 +377,7 @@
                                 <ImageView
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
+                                    app:tint="@color/colorDes"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/round_web_24"
 
@@ -447,6 +451,7 @@
                                 <ImageView
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
+                                    app:tint="@color/colorDes"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/round_web_24"
 
@@ -529,6 +534,7 @@
                                 <ImageView
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
+                                    app:tint="@color/colorDes"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/round_web_24"
 
@@ -602,6 +608,7 @@
                                 <ImageView
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
+                                    app:tint="@color/colorDes"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/round_web_24"
                                     />
@@ -681,6 +688,7 @@
                                 <ImageView
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
+                                    app:tint="@color/colorDes"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/round_web_24"
                                     />
@@ -753,6 +761,7 @@
                                 <ImageView
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
+                                    app:tint="@color/colorDes"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/round_web_24"
                                     />
@@ -832,6 +841,7 @@
                                 <ImageView
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
+                                    app:tint="@color/colorDes"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/round_web_24"
 
@@ -904,6 +914,7 @@
                                 <ImageView
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
+                                    app:tint="@color/colorDes"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/round_web_24"
 
@@ -985,6 +996,7 @@
                                 <ImageView
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
+                                    app:tint="@color/colorDes"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/round_web_24"
 
@@ -1057,6 +1069,7 @@
                                 <ImageView
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
+                                    app:tint="@color/colorDes"
                                     android:contentDescription="@string/app_name"
                                     android:src="@drawable/round_web_24"
                                     />

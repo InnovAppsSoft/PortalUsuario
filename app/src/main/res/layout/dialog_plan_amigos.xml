@@ -35,12 +35,12 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="12dp"
+                    app:tint="@color/colorDes"
+                    android:src="@drawable/outline_spatial_audio_off_24"
                     android:contentDescription="@string/app_name"
                     android:padding="6dp"
-                    android:src="@drawable/actions_viewmembers"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/botoncolorStart" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
                     android:id="@+id/Title1"
@@ -96,12 +96,12 @@
                     android:id="@+id/compra3"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginStart="12dp"
-                    app:tint="@color/botoncolorStart"
                     android:layout_marginTop="12dp"
                     android:contentDescription="@string/app_name"
                     android:padding="6dp"
-                    android:src="@drawable/actions_viewmembers"
+                    app:tint="@color/colorDes"
+                    android:layout_marginStart="12dp"
+                    android:src="@drawable/outline_spatial_audio_off_24"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     />
@@ -165,8 +165,8 @@
                     android:layout_marginTop="12dp"
                     android:contentDescription="@string/app_name"
                     android:padding="6dp"
-                    app:tint="@color/botoncolorStart"
-                    android:src="@drawable/actions_viewmembers"
+                    app:tint="@color/colorDes"
+                    android:src="@drawable/outline_spatial_audio_off_24"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

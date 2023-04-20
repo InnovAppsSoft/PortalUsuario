@@ -50,7 +50,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/displaybold"
                         android:text="@string/atr_s"
-                        android:textColor="@color/colorTest2"
+                        android:textColor="@color/colorDes"
                         android:textSize="@dimen/_13ssp"
                         android:textStyle="bold" />
 
@@ -88,12 +88,12 @@
                             android:id="@+id/compra"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            app:tint="@color/botoncolorStart"
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="12dp"
                             android:contentDescription="@string/app_name"
                             android:padding="6dp"
-                            android:src="@drawable/msg_markunread"
+                            android:src="@drawable/outline_comment_24"
+                            app:tint="@color/colorDes"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -154,10 +154,10 @@
                             android:layout_height="40dp"
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="12dp"
-                            app:tint="@color/botoncolorStart"
                             android:contentDescription="@string/app_name"
                             android:padding="6dp"
-                            android:src="@drawable/msg_markunread"
+                            android:src="@drawable/outline_comment_24"
+                            app:tint="@color/colorDes"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -220,8 +220,8 @@
                             android:layout_marginTop="12dp"
                             android:contentDescription="@string/app_name"
                             android:padding="6dp"
-                            android:src="@drawable/msg_markunread"
-                            app:tint="@color/botoncolorStart"
+                            android:src="@drawable/outline_comment_24"
+                            app:tint="@color/colorDes"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -283,9 +283,9 @@
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="12dp"
                             android:contentDescription="@string/app_name"
+                            android:src="@drawable/outline_comment_24"
+                            app:tint="@color/colorDes"
                             android:padding="6dp"
-                            android:src="@drawable/msg_markunread"
-                            app:tint="@color/botoncolorStart"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 

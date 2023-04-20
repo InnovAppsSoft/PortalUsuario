@@ -10,7 +10,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.nauta.ui.WifiEtecsaFragment
-import com.marlon.portalusuario.view.fragments.SitiosNacionalesFragment
+import com.marlon.portalusuario.view.Fragments.SitiosNacionalesFragment
 import javax.inject.Inject
 
 class ConnectivityFragment @Inject constructor(
@@ -29,7 +29,7 @@ class ConnectivityFragment @Inject constructor(
         if (wifiEtecsaTab != null) {
             wifiEtecsaTab.text = resources.getString(R.string.connectivity)
         }
-        wifiEtecsaTab?.setIcon(R.drawable.round_wifi_lock_24)
+        wifiEtecsaTab?.setIcon(R.drawable.outline_signal_wifi_0_bar_24)
         if (wifiEtecsaTab != null) {
             tabLayout?.addTab(wifiEtecsaTab, true)
         }
@@ -43,7 +43,7 @@ class ConnectivityFragment @Inject constructor(
         if (nationalTab != null) {
             nationalTab.text = resources.getString(R.string.national_sites)
         }
-        nationalTab?.setIcon(R.drawable.round_web_24)
+        nationalTab?.setIcon(R.drawable.outline_article_24_wifi)
         if (nationalTab != null) {
             tabLayout?.addTab(nationalTab)
         }

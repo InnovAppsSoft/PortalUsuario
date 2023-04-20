@@ -3,19 +3,14 @@
 <!--    android:checkableBehavior="single" -->
 <item
     android:id="@+id/donate"
-    android:icon="@drawable/baseline_monetization_on_24"
+    android:icon="@drawable/outline_emoji_events_24"
     android:title="Donar al proyecto"/>
-
-    <item
-    android:id="@+id/bluechat"
-    android:icon="@drawable/baseline_bluetooth_connected_24"
-    android:title="Bluetooth PUChat"/>
 
 <item android:title="Servicios">
     <menu>
         <item
             android:id="@+id/services"
-            android:icon="@drawable/round_phone_forwarded_24"
+            android:icon="@drawable/outline_phone_forwarded_24"
             android:title="Servicios"/>
         <item
             android:id="@+id/plans"
@@ -31,11 +26,11 @@
     <menu>
         <item
             android:id="@+id/firewall"
-            android:icon="@drawable/baseline_local_fire_department_24"
+            android:icon="@drawable/outline_local_fire_department_24"
             android:title="Firewall"/>
         <item
             android:id="@+id/networkChange"
-            android:icon="@drawable/round_perm_data_setting_24"
+            android:icon="@drawable/outline_network_locked_24"
             android:title="Cambiar red preferida"/>
         <item
             android:id="@+id/une"
@@ -44,11 +39,11 @@
             android:title="Calculador UNE"/>
         <item
             android:id="@+id/sim_info"
-            android:icon="@drawable/round_signal_cellular_connected_no_internet_4_bar_24"
+            android:icon="@drawable/baseline_query_stats_24"
             android:title="Medidor de señal"/>
         <item
             android:id="@+id/tutos"
-            android:icon="@drawable/baseline_info_24"
+            android:icon="@drawable/outline_info_24"
             android:title="Información útil"/>
     </menu>
 </item>
@@ -56,11 +51,11 @@
     <menu>
         <item
             android:id="@+id/errors_register"
-            android:icon="@drawable/baseline_bug_report_24"
+            android:icon="@drawable/outline_bug_report_24"
             android:title="Registro de errores"/>
         <item
             android:id="@+id/feedback"
-            android:icon="@drawable/baseline_sms_failed_24"
+            android:icon="@drawable/outline_feedback_24"
             android:title="Reportar..."/>
     </menu>
 </item>
@@ -68,12 +63,12 @@
     <menu>
         <item
             android:id="@+id/telegram_channel"
-            android:icon="@drawable/canal"
+            android:icon="@drawable/outline_verified_24"
             android:iconTint="#EE5117"
             android:title="Canal de Telegram"/>
         <item
             android:id="@+id/facebook"
-            android:icon="@drawable/canal"
+            android:icon="@drawable/outline_verified_24"
             android:iconTint="#EE5117"
             android:title="Página Oficial Facebook"/>
         <item
@@ -88,11 +83,11 @@
         <item
             android:id="@+id/settings"
             android:iconTint="#EE5117"
-            android:icon="@drawable/ic_settings_black_24dp"
+            android:icon="@drawable/outline_settings_24"
             android:title="Preferencias"/>
         <item
             android:id="@+id/about"
-            android:icon="@drawable/baseline_info_24"
+            android:icon="@drawable/outline_info_24"
             android:title="Acerca de"/>
     </menu>
 </item>

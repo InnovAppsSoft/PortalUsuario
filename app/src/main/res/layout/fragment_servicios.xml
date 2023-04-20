@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    tools:context=".view.fragments.ServiciosFragment">
+    android:background="@color/background">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -24,15 +23,24 @@
                 android:id="@+id/services"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:fontFamily="@font/displaybold"
+                android:fontFamily="@font/dosisbold"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:text="@string/consultar"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_13sdp"
+                android:textColor="@color/colorDes"
+                android:textSize="@dimen/_16sdp"
                 tools:ignore="RtlSymmetry" />
+
+            <TextView
+                    android:text="Consultas a los servicios contratados"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/dosislight"
+                    android:textColor="@color/colorDes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,9 +66,10 @@
                             android:layout_marginLeft="@dimen/_4sdp"
                             android:layout_marginRight="@dimen/_4sdp"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                            android:layout_marginTop="4sp"
                             android:layout_weight="1"
                             app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_16sdp">
+                            app:cardCornerRadius="@dimen/_8sdp">
 
                             <RelativeLayout
                                 android:id="@+id/saldo"
@@ -78,8 +87,8 @@
                                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/payment_card"
-                                    app:tint="@color/botoncolorStart" />
+                                    android:src="@drawable/outline_payments_24"
+                                    app:tint="@color/colorDes" />
 
                                 <TextView
                                     android:id="@+id/enseñar"
@@ -106,9 +115,10 @@
                             android:layout_marginLeft="@dimen/_4sdp"
                             android:layout_marginRight="@dimen/_4sdp"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                            android:layout_marginTop="4sp"
                             android:layout_weight="1"
                             app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_16sdp"
+                            app:cardCornerRadius="@dimen/_8sdp"
                             >
 
                             <RelativeLayout
@@ -126,8 +136,8 @@
                                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/msg_language"
-                                    app:tint="@color/botoncolorStart"
+                                    android:src="@drawable/baseline_moving_24"
+                                    app:tint="@color/colorDes"
                                     />
 
                                 <TextView
@@ -137,9 +147,9 @@
                                     android:layout_centerVertical="true"
                                     android:layout_marginStart="@dimen/_5sdp"
                                     android:layout_marginLeft="16dp"
+                                    android:fontFamily="@font/displaybold"
                                     android:layout_marginRight="16dp"
                                     android:layout_toEndOf="@+id/imBtnSaldoSMS"
-                                    android:fontFamily="@font/displaybold"
                                     android:text="@string/datos1"
                                     android:textAllCaps="false"
                                     android:textColor="@color/colorDes"
@@ -161,10 +171,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_4sdp"
                             android:layout_marginRight="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
                             android:layout_weight="1"
                             app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_16sdp"
+                            app:cardCornerRadius="@dimen/_8sdp"
                            >
 
 
@@ -183,8 +193,8 @@
                                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:contentDescription="@string/app_name"
-                                    app:tint="@color/botoncolorStart"
-                                    android:src="@drawable/msg_fave" />
+                                    app:tint="@color/colorDes"
+                                    android:src="@drawable/outline_star_border_24" />
 
                                 <TextView
                                     android:id="@+id/tvVoz"
@@ -207,10 +217,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_4sdp"
                             android:layout_marginRight="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
                             android:layout_weight="1"
                             app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_16sdp"
+                            app:cardCornerRadius="@dimen/_8sdp"
                             >
 
                             <RelativeLayout
@@ -228,8 +238,8 @@
                                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/menu_calls"
-                                    app:tint="@color/botoncolorStart"/>
+                                    android:src="@drawable/outline_local_phone_24"
+                                    app:tint="@color/colorDes"/>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -256,10 +266,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_4sdp"
                             android:layout_marginRight="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
                             android:layout_weight="1"
                             app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_16sdp"
+                            app:cardCornerRadius="@dimen/_8sdp"
                             >
 
                             <RelativeLayout
@@ -277,8 +287,8 @@
                                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/actions_viewmembers"
-                                    app:tint="@color/botoncolorStart"
+                                    android:src="@drawable/outline_spatial_audio_off_24"
+                                    app:tint="@color/colorDes"
                                     />
 
                                 <TextView
@@ -301,10 +311,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_4sdp"
                             android:layout_marginRight="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
                             android:layout_weight="1"
                             app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_16sdp"
+                            app:cardCornerRadius="@dimen/_8sdp"
                             >
 
                             <RelativeLayout
@@ -322,11 +332,12 @@
                                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/msg_markunread"
-                                    app:tint="@color/botoncolorStart"
+                                    android:src="@drawable/outline_comment_24"
+                                    app:tint="@color/colorDes"
                                     />
 
                                 <TextView
+                                        android:id="@+id/texto"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerVertical="true"
@@ -343,19 +354,32 @@
                 </LinearLayout>
             </RelativeLayout>
 
+            <View android:layout_width="2dp"
+                  android:layout_height="48dp"
+                  android:background="@color/colorDes"
+                  android:layout_marginStart="12dp"/>
             <TextView
                 android:id="@+id/call"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:fontFamily="@font/displaybold"
+                android:fontFamily="@font/dosisbold"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                android:text="@string/llamar"
+                android:text="@string/servicios"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_13sdp"
+                android:textColor="@color/colorDes"
+                android:textSize="@dimen/_16sdp"
                 tools:ignore="RtlSymmetry" />
+
+            <TextView
+                    android:text="Servicios a contratar y otras utilidades"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/dosislight"
+                    android:textColor="@color/colorDes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" tools:ignore="RtlSymmetry"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -365,8 +389,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -377,11 +402,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_4sdp"
+                            android:layout_marginTop="4sp"
                             android:layout_marginRight="@dimen/_4sdp"
                             android:layout_marginBottom="@dimen/_4sdp"
                             android:layout_weight="1"
                             app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_16sdp">
+                            app:cardCornerRadius="@dimen/_8sdp">
 
                             <RelativeLayout
                                 android:id="@+id/llamar99"
@@ -398,8 +424,8 @@
                                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:contentDescription="@string/app_name"
-                                    app:tint="@color/botoncolorStart"
-                                    android:src="@drawable/msg_voice_phone" />
+                                    app:tint="@color/colorDes"
+                                    android:src="@drawable/outline_phone_forwarded_24" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -422,10 +448,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_4sdp"
                             android:layout_marginRight="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:layout_marginTop="4sp"
+                            android:layout_marginBottom="@dimen/_8sdp"
                             android:layout_weight="1"
                             app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_16sdp"
+                            app:cardCornerRadius="@dimen/_8sdp"
                             >
 
                             <RelativeLayout
@@ -443,8 +470,8 @@
                                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:contentDescription="@string/app_name"
-                                    app:tint="@color/botoncolorStart"
-                                    android:src="@drawable/msg_voice_phone" />
+                                    app:tint="@color/colorDes"
+                                    android:src="@drawable/outline_phone_locked_24" />
 
                                 <TextView
                                     android:id="@+id/tvAmigo"
@@ -461,250 +488,229 @@
                             </RelativeLayout>
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
-                </LinearLayout>
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/plans"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:fontFamily="@font/displaybold"
-                android:gravity="center_vertical"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:text="Otros"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_13sdp"
-                tools:ignore="RtlSymmetry" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_8sdp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:orientation="horizontal">
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/PlanAmigos1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_4sdp"
-                            android:layout_marginRight="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_16sdp"
-
-                           >
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:id="@+id/imBtnSaldoBolsaNauta1"
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
-                                    android:layout_alignParentLeft="true"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginStart="16dp"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                                    app:tint="@color/botoncolorStart"
-                                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                    android:src="@drawable/actions_viewmembers"
-                                   />
-
-                                <TextView
-                                    android:id="@+id/tvdatos"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_toEndOf="@+id/imBtnSaldoBolsaNauta1"
-                                    android:layout_toRightOf="@+id/imBtnSaldoBolsaNauta1"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/plan_amigo"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_13ssp" />
-                            </RelativeLayout>
-
-                        </androidx.cardview.widget.CardView>
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/voz"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_4sdp"
-                            android:layout_marginRight="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_16sdp"
-                            >
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:id="@+id/imBtnSaldoSMS1"
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
-                                    android:layout_alignParentLeft="true"
-                                    android:layout_marginStart="16dp"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                    android:src="@drawable/menu_calls"
-                                    app:tint="@color/botoncolorStart"
-                                     />
-
-                                <TextView
-                                    android:id="@+id/tvSMS1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_toEndOf="@+id/imBtnSaldoSMS1"
-                                    android:layout_toRightOf="@+id/imBtnSaldoSMS1"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/plan_voz"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_13ssp" />
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:orientation="horizontal">
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/sms"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_4sdp"
-                            android:layout_marginRight="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_16sdp"
-                            >
-
-                            <RelativeLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:id="@+id/imBtnSaldoVoz1"
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
-                                    android:layout_alignParentLeft="true"
-                                    android:layout_marginStart="16dp"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                    android:src="@drawable/msg_markunread"
-                                    app:tint="@color/botoncolorStart"
-                                    />
-
-                                <TextView
-                                    android:id="@+id/tvVoz1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_toEndOf="@+id/imBtnSaldoVoz1"
-                                    android:layout_toRightOf="@+id/imBtnSaldoVoz1"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/plan_sms"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_13ssp" />
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/emergancia"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_4sdp"
-                            android:layout_marginRight="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_16sdp"
-                          >
-
-                            <RelativeLayout
+                                android:id="@+id/PlanAmigos1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:layout_marginRight="@dimen/_4sdp"
+                                android:layout_marginTop="4sp"
+                                android:layout_marginBottom="@dimen/_8sdp"
+                                android:layout_weight="1"
+                                app:cardBackgroundColor="@color/background_color_50"
+                                app:cardCornerRadius="@dimen/_8sdp"
+
+                        >
+
+                            <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
 
                                 <ImageView
-                                    android:id="@+id/imBtnSaldoFriend11"
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
-                                    android:layout_alignParentLeft="true"
-                                    android:layout_marginStart="16dp"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                    android:src="@drawable/group_admin"
-                                    app:tint="@color/botoncolorStart"
-                                     />
+                                        android:id="@+id/imBtnSaldoBolsaNauta1"
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_marginLeft="16dp"
+                                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                        app:tint="@color/colorDes"
+                                        android:src="@drawable/outline_spatial_audio_off_24"
+                                />
 
                                 <TextView
-                                    android:id="@+id/tvAmigo1"
+                                        android:id="@+id/tvdatos"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="16dp"
+                                        android:layout_marginRight="16dp"
+                                        android:layout_toEndOf="@+id/imBtnSaldoBolsaNauta1"
+                                        android:layout_toRightOf="@+id/imBtnSaldoBolsaNauta1"
+                                        android:fontFamily="@font/displaybold"
+                                        android:text="@string/plan_amigo"
+                                        android:textColor="@color/colorDes"
+                                        android:textSize="@dimen/_13ssp" />
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                                android:id="@+id/voz"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:layout_marginRight="@dimen/_4sdp"
+                                android:layout_marginTop="4sp"
+                                android:layout_marginBottom="@dimen/_8sdp"
+                                android:layout_weight="1"
+                                app:cardBackgroundColor="@color/background_color_50"
+                                app:cardCornerRadius="@dimen/_8sdp"
+                        >
+
+                            <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                <ImageView
+                                        android:id="@+id/imBtnSaldoSMS1"
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_marginLeft="16dp"
+                                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                        android:src="@drawable/outline_local_phone_24"
+                                        app:tint="@color/colorDes"
+                                />
+
+                                <TextView
+                                        android:id="@+id/tvSMS1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="16dp"
+                                        android:layout_marginRight="16dp"
+                                        android:layout_toEndOf="@+id/imBtnSaldoSMS1"
+                                        android:layout_toRightOf="@+id/imBtnSaldoSMS1"
+                                        android:fontFamily="@font/displaybold"
+                                        android:text="@string/plan_voz"
+                                        android:textColor="@color/colorDes"
+                                        android:textSize="@dimen/_13ssp" />
+                            </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
+                        <androidx.cardview.widget.CardView
+                                android:id="@+id/sms"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:layout_marginRight="@dimen/_4sdp"
+                                android:layout_marginTop="4sp"
+                                android:layout_marginBottom="@dimen/_8sdp"
+                                android:layout_weight="1"
+                                app:cardBackgroundColor="@color/background_color_50"
+                                app:cardCornerRadius="@dimen/_8sdp"
+                        >
+
+                            <RelativeLayout
                                     android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                <ImageView
+                                        android:id="@+id/imBtnSaldoVoz1"
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_marginLeft="16dp"
+                                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                        android:src="@drawable/outline_comment_24"
+                                        app:tint="@color/colorDes"
+                                />
+
+                                <TextView
+                                        android:id="@+id/tvVoz1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="16dp"
+                                        android:layout_toEndOf="@+id/imBtnSaldoVoz1"
+                                        android:layout_toRightOf="@+id/imBtnSaldoVoz1"
+                                        android:fontFamily="@font/displaybold"
+                                        android:text="@string/plan_sms"
+                                        android:textColor="@color/colorDes"
+                                        android:textSize="@dimen/_13ssp" />
+                            </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                                android:id="@+id/emergancia"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_4sdp"
+                                android:layout_marginRight="@dimen/_4sdp"
+                                android:layout_marginTop="4sp"
+                                android:layout_marginBottom="@dimen/_8sdp"
+                                android:layout_weight="1"
+                                app:cardBackgroundColor="@color/background_color_50"
+                                app:cardCornerRadius="@dimen/_8sdp"
+                        >
+
+                            <RelativeLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_toEndOf="@+id/imBtnSaldoFriend11"
-                                    android:layout_toRightOf="@+id/imBtnSaldoFriend11"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/emergencias"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_13ssp" />
+                                    android:orientation="horizontal">
+
+                                <ImageView
+                                        android:id="@+id/imBtnSaldoFriend11"
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_marginLeft="16dp"
+                                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                        android:src="@drawable/outline_emergency_24"
+                                        app:tint="@color/colorDes"
+                                />
+
+                                <TextView
+                                        android:id="@+id/tvAmigo1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="16dp"
+                                        android:layout_toEndOf="@+id/imBtnSaldoFriend11"
+                                        android:layout_toRightOf="@+id/imBtnSaldoFriend11"
+                                        android:fontFamily="@font/displaybold"
+                                        android:text="@string/emergencias"
+                                        android:textColor="@color/colorDes"
+                                        android:textSize="@dimen/_13ssp" />
                             </RelativeLayout>
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </RelativeLayout>
+
+            <View android:layout_width="2dp"
+                  android:layout_height="48dp"
+                  android:background="@color/colorDes"
+                  android:layout_marginStart="12dp"/>
 
             <TextView
                 android:id="@+id/tv2345"
                 android:layout_width="match_parent"
                 android:layout_height="26dp"
-                android:background="@color/colorPrimary"
-                android:fontFamily="@font/displaybold"
+                android:fontFamily="@font/dosisbold"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:text="@string/recargar_saldo"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_13sdp"
+                android:textColor="@color/colorDes"
+                android:textSize="@dimen/_16sdp"
                 tools:ignore="RtlSymmetry" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -724,23 +730,23 @@
                     android:maxLines="1"
                     android:textColor="@color/colorDes"
                     android:textColorHint="@color/colorTextHint"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="@dimen/_14ssp"
                     tools:ignore="TouchTargetSizeCheck"
                     android:layout_weight="1"/>
                 <ImageView
                     android:id="@+id/camera"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="24sp"
+                    android:layout_height="24sp"
                     android:layout_marginEnd="@dimen/_8sdp"
-                    android:src="@drawable/wallet_qr"
-                    app:tint="@color/botoncolorStart"
+                    android:src="@drawable/outline_qr_code_scanner_24"
+                    app:tint="@color/colorDes"
                      />
                 <ImageView
                     android:id="@+id/Enviar1"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:src="@drawable/outline_send"
-                    app:tint="@color/botoncolorStart"
+                    android:layout_width="24sp"
+                    android:layout_height="24sp"
+                    android:src="@drawable/baseline_north_east_24"
+                    app:tint="@color/colorDes"
                     />
             </LinearLayout>
 
@@ -748,14 +754,12 @@
                 android:id="@+id/tv23456"
                 android:layout_width="match_parent"
                 android:layout_height="26dp"
-                android:background="@color/colorPrimary"
-                android:fontFamily="@font/displaybold"
+                android:fontFamily="@font/dosisbold"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:text="@string/adelantar_saldo"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_13sdp"
+                android:textColor="@color/colorDes"
+                android:textSize="@dimen/_16sdp"
                 tools:ignore="RtlSymmetry" />
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -763,8 +767,8 @@
                 android:layout_margin="10dp">
                 <ImageView
                     android:id="@+id/adelantar"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="24sp"
+                    android:layout_height="24sp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginLeft="@dimen/_8sdp"
@@ -773,8 +777,8 @@
                     android:layout_marginRight="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                     android:contentDescription="@string/app_name"
-                    android:src="@drawable/outline_send"
-                    app:tint="@color/botoncolorStart"
+                    android:src="@drawable/baseline_north_east_24"
+                    app:tint="@color/colorDes"
                      />
                 <EditText
                     android:id="@+id/adesaldo"
@@ -799,14 +803,12 @@
                 android:id="@+id/tv234"
                 android:layout_width="match_parent"
                 android:layout_height="26dp"
-                android:background="@color/colorPrimary"
-                android:fontFamily="@font/displaybold"
+                android:fontFamily="@font/dosisbold"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:text="@string/transferir_mi_saldo"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_13sdp"
+                android:textColor="@color/colorDes"
+                android:textSize="@dimen/_16sdp"
                 tools:ignore="RtlSymmetry" />
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -823,8 +825,8 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_marginRight="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                    app:srcCompat="@drawable/msg_openprofile"
-                    app:tint="@color/botoncolorStart"
+                    app:srcCompat="@drawable/outline_contact_page_24"
+                    app:tint="@color/colorDes"
                      />
                 <EditText
                     android:id="@+id/telefono"
@@ -839,7 +841,7 @@
                     android:maxLines="1"
                     android:textColor="@color/colorDes"
                     android:textColorHint="@color/colorTextHint"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="@dimen/_14ssp"
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <LinearLayout
@@ -848,6 +850,7 @@
                     android:layout_below="@+id/telefono"
                     android:layout_toStartOf="@+id/Contactos"
                     android:baselineAligned="false"
+                    android:layout_marginBottom="8sp"
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/donation_key"
@@ -863,7 +866,7 @@
                         android:maxLines="1"
                         android:textColor="@color/colorDes"
                         android:textColorHint="@color/colorTextHint"
-                        android:textSize="@dimen/_13ssp"
+                        android:textSize="@dimen/_14ssp"
                         tools:ignore="TouchTargetSizeCheck" />
 
                     <EditText
@@ -878,7 +881,7 @@
                         android:maxLines="1"
                         android:textColor="@color/colorDes"
                         android:textColorHint="@color/colorTextHint"
-                        android:textSize="@dimen/_13ssp"
+                        android:textSize="@dimen/_14ssp"
                         tools:ignore="TouchTargetSizeCheck" />
                 </LinearLayout>
 
@@ -894,8 +897,8 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_marginRight="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
-                    android:src="@drawable/outline_send"
-                    app:tint="@color/botoncolorStart"
+                    android:src="@drawable/baseline_north_east_24"
+                    app:tint="@color/colorDes"
                      />
 
             </RelativeLayout>

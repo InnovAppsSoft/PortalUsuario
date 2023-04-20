@@ -28,12 +28,10 @@ class NautaViewModel @Inject constructor(
     private val _currentUser = MutableLiveData<User>()
     val currentUser: LiveData<User> = _currentUser
     val status = MutableLiveData<Pair<Boolean, String?>>()
+    val captchaLoadStatus = MutableLiveData<Pair<Boolean, String?>>()
 
     fun onCreate() {
         viewModelScope.launch {
-            // Set init value for the variables
-            isLoggedIn.postValue(false)
-
             // Getting data session if exists
             val dataSession = pref.getSession()
             if (dataSession.isNotEmpty()) {
@@ -84,7 +82,7 @@ class NautaViewModel @Inject constructor(
                 isLoggedIn.postValue(true)
             } catch (e: Exception) {
                 e.printStackTrace()
-                status.postValue(Pair(false, e.message))
+                status.postValue(Pair(false, e.message.toString()))
             }
         }
     }
@@ -105,9 +103,14 @@ class NautaViewModel @Inject constructor(
 
     fun getCaptcha() {
         viewModelScope.launch {
-            isCaptchaLoaded.postValue(false)
-            captchaImage.postValue(service.getCaptcha())
-            isCaptchaLoaded.postValue(true)
+            try {
+                isCaptchaLoaded.postValue(false)
+                captchaImage.postValue(service.getCaptcha())
+                isCaptchaLoaded.postValue(true)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                captchaLoadStatus.postValue(Pair(false, e.message))
+            }
         }
     }
 

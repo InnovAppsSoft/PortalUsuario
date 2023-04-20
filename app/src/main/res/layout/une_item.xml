@@ -26,15 +26,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lectura actual: 0"
+                android:fontFamily="@font/displaybold"
                 style="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#8A000000"/>
+                android:textColor="@color/colorDes"/>
             <TextView
                 android:id="@+id/previous_read"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/displaybold"
                 android:text="Lectura anterior: 0"
                 style="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#8A000000"/>
+                android:textColor="@color/colorDes"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,6 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Consumo: 0 kW"
+                    android:fontFamily="@font/dosisbold"
                     style="@style/TextAppearance.AppCompat.Small"
                     android:textStyle="bold"
                     android:layout_weight="1"
@@ -54,6 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$0.0"
+                    android:fontFamily="@font/dosisbold"
                     style="@style/TextAppearance.AppCompat.Small"
                     android:textStyle="bold"
                     android:layout_weight="1"

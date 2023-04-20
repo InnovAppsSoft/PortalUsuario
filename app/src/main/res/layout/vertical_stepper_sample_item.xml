@@ -21,8 +21,8 @@
             android:id="@+id/button_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_button"
-            android:backgroundTint="@color/botoncolorStart"
+            android:background="@drawable/widget_4"
+            android:fontFamily="@font/dosisbold"
             android:textColor="@android:color/white"
             android:textAllCaps="false"
             android:text="@string/conceder"/>
@@ -32,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:fontFamily="@font/dosisbold"
             android:text="@string/saltar"
             android:background="@drawable/bg_button"
             android:textAllCaps="false"

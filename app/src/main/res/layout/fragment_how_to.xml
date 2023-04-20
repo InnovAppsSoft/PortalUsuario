@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.fragments.HowToFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,13 +30,12 @@
                     android:id="@+id/tvGSMInfo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorPrimary"
-                    android:fontFamily="@font/displaybold"
+                    android:fontFamily="@font/dosisbold"
                     android:gravity="center_vertical"
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:text="Información útil"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_13sdp"
+                    android:textColor="@color/colorDes"
+                    android:textSize="@dimen/_16sdp"
                     tools:ignore="TextContrastCheck" />
 
                 <TextView
@@ -112,13 +110,12 @@
                     android:id="@+id/tvGSMInfo1"
                     android:layout_width="match_parent"
                     android:layout_height="26dp"
-                    android:background="@color/colorPrimary"
-                    android:fontFamily="@font/displaybold"
+                    android:fontFamily="@font/dosisbold"
                     android:gravity="center_vertical"
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:text="@string/configurar_apn"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_13sdp"
+                    android:textColor="@color/colorDes"
+                    android:textSize="@dimen/_16sdp"
                     tools:ignore="RtlSymmetry,TextContrastCheck" />
 
                 <TextView
