@@ -61,14 +61,6 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/ivLogLogo"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/unnamed">
-            </ImageView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview5"
