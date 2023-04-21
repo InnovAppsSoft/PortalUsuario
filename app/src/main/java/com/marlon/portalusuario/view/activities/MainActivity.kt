@@ -84,6 +84,7 @@ import com.marlon.portalusuario.util.Connectivity
 import com.marlon.portalusuario.util.SSLHelper
 import com.marlon.portalusuario.util.Util
 import com.marlon.portalusuario.util.apklis.ApklisUtil
+import com.marlon.portalusuario.view.Fragments.CuentasFragment
 import com.marlon.portalusuario.view.fragments.HowToFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.ServiciosFragment
@@ -182,6 +183,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             val i: Intent
             when (item.itemId) {
                 R.id.services -> setFragment(ServiciosFragment<Any?>(), "Servicios")
+                R.id.ussd -> setFragment(CuentasFragment(), "Contratados")
                 R.id.plans -> setFragment(PaquetesFragment(), "Planes")
                 R.id.connectivity -> setFragment(connectivityFragment, "Conectividad")
                 R.id.firewall -> {
