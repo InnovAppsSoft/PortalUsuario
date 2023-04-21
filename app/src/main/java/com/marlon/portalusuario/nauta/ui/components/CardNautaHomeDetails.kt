@@ -23,13 +23,14 @@ import com.marlon.portalusuario.nauta.data.entities.User
 fun CardNautaHomeDetails(
     modifier: Modifier = Modifier,
     user: User,
-    isLoading: Boolean = false,
-    isFoundErrors: Boolean = false
+    isLoading: Boolean,
+    loginStatus: Pair<Boolean, String?>
 ) {
+    val (isOk, errors) = loginStatus
     PrettyCard(
         modifier = modifier,
         isLoading = isLoading,
-        isFoundErrors = isFoundErrors
+        isFoundErrors = !isOk
     ) {
         val privateModifier = Modifier.padding(horizontal = 16.dp, vertical = 5.dp)
 
@@ -152,6 +153,8 @@ fun CardNautaHomeDetailsPreview() {
         user = user,
         modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 8.dp)
-            .fillMaxWidth()
+            .fillMaxWidth(),
+        loginStatus = Pair(true, null),
+        isLoading = false
     )
 }

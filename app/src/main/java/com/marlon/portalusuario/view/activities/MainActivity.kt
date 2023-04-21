@@ -88,7 +88,7 @@ import com.marlon.portalusuario.view.fragments.HowToFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.ServiciosFragment
 import com.marlon.portalusuario.view.fragments.BottomSheetDialog
-import com.marlon.portalusuario.view.fragments.connectivity.ConnectivityFragment
+import com.marlon.portalusuario.nauta.ui.ConnectivityFragment
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView

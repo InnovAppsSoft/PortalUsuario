@@ -1056,6 +1056,11 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="new_recharge_content_description">Recargar saldo de la cuenta</string>
     <string name="new_recharge_text_field_placeholder_one">Recargar saldo</string>
     <string name="new_recharge_text_field_placeholder_two">1234 5678 9012 3456</string>
+    <string name="amount">Monto</string>
+    <string name="disconnect">Desconectar</string>
+    <string name="update">Actualizar</string>
+    <string name="captcha_code">Código captcha</string>
+    <string name="password_placeholder">Contraseña</string>
 
 
 </resources>

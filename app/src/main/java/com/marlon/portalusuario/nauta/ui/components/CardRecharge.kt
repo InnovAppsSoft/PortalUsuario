@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -29,17 +30,22 @@ import com.marlon.portalusuario.commons.ui.AnimatedPlaceholder
 @Composable
 fun CardRecharge(
     modifier: Modifier = Modifier,
-    isLoading: Boolean = false,
-    isFoundErrors: Boolean = false
+    isLoading: Boolean,
+    rechargeStatus: Pair<Boolean, String?>,
+    rechargeCode: TextFieldValue,
+    isRechargeButtonEnabled: Boolean,
+    onChangeRechargeCode: (TextFieldValue) -> Unit,
+    onRecharge: (TextFieldValue) -> Unit
 ) {
-    PrettyCard(modifier = modifier, isLoading = isLoading, isFoundErrors = isFoundErrors) {
+    val (isOk, errors) = rechargeStatus
+    PrettyCard(modifier = modifier, isLoading = isLoading, isFoundErrors = !isOk) {
         Box {
             ConstraintLayout {
                 val (inputRechargeCode, buttonRecharge) = createRefs()
 
                 TextField(
-                    value = "",
-                    onValueChange = { },
+                    value = rechargeCode,
+                    onValueChange = { onChangeRechargeCode(it) },
                     placeholder = {
                         AnimatedPlaceholder(
                             hints = listOf(
@@ -84,7 +90,7 @@ fun CardRecharge(
                     }
                 )
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = { onRecharge(rechargeCode) },
                     modifier = Modifier
                         .padding(top = 8.dp, bottom = 8.dp, start = 0.dp, end = 8.dp)
                         .constrainAs(buttonRecharge) {
@@ -99,7 +105,8 @@ fun CardRecharge(
                         topEnd = 8.dp,
                         bottomEnd = 8.dp,
                         bottomStart = 0.dp
-                    )
+                    ),
+                    enabled = isRechargeButtonEnabled
                 ) {
                     Icon(
                         imageVector = ImageVector.vectorResource(id = R.drawable.new_baseline_send),
@@ -114,5 +121,13 @@ fun CardRecharge(
 @Preview(showSystemUi = true)
 @Composable
 fun CardRechargePreview() {
-    CardRecharge(modifier = Modifier.padding(16.dp))
+    CardRecharge(
+        isLoading = false,
+        rechargeStatus = Pair(true, null),
+        rechargeCode = TextFieldValue(""),
+        isRechargeButtonEnabled = false,
+        onChangeRechargeCode = {},
+        onRecharge = {},
+        modifier = Modifier.padding(16.dp)
+    )
 }

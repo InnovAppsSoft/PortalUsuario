@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun UserDetailsHead(modifier: Modifier = Modifier, userName: String, remainingTime: String) {
     Box(modifier = modifier) {
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column {
             Text(
                 text = remainingTime,
                 style = MaterialTheme.typography.h3,
