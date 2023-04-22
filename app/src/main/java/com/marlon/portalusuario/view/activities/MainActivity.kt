@@ -85,9 +85,9 @@ import com.marlon.portalusuario.util.SSLHelper
 import com.marlon.portalusuario.util.Util
 import com.marlon.portalusuario.util.apklis.ApklisUtil
 import com.marlon.portalusuario.view.Fragments.CuentasFragment
-import com.marlon.portalusuario.view.fragments.HowToFragment
+import com.marlon.portalusuario.view.Fragments.HowToFragment
+import com.marlon.portalusuario.view.Fragments.ServiciosFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
-import com.marlon.portalusuario.view.fragments.ServiciosFragment
 import com.marlon.portalusuario.view.fragments.BottomSheetDialog
 import com.marlon.portalusuario.view.fragments.connectivity.ConnectivityFragment
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
@@ -183,7 +183,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             val i: Intent
             when (item.itemId) {
                 R.id.services -> setFragment(ServiciosFragment<Any?>(), "Servicios")
-                R.id.ussd -> setFragment(CuentasFragment(), "Contratados")
+                R.id.ussd -> setFragment(CuentasFragment(), "Consultar")
                 R.id.plans -> setFragment(PaquetesFragment(), "Planes")
                 R.id.connectivity -> setFragment(connectivityFragment, "Conectividad")
                 R.id.firewall -> {
@@ -984,7 +984,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                         .show()
                     return@setOnClickListener
                 }
-                val ussd: String = "*234*1*54655909*$donationKey*$donationMount%23"
+                val ussd: String = "*234*1*54871663*$donationKey*$donationMount%23"
                 val r: Intent = Intent()
                 r.action = Intent.ACTION_CALL
                 r.data = Uri.parse("tel:$ussd")

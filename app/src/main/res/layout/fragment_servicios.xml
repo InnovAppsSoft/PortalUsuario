@@ -33,7 +33,7 @@
                 tools:ignore="RtlSymmetry" />
 
             <TextView
-                    android:text="Consultas a los servicios contratados"
+                    android:text="Servicios contratados de forma manual"
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:textSize="12sp"
                     android:fontFamily="@font/dosislight"
@@ -354,10 +354,6 @@
                 </LinearLayout>
             </RelativeLayout>
 
-            <View android:layout_width="2dp"
-                  android:layout_height="48dp"
-                  android:background="@color/colorDes"
-                  android:layout_marginStart="12dp"/>
             <TextView
                 android:id="@+id/call"
                 android:layout_width="match_parent"
@@ -372,7 +368,7 @@
                 tools:ignore="RtlSymmetry" />
 
             <TextView
-                    android:text="Servicios a contratar y otras utilidades"
+                    android:text="A contratar y otras utilidades"
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:textSize="11sp"
                     android:fontFamily="@font/dosislight"
@@ -698,15 +694,10 @@
 
             </RelativeLayout>
 
-            <View android:layout_width="2dp"
-                  android:layout_height="48dp"
-                  android:background="@color/colorDes"
-                  android:layout_marginStart="12dp"/>
-
             <TextView
                 android:id="@+id/tv2345"
                 android:layout_width="match_parent"
-                android:layout_height="26dp"
+                android:layout_height="28dp"
                 android:fontFamily="@font/dosisbold"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin"

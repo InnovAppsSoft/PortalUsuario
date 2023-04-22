@@ -5,7 +5,6 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior"
         android:id="@+id/swipeRefresh">
 
     <androidx.core.widget.NestedScrollView
@@ -13,507 +12,378 @@
             android:layout_width="match_parent">
 
         <LinearLayout
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:paddingRight="16dp"
-                android:orientation="vertical"
-                android:paddingLeft="16dp"
-                android:paddingTop="5dp">
+        android:orientation="vertical"
+        android:background="@color/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".nauta.ui.PortalNautaActivity">
 
-            <com.google.android.material.card.MaterialCardView
-                    android:layout_height="wrap_content"
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/textView17"
                     android:layout_width="match_parent"
-                    app:cardElevation="3dp"
-                    app:cardCornerRadius="20dp">
+                    android:layout_height="wrap_content"
+                    android:text="@string/saldo_disponible"
+                    android:layout_marginTop="24dp"
+                    android:textColor="@color/colorDes"
+                    android:fontFamily="@font/dosisbold"
+                    android:textSize="@dimen/_15ssp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:textAlignment="center" />
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_cuentas_saldo"
+                    android:text="0.00 CUP"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorDes"
+                    android:fontFamily="@font/dosisbold"
+                    android:textSize="@dimen/_20ssp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp" />
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_cuentas_vence_sim"
+                    android:text="Expira: 00/00/00"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorDes"
+                    android:fontFamily="@font/dosislight"
+                    android:textSize="@dimen/_13ssp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp" />
+
+            <androidx.cardview.widget.CardView
+                    app:cardUseCompatPadding="true"
+                    app:cardBackgroundColor="@color/background_color_50"
+                    app:cardCornerRadius="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp">
 
                 <LinearLayout
-                        android:layout_height="match_parent"
                         android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
                         android:padding="10dp"
-                        android:orientation="vertical">
-
-                    <LinearLayout
-                            android:layout_height="match_parent"
-                            android:layout_width="match_parent"
-                            android:gravity="center_vertical"
-                            android:padding="4dp"
-                            android:orientation="horizontal">
-
-                        <LinearLayout
-                                android:layout_height="wrap_content"
-                                android:layout_width="match_parent"
-                                android:gravity="center_vertical"
-                                android:layout_weight="1">
-
-                            <CheckBox
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="wrap_content"
-                                    android:button="@drawable/sl_type_sim_24dp"
-                                    app:buttonTint="?attr/colorControlNormal"
-                                    android:id="@+id/check_sim_dual" />
-
-                        </LinearLayout>
-
-                        <com.google.android.material.card.MaterialCardView
-                                android:layout_height="24dp"
-                                android:layout_width="wrap_content"
-                                app:backgroundTint="?attr/colorSecondaryContainer"
-                                android:padding="4dp"
-                                android:layout_marginLeft="10dp"
-                                android:textColor="?attr/colorOnSurface"
-                                android:insetRight="0dp"
-                                android:scaleType="centerInside"
-                                android:gravity="center"
-                                android:textAppearance="?textAppearanceBodySmall"
-                                android:insetTop="0dp"
-                                app:cornerRadius="30dp"
-                                android:insetBottom="0dp"
-                                android:id="@+id/button_cuentas_bono"
-                                android:insetLeft="0dp"
-                                android:text="BONOS" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                        <TextView
-                                android:layout_height="wrap_content"
-                                android:layout_width="wrap_content"
-                                android:textAppearance="?textAppearanceBodyMedium"
-                                android:text="Tienes" />
-
-                        <TextView
-                                android:layout_height="wrap_content"
-                                android:layout_width="wrap_content"
-                                android:textAppearance="?textAppearanceHeadlineMedium"
-                                android:id="@+id/text_cuentas_saldo"
-                                android:text="0.00 CUP" />
-
-                        <TextView
-                                android:layout_height="wrap_content"
-                                android:layout_width="wrap_content"
-                                android:textAppearance="?textAppearanceBodySmall"
-                                android:id="@+id/text_cuentas_vence_sim"
-                                android:text="Expira: 00/00/00" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:padding="5dp"
-                            android:orientation="horizontal">
-
-                        <LinearLayout
-                                android:layout_height="wrap_content"
-                                android:layout_width="match_parent"
-                                android:padding="4dp"
-                                android:orientation="vertical"
-                                android:layout_weight="1">
-
-                            <ImageView
-                                    android:layout_height="18dp"
-                                    android:layout_width="18dp"
-                                    android:src="@drawable/unselect_llamadas"
-                                    android:layout_gravity="center_horizontal"
-                                    app:tint="?attr/colorPrimary" />
-
-                            <TextView
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="match_parent"
-                                    android:textAppearance="?textAppearanceBodyMedium"
-                                    android:id="@+id/text_cuentas_minutos"
-                                    android:layout_gravity="center_horizontal"
-                                    android:text="00:00:00"
-                                    android:gravity="center" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                                android:layout_height="wrap_content"
-                                android:layout_width="match_parent"
-                                android:padding="4dp"
-                                android:orientation="vertical"
-                                android:layout_weight="1">
-
-                            <ImageView
-                                    android:layout_height="18dp"
-                                    android:layout_width="18dp"
-                                    android:src="@drawable/ic_drawer_entumovil"
-                                    android:layout_gravity="center_horizontal"
-                                    app:tint="?attr/colorPrimary" />
-
-                            <TextView
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="match_parent"
-                                    android:textAppearance="?textAppearanceBodyMedium"
-                                    android:id="@+id/text_cuentas_mensajes"
-                                    android:layout_gravity="center_horizontal"
-                                    android:text="0"
-                                    android:gravity="center" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                                android:layout_height="wrap_content"
-                                android:layout_width="match_parent"
-                                android:padding="4dp"
-                                android:orientation="vertical"
-                                android:layout_weight="1">
-
-                            <ImageView
-                                    android:layout_height="18dp"
-                                    android:layout_width="18dp"
-                                    android:src="@drawable/ic_cuentas_calendario"
-                                    android:layout_gravity="center_horizontal"
-                                    app:tint="?attr/colorPrimary" />
-
-                            <TextView
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="wrap_content"
-                                    android:textAppearance="?textAppearanceBodyMedium"
-                                    android:id="@+id/text_cuentas_vence_min_sms"
-                                    android:layout_gravity="center_horizontal"
-                                    android:text="0 dias" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
+                        android:layout_marginBottom="30dp">
 
                     <TextView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:textAppearance="?textAppearanceBodySmall"
+                            android:layout_margin="10dp"
                             android:id="@+id/text_hora_update"
-                            android:text="Actualizado: 00:00"
-                            android:layout_gravity="center_horizontal" />
+                            android:text="Ultima actualizacion: 00:00"
+                            android:textColor="@color/colorDes"
+                            android:fontFamily="@font/dosislight"
+                            android:textSize="@dimen/_13ssp"
+                            android:textStyle="bold" />
 
+                    <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/colorDes">
+
+                    </FrameLayout>
+
+                    <TextView
+                            android:text="Voz"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:textColor="@color/colorDes"
+                            android:fontFamily="@font/displaybold"
+                            android:textSize="@dimen/_13ssp"
+                            android:textStyle="bold" />
+
+                    <TextView
+                            android:id="@+id/text_cuentas_minutos"
+                            android:text="00:00:00"
+                            android:fontFamily="@font/dosislight"
+                            android:textColor="@color/colorTextHit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp" />
+
+                    <TextView
+                            android:id="@+id/textView8"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:text="@string/sms"
+                            android:textColor="@color/colorDes"
+                            android:fontFamily="@font/displaybold"
+                            android:textSize="@dimen/_13ssp"
+                            android:textStyle="bold" />
+
+                    <TextView
+                            android:textColor="@color/colorTextHit"
+                            android:id="@+id/text_cuentas_mensajes"
+                            android:text="0"
+                            android:fontFamily="@font/dosislight"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp" />
+
+                    <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/colorDes"
+                            android:fontFamily="@font/displaybold"
+                            android:textSize="@dimen/_13ssp"
+                            android:layout_marginRight="10dp"
+                            android:text="@string/vence_minutos_y_sms"
+                            android:textStyle="bold" />
+
+                    <TextView
+                            android:textColor="@color/colorTextHit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/dosislight"
+                            android:text="0 dias"
+                            android:id="@+id/text_cuentas_vence_min_sms"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp" />
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:text="@string/datos"
+
+                            android:textColor="@color/colorDes"
+                            android:fontFamily="@font/displaybold"
+                            android:textSize="@dimen/_13ssp"
+                            android:textStyle="bold" />
+
+                    <TextView
+                            android:textColor="@color/colorTextHit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/text_cuentas_datos"
+                            android:text="0 MB"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            app:fontFamily="@font/dosislight" />
+
+                    <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:text="LTE"
+                            android:textColor="@color/colorDes"
+                            android:fontFamily="@font/displaybold"
+                            android:textSize="@dimen/_13ssp"
+                            android:textStyle="bold"
+                            />
+
+                    <TextView
+                            android:textColor="@color/colorTextHit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/text_cuentas_datos_lte"
+                            android:text="0 MB"
+                            android:fontFamily="@font/dosislight"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp" />
+
+                    <TextView
+                            android:textColor="@color/colorDes"
+                            android:fontFamily="@font/displaybold"
+                            android:textSize="@dimen/_13ssp"
+                            android:id="@+id/textView16"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:text="@string/datos_nacionales1"
+                            android:textStyle="bold" />
+
+                    <TextView
+                            android:textColor="@color/colorTextHit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/text_cuentas_datos_nacionales"
+                            android:text="0 MB"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            app:fontFamily="@font/dosislight" />
+
+                    <TextView
+                            android:textColor="@color/colorDes"
+                            android:fontFamily="@font/displaybold"
+                            android:textSize="@dimen/_13ssp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:text="Vence Datos"
+                            android:textStyle="bold" />
+
+                    <TextView
+                            android:textColor="@color/colorTextHit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/text_cuentas_vence_datos"
+                            android:text="0 dias"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            app:fontFamily="@font/dosislight" />
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.card.MaterialCardView
-                    android:layout_height="wrap_content"
+            <androidx.cardview.widget.CardView
+                    app:cardUseCompatPadding="true"
+                    app:cardBackgroundColor="@color/background_color_50"
                     android:layout_width="match_parent"
-                    app:cardElevation="3dp"
-                    android:layout_marginTop="10dp"
-                    app:cardCornerRadius="20dp">
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    app:cardCornerRadius="5dp"
+                    >
 
                 <LinearLayout
-                        android:layout_height="match_parent"
                         android:layout_width="match_parent"
-                        android:padding="10dp"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
 
-                    <LinearLayout
-                            android:layout_height="wrap_content"
+                    <TextView
+                            android:id="@+id/textView18"
                             android:layout_width="match_parent"
-                            android:gravity="center_vertical"
-                            android:padding="4dp">
-
-                        <TextView
-                                android:layout_height="wrap_content"
-                                android:layout_width="wrap_content"
-                                android:textAppearance="?textAppearanceTitleSmall"
-                                android:layout_weight="1"
-                                android:text="INTERNET" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
                             android:layout_height="wrap_content"
+                            android:text="Bolsa Mensajeria"
+                            android:textColor="@color/colorDes"
+                            android:fontFamily="@font/displaybold"
+                            android:textSize="@dimen/_13ssp"
+                            android:textStyle="bold" />
+
+                    <FrameLayout
                             android:layout_width="match_parent"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:layout_height="2dp"
+                            android:background="@color/colorDes">
 
-                        <com.google.android.material.card.MaterialCardView
-                                android:layout_height="130dp"
-                                android:layout_width="match_parent"
-                                android:padding="4dp"
-                                android:layout_margin="5dp"
-                                app:strokeWidth="0dp"
-                                style="?attr/materialCardViewFilledStyle"
-                                app:cardCornerRadius="30dp"
-                                android:layout_weight="1">
+                    </FrameLayout>
 
-                            <LinearLayout
-                                    android:layout_height="match_parent"
-                                    android:layout_width="match_parent"
-                                    android:gravity="center"
-                                    android:padding="10dp"
-                                    android:orientation="vertical">
+                    <TextView
+                            android:textColor="@color/colorTextHit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/text_cuentas_mensajeria"
+                            android:text="0 MB"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="10dp"
+                            app:fontFamily="@font/dosislight" />
 
-                                <ImageView
-                                        android:layout_height="18dp"
-                                        android:layout_width="18dp"
-                                        android:src="@drawable/round_perm_data_setting_24"
-                                        app:tint="?attr/colorPrimary" />
+                    <TextView
+                            android:textColor="@color/colorTextHit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/text_cuentas_vence_mensajeria"
+                            android:text="0 dias"
+                            android:layout_marginRight="10dp"
+                            app:fontFamily="@font/dosislight" />
 
-                                <TextView
-                                        android:layout_height="wrap_content"
-                                        android:layout_width="wrap_content"
-                                        android:gravity="center"
-                                        android:textAppearance="?textAppearanceLabelMedium"
-                                        android:id="@+id/text_cuentas_datos"
-                                        android:text="0 MB" />
-
-                            </LinearLayout>
-
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <com.google.android.material.card.MaterialCardView
-                                android:layout_height="130dp"
-                                android:layout_width="match_parent"
-                                android:padding="4dp"
-                                android:layout_margin="5dp"
-                                app:strokeWidth="0dp"
-                                style="?attr/materialCardViewFilledStyle"
-                                app:cardCornerRadius="30dp"
-                                android:layout_weight="1">
-
-                            <LinearLayout
-                                    android:layout_height="match_parent"
-                                    android:layout_width="match_parent"
-                                    android:gravity="center"
-                                    android:padding="10dp"
-                                    android:orientation="vertical">
-
-                                <ImageView
-                                        android:layout_height="18dp"
-                                        android:layout_width="18dp"
-                                        android:src="@drawable/ic_planes_lte"
-                                        app:tint="?attr/colorPrimary" />
-
-                                <TextView
-                                        android:layout_height="wrap_content"
-                                        android:layout_width="wrap_content"
-                                        android:gravity="center"
-                                        android:textAppearance="?textAppearanceLabelMedium"
-                                        android:id="@+id/text_cuentas_datos_lte"
-                                        android:text="0 MB" />
-
-                            </LinearLayout>
-
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <com.google.android.material.card.MaterialCardView
-                                android:layout_height="130dp"
-                                android:layout_width="match_parent"
-                                android:padding="4dp"
-                                android:layout_margin="5dp"
-                                app:strokeWidth="0dp"
-                                style="?attr/materialCardViewFilledStyle"
-                                app:cardCornerRadius="30dp"
-                                android:layout_weight="1">
-
-                            <LinearLayout
-                                    android:layout_height="match_parent"
-                                    android:layout_width="match_parent"
-                                    android:gravity="center"
-                                    android:padding="10dp"
-                                    android:orientation="vertical">
-
-                                <ImageView
-                                        android:layout_height="18dp"
-                                        android:layout_width="18dp"
-                                        android:src="@drawable/ic_cuentas_nacionales"
-                                        app:tint="?attr/colorPrimary" />
-
-                                <TextView
-                                        android:layout_height="wrap_content"
-                                        android:layout_width="wrap_content"
-                                        android:gravity="center"
-                                        android:textAppearance="?textAppearanceLabelMedium"
-                                        android:id="@+id/text_cuentas_datos_nacionales"
-                                        android:text="0 MB" />
-
-                            </LinearLayout>
-
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <com.google.android.material.card.MaterialCardView
-                                android:layout_height="130dp"
-                                android:layout_width="match_parent"
-                                android:padding="4dp"
-                                android:layout_margin="5dp"
-                                app:strokeWidth="0dp"
-                                style="?attr/materialCardViewFilledStyle"
-                                app:cardCornerRadius="30dp"
-                                android:layout_weight="1">
-
-                            <LinearLayout
-                                    android:layout_height="match_parent"
-                                    android:layout_width="match_parent"
-                                    android:gravity="center"
-                                    android:padding="10dp"
-                                    android:orientation="vertical">
-
-                                <ImageView
-                                        android:layout_height="18dp"
-                                        android:layout_width="18dp"
-                                        android:src="@drawable/ic_cuentas_calendario"
-                                        app:tint="?attr/colorPrimary" />
-
-                                <TextView
-                                        android:layout_height="wrap_content"
-                                        android:layout_width="wrap_content"
-                                        android:gravity="center"
-                                        android:textAppearance="?textAppearanceLabelMedium"
-                                        android:id="@+id/text_cuentas_vence_datos"
-                                        android:text="0 dias" />
-
-                            </LinearLayout>
-
-                        </com.google.android.material.card.MaterialCardView>
-
-                    </LinearLayout>
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.card.MaterialCardView
-                    android:layout_height="wrap_content"
+            <androidx.cardview.widget.CardView
+                    app:cardUseCompatPadding="true"
+                    app:cardBackgroundColor="@color/background_color_50"
                     android:layout_width="match_parent"
-                    app:cardElevation="3dp"
-                    android:layout_marginTop="10dp"
-                    app:cardCornerRadius="20dp">
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="20dp"
+                    app:cardCornerRadius="5dp">
 
                 <LinearLayout
-                        android:layout_height="match_parent"
                         android:layout_width="match_parent"
-                        android:padding="10dp"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
 
-                    <LinearLayout
-                            android:layout_height="wrap_content"
+                    <TextView
                             android:layout_width="match_parent"
-                            android:gravity="center_vertical"
-                            android:padding="4dp">
-
-                        <TextView
-                                android:layout_height="wrap_content"
-                                android:layout_width="wrap_content"
-                                android:textAppearance="?textAppearanceTitleSmall"
-                                android:layout_weight="1"
-                                android:text="Bolsas" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
                             android:layout_height="wrap_content"
+                            android:text="Bolsa Diaria"
+                            android:textColor="@color/colorDes"
+                            android:fontFamily="@font/displaybold"
+                            android:textSize="@dimen/_13ssp"
+                            android:textStyle="bold" />
+
+                    <FrameLayout
                             android:layout_width="match_parent"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:layout_height="2dp"
+                            android:background="@color/colorDes">
 
-                        <com.google.android.material.card.MaterialCardView
-                                android:layout_height="wrap_content"
-                                android:layout_width="match_parent"
-                                app:strokeWidth="0dp"
-                                app:cardCornerRadius="30dp"
-                                android:layout_weight="1">
+                    </FrameLayout>
 
-                            <LinearLayout
-                                    android:layout_height="match_parent"
-                                    android:layout_width="match_parent"
-                                    android:gravity="center"
-                                    android:padding="10dp"
-                                    android:orientation="vertical">
+                    <TextView
+                            android:textColor="@color/colorTextHit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/text_cuentas_diaria"
+                            android:text="0 MB"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="10dp"
+                            app:fontFamily="@font/dosislight" />
 
-                                <ImageView
-                                        android:layout_height="18dp"
-                                        android:layout_width="18dp"
-                                        android:src="@drawable/ic_planes_mensajeria"
-                                        app:tint="?attr/colorPrimary" />
+                    <TextView
+                            android:textColor="@color/colorTextHit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/text_cuentas_vence_diaria"
+                            android:text="0 horas"
+                            android:layout_marginRight="10dp"
+                            app:fontFamily="@font/dosislight" />
 
-                                <TextView
-                                        android:layout_height="wrap_content"
-                                        android:layout_width="wrap_content"
-                                        android:gravity="center"
-                                        android:textAppearance="?textAppearanceLabelMedium"
-                                        android:id="@+id/text_cuentas_mensajeria"
-                                        android:text="0 MB" />
-
-                                <TextView
-                                        android:layout_height="wrap_content"
-                                        android:layout_width="wrap_content"
-                                        android:gravity="center"
-                                        android:textAppearance="?textAppearanceBodySmall"
-                                        android:id="@+id/text_cuentas_vence_mensajeria"
-                                        android:text="0 dias" />
-
-                            </LinearLayout>
-
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <com.google.android.material.card.MaterialCardView
-                                android:layout_height="wrap_content"
-                                android:layout_width="match_parent"
-                                app:strokeWidth="0dp"
-                                android:layout_marginLeft="6dp"
-                                app:cardCornerRadius="30dp"
-                                android:layout_weight="1">
-
-                            <LinearLayout
-                                    android:layout_height="match_parent"
-                                    android:layout_width="match_parent"
-                                    android:gravity="center"
-                                    android:padding="10dp"
-                                    android:orientation="vertical">
-
-                                <ImageView
-                                        android:layout_height="18dp"
-                                        android:layout_width="18dp"
-                                        android:src="@drawable/ic_planes_diaria"
-                                        app:tint="?attr/colorPrimary" />
-
-                                <TextView
-                                        android:layout_height="wrap_content"
-                                        android:layout_width="wrap_content"
-                                        android:gravity="center"
-                                        android:textAppearance="?textAppearanceLabelMedium"
-                                        android:id="@+id/text_cuentas_diaria"
-                                        android:text="0 MB" />
-
-                                <TextView
-                                        android:layout_height="wrap_content"
-                                        android:layout_width="wrap_content"
-                                        android:gravity="center"
-                                        android:textAppearance="?textAppearanceBodySmall"
-                                        android:id="@+id/text_cuentas_vence_diaria"
-                                        android:text="0 horas" />
-
-                            </LinearLayout>
-
-                        </com.google.android.material.card.MaterialCardView>
-
-                    </LinearLayout>
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.chip.Chip
-                    android:layout_height="40dp"
-                    android:layout_width="wrap_content"
-                    app:chipCornerRadius="20dp"
-                    android:clickable="false"
-                    app:chipEndPadding="2dp"
-                    android:textSize="11dp"
-                    android:layout_marginTop="10dp"
-                    app:chipStartPadding="2dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="84dp"
-                    android:textAppearance="?textAppearanceBodySmall"
-                    style="@style/Widget.Material3.Chip.Suggestion"
-                    android:checked="true"
-                    android:text="Text" />
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
+
+</LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 

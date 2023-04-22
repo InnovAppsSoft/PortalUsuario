@@ -1037,6 +1037,10 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="msg_report_action">Reportar</string>
     <string name="title_cuenta">Cuentas</string>
     <string name="sim_key">sim_key</string>
+    <string name="saldo_disponible">Saldo Disponible</string>
+    <string name="vence_minutos_y_sms">Vence Minutos y SMS</string>
+    <string name="paquetes_lte1">Paquetes LTE</string>
+    <string name="datos_nacionales1">Datos Nacionales</string>
 
 
 </resources>
