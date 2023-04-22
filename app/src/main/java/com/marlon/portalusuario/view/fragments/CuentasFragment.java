@@ -1,6 +1,7 @@
 package com.marlon.portalusuario.view.Fragments;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -13,36 +14,35 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.elevation.SurfaceColors;
 import com.marlon.portalusuario.R;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.tabs.TabLayout;
-import com.marlon.portalusuario.databinding.CustomProgressDialogBinding;
-import com.marlon.portalusuario.databinding.FragmentCuentasBinding;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 public class CuentasFragment extends Fragment {
 
-    private FragmentCuentasBinding binding;
+    private Button ButtonBonos;
+    private SwipeRefreshLayout Refrescar;
+
+    private TextView saldotext, expiratext, minutostext, mensajestext, venceminutossms, datostext, datoslte, datosnacionales, vencedatos, bolsasms,vencebolsasms,bolsadiaria,vencebolsadiaria,Actulizar;
     TelephonyManager manager, manager2, managerMain;
     SharedPreferences sp_cuentas;
     SharedPreferences.Editor editor;
 
     AlertDialog alertDialog;
-    private CustomProgressDialogBinding dialog;
 
     // TODO: account handle and sim slot
     private List<PhoneAccountHandle> phoneAccountHandleList;
@@ -65,22 +65,37 @@ public class CuentasFragment extends Fragment {
             "slotIdx"
     };
     // TODO: preference dualSim
-    SharedPreferences sp_sim;
     String sim;
+    SharedPreferences sp_sim;
 
     @Override
-    public View onCreateView(LayoutInflater inflate, ViewGroup parent, Bundle savedInstanceState) {
-        binding = FragmentCuentasBinding.inflate(inflate, parent, false);
-        ((TabLayout) getActivity().findViewById(R.id.tab_layout)).setVisibility(View.GONE);
-        ((CollapsingToolbarLayout) getActivity().findViewById(R.id.collapsing_toolbar_layout))
-                .setTitle(getString(R.string.title_cuenta));
-        setHasOptionsMenu(true);
-        return binding.getRoot();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_cuentas, container, false);
+
+        Refrescar = v.findViewById(R.id.swipeRefresh);
+        saldotext = v.findViewById(R.id.text_cuentas_saldo);
+        expiratext = v.findViewById(R.id.text_cuentas_vence_sim);
+        minutostext = v.findViewById(R.id.text_cuentas_minutos);
+        mensajestext = v.findViewById(R.id.text_cuentas_mensajes);
+        venceminutossms = v.findViewById(R.id.text_cuentas_vence_min_sms);
+        datostext = v.findViewById(R.id.text_cuentas_datos);
+        datoslte = v.findViewById(R.id.text_cuentas_datos_lte);
+        datosnacionales = v.findViewById(R.id.text_cuentas_datos_nacionales);
+        vencedatos = v.findViewById(R.id.text_cuentas_vence_datos);
+        bolsasms = v.findViewById(R.id.text_cuentas_mensajeria);
+        vencebolsasms = v.findViewById(R.id.text_cuentas_vence_mensajeria);
+        bolsadiaria = v.findViewById(R.id.text_cuentas_diaria);
+        vencebolsadiaria = v.findViewById(R.id.text_cuentas_vence_diaria);
+        Actulizar =v.findViewById(R.id.text_hora_update);
+
+        //
+        return v;
     }
 
     @Override
     public void onDestroyView() {
-        binding = null;
         super.onDestroyView();
     }
 
@@ -96,37 +111,19 @@ public class CuentasFragment extends Fragment {
         sp_sim = PreferenceManager.getDefaultSharedPreferences(getActivity());
         sim = (sp_sim.getString(getString(R.string.sim_key), "0"));
 
-        // TODO: Ver bonos promocionales
-        binding.buttonCuentasBono.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String promo = sp_cuentas.getString("bonos", null);
-                        new MaterialAlertDialogBuilder(getContext())
-                                .setMessage(promo)
-                                .setPositiveButton("Ok", null)
-                                .show();
-                    }
-                });
 
         // TODO: SwipeRefresh
-        binding.swipeRefresh.setColorSchemeResources(R.color.md_theme_light_primary);
-        binding.swipeRefresh.setProgressBackgroundColorSchemeColor(
-                SurfaceColors.SURFACE_1.getColor(getActivity()));
-        binding.swipeRefresh.setOnRefreshListener(
+        Refrescar.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
                         // Progress dialog
-                        dialog =
-                                CustomProgressDialogBinding.inflate(
-                                        LayoutInflater.from(getContext()));
-                        alertDialog =
-                                new MaterialAlertDialogBuilder(getActivity())
-                                        .setView(dialog.getRoot())
-                                        .setCancelable(false)
-                                        .create();
-                        alertDialog.show();
+                        ProgressDialog progressDialog = new ProgressDialog(getActivity());
+                        progressDialog.setMax(100);
+                        progressDialog.setTitle("Actualizando USSD");
+                        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                        progressDialog.setCancelable(false);
+                        progressDialog.show();
 
                         // UPDATE
                         new Handler(Looper.getMainLooper())
@@ -143,11 +140,9 @@ public class CuentasFragment extends Fragment {
                                                         consultaSaldo("*222#", 1);
                                                     }
                                                 }
-                                                dialog.textProgressCuenta.setText(
+                                                progressDialog.setTitle(
                                                         "Actualizando saldo");
-                                                // cancel swipe
-                                                // binding.swipeRefresh.setRefreshing(false);
-                                                // updateMinutos();
+                                                progressDialog.setProgress(20);
 
                                                 //// MINUTOS
                                                 new Handler(Looper.getMainLooper())
@@ -171,9 +166,9 @@ public class CuentasFragment extends Fragment {
                                                                                         1);
                                                                             }
                                                                         }
-                                                                        dialog.textProgressCuenta
-                                                                                .setText(
+                                                                        progressDialog.setTitle(
                                                                                         "Actualizando minutos");
+                                                                        progressDialog.setProgress(40);
 
                                                                         // MENSAJES
                                                                         new Handler(
@@ -206,10 +201,9 @@ public class CuentasFragment extends Fragment {
                                                                                                                 1);
                                                                                                     }
                                                                                                 }
-                                                                                                dialog
-                                                                                                        .textProgressCuenta
-                                                                                                        .setText(
+                                                                                                progressDialog.setTitle(
                                                                                                                 "Actualizando mensajes");
+                                                                                                progressDialog.setProgress(60);
                                                                                                 // BONOS
                                                                                                 new Handler(
                                                                                                         Looper
@@ -241,10 +235,9 @@ public class CuentasFragment extends Fragment {
                                                                                                                                         1);
                                                                                                                             }
                                                                                                                         }
-                                                                                                                        dialog
-                                                                                                                                .textProgressCuenta
-                                                                                                                                .setText(
+                                                                                                                        progressDialog.setTitle(
                                                                                                                                         "Actualizando bonos");
+                                                                                                                        progressDialog.setProgress(80);
 
                                                                                                                         /// DATOS
                                                                                                                         new Handler(
@@ -277,12 +270,10 @@ public class CuentasFragment extends Fragment {
                                                                                                                                                                 1);
                                                                                                                                                     }
                                                                                                                                                 }
-                                                                                                                                                dialog
-                                                                                                                                                        .textProgressCuenta
-                                                                                                                                                        .setText(
+                                                                                                                                                progressDialog.setTitle(
                                                                                                                                                                 "Actualizando datos");
-                                                                                                                                                binding
-                                                                                                                                                        .swipeRefresh
+                                                                                                                                                progressDialog.setProgress(100);
+                                                                                                                                                        Refrescar
                                                                                                                                                         .setRefreshing(
                                                                                                                                                                 false);
                                                                                                                                                 // hora
@@ -302,8 +293,7 @@ public class CuentasFragment extends Fragment {
                                                                                                                                                                         .toString());
                                                                                                                                                 editor
                                                                                                                                                         .commit();
-                                                                                                                                                binding
-                                                                                                                                                        .textHoraUpdate
+                                                                                                                                                Actulizar
                                                                                                                                                         .setText(
                                                                                                                                                                 "Actualizado: "
                                                                                                                                                                         + time);
@@ -317,8 +307,7 @@ public class CuentasFragment extends Fragment {
                                                                                                                                                                     public
                                                                                                                                                                     void
                                                                                                                                                                     run() {
-                                                                                                                                                                        alertDialog
-                                                                                                                                                                                .dismiss();
+                                                                                                                                                                        progressDialog.dismiss();
                                                                                                                                                                     }
                                                                                                                                                                 },
                                                                                                                                                                 5000);
@@ -339,31 +328,6 @@ public class CuentasFragment extends Fragment {
                                         1000);
                     }
                 });
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_cuentas, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.update:
-                dialogInformation();
-                break;
-            default:
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void dialogInformation() {
-        new MaterialAlertDialogBuilder(getActivity())
-                .setTitle("Atención")
-                .setMessage(getString(R.string.cuentas_message))
-                .setPositiveButton("Ok", null)
-                .show();
     }
 
     public void consultaSaldo(String ussdCode, int sim) {
@@ -395,7 +359,7 @@ public class CuentasFragment extends Fragment {
                             StringBuilder sb1 = new StringBuilder();
                             sb1.append(message_saldo);
                             sb1.append(" CUP");
-                            binding.textCuentasSaldo.setText(sb1);
+                            saldotext.setText(sb1);
                             editor.putString("saldo", sb1.toString());
                             editor.commit();
 
@@ -409,7 +373,7 @@ public class CuentasFragment extends Fragment {
                             StringBuilder sb2 = new StringBuilder();
                             sb2.append("Expira: ");
                             sb2.append(message_vence);
-                            binding.textCuentasVenceSim.setText(sb2);
+                            expiratext.setText(sb2);
                             editor.putString("vence_saldo", sb2.toString());
                             editor.commit();
                         }
@@ -459,7 +423,7 @@ public class CuentasFragment extends Fragment {
                                             .replace("Usted dispone de", "")
                                             .replaceFirst("MIN(.*)", "")
                                             .trim();
-                            binding.textCuentasMinutos.setText(minutos);
+                            minutostext.setText(minutos);
                             editor.putString("minutos", minutos.toString());
                             editor.commit();
                         }
@@ -514,7 +478,7 @@ public class CuentasFragment extends Fragment {
                                             .replace("no activos.", "")
                                             .replaceFirst("SMS(.*)", "")
                                             .trim();
-                            binding.textCuentasMensajes.setText(message_sms);
+                            mensajestext.setText(message_sms);
                             editor.putString("sms", message_sms.toString());
                             editor.commit();
 
@@ -536,7 +500,7 @@ public class CuentasFragment extends Fragment {
                                             .toString()
                                             .replaceFirst("(.*)no activos.", "0 días"));
                             editor.commit();
-                            binding.textCuentasVenceMinSms.setText(message_vence_sms);
+                            venceminutossms.setText(message_vence_sms);
 
                             // no usp
                             String vence_sms_min =
@@ -608,7 +572,7 @@ public class CuentasFragment extends Fragment {
                                             .replace("No dispone de MB.", "0 MB"));
                             editor.commit();
                             String bolsa_diaria = sp_cuentas.getString("diaria", diaria.toString());
-                            binding.textCuentasDiaria.setText(bolsa_diaria);
+                            bolsadiaria.setText(bolsa_diaria);
 
                             // vencimiento de bolsa diaria
                             String message_vence_diaria =
@@ -636,7 +600,7 @@ public class CuentasFragment extends Fragment {
                             String vence_diaria =
                                     sp_cuentas.getString(
                                             "vence_diaria", message_vence_diaria.toString());
-                            binding.textCuentasVenceDiaria.setText(vence_diaria);
+                            vencebolsadiaria.setText(vence_diaria);
 
                             // bolsa de mensajeria
                             String message_mensajeria =
@@ -671,7 +635,7 @@ public class CuentasFragment extends Fragment {
                             String bolsa_msg =
                                     sp_cuentas.getString(
                                             "mensajeria", message_mensajeria.toString());
-                            binding.textCuentasMensajeria.setText(bolsa_msg);
+                            bolsasms.setText(bolsa_msg);
 
                             // vence mensajeria
                             String message_vence_mensajeria =
@@ -705,7 +669,7 @@ public class CuentasFragment extends Fragment {
                             editor.commit();
                             String vence_mensajeria =
                                     sp_cuentas.getString("vence_mensajeria", "0 días");
-                            binding.textCuentasVenceMensajeria.setText(vence_mensajeria);
+                            vencebolsasms.setText(vence_mensajeria);
 
                             // paquetes
                             String message_paquete =
@@ -731,7 +695,7 @@ public class CuentasFragment extends Fragment {
                             editor.commit();
                             String paquete =
                                     sp_cuentas.getString("paquete", message_paquete.toString());
-                            binding.textCuentasDatos.setText(paquete);
+                            datostext.setText(paquete);
 
                             // TODO: message paquete LTE
                             String message_lte =
@@ -756,7 +720,7 @@ public class CuentasFragment extends Fragment {
                                             .replace("no activos.", "");
                             editor.putString("lte", lte.toString());
                             editor.commit();
-                            binding.textCuentasDatosLte.setText(lte);
+                            datoslte.setText(lte);
 
                             // TODO: vencimiento de datos
                             String vencimiento_datos =
@@ -781,7 +745,7 @@ public class CuentasFragment extends Fragment {
                                             .replaceFirst("(.*)LTE", "");
                             editor.putString("vence_datos", vence.toString());
                             editor.commit();
-                            binding.textCuentasVenceDatos.setText(vence);
+                            vencedatos.setText(vence);
                         }
 
                         @Override
@@ -829,7 +793,7 @@ public class CuentasFragment extends Fragment {
                                             .trim();
                             editor.putString("datos_nacionales", datos_nacionales.toString());
                             editor.commit();
-                            binding.textCuentasDatosNacionales.setText(datos_nacionales);
+                            datosnacionales.setText(datos_nacionales);
 
                             // TODO: Bonos en promoción
                             String bonos =
@@ -839,9 +803,9 @@ public class CuentasFragment extends Fragment {
                                             .trim();
                             String string_bono = bonos.toString();
                             if (!TextUtils.isEmpty(string_bono)) {
-                                binding.buttonCuentasBono.setVisibility(View.VISIBLE);
+                                ButtonBonos.setVisibility(View.VISIBLE);
                             } else {
-                                binding.buttonCuentasBono.setVisibility(View.GONE);
+                                ButtonBonos.setVisibility(View.GONE);
                             }
                             editor.putString("bonos", string_bono.toString());
                             editor.commit();
@@ -869,50 +833,46 @@ public class CuentasFragment extends Fragment {
         super.onResume();
         // saldo movil
         String saldo = sp_cuentas.getString("saldo", "0.00 CUP");
-        binding.textCuentasSaldo.setText(saldo);
+        saldotext.setText(saldo);
         // vence saldo movil
         String vence_saldo = sp_cuentas.getString("vence_saldo", "Expira: 00/00/00");
-        binding.textCuentasVenceSim.setText(vence_saldo);
+        expiratext.setText(vence_saldo);
         // minutos
         String minutos = sp_cuentas.getString("minutos", "00:00:00");
-        binding.textCuentasMinutos.setText(minutos);
+        minutostext.setText(minutos);
         // mensajes
         String mensajes = sp_cuentas.getString("sms", "0");
-        binding.textCuentasMensajes.setText(mensajes);
+        mensajestext.setText(mensajes);
         // vence sms y voz
         String vence_min_sms = sp_cuentas.getString("vence_sms", "0 días");
-        binding.textCuentasVenceMinSms.setText(vence_min_sms);
+        venceminutossms.setText(vence_min_sms);
         // bonos en promo
         String promo = sp_cuentas.getString("bonos", null);
-        if (!TextUtils.isEmpty(promo)) {
-            binding.buttonCuentasBono.setVisibility(View.VISIBLE);
-        } else {
-            binding.buttonCuentasBono.setVisibility(View.GONE);
-        }
+
         // datos nacionales
         String nacionales = sp_cuentas.getString("datos_nacionales", "0 MB");
-        binding.textCuentasDatosNacionales.setText(nacionales);
+        datosnacionales.setText(nacionales);
         // paquetes
         String datos = sp_cuentas.getString("paquete", "0 MB");
-        binding.textCuentasDatos.setText(datos);
+        datostext.setText(datos);
         // lte
         String lte = sp_cuentas.getString("lte", "0 MB");
-        binding.textCuentasDatosLte.setText(lte);
+        datoslte.setText(lte);
         // vence datos
         String vence_datos = sp_cuentas.getString("vence_datos", "0 días");
-        binding.textCuentasVenceDatos.setText(vence_datos);
+        vencedatos.setText(vence_datos);
         // mensajeria y vencimiento
         String mensajeria = sp_cuentas.getString("mensajeria", "0 MB");
         String vence_mensajeria = sp_cuentas.getString("vence_mensajeria", "0 días");
-        binding.textCuentasMensajeria.setText(mensajeria);
-        binding.textCuentasVenceMensajeria.setText(vence_mensajeria);
+        bolsasms.setText(mensajeria);
+        vencebolsasms.setText(vence_mensajeria);
         // diaria y vencimiento
         String diaria = sp_cuentas.getString("diaria", "0 MB");
         String vence_diaria = sp_cuentas.getString("vence_diaria", "0 horas");
-        binding.textCuentasDiaria.setText(diaria);
-        binding.textCuentasVenceDiaria.setText(vence_diaria);
+        bolsadiaria.setText(diaria);
+        vencebolsadiaria.setText(vence_diaria);
         // update hora
         String time = sp_cuentas.getString("hora", "00:00");
-        binding.textHoraUpdate.setText("Actualizado: " + time);
+        Actulizar.setText("Actualizado: " + time);
     }
 }

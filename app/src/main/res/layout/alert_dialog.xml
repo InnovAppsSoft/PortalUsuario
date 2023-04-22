@@ -48,7 +48,7 @@
                         android:fontFamily="@font/dosisbold"
                         android:padding="10dp"
                         android:text="@string/texto_donacion"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorDes"
                         android:textSize="13sp"
                         app:layout_constraintTop_toTopOf="parent" />
                     <TextView

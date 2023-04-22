@@ -15,7 +15,7 @@
         <item
                 android:id="@+id/ussd"
                 android:icon="@drawable/outline_sim_card_download_24"
-                android:title="Contratados"/>
+                android:title="Consultar USSD"/>
         <item
             android:id="@+id/plans"
             android:icon="@drawable/baseline_data_saver_off_24"
