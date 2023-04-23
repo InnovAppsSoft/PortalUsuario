@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
+        android:id="@+id/coordinator">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_height="320dp"
+                android:layout_width="match_parent"
+                app:expandedTitleTextColor="@android:color/white"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                android:id="@+id/collapsingTbl">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_width="match_parent"
+                    app:layout_collapseMode="pin"
+                    app:navigationIconTint="@android:color/white"
+                    android:id="@+id/toolbar" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            android:id="@+id/nested_scroll_view">
+
+        <RelativeLayout
+                android:padding="10dp"
+                android:background="@drawable/background_text"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="match_parent">
+
+            <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_perfil_nombre"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:boxCornerRadiusBottomEnd="30dp"
+                        app:boxCornerRadiusTopStart="30dp"
+                        app:boxCornerRadiusTopEnd="30dp"
+                        android:maxLength="15"
+                        app:boxCornerRadiusBottomStart="30dp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        app:startIconDrawable="@drawable/outline_person_27"
+                        app:errorEnabled="true"
+                        android:layout_gravity="center_horizontal"
+                        android:hint="Nombre">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_perfil_nombre"
+                            android:maxLength="15"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_perfil_numero"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:boxCornerRadiusBottomEnd="30dp"
+                        app:boxCornerRadiusTopStart="30dp"
+                        app:boxCornerRadiusTopEnd="30dp"
+                        app:boxCornerRadiusBottomStart="30dp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        app:startIconDrawable="@drawable/outline_local_phone_24"
+                        app:errorEnabled="true"
+                        android:layout_gravity="center_horizontal"
+                        android:hint="Número">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_perfil_numero"
+                            android:inputType="phone"
+                            android:maxLength="8"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_perfil_nauta"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:boxCornerRadiusBottomEnd="30dp"
+                        app:boxCornerRadiusTopStart="30dp"
+                        app:boxCornerRadiusTopEnd="30dp"
+                        app:startIconDrawable="@drawable/outline_mark_email_unread_24"
+                        app:boxCornerRadiusBottomStart="30dp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        app:errorEnabled="true"
+                        android:layout_gravity="center_horizontal"
+                        android:hint="Correo nauta">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_perfil_nauta"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                        android:id="@+id/buttom_save_perfil"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/my_gradient_drawable3"
+                        android:text="Guardar"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center_horizontal" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            app:layout_anchor="@+id/appbar"
+            app:layout_anchorGravity="bottom|end"
+            android:contentDescription="@string/app_name"
+            android:layout_margin="16dp"
+            app:srcCompat="@drawable/outline_add_photo_alternate_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/eliminar"
+            app:layout_anchor="@+id/appbar"
+            app:layout_anchorGravity="bottom|left"
+            android:contentDescription="@string/app_name"
+            android:layout_margin="16dp"
+            app:srcCompat="@drawable/outline_delete_forever_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_perfil"
+            android:layout_height="150dp"
+            android:layout_width="150dp"
+            android:scaleType="centerCrop"
+            android:fitsSystemWindows="true"
+            android:src="@drawable/portal"
+            app:layout_anchorGravity="center"
+            app:layout_anchor="@+id/appbar" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
