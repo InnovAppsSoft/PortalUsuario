@@ -43,6 +43,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -182,8 +183,8 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         navigationView!!.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
             val i: Intent
             when (item.itemId) {
+                R.id.micuenta -> setFragment(CuentasFragment(), "Mi Cuenta")
                 R.id.services -> setFragment(ServiciosFragment<Any?>(), "Servicios")
-                R.id.ussd -> setFragment(CuentasFragment(), "Consultar")
                 R.id.plans -> setFragment(PaquetesFragment(), "Planes")
                 R.id.connectivity -> setFragment(connectivityFragment, "Conectividad")
                 R.id.firewall -> {
@@ -417,7 +418,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             })
         }
         //
-        setFragment(ServiciosFragment<Any?>(), "Servicios")
+        setFragment(CuentasFragment(), "Servicios")
     }
 
     private fun setupBadge() {
@@ -1390,7 +1391,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         private var titleLayout: LinearLayout? = null
 
         // PROMO ETECSA CAROUSEL
-        private var carouselLayout: ConstraintLayout? = null
+        private var carouselLayout: CardView? = null
         private var sliderView: SliderView? = null
         var navigationView: NavigationView? = null
         private var punViewModel: PunViewModel? = null

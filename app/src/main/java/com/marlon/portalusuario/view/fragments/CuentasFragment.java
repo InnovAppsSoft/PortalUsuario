@@ -3,8 +3,11 @@ package com.marlon.portalusuario.view.Fragments;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,32 +16,59 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
+
+import com.google.android.datatransport.runtime.logging.Logging;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.elevation.SurfaceColors;
 import com.marlon.portalusuario.R;
+import com.marlon.portalusuario.logging.JCLogging;
+import com.marlon.portalusuario.perfil.ImageSaver;
+import com.marlon.portalusuario.perfil.PerfilActivity;
+import com.marlon.portalusuario.senal.AppConfiguracionTool;
+import com.marlon.portalusuario.util.Util;
+import com.marlon.portalusuario.view.activities.MainActivity;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CuentasFragment extends Fragment {
+
+    private TelephonyManager j;
+    private TextView networkClass,Fecha;
+    private TelephonyManager telephonyManager;
+    private TextView tvSignal;
+    private com.marlon.portalusuario.Utils utils;
+    private Util util;
+
+    private JCLogging logging;
 
     private Button ButtonBonos;
     private SwipeRefreshLayout Refrescar;
 
     private TextView saldotext, expiratext, minutostext, mensajestext, venceminutossms, datostext, datoslte, datosnacionales, vencedatos, bolsasms,vencebolsasms,bolsadiaria,vencebolsadiaria,Actulizar;
     TelephonyManager manager, manager2, managerMain;
+
+    private TextView TextoNombre,Saludo,Numero, Correo;
     SharedPreferences sp_cuentas;
     SharedPreferences.Editor editor;
 
@@ -68,12 +98,23 @@ public class CuentasFragment extends Fragment {
     String sim;
     SharedPreferences sp_sim;
 
+    private CircleImageView imgperfil;
+    private ImageView Editar,Recargar;
+
+    RelativeLayout Promo;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_cuentas, container, false);
-
+        // check first time opened
+        isFirstTime();
+        // check Cubacel operator
+        checkOperator();
+        util = new Util();
+        logging = new JCLogging(getActivity());
+        // ui components init
         Refrescar = v.findViewById(R.id.swipeRefresh);
         saldotext = v.findViewById(R.id.text_cuentas_saldo);
         expiratext = v.findViewById(R.id.text_cuentas_vence_sim);
@@ -89,6 +130,14 @@ public class CuentasFragment extends Fragment {
         bolsadiaria = v.findViewById(R.id.text_cuentas_diaria);
         vencebolsadiaria = v.findViewById(R.id.text_cuentas_vence_diaria);
         Actulizar =v.findViewById(R.id.text_hora_update);
+        TextoNombre = v.findViewById(R.id.textname);
+        Saludo = v.findViewById(R.id.text_saludo_perfil);
+        imgperfil = v.findViewById(R.id.img_drawer_perfil);
+        Editar = v.findViewById(R.id.editar);
+        Numero = v.findViewById(R.id.numerotext);
+        Correo = v.findViewById(R.id.correotext);
+        Recargar = v.findViewById(R.id.reaload);
+        Promo = v.findViewById(R.id.button_cuentas_bono);
 
         //
         return v;
@@ -107,9 +156,90 @@ public class CuentasFragment extends Fragment {
         sp_cuentas = getActivity().getSharedPreferences("cuentas", Context.MODE_PRIVATE);
         editor = sp_cuentas.edit();
 
+        // TODO: Mostrar saludo con el nombre del usuario
+        SharedPreferences sp_perfil = getActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
+        String name = sp_perfil.getString("nombre", "").toString();
+        String numero = sp_perfil.getString("numero", "").toString();
+        String nauta = sp_perfil.getString("nauta", "").toString();
+        if (name.isEmpty()) {
+            TextoNombre.setText("Usuario");
+        } else {
+            TextoNombre.setText(name);
+        }
+        if (numero.isEmpty()) {
+            Numero.setText("Numero");
+        } else {
+            Numero.setText(numero);
+        }
+        if (nauta.isEmpty()) {
+            Correo.setText("Nauta");
+        } else {
+            Correo.setText(nauta);
+        }
+        // saludo
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LocalDateTime currentTime = LocalDateTime.now();
+            if (currentTime.getHour() < 12) {
+                Saludo.setText(getString(R.string.title_good_morning));
+            } else if (currentTime.getHour() >= 12 && currentTime.getHour() < 18) {
+                Saludo.setText(getString(R.string.title_good_afternoon));
+            } else {
+                Saludo.setText(getString(R.string.title_good_night));
+            }
+        } else {
+            Saludo.setText("Hola");
+        }
+        Editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), PerfilActivity.class));
+
+            }
+        });
+
+        // TODO: Perfil en el header
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            Bitmap load =
+                    new ImageSaver(getContext())
+                            .setFileName("IMG.png")
+                            .setDirectoryName("PortalUsuario")
+                            .load();
+            if (load == null) {
+                imgperfil.setImageResource(R.drawable.portal);
+            } else {
+                imgperfil.setImageBitmap(load);
+            }
+        } else {
+            Bitmap load =
+                    new ImageSaver(getContext())
+                            .setExternal(true)
+                            .setFileName("IMG.png")
+                            .setDirectoryName("PortalUsuario")
+                            .load();
+            if (load == null) {
+                imgperfil.setImageResource(R.drawable.portal);
+            } else {
+                imgperfil.setImageBitmap(load);
+            }
+        }
+
         // TODO: Preferences DualSIM
         sp_sim = PreferenceManager.getDefaultSharedPreferences(getActivity());
         sim = (sp_sim.getString(getString(R.string.sim_key), "0"));
+
+
+        // TODO: Ver bonos promocionales
+        Promo.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String promo = sp_cuentas.getString("bonos", null);
+                        new MaterialAlertDialogBuilder(getContext())
+                                .setMessage(promo)
+                                .setPositiveButton("Ok", null)
+                                .show();
+                    }
+                });
 
 
         // TODO: SwipeRefresh
@@ -831,6 +961,42 @@ public class CuentasFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        if(getView() == null){
+            return;
+        }
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                    // handle back button's click listener
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        SharedPreferences sp_perfil = requireActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
+        String name = sp_perfil.getString("nombre", "").toString();
+        String numero = sp_perfil.getString("numero", "").toString();
+        String nauta = sp_perfil.getString("nauta", "").toString();
+        if (name.isEmpty()) {
+            TextoNombre.setText("Usuario");
+        } else {
+            TextoNombre.setText(name);
+        }
+        if (numero.isEmpty()) {
+            Numero.setText("Numero");
+        } else {
+            Numero.setText(numero);
+        }
+        if (nauta.isEmpty()) {
+            Correo.setText("Nauta");
+        } else {
+            Correo.setText(nauta);
+        }
         // saldo movil
         String saldo = sp_cuentas.getString("saldo", "0.00 CUP");
         saldotext.setText(saldo);
@@ -848,7 +1014,11 @@ public class CuentasFragment extends Fragment {
         venceminutossms.setText(vence_min_sms);
         // bonos en promo
         String promo = sp_cuentas.getString("bonos", null);
-
+        if (!TextUtils.isEmpty(promo)) {
+            Promo.setVisibility(View.VISIBLE);
+        } else {
+            Promo.setVisibility(View.GONE);
+        }
         // datos nacionales
         String nacionales = sp_cuentas.getString("datos_nacionales", "0 MB");
         datosnacionales.setText(nacionales);
@@ -874,5 +1044,66 @@ public class CuentasFragment extends Fragment {
         // update hora
         String time = sp_cuentas.getString("hora", "00:00");
         Actulizar.setText("Actualizado: " + time);
+    }
+
+
+    public class acceptTermsDialogListener implements DialogInterface.OnClickListener {
+        acceptTermsDialogListener() {
+        }
+
+        public void onClick(DialogInterface dialogInterface, int i) {
+            AppConfiguracionTool.setIsPrimeraEjecucion(getContext(), true);
+            dialogInterface.dismiss();
+        }
+    }
+
+    public class rejectTermsDialogListener implements DialogInterface.OnClickListener {
+        rejectTermsDialogListener() {
+        }
+
+        public void onClick(DialogInterface dialogInterface, int i) {
+            dialogInterface.dismiss();
+            requireActivity().finish();
+        }
+    }
+
+    public class okButtonListener implements DialogInterface.OnClickListener {
+        okButtonListener() {
+        }
+
+        public void onClick(DialogInterface dialogInterface, int i) {
+            dialogInterface.dismiss();
+        }
+    }
+    private void checkOperator() {
+        boolean isCubacelShow = AppConfiguracionTool.getIsCubacelShow(getContext());
+        try {
+            if (!this.j.getNetworkOperatorName().equalsIgnoreCase("CUBACEL") && !isCubacelShow) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setPositiveButton(getResources().getText(R.string.aceptar), new CuentasFragment.okButtonListener());
+                AlertDialog create = builder.create();
+                create.setMessage(getResources().getText(R.string.main_iscubacel));
+                create.setCancelable(false);
+                create.show();
+                AppConfiguracionTool.setIsCubacelShow(getContext(), true);
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    private void isFirstTime() {
+        if (!AppConfiguracionTool.getIsPrimeraEjecucion(getContext())) {
+            try {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                String appTerms = getResources().getString(R.string.terminos);
+                builder.setTitle(R.string.main_isprimera_ejecucion_title).setMessage(appTerms).setPositiveButton(getResources().getText(R.string.main_isprimera_ejecucion_acepto), new CuentasFragment.acceptTermsDialogListener()).setNegativeButton(getResources().getText(R.string.main_isprimera_ejecucion_noacepto), new CuentasFragment.rejectTermsDialogListener());
+                AlertDialog create = builder.create();
+                create.setCancelable(false);
+                create.show();
+            }catch (Exception ex){
+                ex.printStackTrace();
+                Logging.e("", "", ex);
+            }
+        }
     }
 }

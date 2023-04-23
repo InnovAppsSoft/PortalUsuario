@@ -9,13 +9,14 @@
 <item android:title="Servicios">
     <menu>
         <item
+                android:id="@+id/micuenta"
+                android:icon="@drawable/outline_sim_card_download_24"
+                android:title="Mi Cuenta"/>
+        <item
             android:id="@+id/services"
             android:icon="@drawable/outline_phone_forwarded_24"
             android:title="Servicios"/>
-        <item
-                android:id="@+id/ussd"
-                android:icon="@drawable/outline_sim_card_download_24"
-                android:title="Consultar USSD"/>
+
         <item
             android:id="@+id/plans"
             android:icon="@drawable/baseline_data_saver_off_24"
