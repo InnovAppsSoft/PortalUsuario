@@ -65,10 +65,10 @@ public class CuentasFragment extends Fragment {
     private Button ButtonBonos;
     private SwipeRefreshLayout Refrescar;
 
-    private TextView saldotext, expiratext, minutostext, mensajestext, venceminutossms, datostext, datoslte, datosnacionales, vencedatos, bolsasms,vencebolsasms,bolsadiaria,vencebolsadiaria,Actulizar;
+    private TextView saldotext, expiratext, minutostext, mensajestext, venceminutossms, datostext, datoslte, datosnacionales, VenceDatosI, bolsasms,vencebolsasms,bolsadiaria,vencebolsadiaria,Actulizar;
     TelephonyManager manager, manager2, managerMain;
 
-    private TextView TextoNombre,Saludo,Numero, Correo;
+    private TextView TextoNombre,Saludo,Numero, Correo, vencenacionales;
     SharedPreferences sp_cuentas;
     SharedPreferences.Editor editor;
 
@@ -101,7 +101,7 @@ public class CuentasFragment extends Fragment {
     private CircleImageView imgperfil;
     private ImageView Editar,Recargar;
 
-    RelativeLayout Promo;
+    TextView Promo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -124,7 +124,7 @@ public class CuentasFragment extends Fragment {
         datostext = v.findViewById(R.id.text_cuentas_datos);
         datoslte = v.findViewById(R.id.text_cuentas_datos_lte);
         datosnacionales = v.findViewById(R.id.text_cuentas_datos_nacionales);
-        vencedatos = v.findViewById(R.id.text_cuentas_vence_datos);
+        VenceDatosI = v.findViewById(R.id.text_cuentas_vence_datos);
         bolsasms = v.findViewById(R.id.text_cuentas_mensajeria);
         vencebolsasms = v.findViewById(R.id.text_cuentas_vence_mensajeria);
         bolsadiaria = v.findViewById(R.id.text_cuentas_diaria);
@@ -138,6 +138,7 @@ public class CuentasFragment extends Fragment {
         Correo = v.findViewById(R.id.correotext);
         Recargar = v.findViewById(R.id.reaload);
         Promo = v.findViewById(R.id.button_cuentas_bono);
+        vencenacionales = v.findViewById(R.id.vencenacionales);
 
         //
         return v;
@@ -234,10 +235,10 @@ public class CuentasFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         String promo = sp_cuentas.getString("bonos", null);
-                        new MaterialAlertDialogBuilder(getContext())
-                                .setMessage(promo)
-                                .setPositiveButton("Ok", null)
-                                .show();
+                        AlertDialog.Builder alertdialogo = new AlertDialog.Builder(requireActivity());
+                        alertdialogo.setMessage(promo);
+                        alertdialogo.setPositiveButton("Ok",null);
+                        alertdialogo.create().show();
                     }
                 });
 
@@ -656,13 +657,13 @@ public class CuentasFragment extends Fragment {
 
     public void consultaDatos(String ussdCode, int sim) {
         if (ussdCode.equalsIgnoreCase("")) return;
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE)
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CALL_PHONE)
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, 234);
             return;
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            manager = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+            manager = (TelephonyManager) requireActivity().getSystemService(Context.TELEPHONY_SERVICE);
             manager2 = manager.createForSubscriptionId(2);
             managerMain = (sim == 0) ? manager : manager2;
             managerMain.sendUssdRequest(
@@ -875,7 +876,7 @@ public class CuentasFragment extends Fragment {
                                             .replaceFirst("(.*)LTE", "");
                             editor.putString("vence_datos", vence.toString());
                             editor.commit();
-                            vencedatos.setText(vence);
+                            VenceDatosI.setText(vence);
                         }
 
                         @Override
@@ -897,13 +898,13 @@ public class CuentasFragment extends Fragment {
 
     public void consultaBonos(String ussdCode, int sim) {
         if (ussdCode.equalsIgnoreCase("")) return;
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE)
+        if (ContextCompat.checkSelfPermission(Objects.requireNonNull(requireActivity()), Manifest.permission.CALL_PHONE)
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, 234);
             return;
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            manager = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+            manager = (TelephonyManager) requireActivity().getSystemService(Context.TELEPHONY_SERVICE);
             manager2 = manager.createForSubscriptionId(2);
             managerMain = (sim == 0) ? manager : manager2;
             managerMain.sendUssdRequest(
@@ -1030,7 +1031,7 @@ public class CuentasFragment extends Fragment {
         datoslte.setText(lte);
         // vence datos
         String vence_datos = sp_cuentas.getString("vence_datos", "0 días");
-        vencedatos.setText(vence_datos);
+        VenceDatosI.setText(vence_datos);
         // mensajeria y vencimiento
         String mensajeria = sp_cuentas.getString("mensajeria", "0 MB");
         String vence_mensajeria = sp_cuentas.getString("vence_mensajeria", "0 días");

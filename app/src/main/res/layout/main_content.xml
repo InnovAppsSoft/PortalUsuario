@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 app:cardBackgroundColor="@color/background_color_50"
-                android:layout_marginTop="50dp">
+                android:layout_marginTop="60dp">
                 <ProgressBar
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
