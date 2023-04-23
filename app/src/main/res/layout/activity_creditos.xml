@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/displaybold"
             android:text="@string/atr_s"
-            android:textColor="@color/colorTest2"
+            android:textColor="@color/colorDes"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold" />
 
@@ -82,7 +82,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:fontFamily="@font/displaybold"
+                            android:fontFamily="@font/dosisbold"
                             android:text="@string/marlon_de_jes_s_milan_s_rivero"
                             android:textColor="@color/colorEscrito"
                             android:textSize="15sp"
@@ -91,7 +91,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/displaybold"
+                            android:fontFamily="@font/dosislight"
                             android:text="@string/creador_y_desarrollador"
                             android:textColor="@color/colorDes"
                             android:textSize="13sp" />
@@ -129,22 +129,22 @@
                                         android:orientation="horizontal">
 
                                         <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            android:contentDescription="@string/app_name"
-                                            app:tint="@color/botoncolorStart"
-                                            android:src="@drawable/facebook" />
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                app:tint="@color/colorDes"
+                                                android:contentDescription="@string/app_name"
+                                                android:src="@drawable/outline_open_in_new_24"/>
 
                                         <TextView
                                             android:id="@+id/marlon_facebook"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
-                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginStart="10dp"
                                             android:fontFamily="@font/displaybold"
                                             android:gravity="center_vertical"
                                             android:text="@string/facebook"
                                             android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
 
                                     </LinearLayout>
                                     <!-- INSTAGRAM -->
@@ -156,12 +156,11 @@
                                         tools:ignore="UseCompoundDrawables">
 
                                         <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            app:tint="@color/botoncolorStart"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/instagram" />
-
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                app:tint="@color/colorDes"
+                                                android:contentDescription="@string/app_name"
+                                                android:src="@drawable/outline_open_in_new_24"/>
                                         <TextView
                                             android:id="@+id/marlon_instagram"
                                             android:layout_width="wrap_content"
@@ -171,8 +170,9 @@
                                             android:gravity="center_vertical"
                                             android:text="@string/instagram"
                                             android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
                                     </LinearLayout>
+
                                     <!-- TWITTER -->
                                     <LinearLayout
                                         android:layout_width="wrap_content"
@@ -182,11 +182,11 @@
                                         tools:ignore="UseCompoundDrawables">
 
                                         <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            app:tint="@color/botoncolorStart"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/gorjeo" />
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                app:tint="@color/colorDes"
+                                                android:contentDescription="@string/app_name"
+                                                android:src="@drawable/outline_open_in_new_24"/>
 
                                         <TextView
                                             android:id="@+id/marlon_twitter"
@@ -197,7 +197,7 @@
                                             android:gravity="center_vertical"
                                             android:text="@string/twitter"
                                             android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
                                     </LinearLayout>
 
                                 </LinearLayout>
@@ -251,7 +251,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:fontFamily="@font/displaybold"
+                            android:fontFamily="@font/dosisbold"
                             android:text="@string/javier_alejandro_gonz_lez_casellas"
                             android:textColor="@color/colorEscrito"
                             android:textSize="15sp"
@@ -260,7 +260,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/displaybold"
+                            android:fontFamily="@font/dosislight"
                             android:text="@string/coautor_y_desarrollador"
                             android:textColor="@color/colorDes"
                             android:textSize="13sp" />
@@ -278,7 +278,6 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
                             android:orientation="vertical">
                             <TableRow
                                 android:layout_width="wrap_content"
@@ -286,7 +285,9 @@
                                 android:gravity="center_vertical"
                                 tools:ignore="UseCompoundDrawables">
                                 <LinearLayout
+                                        android:layout_marginBottom="8sp"
                                     android:layout_width="match_parent"
+                                        android:layout_marginTop="8sp"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
                                     <!-- FACEBOOK -->
@@ -295,11 +296,12 @@
                                         android:layout_height="wrap_content"
                                         android:orientation="horizontal">
                                         <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            app:tint="@color/botoncolorStart"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/facebook" />
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                app:tint="@color/colorDes"
+                                                android:contentDescription="@string/app_name"
+                                                android:src="@drawable/outline_open_in_new_24"/>
+
 
                                         <TextView
                                             android:id="@+id/javier_facebook"
@@ -310,7 +312,7 @@
                                             android:fontFamily="@font/displaybold"
                                             android:text="@string/facebook"
                                             android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
 
                                     </LinearLayout>
                                     <!-- TELEGRAM USER -->
@@ -322,11 +324,11 @@
                                         tools:ignore="UseCompoundDrawables">
 
                                         <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            app:tint="@color/botoncolorStart"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/telegrama" />
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                app:tint="@color/colorDes"
+                                                android:contentDescription="@string/app_name"
+                                                android:src="@drawable/outline_open_in_new_24"/>
 
                                         <TextView
                                             android:id="@+id/javier_telegram"
@@ -337,7 +339,7 @@
                                             android:fontFamily="@font/displaybold"
                                             android:text="@string/javier_Telegram"
                                             android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
                                     </LinearLayout>
                                     <!-- TWITTER -->
                                     <LinearLayout
@@ -348,11 +350,12 @@
                                         tools:ignore="UseCompoundDrawables">
 
                                         <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            app:tint="@color/botoncolorStart"
-                                            android:layout_height="@dimen/_25sdp"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/gorjeo" />
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                app:tint="@color/colorDes"
+                                                android:contentDescription="@string/app_name"
+                                                android:src="@drawable/outline_open_in_new_24"/>
+
 
                                         <TextView
                                             android:id="@+id/javier_twitter"
@@ -363,7 +366,7 @@
                                             android:fontFamily="@font/displaybold"
                                             android:text="@string/twitter"
                                             android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
                                     </LinearLayout>
 
                                 </LinearLayout>
@@ -372,19 +375,17 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="2dp"
-                                android:background="@color/colorTest1" />
+                                android:background="@color/colorDes" />
                             <!-- SEPARATOR -->
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:background="@color/colorTest1" />
                             <TableRow
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_vertical"
                                 tools:ignore="UseCompoundDrawables">
                                 <LinearLayout
+                                        android:layout_marginBottom="8sp"
                                     android:layout_width="match_parent"
+                                        android:layout_marginTop="8sp"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
                                     <!-- FACEBOOK PAGE -->
@@ -394,11 +395,12 @@
                                         android:orientation="horizontal">
 
                                         <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            app:tint="@color/botoncolorStart"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/instagram" />
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                app:tint="@color/colorDes"
+                                                android:contentDescription="@string/app_name"
+                                                android:src="@drawable/outline_open_in_new_24"/>
+
 
                                         <TextView
                                             android:id="@+id/javier_insta"
@@ -409,7 +411,7 @@
                                             android:fontFamily="@font/displaybold"
                                             android:text="@string/instagram"
                                             android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
 
                                     </LinearLayout>
 
@@ -422,11 +424,12 @@
                                         tools:ignore="UseCompoundDrawables">
 
                                         <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            app:tint="@color/botoncolorStart"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/telegrama" />
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                app:tint="@color/colorDes"
+                                                android:contentDescription="@string/app_name"
+                                                android:src="@drawable/outline_open_in_new_24"/>
+
 
                                         <TextView
                                             android:id="@+id/javier_canal_telegram"
@@ -437,7 +440,7 @@
                                             android:fontFamily="@font/displaybold"
                                             android:text="@string/javier_canal_telegram"
                                             android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
                                     </LinearLayout>
 
                                     <!-- GITHUB -->
@@ -449,11 +452,12 @@
                                         tools:ignore="UseCompoundDrawables">
 
                                         <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            app:tint="@color/botoncolorStart"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/github" />
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                app:tint="@color/colorDes"
+                                                android:contentDescription="@string/app_name"
+                                                android:src="@drawable/outline_open_in_new_24"/>
+
 
                                         <TextView
                                             android:id="@+id/javier_github"
@@ -464,7 +468,7 @@
                                             android:fontFamily="@font/displaybold"
                                             android:text="@string/javier_github"
                                             android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
                                     </LinearLayout>
 
                                 </LinearLayout>
@@ -474,12 +478,8 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="2dp"
-                                android:background="@color/colorTest1" />
+                                android:background="@color/colorDes" />
                             <!-- SEPARATOR -->
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:background="@color/colorTest1" />
                             <TableRow
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -487,6 +487,8 @@
                                 tools:ignore="UseCompoundDrawables">
                                 <LinearLayout
                                     android:layout_width="wrap_content"
+                                    android:layout_marginTop="8sp"
+                                    android:layout_marginBottom="8sp"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
                                     <!-- GMAIL -->
@@ -497,11 +499,12 @@
                                         tools:ignore="UseCompoundDrawables">
 
                                         <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            app:tint="@color/botoncolorStart"
-                                            android:layout_height="@dimen/_25sdp"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/gmail" />
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                app:tint="@color/colorDes"
+                                                android:contentDescription="@string/app_name"
+                                                android:src="@drawable/outline_open_in_new_24"/>
+
 
                                         <TextView
                                             android:id="@+id/javier_gmail"
@@ -512,7 +515,7 @@
                                             android:fontFamily="@font/displaybold"
                                             android:text="@string/gmail_javier"
                                             android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
                                     </LinearLayout>
 
                                 </LinearLayout>
@@ -555,7 +558,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:fontFamily="@font/displaybold"
+                            android:fontFamily="@font/dosisbold"
                             android:text="Lesly Cintra"
                             android:textColor="@color/colorEscrito"
                             android:textSize="15sp"
@@ -564,7 +567,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/displaybold"
+                            android:fontFamily="@font/dosislight"
                             android:text="Desarrollador"
                             android:textColor="@color/colorDes"
                             android:textSize="13sp" />
@@ -605,11 +608,11 @@
                                         tools:ignore="UseCompoundDrawables">
 
                                         <ImageView
-                                            android:layout_width="@dimen/_25sdp"
-                                            android:layout_height="@dimen/_25sdp"
-                                            app:tint="@color/botoncolorStart"
-                                            android:contentDescription="@string/app_name"
-                                            android:src="@drawable/telegrama" />
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                app:tint="@color/colorDes"
+                                                android:contentDescription="@string/app_name"
+                                                android:src="@drawable/outline_open_in_new_24"/>
 
                                         <TextView
                                             android:layout_width="wrap_content"
@@ -619,7 +622,7 @@
                                             android:gravity="center_vertical"
                                             android:text="Telegram"
                                             android:textColor="@color/colorDes"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
                                     </LinearLayout>
 
                                 </LinearLayout>
@@ -727,7 +730,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/displaybold"
+                                    android:fontFamily="@font/dosisbold"
                                     android:text="@string/sobre_nosotros"
                                     android:textColor="@color/colorEscrito"
                                     android:textSize="13sp"
@@ -738,7 +741,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
-                                android:fontFamily="@font/displaybold"
+                                android:fontFamily="@font/dosislight"
                                 android:text="@string/my_desc"
                                 android:textColor="@color/colorDes"
                                 android:textSize="13sp" />
@@ -769,7 +772,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/displaybold"
+                                android:fontFamily="@font/dosisbold"
                                 android:text="@string/acerca_de_la_app"
                                 android:textColor="@color/colorEscrito"
                                 android:textSize="13sp" />
@@ -790,10 +793,10 @@
 
                                     <ImageView
                                         android:layout_width="@dimen/_25sdp"
-                                        app:tint="@color/botoncolorStart"
+                                        app:tint="@color/colorDes"
                                         android:layout_height="@dimen/_25sdp"
                                         android:contentDescription="@string/app_name"
-                                        android:src="@drawable/unir" />
+                                        android:src="@drawable/outline_code_24" />
 
                                     <LinearLayout
                                         android:layout_width="wrap_content"
@@ -806,7 +809,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="@font/displaybold"
-                                            android:text="7.0.1"
+                                            android:text="7.0.3"
                                             android:textColor="@color/colorDes"
                                             android:textSize="12sp"
                                             android:textStyle="bold"
@@ -833,9 +836,9 @@
                                     <ImageView
                                         android:layout_width="@dimen/_25sdp"
                                         android:layout_height="@dimen/_25sdp"
-                                        app:tint="@color/botoncolorStart"
+                                        app:tint="@color/colorDes"
                                         android:contentDescription="@string/app_name"
-                                        android:src="@drawable/descarga" />
+                                        android:src="@drawable/outline_arrow_downward_24" />
 
                                     <LinearLayout
                                         android:layout_width="wrap_content"
@@ -900,7 +903,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/displaybold"
+                                android:fontFamily="@font/dosisbold"
                                 android:text="@string/colaboradores"
                                 android:textColor="@color/colorEscrito"
                                 android:textSize="13sp" />
@@ -920,10 +923,11 @@
                                 tools:ignore="UseCompoundDrawables">
 
                                 <ImageView
-                                    android:layout_width="@dimen/_25sdp"
-                                    android:layout_height="@dimen/_25sdp"
+                                    android:layout_width="24sp"
+                                    android:layout_height="24sp"
+                                    app:tint="@color/colorDes"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/bagdata" />
+                                    android:src="@drawable/outline_engineering_24" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -940,28 +944,6 @@
                                 android:layout_height="2dp"
                                 android:background="@color/colorTest1" />
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:gravity="center_vertical"
-                                tools:ignore="UseCompoundDrawables">
-
-                                <ImageView
-                                    android:layout_width="@dimen/_25sdp"
-                                    android:layout_height="@dimen/_25sdp"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/iteec" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="20dp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/itecnogeek"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="13sp" />
-                            </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -976,10 +958,11 @@
                                 tools:ignore="UseCompoundDrawables">
 
                                 <ImageView
-                                    android:layout_width="@dimen/_25sdp"
-                                    android:layout_height="@dimen/_25sdp"
+                                    android:layout_width="24sp"
+                                    android:layout_height="24sp"
                                     android:contentDescription="@string/app_name"
-                                    android:src="@drawable/logo_avatar" />
+                                    app:tint="@color/colorDes"
+                                    android:src="@drawable/outline_category_24" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -1029,11 +1012,11 @@
                          android:gravity="center_vertical">
 
                          <ImageView
-                             android:layout_width="@dimen/_25sdp"
-                             android:layout_height="@dimen/_25sdp"
-                             app:tint="@color/botoncolorStart"
+                             android:layout_width="24sp"
+                             android:layout_height="24sp"
+                             app:tint="@color/colorDes"
                              android:contentDescription="@string/app_name"
-                             android:src="@drawable/google" />
+                             android:src="@drawable/outline_open_in_new_24" />
 
                          <LinearLayout
                              android:layout_width="wrap_content"
@@ -1089,10 +1072,11 @@
                             android:gravity="center_vertical">
 
                             <ImageView
-                                android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_25sdp"
-                                android:contentDescription="@string/app_name"
-                                android:src="@drawable/apklis" />
+                                    android:layout_width="24sp"
+                                    android:layout_height="24sp"
+                                    app:tint="@color/colorDes"
+                                    android:contentDescription="@string/app_name"
+                                    android:src="@drawable/outline_open_in_new_24" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -1148,10 +1132,11 @@
                             android:gravity="center_vertical">
 
                             <ImageView
-                                android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_25sdp"
-                                android:contentDescription="@string/app_name"
-                                android:src="@drawable/icon" />
+                                    android:layout_width="24sp"
+                                    android:layout_height="24sp"
+                                    app:tint="@color/colorDes"
+                                    android:contentDescription="@string/app_name"
+                                    android:src="@drawable/outline_open_in_new_24" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"

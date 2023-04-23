@@ -1,4 +1,4 @@
-package com.marlon.portalusuario.view.fragments;
+package com.marlon.portalusuario.view.Fragments;
 
 
 import android.Manifest;
@@ -45,6 +45,7 @@ public class ServiciosFragment<b> extends Fragment {
 
     private static Context context;
 
+    private CardView activar,adicionar,consultar;
     private SharedPreferences salva,nochesalva;
 
     private CardView SMS, VOZ, PlanAmigos1, Emergencia;
@@ -67,10 +68,6 @@ public class ServiciosFragment<b> extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_servicios, container, false);
-        // check first time opened
-        isFirstTime();
-        // check Cubacel operator
-        checkOperator();
 
         util = new Util();
         logging = new JCLogging(getActivity());
@@ -273,66 +270,6 @@ public class ServiciosFragment<b> extends Fragment {
         //loadPromo();
     }
 
-    public class rejectTermsDialogListener implements DialogInterface.OnClickListener {
-        rejectTermsDialogListener() {
-        }
-
-        public void onClick(DialogInterface dialogInterface, int i) {
-            dialogInterface.dismiss();
-            requireActivity().finish();
-        }
-    }
-
-    public class acceptTermsDialogListener implements DialogInterface.OnClickListener {
-        acceptTermsDialogListener() {
-        }
-
-        public void onClick(DialogInterface dialogInterface, int i) {
-            AppConfiguracionTool.setIsPrimeraEjecucion(getContext(), true);
-            dialogInterface.dismiss();
-        }
-    }
-
-    public class okButtonListener implements DialogInterface.OnClickListener {
-        okButtonListener() {
-        }
-
-        public void onClick(DialogInterface dialogInterface, int i) {
-            dialogInterface.dismiss();
-        }
-    }
-
-    private void checkOperator() {
-        boolean isCubacelShow = AppConfiguracionTool.getIsCubacelShow(getContext());
-        try {
-            if (!this.j.getNetworkOperatorName().equalsIgnoreCase("CUBACEL") && !isCubacelShow) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setPositiveButton(getResources().getText(R.string.aceptar), new okButtonListener());
-                AlertDialog create = builder.create();
-                create.setMessage(getResources().getText(R.string.main_iscubacel));
-                create.setCancelable(false);
-                create.show();
-                AppConfiguracionTool.setIsCubacelShow(getContext(), true);
-            }
-        } catch (Exception ignored) {
-        }
-    }
-
-    private void isFirstTime() {
-        if (!AppConfiguracionTool.getIsPrimeraEjecucion(getContext())) {
-            try {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                String appTerms = getResources().getString(R.string.terminos);
-                builder.setTitle(R.string.main_isprimera_ejecucion_title).setMessage(appTerms).setPositiveButton(getResources().getText(R.string.main_isprimera_ejecucion_acepto), new acceptTermsDialogListener()).setNegativeButton(getResources().getText(R.string.main_isprimera_ejecucion_noacepto), new rejectTermsDialogListener());
-                AlertDialog create = builder.create();
-                create.setCancelable(false);
-                create.show();
-            }catch (Exception ex){
-                ex.printStackTrace();
-                Logging.e("", "", ex);
-            }
-        }
-    }
 
     @SuppressLint("IntentReset")
     private void pickContact() {
@@ -380,7 +317,7 @@ public class ServiciosFragment<b> extends Fragment {
     }
 
     public class PlanAmigosDialog {
-        private CardView activar,adicionar,consultar;
+
         public PlanAmigosDialog(final Context context) {
             final Dialog plamAmigosDialog = new Dialog(getContext());
 
@@ -397,23 +334,6 @@ public class ServiciosFragment<b> extends Fragment {
             consultar.setOnClickListener(v -> USSDcall("*133*4*3%23"));
 
             plamAmigosDialog.show();
-        }
-
-        public void USSDcall(String ussd){
-            Intent r = new Intent();
-            r.setAction(Intent.ACTION_CALL); r.setData(Uri.parse("tel:"+ussd + ""));
-
-            if (Build.VERSION.SDK_INT >= 23) {
-                if (context.checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_DENIED ) {
-                    ServiciosFragment.this.requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, 1000);
-                } else {
-                    startActivity(r);
-                }
-            } else {
-                startActivity(r);
-
-            }
-
         }
 
     }

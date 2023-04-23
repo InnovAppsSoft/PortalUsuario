@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:text="username"
         android:textStyle="bold"
-        android:textSize="13sp"
+        android:fontFamily="@font/dosisbold"
+        android:textSize="16sp"
         android:ellipsize="end"
         android:maxLines="1"/>
     <TextView
@@ -19,8 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="account type"
+        android:fontFamily="@font/dosislight"
         android:textStyle="italic"
-        android:textSize="11sp"
+        android:textSize="13sp"
         android:ellipsize="end"
         android:maxLines="1"/>
 </LinearLayout>

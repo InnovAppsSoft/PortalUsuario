@@ -14,6 +14,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -53,6 +54,7 @@ public class LogFileViewerActivity extends AppCompatActivity {
         }
         // INIT DE ELEMENTOS
         this.setTitle("Registro de depuración");
+        this.setTitleColor(Color.GREEN);
         JCLogging = new JCLogging(LogFileViewerActivity.this);
         recyclerView = findViewById(R.id.rvLogs);
         recyclerView.setHasFixedSize(true);

@@ -19,3 +19,14 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# You can specify any path and filename.
+
+# jsoup
+-keeppackagenames org.jsoup.nodes
+
+-keepnames @dagger.hilt.android.lifecycle.HiltViewModel class * extends androidx.lifecycle.ViewModel
+
+-keep class cu.suitetecsa.sdk.**{
+*;
+}

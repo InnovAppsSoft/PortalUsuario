@@ -16,6 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+                android:textColor="@color/colorDes"
             android:text="@string/escanee_el_siguiente_c_digo_qr_n"
             android:textAlignment="center"/>
         <ImageView
@@ -23,6 +24,7 @@
             android:layout_height="200dp"
             android:src="@drawable/jalex_enzona"/>
         <TextView
+                android:textColor="@color/colorDes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/gracias_por_su_aporte_n"

@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/sin_usuarios_registrados"
                 android:textColor="@color/colorDes"
-                android:textSize="13sp"
+                android:textSize="15sp"
                 android:minHeight="20dp"
                 android:fontFamily="@font/displaybold"
                 android:textAlignment="center"
@@ -50,8 +50,8 @@
                     android:id="@+id/add_user_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_person_add_24"
-                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/outline_person_add_alt_24"
+                    app:tint="@color/colorDes"
                     android:contentDescription="TODO"
                     tools:ignore="ContentDescription,HardcodedText" />
                 <ImageView
@@ -59,21 +59,26 @@
                     android:id="@+id/edit_user_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_edit_24"
-                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/outline_mode_edit_outline_24"
+                    app:tint="@color/colorDes"
                     tools:ignore="ContentDescription" />
                 <ImageView
                     android:layout_marginLeft="8dp"
                     android:id="@+id/del_user_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_delete_24"
-                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/outline_delete_forever_24"
+                    app:tint="@color/colorDes"
                     android:contentDescription="TODO"
                     tools:ignore="ContentDescription,HardcodedText" />
             </LinearLayout>
 
         </LinearLayout>
+
+        <View android:layout_width="2dp"
+              android:layout_height="64dp"
+              android:background="@color/colorDes"
+              android:layout_marginStart="12dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -90,7 +95,7 @@
                 android:text="@string/limitar_tiempo_de_conexi_n"
                 android:textColor="@color/colorDes"
                 android:textSize="11sp"
-                app:buttonTint="@color/botoncolorStart"
+                app:buttonTint="@color/colorDes"
                 android:minHeight="48dp"
                 tools:ignore="TouchTargetSizeCheck"/>
             <LinearLayout
@@ -219,10 +224,10 @@
                         android:padding="@dimen/_15sdp">
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/_32sdp"
-                            android:layout_height="@dimen/_32sdp"
-                            android:src="@drawable/payment_card"
-                            app:tint="@color/botoncolorStart" />
+                            android:layout_width="24sp"
+                            android:layout_height="24sp"
+                            android:src="@drawable/outline_payments_24"
+                            app:tint="@color/colorDes" />
 
                         <TextView
                             android:id="@+id/editSaldoCuenta"
@@ -260,10 +265,10 @@
                         android:padding="@dimen/_15sdp">
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/_32sdp"
-                            android:layout_height="@dimen/_32sdp"
-                            android:src="@drawable/baseline_info_24"
-                            app:tint="@color/botoncolorStart" />
+                            android:layout_width="24sp"
+                            android:layout_height="24sp"
+                            android:src="@drawable/outline_info_24"
+                            app:tint="@color/colorDes" />
 
                         <TextView
                             android:id="@+id/editEstadoCuenta"
@@ -301,17 +306,17 @@
                         android:padding="@dimen/_15sdp">
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/_32sdp"
-                            android:layout_height="@dimen/_32sdp"
+                            android:layout_width="24sp"
+                            android:layout_height="24sp"
                             android:src="@drawable/round_timelapse_24"
-                            app:tint="@color/botoncolorStart" />
+                            app:tint="@color/colorDes" />
 
                         <TextView
                             android:id="@+id/textLeftTime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_4sdp"
-                            android:text="@string/tiempo_restante"
+                            android:text="@string/remaining_time"
                             android:textColor="@color/colorDes"
                             android:textStyle="bold"
                             android:fontFamily="@font/displaybold"
@@ -340,10 +345,10 @@
                         android:padding="@dimen/_15sdp">
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/_32sdp"
-                            android:layout_height="@dimen/_32sdp"
+                            android:layout_width="24sp"
+                            android:layout_height="24sp"
                             android:src="@drawable/round_timer_24"
-                            app:tint="@color/botoncolorStart" />
+                            app:tint="@color/colorDes" />
 
                         <Chronometer
                             android:id="@+id/simpleChronometer"

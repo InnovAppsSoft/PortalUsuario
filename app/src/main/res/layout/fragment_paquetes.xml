@@ -27,10 +27,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/displaybold"
+                    android:fontFamily="@font/dosisbold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:text="@string/paquetes_combinados"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
@@ -39,7 +39,7 @@
                 app:cardUseCompatPadding="true"
                 app:cardBackgroundColor="@color/background_color_50"
                 app:cardCornerRadius="@dimen/_16sdp"
-                app:contentPadding="8dp">
+                app:contentPadding="16dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -57,6 +57,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:fontFamily="@font/dosisbold"
                             android:text="@string/plan_b_sico"
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -360,7 +361,7 @@
                 app:cardUseCompatPadding="true"
                 app:cardBackgroundColor="@color/background_color_50"
                 app:cardCornerRadius="@dimen/_16sdp"
-                app:contentPadding="8dp">
+                app:contentPadding="16dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -378,6 +379,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:fontFamily="@font/dosisbold"
                             android:text="Plan Medio"
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -680,7 +682,7 @@
                 app:cardUseCompatPadding="true"
                 app:cardBackgroundColor="@color/background_color_50"
                 app:cardCornerRadius="@dimen/_16sdp"
-                app:contentPadding="8dp">
+                app:contentPadding="16dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -699,6 +701,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Plan Extra"
+                            android:fontFamily="@font/dosisbold"
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textSize="@dimen/_15sdp" />
@@ -1003,10 +1006,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/displaybold"
+                    android:fontFamily="@font/dosisbold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:text="@string/paquetes_solo_4g_lte"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -1026,7 +1029,7 @@
                         android:id="@+id/title2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
+                        android:fontFamily="@font/dosisbold"
                         android:text="Paquete solo LTE"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp"
@@ -1145,7 +1148,7 @@
                         android:id="@+id/title1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
+                        android:fontFamily="@font/dosisbold"
                         android:text="Paquete solo LTE"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp"
@@ -1264,7 +1267,7 @@
                         android:id="@+id/title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
+                        android:fontFamily="@font/dosisbold"
                         android:text="Paquete 3G - LTE"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp"
@@ -1377,10 +1380,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/displaybold"
+                    android:fontFamily="@font/dosisbold"
                     android:text="Bolsas - Tarifa"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -1399,7 +1402,7 @@
                         android:id="@+id/title_package"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
+                        android:fontFamily="@font/dosisbold"
                         android:text="Bolsa de Diaria (LTE)"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp"
@@ -1518,7 +1521,7 @@
                         android:id="@+id/title_package4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
+                        android:fontFamily="@font/dosisbold"
                         android:text="Bolsa de Mensajeria"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp"
@@ -1637,7 +1640,7 @@
                         android:id="@+id/title_package3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
+                        android:fontFamily="@font/dosisbold"
                         android:text="Tarifa por Consumo"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp"

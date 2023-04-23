@@ -1,4 +1,4 @@
-package com.marlon.portalusuario.view.fragments;
+package com.marlon.portalusuario.view.Fragments;
 
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;

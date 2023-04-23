@@ -55,13 +55,13 @@
             android:layout_marginStart="6dp"
             android:layout_weight="0.6"
             android:drawablePadding="8dp"
-            android:textColor="@color/white"
+            android:textColor="@color/colorDes"
             android:text="@string/portal_usuario_oficial"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/dosisbold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -77,7 +77,8 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@string/en_l_nea"
-                android:textColor="@color/white"
+                android:fontFamily="@font/dosislight"
+                android:textColor="@color/colorDes"
                 android:textSize="12sp" />
         </LinearLayout>
 
