@@ -84,9 +84,9 @@ import com.marlon.portalusuario.util.Connectivity
 import com.marlon.portalusuario.util.SSLHelper
 import com.marlon.portalusuario.util.Util
 import com.marlon.portalusuario.util.apklis.ApklisUtil
-import com.marlon.portalusuario.view.Fragments.CuentasFragment
-import com.marlon.portalusuario.view.Fragments.HowToFragment
-import com.marlon.portalusuario.view.Fragments.ServiciosFragment
+import com.marlon.portalusuario.view.fragments.CuentasFragment
+import com.marlon.portalusuario.view.fragments.HowToFragment
+import com.marlon.portalusuario.view.fragments.ServiciosFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.BottomSheetDialog
 import com.marlon.portalusuario.view.fragments.connectivity.ConnectivityFragment

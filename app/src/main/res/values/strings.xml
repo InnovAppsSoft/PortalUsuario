@@ -1041,9 +1041,10 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="vence_minutos_y_sms">Vence Minutos y SMS</string>
     <string name="paquetes_lte1">Paquetes LTE</string>
     <string name="datos_nacionales1">Datos Nacionales</string>
-    <string name="title_good_morning">Buenos Dias</string>
+    <string name="title_good_morning">Buenos Días</string>
     <string name="title_good_afternoon">Buenas Tardes</string>
     <string name="title_good_night">Buenas Noches</string>
+    <string name="promoci_n">Promoción</string>
 
 
 </resources>

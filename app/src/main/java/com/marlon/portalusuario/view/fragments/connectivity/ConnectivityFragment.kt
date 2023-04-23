@@ -10,7 +10,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.nauta.ui.WifiEtecsaFragment
-import com.marlon.portalusuario.view.Fragments.SitiosNacionalesFragment
+import com.marlon.portalusuario.view.fragments.SitiosNacionalesFragment
 import javax.inject.Inject
 
 class ConnectivityFragment @Inject constructor(

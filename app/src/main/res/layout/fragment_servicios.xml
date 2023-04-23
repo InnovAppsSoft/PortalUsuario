@@ -91,7 +91,7 @@
                                     app:tint="@color/colorDes" />
 
                                 <TextView
-                                    android:id="@+id/enseñar"
+                                    android:id="@+id/saldoConsulta"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerVertical="true"

@@ -29,7 +29,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.view.Fragments.CuentasFragment;
+import com.marlon.portalusuario.view.fragments.CuentasFragment;
 import com.marlon.portalusuario.view.activities.MainActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
