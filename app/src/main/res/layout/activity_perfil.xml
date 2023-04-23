@@ -25,7 +25,7 @@
                     android:layout_height="?attr/actionBarSize"
                     android:layout_width="match_parent"
                     app:layout_collapseMode="pin"
-                    app:navigationIconTint="@android:color/white"
+                    app:navigationIconTint="@color/colorDes"
                     android:id="@+id/toolbar" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
