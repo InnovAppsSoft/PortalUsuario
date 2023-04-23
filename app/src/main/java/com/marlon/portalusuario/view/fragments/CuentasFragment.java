@@ -441,13 +441,13 @@ public class CuentasFragment extends Fragment {
                                                                                                                                                                         progressDialog.dismiss();
                                                                                                                                                                     }
                                                                                                                                                                 },
-                                                                                                                                                                5000);
+                                                                                                                                                                8000);
                                                                                                                                             }
                                                                                                                                         },
-                                                                                                                                        5000);
+                                                                                                                                        6000);
                                                                                                                     }
                                                                                                                 },
-                                                                                                                5000);
+                                                                                                                6000);
                                                                                             }
                                                                                         },
                                                                                         5000);
