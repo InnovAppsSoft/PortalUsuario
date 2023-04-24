@@ -45,6 +45,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ShareCompat.IntentBuilder
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -84,11 +85,11 @@ import com.marlon.portalusuario.util.Connectivity
 import com.marlon.portalusuario.util.SSLHelper
 import com.marlon.portalusuario.util.Util
 import com.marlon.portalusuario.util.apklis.ApklisUtil
+import com.marlon.portalusuario.view.fragments.BottomSheetDialog
 import com.marlon.portalusuario.view.fragments.CuentasFragment
 import com.marlon.portalusuario.view.fragments.HowToFragment
-import com.marlon.portalusuario.view.fragments.ServiciosFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
-import com.marlon.portalusuario.view.fragments.BottomSheetDialog
+import com.marlon.portalusuario.view.fragments.ServiciosFragment
 import com.marlon.portalusuario.view.fragments.connectivity.ConnectivityFragment
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
@@ -245,6 +246,9 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                     val betaLaunch = Intent(Intent.ACTION_VIEW)
                     betaLaunch.data = Uri.parse(betaUrl)
                     startActivity(betaLaunch)
+                }
+                R.id.invite -> {
+                    inviteUser()
                 }
 
                 R.id.settings -> {
@@ -595,6 +599,14 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             //start authentication
             mBiometricManager!!.authenticate(this@MainActivity)
         }
+    }
+
+    private fun inviteUser() {
+        IntentBuilder(this)
+            .setText(getString(R.string.invite_user) + packageName)
+            .setType("text/plain")
+            .setChooserTitle("Compartir:")
+            .startChooser()
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)

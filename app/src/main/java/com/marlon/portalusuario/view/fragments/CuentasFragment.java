@@ -185,13 +185,13 @@ public class CuentasFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             LocalDateTime currentTime = LocalDateTime.now();
             if (currentTime.getHour() < 12) {
-                imgGreetings.setImageResource(R.drawable.daily_forecast_sunny);
+                imgGreetings.setImageResource(R.drawable.baseline_light_mode_24);
                 Saludo.setText(getString(R.string.title_good_morning));
             } else if (currentTime.getHour() >= 12 && currentTime.getHour() < 18) {
-                imgGreetings.setImageResource(R.drawable.daily_forecast_cloudy);
+                imgGreetings.setImageResource(R.drawable.outline_brightness_4_24);
                 Saludo.setText(getString(R.string.title_good_afternoon));
             } else {
-                imgGreetings.setImageResource(R.drawable.daily_forecast_sunny_night);
+                imgGreetings.setImageResource(R.drawable.outline_dark_mode_24);
                 Saludo.setText(getString(R.string.title_good_night));
             }
         } else {

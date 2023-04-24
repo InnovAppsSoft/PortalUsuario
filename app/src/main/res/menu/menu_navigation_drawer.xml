@@ -81,6 +81,10 @@
             android:iconTint="#EE5117"
             android:icon="@drawable/ic_baseline_developer_mode_24"
             android:title="Grupo de Testers en Telegram"/>
+        <item
+            android:id="@+id/invite"
+            android:icon="@drawable/outline_group_add_24"
+            android:title="Grupo de Testers en Telegram"/>
     </menu>
 </item>
 <item android:title="Preferencias">

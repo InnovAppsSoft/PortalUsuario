@@ -1045,6 +1045,7 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="title_good_afternoon">Buenas Tardes</string>
     <string name="title_good_night">Buenas Noches</string>
     <string name="promoci_n">Promoción</string>
-
+    <string name="invite_user">¡Ya instalaste Portal Usuario! Gestiona los servicios de ETECSA super sencillo y rapido Descárgala aquí: https://play.google.com/store/apps/details?id=com.marlon.portalusuario&amp;hl=es_US&amp;gl=US&amp;pli=1com.marlon.portalusuario</string>
+    <string name="adquirir_un_servicio">Adquirir un servicio</string>
 
 </resources>
