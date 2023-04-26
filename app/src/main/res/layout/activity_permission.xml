@@ -24,7 +24,7 @@
             android:text="Permisos"
             android:textAlignment="textStart"
             android:textColor="@color/colorDes"
-            android:textSize="@dimen/_20ssp"
+            android:textSize="17sp"
             android:layout_marginBottom="10dp"/>
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview"

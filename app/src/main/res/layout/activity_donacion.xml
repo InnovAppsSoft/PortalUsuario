@@ -26,7 +26,7 @@
                 android:textColor="@color/colorDes"
                 android:fontFamily="@font/displaybold"
                 android:text="@string/donacion_a_javier"
-                android:textSize="@dimen/_20ssp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -84,6 +84,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/widget_4"
                         android:text="@string/enviar"
+                        android:textSize="13sp"
                         android:fontFamily="@font/displaybold"
                         android:textColor="@color/white" />
                 </LinearLayout>
@@ -100,7 +101,7 @@
                 android:textColor="@color/colorDes"
                 android:fontFamily="@font/displaybold"
                 android:text="Donacion a Lesly"
-                android:textSize="@dimen/_20ssp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -158,6 +159,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/widget_4"
                         android:text="@string/enviar"
+                        android:textSize="13sp"
                         android:fontFamily="@font/displaybold"
                         android:textColor="@color/white" />
                 </LinearLayout>
@@ -173,7 +175,7 @@
                 android:textColor="@color/colorDes"
                 android:fontFamily="@font/displaybold"
                 android:text="Donacion a Marlon"
-                android:textSize="@dimen/_20ssp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -182,7 +184,7 @@
                 android:layout_marginRight="20dp"
                 android:textColor="@color/colorDes"
                 android:fontFamily="@font/displaybold"
-                android:text="@string/donaciones_via_zelle_en_estados_unidos"
+                android:text="@string/donaciones_en_estados_unidos_via_zelle_marlonrivero1999_gmail_com"
                 android:textSize="13sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -200,8 +202,8 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
                         android:layout_marginTop="@dimen/_8sdp"
                         android:src="@drawable/zelle"/>
 

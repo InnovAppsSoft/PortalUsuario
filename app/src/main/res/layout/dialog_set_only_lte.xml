@@ -77,7 +77,7 @@
                 android:id="@+id/set_4g"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/widget_4"
+                android:background="@drawable/my_gradient_drawable_"
                 android:layout_margin="10dp"
                 android:textSize="13sp"
                 android:textColor="@color/white"

@@ -31,7 +31,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
                 android:textColor="@color/colorDes"
-                android:textSize="@dimen/_18sdp"
+                android:textSize="15sp"
                 tools:ignore="RtlSymmetry" />
 
             <!--Options-->
@@ -49,20 +49,20 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="80dp"
                         android:layout_marginTop="6dp">
 
                         <RelativeLayout
                             android:id="@+id/saldo"
                             android:layout_width="wrap_content"
-                            android:layout_height="100dp"
+                            android:layout_height="80dp"
                             android:background="@drawable/my_gradient_drawable2"
                             android:minHeight="100dp"
                             android:padding="10dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
@@ -79,7 +79,7 @@
                                 android:text="Saldo"
                                 android:fontFamily="@font/displaybold"
                                 android:textColor="@color/white"
-                                android:textSize="15sp"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
 
 
@@ -95,14 +95,14 @@
                         <RelativeLayout
                             android:id="@+id/llamar99"
                             android:layout_width="wrap_content"
-                            android:layout_height="100dp"
+                            android:layout_height="80dp"
                             android:background="@drawable/my_gradient_drawable3"
-                            android:minHeight="100dp"
+                            android:minHeight="80dp"
                             android:padding="10dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
@@ -118,7 +118,7 @@
                                 android:text="Llamar *99"
                                 android:fontFamily="@font/displaybold"
                                 android:textColor="@color/white"
-                                android:textSize="15sp"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
 
 
@@ -137,20 +137,20 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="80dp"
                         android:layout_marginTop="6dp">
 
                         <RelativeLayout
                             android:id="@+id/megas"
                             android:layout_width="wrap_content"
-                            android:layout_height="100dp"
+                            android:layout_height="80dp"
                             android:background="@drawable/my_gradient_drawable"
                             android:minHeight="100dp"
                             android:padding="10dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
@@ -167,7 +167,7 @@
                                 android:text="Datos"
                                 android:fontFamily="@font/displaybold"
                                 android:textColor="@color/white"
-                                android:textSize="15sp"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
 
 
@@ -183,14 +183,14 @@
                         <RelativeLayout
                             android:id="@+id/llamarPrivado"
                             android:layout_width="wrap_content"
-                            android:layout_height="100dp"
+                            android:layout_height="80dp"
                             android:background="@drawable/my_gradient_drawable_"
-                            android:minHeight="100dp"
+                            android:minHeight="80dp"
                             android:padding="10dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
@@ -205,7 +205,7 @@
                                 android:text="Privado"
                                 android:fontFamily="@font/displaybold"
                                 android:textColor="@color/white"
-                                android:textSize="15sp"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
 
 
@@ -232,20 +232,20 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="80dp"
                         android:layout_marginTop="6dp">
 
                         <RelativeLayout
                             android:id="@+id/PlanAmigos1"
                             android:layout_width="wrap_content"
-                            android:layout_height="100dp"
+                            android:layout_height="80dp"
                             android:background="@drawable/my_gradient_drawable2"
-                            android:minHeight="100dp"
+                            android:minHeight="80dp"
                             android:padding="10dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
@@ -263,7 +263,7 @@
                                 android:text="Plan Amigo"
                                 android:fontFamily="@font/displaybold"
                                 android:textColor="@color/white"
-                                android:textSize="15sp"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
 
 
@@ -279,14 +279,14 @@
                         <RelativeLayout
                             android:id="@+id/sms"
                             android:layout_width="wrap_content"
-                            android:layout_height="100dp"
+                            android:layout_height="80dp"
                             android:background="@drawable/my_gradient_drawable3"
-                            android:minHeight="100dp"
+                            android:minHeight="80dp"
                             android:padding="10dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
@@ -304,7 +304,7 @@
                                 android:text="Plan SMS"
                                 android:fontFamily="@font/displaybold"
                                 android:textColor="@color/white"
-                                android:textSize="15sp"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
 
 
@@ -324,20 +324,20 @@
                     <LinearLayout
                         android:id="@+id/teacherll"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="80dp"
                         android:layout_marginTop="6dp">
 
                         <RelativeLayout
                             android:id="@+id/voz"
                             android:layout_width="wrap_content"
-                            android:layout_height="100dp"
+                            android:layout_height="80dp"
                             android:background="@drawable/my_gradient_drawable"
-                            android:minHeight="100dp"
+                            android:minHeight="80dp"
                             android:padding="10dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
@@ -354,7 +354,7 @@
                                 android:text="Plan Voz"
                                 android:fontFamily="@font/displaybold"
                                 android:textColor="@color/white"
-                                android:textSize="15sp"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
 
 
@@ -370,14 +370,14 @@
                         <RelativeLayout
                             android:id="@+id/emergancia"
                             android:layout_width="wrap_content"
-                            android:layout_height="100dp"
+                            android:layout_height="80dp"
                             android:background="@drawable/my_gradient_drawable_"
-                            android:minHeight="100dp"
+                            android:minHeight="80dp"
                             android:padding="10dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
@@ -393,7 +393,7 @@
                                 android:text="Emergencias"
                                 android:fontFamily="@font/displaybold"
                                 android:textColor="@color/white"
-                                android:textSize="15sp"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
 
 
@@ -428,12 +428,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="10dp"
                         android:text="@string/recargar_saldo"
                         android:transitionName="title"
                         android:fontFamily="@font/displaybold"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -458,15 +458,16 @@
                             android:id="@+id/recargartelefono"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginEnd="10dp"
                             android:fontFamily="@font/displaybold"
                             android:hint="@string/recharge_credit_hint"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:maxLines="1"
-                            android:textColor="@color/white"
-                            android:textColorHint="@color/white"
-                            android:textSize="@dimen/_15ssp"
+                            android:background="@drawable/editstile"
+                            android:textColor="@color/colorDes"
+                            android:textColorHint="@color/colorDes"
+                            android:textSize="14sp"
                             tools:ignore="TouchTargetSizeCheck"
                             android:layout_weight="1"/>
                         <ImageView
@@ -516,7 +517,7 @@
                         android:transitionName="title"
                         android:fontFamily="@font/displaybold"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -539,8 +540,8 @@
 
                         <ImageView
                             android:id="@+id/adelantar"
-                            android:layout_width="24sp"
-                            android:layout_height="24sp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="@dimen/_8sdp"
                             android:layout_marginLeft="@dimen/_8sdp"
@@ -555,16 +556,17 @@
                             android:id="@+id/adesaldo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginEnd="10dp"
                             android:layout_toStartOf="@+id/adelantar"
                             android:fontFamily="@font/displaybold"
                             android:hint="@string/_25_50"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:maxLines="1"
-                            android:textColor="@color/white"
-                            android:textColorHint="@color/white"
-                            android:textSize="@dimen/_13ssp"
+                            android:background="@drawable/editstile"
+                            android:textColor="@color/colorDes"
+                            android:textColorHint="@color/colorDes"
+                            android:textSize="13sp"
                             tools:ignore="TouchTargetSizeCheck" />
 
 
@@ -603,7 +605,7 @@
                         android:transitionName="title"
                         android:fontFamily="@font/displaybold"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -624,8 +626,8 @@
                         android:layout_margin="10dp">
                         <ImageView
                             android:id="@+id/Contactos"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="@dimen/_8sdp"
                             android:layout_marginLeft="@dimen/_8sdp"
@@ -646,9 +648,10 @@
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:maxLines="1"
-                            android:textColor="@color/white"
-                            android:textColorHint="@color/white"
-                            android:textSize="@dimen/_14ssp"
+                            android:background="@drawable/editstile"
+                            android:textColor="@color/colorDes"
+                            android:textColorHint="@color/colorDes"
+                            android:textSize="14sp"
                             tools:ignore="TouchTargetSizeCheck" />
 
                         <LinearLayout
@@ -667,13 +670,16 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/displaybold"
                                 android:hint="@string/_1234"
+                                android:layout_marginTop="4dp"
                                 android:imeOptions="actionNext"
                                 android:inputType="numberPassword"
                                 android:maxLength="4"
                                 android:maxLines="1"
-                                android:textColor="@color/white"
-                                android:textColorHint="@color/white"
-                                android:textSize="@dimen/_14ssp"
+                                android:layout_marginEnd="4dp"
+                                android:background="@drawable/editstile"
+                                android:textColor="@color/colorDes"
+                                android:textColorHint="@color/colorDes"
+                                android:textSize="14sp"
                                 tools:ignore="TouchTargetSizeCheck" />
 
                             <EditText
@@ -685,17 +691,19 @@
                                 android:hint="@string/_0_00"
                                 android:imeOptions="actionDone"
                                 android:inputType="numberDecimal"
+                                android:layout_marginTop="4dp"
                                 android:maxLines="1"
-                                android:textColor="@color/white"
-                                android:textColorHint="@color/white"
-                                android:textSize="@dimen/_14ssp"
+                                android:textColor="@color/colorDes"
+                                android:background="@drawable/editstile"
+                                android:textColorHint="@color/colorDes"
+                                android:textSize="14sp"
                                 tools:ignore="TouchTargetSizeCheck" />
                         </LinearLayout>
 
                         <ImageView
                             android:id="@+id/Enviar"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:layout_below="@+id/Contactos"
                             android:layout_alignParentEnd="true"
                             android:layout_marginTop="@dimen/_8sdp"

@@ -72,17 +72,16 @@
 
                 <androidx.cardview.widget.CardView
                     app:cardUseCompatPadding="true"
-                    app:cardBackgroundColor="@color/background_color_50"
                     app:cardCornerRadius="@dimen/_16sdp"
                     android:id="@+id/ambulancia"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
+                        android:background="@drawable/my_gradient_drawable_"
                         android:layout_height="wrap_content">
 
                         <ImageView
@@ -90,7 +89,7 @@
                             android:layout_width="@dimen/_30sdp"
                             android:layout_height="@dimen/_30sdp"
                             android:src="@drawable/outline_emergency_24"
-                            app:tint="@color/colorDes"
+                            app:tint="@color/white"
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="12dp"
                             android:contentDescription="@string/app_name"
@@ -106,7 +105,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="80dp"
                             android:text="@string/ambulacia"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             android:textSize="13sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toEndOf="@+id/compra"
@@ -123,7 +122,7 @@
                             android:maxLines="2"
                             android:text="@string/_104"
                             android:textSize="12sp"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/Title1"
                             app:layout_constraintStart_toStartOf="@+id/Title1"
@@ -137,15 +136,14 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/policia"
                     android:layout_width="match_parent" app:cardUseCompatPadding="true"
-                    app:cardBackgroundColor="@color/background_color_50"
                     app:cardCornerRadius="@dimen/_16sdp"
-
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
+                        android:background="@drawable/my_gradient_drawable_"
                         android:layout_height="wrap_content">
 
                         <ImageView
@@ -153,7 +151,6 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/outline_emergency_24"
-                            app:tint="@color/colorDes"
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="12dp"
                             android:contentDescription="@string/app_name"
@@ -169,7 +166,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="80dp"
                             android:text="@string/polic_a"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             android:textSize="13sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toEndOf="@+id/compra3"
@@ -186,7 +183,7 @@
                             android:maxLines="2"
                             android:textSize="12sp"
                             android:text="@string/_106"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/Title4"
                             app:layout_constraintStart_toStartOf="@+id/Title4"
@@ -200,7 +197,6 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/bomberos"
                     app:cardUseCompatPadding="true"
-                    app:cardBackgroundColor="@color/background_color_50"
                     app:cardCornerRadius="@dimen/_16sdp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -209,6 +205,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
+                        android:background="@drawable/my_gradient_drawable_"
                         android:layout_height="wrap_content">
 
                         <ImageView
@@ -216,7 +213,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/outline_emergency_24"
-                            app:tint="@color/colorDes"
+                            app:tint="@color/white"
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="12dp"
                             android:contentDescription="@string/app_name"
@@ -232,7 +229,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="80dp"
                             android:text="@string/bomberos"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             android:textSize="13sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toEndOf="@+id/compra2"
@@ -249,7 +246,7 @@
                             android:maxLines="2"
                             android:textSize="12sp"
                             android:text="@string/_105"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/Title3"
                             app:layout_constraintStart_toStartOf="@+id/Title3"
@@ -265,7 +262,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:cardUseCompatPadding="true"
-                    app:cardBackgroundColor="@color/background_color_50"
                     app:cardCornerRadius="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp">
@@ -273,6 +269,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
+                        android:background="@drawable/my_gradient_drawable_"
                         android:layout_height="wrap_content">
 
                         <ImageView
@@ -280,7 +277,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/outline_emergency_24"
-                            app:tint="@color/colorDes"
+                            app:tint="@color/white"
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="12dp"
                             android:contentDescription="@string/app_name"
@@ -296,7 +293,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="80dp"
                             android:text="@string/antidrogas"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             android:textSize="13sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toEndOf="@+id/compra4"
@@ -313,7 +310,7 @@
                             android:maxLines="2"
                             android:text="@string/_103"
                             android:textSize="12sp"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/Title5"
                             app:layout_constraintStart_toStartOf="@+id/Title5"
@@ -328,7 +325,6 @@
                     android:id="@+id/Mar"
                     android:layout_width="match_parent"
                     app:cardUseCompatPadding="true"
-                    app:cardBackgroundColor="@color/background_color_50"
                     app:cardCornerRadius="@dimen/_16sdp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/_10sdp"
@@ -336,6 +332,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
+                        android:background="@drawable/my_gradient_drawable_"
                         android:layout_height="wrap_content">
 
                         <ImageView
@@ -343,7 +340,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/outline_emergency_24"
-                            app:tint="@color/colorDes"
+                            app:tint="@color/white"
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="12dp"
                             android:contentDescription="@string/app_name"
@@ -359,7 +356,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="8dp"
                             android:text="@string/salvamiento_mar_timo"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             android:textSize="13sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toEndOf="@+id/compra6"
@@ -376,7 +373,7 @@
                             android:maxLines="2"
                             android:text="@string/_107"
                             android:textSize="12sp"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/Title6"
                             app:layout_constraintStart_toStartOf="@+id/Title6"
@@ -392,7 +389,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:cardUseCompatPadding="true"
-                    app:cardBackgroundColor="@color/background_color_50"
                     app:cardCornerRadius="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp">
@@ -400,6 +396,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
+                        android:background="@drawable/my_gradient_drawable_"
                         android:layout_height="wrap_content">
 
                         <ImageView
@@ -407,7 +404,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/outline_emergency_24"
-                            app:tint="@color/colorDes"
+                            app:tint="@color/white"
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="12dp"
                             android:contentDescription="@string/app_name"
@@ -423,7 +420,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="8dp"
                             android:text="@string/atenci_n_al_cliente"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             android:textSize="13sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toEndOf="@+id/compra22"
@@ -440,7 +437,7 @@
                             android:textSize="12sp"
                             android:maxLines="2"
                             android:text="@string/_52642266"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/Title22"
                             app:layout_constraintStart_toStartOf="@+id/Title22"

@@ -66,7 +66,7 @@
                     android:orientation="vertical"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="8dp">
 
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -89,6 +89,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edit_perfil_nombre"
                             android:maxLength="20"
+                        android:textSize="13sp"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent" />
 
@@ -113,6 +114,7 @@
                             android:id="@+id/edit_perfil_numero"
                             android:inputType="phone"
                             android:maxLength="8"
+                        android:textSize="13sp"
                         app:hintTextColor="@color/colorDes"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent" />
@@ -138,6 +140,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edit_perfil_nauta"
                             android:layout_height="wrap_content"
+                        android:textSize="13sp"
                             android:layout_width="match_parent" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -148,6 +151,7 @@
                         android:layout_width="match_parent"
                         android:background="@drawable/my_gradient_drawable3"
                         android:text="Guardar"
+                    android:textSize="13sp"
                         android:textColor="@color/white"
                         android:layout_gravity="center_horizontal" />
 

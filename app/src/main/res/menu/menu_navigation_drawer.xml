@@ -84,7 +84,7 @@
         <item
             android:id="@+id/invite"
             android:icon="@drawable/outline_group_add_24"
-            android:title="Grupo de Testers en Telegram"/>
+            android:title="Invitar Amigos"/>
     </menu>
 </item>
 <item android:title="Preferencias">
