@@ -8,6 +8,7 @@ import com.marlon.portalusuario.nauta.data.UserDao
 import com.marlon.portalusuario.nauta.data.network.UserDb
 import com.marlon.portalusuario.nauta.data.repository.UserRepository
 import com.marlon.portalusuario.nauta.data.repository.UserRepositoryImpl
+import com.marlon.portalusuario.nauta.service.CountdownServiceClient
 import cu.suitetecsa.sdk.nauta.data.repository.DefaultNautaSession
 import cu.suitetecsa.sdk.nauta.data.repository.JSoupNautaScrapper
 import cu.suitetecsa.sdk.nauta.domain.service.NautaClient
@@ -39,4 +40,8 @@ class AppModule {
     @Singleton
     @Provides
     fun provideNautaSharedPreferences(@ApplicationContext context: Context): Pref = Pref(context)
+
+    @Singleton
+    @Provides
+    fun provideCountdownServiceClient(@ApplicationContext context: Context) = CountdownServiceClient(context)
 }

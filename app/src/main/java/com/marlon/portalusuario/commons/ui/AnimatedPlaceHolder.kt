@@ -13,8 +13,7 @@ import com.marlon.portalusuario.commons.utils.doWhenHasNextOrPrevious
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AnimatedPlaceholder(
-    hints: List<String>,
-    textColor: Color = MaterialTheme.colors.onSurface
+    hints: List<String>
 ) {
     val iterator = hints.listIterator()
     val target by produceState(initialValue = hints.first()) {
@@ -28,8 +27,7 @@ fun AnimatedPlaceholder(
         transitionSpec = { ScrollAnimation() }
     ) { str ->
         Text(
-            text = str,
-            color = textColor
+            text = str
         )
     }
 }

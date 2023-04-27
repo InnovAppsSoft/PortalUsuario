@@ -143,10 +143,6 @@
         <activity android:name=".view.activities.LlamadaOcultoActivity" />
         <activity android:name=".view.activities.Llamada_99Activity" />
         <activity android:name=".view.activities.EmergenciaActivity" />
-        <activity
-            android:name=".nauta.ui.PortalNautaActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
         <activity android:name=".view.activities.PrivacyActivity" />
         <activity
             android:name=".firewall.ActivityMain"
@@ -215,6 +211,10 @@
                 <action android:name="android.net.VpnService" />
             </intent-filter>
         </service>
+        
+        <service android:name=".nauta.service.CountdownServiceImpl"
+            android:exported="false"
+            android:permission="android.permission.INTERNET" />
 
         <receiver
             android:name=".firewall.Receiver"

@@ -9,24 +9,27 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.marlon.portalusuario.commons.ui.theme.SuitEtecsaTheme
+import javax.inject.Inject
 
-class ConnectivityFragment : Fragment() {
+class ConnectivityFragment @Inject constructor() : Fragment() {
     private val nautaViewModel: NautaViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return ComposeView(requireContext()).apply {
+        val view = ComposeView(requireContext()).apply {
             setContent {
-                NautaScreen(viewModel = nautaViewModel)
+                SuitEtecsaTheme { NautaScreen(viewModel = nautaViewModel) }
             }
         }
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        nautaViewModel.onCreate()
+        nautaViewModel.onCreated()
     }
 
     @Preview(showSystemUi = true)

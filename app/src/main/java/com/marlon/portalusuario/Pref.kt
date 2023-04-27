@@ -7,6 +7,22 @@ class Pref(val context: Context) {
 
     private val storage: SharedPreferences = context.getSharedPreferences("nauta_session", 0)
 
+    var currentUserId: Int
+        set(value) {
+            storage.edit().putInt("current_user_id", value).apply()
+        }
+        get() {
+             return storage.getInt("current_user_id", 0)
+        }
+
+    var reservedTime: Int
+        set(value) {
+            storage.edit().putInt("reserved_time", value).apply()
+        }
+        get() {
+            return storage.getInt("reserved_time", 0)
+        }
+
     fun saveSession(dataSession: Map<String, String>) {
         storage.edit().putString("username", dataSession["username"]).apply()
         storage.edit().putString("CSRFHW", dataSession["CSRFHW"]).apply()

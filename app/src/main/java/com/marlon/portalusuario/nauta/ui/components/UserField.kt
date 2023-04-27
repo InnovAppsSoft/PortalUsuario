@@ -28,8 +28,7 @@ fun UserField(userName: TextFieldValue, onChangedText: (TextFieldValue) -> Unit)
             )
         },
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp),
+            .fillMaxWidth(),
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Email, imeAction = ImeAction.Next
         ),

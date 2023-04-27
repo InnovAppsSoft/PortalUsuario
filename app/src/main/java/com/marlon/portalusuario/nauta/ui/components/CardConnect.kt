@@ -1,5 +1,7 @@
 package com.marlon.portalusuario.nauta.ui.components
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -15,10 +17,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.R
+import com.marlon.portalusuario.commons.ui.theme.SuitEtecsaTheme
 
 @Composable
 fun CardConnect(
@@ -26,12 +30,16 @@ fun CardConnect(
     remainingTime: String,
     connectButtonEnabled: Boolean,
     isLoading: Boolean,
+    isButtonEnabled: Boolean = true,
     connectStatus: Pair<Boolean, String?>,
     isLoggedIn: Boolean,
     onLogin: () -> Unit,
     onSelectLimitedTime: () -> Unit
 ) {
     val (isOk, errors) = connectStatus
+    val context = LocalContext.current
+    if (!isOk) Toast.makeText(context, errors, Toast.LENGTH_LONG).show()
+    val isEnabled = isButtonEnabled && !isLoading
     PrettyCard(modifier = modifier, isLoading = isLoading, isFoundErrors = !isOk) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -44,35 +52,63 @@ fun CardConnect(
                 modifier = Modifier
                     .weight(1f)
                     .wrapContentWidth()
-                    .clickable { onSelectLimitedTime() },
+                    .clickable { if (isEnabled) { onSelectLimitedTime() } },
                 style = MaterialTheme.typography.h5
             )
             Button(
                 onClick = { onLogin() },
                 shape = RoundedCornerShape(topEnd = 8.dp, bottomEnd = 8.dp),
                 modifier = Modifier.fillMaxHeight(),
-                enabled = connectButtonEnabled
+                enabled = connectButtonEnabled && isEnabled
             ) {
                 if (!isLoggedIn) {
-                    Text(text = stringResource(R.string.connect))
+                    Text(
+                        text = stringResource(R.string.connect),
+                        style = MaterialTheme.typography.button
+                    )
                 } else {
-                    Text(text = stringResource(R.string.disconnect))
+                    Text(
+                        text = stringResource(R.string.disconnect),
+                        style = MaterialTheme.typography.button
+                    )
                 }
             }
         }
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun CardConnectPreview() {
-    CardConnect(
-        remainingTime = "",
-        connectButtonEnabled = false,
-        isLoading = false,
-        connectStatus = Pair(true, null),
-        isLoggedIn = false,
-        onLogin = { /*TODO*/ }) {
+    SuitEtecsaTheme {
+        CardConnect(
+            remainingTime = "00:00:00",
+            connectButtonEnabled = false,
+            isLoading = false,
+            connectStatus = Pair(true, null),
+            isLoggedIn = false,
+            onLogin = { /*TODO*/ },
+            modifier = Modifier.padding(16.dp)
+        ) {
 
+        }
+    }
+}
+
+@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun CardConnectPreviewDark() {
+    SuitEtecsaTheme {
+        CardConnect(
+            remainingTime = "00:00:00",
+            connectButtonEnabled = false,
+            isLoading = false,
+            connectStatus = Pair(true, null),
+            isLoggedIn = false,
+            onLogin = { /*TODO*/ },
+            modifier = Modifier.padding(16.dp)
+        ) {
+
+        }
     }
 }

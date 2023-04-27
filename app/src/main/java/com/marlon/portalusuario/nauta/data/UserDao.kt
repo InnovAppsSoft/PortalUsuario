@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface UserDao {
     @Query("SELECT * FROM $USER_TABLE ORDER BY id ASC")
-    fun getUsers(): Flow<Users>
+    suspend fun getUsers(): Users
 
     @Query("SELECT * FROM $USER_TABLE WHERE id = :id")
     suspend fun getUser(id: Int): User
