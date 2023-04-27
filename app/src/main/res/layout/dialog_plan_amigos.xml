@@ -26,6 +26,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:background="@drawable/my_gradient_drawable2"
                 android:layout_height="wrap_content">
 
 
@@ -35,7 +36,6 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="12dp"
-                    app:tint="@color/colorDes"
                     android:src="@drawable/outline_spatial_audio_off_24"
                     android:contentDescription="@string/app_name"
                     android:padding="6dp"
@@ -50,7 +50,7 @@
                     android:layout_marginEnd="80dp"
                     android:fontFamily="@font/displaybold"
                     android:text="@string/activar_plan"
-                    android:textColor="@color/colorDes"
+                    android:textColor="@color/white"
                     android:textSize="13sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +66,7 @@
                     android:fontFamily="@font/displaybold"
                     android:maxLines="2"
                     android:text="@string/_25_cup"
-                    android:textColor="@color/colorDes"
+                    android:textColor="@color/white"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/Title1"
@@ -81,7 +81,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/adicionar"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginTop="8dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             app:cardBackgroundColor="@color/background_color_50"
@@ -90,6 +90,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:background="@drawable/my_gradient_drawable2"
                 android:layout_height="wrap_content">
 
                 <ImageView
@@ -99,7 +100,6 @@
                     android:layout_marginTop="12dp"
                     android:contentDescription="@string/app_name"
                     android:padding="6dp"
-                    app:tint="@color/colorDes"
                     android:layout_marginStart="12dp"
                     android:src="@drawable/outline_spatial_audio_off_24"
                     app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +114,7 @@
                     android:layout_marginEnd="80dp"
                     android:fontFamily="@font/displaybold"
                     android:text="@string/adicionar_o_eliminar"
-                    android:textColor="@color/colorDes"
+                    android:textColor="@color/white"
                     android:textSize="13sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -130,7 +130,7 @@
                     android:fontFamily="@font/displaybold"
                     android:maxLines="2"
                     android:text="@string/amigos"
-                    android:textColor="@color/colorDes"
+                    android:textColor="@color/white"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/Title4"
@@ -147,14 +147,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginBottom="8dp"
             app:cardBackgroundColor="@color/background_color_50"
             app:cardCornerRadius="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/_10sdp">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:background="@drawable/my_gradient_drawable2"
                 android:layout_height="wrap_content">
 
                 <ImageView
@@ -165,7 +167,6 @@
                     android:layout_marginTop="12dp"
                     android:contentDescription="@string/app_name"
                     android:padding="6dp"
-                    app:tint="@color/colorDes"
                     android:src="@drawable/outline_spatial_audio_off_24"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -178,7 +179,7 @@
                     android:layout_marginEnd="80dp"
                     android:fontFamily="@font/displaybold"
                     android:text="@string/consultar_plan"
-                    android:textColor="@color/colorDes"
+                    android:textColor="@color/white"
                     android:textSize="13sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -194,7 +195,7 @@
                     android:fontFamily="@font/displaybold"
                     android:maxLines="2"
                     android:text="@string/consultar"
-                    android:textColor="@color/colorDes"
+                    android:textColor="@color/white"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/Title3"

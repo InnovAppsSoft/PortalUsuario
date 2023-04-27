@@ -17,6 +17,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_height="320dp"
                 android:layout_width="match_parent"
+            android:background="@color/background"
                 app:expandedTitleTextColor="@android:color/white"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
                 android:id="@+id/collapsingTbl">
@@ -27,6 +28,16 @@
                     app:layout_collapseMode="pin"
                     app:navigationIconTint="@color/colorDes"
                     android:id="@+id/toolbar" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/image_perfil"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"
+                android:fitsSystemWindows="true"
+                android:src="@drawable/portal"
+                app:layout_anchorGravity="center"
+                app:layout_anchor="@+id/appbar" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -55,7 +66,7 @@
                     android:orientation="vertical"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="8dp">
 
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -65,7 +76,8 @@
                         app:boxCornerRadiusBottomEnd="30dp"
                         app:boxCornerRadiusTopStart="30dp"
                         app:boxCornerRadiusTopEnd="30dp"
-                        android:maxLength="15"
+                        android:maxLength="20"
+                    app:hintTextColor="@color/colorDes"
                         app:boxCornerRadiusBottomStart="30dp"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
@@ -76,7 +88,8 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edit_perfil_nombre"
-                            android:maxLength="15"
+                            android:maxLength="20"
+                        android:textSize="13sp"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent" />
 
@@ -101,6 +114,8 @@
                             android:id="@+id/edit_perfil_numero"
                             android:inputType="phone"
                             android:maxLength="8"
+                        android:textSize="13sp"
+                        app:hintTextColor="@color/colorDes"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent" />
 
@@ -118,12 +133,14 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         app:errorEnabled="true"
+                    app:hintTextColor="@color/colorDes"
                         android:layout_gravity="center_horizontal"
                         android:hint="Correo nauta">
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edit_perfil_nauta"
                             android:layout_height="wrap_content"
+                        android:textSize="13sp"
                             android:layout_width="match_parent" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -134,6 +151,7 @@
                         android:layout_width="match_parent"
                         android:background="@drawable/my_gradient_drawable3"
                         android:text="Guardar"
+                    android:textSize="13sp"
                         android:textColor="@color/white"
                         android:layout_gravity="center_horizontal" />
 
@@ -157,21 +175,13 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/eliminar"
             app:layout_anchor="@+id/appbar"
-            app:layout_anchorGravity="bottom|left"
+            app:layout_anchorGravity="bottom|end"
             android:contentDescription="@string/app_name"
-            android:layout_margin="16dp"
+        android:layout_marginEnd="80dp"
             app:srcCompat="@drawable/outline_delete_forever_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/image_perfil"
-            android:layout_height="150dp"
-            android:layout_width="150dp"
-            android:scaleType="centerCrop"
-            android:fitsSystemWindows="true"
-            android:src="@drawable/portal"
-            app:layout_anchorGravity="center"
-            app:layout_anchor="@+id/appbar" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

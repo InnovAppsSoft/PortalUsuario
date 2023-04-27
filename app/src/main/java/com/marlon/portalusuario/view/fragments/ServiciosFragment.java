@@ -1,4 +1,4 @@
-package com.marlon.portalusuario.view.Fragments;
+package com.marlon.portalusuario.view.fragments;
 
 
 import android.Manifest;
@@ -48,8 +48,8 @@ public class ServiciosFragment<b> extends Fragment {
     private CardView activar,adicionar,consultar;
     private SharedPreferences salva,nochesalva;
 
-    private CardView SMS, VOZ, PlanAmigos1, Emergencia;
-    private RelativeLayout creditBtn, bonusBtn, mobileDataBtn, callPrivateBtn, call99Btn, voicePlansBtn, friendsPlanBtn, smsPlansBtn;
+    private RelativeLayout VOZ, PlanAmigos1, Emergencia,SMS;
+    private RelativeLayout creditBtn, mobileDataBtn, callPrivateBtn, call99Btn;
     private EditText donateMount, donateKey, rechargeCode, adelantaSaldoMount;
     public static EditText phoneNumber;
     private ImageView sendDonation, adelantaSaldoBtn, rechargeBtn, contactSBtn, scanQRRechargeCode;
@@ -73,11 +73,17 @@ public class ServiciosFragment<b> extends Fragment {
         logging = new JCLogging(getActivity());
         // ui components init
 
-        SMS = view.findViewById(R.id.sms);
-        VOZ = view.findViewById(R.id.voz);
+        creditBtn = view.findViewById(R.id.saldo);
+        mobileDataBtn = view.findViewById(R.id.megas);
+        call99Btn = view.findViewById(R.id.llamar99);
+        callPrivateBtn = view.findViewById(R.id.llamarPrivado);
         PlanAmigos1 =  view.findViewById(R.id.PlanAmigos1);
+        VOZ = view.findViewById(R.id.voz);
+        SMS = view.findViewById(R.id.sms);
         Emergencia = view.findViewById(R.id.emergancia);
 
+
+        contactSBtn = view.findViewById(R.id.Contactos);
         phoneNumber = view.findViewById(R.id.telefono);
         donateMount = view.findViewById(R.id.donation_mount);
         donateKey = view.findViewById(R.id.donation_key);
@@ -90,37 +96,7 @@ public class ServiciosFragment<b> extends Fragment {
         adelantaSaldoMount = view.findViewById(R.id.adesaldo);
         adelantaSaldoBtn = view.findViewById(R.id.adelantar);
 
-        creditBtn = view.findViewById(R.id.saldo);
-        bonusBtn = view.findViewById(R.id.bono);
-        mobileDataBtn = view.findViewById(R.id.megas);
-        call99Btn = view.findViewById(R.id.llamar99);
-        callPrivateBtn = view.findViewById(R.id.llamarPrivado);
-        contactSBtn = view.findViewById(R.id.Contactos);
-        voicePlansBtn = view.findViewById(R.id.microfono);
-        friendsPlanBtn = view.findViewById(R.id.amigosplan);
-        smsPlansBtn = view.findViewById(R.id.smsplan);
 
-
-        friendsPlanBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                USSDcall("*222*264%23");
-            }
-        });
-
-        smsPlansBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                USSDcall("*222*767%23");
-            }
-        });
-
-        voicePlansBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                USSDcall("*222*869%23");
-            }
-        });
 
         scanQRRechargeCode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,13 +133,6 @@ public class ServiciosFragment<b> extends Fragment {
             @Override
             public void onClick(View view) {
                 USSDcall("*222%23");
-            }
-        });
-
-        bonusBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                USSDcall("*222*266%23");
             }
         });
 

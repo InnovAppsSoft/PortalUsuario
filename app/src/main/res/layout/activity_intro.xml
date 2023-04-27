@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_gravity="bottom"
-        android:background="@color/dark_shadow"
+        android:background="@color/background"
         android:elevation="12dp"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -51,12 +51,11 @@
             android:layout_height="48dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/rounded"
-            android:fontFamily="@font/ibm_semibold"
+            android:background="@drawable/my_gradient_drawable4"
+            android:fontFamily="@font/dosisbold"
             android:text="@string/siguiente"
-            android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="@dimen/_13sdp" />
+            android:textSize="13sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -64,7 +63,6 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_gravity="bottom"
-        android:background="@color/background"
         android:elevation="12dp"
         android:gravity="center"
         android:visibility="invisible"
@@ -76,12 +74,11 @@
             android:layout_height="48dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/rounded"
+            android:background="@drawable/my_gradient_drawable3"
             android:fontFamily="@font/dosisbold"
             android:text="Continuar"
-            android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="@dimen/_13sdp" />
+            android:textSize="13sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

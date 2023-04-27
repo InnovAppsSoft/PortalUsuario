@@ -1,4 +1,4 @@
-package com.marlon.portalusuario.view.Fragments;
+package com.marlon.portalusuario.view.fragments;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -62,13 +62,12 @@ public class CuentasFragment extends Fragment {
 
     private JCLogging logging;
 
-    private Button ButtonBonos;
     private SwipeRefreshLayout Refrescar;
 
     private TextView saldotext, expiratext, minutostext, mensajestext, venceminutossms, datostext, datoslte, datosnacionales, VenceDatosI, bolsasms,vencebolsasms,bolsadiaria,vencebolsadiaria,Actulizar;
     TelephonyManager manager, manager2, managerMain;
 
-    private TextView TextoNombre,Saludo,Numero, Correo, vencenacionales;
+    private TextView TextoNombre,Saludo,Numero, Correo;
     SharedPreferences sp_cuentas;
     SharedPreferences.Editor editor;
 
@@ -98,8 +97,8 @@ public class CuentasFragment extends Fragment {
     String sim;
     SharedPreferences sp_sim;
 
-    private CircleImageView imgperfil;
-    private ImageView Editar,Recargar;
+    private CircleImageView imgperfil, imgGreetings;
+    private ImageView Editar, refreshButton;
 
     TextView Promo;
 
@@ -136,10 +135,15 @@ public class CuentasFragment extends Fragment {
         Editar = v.findViewById(R.id.editar);
         Numero = v.findViewById(R.id.numerotext);
         Correo = v.findViewById(R.id.correotext);
-        Recargar = v.findViewById(R.id.reaload);
         Promo = v.findViewById(R.id.button_cuentas_bono);
-        vencenacionales = v.findViewById(R.id.vencenacionales);
-
+        imgGreetings = v.findViewById(R.id.img_greetings);
+//        refreshButton = v.findViewById(R.id.refreshButton);
+//        refreshButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
         //
         return v;
     }
@@ -181,10 +185,13 @@ public class CuentasFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             LocalDateTime currentTime = LocalDateTime.now();
             if (currentTime.getHour() < 12) {
+                imgGreetings.setImageResource(R.drawable.baseline_light_mode_24);
                 Saludo.setText(getString(R.string.title_good_morning));
             } else if (currentTime.getHour() >= 12 && currentTime.getHour() < 18) {
+                imgGreetings.setImageResource(R.drawable.outline_brightness_4_24);
                 Saludo.setText(getString(R.string.title_good_afternoon));
             } else {
+                imgGreetings.setImageResource(R.drawable.outline_dark_mode_24);
                 Saludo.setText(getString(R.string.title_good_night));
             }
         } else {
@@ -241,7 +248,6 @@ public class CuentasFragment extends Fragment {
                         alertdialogo.create().show();
                     }
                 });
-
 
         // TODO: SwipeRefresh
         Refrescar.setOnRefreshListener(
@@ -441,13 +447,13 @@ public class CuentasFragment extends Fragment {
                                                                                                                                                                         progressDialog.dismiss();
                                                                                                                                                                     }
                                                                                                                                                                 },
-                                                                                                                                                                5000);
+                                                                                                                                                                8000);
                                                                                                                                             }
                                                                                                                                         },
-                                                                                                                                        5000);
+                                                                                                                                        6000);
                                                                                                                     }
                                                                                                                 },
-                                                                                                                5000);
+                                                                                                                6000);
                                                                                             }
                                                                                         },
                                                                                         5000);
@@ -934,9 +940,9 @@ public class CuentasFragment extends Fragment {
                                             .trim();
                             String string_bono = bonos.toString();
                             if (!TextUtils.isEmpty(string_bono)) {
-                                ButtonBonos.setVisibility(View.VISIBLE);
+                                Promo.setVisibility(View.VISIBLE);
                             } else {
-                                ButtonBonos.setVisibility(View.GONE);
+                                Promo.setVisibility(View.GONE);
                             }
                             editor.putString("bonos", string_bono.toString());
                             editor.commit();

@@ -7,15 +7,18 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical">
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/simpleTabLayout"
         android:layout_width="match_parent"
+        android:background="@color/background"
         android:layout_height="wrap_content"
         app:tabMode="fixed"
         app:tabGravity="fill"
         app:tabIndicatorAnimationMode="elastic"
         android:contentDescription="null"
         tools:ignore="HardcodedText" />
+
     <FrameLayout
         android:id="@+id/simpleFrameLayout"
         android:layout_width="match_parent"

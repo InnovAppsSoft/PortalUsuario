@@ -1070,9 +1070,18 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="vence_minutos_y_sms">Vence Minutos y SMS</string>
     <string name="paquetes_lte1">Paquetes LTE</string>
     <string name="datos_nacionales1">Datos Nacionales</string>
-    <string name="title_good_morning">Buenos Dias</string>
+    <string name="title_good_morning">Buenos Días</string>
     <string name="title_good_afternoon">Buenas Tardes</string>
     <string name="title_good_night">Buenas Noches</string>
-
+    <string name="promoci_n">Promoción</string>
+    <string name="invite_user">¡Ya instalaste Portal Usuario! Gestiona los servicios de ETECSA super sencillo y rapido Descárgala aquí: https://play.google.com/store/apps/details?id=com.marlon.portalusuario&amp;hl=es_US&amp;gl=US&amp;pli=1com.marlon.portalusuario</string>
+    <string name="adquirir_un_servicio">Adquirir un servicio</string>
+    <string name="expira_datos">Expira Datos:</string>
+    <string name="expira_sms_voz">Expira Sms-Voz:</string>
+    <string name="ultima_actualizacion_00_00">Ultima actualizacion: 00:00</string>
+    <string name="numero">Numero</string>
+    <string name="desliza_hacia_abajo_para_actualizar">Desliza hacia abajo para actualizar</string>
+    <string name="promociones_activas">Promociones activas</string>
+    <string name="donaciones_en_estados_unidos_via_zelle_marlonrivero1999_gmail_com">Donaciones en Estados Unidos via zelle: marlonrivero1999@gmail.com</string>
 
 </resources>

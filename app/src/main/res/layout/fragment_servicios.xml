@@ -26,875 +26,701 @@
                 android:fontFamily="@font/dosisbold"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                android:text="@string/consultar"
+                android:text="@string/adquirir_un_servicio"
                 android:textAllCaps="false"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
                 android:textColor="@color/colorDes"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="15sp"
                 tools:ignore="RtlSymmetry" />
 
-            <TextView
-                    android:text="Servicios contratados de forma manual"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/dosislight"
-                    android:textColor="@color/colorDes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:orientation="horizontal">
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cvCredit"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_4sdp"
-                            android:layout_marginRight="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:layout_marginTop="4sp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_8sdp">
-
-                            <RelativeLayout
-                                android:id="@+id/saldo"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:id="@+id/imBtnSaldoBolsaNauta"
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginStart="@dimen/_8sdp"
-                                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/outline_payments_24"
-                                    app:tint="@color/colorDes" />
-
-                                <TextView
-                                    android:id="@+id/enseñar"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginStart="@dimen/_5sdp"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_toEndOf="@+id/imBtnSaldoBolsaNauta"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/saldo1"
-                                    android:textAllCaps="false"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_13sdp" />
-
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cvCall99"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_4sdp"
-                            android:layout_marginRight="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:layout_marginTop="4sp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_8sdp"
-                            >
-
-                            <RelativeLayout
-                                android:id="@+id/megas"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:id="@+id/imBtnSaldoSMS"
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_marginStart="@dimen/_8sdp"
-                                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/baseline_moving_24"
-                                    app:tint="@color/colorDes"
-                                    />
-
-                                <TextView
-                                    android:id="@+id/tvSMS"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginStart="@dimen/_5sdp"
-                                    android:layout_marginLeft="16dp"
-                                    android:fontFamily="@font/displaybold"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_toEndOf="@+id/imBtnSaldoSMS"
-                                    android:text="@string/datos1"
-                                    android:textAllCaps="false"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_13sdp" />
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:orientation="horizontal">
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cvPlanVoz"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_4sdp"
-                            android:layout_marginRight="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/_8sdp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_8sdp"
-                           >
-
-
-                            <RelativeLayout
-                                android:id="@+id/bono"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:id="@+id/imBtnSaldoVoz"
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_marginStart="@dimen/_8sdp"
-                                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                    android:contentDescription="@string/app_name"
-                                    app:tint="@color/colorDes"
-                                    android:src="@drawable/outline_star_border_24" />
-
-                                <TextView
-                                    android:id="@+id/tvVoz"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginStart="@dimen/_5sdp"
-                                    android:layout_toEndOf="@+id/imBtnSaldoVoz"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/bonos"
-                                    android:textAllCaps="false"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_13sdp" />
-
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_4sdp"
-                            android:layout_marginRight="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/_8sdp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_8sdp"
-                            >
-
-                            <RelativeLayout
-                                android:id="@+id/microfono"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:id="@+id/imBtnSaldoFriend1"
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_marginStart="@dimen/_8sdp"
-                                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/outline_local_phone_24"
-                                    app:tint="@color/colorDes"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginStart="@dimen/_5sdp"
-                                    android:layout_toEndOf="@+id/imBtnSaldoFriend1"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/voz1"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_13sdp" />
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:orientation="horizontal">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_4sdp"
-                            android:layout_marginRight="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/_8sdp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_8sdp"
-                            >
-
-                            <RelativeLayout
-                                android:id="@+id/amigosplan"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:id="@+id/imBtnSaldoVoz2"
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_marginStart="@dimen/_8sdp"
-                                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/outline_spatial_audio_off_24"
-                                    app:tint="@color/colorDes"
-                                    />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginStart="@dimen/_5sdp"
-                                    android:layout_toEndOf="@+id/imBtnSaldoVoz2"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/amigo1"
-                                    android:textAllCaps="false"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_13sdp" />
-
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_4sdp"
-                            android:layout_marginRight="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/_8sdp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_8sdp"
-                            >
-
-                            <RelativeLayout
-                                android:id="@+id/smsplan"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:id="@+id/imBtnSaldoFriend3"
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_marginStart="@dimen/_8sdp"
-                                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                    android:contentDescription="@string/app_name"
-                                    android:src="@drawable/outline_comment_24"
-                                    app:tint="@color/colorDes"
-                                    />
-
-                                <TextView
-                                        android:id="@+id/texto"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginStart="@dimen/_5sdp"
-                                    android:layout_toEndOf="@+id/imBtnSaldoFriend3"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/sms1"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_13sdp" />
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
-
-                </LinearLayout>
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/call"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/dosisbold"
-                android:gravity="center_vertical"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:text="@string/servicios"
-                android:textAllCaps="false"
-                android:textColor="@color/colorDes"
-                android:textSize="@dimen/_16sdp"
-                tools:ignore="RtlSymmetry" />
-
-            <TextView
-                    android:text="A contratar y otras utilidades"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:textSize="11sp"
-                    android:fontFamily="@font/dosislight"
-                    android:textColor="@color/colorDes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" tools:ignore="RtlSymmetry"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_8sdp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:orientation="horizontal">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_4sdp"
-                            android:layout_marginTop="4sp"
-                            android:layout_marginRight="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_8sdp">
-
-                            <RelativeLayout
-                                android:id="@+id/llamar99"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:id="@+id/imBtnSaldoVoz11"
-                                        android:layout_alignParentStart="true"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginStart="16dp"
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
-                                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                    android:contentDescription="@string/app_name"
-                                    app:tint="@color/colorDes"
-                                    android:src="@drawable/outline_phone_forwarded_24" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_marginRight="16dp"
-                                    android:layout_marginStart="@dimen/_5sdp"
-
-                                    android:layout_toEndOf="@+id/imBtnSaldoVoz11"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/_99"
-                                    android:textAllCaps="false"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_13sdp" />
-
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cvPlanAmigo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_4sdp"
-                            android:layout_marginRight="@dimen/_4sdp"
-                            android:layout_marginTop="4sp"
-                            android:layout_marginBottom="@dimen/_8sdp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/background_color_50"
-                            app:cardCornerRadius="@dimen/_8sdp"
-                            >
-
-                            <RelativeLayout
-                                android:id="@+id/llamarPrivado"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:id="@+id/imBtnSaldoFriend"
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_marginStart="@dimen/_8sdp"
-                                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                    android:contentDescription="@string/app_name"
-                                    app:tint="@color/colorDes"
-                                    android:src="@drawable/outline_phone_locked_24" />
-
-                                <TextView
-                                    android:id="@+id/tvAmigo"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginStart="@dimen/_5sdp"
-                                    android:layout_toEndOf="@+id/imBtnSaldoFriend"
-                                    android:fontFamily="@font/displaybold"
-                                    android:text="@string/privado1"
-                                    android:textAllCaps="false"
-                                    android:textColor="@color/colorDes"
-                                    android:textSize="@dimen/_13sdp" />
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
-
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:orientation="horizontal">
-
-                        <androidx.cardview.widget.CardView
-                                android:id="@+id/PlanAmigos1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_4sdp"
-                                android:layout_marginRight="@dimen/_4sdp"
-                                android:layout_marginTop="4sp"
-                                android:layout_marginBottom="@dimen/_8sdp"
-                                android:layout_weight="1"
-                                app:cardBackgroundColor="@color/background_color_50"
-                                app:cardCornerRadius="@dimen/_8sdp"
-
-                        >
-
-                            <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="horizontal">
-
-                                <ImageView
-                                        android:id="@+id/imBtnSaldoBolsaNauta1"
-                                        android:layout_width="@dimen/_20sdp"
-                                        android:layout_height="@dimen/_20sdp"
-                                        android:layout_alignParentStart="true"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginStart="16dp"
-                                        android:layout_marginTop="@dimen/activity_horizontal_margin"
-                                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                        app:tint="@color/colorDes"
-                                        android:src="@drawable/outline_spatial_audio_off_24"
-                                />
-
-                                <TextView
-                                        android:id="@+id/tvdatos"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_marginRight="16dp"
-                                        android:layout_toEndOf="@+id/imBtnSaldoBolsaNauta1"
-                                        android:fontFamily="@font/displaybold"
-                                        android:text="@string/plan_amigo"
-                                        android:textColor="@color/colorDes"
-                                        android:textSize="@dimen/_13ssp" />
-                            </RelativeLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                                android:id="@+id/voz"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_4sdp"
-                                android:layout_marginRight="@dimen/_4sdp"
-                                android:layout_marginTop="4sp"
-                                android:layout_marginBottom="@dimen/_8sdp"
-                                android:layout_weight="1"
-                                app:cardBackgroundColor="@color/background_color_50"
-                                app:cardCornerRadius="@dimen/_8sdp"
-                        >
-
-                            <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="horizontal">
-
-                                <ImageView
-                                        android:id="@+id/imBtnSaldoSMS1"
-                                        android:layout_width="@dimen/_20sdp"
-                                        android:layout_height="@dimen/_20sdp"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_marginStart="16dp"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_marginTop="@dimen/activity_horizontal_margin"
-                                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                        android:src="@drawable/outline_local_phone_24"
-                                        app:tint="@color/colorDes"
-                                />
-
-                                <TextView
-                                        android:id="@+id/tvSMS1"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_marginRight="16dp"
-                                        android:layout_toEndOf="@+id/imBtnSaldoSMS1"
-                                        android:layout_toRightOf="@+id/imBtnSaldoSMS1"
-                                        android:fontFamily="@font/displaybold"
-                                        android:text="@string/plan_voz"
-                                        android:textColor="@color/colorDes"
-                                        android:textSize="@dimen/_13ssp" />
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:orientation="horizontal">
-                        <androidx.cardview.widget.CardView
-                                android:id="@+id/sms"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_4sdp"
-                                android:layout_marginRight="@dimen/_4sdp"
-                                android:layout_marginTop="4sp"
-                                android:layout_marginBottom="@dimen/_8sdp"
-                                android:layout_weight="1"
-                                app:cardBackgroundColor="@color/background_color_50"
-                                app:cardCornerRadius="@dimen/_8sdp"
-                        >
-
-                            <RelativeLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:orientation="horizontal">
-
-                                <ImageView
-                                        android:id="@+id/imBtnSaldoVoz1"
-                                        android:layout_width="@dimen/_20sdp"
-                                        android:layout_height="@dimen/_20sdp"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_marginStart="16dp"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_marginTop="@dimen/activity_horizontal_margin"
-                                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                        android:src="@drawable/outline_comment_24"
-                                        app:tint="@color/colorDes"
-                                />
-
-                                <TextView
-                                        android:id="@+id/tvVoz1"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_toEndOf="@+id/imBtnSaldoVoz1"
-                                        android:layout_toRightOf="@+id/imBtnSaldoVoz1"
-                                        android:fontFamily="@font/displaybold"
-                                        android:text="@string/plan_sms"
-                                        android:textColor="@color/colorDes"
-                                        android:textSize="@dimen/_13ssp" />
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                                android:id="@+id/emergancia"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_4sdp"
-                                android:layout_marginRight="@dimen/_4sdp"
-                                android:layout_marginTop="4sp"
-                                android:layout_marginBottom="@dimen/_8sdp"
-                                android:layout_weight="1"
-                                app:cardBackgroundColor="@color/background_color_50"
-                                app:cardCornerRadius="@dimen/_8sdp"
-                        >
-
-                            <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                <ImageView
-                                        android:id="@+id/imBtnSaldoFriend11"
-                                        android:layout_width="@dimen/_20sdp"
-                                        android:layout_height="@dimen/_20sdp"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_marginStart="16dp"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_marginTop="@dimen/activity_horizontal_margin"
-                                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                        android:src="@drawable/outline_emergency_24"
-                                        app:tint="@color/colorDes"
-                                />
-
-                                <TextView
-                                        android:id="@+id/tvAmigo1"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginLeft="16dp"
-                                        android:layout_toEndOf="@+id/imBtnSaldoFriend11"
-                                        android:layout_toRightOf="@+id/imBtnSaldoFriend11"
-                                        android:fontFamily="@font/displaybold"
-                                        android:text="@string/emergencias"
-                                        android:textColor="@color/colorDes"
-                                        android:textSize="@dimen/_13ssp" />
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/tv2345"
-                android:layout_width="match_parent"
-                android:layout_height="28dp"
-                android:fontFamily="@font/dosisbold"
-                android:gravity="center_vertical"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:text="@string/recargar_saldo"
-                android:textColor="@color/colorDes"
-                android:textSize="@dimen/_16sdp"
-                tools:ignore="RtlSymmetry" />
+            <!--Options-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="horizontal"
-                android:gravity="center">
-                <EditText
-                    android:id="@+id/recargartelefono"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:fontFamily="@font/displaybold"
-                    android:hint="@string/recharge_credit_hint"
-                    android:imeOptions="actionNext"
-                    android:inputType="number"
-                    android:maxLines="1"
-                    android:textColor="@color/colorDes"
-                    android:textColorHint="@color/colorTextHint"
-                    android:textSize="@dimen/_14ssp"
-                    tools:ignore="TouchTargetSizeCheck"
-                    android:layout_weight="1"/>
-                <ImageView
-                    android:id="@+id/camera"
-                    android:layout_width="24sp"
-                    android:layout_height="24sp"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:src="@drawable/outline_qr_code_scanner_24"
-                    app:tint="@color/colorDes"
-                     />
-                <ImageView
-                    android:id="@+id/Enviar1"
-                    android:layout_width="24sp"
-                    android:layout_height="24sp"
-                    android:src="@drawable/baseline_north_east_24"
-                    app:tint="@color/colorDes"
-                    />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv23456"
-                android:layout_width="match_parent"
-                android:layout_height="26dp"
-                android:fontFamily="@font/dosisbold"
-                android:gravity="center_vertical"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:text="@string/adelantar_saldo"
-                android:textColor="@color/colorDes"
-                android:textSize="@dimen/_16sdp"
-                tools:ignore="RtlSymmetry" />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
-                <ImageView
-                    android:id="@+id/adelantar"
-                    android:layout_width="24sp"
-                    android:layout_height="24sp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginLeft="@dimen/_8sdp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:layout_marginRight="@dimen/_8sdp"
-                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/baseline_north_east_24"
-                    app:tint="@color/colorDes"
-                     />
-                <EditText
-                    android:id="@+id/adesaldo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_toStartOf="@+id/adelantar"
-                    android:fontFamily="@font/displaybold"
-                    android:hint="@string/_25_50"
-                    android:imeOptions="actionNext"
-                    android:inputType="number"
-                    android:maxLines="1"
-                    android:textColor="@color/colorDes"
-                    android:textColorHint="@color/colorTextHint"
-                    android:textSize="@dimen/_13ssp"
-                    tools:ignore="TouchTargetSizeCheck" />
-
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/tv234"
-                android:layout_width="match_parent"
-                android:layout_height="26dp"
-                android:fontFamily="@font/dosisbold"
-                android:gravity="center_vertical"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:text="@string/transferir_mi_saldo"
-                android:textColor="@color/colorDes"
-                android:textSize="@dimen/_16sdp"
-                tools:ignore="RtlSymmetry" />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
-                <ImageView
-                    android:id="@+id/Contactos"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginLeft="@dimen/_8sdp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:layout_marginRight="@dimen/_8sdp"
-                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                    app:srcCompat="@drawable/outline_contact_page_24"
-                    app:tint="@color/colorDes"
-                     />
-                <EditText
-                    android:id="@+id/telefono"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_toStartOf="@+id/Contactos"
-                    android:fontFamily="@font/displaybold"
-                    android:hint="@string/phone_number_hint"
-                    android:imeOptions="actionNext"
-                    android:inputType="number"
-                    android:maxLines="1"
-                    android:textColor="@color/colorDes"
-                    android:textColorHint="@color/colorTextHint"
-                    android:textSize="@dimen/_14ssp"
-                    tools:ignore="TouchTargetSizeCheck" />
+                android:layout_marginStart="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/telefono"
-                    android:layout_toStartOf="@+id/Contactos"
-                    android:baselineAligned="false"
-                    android:layout_marginBottom="8sp"
-                    android:orientation="horizontal">
-                    <EditText
-                        android:id="@+id/donation_key"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/displaybold"
-                        android:hint="@string/_1234"
-                        android:imeOptions="actionNext"
-                        android:inputType="numberPassword"
-                        android:maxLength="4"
-                        android:maxLines="1"
-                        android:textColor="@color/colorDes"
-                        android:textColorHint="@color/colorTextHint"
-                        android:textSize="@dimen/_14ssp"
-                        tools:ignore="TouchTargetSizeCheck" />
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/donation_mount"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="6dp">
+
+                        <RelativeLayout
+                            android:id="@+id/saldo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:background="@drawable/my_gradient_drawable2"
+                            android:minHeight="100dp"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginEnd="3dp"
+                                android:padding="3dp"
+                                android:src="@drawable/outline_payments_24"
+                                />
+
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:text="Saldo"
+                                android:fontFamily="@font/displaybold"
+                                android:textColor="@color/white"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/displaybold"
-                        android:hint="@string/_0_00"
-                        android:imeOptions="actionDone"
-                        android:inputType="numberDecimal"
-                        android:maxLines="1"
-                        android:textColor="@color/colorDes"
-                        android:textColorHint="@color/colorTextHint"
-                        android:textSize="@dimen/_14ssp"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        android:layout_marginTop="6dp">
+
+                        <RelativeLayout
+                            android:id="@+id/llamar99"
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:background="@drawable/my_gradient_drawable3"
+                            android:minHeight="80dp"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginEnd="3dp"
+                                android:padding="3dp"
+                                android:src="@drawable/outline_phone_forwarded_24" />
+
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:text="Llamar *99"
+                                android:fontFamily="@font/displaybold"
+                                android:textColor="@color/white"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/Enviar"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_below="@+id/Contactos"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginLeft="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:layout_marginRight="@dimen/_8sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:src="@drawable/baseline_north_east_24"
-                    app:tint="@color/colorDes"
-                     />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="6dp">
+
+                        <RelativeLayout
+                            android:id="@+id/megas"
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:background="@drawable/my_gradient_drawable"
+                            android:minHeight="100dp"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginEnd="3dp"
+                                android:padding="3dp"
+                                android:src="@drawable/baseline_moving_24"
+                                />
+
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:text="Datos"
+                                android:fontFamily="@font/displaybold"
+                                android:textColor="@color/white"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp">
+
+                        <RelativeLayout
+                            android:id="@+id/llamarPrivado"
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:background="@drawable/my_gradient_drawable_"
+                            android:minHeight="80dp"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginEnd="3dp"
+                                android:src="@drawable/outline_phone_locked_24" />
+
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:text="Privado"
+                                android:fontFamily="@font/displaybold"
+                                android:textColor="@color/white"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--Options-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="6dp">
+
+                        <RelativeLayout
+                            android:id="@+id/PlanAmigos1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:background="@drawable/my_gradient_drawable2"
+                            android:minHeight="80dp"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginEnd="3dp"
+                                android:padding="3dp"
+                                android:src="@drawable/outline_spatial_audio_off_24"
+                                />
+
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:id="@+id/text_cuentas_minutos"
+                                android:text="Plan Amigo"
+                                android:fontFamily="@font/displaybold"
+                                android:textColor="@color/white"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp">
+
+                        <RelativeLayout
+                            android:id="@+id/sms"
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:background="@drawable/my_gradient_drawable3"
+                            android:minHeight="80dp"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginEnd="3dp"
+                                android:padding="3dp"
+                                android:src="@drawable/outline_comment_24"
+                                />
+
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:id="@+id/text_cuentas_datos"
+                                android:text="Plan SMS"
+                                android:fontFamily="@font/displaybold"
+                                android:textColor="@color/white"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/teacherll"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="6dp">
+
+                        <RelativeLayout
+                            android:id="@+id/voz"
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:background="@drawable/my_gradient_drawable"
+                            android:minHeight="80dp"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginEnd="3dp"
+                                android:padding="3dp"
+                                android:src="@drawable/outline_local_phone_24"/>
+
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:id="@+id/text_cuentas_mensajes"
+                                android:text="Plan Voz"
+                                android:fontFamily="@font/displaybold"
+                                android:textColor="@color/white"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp">
+
+                        <RelativeLayout
+                            android:id="@+id/emergancia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:background="@drawable/my_gradient_drawable_"
+                            android:minHeight="80dp"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginEnd="3dp"
+                                android:src="@drawable/outline_emergency_24" />
+
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:id="@+id/text_cuentas_datos_lte"
+                                android:text="Emergencias"
+                                android:fontFamily="@font/displaybold"
+                                android:textColor="@color/white"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:transitionName="card"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/my_gradient_drawable4"
+                android:orientation="vertical">
+
+                <!--title and desc-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/recargar_saldo"
+                        android:transitionName="title"
+                        android:fontFamily="@font/displaybold"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!--Date and location-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+                        <EditText
+                            android:id="@+id/recargartelefono"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:fontFamily="@font/displaybold"
+                            android:hint="@string/recharge_credit_hint"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:background="@drawable/editstile"
+                            android:textColor="@color/colorDes"
+                            android:textColorHint="@color/colorDes"
+                            android:textSize="14sp"
+                            tools:ignore="TouchTargetSizeCheck"
+                            android:layout_weight="1"/>
+                        <ImageView
+                            android:id="@+id/camera"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:src="@drawable/outline_qr_code_scanner_24"
+                            />
+                        <ImageView
+                            android:id="@+id/Enviar1"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/baseline_north_east_24"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:transitionName="card"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/my_gradient_drawable5"
+                android:orientation="vertical">
+
+                <!--title and desc-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/adelantar_saldo"
+                        android:transitionName="title"
+                        android:fontFamily="@font/displaybold"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!--Date and location-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+
+                        <ImageView
+                            android:id="@+id/adelantar"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:layout_marginRight="@dimen/_8sdp"
+                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                            android:contentDescription="@string/app_name"
+                            android:src="@drawable/baseline_north_east_24"
+                            />
+                        <EditText
+                            android:id="@+id/adesaldo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_toStartOf="@+id/adelantar"
+                            android:fontFamily="@font/displaybold"
+                            android:hint="@string/_25_50"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:background="@drawable/editstile"
+                            android:textColor="@color/colorDes"
+                            android:textColorHint="@color/colorDes"
+                            android:textSize="13sp"
+                            tools:ignore="TouchTargetSizeCheck" />
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:transitionName="card"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/my_grandient_drawable6"
+                android:orientation="vertical">
+
+                <!--title and desc-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/transferir_mi_saldo"
+                        android:transitionName="title"
+                        android:fontFamily="@font/displaybold"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!--Date and location-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+                        <ImageView
+                            android:id="@+id/Contactos"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:layout_marginRight="@dimen/_8sdp"
+                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                            app:srcCompat="@drawable/outline_contact_page_24"
+                            />
+                        <EditText
+                            android:id="@+id/telefono"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_toStartOf="@+id/Contactos"
+                            android:fontFamily="@font/displaybold"
+                            android:hint="@string/phone_number_hint"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:background="@drawable/editstile"
+                            android:textColor="@color/colorDes"
+                            android:textColorHint="@color/colorDes"
+                            android:textSize="14sp"
+                            tools:ignore="TouchTargetSizeCheck" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/telefono"
+                            android:layout_toStartOf="@+id/Contactos"
+                            android:baselineAligned="false"
+                            android:layout_marginBottom="8sp"
+                            android:orientation="horizontal">
+                            <EditText
+                                android:id="@+id/donation_key"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_8sdp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/displaybold"
+                                android:hint="@string/_1234"
+                                android:layout_marginTop="4dp"
+                                android:imeOptions="actionNext"
+                                android:inputType="numberPassword"
+                                android:maxLength="4"
+                                android:maxLines="1"
+                                android:layout_marginEnd="4dp"
+                                android:background="@drawable/editstile"
+                                android:textColor="@color/colorDes"
+                                android:textColorHint="@color/colorDes"
+                                android:textSize="14sp"
+                                tools:ignore="TouchTargetSizeCheck" />
+
+                            <EditText
+                                android:id="@+id/donation_mount"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/displaybold"
+                                android:hint="@string/_0_00"
+                                android:imeOptions="actionDone"
+                                android:inputType="numberDecimal"
+                                android:layout_marginTop="4dp"
+                                android:maxLines="1"
+                                android:textColor="@color/colorDes"
+                                android:background="@drawable/editstile"
+                                android:textColorHint="@color/colorDes"
+                                android:textSize="14sp"
+                                tools:ignore="TouchTargetSizeCheck" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/Enviar"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_below="@+id/Contactos"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:layout_marginRight="@dimen/_8sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:src="@drawable/baseline_north_east_24"
+                            />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
