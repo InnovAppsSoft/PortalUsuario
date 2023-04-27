@@ -82,11 +82,12 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.10.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-
-    implementation 'com.airbnb.android:lottie:5.0.3'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'org.jsoup:jsoup:1.15.3'
 
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation("com.google.guava:guava:29.0-android")
@@ -97,7 +98,7 @@ dependencies {
     implementation 'com.felipecsl:gifimageview:2.1.0'
     implementation 'com.github.GwonHyeok:StickySwitch:0.0.15'
 
-    //Library
+    //Library Barcode
     implementation 'com.google.zxing:android-integration:3.3.0'
     implementation 'me.dm7.barcodescanner:zxing:1.9.13'
     implementation 'com.karumi:dexter:6.2.2'
@@ -167,8 +168,6 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.8.0')
     implementation 'com.google.firebase:firebase-iid'
     implementation 'com.google.firebase:firebase-messaging'
-
-    implementation 'com.jjoe64:graphview:4.2.2'
 
     implementation 'mobi.gspd:segmentedbarview:1.1.6@aar'
     implementation 'com.budiyev.android:code-scanner:2.1.0'

@@ -4,13 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+        android:background="@color/background"
     android:layout_height="match_parent"
     tools:context=".view.activities.MainActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
+        android:background="@color/background">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar_layout"
@@ -20,11 +21,16 @@
             app:contentScrim="?attr/colorPrimary"
             app:titleEnabled="false">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.cardview.widget.CardView
                 android:id="@+id/carouselLayout"
+                    app:cardCornerRadius="20dp"
+                    android:padding="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginTop="50dp">
+                android:layout_height="120dp"
+                app:cardBackgroundColor="@color/background_color_50"
+                android:layout_marginTop="60dp">
                 <ProgressBar
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +57,7 @@
                         android:layout_height="25dp"
                         android:contentDescription="@string/app_name"
                         android:src="@drawable/ic_baseline_error_24"
-                        app:tint="@color/white" />
+                        app:tint="@color/colorDes" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -64,7 +70,7 @@
                         android:fontFamily="@font/displaybold"
                         android:gravity="center_horizontal"
                         android:text="@string/compruebe_su_conexi_n"
-                        android:textColor="@color/white"
+                        android:textColor="@color/colorDes"
                         android:textSize="@dimen/_13sdp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
@@ -81,7 +87,7 @@
                         android:fontFamily="@font/displaybold"
                         android:gravity="center_horizontal"
                         android:text="@string/volver_a_intentar"
-                        android:textColor="@color/white"
+                        android:textColor="@color/colorDes"
                         android:textSize="@dimen/_13sdp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
@@ -111,7 +117,7 @@
 
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -132,7 +138,7 @@
                         android:layout_width="40dp"
                         android:layout_height="match_parent"
                         android:src="@drawable/outline_menu_open_24"
-                        app:tint="@color/white"
+                        app:tint="@color/colorDes"
                         android:layout_marginStart="@dimen/_12sdp"
                         android:contentDescription="Menú"
                         />
@@ -144,7 +150,7 @@
                         android:fontFamily="@font/dosisbold"
                         android:text="@string/portal_usuario"
                         android:textAlignment="textStart"
-                        android:textColor="@color/white"
+                        android:textColor="@color/colorDes"
                         android:textSize="@dimen/_20ssp"
                         android:layout_weight="1"/>
 
@@ -163,7 +169,7 @@
                             android:layout_height="@dimen/_20sdp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_baseline_notifications_none_24"
-                            app:tint="@color/white"/>
+                            app:tint="@color/colorDes"/>
 
                         <TextView
                             android:id="@+id/cart_badge"
@@ -176,7 +182,7 @@
                             android:gravity="center"
                             android:padding="3dp"
                             android:text="0"
-                            android:textColor="@android:color/white"
+                            android:textColor="@color/white"
                             android:textSize="10sp"/>
                     </FrameLayout>
                 </LinearLayout>

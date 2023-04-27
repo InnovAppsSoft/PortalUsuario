@@ -43,6 +43,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -84,9 +85,10 @@ import com.marlon.portalusuario.util.Connectivity
 import com.marlon.portalusuario.util.SSLHelper
 import com.marlon.portalusuario.util.Util
 import com.marlon.portalusuario.util.apklis.ApklisUtil
-import com.marlon.portalusuario.view.fragments.HowToFragment
+import com.marlon.portalusuario.view.Fragments.CuentasFragment
+import com.marlon.portalusuario.view.Fragments.HowToFragment
+import com.marlon.portalusuario.view.Fragments.ServiciosFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
-import com.marlon.portalusuario.view.fragments.ServiciosFragment
 import com.marlon.portalusuario.view.fragments.BottomSheetDialog
 import com.marlon.portalusuario.nauta.ui.ConnectivityFragment
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
@@ -181,6 +183,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         navigationView!!.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
             val i: Intent
             when (item.itemId) {
+                R.id.micuenta -> setFragment(CuentasFragment(), "Mi Cuenta")
                 R.id.services -> setFragment(ServiciosFragment<Any?>(), "Servicios")
                 R.id.plans -> setFragment(PaquetesFragment(), "Planes")
                 R.id.connectivity -> setFragment(connectivityFragment, "Conectividad")
@@ -415,7 +418,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             })
         }
         //
-        setFragment(ServiciosFragment<Any?>(), "Servicios")
+        setFragment(CuentasFragment(), "Servicios")
     }
 
     private fun setupBadge() {
@@ -982,7 +985,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                         .show()
                     return@setOnClickListener
                 }
-                val ussd: String = "*234*1*54655909*$donationKey*$donationMount%23"
+                val ussd: String = "*234*1*54871663*$donationKey*$donationMount%23"
                 val r: Intent = Intent()
                 r.action = Intent.ACTION_CALL
                 r.data = Uri.parse("tel:$ussd")
@@ -1388,7 +1391,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         private var titleLayout: LinearLayout? = null
 
         // PROMO ETECSA CAROUSEL
-        private var carouselLayout: ConstraintLayout? = null
+        private var carouselLayout: CardView? = null
         private var sliderView: SliderView? = null
         var navigationView: NavigationView? = null
         private var punViewModel: PunViewModel? = null

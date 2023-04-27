@@ -971,7 +971,6 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="donaciones_via_saldo_movil">Donaciones via saldo movil</string>
 
 
-
     <string name="nothing"> </string>
     <string name="search_devices">Buscando</string>
     <string name="not_compatible">No Compatible</string>
@@ -1061,6 +1060,19 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="update">Actualizar</string>
     <string name="captcha_code">Código captcha</string>
     <string name="password_placeholder">Contraseña</string>
+
+
+    <string name="cuentas_message">Para actualizar sus cuentas debe deslizar hacia abajo, esperar a que la aplicación termine de sincronizar todos sus paquetes, bonos y saldo activos. En ocasiones puede que haya valores que no se actualicen, esto puede ocurrir debido a varios factores, uno de ellos es el problema en la red. Tenga en cuenta que usted está realizando varias consultas en segundos, por lo que su operador móvil puede devolver algunas consultas con «error» y la aplicación no lo tomará como información. Le recomendamos que vuelva a intentarlo.</string>
+    <string name="msg_report_action">Reportar</string>
+    <string name="title_cuenta">Cuentas</string>
+    <string name="sim_key">sim_key</string>
+    <string name="saldo_disponible">Saldo Disponible</string>
+    <string name="vence_minutos_y_sms">Vence Minutos y SMS</string>
+    <string name="paquetes_lte1">Paquetes LTE</string>
+    <string name="datos_nacionales1">Datos Nacionales</string>
+    <string name="title_good_morning">Buenos Dias</string>
+    <string name="title_good_afternoon">Buenas Tardes</string>
+    <string name="title_good_night">Buenas Noches</string>
 
 
 </resources>

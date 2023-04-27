@@ -11,7 +11,6 @@
 
     <color name="downloadBackgroundStart">#000000</color>
     <color name="downloadBackgroundEnd">#000000</color>
-    <color name="colorboton">#535353</color>
 
     <color name="transparent_white">#99000000</color>
     <color name="botoncolorStart">#7041FF</color>
@@ -41,32 +40,14 @@
 
     <color name="colorFondo1">#808A8A8A</color>
 
-    <color name="colorItem1Start">#4E4E4E</color>
-    <color name="colorItem1End">#4E4E4E</color>
-
-    <color name="colorItem1End6">#4E4E4E</color>
-
-    <color name="colorIndicador">#ffffff</color>
-
-    <color name="colorItem1Start2">#4E4E4E</color>
-    <color name="colorItem1End2">#4E4E4E</color>
-
-    <color name="colorItem1End3">#4E4E4E</color>
-
-    <color name="colorItem1Start4">#4E4E4E</color>
-    <color name="colorItem1End4">#4E4E4E</color>
 
 
     <color name="gradient_start_color">#4E4E4E</color>
     <color name="gradient_end_color">#4E4E4E</color>
 
-    <color name="colorItem1Start5">#4E4E4E</color>
-    <color name="colorItem1End5">#4E4E4E</color>
 
     <color name="colorCalendar">#8E8E8E</color>
 
-    <color name="colorFondo">#4E4E4E</color>
-    <color name="colorEscrito">#FFFFFF</color>
     <color name="colorDes">#FFFFFF</color>
 
     <color name="colorTexto">#FCFBFB</color>

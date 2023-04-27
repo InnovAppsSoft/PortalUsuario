@@ -33,7 +33,7 @@
                 tools:ignore="RtlSymmetry" />
 
             <TextView
-                    android:text="Consultas a los servicios contratados"
+                    android:text="Servicios contratados de forma manual"
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:textSize="12sp"
                     android:fontFamily="@font/dosislight"
@@ -354,10 +354,6 @@
                 </LinearLayout>
             </RelativeLayout>
 
-            <View android:layout_width="2dp"
-                  android:layout_height="48dp"
-                  android:background="@color/colorDes"
-                  android:layout_marginStart="12dp"/>
             <TextView
                 android:id="@+id/call"
                 android:layout_width="match_parent"
@@ -372,7 +368,7 @@
                 tools:ignore="RtlSymmetry" />
 
             <TextView
-                    android:text="Servicios a contratar y otras utilidades"
+                    android:text="A contratar y otras utilidades"
                     android:paddingStart="@dimen/activity_horizontal_margin"
                     android:textSize="11sp"
                     android:fontFamily="@font/dosislight"
@@ -417,10 +413,11 @@
 
                                 <ImageView
                                     android:id="@+id/imBtnSaldoVoz11"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="16dp"
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_marginStart="@dimen/_8sdp"
                                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                     android:contentDescription="@string/app_name"
@@ -430,8 +427,11 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="16dp"
+                                        android:layout_marginRight="16dp"
                                     android:layout_marginStart="@dimen/_5sdp"
+
                                     android:layout_toEndOf="@+id/imBtnSaldoVoz11"
                                     android:fontFamily="@font/displaybold"
                                     android:text="@string/_99"
@@ -518,10 +518,9 @@
                                         android:id="@+id/imBtnSaldoBolsaNauta1"
                                         android:layout_width="@dimen/_20sdp"
                                         android:layout_height="@dimen/_20sdp"
-                                        android:layout_alignParentLeft="true"
+                                        android:layout_alignParentStart="true"
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="16dp"
-                                        android:layout_marginLeft="16dp"
                                         android:layout_marginTop="@dimen/activity_horizontal_margin"
                                         android:layout_marginBottom="@dimen/activity_horizontal_margin"
                                         app:tint="@color/colorDes"
@@ -536,7 +535,6 @@
                                         android:layout_marginLeft="16dp"
                                         android:layout_marginRight="16dp"
                                         android:layout_toEndOf="@+id/imBtnSaldoBolsaNauta1"
-                                        android:layout_toRightOf="@+id/imBtnSaldoBolsaNauta1"
                                         android:fontFamily="@font/displaybold"
                                         android:text="@string/plan_amigo"
                                         android:textColor="@color/colorDes"
@@ -696,15 +694,10 @@
 
             </RelativeLayout>
 
-            <View android:layout_width="2dp"
-                  android:layout_height="48dp"
-                  android:background="@color/colorDes"
-                  android:layout_marginStart="12dp"/>
-
             <TextView
                 android:id="@+id/tv2345"
                 android:layout_width="match_parent"
-                android:layout_height="26dp"
+                android:layout_height="28dp"
                 android:fontFamily="@font/dosisbold"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin"
