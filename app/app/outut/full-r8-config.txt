@@ -176,7 +176,7 @@
 -keep class com.google.firebase.provider.FirebaseInitProvider { <init>(); }
 -keep class com.karumi.dexter.DexterActivity { <init>(); }
 -keep class com.marlon.portalusuario.PUNotifications.PUNotificationsActivity { <init>(); }
--keep class com.marlon.portalusuario.PortalUsuarioApplication { <init>(); }
+-keep class com.marlon.portalusuario.util.PortalUsuarioApplication { <init>(); }
 -keep class com.marlon.portalusuario.codescanner.ScannerActivity { <init>(); }
 -keep class com.marlon.portalusuario.firebase.FirebaseService { <init>(); }
 -keep class com.marlon.portalusuario.firewall.ActivityMain { <init>(); }

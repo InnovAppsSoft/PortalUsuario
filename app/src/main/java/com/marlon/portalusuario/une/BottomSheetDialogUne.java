@@ -1,14 +1,11 @@
 package com.marlon.portalusuario.une;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +13,6 @@ import androidx.annotation.Nullable;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.marlon.portalusuario.R;
 
-import org.w3c.dom.Text;
 
 public class BottomSheetDialogUne extends BottomSheetDialogFragment {
     private BottomSheetListener bottomSheetListener;

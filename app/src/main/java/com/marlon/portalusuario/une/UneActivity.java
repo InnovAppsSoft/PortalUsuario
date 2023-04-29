@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.marlon.portalusuario.R;
 import com.marlon.portalusuario.ViewModel.UneViewModel;
-import com.marlon.portalusuario.logging.JCLogging;
+import com.marlon.portalusuario.errores_log.JCLogging;
 import com.marlon.portalusuario.util.Util;
 
 import java.util.ArrayList;

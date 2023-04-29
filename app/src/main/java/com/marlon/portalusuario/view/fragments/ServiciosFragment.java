@@ -5,7 +5,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -25,20 +24,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.datatransport.runtime.logging.Logging;
-import com.marlon.portalusuario.view.activities.EmergenciaActivity;
-import com.marlon.portalusuario.view.activities.LlamadaOcultoActivity;
-import com.marlon.portalusuario.view.activities.Llamada_99Activity;
+import com.marlon.portalusuario.activities.EmergenciaActivity;
+import com.marlon.portalusuario.activities.LlamadaOcultoActivity;
+import com.marlon.portalusuario.activities.Llamada_99Activity;
 import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.view.activities.SmsActivity;
-import com.marlon.portalusuario.view.activities.VozActivity;
-import com.marlon.portalusuario.codescanner.ScannerActivity;
-import com.marlon.portalusuario.logging.JCLogging;
-import com.marlon.portalusuario.senal.AppConfiguracionTool;
+import com.marlon.portalusuario.activities.SmsActivity;
+import com.marlon.portalusuario.activities.VozActivity;
+import com.marlon.portalusuario.escaner_recarga.ScannerActivity;
+import com.marlon.portalusuario.errores_log.JCLogging;
 import com.marlon.portalusuario.util.Util;
 
 public class ServiciosFragment<b> extends Fragment {
@@ -58,7 +54,6 @@ public class ServiciosFragment<b> extends Fragment {
     private TextView networkClass,Fecha;
     private TelephonyManager telephonyManager;
     private TextView tvSignal;
-    private com.marlon.portalusuario.Utils utils;
     private Util util;
 
     private JCLogging logging;

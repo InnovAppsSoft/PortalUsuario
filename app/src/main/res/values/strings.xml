@@ -1083,5 +1083,23 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="desliza_hacia_abajo_para_actualizar">Desliza hacia abajo para actualizar</string>
     <string name="promociones_activas">Promociones activas</string>
     <string name="donaciones_en_estados_unidos_via_zelle_marlonrivero1999_gmail_com">Donaciones en Estados Unidos via zelle: marlonrivero1999@gmail.com</string>
+    <string name="serviciosmenu">Servicios</string>
+    <string name="mi_cuenta">Mi Cuenta</string>
+    <string name="donar_al_proyecto">Donar al proyecto</string>
+    <string name="conectividad">Conectividad</string>
+    <string name="utiles1">Utiles</string>
+    <string name="forzar_4g">Forzar 4G</string>
+    <string name="calculadora_une">Calculadora UNE</string>
+    <string name="feedback1">Feedback</string>
+    <string name="registro_de_errores1">Registro de errores</string>
+    <string name="reportar">Reportar...</string>
+    <string name="redes_sociales1">Redes sociales</string>
+    <string name="canal_de_telegram">Canal de Telegram</string>
+    <string name="p_gina_oficial_facebook1">Página Oficial Facebook</string>
+    <string name="grupo_de_testers_en_telegram">Grupo de Testers en Telegram</string>
+    <string name="invitar_amigos">Invitar Amigos</string>
+    <string name="ajustes1">Ajustes</string>
+    <string name="preferencias1">Preferencias</string>
+    <string name="acerca_de1">Acerca de</string>
 
 </resources>
