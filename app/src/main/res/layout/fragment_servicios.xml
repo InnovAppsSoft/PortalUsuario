@@ -66,7 +66,6 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
-                                android:padding="3dp"
                                 android:src="@drawable/outline_payments_24"
                                 />
 
@@ -106,7 +105,6 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
-                                android:padding="3dp"
                                 android:src="@drawable/outline_phone_forwarded_24" />
 
                             <TextView
@@ -154,7 +152,6 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
-                                android:padding="3dp"
                                 android:src="@drawable/baseline_moving_24"
                                 />
 
@@ -249,7 +246,6 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
-                                android:padding="3dp"
                                 android:src="@drawable/outline_spatial_audio_off_24"
                                 />
 
@@ -290,7 +286,6 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
-                                android:padding="3dp"
                                 android:src="@drawable/outline_comment_24"
                                 />
 
@@ -341,7 +336,6 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
-                                android:padding="3dp"
                                 android:src="@drawable/outline_local_phone_24"/>
 
                             <TextView

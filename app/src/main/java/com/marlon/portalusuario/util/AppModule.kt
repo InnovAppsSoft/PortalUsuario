@@ -1,8 +1,7 @@
-package com.marlon.portalusuario.di
+package com.marlon.portalusuario.util
 
 import android.content.Context
 import androidx.room.Room
-import com.marlon.portalusuario.util.Pref
 import com.marlon.portalusuario.commons.USER_TABLE
 import com.marlon.portalusuario.nauta.data.UserDao
 import com.marlon.portalusuario.nauta.data.network.UserDb
