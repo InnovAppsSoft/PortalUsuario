@@ -71,7 +71,7 @@ fun CardNautaDetails(
         }
         Row(modifier = Modifier.fillMaxWidth()) {
             NautaDetail(
-                detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_auto_delete_24),
+                detailIcon = ImageVector.vectorResource(id = R.drawable.outline_auto_delete_24),
                 detailName = stringResource(id = R.string.new_date_of_elimination),
                 detailValue = user.dateOfElimination,
                 isLoading = isLoading,
