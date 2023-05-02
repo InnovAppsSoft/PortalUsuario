@@ -45,12 +45,11 @@ android {
 
         }
 
-            debug {
-                applicationIdSuffix '.debug'
-                minifyEnabled false
-                debuggable true
-                jniDebuggable true
-                renderscriptDebuggable true
+        debug {
+            minifyEnabled false
+            debuggable true
+            jniDebuggable true
+            renderscriptDebuggable true
         }
     }
 
@@ -189,8 +188,10 @@ dependencies {
     //FIREBASE
     implementation platform('com.google.firebase:firebase-bom:31.5.0')
     implementation 'com.google.firebase:firebase-messaging'
-    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
     implementation 'mobi.gspd:segmentedbarview:1.1.6@aar'
     implementation 'com.budiyev.android:code-scanner:2.1.0'

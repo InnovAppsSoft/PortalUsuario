@@ -87,8 +87,8 @@ public class CuentasFragment extends Fragment {
     String sim;
     SharedPreferences sp_sim;
 
-    private CircleImageView imgperfil, imgGreetings;
-    private ImageView Editar, refreshButton;
+    private CircleImageView imgperfil;
+    private ImageView Editar, refreshButton, imgGreetings;
 
     TextView Promo;
 

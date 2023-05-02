@@ -10,7 +10,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marlon.portalusuario.Pref
 import com.marlon.portalusuario.nauta.core.INITIAL_USER
 import com.marlon.portalusuario.nauta.core.isValidCaptchaCode
 import com.marlon.portalusuario.nauta.core.isValidPassword
@@ -29,6 +28,7 @@ import com.marlon.portalusuario.nauta.domain.dto.UserDTO
 import com.marlon.portalusuario.nauta.domain.model.UserModel
 import com.marlon.portalusuario.nauta.service.CountdownServiceClient
 import com.marlon.portalusuario.nauta.service.CountdownSubscriber
+import com.marlon.portalusuario.util.Pref
 import cu.suitetecsa.sdk.nauta.core.exceptions.NotLoggedIn
 import cu.suitetecsa.sdk.nauta.domain.util.secondsToTimeString
 import cu.suitetecsa.sdk.nauta.domain.util.timeStringToSeconds
