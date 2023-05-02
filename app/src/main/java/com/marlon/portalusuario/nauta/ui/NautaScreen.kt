@@ -13,30 +13,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.marlon.portalusuario.commons.NavigationType
-import com.marlon.portalusuario.commons.fullUserName
-import com.marlon.portalusuario.nauta.data.entities.User
-import com.marlon.portalusuario.nauta.data.repository.Users
+import com.marlon.portalusuario.nauta.core.INITIAL_USER
+import com.marlon.portalusuario.nauta.data.network.Users
+import com.marlon.portalusuario.nauta.domain.model.UserModel
 import com.marlon.portalusuario.nauta.ui.components.CardUserManager
 
 @Composable
 fun NautaScreen(viewModel: NautaViewModel) {
-    val initialUser = User(
-        userName = "Agrega un usuario",
-        password = "",
-        accountNavigationType = NavigationType.INTERNATIONAL,
-        lastConnection = 0L,
-        blockingDate = "",
-        dateOfElimination = "",
-        accountType = "",
-        serviceType = "",
-        credit = "",
-        time = "",
-        mailAccount = ""
-    )
     val users: Users by viewModel.users.observeAsState(initial = listOf())
-    val currentUser: User by viewModel.currentUser.observeAsState(
-        initial = initialUser
+    val currentUser: UserModel by viewModel.currentUser.observeAsState(
+        initial = INITIAL_USER
     )
     val isUpdatingUserInformation: Boolean by viewModel.isUpdatingUserInfo.observeAsState(initial = false)
     val isLoading: Boolean by viewModel.isLoading.observeAsState(initial = false)
@@ -51,16 +37,16 @@ fun NautaScreen(viewModel: NautaViewModel) {
             users = users,
             selectedItem = currentUser,
             isLoading = isUpdatingUserInformation,
-            isButtonsEnable = !isLoading && (!isLoggedIn || currentUser.fullUserName() != userConnected),
+            isButtonsEnable = !isLoading && (!isLoggedIn || currentUser.username != userConnected),
             onItemSelected = { viewModel.onUserSelected(it) },
-            onReloadUserInfo = { viewModel.updateUserInformation() },
-            onAddUser = { viewModel.onUserSelected(initialUser) },
+            onReloadUserInfo = { viewModel.updateUser() },
+            onAddUser = { viewModel.onUserSelected(INITIAL_USER) },
             onEditUser = { },
-            onDeleteUser = { viewModel.deleteUser(it) },
+            onDeleteUser = { viewModel.deleteUser() },
             modifier = Modifier.padding(16.dp)
         )
         Column(modifier = Modifier.padding(horizontal = 16.dp)){
-            if (currentUser == initialUser) {
+            if (currentUser == INITIAL_USER) {
                 AddUserDashboard(viewModel = viewModel)
             } else {
                 CurrentUserDashboard(viewModel = viewModel)

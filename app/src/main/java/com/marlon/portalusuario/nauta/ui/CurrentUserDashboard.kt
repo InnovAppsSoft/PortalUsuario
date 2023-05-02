@@ -16,10 +16,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.R
-import com.marlon.portalusuario.commons.NavigationType
-import com.marlon.portalusuario.commons.fullUserName
-import com.marlon.portalusuario.nauta.data.entities.User
+import com.marlon.portalusuario.codescanner.ui.components.QRScannerDialog
+import com.marlon.portalusuario.nauta.core.INITIAL_USER
+import com.marlon.portalusuario.nauta.core.isValidAmountToTransfer
+import com.marlon.portalusuario.nauta.core.isValidPassword
+import com.marlon.portalusuario.nauta.core.isValidRechargeCode
+import com.marlon.portalusuario.nauta.core.toSeconds
+import com.marlon.portalusuario.nauta.core.toTimeString
+import com.marlon.portalusuario.nauta.domain.model.UserModel
 import com.marlon.portalusuario.nauta.ui.components.CaptchaDialog
+import com.marlon.portalusuario.nauta.ui.components.CardChangeEmailPassword
+import com.marlon.portalusuario.nauta.ui.components.CardChangePassword
 import com.marlon.portalusuario.nauta.ui.components.CardConnect
 import com.marlon.portalusuario.nauta.ui.components.CardNautaDetails
 import com.marlon.portalusuario.nauta.ui.components.CardNautaHomeDetails
@@ -27,27 +34,12 @@ import com.marlon.portalusuario.nauta.ui.components.CardRecharge
 import com.marlon.portalusuario.nauta.ui.components.CardTransfer
 import com.marlon.portalusuario.nauta.ui.components.UserDetailsHead
 import com.marlon.portalusuario.nauta.ui.components.timepicker.TimePickerDialog
-import cu.suitetecsa.sdk.nauta.domain.util.timeStringToSeconds
 
 @Composable
 fun CurrentUserDashboard(viewModel: NautaViewModel) {
     val isLoading: Boolean by viewModel.isLoading.observeAsState(initial = false)
     val context = LocalContext.current
-    val currentUser: User by viewModel.currentUser.observeAsState(
-        initial = User(
-            userName = "Agrega un usuario",
-            password = "",
-            accountNavigationType = NavigationType.INTERNATIONAL,
-            lastConnection = 0L,
-            blockingDate = "",
-            dateOfElimination = "",
-            accountType = "",
-            serviceType = "",
-            credit = "",
-            time = "",
-            mailAccount = ""
-        )
-    )
+    val currentUser: UserModel by viewModel.currentUser.observeAsState(initial = INITIAL_USER)
 
     //Update
     val captchaCode: String by viewModel.captchaCode.observeAsState(initial = "")
@@ -59,7 +51,7 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
     val isReadyToUpdate: Boolean by viewModel.isReadyToUpdate.observeAsState(initial = false)
 
     // Connect
-    val leftTime: String by viewModel.leftTime.observeAsState(initial = currentUser.time)
+    val leftTime: String by viewModel.leftTime.observeAsState(initial = currentUser.remainingTime.toTimeString())
     val limitedTime: String by viewModel.limitedTime.observeAsState(initial = leftTime)
     val isConnecting: Boolean by viewModel.isConnecting.observeAsState(initial = false)
     val connectStatus: Pair<Boolean, String?> by viewModel.connectStatus.observeAsState(
@@ -82,11 +74,7 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
     // Recharge
     val isRecharging: Boolean by viewModel.isRecharging.observeAsState(initial = false)
     val isEnabledRechargeButton: Boolean by viewModel.isEnabledRechargeButton.observeAsState(initial = false)
-    val rechargeCode: TextFieldValue by viewModel.rechargeCode.observeAsState(
-        initial = TextFieldValue(
-            ""
-        )
-    )
+    val rechargeCode: String by viewModel.rechargeCode.observeAsState(initial = "")
     val rechargeStatus: Pair<Boolean, String?> by viewModel.rechargeStatus.observeAsState(
         initial = Pair(
             true,
@@ -110,49 +98,82 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
         )
     )
 
+    // Change password
+    val accessAccountNewPassword: String by viewModel.accessAccountNewPassword.observeAsState(
+        initial = ""
+    )
+    val isChangingAccountAccessPassword: Boolean by viewModel.isChangingAccountAccessPassword.observeAsState(
+        initial = false
+    )
+    val accessAccountChangePasswordStatus: Pair<Boolean, String?> by viewModel.accessAccountChangePasswordStatus.observeAsState(
+        initial = Pair(true, null)
+    )
+
+    // ChangeEmailPassword
+    val emailOldPassword: String by viewModel.emailOldPassword.observeAsState(initial = "")
+    val emailNewPassword: String by viewModel.emailNewPassword.observeAsState(initial = "")
+    val isChangingEmailPassword: Boolean by viewModel.isChangingEmailPassword.observeAsState(initial = false)
+    val emailChangePasswordStatus: Pair<Boolean, String?> by viewModel.emailChangePasswordStatus.observeAsState(
+        initial = Pair(true, null)
+    )
+
     // Dialog
     val showTimePickerDialog: Boolean by viewModel.showTimePickerDialog.observeAsState(initial = false)
     val showCaptchaDialog: Pair<Boolean, () -> Unit> by viewModel.showCaptchaDialog.observeAsState(
         initial = Pair(false) {})
     val (isShowCaptchaDialog, postLoginAction) = showCaptchaDialog
+    val showQRCodeDialog: Pair<Boolean, (String) -> Unit> by viewModel.showQRCodeScanner.observeAsState(
+        initial = Pair(false) {})
+    val (isShowQRCodeDialog, onQRCodeRead) = showQRCodeDialog
 
-    if (showTimePickerDialog) {
-        val (hour, minute, _) = limitedTime.split(":")
-        TimePickerDialog(
-            limitedTime = Pair(hour.toInt(), minute.toInt()),
-            onDismiss = { viewModel.showTimePickerDialog(false) },
-            onConfirm = {
-                val (hours, minutes) = it
-                val inSeconds = (hours * 3600) + (minutes * 60)
-                if (inSeconds <= timeStringToSeconds(leftTime)) {
-                    viewModel.onChangeLimiterTime(it)
-                    viewModel.showTimePickerDialog(false)
-                } else {
-                    Toast.makeText(context, "No dispones de tanto tiempo", Toast.LENGTH_LONG).show()
-                }
-            })
-    }
-    if (isShowCaptchaDialog) {
-        CaptchaDialog(
-            captchaImage = captchaImage,
-            captchaCode = captchaCode,
-            isLoading = isLogging,
-            isLoadingCaptcha = isLoadingCaptcha,
-            isExecutable = isReadyToUpdate,
-            captchaLoadStatus = captchaLoadStatus,
-            onClickImage = { viewModel.getCaptcha() },
-            onChangeCaptchaCode = { viewModel.onChangeCaptchaCode(it) },
-            loginFunction = {
-                viewModel.login(currentUser.fullUserName(), currentUser.password, it) {
-                    viewModel.showCaptchaDialog(false) {}
-                    postLoginAction()
-                }
-            },
-            onDismiss = {
-                viewModel.showCaptchaDialog(false) {}
+
+    val (hour, minute, _) = limitedTime.split(":")
+    TimePickerDialog(
+        show = showTimePickerDialog,
+        limitedTime = Pair(hour.toInt(), minute.toInt()),
+        onDismiss = { viewModel.showTimePickerDialog(false) },
+        onConfirm = {
+            val (hours, minutes) = it
+            val inSeconds = (hours * 3600) + (minutes * 60)
+            if (inSeconds <= leftTime.toSeconds()) {
+                viewModel.onChangeLimiterTime(it)
+                viewModel.showTimePickerDialog(false)
+            } else {
+                Toast.makeText(context, "No dispones de tanto tiempo", Toast.LENGTH_LONG).show()
             }
-        )
-    }
+        })
+
+    CaptchaDialog(
+        show = isShowCaptchaDialog,
+        captchaImage = captchaImage,
+        captchaCode = captchaCode,
+        isLoading = isLogging,
+        isLoadingCaptcha = isLoadingCaptcha,
+        isExecutable = isReadyToUpdate,
+        captchaLoadStatus = captchaLoadStatus,
+        onClickImage = { viewModel.getCaptcha() },
+        onChangeCaptchaCode = { viewModel.onChangeCaptchaCode(it) },
+        loginFunction = {
+            viewModel.updateUser(it) {
+                viewModel.showCaptchaDialog(false) {}
+                postLoginAction()
+            }
+        },
+        onDismiss = {
+            viewModel.showCaptchaDialog(false) {}
+        }
+    )
+
+    QRScannerDialog(
+        show = isShowQRCodeDialog,
+        onQRCodeRead = {
+            onQRCodeRead(it)
+            viewModel.showQRCodeScanner(false) {}
+        },
+        onDismiss = {
+            viewModel.showQRCodeScanner(false) {}
+        }
+    )
 
     // Showing errors
     val (isRechargeOk, rechargeErrors) = rechargeStatus
@@ -170,23 +191,20 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
     Column(modifier = Modifier.padding(bottom = 40.dp)) {
 
         UserDetailsHead(
-            userName = currentUser.fullUserName(),
+            userName = currentUser.username,
             remainingTime = leftTime,
             modifier = Modifier.padding(vertical = 8.dp)
         )
         CardConnect(
             remainingTime = limitedTime,
-            connectButtonEnabled = currentUser.time != "00:00:00" && !isLogging,
+            connectButtonEnabled = currentUser.remainingTime != 0 && !isLogging,
             isLoading = isConnecting,
             connectStatus = connectStatus,
             isLoggedIn = isLoggedIn,
             modifier = Modifier.padding(vertical = 8.dp),
             onLogin = {
-                if (!isLoggedIn) {
-                    viewModel.connect(currentUser.fullUserName(), currentUser.password)
-                } else {
-                    viewModel.disconnect()
-                }
+                if (!isLoggedIn) viewModel.connect(currentUser.username, currentUser.password)
+                else viewModel.disconnect()
             }) { viewModel.showTimePickerDialog(true) }
         CardNautaDetails(
             user = currentUser,
@@ -216,8 +234,11 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
                 isExecutable = isEnabledRechargeButton,
                 onChangeRechargeCode = { viewModel.onChangeRechargeCode(it) },
                 onRecharge = {
-                    if (!isLoading && viewModel.isValidRechargePassword(rechargeCode.text)) {
-                        viewModel.toUp(it.text)
+                    if (!isLoading && rechargeCode.isValidRechargeCode()) viewModel.toUp(it)
+                },
+                onClickQRScannerIcon = {
+                    viewModel.showQRCodeScanner(true) {
+                        viewModel.onChangeRechargeCode(it)
                     }
                 }
             )
@@ -236,10 +257,9 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
                 isLoading = isTransferring,
                 transferStatus = transferStatus,
                 onTransfer = { destinationAccount, amount ->
-                    println("JAJA $destinationAccount JAJA")
                     if (
                         viewModel.isValidDestinationAccount(destinationAccount) &&
-                        viewModel.isValidTransferAmount(amount) &&
+                        amount.isValidAmountToTransfer(currentUser) &&
                         !isLoading
                     ) {
                         viewModel.transfer(amount.toFloat(), destinationAccount)
@@ -247,6 +267,50 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
                 },
                 onChangeDestinationAccount = { viewModel.onTransferChange(it, amount) },
                 onChangeAmount = { viewModel.onTransferChange(destinationAccount, it) }
+            )
+        }
+        Spacer(modifier = Modifier.padding(8.dp))
+        Column {
+            Text(
+                text = stringResource(id = R.string.change_password),
+                style = MaterialTheme.typography.subtitle1.copy(color = MaterialTheme.colors.onBackground)
+            )
+            Spacer(modifier = Modifier.padding(4.dp))
+            CardChangePassword(
+                isLoading = isChangingAccountAccessPassword,
+                newPassword = accessAccountNewPassword,
+                changedPasswordStatus = accessAccountChangePasswordStatus,
+                isExecutable = accessAccountNewPassword.isValidPassword(),
+                onChangeNewPassword = { viewModel.onAccountAccessPasswordChange(it) },
+                onChangePassword = { viewModel.changePassword(it) },
+                onGeneratePassword = { viewModel.generatePassword(false) }
+            )
+        }
+        Spacer(modifier = Modifier.padding(8.dp))
+        Column {
+            Text(
+                text = stringResource(R.string.change_email_password),
+                style = MaterialTheme.typography.subtitle1.copy(color = MaterialTheme.colors.onBackground)
+            )
+            Spacer(modifier = Modifier.padding(4.dp))
+            CardChangeEmailPassword(
+                oldPassword = emailOldPassword,
+                newPassword = emailNewPassword,
+                onChangePassword = { oldPassword, newPassword ->
+                    viewModel.onEmailPasswordChange(
+                        oldPassword,
+                        newPassword
+                    )
+                },
+                onChangeEmailPassword = { oldPassword, newPassword ->
+                    viewModel.changeEmailPassword(
+                        oldPassword,
+                        newPassword
+                    )
+                },
+                onGeneratePassword = { viewModel.generatePassword(true) },
+                isChangingEmailPassword = isChangingEmailPassword,
+                changePasswordStatus = emailChangePasswordStatus
             )
         }
     }

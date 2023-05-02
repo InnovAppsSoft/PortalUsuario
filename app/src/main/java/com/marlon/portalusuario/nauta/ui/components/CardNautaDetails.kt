@@ -1,7 +1,6 @@
 package com.marlon.portalusuario.nauta.ui.components
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,39 +19,37 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.commons.NavigationType
 import com.marlon.portalusuario.commons.ui.theme.SuitEtecsaTheme
-import com.marlon.portalusuario.nauta.data.entities.User
+import com.marlon.portalusuario.nauta.core.toPriceString
+import com.marlon.portalusuario.nauta.domain.model.UserModel
 
 @Composable
 fun CardNautaDetails(
     modifier: Modifier = Modifier,
-    user: User,
+    user: UserModel,
     isLoading: Boolean,
     loginStatus: Pair<Boolean, String?>
 ) {
     val (isOk, _) = loginStatus
     Column(modifier = modifier) {
-        PrettyCard(modifier = Modifier.padding(vertical = 8.dp)) {
-            Text(
-                text = "Nauta",
-                style = MaterialTheme.typography.h5,
-                fontStyle = FontStyle.Italic,
-                modifier = Modifier
-                    .padding(4.dp)
-                    .fillMaxWidth()
-                    .wrapContentSize(align = Alignment.Center)
-            )
-        }
+        Text(
+            text = "Nauta",
+            style = MaterialTheme.typography.h5,
+            color = MaterialTheme.colors.onBackground,
+            fontStyle = FontStyle.Italic,
+            modifier = Modifier
+                .padding(4.dp)
+        )
         Row(modifier = Modifier.fillMaxWidth()) {
             NautaDetail(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.ic_baseline_attach_money_24),
                 detailName = stringResource(id = R.string.new_account_credit),
-                detailValue = user.credit.replace("$", ""),
+                detailValue = "${user.credit.toPriceString()} CUP",
                 isLoading = isLoading,
                 isFoundErrors = !isOk,
                 backgroundColor = Color(0xFFFF4747),
@@ -101,7 +97,7 @@ fun CardNautaDetails(
             NautaDetail(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_payment_24),
                 detailName = stringResource(id = R.string.new_service_type),
-                detailValue = user.serviceType,
+                detailValue = if (user.serviceType == NavigationType.INTERNATIONAL) "Internacional" else "Nacional",
                 isLoading = isLoading,
                 isFoundErrors = !isOk,
                 backgroundColor = Color(0xFF009688),
@@ -112,7 +108,7 @@ fun CardNautaDetails(
             NautaDetail(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_alternate_email_24),
                 detailName = stringResource(id = R.string.new_mail_account),
-                detailValue = user.mailAccount,
+                detailValue = user.email,
                 isLoading = isLoading,
                 isFoundErrors = !isOk,
                 backgroundColor = Color(0xFF3F51B5),
@@ -162,28 +158,31 @@ fun NautaDetail(
                     .fillMaxWidth()
                     .wrapContentSize(align = Alignment.BottomStart),
                 style = MaterialTheme.typography.subtitle1,
-                color = Color.White
+                color = Color.White,
+                maxLines = 1,
+                softWrap = false,
+                overflow = TextOverflow.Ellipsis
             )
         }
     }
 }
 
+val user = UserModel(
+    id = 5,
+    username = "user.name",
+    password = "somePassword",
+    blockingDate = "25/12/2025",
+    dateOfElimination = "26/1/2026",
+    accountType = "Prepago",
+    serviceType = NavigationType.INTERNATIONAL,
+    credit = 59.64f,
+    remainingTime = 5234,
+    email = "user.name@nauta.cu"
+)
+
 @Preview(showBackground = true)
 @Composable
 fun CardNautaDetailsPreview() {
-    val user = User(
-        userName = "user.name",
-        password = "somePassword",
-        accountNavigationType = NavigationType.INTERNATIONAL,
-        lastConnection = 0L,
-        blockingDate = "25/12/2025",
-        dateOfElimination = "26/1/2026",
-        accountType = "Navegacion Internacional",
-        serviceType = "Prepago",
-        credit = "$59,64 CUP",
-        time = "04:23:15",
-        mailAccount = "user.name@nauta.cu"
-    )
     SuitEtecsaTheme {
         CardNautaDetails(
             user = user,
@@ -199,19 +198,6 @@ fun CardNautaDetailsPreview() {
 @Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun CardNautaDetailsPreviewDark() {
-    val user = User(
-        userName = "user.name",
-        password = "somePassword",
-        accountNavigationType = NavigationType.INTERNATIONAL,
-        lastConnection = 0L,
-        blockingDate = "25/12/2025",
-        dateOfElimination = "26/1/2026",
-        accountType = "Navegacion Internacional",
-        serviceType = "Prepago",
-        credit = "$59,64 CUP",
-        time = "04:23:15",
-        mailAccount = "user.name@nauta.cu"
-    )
     SuitEtecsaTheme {
         CardNautaDetails(
             user = user,

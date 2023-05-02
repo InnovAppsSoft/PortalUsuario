@@ -5,9 +5,10 @@ import androidx.room.Room
 import com.marlon.portalusuario.Pref
 import com.marlon.portalusuario.commons.USER_TABLE
 import com.marlon.portalusuario.nauta.data.UserDao
+import com.marlon.portalusuario.nauta.data.network.NautaService
 import com.marlon.portalusuario.nauta.data.network.UserDb
-import com.marlon.portalusuario.nauta.data.repository.UserRepository
-import com.marlon.portalusuario.nauta.data.repository.UserRepositoryImpl
+import com.marlon.portalusuario.nauta.data.network.UserRepository
+import com.marlon.portalusuario.nauta.data.network.UserRepositoryImpl
 import com.marlon.portalusuario.nauta.service.CountdownServiceClient
 import cu.suitetecsa.sdk.nauta.data.repository.DefaultNautaSession
 import cu.suitetecsa.sdk.nauta.data.repository.JSoupNautaScrapper
@@ -22,6 +23,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+    @Singleton
+    @Provides
+    fun provideNautaClient(): NautaClient = NautaClient(JSoupNautaScrapper(DefaultNautaSession()))
+
     @Provides
     fun provideUserDb(@ApplicationContext context: Context) =
         Room.databaseBuilder(context, UserDb::class.java, USER_TABLE).build()
@@ -30,12 +35,8 @@ class AppModule {
     fun provideUserDao(userDb: UserDb) = userDb.userDao
 
     @Provides
-    fun providerUserRepository(userDao: UserDao): UserRepository =
-        UserRepositoryImpl(userDao = userDao)
-
-    @Singleton
-    @Provides
-    fun provideNautaClient(): NautaClient = NautaClient(JSoupNautaScrapper(DefaultNautaSession()))
+    fun providerUserRepository(userDao: UserDao, nautaService: NautaService): UserRepository =
+        UserRepositoryImpl(userDao = userDao, service = nautaService)
 
     @Singleton
     @Provides

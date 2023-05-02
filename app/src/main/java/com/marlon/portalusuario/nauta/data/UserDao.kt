@@ -8,13 +8,12 @@ import androidx.room.Query
 import androidx.room.Update
 import com.marlon.portalusuario.commons.USER_TABLE
 import com.marlon.portalusuario.nauta.data.entities.User
-import com.marlon.portalusuario.nauta.data.repository.Users
-import kotlinx.coroutines.flow.Flow
+import com.marlon.portalusuario.nauta.data.network.Users
 
 @Dao
 interface UserDao {
     @Query("SELECT * FROM $USER_TABLE ORDER BY id ASC")
-    suspend fun getUsers(): Users
+    suspend fun getUsers(): List<User>
 
     @Query("SELECT * FROM $USER_TABLE WHERE id = :id")
     suspend fun getUser(id: Int): User

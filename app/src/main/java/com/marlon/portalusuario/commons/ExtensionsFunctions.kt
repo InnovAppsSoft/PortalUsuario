@@ -1,5 +1,7 @@
 package com.marlon.portalusuario.commons
 
+import com.marlon.portalusuario.nauta.core.toPriceFloat
+import com.marlon.portalusuario.nauta.core.toSeconds
 import com.marlon.portalusuario.nauta.data.entities.User
 import cu.suitetecsa.sdk.nauta.domain.model.NautaUser
 
@@ -8,15 +10,13 @@ fun NautaUser.toLocalUser(user: User): User {
         id = user.id,
         userName = user.userName,
         password = user.password,
-        accountNavigationType = user.accountNavigationType,
-        lastConnection = user.lastConnection,
         blockingDate = this.blockingDate,
         dateOfElimination = this.dateOfElimination,
         accountType = this.accountType,
-        serviceType = this.serviceType,
-        credit = this.credit,
-        time = this.time,
-        mailAccount = this.mailAccount,
+        serviceType = if (this.serviceType.contains("Navegaci\u00f3n Internacional")) NavigationType.INTERNATIONAL else NavigationType.NATIONAL,
+        credit = this.credit.toPriceFloat(),
+        remainingTime = this.time.toSeconds(),
+        email = this.mailAccount,
         offer = this.offer,
         monthlyFee = this.monthlyFee,
         downloadSpeed = this.downloadSpeed,
@@ -32,6 +32,3 @@ fun NautaUser.toLocalUser(user: User): User {
         debt = this.debt
     )
 }
-
-fun User.fullUserName(): String =
-    "${this.userName}@nauta.c${if (this.accountNavigationType == NavigationType.INTERNATIONAL) "om" else "o"}.cu"

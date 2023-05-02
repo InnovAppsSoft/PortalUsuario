@@ -34,6 +34,7 @@ import kotlinx.coroutines.withContext
 
 @Composable
 fun CaptchaDialog(
+    show: Boolean,
     captchaImage: Bitmap?,
     captchaCode: String,
     isLoading: Boolean,
@@ -45,56 +46,58 @@ fun CaptchaDialog(
     loginFunction: (String) -> Unit,
     onDismiss: () -> Unit
 ) {
-    val (isOk, _) = captchaLoadStatus
-    Dialog(
-        onDismissRequest = { onDismiss() },
-        properties = DialogProperties(usePlatformDefaultWidth = false)
-    ) {
-        val scope = rememberCoroutineScope()
-        PrettyCard(isLoading = isLoading, isFoundErrors = !isOk) {
-            Column(
-                modifier = Modifier.widthIn(max = 280.dp)
-            ) {
-                CaptchaCanvas(
-                    isLoading = isLoadingCaptcha,
-                    captchaLoadStatus = captchaLoadStatus,
-                    captchaImage = captchaImage
+    if (show) {
+        val (isOk, _) = captchaLoadStatus
+        Dialog(
+            onDismissRequest = { onDismiss() },
+            properties = DialogProperties(usePlatformDefaultWidth = false)
+        ) {
+            val scope = rememberCoroutineScope()
+            PrettyCard(isLoading = isLoading, isFoundErrors = !isOk) {
+                Column(
+                    modifier = Modifier.widthIn(max = 280.dp)
                 ) {
-                    onClickImage()
-                }
-                Spacer(modifier = Modifier.padding(4.dp))
-                TextField(
-                    value = captchaCode, onValueChange = { onChangeCaptchaCode(it) },
-                    placeholder = {
-                        AnimatedPlaceholder(
-                            hints = listOf(
-                                stringResource(R.string.captcha_code),
-                                "HL46Fr"
+                    CaptchaCanvas(
+                        isLoading = isLoadingCaptcha,
+                        captchaLoadStatus = captchaLoadStatus,
+                        captchaImage = captchaImage
+                    ) {
+                        onClickImage()
+                    }
+                    Spacer(modifier = Modifier.padding(4.dp))
+                    TextField(
+                        value = captchaCode, onValueChange = { onChangeCaptchaCode(it) },
+                        placeholder = {
+                            AnimatedPlaceholder(
+                                hints = listOf(
+                                    stringResource(R.string.captcha_code),
+                                    "HL46Fr"
+                                )
                             )
-                        )
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Text,
-                        capitalization = KeyboardCapitalization.Characters,
-                        imeAction = ImeAction.Done
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onDone = {
-                            if (isExecutable) {
-                                loginFunction(captchaCode)
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Text,
+                            capitalization = KeyboardCapitalization.Characters,
+                            imeAction = ImeAction.Done
+                        ),
+                        keyboardActions = KeyboardActions(
+                            onDone = {
+                                if (isExecutable) {
+                                    loginFunction(captchaCode)
+                                }
                             }
-                        }
-                    ),
-                    singleLine = true,
-                    maxLines = 1,
-                    colors = TextFieldDefaults.textFieldColors(
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent
-                    ),
-                    shape = RoundedCornerShape(8.dp)
-                )
+                        ),
+                        singleLine = true,
+                        maxLines = 1,
+                        colors = TextFieldDefaults.textFieldColors(
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent
+                        ),
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                }
             }
         }
     }
@@ -105,6 +108,7 @@ fun CaptchaDialog(
 fun CaptchaDialogPreview() {
     SuitEtecsaTheme {
         CaptchaDialog(
+            show = true,
             captchaImage = null,
             captchaCode = "",
             isLoading = false,
@@ -123,6 +127,7 @@ fun CaptchaDialogPreview() {
 fun CaptchaDialogPreviewDark() {
     SuitEtecsaTheme {
         CaptchaDialog(
+            show = true,
             captchaImage = null,
             captchaCode = "",
             isLoading = false,

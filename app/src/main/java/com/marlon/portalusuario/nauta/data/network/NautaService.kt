@@ -2,6 +2,7 @@ package com.marlon.portalusuario.nauta.data.network
 
 import cu.suitetecsa.sdk.nauta.domain.model.NautaUser
 import cu.suitetecsa.sdk.nauta.domain.service.NautaClient
+import cu.suitetecsa.sdk.nauta.domain.util.PasswordGenerator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -42,6 +43,18 @@ class NautaService @Inject constructor(
         }
     }
 
+    suspend fun changePassword(newPassword: String) {
+        withContext(Dispatchers.IO) {
+            client.changePassword(newPassword)
+        }
+    }
+
+    suspend fun changeEmailPassword(oldPassword: String, newPassword: String) {
+        withContext(Dispatchers.IO) {
+            client.changeEmailPassword(oldPassword, newPassword)
+        }
+    }
+
     suspend fun isLoggedIn(): Boolean {
         return withContext(Dispatchers.IO) {
             client.isLoggedIn
@@ -67,8 +80,9 @@ class NautaService @Inject constructor(
         }
     }
 
-    suspend fun getConnectInfo(postGet: (String) -> Unit) {
+    suspend fun getConnectInfo(userName: String, password: String, postGet: (String) -> Unit) {
         withContext(Dispatchers.IO) {
+            client.setCredentials(userName, password)
             val infoConnect = client.connectInformation
             postGet(
                 "$${((infoConnect[" account_info "]!! as Map<*, *>)[" credit "]!! as String)}".replace(
@@ -91,5 +105,9 @@ class NautaService @Inject constructor(
         withContext(Dispatchers.IO) {
             client.disconnect()
         }
+    }
+
+    fun generatePassword(): String {
+        return PasswordGenerator().generatePassword(12)
     }
 }

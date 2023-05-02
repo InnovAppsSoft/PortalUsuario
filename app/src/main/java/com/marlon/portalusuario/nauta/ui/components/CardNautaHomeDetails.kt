@@ -3,13 +3,10 @@ package com.marlon.portalusuario.nauta.ui.components
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,34 +16,26 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.commons.NavigationType
 import com.marlon.portalusuario.commons.ui.theme.SuitEtecsaTheme
-import com.marlon.portalusuario.nauta.data.entities.User
+import com.marlon.portalusuario.nauta.domain.model.UserModel
 
 @Composable
 fun CardNautaHomeDetails(
     modifier: Modifier = Modifier,
-    user: User,
+    user: UserModel,
     isLoading: Boolean,
     loginStatus: Pair<Boolean, String?>
 ) {
     val (isOk, _) = loginStatus
     Column(modifier = modifier) {
-        PrettyCard(modifier = Modifier.padding(vertical = 8.dp)) {
-            Text(
-                text = "Enlace",
-                style = MaterialTheme.typography.h5,
-                fontStyle = FontStyle.Italic,
-                modifier = Modifier
-                    .padding(4.dp)
-                    .fillMaxWidth()
-                    .wrapContentSize(align = Alignment.Center)
-            )
-        }
+        Text(
+            text = "Enlace",
+            style = MaterialTheme.typography.subtitle1.copy(color = MaterialTheme.colors.onBackground)
+        )
         Row(modifier = Modifier.fillMaxWidth()) {
             NautaDetail(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.ic_baseline_attach_money_24),
@@ -62,7 +51,7 @@ fun CardNautaHomeDetails(
             NautaDetail(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_download_24),
                 detailName = stringResource(id = R.string.new_download_speed),
-                detailValue = user.downloadSpeed!!,
+                detailValue = user.downloadSpeeds!!,
                 isLoading = isLoading,
                 isFoundErrors = !isOk,
                 backgroundColor = Color(0xFFB2C1FA),
@@ -75,7 +64,7 @@ fun CardNautaHomeDetails(
             NautaDetail(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_upload_24),
                 detailName = stringResource(id = R.string.new_upload_speed),
-                detailValue = user.uploadSpeed!!,
+                detailValue = user.uploadSpeeds!!,
                 isLoading = isLoading,
                 isFoundErrors = !isOk,
                 backgroundColor = Color(0xFFEC9F6B),
@@ -147,7 +136,7 @@ fun CardNautaHomeDetails(
             NautaDetail(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_lock_clock_24),
                 detailName = stringResource(id = R.string.new_blocking_date),
-                detailValue = user.blockingDateHome!!,
+                detailValue = user.blockingDateHome,
                 isLoading = isLoading,
                 isFoundErrors = !isOk,
                 backgroundColor = Color(0xFFF59070),
@@ -207,38 +196,38 @@ fun CardNautaHomeDetails(
     }
 }
 
+val nautaUserHome = UserModel(
+    id = 5,
+    username = "user.name",
+    password = "somePassword",
+    blockingDate = "25/12/2025",
+    dateOfElimination = "26/1/2026",
+    accountType = "Prepago",
+    serviceType = NavigationType.INTERNATIONAL,
+    credit = 59.64f,
+    remainingTime = 5342,
+    email = "user.name@nauta.cu",
+    offer = "NH RESIDENCIAL 1024/512 (40h) - RP",
+    monthlyFee = "$300,00 CUP",
+    downloadSpeeds = "1024 kbps",
+    uploadSpeeds = "512 kbps",
+    phone = "########",
+    linkIdentifiers = "H ED######",
+    linkStatus = "HABILITADO",
+    activationDate = "25/02/2021",
+    blockingDateHome = "10/04/2023",
+    dateOfEliminationHome = "10/05/2023",
+    quotePaid = "$0,81 CUP",
+    voucher = "$0,00 CUP",
+    debt = "$0,00 CUP"
+)
+
 @Preview(showBackground = true)
 @Composable
 fun CardNautaHomeDetailsPreview() {
-    val user = User(
-        userName = "user.name",
-        password = "somePassword",
-        accountNavigationType = NavigationType.INTERNATIONAL,
-        lastConnection = 0L,
-        blockingDate = "25/12/2025",
-        dateOfElimination = "26/1/2026",
-        accountType = "Navegacion Internacional",
-        serviceType = "Prepago",
-        credit = "$59,64 CUP",
-        time = "04:23:15",
-        mailAccount = "user.name@nauta.cu",
-        offer = "NH RESIDENCIAL 1024/512 (40h) - RP",
-        monthlyFee = "$300,00 CUP",
-        downloadSpeed = "1024 kbps",
-        uploadSpeed = "512 kbps",
-        phone = "########",
-        linkIdentifiers = "H ED######",
-        linkStatus = "HABILITADO",
-        activationDate = "25/02/2021",
-        blockingDateHome = "10/04/2023",
-        dateOfEliminationHome = "10/05/2023",
-        quotePaid = "$0,81 CUP",
-        voucher = "$0,00 CUP",
-        debt = "$0,00 CUP"
-    )
     SuitEtecsaTheme {
         CardNautaHomeDetails(
-            user = user,
+            user = nautaUserHome,
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 8.dp)
                 .fillMaxWidth(),
@@ -251,35 +240,9 @@ fun CardNautaHomeDetailsPreview() {
 @Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun CardNautaHomeDetailsPreviewDark() {
-    val user = User(
-        userName = "user.name",
-        password = "somePassword",
-        accountNavigationType = NavigationType.INTERNATIONAL,
-        lastConnection = 0L,
-        blockingDate = "25/12/2025",
-        dateOfElimination = "26/1/2026",
-        accountType = "Navegacion Internacional",
-        serviceType = "Prepago",
-        credit = "$59,64 CUP",
-        time = "04:23:15",
-        mailAccount = "user.name@nauta.cu",
-        offer = "NH RESIDENCIAL 1024/512 (40h) - RP",
-        monthlyFee = "$300,00 CUP",
-        downloadSpeed = "1024 kbps",
-        uploadSpeed = "512 kbps",
-        phone = "########",
-        linkIdentifiers = "H ED######",
-        linkStatus = "HABILITADO",
-        activationDate = "25/02/2021",
-        blockingDateHome = "10/04/2023",
-        dateOfEliminationHome = "10/05/2023",
-        quotePaid = "$0,81 CUP",
-        voucher = "$0,00 CUP",
-        debt = "$0,00 CUP"
-    )
     SuitEtecsaTheme {
         CardNautaHomeDetails(
-            user = user,
+            user = nautaUserHome,
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 8.dp)
                 .fillMaxWidth(),

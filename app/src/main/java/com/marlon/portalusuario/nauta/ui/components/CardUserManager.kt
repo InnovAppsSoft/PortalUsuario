@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,11 +17,9 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.R
-import com.marlon.portalusuario.commons.NavigationType
-import com.marlon.portalusuario.commons.fullUserName
 import com.marlon.portalusuario.commons.ui.theme.SuitEtecsaTheme
-import com.marlon.portalusuario.nauta.data.entities.User
-import com.marlon.portalusuario.nauta.data.repository.Users
+import com.marlon.portalusuario.nauta.data.network.Users
+import com.marlon.portalusuario.nauta.domain.model.UserModel
 
 @Composable
 fun CardUserManager(
@@ -31,12 +28,12 @@ fun CardUserManager(
     isFoundErrors: Boolean = false,
     isButtonsEnable: Boolean = true,
     users: Users,
-    selectedItem: User,
-    onItemSelected: (User) -> Unit,
-    onReloadUserInfo: (User) -> Unit,
+    selectedItem: UserModel,
+    onItemSelected: (UserModel) -> Unit,
+    onReloadUserInfo: (UserModel) -> Unit,
     onAddUser: () -> Unit,
-    onEditUser: (User) -> Unit,
-    onDeleteUser: (User) -> Unit
+    onEditUser: (UserModel) -> Unit,
+    onDeleteUser: (UserModel) -> Unit
 ) {
     val isEnabled = users.isNotEmpty() && isButtonsEnable
     PrettyCard(modifier = modifier, isLoading = isLoading, isFoundErrors = isFoundErrors) {
@@ -58,11 +55,11 @@ fun CardUserManager(
                                 .padding(8.dp)
                                 .wrapContentSize()
                         ) {
-                            Text(text = item.userName)
+                            Text(text = item.username.split("@")[0])
                         }
                     },
                     dropdownItemFactory = { item, _ ->
-                        Text(text = item.fullUserName())
+                        Text(text = item.username)
                     }
                 )
             }
@@ -92,8 +89,7 @@ fun CardUserManager(
 @Preview(showBackground = true)
 @Composable
 fun CardUserManagerPreview() {
-    val user = User(0, "", "", NavigationType.INTERNATIONAL, 0L, "", "", "", "", "", "", "")
-    val users = listOf<User>()
+    val users = listOf<UserModel>()
     SuitEtecsaTheme {
         CardUserManager(
             users = users,
@@ -110,8 +106,7 @@ fun CardUserManagerPreview() {
 @Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun CardUserManagerPreviewDark() {
-    val user = User(0, "", "", NavigationType.INTERNATIONAL, 0L, "", "", "", "", "", "", "")
-    val users = listOf<User>()
+    val users = listOf<UserModel>()
     SuitEtecsaTheme {
         CardUserManager(
             users = users,

@@ -89,7 +89,7 @@ fun AddUserDashboard(viewModel: NautaViewModel) {
                 keyboardActions = KeyboardActions(
                     onDone = {
                         if (updateButtonIsEnabled) {
-                            viewModel.login(userName.text, password, captchaCode) {}
+                            viewModel.addUser(userName.text, password, captchaCode)
                         }
                     }
                 ),

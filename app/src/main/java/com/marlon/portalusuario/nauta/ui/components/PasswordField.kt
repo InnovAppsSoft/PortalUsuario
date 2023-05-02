@@ -5,6 +5,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Lock
+import androidx.compose.material.icons.outlined.Visibility
+import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,7 +29,8 @@ import com.marlon.portalusuario.R
 fun PasswordField(password: String, onChangedText: (String) -> Unit) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
-    TextField(value = password,
+    TextField(
+        value = password,
         onValueChange = { onChangedText(it) },
         placeholder = { Text(text = stringResource(id = R.string.password_placeholder)) },
         modifier = Modifier
@@ -35,11 +39,18 @@ fun PasswordField(password: String, onChangedText: (String) -> Unit) {
             keyboardType = KeyboardType.Password, imeAction = ImeAction.Next
         ),
         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Outlined.Lock,
+                contentDescription = stringResource(id = R.string.password_placeholder)
+            )
+        },
         trailingIcon = {
-            val image = if (passwordVisible) ImageVector.vectorResource(id = R.drawable.baseline_visibility_24)
-            else ImageVector.vectorResource(id = R.drawable.ic_baseline_visibility_off_24)
+            val image = if (passwordVisible) Icons.Outlined.Visibility
+            else Icons.Outlined.VisibilityOff
 
-            val description = if (passwordVisible) "Ocultar contraseña" else "Mostrar contraseña"
+            val description = if (passwordVisible) stringResource(R.string.hide_password) else stringResource(
+                            R.string.show_password)
 
             IconButton(onClick = { passwordVisible = !passwordVisible }) {
                 Icon(imageVector = image, contentDescription = description)
@@ -50,6 +61,6 @@ fun PasswordField(password: String, onChangedText: (String) -> Unit) {
         colors = TextFieldDefaults.textFieldColors(
             focusedIndicatorColor = Color.Transparent, unfocusedIndicatorColor = Color.Transparent
         ),
-        shape = RoundedCornerShape(8.dp)
+        shape = MaterialTheme.shapes.small
     )
 }

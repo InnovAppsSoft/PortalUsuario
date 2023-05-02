@@ -10,9 +10,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Numbers
+import androidx.compose.material.icons.outlined.QrCodeScanner
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,16 +33,18 @@ import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.commons.ui.AnimatedPlaceholder
 import com.marlon.portalusuario.commons.ui.theme.SuitEtecsaTheme
+import com.marlon.portalusuario.nauta.core.rechargeCodeVisualTransformation
 
 @Composable
 fun CardRecharge(
     modifier: Modifier = Modifier,
     isLoading: Boolean,
     rechargeStatus: Pair<Boolean, String?>,
-    rechargeCode: TextFieldValue,
+    rechargeCode: String,
     isExecutable: Boolean,
-    onChangeRechargeCode: (TextFieldValue) -> Unit,
-    onRecharge: (TextFieldValue) -> Unit
+    onChangeRechargeCode: (String) -> Unit,
+    onRecharge: (String) -> Unit,
+    onClickQRScannerIcon: () -> Unit
 ) {
     val (isOk, _) = rechargeStatus
     PrettyCard(modifier = modifier, isLoading = isLoading, isFoundErrors = !isOk) {
@@ -48,7 +56,8 @@ fun CardRecharge(
         ) {
             TextField(
                 value = rechargeCode,
-                onValueChange = { onChangeRechargeCode(it) },
+                onValueChange = { code -> onChangeRechargeCode(code.takeWhile { it.isDigit() }) },
+                visualTransformation = rechargeCodeVisualTransformation(),
                 placeholder = {
                     AnimatedPlaceholder(
                         hints = listOf(
@@ -64,12 +73,7 @@ fun CardRecharge(
                     imeAction = ImeAction.Go
                 ),
                 keyboardActions = KeyboardActions(onGo = { if (isExecutable) onRecharge(rechargeCode) }),
-                shape = RoundedCornerShape(
-                    topStart = 8.dp,
-                    topEnd = 0.dp,
-                    bottomEnd = 0.dp,
-                    bottomStart = 8.dp
-                ),
+                shape = MaterialTheme.shapes.small,
                 singleLine = true,
                 maxLines = 1,
                 colors = TextFieldDefaults.textFieldColors(
@@ -78,15 +82,17 @@ fun CardRecharge(
                 ),
                 leadingIcon = {
                     Icon(
-                        imageVector = ImageVector.vectorResource(id = R.drawable.baseline_numbers_24),
+                        imageVector = Icons.Outlined.Numbers,
                         contentDescription = null
                     )
                 },
                 trailingIcon = {
-                    Icon(
-                        imageVector = ImageVector.vectorResource(id = R.drawable.new_baseline_qr_code_scanner),
-                        contentDescription = null
-                    )
+                    IconButton(onClick = { onClickQRScannerIcon() }) {
+                        Icon(
+                            imageVector = Icons.Outlined.QrCodeScanner,
+                            contentDescription = null
+                        )
+                    }
                 }
             )
         }
@@ -100,11 +106,12 @@ fun CardRechargePreview() {
         CardRecharge(
             isLoading = false,
             rechargeStatus = Pair(true, null),
-            rechargeCode = TextFieldValue(""),
+            rechargeCode = "",
             isExecutable = false,
             onChangeRechargeCode = {},
             onRecharge = {},
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp),
+            onClickQRScannerIcon = {}
         )
     }
 }
@@ -116,11 +123,12 @@ fun CardRechargePreviewDark() {
         CardRecharge(
             isLoading = false,
             rechargeStatus = Pair(true, null),
-            rechargeCode = TextFieldValue(""),
+            rechargeCode = "",
             isExecutable = false,
             onChangeRechargeCode = {},
             onRecharge = {},
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp),
+            onClickQRScannerIcon = {}
         )
     }
 }

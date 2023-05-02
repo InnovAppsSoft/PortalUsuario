@@ -1083,5 +1083,14 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="desliza_hacia_abajo_para_actualizar">Desliza hacia abajo para actualizar</string>
     <string name="promociones_activas">Promociones activas</string>
     <string name="donaciones_en_estados_unidos_via_zelle_marlonrivero1999_gmail_com">Donaciones en Estados Unidos via zelle: marlonrivero1999@gmail.com</string>
+    <string name="change_password">Cambiar contraseña</string>
+    <string name="new_password_example">Minuevacontraseña.1234*</string>
+    <string name="generate_password">Generar contraseña</string>
+    <string name="current_password_example">Micontraseñaactual123.*</string>
+    <string name="current_password_placeholder">Contraseña actual</string>
+    <string name="hide_password">Ocultar contraseña</string>
+    <string name="show_password">Mostrar contraseña</string>
+    <string name="new_password_placeholder">Nueva contraseña</string>
+    <string name="change_email_password">Cambiar contraseña de la cuenta de correo</string>
 
 </resources>

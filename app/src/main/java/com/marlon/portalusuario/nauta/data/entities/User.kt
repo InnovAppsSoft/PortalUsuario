@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.marlon.portalusuario.commons.NavigationType
 import com.marlon.portalusuario.commons.USER_TABLE
+import com.marlon.portalusuario.nauta.domain.model.UserModel
 
 @Entity(tableName = USER_TABLE)
 data class User(
@@ -12,15 +13,13 @@ data class User(
     @ColumnInfo(name = "id") val id: Int = 0,
     @ColumnInfo(name = "user_name") var userName: String,
     @ColumnInfo(name = "password") var password: String,
-    @ColumnInfo(name = "account_navigation_type") var accountNavigationType: NavigationType,
-    @ColumnInfo(name = "last_connection") val lastConnection: Long,
     @ColumnInfo(name = "blocking_date") val blockingDate: String,
     @ColumnInfo(name = "date_of_elimination") val dateOfElimination: String,
     @ColumnInfo(name = "account_type") val accountType: String,
-    @ColumnInfo(name = "service_type") val serviceType: String,
-    @ColumnInfo(name = "credit") var credit: String,
-    @ColumnInfo(name = "time") var time: String,
-    @ColumnInfo(name = "mail_account") val mailAccount: String,
+    @ColumnInfo(name = "service_type") val serviceType: NavigationType,
+    @ColumnInfo(name = "credit") var credit: Float,
+    @ColumnInfo(name = "remaining_time") var remainingTime: Int,
+    @ColumnInfo(name = "email") val email: String,
     @ColumnInfo(name = "offer") val offer: String? = null,
     @ColumnInfo(name = "monthly_fee") val monthlyFee: String? = null,
     @ColumnInfo(name = "download_speed") val downloadSpeed: String? = null,
@@ -36,6 +35,32 @@ data class User(
     @ColumnInfo(name = "debt") val debt: String? = null
 ) {
     override fun toString(): String {
-        return "$userName@nauta.${if (accountNavigationType == NavigationType.INTERNATIONAL) "com.cu" else "co.cu"}"
+        return userName
     }
 }
+
+fun User.toDomain() = UserModel(
+    id = this.id,
+    username = this.userName,
+    password = this.password,
+    blockingDate = this.blockingDate,
+    dateOfElimination = this.dateOfElimination,
+    accountType = this.accountType,
+    serviceType = this.serviceType,
+    credit = this.credit,
+    remainingTime = this.remainingTime,
+    email = this.email,
+    offer = this.offer,
+    monthlyFee = this.monthlyFee,
+    downloadSpeeds = this.downloadSpeed,
+    uploadSpeeds = this.uploadSpeed,
+    phone = this.phone,
+    linkIdentifiers = this.linkIdentifiers,
+    linkStatus = this.linkStatus,
+    activationDate = this.activationDate,
+    blockingDateHome = this.blockingDateHome,
+    dateOfEliminationHome = this.dateOfEliminationHome,
+    quotePaid = this.quotePaid,
+    voucher = this.voucher,
+    debt = this.debt
+)
