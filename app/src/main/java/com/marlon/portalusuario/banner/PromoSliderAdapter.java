@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.logging.JCLogging;
+import com.marlon.portalusuario.errores_log.JCLogging;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 import com.marlon.portalusuario.banner.PromoSliderAdapter.SliderAdapterViewHolder;
 import com.squareup.picasso.Picasso;

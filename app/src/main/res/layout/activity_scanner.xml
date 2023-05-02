@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".codescanner.ScannerActivity">
+    tools:context=".escaner_recarga.ScannerActivity">
 
-    <com.marlon.portalusuario.codescanner.CodeScannerView
+    <com.marlon.portalusuario.escaner_recarga.CodeScannerView
         android:id="@+id/scanner_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

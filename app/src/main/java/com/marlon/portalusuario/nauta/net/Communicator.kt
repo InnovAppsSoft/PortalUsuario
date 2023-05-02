@@ -1,0 +1,8 @@
+package com.marlon.portalusuario.nauta.net
+
+import cu.suitetecsa.sdk.nauta.domain.service.NautaClient
+
+interface Communicator {
+    fun communicate()
+    fun postCommunicate()
+}

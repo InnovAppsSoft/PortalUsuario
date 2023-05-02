@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".onboard.IntroActivity">
+    tools:context=".intro_app.IntroActivity">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/screen_viewpager"

@@ -61,7 +61,7 @@
                     android:src="@drawable/portal1" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:orientation="vertical"
@@ -153,10 +153,10 @@
                 android:padding="4dp"
                 android:background="@drawable/background_text">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:id="@+id/img_greetings"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
                     android:src="@drawable/baseline_light_mode_24" />
@@ -164,7 +164,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="20dp"
                     android:orientation="vertical"
                     android:layout_weight="1">
 
@@ -371,7 +371,6 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
-                                android:padding="3dp"
                                 android:src="@drawable/outline_local_phone_24"
                                 />
 
@@ -416,7 +415,6 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
-                                android:padding="3dp"
                                 android:src="@drawable/ic_data_wiget" />
 
                             <TextView
@@ -469,7 +467,6 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
-                                android:padding="3dp"
                                 android:src="@drawable/outline_comment_24" />
 
                             <TextView
@@ -507,8 +504,8 @@
                             android:padding="10dp">
 
                             <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
