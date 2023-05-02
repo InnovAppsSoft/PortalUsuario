@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
-            android:fontFamily="@font/dosisbold"
+            android:fontFamily="@font/displaybold"
             android:text="@string/portal_usuario"
             android:textColor="@color/colorDes"
             android:textSize="@dimen/_20ssp"
@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/dosislight"
+            android:fontFamily="@font/displaybold"
             android:text="@string/sencillo_r_pido_y_cubano"
             android:textColor="@color/colorDes"
             android:textSize="@dimen/_13ssp"/>

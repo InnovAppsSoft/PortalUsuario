@@ -74,7 +74,7 @@
         <TextView
                 android:textSize="13sp"
             android:layout_width="wrap_content"
-            android:fontFamily="@font/dosislight"
+            android:fontFamily="@font/displaybold"
             android:layout_height="wrap_content"
             android:text="@string/cargando_captcha_por_favor_espere"/>
     </LinearLayout>

@@ -61,7 +61,6 @@ import com.marlon.portalusuario.une.UneActivity
 import com.marlon.portalusuario.util.SSLHelper
 import com.marlon.portalusuario.util.Util
 import com.marlon.portalusuario.apklis.ApklisUtil
-import com.marlon.portalusuario.view.fragments.BottomSheetDialog
 import com.marlon.portalusuario.nauta.ui.ConnectivityFragment
 import com.marlon.portalusuario.view.fragments.CuentasFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
@@ -88,7 +87,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     private var download_apklis: Button? = null
     private var download_ps: Button? = null
     private var remind_me_later: Button? = null
-    private val bottomSheetDialog: BottomSheetDialog? = null
     private var progressBar: ProgressBar? = null
     private var errorLayout: LinearLayout? = null
     private var try_again: TextView? = null

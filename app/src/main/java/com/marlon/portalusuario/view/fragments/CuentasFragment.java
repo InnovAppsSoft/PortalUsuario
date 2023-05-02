@@ -44,14 +44,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CuentasFragment extends Fragment {
 
-    private TelephonyManager j;
-    private TextView networkClass,Fecha;
-    private TelephonyManager telephonyManager;
-    private TextView tvSignal;
-    private Util util;
-
-    private JCLogging logging;
-
     private SwipeRefreshLayout Refrescar;
 
     private TextView saldotext, expiratext, minutostext, mensajestext, venceminutossms, datostext, datoslte, datosnacionales, VenceDatosI, bolsasms,vencebolsasms,bolsadiaria,vencebolsadiaria,Actulizar;
@@ -87,7 +79,8 @@ public class CuentasFragment extends Fragment {
     String sim;
     SharedPreferences sp_sim;
 
-    private CircleImageView imgperfil, imgGreetings;
+    private CircleImageView imgperfil;
+    private ImageView imgGreetings;
     private ImageView Editar, refreshButton;
 
     TextView Promo;
@@ -97,8 +90,6 @@ public class CuentasFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_cuentas, container, false);
-        util = new Util();
-        logging = new JCLogging(getActivity());
         // ui components init
         Refrescar = v.findViewById(R.id.swipeRefresh);
         saldotext = v.findViewById(R.id.text_cuentas_saldo);

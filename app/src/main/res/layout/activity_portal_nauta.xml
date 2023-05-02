@@ -6,8 +6,7 @@
     android:orientation="vertical"
     android:background="@color/background"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".nauta.ui.PortalNautaActivity">
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,7 +28,7 @@
                 android:text="@string/infoTime"
                 android:layout_marginTop="24dp"
                 android:textColor="@color/colorDes"
-                android:fontFamily="@font/dosisbold"
+                android:fontFamily="@font/displaybold"
                 android:textSize="@dimen/_15ssp"
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp"
@@ -54,7 +53,7 @@
                 android:text="@string/infoUser"
                 android:textAlignment="center"
                 android:textColor="@color/colorDes"
-                android:fontFamily="@font/dosislight"
+                android:fontFamily="@font/displaybold"
                 android:textSize="@dimen/_13ssp"
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp" />
@@ -183,7 +182,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
-                        app:fontFamily="@font/ubuntu" />
+                        app:fontFamily="@font/displaybold" />
 
                     <TextView
                         android:id="@+id/textView14"
@@ -207,7 +206,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
-                        app:fontFamily="@font/ubuntu" />
+                        app:fontFamily="@font/displaybold" />
 
                     <TextView
                         android:textColor="@color/colorDes"
@@ -230,7 +229,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
-                        app:fontFamily="@font/ubuntu" />
+                        app:fontFamily="@font/displaybold" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

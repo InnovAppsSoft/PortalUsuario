@@ -8,7 +8,6 @@
 
     <ImageView
         android:id="@+id/img_intro"
-        android:layout_marginTop="@dimen/_5sdp"
         android:src="@drawable/img1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +16,7 @@
     <TextView
         android:id="@+id/tv_title"
         android:layout_marginTop="@dimen/_10sdp"
-        android:fontFamily="@font/dosisbold"
+        android:fontFamily="@font/displaybold"
         android:text="@string/sencillo"
         android:textAlignment="center"
         android:textColor="@color/colorDes"
@@ -28,7 +27,7 @@
     <TextView
         android:id="@+id/tv_description"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/dosislight"
+        android:fontFamily="@font/displaybold"
         android:text="@string/acceda_desde_la_comodidad_de_su_casa_de_los_servicios_que_brinda_etecsa"
         android:textAlignment="center"
         android:textColor="@color/colorDes"

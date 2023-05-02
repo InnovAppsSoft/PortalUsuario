@@ -13,6 +13,9 @@
     <color name="data_usage_low">#E57373</color>
     <color name="data_usage_high">#81C784</color>
 
+    <color name="predeterminado">#FF4081</color>
+
+
     <color name="botoncolorStart">#7041FF</color>
     <color name="colorboton">#4D53E0</color>
     <color name="botoncolorEnd">#7041FF</color>
@@ -156,7 +159,7 @@
 
     <color name="min_rtt">#ffb3e4ff</color>
     <color name="max_rtt">#ff1aafff</color>
-    <color name="avg_rtt">#ff66c9ff</color>
+
 
     <color name="loss">#ffff6262</color>
 

@@ -115,8 +115,6 @@
                             app:sliderScrollTimeInSec="1"
                             app:sliderStartAutoCycle="true" />
 
-
-
             </androidx.cardview.widget.CardView>
 
             <androidx.appcompat.widget.Toolbar
@@ -147,7 +145,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_8sdp"
-                        android:fontFamily="@font/dosisbold"
+                        android:fontFamily="@font/displaybold"
                         android:text="@string/portal_usuario"
                         android:textAlignment="textStart"
                         android:textColor="@color/colorDes"
