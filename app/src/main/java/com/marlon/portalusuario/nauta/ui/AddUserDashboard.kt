@@ -15,9 +15,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -31,6 +33,7 @@ import com.marlon.portalusuario.nauta.ui.components.PasswordField
 import com.marlon.portalusuario.nauta.ui.components.PrettyCard
 import com.marlon.portalusuario.nauta.ui.components.UserField
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AddUserDashboard(viewModel: NautaViewModel) {
     val userName: TextFieldValue by viewModel.userName.observeAsState(initial = TextFieldValue(text = ""))
@@ -51,6 +54,7 @@ fun AddUserDashboard(viewModel: NautaViewModel) {
     )
 
     val context = LocalContext.current
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     PrettyCard(isLoading = isLogging) {
         val (isOk, err) = loginStatus
@@ -89,6 +93,7 @@ fun AddUserDashboard(viewModel: NautaViewModel) {
                 keyboardActions = KeyboardActions(
                     onDone = {
                         if (updateButtonIsEnabled) {
+                            keyboardController?.hide()
                             viewModel.addUser(userName.text, password, captchaCode)
                         }
                     }

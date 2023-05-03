@@ -237,8 +237,12 @@ class NautaViewModel @Inject constructor(
                             _isLogging.postValue(false)
                             _isLoading.postValue(false)
                             _loginStatus.postValue(Pair(true, null))
-                            _currentUser.postValue(it.data!!)
-                            pref.currentUserId = it.data!!.id
+                            repository.getUsersFromRoom { users ->
+                                _users.value = users
+
+                                _currentUser.value = it.data!!
+                                pref.currentUserId = it.data!!.id
+                            }
                             clearFields()
                         }
                     }
@@ -257,42 +261,51 @@ class NautaViewModel @Inject constructor(
             _isLogging.postValue(true)
             _isUpdatingUserInfo.postValue(true)
             _isLoading.postValue(true)
-            updateUserUseCase(
-                UserDTO(
-                    id = _currentUser.value!!.id,
-                    username = _currentUser.value!!.username,
-                    password = _currentUser.value!!.password,
-                    captchaCode = captchaCode
+            if (_currentUser.value!!.id == pref.currentUserId) {
+                updateUserUseCase(
+                    UserDTO(
+                        id = _currentUser.value!!.id,
+                        username = _currentUser.value!!.username,
+                        password = _currentUser.value!!.password,
+                        captchaCode = captchaCode
+                    )
                 )
-            )
-                .collect {
-                    when (it) {
-                        is ResultType.Error -> {
-                            if (it.message == "Not logged in") {
-                                showCaptchaDialog(true) {}
+                    .collect {
+                        when (it) {
+                            is ResultType.Error -> {
+                                if (it.message == "Not logged in") {
+                                    showCaptchaDialog(true) {}
+                                    _isLogging.postValue(false)
+                                    _isUpdatingUserInfo.postValue(false)
+                                    _isLoading.postValue(false)
+                                } else {
+                                    _isLogging.postValue(false)
+                                    _isUpdatingUserInfo.postValue(false)
+                                    _isLoading.postValue(false)
+                                    _loginStatus.postValue(Pair(false, it.message))
+                                    getCaptcha()
+                                }
+                            }
+
+                            is ResultType.Success -> {
                                 _isLogging.postValue(false)
                                 _isUpdatingUserInfo.postValue(false)
                                 _isLoading.postValue(false)
-                            } else {
-                                _isLogging.postValue(false)
-                                _isUpdatingUserInfo.postValue(false)
-                                _isLoading.postValue(false)
-                                _loginStatus.postValue(Pair(false, it.message))
-                                getCaptcha()
+                                _loginStatus.postValue(Pair(true, null))
+                                repository.getUsersFromRoom { users ->
+                                    _users.value = users
+
+                                    _currentUser.postValue(it.data!!)
+                                    pref.currentUserId = _currentUser.value!!.id
+                                }
+                                postUpdate()
                             }
                         }
-
-                        is ResultType.Success -> {
-                            _isLogging.postValue(false)
-                            _isUpdatingUserInfo.postValue(false)
-                            _isLoading.postValue(false)
-                            _loginStatus.postValue(Pair(true, null))
-                            _currentUser.postValue(it.data!!)
-                            pref.currentUserId = _currentUser.value!!.id
-                            postUpdate()
-                        }
                     }
-                }
+            } else {
+                pref.currentUserId = _currentUser.value!!.id
+                showCaptchaDialog(true) {}
+            }
         }
     }
 
