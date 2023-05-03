@@ -18,9 +18,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.ImeAction
@@ -32,6 +34,7 @@ import com.marlon.portalusuario.R
 import com.marlon.portalusuario.commons.ui.AnimatedPlaceholder
 import com.marlon.portalusuario.commons.ui.theme.SuitEtecsaTheme
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CardTransfer(
     modifier: Modifier = Modifier,
@@ -45,6 +48,8 @@ fun CardTransfer(
     onChangeAmount: (TextFieldValue) -> Unit
 ) {
     val (isOk, _) = transferStatus
+    val keyboardController = LocalSoftwareKeyboardController.current
+
     PrettyCard(modifier = modifier, isLoading = isLoading, isFoundErrors = !isOk) {
         Column {
             TextField(
@@ -95,6 +100,7 @@ fun CardTransfer(
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = {
+                        keyboardController?.hide()
                         onTransfer(destinationAccount.text, amount.text)
                     }
                 ),

@@ -24,9 +24,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -38,6 +40,7 @@ import com.marlon.portalusuario.R
 import com.marlon.portalusuario.commons.ui.AnimatedPlaceholder
 import com.marlon.portalusuario.commons.ui.theme.SuitEtecsaTheme
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CardChangeEmailPassword(
     modifier: Modifier = Modifier,
@@ -52,6 +55,8 @@ fun CardChangeEmailPassword(
     var oldPasswordVisible by rememberSaveable { mutableStateOf(false) }
     var newPasswordVisible by rememberSaveable { mutableStateOf(false) }
     val (isPasswordChanged, errorMessage) = changePasswordStatus
+    val keyboardController = LocalSoftwareKeyboardController.current
+
     if (!isPasswordChanged) Toast.makeText(LocalContext.current, errorMessage, Toast.LENGTH_LONG)
         .show()
     PrettyCard(
@@ -122,6 +127,7 @@ fun CardChangeEmailPassword(
                     imeAction = ImeAction.Go
                 ),
                 keyboardActions = KeyboardActions(onGo = {
+                    keyboardController?.hide()
                     onChangeEmailPassword(
                         oldPassword,
                         newPassword

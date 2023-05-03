@@ -21,8 +21,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -34,6 +36,7 @@ import com.marlon.portalusuario.R
 import com.marlon.portalusuario.commons.ui.AnimatedPlaceholder
 import com.marlon.portalusuario.commons.ui.theme.SuitEtecsaTheme
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CardChangePassword(
     modifier: Modifier = Modifier,
@@ -47,6 +50,8 @@ fun CardChangePassword(
 ) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     val (isChanged, _) = changedPasswordStatus
+    val keyboardController = LocalSoftwareKeyboardController.current
+
     PrettyCard(modifier = modifier, isLoading = isLoading, isFoundErrors = !isChanged) {
         TextField(
             value = newPassword,
@@ -65,7 +70,10 @@ fun CardChangePassword(
                 imeAction = ImeAction.Go
             ),
             keyboardActions = KeyboardActions(
-                onGo = { if (isExecutable) onChangePassword(newPassword) }
+                onGo = { if (isExecutable) {
+                    keyboardController?.hide()
+                    onChangePassword(newPassword)
+                } }
             ),
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             shape = MaterialTheme.shapes.small,

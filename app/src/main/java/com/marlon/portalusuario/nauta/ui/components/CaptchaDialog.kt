@@ -2,6 +2,7 @@ package com.marlon.portalusuario.nauta.ui.components
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.graphics.Bitmap
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,8 +15,11 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -32,6 +36,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CaptchaDialog(
     show: Boolean,
@@ -47,12 +52,18 @@ fun CaptchaDialog(
     onDismiss: () -> Unit
 ) {
     if (show) {
-        val (isOk, _) = captchaLoadStatus
+        val (isOk, err) = captchaLoadStatus
+        if (!isOk) {
+            Toast.makeText(LocalContext.current, err, Toast.LENGTH_LONG).show()
+        }
+        val keyboardController = LocalSoftwareKeyboardController.current
+        if (isLoading) {
+            keyboardController?.hide()
+        }
         Dialog(
             onDismissRequest = { onDismiss() },
             properties = DialogProperties(usePlatformDefaultWidth = false)
         ) {
-            val scope = rememberCoroutineScope()
             PrettyCard(isLoading = isLoading, isFoundErrors = !isOk) {
                 Column(
                     modifier = Modifier.widthIn(max = 280.dp)
@@ -85,6 +96,7 @@ fun CaptchaDialog(
                         keyboardActions = KeyboardActions(
                             onDone = {
                                 if (isExecutable) {
+                                    keyboardController?.hide()
                                     loginFunction(captchaCode)
                                 }
                             }

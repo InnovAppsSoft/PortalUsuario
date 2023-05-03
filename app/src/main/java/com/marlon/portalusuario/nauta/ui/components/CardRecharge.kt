@@ -20,9 +20,11 @@ import androidx.compose.material.icons.outlined.QrCodeScanner
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.ImeAction
@@ -35,6 +37,7 @@ import com.marlon.portalusuario.commons.ui.AnimatedPlaceholder
 import com.marlon.portalusuario.commons.ui.theme.SuitEtecsaTheme
 import com.marlon.portalusuario.nauta.core.rechargeCodeVisualTransformation
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CardRecharge(
     modifier: Modifier = Modifier,
@@ -47,6 +50,12 @@ fun CardRecharge(
     onClickQRScannerIcon: () -> Unit
 ) {
     val (isOk, _) = rechargeStatus
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    if (rechargeCode.length == 16 && !isLoading) {
+        keyboardController?.hide()
+        onRecharge(rechargeCode)
+    }
     PrettyCard(modifier = modifier, isLoading = isLoading, isFoundErrors = !isOk) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -72,7 +81,15 @@ fun CardRecharge(
                     keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Go
                 ),
-                keyboardActions = KeyboardActions(onGo = { if (isExecutable) onRecharge(rechargeCode) }),
+                keyboardActions = KeyboardActions(
+                    onGo = {
+                        if (isExecutable) {
+                            keyboardController?.hide()
+                            onRecharge(rechargeCode)
+                        }
+
+                    }
+                ),
                 shape = MaterialTheme.shapes.small,
                 singleLine = true,
                 maxLines = 1,

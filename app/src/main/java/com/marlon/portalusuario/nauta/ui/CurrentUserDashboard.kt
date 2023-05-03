@@ -48,6 +48,7 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
     val captchaLoadStatus: Pair<Boolean, String?> by viewModel.captchaLoadStatus.observeAsState(
         initial = Pair(true, null)
     )
+
     val isReadyToUpdate: Boolean by viewModel.isReadyToUpdate.observeAsState(initial = false)
 
     // Connect
@@ -60,6 +61,9 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
             null
         )
     )
+    val (isConnected, connectError) = connectStatus
+    if (!isConnected) Toast.makeText(context, connectError, Toast.LENGTH_LONG).show()
+
     val isLoggedIn: Boolean by viewModel.isLoggedIn.observeAsState(initial = false)
 
     // User
@@ -70,6 +74,8 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
             null
         )
     )
+    val (isLogged, loginError) = loginStatus
+    if (!isLogged) Toast.makeText(context, loginError, Toast.LENGTH_LONG).show()
 
     // Recharge
     val isRecharging: Boolean by viewModel.isRecharging.observeAsState(initial = false)
@@ -81,6 +87,8 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
             null
         )
     )
+    val (isRecharged, rechargeError) = rechargeStatus
+    if (!isRecharged) Toast.makeText(context, rechargeError, Toast.LENGTH_LONG).show()
 
     // Transfer
     val destinationAccount: TextFieldValue by viewModel.destinationAccount.observeAsState(
@@ -97,6 +105,8 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
             null
         )
     )
+    val (isTransferred, transferError) = transferStatus
+    if (!isTransferred) Toast.makeText(context, transferError, Toast.LENGTH_LONG).show()
 
     // Change password
     val accessAccountNewPassword: String by viewModel.accessAccountNewPassword.observeAsState(
@@ -108,6 +118,8 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
     val accessAccountChangePasswordStatus: Pair<Boolean, String?> by viewModel.accessAccountChangePasswordStatus.observeAsState(
         initial = Pair(true, null)
     )
+    val (isAccessAccountPasswordChanged, accessAccountPasswordChangeError) = accessAccountChangePasswordStatus
+    if (!isAccessAccountPasswordChanged) Toast.makeText(context, accessAccountPasswordChangeError, Toast.LENGTH_LONG).show()
 
     // ChangeEmailPassword
     val emailOldPassword: String by viewModel.emailOldPassword.observeAsState(initial = "")
@@ -116,6 +128,8 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
     val emailChangePasswordStatus: Pair<Boolean, String?> by viewModel.emailChangePasswordStatus.observeAsState(
         initial = Pair(true, null)
     )
+    val (isEmailPasswordChanged, emailPasswordChangeError) = emailChangePasswordStatus
+    if (!isEmailPasswordChanged) Toast.makeText(context, emailPasswordChangeError, Toast.LENGTH_LONG).show()
 
     // Dialog
     val showTimePickerDialog: Boolean by viewModel.showTimePickerDialog.observeAsState(initial = false)
@@ -174,19 +188,6 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
             viewModel.showQRCodeScanner(false) {}
         }
     )
-
-    // Showing errors
-    val (isRechargeOk, rechargeErrors) = rechargeStatus
-    if (!isRechargeOk) {
-        Toast.makeText(context, rechargeErrors, Toast.LENGTH_LONG).show()
-        viewModel.resetStatus()
-    }
-
-    val (isTransferOk, transferErrors) = transferStatus
-    if (!isTransferOk) {
-        Toast.makeText(context, transferErrors, Toast.LENGTH_LONG).show()
-        viewModel.resetStatus()
-    }
 
     Column(modifier = Modifier.padding(bottom = 40.dp)) {
 

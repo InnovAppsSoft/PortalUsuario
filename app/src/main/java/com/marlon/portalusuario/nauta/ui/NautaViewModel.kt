@@ -34,7 +34,10 @@ import cu.suitetecsa.sdk.nauta.domain.util.secondsToTimeString
 import cu.suitetecsa.sdk.nauta.domain.util.timeStringToSeconds
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import trikita.log.Log
 import javax.inject.Inject
+
+private const val TAG = "NautaViewModel"
 
 @HiltViewModel
 class NautaViewModel @Inject constructor(
@@ -131,7 +134,8 @@ class NautaViewModel @Inject constructor(
     val currentUser: LiveData<UserModel> = _currentUser
     val isChangingAccountAccessPassword: LiveData<Boolean> = _isChangingAccountAccessPassword
     val accessAccountNewPassword: LiveData<String> = _accessAccountNewPassword
-    val accessAccountChangePasswordStatus: LiveData<Pair<Boolean, String?>> = _accessAccountChangePasswordStatus
+    val accessAccountChangePasswordStatus: LiveData<Pair<Boolean, String?>> =
+        _accessAccountChangePasswordStatus
     val isChangingEmailPassword: LiveData<Boolean> = _isChangingEmailPassword
     val emailOldPassword: LiveData<String> = _emailOldPassword
     val emailNewPassword: LiveData<String> = _emailNewPassword
@@ -209,9 +213,10 @@ class NautaViewModel @Inject constructor(
     }
 
     fun addUser(userName: String, password: String, captchaCode: String) {
-        clearFields()
         resetStatus()
         viewModelScope.launch {
+            _isLogging.postValue(true)
+            _isLoading.postValue(true)
             addUserUseCase(
                 UserDTO(
                     id = 0,
@@ -221,8 +226,6 @@ class NautaViewModel @Inject constructor(
                 )
             )
                 .collect {
-                    _isLogging.postValue(true)
-                    _isLoading.postValue(true)
                     when (it) {
                         is ResultType.Error -> {
                             _isLogging.postValue(false)
@@ -235,21 +238,25 @@ class NautaViewModel @Inject constructor(
                             _isLoading.postValue(false)
                             _loginStatus.postValue(Pair(true, null))
                             _currentUser.postValue(it.data!!)
+                            pref.currentUserId = it.data!!.id
+                            clearFields()
                         }
                     }
                 }
         }
     }
 
-    fun updateUser(captchaCode: String? = null, postUpdate: () -> Unit) {
-        updateUser(captchaCode)
-        postUpdate()
+    fun updateUser(captchaCode: String? = null) {
+        updateUser(captchaCode) {}
     }
 
-    fun updateUser(captchaCode: String? = null) {
+    fun updateUser(captchaCode: String? = null, postUpdate: () -> Unit) {
         clearFields()
         resetStatus()
         viewModelScope.launch {
+            _isLogging.postValue(true)
+            _isUpdatingUserInfo.postValue(true)
+            _isLoading.postValue(true)
             updateUserUseCase(
                 UserDTO(
                     id = _currentUser.value!!.id,
@@ -259,26 +266,30 @@ class NautaViewModel @Inject constructor(
                 )
             )
                 .collect {
-                    _isLogging.postValue(true)
-                    _isLoading.postValue(true)
                     when (it) {
                         is ResultType.Error -> {
                             if (it.message == "Not logged in") {
                                 showCaptchaDialog(true) {}
                                 _isLogging.postValue(false)
+                                _isUpdatingUserInfo.postValue(false)
                                 _isLoading.postValue(false)
                             } else {
                                 _isLogging.postValue(false)
+                                _isUpdatingUserInfo.postValue(false)
                                 _isLoading.postValue(false)
                                 _loginStatus.postValue(Pair(false, it.message))
+                                getCaptcha()
                             }
                         }
 
                         is ResultType.Success -> {
                             _isLogging.postValue(false)
+                            _isUpdatingUserInfo.postValue(false)
                             _isLoading.postValue(false)
                             _loginStatus.postValue(Pair(true, null))
                             _currentUser.postValue(it.data!!)
+                            pref.currentUserId = _currentUser.value!!.id
+                            postUpdate()
                         }
                     }
                 }
@@ -427,6 +438,9 @@ class NautaViewModel @Inject constructor(
         _rechargeCode.postValue("")
         _amount.postValue(TextFieldValue(""))
         _destinationAccount.postValue(TextFieldValue(""))
+        _accessAccountNewPassword.postValue("")
+        _emailNewPassword.postValue("")
+        _emailOldPassword.postValue("")
     }
 
     fun resetStatus() {
@@ -435,6 +449,8 @@ class NautaViewModel @Inject constructor(
         _loginStatus.postValue(Pair(true, null))
         _connectStatus.postValue(Pair(true, null))
         _captchaLoadStatus.postValue(Pair(true, null))
+        _emailChangePasswordStatus.postValue(Pair(true, null))
+        _accessAccountChangePasswordStatus.postValue(Pair(true, null))
     }
 
     // Show/hide dialogs
@@ -510,7 +526,10 @@ class NautaViewModel @Inject constructor(
                 pref.reservedTime = 0
 
                 // Updating credit
-                service.getConnectInfo(_currentUser.value!!.username, _currentUser.value!!.password) {
+                service.getConnectInfo(
+                    _currentUser.value!!.username,
+                    _currentUser.value!!.password
+                ) {
                     _currentUser.value!!.credit = it.toPriceFloat()
                 }
 
@@ -553,10 +572,17 @@ class NautaViewModel @Inject constructor(
                 _isRecharging.postValue(true)
                 _isLoading.postValue(true)
                 if (pref.currentUserId == _currentUser.value!!.id) {
+                    Log.i(TAG, "Trying to top up the account balance")
                     service.toUp(rechargeCode)
+                    Log.i(TAG, "Account balance recharged")
+                    clearFields()
                 } else {
+                    Log.i(TAG, "New account to manage")
+                    Log.i(TAG, "Showing captcha dialog")
                     showCaptchaDialog(true) { toUp(rechargeCode) }
+                    Log.i(TAG, "Getting captcha image")
                     getCaptcha()
+                    Log.i(TAG, "Captcha image loaded")
                 }
                 _rechargeStatus.postValue(Pair(true, null))
                 _isRecharging.postValue(false)
@@ -564,12 +590,9 @@ class NautaViewModel @Inject constructor(
                 _rechargeCode.postValue("")
                 updateUser()
             } catch (e: NotLoggedIn) {
+                e.printStackTrace()
                 showCaptchaDialog(true) { toUp(rechargeCode) }
                 getCaptcha()
-                e.printStackTrace()
-                _rechargeStatus.postValue(Pair(true, null))
-                _isRecharging.postValue(false)
-                _isLoading.postValue(false)
             } catch (e: Exception) {
                 e.printStackTrace()
                 _isRecharging.postValue(false)
@@ -588,6 +611,7 @@ class NautaViewModel @Inject constructor(
                 if (pref.currentUserId == _currentUser.value!!.id) {
                     if (destinationAccount == "") service.payQuote(amount)
                     else service.transfer(amount, destinationAccount)
+                    clearFields()
                 } else {
                     showCaptchaDialog(true) { transfer(amount, destinationAccount) }
                     getCaptcha()
@@ -595,8 +619,6 @@ class NautaViewModel @Inject constructor(
                 _transferStatus.postValue(Pair(true, null))
                 _isTransferring.postValue(false)
                 _isLoading.postValue(false)
-                _amount.postValue(TextFieldValue(""))
-                _destinationAccount.postValue(TextFieldValue(""))
             } catch (e: NotLoggedIn) {
                 e.printStackTrace()
                 showCaptchaDialog(true) { transfer(amount, destinationAccount) }
@@ -621,6 +643,9 @@ class NautaViewModel @Inject constructor(
                 _isLoading.postValue(true)
                 if (pref.currentUserId == _currentUser.value!!.id) {
                     service.changePassword(newPassword)
+                    _currentUser.value!!.password = newPassword
+                    updateUser()
+                    clearFields()
                 } else {
                     showCaptchaDialog(true) { changePassword(newPassword) }
                     getCaptcha()
@@ -649,6 +674,7 @@ class NautaViewModel @Inject constructor(
                 _isLoading.postValue(true)
                 if (pref.currentUserId == _currentUser.value!!.id) {
                     service.changeEmailPassword(oldPassword, newPassword)
+                    clearFields()
                 } else {
                     showCaptchaDialog(true) { changeEmailPassword(oldPassword, newPassword) }
                     getCaptcha()
@@ -675,7 +701,9 @@ class NautaViewModel @Inject constructor(
 
     fun generatePassword(isEmailPassword: Boolean) {
         resetStatus()
-        if (isEmailPassword) _emailNewPassword.postValue(service.generatePassword()) else _accessAccountNewPassword.postValue(service.generatePassword())
+        if (isEmailPassword) _emailNewPassword.postValue(service.generatePassword()) else _accessAccountNewPassword.postValue(
+            service.generatePassword()
+        )
     }
 
     override fun onCleared() {

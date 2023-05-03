@@ -6,7 +6,7 @@ import com.marlon.portalusuario.nauta.data.entities.User
 data class UserModel(
     val id: Int,
     val username: String,
-    val password: String,
+    var password: String,
     var remainingTime: Int,
     var credit: Float,
     val email: String,
