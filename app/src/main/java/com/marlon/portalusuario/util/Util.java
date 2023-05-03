@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 
-import com.marlon.portalusuario.logging.JCLogging;
+import com.marlon.portalusuario.errores_log.JCLogging;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,94 +38,6 @@ public class Util {
     }
 
     public Util() {
-    }
-
-    public static void CreateAsset(TextView textView, String str) {
-        textView.setTypeface(Typeface.createFromAsset(textView.getContext().getAssets(), str));
-    }
-
-    public boolean PermissionUECall(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.CALL_PHONE") == 0;
-    }
-
-    public boolean PermissionUECallAnswer(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.ANSWER_PHONE_CALLS") == 0;
-    }
-
-    public boolean PermissionUECallAnsw(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.ANSWER_PHONE_CALLS") == 0;
-    }
-
-    public boolean PermissionUEAlertW(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.SYSTEM_ALERT_WINDOW") == 0;
-    }
-
-    public boolean PermissionUEWakeLock(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.WAKE_LOCK") == 0;
-    }
-
-    public boolean PermissionUESMS(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.SEND_SMS") == 0;
-    }
-
-    public boolean PermissionUEData(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.READ_SMS") == 0;
-    }
-
-    public boolean PermissionUECamera(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.CAMERA") == 0;
-    }
-
-    public boolean PermissionUEContact(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.READ_CONTACTS") == 0;
-    }
-
-    public boolean PermissionUEWContact(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.WRITE_CONTACTS") == 0;
-    }
-
-    public boolean PermissionUEStorageExt(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.READ_EXTERNAL_STORAGE") == 0;
-    }
-
-    public boolean PermissionUEReadCallLogs(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.READ_CALL_LOG") == 0;
-    }
-
-    public boolean PermissionUEReadSMS(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.READ_SMS") == 0;
-    }
-
-    public boolean PermissionUEStorageExtInit(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.READ_EXTERNAL_STORAGE") == 0;
-    }
-
-    public boolean PermissionUEStorageInt(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.WRITE_EXTERNAL_STORAGE") == 0;
-    }
-
-    public boolean PermissionUELocation(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.ACCESS_COARSE_LOCATION") == 0 && ActivityCompat.checkSelfPermission(context2, "android.permission.READ_PHONE_STATE") == 0;
-    }
-
-    public boolean PermissionUERPhoneState() {
-        return ActivityCompat.checkSelfPermission(this.context, "android.permission.READ_PHONE_STATE") == 0;
-    }
-
-    public boolean PermissionUERPhoneState(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.READ_PHONE_STATE") == 0;
-    }
-
-    public boolean PermissionUELocationGPS(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.ACCESS_COARSE_LOCATION") == 0 && ActivityCompat.checkSelfPermission(context2, "android.permission.ACCESS_FINE_LOCATION") == 0;
-    }
-
-    public boolean PermissionUECalendar(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.WRITE_CALENDAR") == 0;
-    }
-
-    public boolean PermissionUEBIND_ACCESSIBILITY_SERVICE(Context context2) {
-        return ActivityCompat.checkSelfPermission(context2, "android.permission.BIND_ACCESSIBILITY_SERVICE") == 0;
     }
     
     // chequear conexion por wifi o datos
@@ -236,65 +148,9 @@ public class Util {
 //        }
 //    }
 
-    // reajustar tamanno de Bitmap
-    public static Drawable resize(Context context2, Drawable drawable) {
-        return new BitmapDrawable(context2.getResources(), Bitmap.createScaledBitmap(((BitmapDrawable) drawable).getBitmap(), 50, 50, false));
-    }
-
-    // chequear Localizacion
-    public boolean openLocation(Context context2) {
-        boolean gps = false;
-        boolean network = false;
-        LocationManager locationManager = (LocationManager) context2.getSystemService(Context.LOCATION_SERVICE);
-        try {
-            gps = locationManager.isProviderEnabled("gps");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            network = locationManager.isProviderEnabled("network");
-        } catch (Exception e2) {
-            e2.printStackTrace();
-        }
-        return gps || network;
-    }
-
-    // extract text from RAW Resource
-    public static String getTextFrom(Context context, int resource){
-        StringBuilder text = new StringBuilder();
-        try {
-            InputStreamReader isr = new InputStreamReader(context.getResources().openRawResource(resource), StandardCharsets.ISO_8859_1);
-            BufferedReader br = new BufferedReader(isr);
-
-            String line;
-
-            while((line = br.readLine()) != null)
-            {
-                text.append(line);
-                text.append("\n");
-            }
-            br.close();
-            isr.close();
-        } catch(IOException e){
-            e.printStackTrace();
-        }
-        Log.e("TERMINOS", text.toString());
-        return text.toString();
-    }
-
-    //
     @SuppressLint("SimpleDateFormat")
     public static String date2String(GregorianCalendar date){
         return new SimpleDateFormat("dd/MM/yyyy hh:mm aa").format(date.getTime());
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    public static Date string2Date(String date) throws ParseException {
-        return new SimpleDateFormat("dd/MM/yyyy").parse(date);
-    }
-
-    public static long date2Long(GregorianCalendar date){
-        return date.getTimeInMillis();
     }
 
     public static GregorianCalendar long2Date(long timestamp){

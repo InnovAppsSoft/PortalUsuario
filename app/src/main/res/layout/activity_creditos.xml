@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".view.activities.AboutActivity">
+    tools:context=".activities.AboutActivity">
 
     <LinearLayout
         android:id="@+id/topbar"
@@ -82,7 +82,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:fontFamily="@font/dosisbold"
+                            android:fontFamily="@font/displaybold"
                             android:text="@string/marlon_de_jes_s_milan_s_rivero"
                             android:textColor="@color/colorEscrito"
                             android:textSize="15sp"
@@ -91,7 +91,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/dosislight"
+                            android:fontFamily="@font/displaybold"
                             android:text="@string/creador_y_desarrollador"
                             android:textColor="@color/colorDes"
                             android:textSize="13sp" />
@@ -251,7 +251,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:fontFamily="@font/dosisbold"
+                            android:fontFamily="@font/displaybold"
                             android:text="@string/javier_alejandro_gonz_lez_casellas"
                             android:textColor="@color/colorEscrito"
                             android:textSize="15sp"
@@ -260,7 +260,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/dosislight"
+                            android:fontFamily="@font/displaybold"
                             android:text="@string/coautor_y_desarrollador"
                             android:textColor="@color/colorDes"
                             android:textSize="13sp" />
@@ -558,7 +558,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:fontFamily="@font/dosisbold"
+                            android:fontFamily="@font/displaybold"
                             android:text="Lesly Cintra"
                             android:textColor="@color/colorEscrito"
                             android:textSize="15sp"
@@ -567,7 +567,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/dosislight"
+                            android:fontFamily="@font/displaybold"
                             android:text="Desarrollador"
                             android:textColor="@color/colorDes"
                             android:textSize="13sp" />
@@ -730,7 +730,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/dosisbold"
+                                    android:fontFamily="@font/displaybold"
                                     android:text="@string/sobre_nosotros"
                                     android:textColor="@color/colorEscrito"
                                     android:textSize="13sp"
@@ -741,7 +741,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
-                                android:fontFamily="@font/dosislight"
+                                android:fontFamily="@font/displaybold"
                                 android:text="@string/my_desc"
                                 android:textColor="@color/colorDes"
                                 android:textSize="13sp" />
@@ -772,7 +772,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/dosisbold"
+                                android:fontFamily="@font/displaybold"
                                 android:text="@string/acerca_de_la_app"
                                 android:textColor="@color/colorEscrito"
                                 android:textSize="13sp" />
@@ -809,7 +809,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="@font/displaybold"
-                                            android:text="7.0.3"
+                                            android:text="7.0.4"
                                             android:textColor="@color/colorDes"
                                             android:textSize="12sp"
                                             android:textStyle="bold"
@@ -903,7 +903,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/dosisbold"
+                                android:fontFamily="@font/displaybold"
                                 android:text="@string/colaboradores"
                                 android:textColor="@color/colorEscrito"
                                 android:textSize="13sp" />

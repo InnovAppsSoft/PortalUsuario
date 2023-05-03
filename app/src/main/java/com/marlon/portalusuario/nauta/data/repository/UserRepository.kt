@@ -6,8 +6,7 @@ import kotlinx.coroutines.flow.Flow
 typealias Users = List<User>
 
 interface UserRepository {
-    fun getUsersFromRoom(): Flow<Users>
-
+    suspend fun getUsersFromRoom(onResult: (Users) -> Unit): Users
     suspend fun getUserFromRoom(id: Int): User
     suspend fun getUserFromRoom(userName: String): User
     suspend fun addUserToRoom(user: User)

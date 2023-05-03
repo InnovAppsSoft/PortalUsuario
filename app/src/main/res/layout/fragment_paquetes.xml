@@ -27,10 +27,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/dosisbold"
+                    android:fontFamily="@font/displaybold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:text="@string/paquetes_combinados"
-                    android:textSize="16sp" />
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
@@ -39,7 +39,7 @@
                 app:cardUseCompatPadding="true"
                 app:cardBackgroundColor="@color/background_color_50"
                 app:cardCornerRadius="@dimen/_16sdp"
-                app:contentPadding="16dp">
+                app:contentPadding="10dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/dosisbold"
+                            android:fontFamily="@font/displaybold"
                             android:text="@string/plan_b_sico"
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -89,6 +89,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/_10ssp"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:text="Todas las Redes" />
 
                             <androidx.appcompat.widget.LinearLayoutCompat
@@ -101,6 +103,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="800"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="@dimen/_13sdp"
                                     android:textStyle="bold" />
@@ -111,6 +115,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="3dp"
                                     android:text="MB"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />
@@ -127,6 +133,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:textSize="@dimen/_10ssp"
                                 android:text="@string/lte_4g" />
 
@@ -140,6 +148,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="600"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="@dimen/_13sdp"
                                     android:textStyle="bold" />
@@ -150,6 +160,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="3dp"
                                     android:text="MB"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />
@@ -167,6 +179,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/_10ssp"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:text="@string/bono_nacional" />
 
                             <androidx.appcompat.widget.LinearLayoutCompat
@@ -179,6 +193,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="300"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="@dimen/_13sdp"
                                     android:textStyle="bold" />
@@ -189,6 +205,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="3dp"
                                     android:text="MB"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />
@@ -220,6 +238,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:text="@string/minutos" />
 
                             <androidx.appcompat.widget.LinearLayoutCompat
@@ -232,6 +252,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="15"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="@dimen/_13sdp"
                                     android:textStyle="bold" />
@@ -241,6 +263,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="3dp"
                                     android:text="min"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />
@@ -257,6 +281,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:text="@string/sms" />
 
                             <androidx.appcompat.widget.LinearLayoutCompat
@@ -269,6 +295,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="20"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="@dimen/_13sdp"
                                     android:textStyle="bold" />
@@ -278,6 +306,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="3dp"
                                     android:text="sms"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />
@@ -302,6 +332,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/_110"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                                 android:textSize="@dimen/_20sdp"
                                 android:textStyle="bold" />
@@ -312,6 +344,8 @@
                                 android:layout_marginStart="4dp"
                                 android:layout_marginEnd="10dp"
                                 android:text="CUP"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:textAlignment="center"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                 android:textSize="14sp"
@@ -335,23 +369,13 @@
                         android:id="@+id/planbasico"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/blue_rounded_shape"
+                        android:background="@drawable/my_gradient_drawable_"
                         android:text="@string/comprar"
+                        android:fontFamily="@font/displaybold"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_10ssp" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <com.lid.lib.LabelTextView
-                    android:id="@+id/ltvNautaMoney"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:textColor="@color/white"
-                    app:label_backgroundColor="@color/yellow"
-                    app:label_distance="20dp"
-                    app:label_orientation="LEFT_TOP"
-                    app:label_text="Básico"
-                    app:label_textSize="10sp" />
 
             </androidx.cardview.widget.CardView>
 
@@ -361,7 +385,7 @@
                 app:cardUseCompatPadding="true"
                 app:cardBackgroundColor="@color/background_color_50"
                 app:cardCornerRadius="@dimen/_16sdp"
-                app:contentPadding="16dp">
+                app:contentPadding="10dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -379,8 +403,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/dosisbold"
+                            android:fontFamily="@font/displaybold"
                             android:text="Plan Medio"
+                            android:textColor="@color/colorDes"
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textSize="@dimen/_15sdp" />
@@ -411,6 +436,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/_10ssp"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:text="@string/todas_las_redes" />
 
                             <androidx.appcompat.widget.LinearLayoutCompat
@@ -423,6 +450,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="1.5"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="@dimen/_13sdp"
                                     android:textStyle="bold" />
@@ -433,6 +462,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="3dp"
                                     android:text="GB"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />
@@ -450,6 +481,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/_10ssp"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:text="@string/lte_4g" />
 
                             <androidx.appcompat.widget.LinearLayoutCompat
@@ -462,6 +495,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="2"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="@dimen/_13sdp"
                                     android:textStyle="bold" />
@@ -471,6 +506,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="3dp"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:text="GB"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
@@ -488,6 +525,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:textSize="@dimen/_10ssp"
                                 android:text="@string/bono_nacional" />
 
@@ -501,6 +540,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="300"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="@dimen/_13sdp"
                                     android:textStyle="bold" />
@@ -511,6 +552,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="3dp"
                                     android:text="MB"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />
@@ -541,6 +584,8 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:layout_height="wrap_content"
                                 android:text="@string/minutos" />
 
@@ -552,6 +597,8 @@
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/minutes_value1"
                                     android:layout_width="wrap_content"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:layout_height="wrap_content"
                                     android:text="35"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -561,6 +608,8 @@
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:layout_marginLeft="3dp"
                                     android:text="min"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -579,6 +628,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:text="@string/sms" />
 
                             <androidx.appcompat.widget.LinearLayoutCompat
@@ -590,6 +641,8 @@
                                     android:id="@+id/sms_value1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:text="40"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="@dimen/_13sdp"
@@ -597,6 +650,8 @@
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="wrap_content"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="3dp"
                                     android:text="sms"
@@ -616,6 +671,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:text="$"
                                 android:textSize="16sp" />
 
@@ -624,6 +681,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/_250"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                                 android:textSize="@dimen/_20sdp"
                                 android:textStyle="bold" />
@@ -631,6 +690,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:layout_marginStart="4dp"
                                 android:layout_marginEnd="10dp"
                                 android:text="@string/cup"
@@ -657,22 +718,14 @@
                         android:id="@+id/planmedio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/blue_rounded_shape"
+                        android:background="@drawable/my_grandient_drawable6"
                         android:text="@string/comprar"
+                        android:fontFamily="@font/displaybold"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_10ssp" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <com.lid.lib.LabelTextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:textColor="@color/white"
-                    app:label_backgroundColor="@color/deeppurple"
-                    app:label_distance="20dp"
-                    app:label_orientation="LEFT_TOP"
-                    app:label_text="Medio"
-                    app:label_textSize="10sp" />
 
             </androidx.cardview.widget.CardView>
 
@@ -682,7 +735,7 @@
                 app:cardUseCompatPadding="true"
                 app:cardBackgroundColor="@color/background_color_50"
                 app:cardCornerRadius="@dimen/_16sdp"
-                app:contentPadding="16dp">
+                app:contentPadding="10dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -701,7 +754,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Plan Extra"
-                            android:fontFamily="@font/dosisbold"
+                            android:fontFamily="@font/displaybold"
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textSize="@dimen/_15sdp" />
@@ -730,6 +783,8 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:layout_height="wrap_content"
                                 android:text="Todas las Redes" />
 
@@ -742,6 +797,8 @@
                                     android:id="@+id/international_all_value2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:text="3.5"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="@dimen/_13sdp"
@@ -751,6 +808,8 @@
                                     android:id="@+id/international_all_unit2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:layout_marginStart="3dp"
                                     android:text="GB"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -769,6 +828,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:text="(LTE - 4G)" />
 
                             <androidx.appcompat.widget.LinearLayoutCompat
@@ -778,6 +839,8 @@
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/international_lte_value2"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="4.5"
@@ -790,6 +853,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="3dp"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:text="GB"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
@@ -806,6 +871,8 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:layout_height="wrap_content"
                                 android:text="Bono Nacional" />
 
@@ -817,6 +884,8 @@
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/national_value2"
                                     android:layout_width="wrap_content"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:layout_height="wrap_content"
                                     android:text="300"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -827,6 +896,8 @@
                                     android:id="@+id/national_unit2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:layout_marginStart="3dp"
                                     android:text="MB"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -860,6 +931,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:text="Minutos" />
 
                             <androidx.appcompat.widget.LinearLayoutCompat
@@ -871,6 +944,8 @@
                                     android:id="@+id/minutes_value2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:text="75"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="@dimen/_13sdp"
@@ -880,6 +955,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="3dp"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:text="min"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="14sp"
@@ -897,6 +974,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:text="SMS" />
 
                             <androidx.appcompat.widget.LinearLayoutCompat
@@ -908,6 +987,8 @@
                                     android:id="@+id/sms_value2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:text="80"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textSize="@dimen/_13sdp"
@@ -916,6 +997,8 @@
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/colorDes"
+                                    android:fontFamily="@font/displaybold"
                                     android:layout_marginStart="3dp"
                                     android:text="sms"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -933,6 +1016,8 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:layout_height="wrap_content"
                                 android:text="$"
                                 android:textSize="16sp" />
@@ -941,6 +1026,8 @@
                                 android:id="@+id/price2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:text="@string/_500"
                                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                                 android:textSize="@dimen/_20sdp"
@@ -949,6 +1036,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/colorDes"
+                                android:fontFamily="@font/displaybold"
                                 android:layout_marginStart="4dp"
                                 android:layout_marginEnd="10dp"
                                 android:text="@string/cup"
@@ -975,43 +1064,16 @@
                         android:id="@+id/planextra"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/blue_rounded_shape"
+                        android:background="@drawable/my_gradient_drawable4"
                         android:text="@string/comprar"
                         android:textColor="@color/white"
+                        android:fontFamily="@font/displaybold"
                         android:textSize="@dimen/_10ssp" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <com.lid.lib.LabelTextView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:textColor="@color/white"
-                    app:label_backgroundColor="@color/progressbarLow"
-                    app:label_distance="20dp"
-                    app:label_orientation="LEFT_TOP"
-                    app:label_text="Extra"
-                    app:label_textSize="10sp" />
-
-
             </androidx.cardview.widget.CardView>
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/dosisbold"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:text="@string/paquetes_solo_4g_lte"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -1029,7 +1091,7 @@
                         android:id="@+id/title2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/dosisbold"
+                        android:fontFamily="@font/displaybold"
                         android:text="Paquete solo LTE"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp"
@@ -1045,6 +1107,8 @@
                         android:layout_marginEnd="3dp"
                         android:text="$"
                         android:textSize="16sp"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         app:layout_constraintBottom_toBottomOf="@+id/text2"
                         app:layout_constraintEnd_toStartOf="@+id/text2"
                         app:layout_constraintTop_toTopOf="@+id/text2"
@@ -1055,7 +1119,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="4dp"
-                        android:fontFamily="sans-serif-black"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:text="100"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="@dimen/_15sdp"
@@ -1069,6 +1134,8 @@
                         android:text="CUP"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="16sp"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         app:layout_constraintBottom_toBottomOf="@+id/text2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.94"
@@ -1093,6 +1160,8 @@
                         android:id="@+id/h_mb_lte7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:layout_marginTop="7dp"
                         android:text="@string/v_lidos_por_30d"
                         app:layout_constraintEnd_toStartOf="@+id/plan1gb"
@@ -1104,6 +1173,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:text="1 GB + 300MB.Cu"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -1122,7 +1193,7 @@
                         android:text="@string/comprar"
                         android:textSize="@dimen/_10ssp"
                         android:textColor="@color/white"
-                        android:background="@drawable/blue_rounded_shape"
+                        android:background="@drawable/my_gradient_drawable"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.7"
@@ -1148,7 +1219,7 @@
                         android:id="@+id/title1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/dosisbold"
+                        android:fontFamily="@font/displaybold"
                         android:text="Paquete solo LTE"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp"
@@ -1162,6 +1233,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="3dp"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:text="$"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@+id/text1"
@@ -1172,9 +1245,10 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/text1"
                         android:layout_width="wrap_content"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="4dp"
-                        android:fontFamily="sans-serif-black"
                         android:text="200"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="@dimen/_15sdp"
@@ -1185,6 +1259,8 @@
                         android:id="@+id/text_price6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:text="CUP"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="16sp"
@@ -1214,6 +1290,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7dp"
                         android:text="@string/v_lidos_por_30d"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         app:layout_constraintEnd_toStartOf="@+id/plan2gb"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/divider6" />
@@ -1223,6 +1301,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:text="2.5GB + 300MB.Cu"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -1241,7 +1321,7 @@
                         android:text="@string/comprar"
                         android:textSize="@dimen/_10ssp"
                         android:textColor="@color/white"
-                        android:background="@drawable/blue_rounded_shape"
+                        android:background="@drawable/my_gradient_drawable3"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.7"
@@ -1267,8 +1347,9 @@
                         android:id="@+id/title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/dosisbold"
                         android:text="Paquete 3G - LTE"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toTopOf="@+id/divider5"
@@ -1282,6 +1363,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="3dp"
                         android:text="$"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@+id/text"
                         app:layout_constraintEnd_toStartOf="@+id/text"
@@ -1293,7 +1376,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="4dp"
-                        android:fontFamily="sans-serif-black"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:text="950"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="@dimen/_15sdp"
@@ -1305,6 +1389,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="CUP"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@+id/text"
@@ -1333,6 +1419,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7dp"
                         android:text="Válidos por 30d"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         app:layout_constraintEnd_toStartOf="@+id/plan16"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/divider5" />
@@ -1343,6 +1431,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:text="4GB + 12GB(LTE)"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp"
@@ -1360,7 +1450,7 @@
                         android:text="@string/comprar"
                         android:textSize="@dimen/_10ssp"
                         android:textColor="@color/white"
-                        android:background="@drawable/blue_rounded_shape"
+                        android:background="@drawable/my_gradient_drawable_"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.7"
@@ -1369,23 +1459,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
-
-            <LinearLayout
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/dosisbold"
-                    android:text="Bolsas - Tarifa"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -1402,7 +1475,7 @@
                         android:id="@+id/title_package"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/dosisbold"
+                        android:fontFamily="@font/displaybold"
                         android:text="Bolsa de Diaria (LTE)"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp"
@@ -1418,6 +1491,8 @@
                         android:layout_marginEnd="3dp"
                         android:text="$"
                         android:textSize="16sp"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         app:layout_constraintBottom_toBottomOf="@+id/text_price"
                         app:layout_constraintEnd_toStartOf="@+id/text_price"
                         app:layout_constraintTop_toTopOf="@+id/text_price"
@@ -1427,8 +1502,9 @@
                         android:id="@+id/text_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:layout_marginEnd="4dp"
-                        android:fontFamily="sans-serif-black"
                         android:text="25"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="@dimen/_15sdp"
@@ -1440,6 +1516,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="CUP"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@+id/text_price"
@@ -1468,6 +1546,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7dp"
                         android:text="Válidos por 24h"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         app:layout_constraintEnd_toStartOf="@+id/bolsad"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/divider" />
@@ -1476,6 +1556,8 @@
                         android:id="@+id/value_mb_lte"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:layout_marginTop="2dp"
                         android:text="200 MB"
                         android:textAlignment="center"
@@ -1495,7 +1577,7 @@
                         android:text="@string/comprar"
                         android:textSize="@dimen/_10ssp"
                         android:textColor="@color/white"
-                        android:background="@drawable/blue_rounded_shape"
+                        android:background="@drawable/my_grandient_drawable6"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.7"
@@ -1521,7 +1603,7 @@
                         android:id="@+id/title_package4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/dosisbold"
+                        android:fontFamily="@font/displaybold"
                         android:text="Bolsa de Mensajeria"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp"
@@ -1536,6 +1618,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="3dp"
                         android:text="$"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@+id/text_price4"
                         app:layout_constraintEnd_toStartOf="@+id/text_price4"
@@ -1546,8 +1630,9 @@
                         android:id="@+id/text_price4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:layout_marginEnd="4dp"
-                        android:fontFamily="sans-serif-black"
                         android:text="25"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="@dimen/_15sdp"
@@ -1559,6 +1644,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="CUP"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@+id/text_price4"
@@ -1587,6 +1674,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7dp"
                         android:text="Válidos por 30d"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         app:layout_constraintEnd_toStartOf="@+id/bolsac"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/divider4" />
@@ -1595,6 +1684,8 @@
                         android:id="@+id/value_mb_lte4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:layout_marginTop="2dp"
                         android:text="600 MB"
                         android:textAlignment="center"
@@ -1614,7 +1705,7 @@
                         android:text="@string/comprar"
                         android:textSize="@dimen/_10ssp"
                         android:textColor="@color/white"
-                        android:background="@drawable/blue_rounded_shape"
+                        android:background="@drawable/my_gradient_drawable2"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.7"
@@ -1640,7 +1731,7 @@
                         android:id="@+id/title_package3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/dosisbold"
+                        android:fontFamily="@font/displaybold"
                         android:text="Tarifa por Consumo"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp"
@@ -1656,6 +1747,8 @@
                         android:layout_marginEnd="3dp"
                         android:text="$"
                         android:textSize="16sp"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         app:layout_constraintBottom_toBottomOf="@+id/text_price3"
                         app:layout_constraintEnd_toStartOf="@+id/text_price3"
                         app:layout_constraintTop_toTopOf="@+id/text_price3"
@@ -1666,8 +1759,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="4dp"
-                        android:fontFamily="sans-serif-black"
                         android:text="0.50"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="@dimen/_15sdp"
                         app:layout_constraintEnd_toStartOf="@+id/text_price_unit3"
@@ -1678,6 +1772,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="CUP"
+                        android:textColor="@color/colorDes"
+                        android:fontFamily="@font/displaybold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@+id/text_price3"
@@ -1708,7 +1804,7 @@
                         android:text="@string/activar"
                         android:textSize="@dimen/_10ssp"
                         android:textColor="@color/white"
-                        android:background="@drawable/blue_rounded_shape"
+                        android:background="@drawable/my_gradient_drawable4"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.7"

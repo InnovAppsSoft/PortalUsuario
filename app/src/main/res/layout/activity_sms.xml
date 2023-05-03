@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".view.activities.SmsActivity">
+    tools:context=".activities.SmsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -72,7 +72,6 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/plan"
                     app:cardUseCompatPadding="true"
-                    app:cardBackgroundColor="@color/background_color_50"
                     app:cardCornerRadius="@dimen/_16sdp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -82,6 +81,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
+                        android:background="@drawable/my_gradient_drawable3"
                         android:layout_height="wrap_content">
 
                         <ImageView
@@ -93,7 +93,6 @@
                             android:contentDescription="@string/app_name"
                             android:padding="6dp"
                             android:src="@drawable/outline_comment_24"
-                            app:tint="@color/colorDes"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -105,7 +104,7 @@
                             android:layout_marginEnd="80dp"
                             android:fontFamily="@font/displaybold"
                             android:text="@string/plan_20_sms"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             android:textSize="13sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +120,7 @@
                             android:fontFamily="@font/displaybold"
                             android:maxLines="2"
                             android:text="@string/_15_cup"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/Title1"
@@ -136,7 +135,6 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/plan20"
                     app:cardUseCompatPadding="true"
-                    app:cardBackgroundColor="@color/background_color_50"
                     app:cardCornerRadius="@dimen/_16sdp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -146,6 +144,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
+                        android:background="@drawable/my_gradient_drawable3"
                         android:layout_height="wrap_content">
 
                         <ImageView
@@ -157,7 +156,6 @@
                             android:contentDescription="@string/app_name"
                             android:padding="6dp"
                             android:src="@drawable/outline_comment_24"
-                            app:tint="@color/colorDes"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -169,7 +167,7 @@
                             android:layout_marginEnd="80dp"
                             android:fontFamily="@font/displaybold"
                             android:text="@string/plan_50_sms"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             android:textSize="13sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -185,7 +183,7 @@
                             android:fontFamily="@font/displaybold"
                             android:maxLines="2"
                             android:text="@string/_30_cup"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/Title4"
@@ -200,7 +198,6 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/plan35"
                     app:cardUseCompatPadding="true"
-                    app:cardBackgroundColor="@color/background_color_50"
                     app:cardCornerRadius="@dimen/_16sdp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -210,6 +207,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
+                        android:background="@drawable/my_gradient_drawable3"
                         android:layout_height="wrap_content">
 
                         <ImageView
@@ -221,7 +219,6 @@
                             android:contentDescription="@string/app_name"
                             android:padding="6dp"
                             android:src="@drawable/outline_comment_24"
-                            app:tint="@color/colorDes"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -233,7 +230,7 @@
                             android:layout_marginEnd="80dp"
                             android:fontFamily="@font/displaybold"
                             android:text="@string/plan_90_sms"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             android:textSize="13sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -249,7 +246,7 @@
                             android:fontFamily="@font/displaybold"
                             android:maxLines="2"
                             android:text="@string/_50_cup"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/Title3"
@@ -266,7 +263,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:cardUseCompatPadding="true"
-                    app:cardBackgroundColor="@color/background_color_50"
                     app:cardCornerRadius="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp">
@@ -274,6 +270,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
+                        android:background="@drawable/my_gradient_drawable3"
                         android:layout_height="wrap_content">
 
                         <ImageView
@@ -284,7 +281,6 @@
                             android:layout_marginTop="12dp"
                             android:contentDescription="@string/app_name"
                             android:src="@drawable/outline_comment_24"
-                            app:tint="@color/colorDes"
                             android:padding="6dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -297,7 +293,7 @@
                             android:layout_marginEnd="80dp"
                             android:fontFamily="@font/displaybold"
                             android:text="@string/plan_120_sms"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             android:textSize="13sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -313,7 +309,7 @@
                             android:fontFamily="@font/displaybold"
                             android:maxLines="2"
                             android:text="@string/_60_cup"
-                            android:textColor="@color/colorDes"
+                            android:textColor="@color/white"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/Title5"

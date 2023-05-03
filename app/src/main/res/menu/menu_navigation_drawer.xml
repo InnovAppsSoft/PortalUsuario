@@ -1,99 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<!--    android:checkableBehavior="single" -->
 <item
     android:id="@+id/donate"
     android:icon="@drawable/outline_emoji_events_24"
-    android:title="Donar al proyecto"/>
+    android:title="@string/donar_al_proyecto"/>
 
-<item android:title="Servicios">
+<item android:title="@string/serviciosmenu">
     <menu>
         <item
                 android:id="@+id/micuenta"
                 android:icon="@drawable/outline_sim_card_download_24"
-                android:title="Mi Cuenta"/>
+                android:title="@string/mi_cuenta"/>
         <item
             android:id="@+id/services"
             android:icon="@drawable/outline_phone_forwarded_24"
-            android:title="Servicios"/>
+            android:title="@string/serviciosmenu"/>
 
         <item
             android:id="@+id/plans"
             android:icon="@drawable/baseline_data_saver_off_24"
-            android:title="Planes"/>
+            android:title="@string/planes"/>
         <item
             android:id="@+id/connectivity"
             android:icon="@drawable/round_cell_wifi_24"
-            android:title="Conectividad"/>
+            android:title="@string/conectividad"/>
     </menu>
 </item>
-<item android:title="Herramientas">
+<item android:title="@string/utiles1">
     <menu>
         <item
             android:id="@+id/firewall"
             android:icon="@drawable/outline_local_fire_department_24"
-            android:title="Firewall"/>
+            android:title="@string/Cortafuegos"/>
         <item
             android:id="@+id/networkChange"
             android:icon="@drawable/outline_network_locked_24"
-            android:title="Cambiar red preferida"/>
+            android:title="@string/forzar_4g"/>
         <item
             android:id="@+id/une"
             android:icon="@drawable/ic_une"
-            android:iconTint="#EE5117"
-            android:title="Calculador UNE"/>
-        <item
-            android:id="@+id/sim_info"
-            android:icon="@drawable/baseline_query_stats_24"
-            android:title="Medidor de señal"/>
-        <item
-            android:id="@+id/tutos"
-            android:icon="@drawable/outline_info_24"
-            android:title="Información útil"/>
+            android:title="@string/calculadora_une"/>
     </menu>
 </item>
-<item android:title="Feedback">
+<item android:title="@string/feedback1">
     <menu>
         <item
             android:id="@+id/errors_register"
             android:icon="@drawable/outline_bug_report_24"
-            android:title="Registro de errores"/>
+            android:title="@string/registro_de_errores1"/>
         <item
             android:id="@+id/feedback"
             android:icon="@drawable/outline_feedback_24"
-            android:title="Reportar..."/>
+            android:title="@string/reportar"/>
     </menu>
 </item>
-<item android:title="Redes sociales">
+<item android:title="@string/redes_sociales1">
     <menu>
         <item
             android:id="@+id/telegram_channel"
             android:icon="@drawable/outline_verified_24"
-            android:iconTint="#EE5117"
-            android:title="Canal de Telegram"/>
+            android:title="@string/canal_de_telegram"/>
         <item
             android:id="@+id/facebook"
             android:icon="@drawable/outline_verified_24"
-            android:iconTint="#EE5117"
-            android:title="Página Oficial Facebook"/>
+            android:title="@string/p_gina_oficial_facebook1"/>
         <item
             android:id="@+id/betatesters"
-            android:iconTint="#EE5117"
             android:icon="@drawable/ic_baseline_developer_mode_24"
-            android:title="Grupo de Testers en Telegram"/>
+            android:title="@string/grupo_de_testers_en_telegram"/>
+        <item
+            android:id="@+id/invite"
+            android:icon="@drawable/outline_group_add_24"
+            android:title="@string/invitar_amigos"/>
     </menu>
 </item>
-<item android:title="Preferencias">
+<item android:title="@string/ajustes1">
     <menu>
         <item
             android:id="@+id/settings"
-            android:iconTint="#EE5117"
             android:icon="@drawable/outline_settings_24"
-            android:title="Preferencias"/>
+            android:title="@string/preferencias1"/>
         <item
             android:id="@+id/about"
             android:icon="@drawable/outline_info_24"
-            android:title="Acerca de"/>
+            android:title="@string/acerca_de1"/>
     </menu>
 </item>
 </menu>

@@ -1032,6 +1032,35 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="fail_transfer">Transferencia fallida</string>
     <string name="sencillo_r_pido_y_cubano">Sencillo, rápido y cubano</string>
 
+    <!--For the new interface-->
+    <string name="new_account_credit">Saldo restante</string>
+    <string name="new_blocking_date">Fecha de bloqueo</string>
+    <string name="new_date_of_elimination">Fecha de eliminación</string>
+    <string name="new_account_type">Tipo de cuenta</string>
+    <string name="new_service_type">Tipo de servicio</string>
+    <string name="new_mail_account">Cuenta de correo</string>
+    <string name="new_nauta">Nauta</string>
+    <string name="new_link">Enlace</string>
+    <string name="new_offer">Oferta</string>
+    <string name="new_monthly_fee">Cuota mensual</string>
+    <string name="new_download_speed">Velocidad de bajada</string>
+    <string name="new_upload_speed">Velocidad de subida</string>
+    <string name="new_phone">Teléfono</string>
+    <string name="new_link_identifier">Identificador del enlace</string>
+    <string name="new_link_status">Estado del enlace</string>
+    <string name="new_activation_date">Fecha de activación</string>
+    <string name="new_quote_fund">Fondo de cuota</string>
+    <string name="new_voucher">Bono</string>
+    <string name="new_debt">Deuda</string>
+    <string name="new_recharge_content_description">Recargar saldo de la cuenta</string>
+    <string name="new_recharge_text_field_placeholder_one">Recargar saldo</string>
+    <string name="new_recharge_text_field_placeholder_two">1234 5678 9012 3456</string>
+    <string name="amount">Monto</string>
+    <string name="disconnect">Desconectar</string>
+    <string name="update">Actualizar</string>
+    <string name="captcha_code">Código captcha</string>
+    <string name="password_placeholder">Contraseña</string>
+
 
     <string name="cuentas_message">Para actualizar sus cuentas debe deslizar hacia abajo, esperar a que la aplicación termine de sincronizar todos sus paquetes, bonos y saldo activos. En ocasiones puede que haya valores que no se actualicen, esto puede ocurrir debido a varios factores, uno de ellos es el problema en la red. Tenga en cuenta que usted está realizando varias consultas en segundos, por lo que su operador móvil puede devolver algunas consultas con «error» y la aplicación no lo tomará como información. Le recomendamos que vuelva a intentarlo.</string>
     <string name="msg_report_action">Reportar</string>
@@ -1041,9 +1070,39 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="vence_minutos_y_sms">Vence Minutos y SMS</string>
     <string name="paquetes_lte1">Paquetes LTE</string>
     <string name="datos_nacionales1">Datos Nacionales</string>
-    <string name="title_good_morning">Buenos Dias</string>
+    <string name="title_good_morning">Buenos Días</string>
     <string name="title_good_afternoon">Buenas Tardes</string>
     <string name="title_good_night">Buenas Noches</string>
-
+    <string name="promoci_n">Promoción</string>
+    <string name="invite_user">¡Ya instalaste Portal Usuario! Gestiona los servicios de ETECSA super sencillo y rapido Descárgala aquí: https://play.google.com/store/apps/details?id=com.marlon.portalusuario&amp;hl=es_US&amp;gl=US&amp;pli=1com.marlon.portalusuario</string>
+    <string name="adquirir_un_servicio">Adquirir un servicio</string>
+    <string name="expira_datos">Expira Datos:</string>
+    <string name="expira_sms_voz">Expira Sms-Voz:</string>
+    <string name="ultima_actualizacion_00_00">Ultima actualizacion: 00:00</string>
+    <string name="numero">Numero</string>
+    <string name="desliza_hacia_abajo_para_actualizar">Desliza hacia abajo para actualizar</string>
+    <string name="promociones_activas">Promociones activas</string>
+    <string name="donaciones_en_estados_unidos_via_zelle_marlonrivero1999_gmail_com">Donaciones en Estados Unidos via zelle: marlonrivero1999@gmail.com</string>
+    <string name="serviciosmenu">Servicios</string>
+    <string name="mi_cuenta">Mi Cuenta</string>
+    <string name="donar_al_proyecto">Donar al proyecto</string>
+    <string name="conectividad">Conectividad</string>
+    <string name="utiles1">Utiles</string>
+    <string name="forzar_4g">Forzar 4G</string>
+    <string name="calculadora_une">Calculadora UNE</string>
+    <string name="feedback1">Feedback</string>
+    <string name="registro_de_errores1">Registro de errores</string>
+    <string name="reportar">Reportar...</string>
+    <string name="redes_sociales1">Redes sociales</string>
+    <string name="canal_de_telegram">Canal de Telegram</string>
+    <string name="p_gina_oficial_facebook1">Página Oficial Facebook</string>
+    <string name="grupo_de_testers_en_telegram">Grupo de Testers en Telegram</string>
+    <string name="invitar_amigos">Invitar Amigos</string>
+    <string name="ajustes1">Ajustes</string>
+    <string name="preferencias1">Preferencias</string>
+    <string name="acerca_de1">Acerca de</string>
+    <string name="hola">Hola</string>
+    <string name="todo">TODO</string>
+    <string name="advertencia">Lo sentimos mucho!! este apartado solo funciona en versiones Android 8+ puede consultar su saldo y otras opciones en el apartado de Servicios </string>
 
 </resources>

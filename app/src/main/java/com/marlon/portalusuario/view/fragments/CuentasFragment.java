@@ -1,4 +1,6 @@
-package com.marlon.portalusuario.view.Fragments;
+package com.marlon.portalusuario.view.fragments;
+
+import static androidx.core.content.ContextCompat.getSystemService;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -7,7 +9,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Icon;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,30 +27,24 @@ import android.view.LayoutInflater;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
-
-import com.google.android.datatransport.runtime.logging.Logging;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.elevation.SurfaceColors;
 import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.logging.JCLogging;
+import com.marlon.portalusuario.errores_log.JCLogging;
 import com.marlon.portalusuario.perfil.ImageSaver;
 import com.marlon.portalusuario.perfil.PerfilActivity;
-import com.marlon.portalusuario.senal.AppConfiguracionTool;
 import com.marlon.portalusuario.util.Util;
-import com.marlon.portalusuario.view.activities.MainActivity;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -53,30 +53,22 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CuentasFragment extends Fragment {
 
-    private TelephonyManager j;
-    private TextView networkClass,Fecha;
-    private TelephonyManager telephonyManager;
-    private TextView tvSignal;
-    private com.marlon.portalusuario.Utils utils;
-    private Util util;
-
-    private JCLogging logging;
-
-    private Button ButtonBonos;
     private SwipeRefreshLayout Refrescar;
 
     private TextView saldotext, expiratext, minutostext, mensajestext, venceminutossms, datostext, datoslte, datosnacionales, VenceDatosI, bolsasms,vencebolsasms,bolsadiaria,vencebolsadiaria,Actulizar;
     TelephonyManager manager, manager2, managerMain;
 
-    private TextView TextoNombre,Saludo,Numero, Correo, vencenacionales;
+    private TextView TextoNombre,Saludo,Numero, Correo;
     SharedPreferences sp_cuentas;
     SharedPreferences.Editor editor;
+
+    CheckBox escogerSim;
 
     AlertDialog alertDialog;
 
     // TODO: account handle and sim slot
     private List<PhoneAccountHandle> phoneAccountHandleList;
-    private static final String simSlotName[] = {
+    public static final String simSlotName[] = {
             "extra_asus_dial_use_dualsim",
             "com.android.phone.extra.slot",
             "slot",
@@ -95,12 +87,12 @@ public class CuentasFragment extends Fragment {
             "slotIdx"
     };
     // TODO: preference dualSim
-    String sim;
-    SharedPreferences sp_sim;
+    public String sim = "1";
+    public SharedPreferences sp_sim;
 
     private CircleImageView imgperfil;
-    private ImageView Editar,Recargar;
-
+    private ImageView imgGreetings;
+    private ImageView Editar, refreshButton;
     TextView Promo;
 
     @Override
@@ -108,12 +100,16 @@ public class CuentasFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_cuentas, container, false);
-        // check first time opened
-        isFirstTime();
-        // check Cubacel operator
-        checkOperator();
-        util = new Util();
-        logging = new JCLogging(getActivity());
+
+        // Mensaje para Android menor que 8
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            AlertDialog.Builder alertdialogo1 = new AlertDialog.Builder(requireActivity());
+            alertdialogo1.setTitle("Advertencia");
+            alertdialogo1.setMessage(R.string.advertencia);
+            alertdialogo1.setPositiveButton("Ok",null);
+            alertdialogo1.create().show();
+        }
+
         // ui components init
         Refrescar = v.findViewById(R.id.swipeRefresh);
         saldotext = v.findViewById(R.id.text_cuentas_saldo);
@@ -136,11 +132,35 @@ public class CuentasFragment extends Fragment {
         Editar = v.findViewById(R.id.editar);
         Numero = v.findViewById(R.id.numerotext);
         Correo = v.findViewById(R.id.correotext);
-        Recargar = v.findViewById(R.id.reaload);
+        escogerSim = v.findViewById(R.id.check_sim_dual);
         Promo = v.findViewById(R.id.button_cuentas_bono);
-        vencenacionales = v.findViewById(R.id.vencenacionales);
+        imgGreetings = v.findViewById(R.id.img_greetings);
 
-        //
+        // TODO: SharedPreferences para guardar datos de cuentas
+        sp_cuentas = requireActivity().getSharedPreferences("cuentas", Context.MODE_PRIVATE);
+        editor = sp_cuentas.edit();
+
+        // TODO: Preferences DualSIM
+        sp_sim = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sim = (sp_sim.getString(getString(R.string.sim_key), "1"));
+
+        // ESCOGER SIM0-SIM1
+        escogerSim.setChecked(sim.equals("0"));
+        escogerSim.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    sim = "0";
+                } else {
+                    sim = "1";
+                }
+                sp_sim.edit().putString("sim_key", sim).apply();
+                }
+
+        });
+
+
+
         return v;
     }
 
@@ -152,10 +172,6 @@ public class CuentasFragment extends Fragment {
     @Override
     public void onViewCreated(View arg0, Bundle arg1) {
         super.onViewCreated(arg0, arg1);
-
-        // TODO: SharedPreferences para guardar datos de cuentas
-        sp_cuentas = getActivity().getSharedPreferences("cuentas", Context.MODE_PRIVATE);
-        editor = sp_cuentas.edit();
 
         // TODO: Mostrar saludo con el nombre del usuario
         SharedPreferences sp_perfil = getActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
@@ -181,10 +197,13 @@ public class CuentasFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             LocalDateTime currentTime = LocalDateTime.now();
             if (currentTime.getHour() < 12) {
+                imgGreetings.setImageResource(R.drawable.baseline_light_mode_24);
                 Saludo.setText(getString(R.string.title_good_morning));
             } else if (currentTime.getHour() >= 12 && currentTime.getHour() < 18) {
+                imgGreetings.setImageResource(R.drawable.outline_brightness_4_24);
                 Saludo.setText(getString(R.string.title_good_afternoon));
             } else {
+                imgGreetings.setImageResource(R.drawable.outline_dark_mode_24);
                 Saludo.setText(getString(R.string.title_good_night));
             }
         } else {
@@ -241,7 +260,6 @@ public class CuentasFragment extends Fragment {
                         alertdialogo.create().show();
                     }
                 });
-
 
         // TODO: SwipeRefresh
         Refrescar.setOnRefreshListener(
@@ -441,13 +459,13 @@ public class CuentasFragment extends Fragment {
                                                                                                                                                                         progressDialog.dismiss();
                                                                                                                                                                     }
                                                                                                                                                                 },
-                                                                                                                                                                5000);
+                                                                                                                                                                8000);
                                                                                                                                             }
                                                                                                                                         },
-                                                                                                                                        5000);
+                                                                                                                                        6000);
                                                                                                                     }
                                                                                                                 },
-                                                                                                                5000);
+                                                                                                                6000);
                                                                                             }
                                                                                         },
                                                                                         5000);
@@ -934,9 +952,9 @@ public class CuentasFragment extends Fragment {
                                             .trim();
                             String string_bono = bonos.toString();
                             if (!TextUtils.isEmpty(string_bono)) {
-                                ButtonBonos.setVisibility(View.VISIBLE);
+                                Promo.setVisibility(View.VISIBLE);
                             } else {
-                                ButtonBonos.setVisibility(View.GONE);
+                                Promo.setVisibility(View.GONE);
                             }
                             editor.putString("bonos", string_bono.toString());
                             editor.commit();
@@ -1047,64 +1065,4 @@ public class CuentasFragment extends Fragment {
         Actulizar.setText("Actualizado: " + time);
     }
 
-
-    public class acceptTermsDialogListener implements DialogInterface.OnClickListener {
-        acceptTermsDialogListener() {
-        }
-
-        public void onClick(DialogInterface dialogInterface, int i) {
-            AppConfiguracionTool.setIsPrimeraEjecucion(getContext(), true);
-            dialogInterface.dismiss();
-        }
-    }
-
-    public class rejectTermsDialogListener implements DialogInterface.OnClickListener {
-        rejectTermsDialogListener() {
-        }
-
-        public void onClick(DialogInterface dialogInterface, int i) {
-            dialogInterface.dismiss();
-            requireActivity().finish();
-        }
-    }
-
-    public class okButtonListener implements DialogInterface.OnClickListener {
-        okButtonListener() {
-        }
-
-        public void onClick(DialogInterface dialogInterface, int i) {
-            dialogInterface.dismiss();
-        }
-    }
-    private void checkOperator() {
-        boolean isCubacelShow = AppConfiguracionTool.getIsCubacelShow(getContext());
-        try {
-            if (!this.j.getNetworkOperatorName().equalsIgnoreCase("CUBACEL") && !isCubacelShow) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setPositiveButton(getResources().getText(R.string.aceptar), new CuentasFragment.okButtonListener());
-                AlertDialog create = builder.create();
-                create.setMessage(getResources().getText(R.string.main_iscubacel));
-                create.setCancelable(false);
-                create.show();
-                AppConfiguracionTool.setIsCubacelShow(getContext(), true);
-            }
-        } catch (Exception ignored) {
-        }
-    }
-
-    private void isFirstTime() {
-        if (!AppConfiguracionTool.getIsPrimeraEjecucion(getContext())) {
-            try {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                String appTerms = getResources().getString(R.string.terminos);
-                builder.setTitle(R.string.main_isprimera_ejecucion_title).setMessage(appTerms).setPositiveButton(getResources().getText(R.string.main_isprimera_ejecucion_acepto), new CuentasFragment.acceptTermsDialogListener()).setNegativeButton(getResources().getText(R.string.main_isprimera_ejecucion_noacepto), new CuentasFragment.rejectTermsDialogListener());
-                AlertDialog create = builder.create();
-                create.setCancelable(false);
-                create.show();
-            }catch (Exception ex){
-                ex.printStackTrace();
-                Logging.e("", "", ex);
-            }
-        }
-    }
 }

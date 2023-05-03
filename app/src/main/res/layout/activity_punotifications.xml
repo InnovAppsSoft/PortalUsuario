@@ -32,7 +32,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/dosislight"
+            android:fontFamily="@font/displaybold"
             android:textSize="13sp"
             android:text="No hay notificaciones almacenadas"
             android:textAlignment="center"/>

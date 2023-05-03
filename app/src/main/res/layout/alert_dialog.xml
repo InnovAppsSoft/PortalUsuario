@@ -45,7 +45,7 @@
                         android:id="@+id/tv234"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/dosisbold"
+                        android:fontFamily="@font/displaybold"
                         android:padding="10dp"
                         android:text="@string/texto_donacion"
                         android:textColor="@color/colorDes"
@@ -57,7 +57,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Para transferencia por EnZona, presione aquí"
-                        android:fontFamily="@font/dosislight"
+                        android:fontFamily="@font/displaybold"
                         android:padding="10dp"
                         android:textColor="@color/colorDes"
                         android:textSize="13sp"/>

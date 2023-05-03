@@ -61,7 +61,7 @@
             android:gravity="center_vertical"
             android:maxLines="1"
             android:textSize="18sp"
-            android:fontFamily="@font/dosisbold" />
+            android:fontFamily="@font/displaybold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -77,7 +77,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@string/en_l_nea"
-                android:fontFamily="@font/dosislight"
+                android:fontFamily="@font/displaybold"
                 android:textColor="@color/colorDes"
                 android:textSize="12sp" />
         </LinearLayout>

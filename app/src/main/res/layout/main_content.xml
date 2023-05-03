@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
         android:background="@color/background"
     android:layout_height="match_parent"
-    tools:context=".view.activities.MainActivity">
+    tools:context=".activities.MainActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
@@ -21,16 +21,16 @@
             app:contentScrim="?attr/colorPrimary"
             app:titleEnabled="false">
 
-            <androidx.cardview.widget.CardView
+            <RelativeLayout
                 android:id="@+id/carouselLayout"
-                    app:cardCornerRadius="20dp"
-                    android:padding="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                app:cardBackgroundColor="@color/background_color_50"
-                android:layout_marginTop="60dp">
+                android:layout_height="100dp"
+                android:background="@drawable/cardview"
+                android:layout_marginTop="60dp"
+                android:orientation="horizontal">
+
                 <ProgressBar
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -106,18 +106,16 @@
                             app:sliderAutoCycleEnabled="true"
                             app:sliderIndicatorAnimationDuration="600"
                             app:sliderIndicatorGravity="center_horizontal|bottom"
-                            app:sliderIndicatorMargin="15dp"
+                            app:sliderIndicatorMargin="10dp"
                             app:sliderIndicatorOrientation="horizontal"
-                            app:sliderIndicatorPadding="3dp"
-                            app:sliderIndicatorRadius="2dp"
+                            app:sliderIndicatorPadding="2dp"
+                            app:sliderIndicatorRadius="1dp"
                             app:sliderIndicatorSelectedColor="#5A5A5A"
                             app:sliderIndicatorUnselectedColor="#FFF"
                             app:sliderScrollTimeInSec="1"
                             app:sliderStartAutoCycle="true" />
 
-
-
-            </androidx.cardview.widget.CardView>
+            </RelativeLayout>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -147,7 +145,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_8sdp"
-                        android:fontFamily="@font/dosisbold"
+                        android:fontFamily="@font/displaybold"
                         android:text="@string/portal_usuario"
                         android:textAlignment="textStart"
                         android:textColor="@color/colorDes"

@@ -12,7 +12,7 @@
         android:text="@string/no_existen_registros"
         android:textAlignment="center"
         android:textSize="@dimen/_13ssp"
-        android:fontFamily="@font/dosislight"
+        android:fontFamily="@font/displaybold"
         android:textColor="@color/colorDes"
         android:gravity="center_vertical"
         tools:ignore="RtlCompat" />

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.activities.MainActivity"
+    tools:context=".activities.MainActivity"
     android:layout_marginStart="@dimen/_8sdp"
     android:layout_marginTop="@dimen/_8sdp"
     android:layout_marginEnd="@dimen/_8sdp"
@@ -62,7 +62,7 @@
                         android:layout_below="@+id/tvLTE"
                         android:layout_marginStart="@dimen/activity_horizontal_margin"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:fontFamily="@font/dosislight"
+                        android:fontFamily="@font/displaybold"
                         android:text="@string/se_al1"
                         android:textColor="@color/colorDes"
                         android:textSize="13sp" />
@@ -77,11 +77,11 @@
                 android:id="@+id/set_4g"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/widget_4"
+                android:background="@drawable/my_gradient_drawable4"
                 android:layout_margin="10dp"
                 android:textSize="13sp"
                 android:textColor="@color/white"
-                android:fontFamily="@font/dosisbold"
+                android:fontFamily="@font/displaybold"
                 android:text="@string/configurar_solo_4g" />
 
 </LinearLayout>

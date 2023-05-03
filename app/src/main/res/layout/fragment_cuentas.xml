@@ -1,270 +1,411 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:id="@+id/swipeRefresh">
-
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/swipeRefresh"
+    >
     <androidx.core.widget.NestedScrollView
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
-
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
         <LinearLayout
-                android:layout_width="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
+                android:gravity="center"
+                android:layout_gravity="center">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:src="@drawable/outline_swipe_down_24"
+                    app:tint="@color/colorDes"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/desliza_hacia_abajo_para_actualizar"
+                    android:textColor="@color/colorDes"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:fontFamily="@font/displaybold"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
             <!--Profile Tab-->
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/background_text"
-                    android:padding="14dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/background_text"
+                android:padding="10dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/img_drawer_perfil"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="10sp"
-                        android:src="@drawable/portal1" />
+                    android:id="@+id/img_drawer_perfil"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:civ_border_color="@color/white"
+                    android:layout_marginTop="4dp"
+                    app:civ_border_width="2dp"
+                    android:src="@drawable/portal1" />
 
                 <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:orientation="vertical">
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
                     <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
 
                         <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/displaybold"
-                                android:text="Usuario"
-                                android:id="@+id/textname"
-                                android:textColor="@color/colorDes"
-                                android:textSize="17sp"
-                                android:textStyle="bold" />
-
-                        <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_marginStart="10dp"
-                                app:tint="@color/colorDes"
-                                android:id="@+id/editar"
-                                android:src="@drawable/outline_mode_edit_outline_24" />
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/displaybold"
+                            android:text="Usuario"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:id="@+id/textname"
+                            android:textColor="@color/colorDes"
+                            android:textSize="15sp"
+                            android:textStyle="bold"/>
                         <!--<div>Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a></div>-->
 
                     </LinearLayout>
 
                     <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center_vertical">
-
-                        <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Numero"
-                                android:id="@+id/numerotext"
-                                android:fontFamily="@font/displaybold"
-                                android:textColor="@color/colorDes"
-                                android:textSize="14sp" />
-
-                        <ImageView
-                                android:layout_width="5dp"
-                                android:layout_height="5dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
-                                android:alpha="0.6"
-                                android:src="@drawable/circle_dark_grey_fil" />
-
-                        <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Nauta"
-                                android:id="@+id/correotext"
-                                android:fontFamily="@font/displaybold"
-                                android:textColor="@color/colorDes"
-                                android:textSize="14sp" />
+                            android:text="Nauta"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:id="@+id/correotext"
+                            android:fontFamily="@font/displaybold"
+                            android:textColor="@color/colorDes"
+                            android:textSize="13sp" />
 
                     </LinearLayout>
 
+
                     <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center_vertical">
-
-                        <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/text_cuentas_saldo"
-                                android:text="0.00 CUP"
-                                android:fontFamily="@font/displaybold"
-                                android:textColor="@color/colorDes"
-                                android:textSize="14sp" />
-
-                        <ImageView
-                                android:layout_width="5dp"
-                                android:layout_height="5dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
-                                android:alpha="0.6"
-                                android:src="@drawable/circle_dark_grey_fil" />
-
-                        <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/text_cuentas_vence_sim"
-                                android:text="Expira: 00/00/00"
-                                android:fontFamily="@font/displaybold"
-                                android:textColor="@color/colorDes"
-                                android:textSize="14sp" />
+                            android:text="@string/numero"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:id="@+id/numerotext"
+                            android:fontFamily="@font/displaybold"
+                            android:textColor="@color/colorDes"
+                            android:textSize="13sp" />
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <!--Big Text-->
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="20dp">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Buenas dias"
-                        android:id="@+id/text_saludo_perfil"
-                        android:fontFamily="@font/dosisbold"
-                        android:textColor="@color/colorDes"
-                        android:textSize="20sp" />
+                <ImageView
+                    android:id="@+id/editar"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:contentDescription="@string/edit_user"
+                    android:src="@drawable/outline_mode_edit_outline_24"
+                    app:tint="@color/colorDes" />
 
             </LinearLayout>
+            <!--Profile Tab-->
             <LinearLayout
-                    android:layout_width="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="8dp"
+                android:padding="4dp"
+                android:background="@drawable/background_text">
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp">
+                    android:layout_marginStart="6dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <CheckBox
+                            android:layout_alignParentEnd="true"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
+                            android:layout_width="wrap_content"
+                            android:button="@drawable/sl_type_sim_24dp"
+                            app:buttonTint="@color/predeterminado"
+                            android:id="@+id/check_sim_dual" />
+
+                    </RelativeLayout>
 
 
-                <TextView
+                    <!--Big Text-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/hola"
+                            android:id="@+id/text_saludo_perfil"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/displaybold"
+                            android:textColor="@color/colorDes"
+                            android:textSize="20sp" />
+
+                        <ImageView
+                            android:id="@+id/img_greetings"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="6dp"
+                            android:src="@drawable/baseline_light_mode_24"
+                            android:contentDescription="@string/todo" />
+
+
+                    </LinearLayout>
+                    <TextView
                         android:layout_width="match_parent"
                         android:id="@+id/text_hora_update"
                         android:layout_height="wrap_content"
-                        android:text="Ultima actualizacion: 00:00"
+                        android:text="@string/ultima_actualizacion_00_00"
                         android:textColor="@color/colorDes"
-                        android:fontFamily="@font/dosislight"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:fontFamily="@font/displaybold"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text_cuentas_saldo"
+                            android:text="0.00 CUP"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:fontFamily="@font/displaybold"
+                            android:textColor="@color/colorDes"
+                            android:textSize="13sp" />
+
+                        <ImageView
+                            android:layout_width="5dp"
+                            android:layout_height="5dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:alpha="0.6"
+                            android:src="@drawable/circle_dark_grey_fil" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text_cuentas_vence_sim"
+                            android:text="Expira: 00/00/00"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:fontFamily="@font/displaybold"
+                            android:textColor="@color/colorDes"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/expira_datos"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/colorDes"
+                            android:textSize="13sp"
+                            android:fontFamily="@font/displaybold"
+                            android:layout_marginEnd="10dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text_cuentas_vence_datos"
+                            android:text="0 dias"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/colorDes"
+                            android:fontFamily="@font/displaybold"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginBottom="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/expira_sms_voz"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:fontFamily="@font/displaybold"
+                            android:textColor="@color/colorDes"
+                            android:textSize="13sp"
+                            android:layout_marginEnd="10dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0 dias"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:fontFamily="@font/displaybold"
+                            android:id="@+id/text_cuentas_vence_min_sms"
+                            android:textColor="@color/colorDes"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
 
             </LinearLayout>
 
-        <!--Big Text-->
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:scaleType="centerInside"
-                android:gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp">
-
-
-            <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/outline_swipe_down_24"
-                    app:tint="@color/colorDes"
-                    android:id="@+id/reaload" />
-        </LinearLayout>
-
             <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/background_text">
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/background_text"
+                android:padding="4dp">
 
-                    <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:textAlignment="center"
-                            android:id="@+id/button_cuentas_bono"
-                            android:fontFamily="@font/displaybold"
-                            android:text="Promocion"
-                            android:textAllCaps="false"
-                            android:textColor="@color/colorDes"
-                            android:textSize="@dimen/_13sdp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textAlignment="center"
+                    android:id="@+id/button_cuentas_bono"
+                    android:fontFamily="@font/displaybold"
+                    android:text="@string/promociones_activas"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textColor="@color/colorDes"
+                    android:textSize="13sp" />
 
             </RelativeLayout>
 
             <!--Options-->
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="10dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp">
 
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="2"
-                        android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="10dp">
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="6dp">
 
                         <RelativeLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="100dp"
-                                android:background="@drawable/my_gradient_drawable2"
-                                android:minHeight="100dp"
-                                android:padding="10dp">
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:background="@drawable/my_gradient_drawable2"
+                            android:minHeight="100dp"
+                            android:padding="10dp">
 
                             <ImageView
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_marginTop="3dp"
-                                    android:layout_marginEnd="3dp"
-                                    android:padding="3dp"
-                                    android:src="@drawable/outline_local_phone_24"
-                                    />
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginEnd="3dp"
+                                android:src="@drawable/outline_local_phone_24"
+                                />
 
                             <TextView
-                                    android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentBottom="true"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:id="@+id/text_cuentas_minutos"
-                                    android:text="00:00:00"
-                                    android:fontFamily="@font/displaybold"
-                                    android:textColor="@color/white"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold" />
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:id="@+id/text_cuentas_minutos"
+                                android:text="00:00:00"
+                                android:ellipsize="marquee"
+                                android:marqueeRepeatLimit="marquee_forever"
+                                android:scrollHorizontally="true"
+                                android:singleLine="true"
+                                android:fontFamily="@font/displaybold"
+                                android:textColor="@color/white"
+                                android:textSize="13sp" />
 
 
                         </RelativeLayout>
@@ -272,38 +413,41 @@
 
 
                     <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        >
 
                         <RelativeLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="100dp"
-                                android:background="@drawable/my_gradient_drawable3"
-                                android:minHeight="100dp"
-                                android:padding="10dp">
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:background="@drawable/my_gradient_drawable3"
+                            android:minHeight="100dp"
+                            android:padding="10dp">
 
                             <ImageView
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_marginTop="3dp"
-                                    android:layout_marginEnd="3dp"
-                                    android:padding="3dp"
-                                    android:src="@drawable/ic_data_wiget" />
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginEnd="3dp"
+                                android:src="@drawable/ic_data_wiget" />
 
                             <TextView
-                                    android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentBottom="true"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:id="@+id/text_cuentas_datos"
-                                    android:text="0 MB"
-                                    android:fontFamily="@font/displaybold"
-                                    android:textColor="@color/white"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold" />
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:id="@+id/text_cuentas_datos"
+                                android:text="0 MB"
+                                android:ellipsize="marquee"
+                                android:marqueeRepeatLimit="marquee_forever"
+                                android:scrollHorizontally="true"
+                                android:singleLine="true"
+                                android:fontFamily="@font/displaybold"
+                                android:textColor="@color/white"
+                                android:textSize="13sp" />
 
 
                         </RelativeLayout>
@@ -313,46 +457,48 @@
                 </LinearLayout>
 
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:layout_weight="2"
-                        android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                            android:id="@+id/teacherll"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginTop="10dp">
+                        android:id="@+id/teacherll"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="6dp">
 
                         <RelativeLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="100dp"
-                                android:background="@drawable/my_gradient_drawable"
-                                android:minHeight="100dp"
-                                android:padding="10dp">
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:background="@drawable/my_gradient_drawable"
+                            android:minHeight="100dp"
+                            android:padding="10dp">
 
                             <ImageView
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_marginTop="3dp"
-                                    android:layout_marginEnd="3dp"
-                                    android:padding="3dp"
-                                    android:src="@drawable/outline_comment_24" />
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginEnd="3dp"
+                                android:src="@drawable/outline_comment_24" />
 
                             <TextView
-                                    android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentBottom="true"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:id="@+id/text_cuentas_mensajes"
-                                    android:text="0"
-                                    android:fontFamily="@font/displaybold"
-                                    android:textColor="@color/white"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold" />
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:id="@+id/text_cuentas_mensajes"
+                                android:text="0"
+                                android:ellipsize="marquee"
+                                android:marqueeRepeatLimit="marquee_forever"
+                                android:scrollHorizontally="true"
+                                android:singleLine="true"
+                                android:fontFamily="@font/displaybold"
+                                android:textColor="@color/white"
+                                android:textSize="13sp" />
 
 
                         </RelativeLayout>
@@ -360,37 +506,40 @@
 
 
                     <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp">
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="6dp"
+                        android:layout_height="wrap_content">
 
                         <RelativeLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="100dp"
-                                android:background="@drawable/my_gradient_drawable_"
-                                android:minHeight="100dp"
-                                android:padding="10dp">
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:background="@drawable/my_gradient_drawable_"
+                            android:minHeight="100dp"
+                            android:padding="10dp">
 
                             <ImageView
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_marginTop="3dp"
-                                    android:layout_marginEnd="3dp"
-                                    android:src="@drawable/outline_lte_mobiledata_24" />
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginEnd="3dp"
+                                android:src="@drawable/outline_lte_mobiledata_24" />
 
                             <TextView
-                                    android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentBottom="true"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:id="@+id/text_cuentas_datos_lte"
-                                    android:text="0 MB"
-                                    android:fontFamily="@font/displaybold"
-                                    android:textColor="@color/white"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold" />
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:id="@+id/text_cuentas_datos_lte"
+                                android:text="0 MB"
+                                android:ellipsize="marquee"
+                                android:marqueeRepeatLimit="marquee_forever"
+                                android:scrollHorizontally="true"
+                                android:singleLine="true"
+                                android:fontFamily="@font/displaybold"
+                                android:textColor="@color/white"
+                                android:textSize="13sp" />
 
 
                         </RelativeLayout>
@@ -401,364 +550,303 @@
 
             </LinearLayout>
 
-            <!--Slide Options-->
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center_vertical">
 
-                <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="left">
 
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:text="Expira sms-voz:"
-                            android:fontFamily="@font/displaybold"
-                            android:textColor="@color/colorDes"
-                            android:textSize="15sp"
-                            android:layout_marginRight="10dp" />
 
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0 dias"
-                            android:fontFamily="@font/dosislight"
-                            android:id="@+id/text_cuentas_vence_min_sms"
-                            android:textColor="@color/colorDes"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:gravity="left">
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:text="Expira datos:"
-                            android:textColor="@color/colorDes"
-                            android:textSize="15sp"
-                            android:fontFamily="@font/displaybold"
-                            android:layout_marginRight="10dp" />
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/text_cuentas_vence_datos"
-                            android:text="0 dias"
-                            android:textColor="@color/colorDes"
-                            android:fontFamily="@font/displaybold"
-                            android:textSize="15sp" />
-                </LinearLayout>
-
-            </LinearLayout>
 
             <!--List View (Adding just one item)-->
             <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
-                    android:transitionName="card"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/my_gradient_drawable"
-                    android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:transitionName="card"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/my_gradient_drawable5"
+                android:orientation="vertical">
 
                 <!--title and desc-->
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="vertical">
 
                     <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="15dp"
-                            android:text="Datos Nacionales"
-                            android:transitionName="title"
-                            android:fontFamily="@font/displaybold"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:text="Datos Nacionales"
+                        android:transitionName="title"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:fontFamily="@font/displaybold"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
                 <!--Date and location-->
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="20dp"
-                        android:orientation="vertical">
-
-                    <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center_vertical"
-                            tools:ignore="UselessParent">
-
-                        <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Expira"
-                                android:textColor="@color/white"
-                                android:textSize="15sp" />
-
-
-                        <TextView
-                                android:id="@+id/vencenacionales"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:text="0 dias"
-                                android:fontFamily="@font/displaybold"
-                                android:textColor="@color/white"
-                                android:textSize="15sp"
-                                android:textStyle="bold" />
-
-                    </LinearLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical">
                 </LinearLayout>
 
                 <!--Price-->
                 <RelativeLayout
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:background="@drawable/arc_dark_fil">
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true">
 
                     <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginEnd="20dp"
-                            android:layout_marginBottom="20dp"
-                            android:id="@+id/text_cuentas_datos_nacionales"
-                            android:text="0 MB"
-                            android:fontFamily="@font/displaybold"
-                            android:textColor="@color/white"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="15dp"
+                        android:id="@+id/text_cuentas_datos_nacionales"
+                        android:text="0 MB"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:fontFamily="@font/displaybold"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
                 </RelativeLayout>
             </RelativeLayout>
 
             <RelativeLayout
-                    android:id="@+id/card"
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
-                    android:transitionName="card"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/my_gradient_drawable3"
-                    android:orientation="vertical">
+                android:id="@+id/card"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:transitionName="card"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/my_gradient_drawable3"
+                android:orientation="vertical">
 
                 <!--title and desc-->
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="vertical">
 
                     <TextView
-                            android:id="@+id/titletv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="15dp"
-                            android:text="Bolsa Mensajeria"
-                            android:transitionName="title"
-                            android:fontFamily="@font/displaybold"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                        android:id="@+id/titletv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="Bolsa Mensajeria"
+                        android:transitionName="title"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/displaybold"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
                 <!--Date and location-->
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="20dp"
-                        android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical">
 
                     <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical"
+                        tools:ignore="UselessParent">
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center_vertical"
-                            tools:ignore="UselessParent">
-
-                        <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Expira"
-                                android:textColor="@color/white"
-                                android:textSize="15sp" />
+                            android:text="Expira"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:fontFamily="@font/displaybold"
+                            android:textColor="@color/white"
+                            android:textSize="13sp" />
 
 
                         <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:id="@+id/text_cuentas_vence_mensajeria"
-                                android:text="0 dias"
-                                android:fontFamily="@font/displaybold"
-                                android:textColor="@color/white"
-                                android:textSize="15sp"
-                                android:textStyle="bold" />
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:id="@+id/text_cuentas_vence_mensajeria"
+                            android:text="0 dias"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:fontFamily="@font/displaybold"
+                            android:textColor="@color/white"
+                            android:textSize="13sp" />
 
                     </LinearLayout>
                 </LinearLayout>
 
                 <!--Price-->
                 <RelativeLayout
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:background="@drawable/arc_dark_blue_fil">
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true">
 
                     <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginEnd="20dp"
-                            android:layout_marginBottom="20dp"
-                            android:id="@+id/text_cuentas_mensajeria"
-                            android:text="0 MB"
-                            android:fontFamily="@font/displaybold"
-                            android:textColor="@color/white"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/text_cuentas_mensajeria"
+                        android:text="0 MB"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:fontFamily="@font/displaybold"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
                 </RelativeLayout>
             </RelativeLayout>
 
             <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/my_violet_background_drawable"
-                    android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/my_violet_background_drawable"
+                android:orientation="vertical">
 
                 <!--title and desc-->
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="vertical">
 
                     <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="15dp"
-                            android:text="Bolsa Diaria"
-                            android:fontFamily="@font/displaybold"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:text="Bolsa Diaria"
+                        android:fontFamily="@font/displaybold"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true" />
 
                 </LinearLayout>
 
                 <!--Date and location-->
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="20dp"
-                        android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical">
 
                     <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center_vertical">
-
-                        <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Expira"
-                                android:textColor="@color/white"
-                                android:textSize="15sp" />
+                            android:text="Expira"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:fontFamily="@font/displaybold"
+                            android:textColor="@color/white"
+                            android:textSize="13sp" />
 
 
                         <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:id="@+id/text_cuentas_vence_diaria"
-                                android:text="0 horas"
-                                android:textColor="@color/white"
-                                android:textSize="15sp"
-                                android:fontFamily="@font/displaybold"
-                                android:textStyle="bold" />
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:id="@+id/text_cuentas_vence_diaria"
+                            android:text="0 horas"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"
+                            android:fontFamily="@font/displaybold" />
 
                     </LinearLayout>
                 </LinearLayout>
 
                 <!--Price-->
                 <RelativeLayout
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:background="@drawable/arc_dark_blue_fill2">
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true">
 
                     <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginEnd="20dp"
-                            android:layout_marginBottom="20dp"
-                            android:id="@+id/text_cuentas_diaria"
-                            android:text="0 MB"
-                            android:fontFamily="@font/displaybold"
-                            android:textColor="@color/white"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/text_cuentas_diaria"
+                        android:text="0 MB"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:fontFamily="@font/displaybold"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
                 </RelativeLayout>
             </RelativeLayout>
 

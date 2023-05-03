@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "460008355472-oc2alk1o4rbhkap7t5fj3kgrckql74q1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.marlon.portalusuario",
+            "certificate_hash": "31d9dcafea024aacaecb302c5a0425956b5b72ab"
+          }
+        },
+        {
           "client_id": "460008355472-o357saksb6399nfd0h115nd1h1b25fd3.apps.googleusercontent.com",
           "client_type": 3
         }

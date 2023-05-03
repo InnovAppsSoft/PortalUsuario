@@ -9,7 +9,6 @@ import javax.inject.Inject
 class NautaService @Inject constructor(
     private val client: NautaClient
 ) {
-
     suspend fun getCaptcha(): ByteArray {
         return withContext(Dispatchers.IO) {
             client.captchaImage
@@ -23,6 +22,8 @@ class NautaService @Inject constructor(
         }
     }
 
+    suspend fun userInformation() = withContext(Dispatchers.IO) { client.userInformation }
+
     suspend fun toUp(rechargeCode: String) {
         withContext(Dispatchers.IO) {
             client.toUpBalance(rechargeCode)
@@ -31,7 +32,19 @@ class NautaService @Inject constructor(
 
     suspend fun transfer(amount: Float, destinationAccount: String) {
         withContext(Dispatchers.IO) {
-            client.transferBalance(amount,destinationAccount)
+            client.transferBalance(amount, destinationAccount)
+        }
+    }
+
+    suspend fun payQuote(amount: Float) {
+        withContext(Dispatchers.IO) {
+            client.payNautaHome(amount)
+        }
+    }
+
+    suspend fun isLoggedIn(): Boolean {
+        return withContext(Dispatchers.IO) {
+            client.isLoggedIn
         }
     }
 
@@ -42,22 +55,36 @@ class NautaService @Inject constructor(
         }
     }
 
+    suspend fun getRemainingTime(onResult: (String) -> Unit) {
+        withContext(Dispatchers.IO) {
+            onResult(client.remainingTime)
+        }
+    }
+
     suspend fun getRemainingTime(): String {
         return withContext(Dispatchers.IO) {
             client.remainingTime
         }
     }
 
-    suspend fun getDataSession(): Map<String, String> {
-        return withContext(Dispatchers.IO) {
-            client.dataSession
+    suspend fun getConnectInfo(postGet: (String) -> Unit) {
+        withContext(Dispatchers.IO) {
+            val infoConnect = client.connectInformation
+            postGet(
+                "$${((infoConnect[" account_info "]!! as Map<*, *>)[" credit "]!! as String)}".replace(
+                    ".",
+                    ","
+                )
+            )
         }
     }
 
-    suspend fun setDataSession(value: Map<String, String>) {
-        return withContext(Dispatchers.IO) {
-            client.dataSession = value
-        }
+    fun getDataSession(): Map<String, String> {
+        return client.dataSession
+    }
+
+    fun setDataSession(value: Map<String, String>) {
+        client.dataSession = value
     }
 
     suspend fun disconnect() {

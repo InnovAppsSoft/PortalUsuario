@@ -21,8 +21,9 @@
             android:id="@+id/button_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/widget_4"
-            android:fontFamily="@font/dosisbold"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/my_gradient_drawable4"
+            android:fontFamily="@font/displaybold"
             android:textColor="@android:color/white"
             android:textAllCaps="false"
             android:text="@string/conceder"/>
@@ -32,9 +33,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:fontFamily="@font/dosisbold"
+            android:fontFamily="@font/displaybold"
             android:text="@string/saltar"
-            android:background="@drawable/bg_button"
+            android:textColor="@color/white"
+            android:background="@drawable/my_gradient_drawable4"
             android:textAllCaps="false"
             android:visibility="gone"/>
 
