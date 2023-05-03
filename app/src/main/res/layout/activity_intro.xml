@@ -52,7 +52,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:background="@drawable/my_gradient_drawable4"
-            android:fontFamily="@font/dosisbold"
+            android:fontFamily="@font/displaybold"
             android:text="@string/siguiente"
             android:textColor="@color/white"
             android:textSize="13sp" />
@@ -74,8 +74,8 @@
             android:layout_height="48dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/my_gradient_drawable3"
-            android:fontFamily="@font/dosisbold"
+            android:background="@drawable/my_gradient_drawable4"
+            android:fontFamily="@font/displaybold"
             android:text="Continuar"
             android:textColor="@color/white"
             android:textSize="13sp" />

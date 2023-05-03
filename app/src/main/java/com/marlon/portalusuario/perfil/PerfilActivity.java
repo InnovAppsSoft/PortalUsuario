@@ -120,7 +120,7 @@ public class PerfilActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View arg0) {
-                        Snackbar.make(arg0, "Guardado!", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(arg0, "Guardado con exito", Snackbar.LENGTH_LONG).show();
 
                         editor.putString(
                                 "nombre", UsuarioName.getTitle().toString().trim());

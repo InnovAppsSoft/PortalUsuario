@@ -9,10 +9,10 @@ import androidx.compose.ui.unit.sp
 import com.marlon.portalusuario.R
 
 private val Dosis = FontFamily(
-    Font(R.font.dosis),
-    Font(R.font.dosislight),
+    Font(R.font.displaybold),
+    Font(R.font.displaybold),
     Font(R.font.displaybold, FontWeight.W500),
-    Font(R.font.dosisbold, FontWeight.W600)
+    Font(R.font.displaybold, FontWeight.W600)
 )
 
 val SuitEtecsaTypography = Typography(

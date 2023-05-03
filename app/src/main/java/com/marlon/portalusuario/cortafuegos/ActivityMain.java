@@ -35,6 +35,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -44,6 +45,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,6 +57,7 @@ import java.util.List;
 
 public class ActivityMain extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "Firewall.Main";
+    private static final int NOTIFICATION_PERMISSION_CODE = 123;
     private NotificationManagerCompat notificationManagerCompat;
     private static final int NOTIFICATION_ID = 0;
     private static String CHANNEL_ID = "Servicio de Cortafuegos";
@@ -81,6 +84,8 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.firewall_activity);
+
+        requestNotificationPermission();
 
         running = true;
 
@@ -425,6 +430,17 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
     }
 
+    private void requestNotificationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NOTIFICATION_POLICY) == PackageManager.PERMISSION_GRANTED)
+            return;
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_NOTIFICATION_POLICY)) {
+
+        }
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_NOTIFICATION_POLICY}, NOTIFICATION_PERMISSION_CODE );
+    }
+
     public void createNotification(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // INTENT QUE LANZARA LA ACTIVITY
@@ -479,6 +495,24 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             }
         }
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        // Checking the request code of our request
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == NOTIFICATION_PERMISSION_CODE) {
+
+            // If permission is granted
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Displaying a toast
+                Toast.makeText(this, "Permission granted now you can read the storage", Toast.LENGTH_LONG).show();
+            } else {
+                // Displaying another toast if permission is not granted
+                Toast.makeText(this, "Oops you just denied the permission", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
 }

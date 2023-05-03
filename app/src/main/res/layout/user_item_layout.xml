@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="username"
         android:textStyle="bold"
-        android:fontFamily="@font/dosisbold"
+        android:fontFamily="@font/displaybold"
         android:textSize="16sp"
         android:ellipsize="end"
         android:maxLines="1"/>
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="account type"
-        android:fontFamily="@font/dosislight"
+        android:fontFamily="@font/displaybold"
         android:textStyle="italic"
         android:textSize="13sp"
         android:ellipsize="end"

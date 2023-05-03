@@ -23,7 +23,7 @@
                 android:id="@+id/services"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/dosisbold"
+                android:fontFamily="@font/displaybold"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:text="@string/adquirir_un_servicio"
@@ -31,7 +31,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
                 android:textColor="@color/colorDes"
-                android:textSize="15sp"
+                android:textSize="20sp"
                 tools:ignore="RtlSymmetry" />
 
             <!--Options-->

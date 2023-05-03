@@ -9,9 +9,12 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.content.pm.ShortcutInfo
+import android.content.pm.ShortcutManager
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Icon
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.AsyncTask
@@ -27,11 +30,11 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.core.app.ShareCompat.IntentBuilder
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
@@ -47,22 +50,21 @@ import com.marlon.portalusuario.PUNotifications.PUNotification
 import com.marlon.portalusuario.PUNotifications.PUNotificationsActivity
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ViewModel.PunViewModel
-import com.marlon.portalusuario.huella.BiometricCallback
-import com.marlon.portalusuario.huella.BiometricManager
-import com.marlon.portalusuario.databinding.ActivityMainBinding
+import com.marlon.portalusuario.apklis.ApklisUtil
 import com.marlon.portalusuario.banner.etecsa_scraping.Promo
 import com.marlon.portalusuario.banner.etecsa_scraping.PromoSliderAdapter
-import com.marlon.portalusuario.cortafuegos.ActivityMain
 import com.marlon.portalusuario.burbuja_trafico.BootReceiver
 import com.marlon.portalusuario.burbuja_trafico.FloatingBubbleService
+import com.marlon.portalusuario.cortafuegos.ActivityMain
+import com.marlon.portalusuario.databinding.ActivityMainBinding
 import com.marlon.portalusuario.errores_log.JCLogging
 import com.marlon.portalusuario.errores_log.LogFileViewerActivity
+import com.marlon.portalusuario.huella.BiometricCallback
+import com.marlon.portalusuario.huella.BiometricManager
+import com.marlon.portalusuario.nauta.ui.ConnectivityFragment
 import com.marlon.portalusuario.une.UneActivity
 import com.marlon.portalusuario.util.SSLHelper
 import com.marlon.portalusuario.util.Util
-import com.marlon.portalusuario.apklis.ApklisUtil
-import com.marlon.portalusuario.view.fragments.BottomSheetDialog
-import com.marlon.portalusuario.nauta.ui.ConnectivityFragment
 import com.marlon.portalusuario.view.fragments.CuentasFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.ServiciosFragment
@@ -71,6 +73,7 @@ import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
 import dagger.hilt.android.AndroidEntryPoint
 import org.jsoup.Connection
+import java.util.Arrays
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -88,7 +91,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     private var download_apklis: Button? = null
     private var download_ps: Button? = null
     private var remind_me_later: Button? = null
-    private val bottomSheetDialog: BottomSheetDialog? = null
     private var progressBar: ProgressBar? = null
     private var errorLayout: LinearLayout? = null
     private var try_again: TextView? = null
@@ -113,7 +115,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     private var apklis: ApklisUtil? = null
     var mBiometricManager: BiometricManager? = null
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     var ResultCall = 1001
     fun setFragment(fragment: Fragment?, title: String?) {
         supportFragmentManager
@@ -124,19 +125,50 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         titleTextView!!.text = title
     }
 
+    public val simSlotName = arrayOf(
+        "extra_asus_dial_use_dualsim",
+        "com.android.phone.extra.slot",
+        "slot",
+        "simslot",
+        "sim_slot",
+        "subscription",
+        "Subscription",
+        "phone",
+        "com.android.phone.DialingMode",
+        "simSlot",
+        "slot_id",
+        "simId",
+        "simnum",
+        "phone_type",
+        "slotId",
+        "slotIdx"
+    )
+
+    // TODO: preference dualSim
+    var sp_sim: SharedPreferences? = null
+    var sim: String? = null
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // TODO: Shorcuts
+        shorcut()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         punViewModel = ViewModelProvider(this)[PunViewModel::class.java]
         APP_NAME = packageName
         // VALORES POR DEFECTO EN LAS PREFERENCIAS
         PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false)
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions()
         }
+        // TODO: Preferences DualSIM
+
+        // TODO: Preferences DualSIM
+
+        // TODO: Preferences DualSIM
+        sp_sim = PreferenceManager.getDefaultSharedPreferences(this)
+
         context = this
         // drawer Layout
         drawer = findViewById(R.id.drawer_layout)
@@ -224,9 +256,11 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                     i = Intent(this@MainActivity, Donacion::class.java)
                     startActivity(i)
                 }
+
             }
             drawer!!.closeDrawer(GravityCompat.START)
             false
+
         })
         menu = findViewById(R.id.menu)
         menu!!.setOnClickListener(View.OnClickListener { drawer!!.openDrawer(GravityCompat.START) })
@@ -569,6 +603,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             mBiometricManager = BiometricManager.BiometricBuilder(this@MainActivity)
                 .setTitle(getString(R.string.biometric_title))
                 .setSubtitle(getString(R.string.biometric_subtitle))
+
                 .setDescription(getString(R.string.biometric_description))
                 .setNegativeButtonText(getString(R.string.biometric_negative_button_text))
                 .build()
@@ -848,6 +883,85 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
     }
 
+    private fun shorcut() {
+        if (Build.VERSION.SDK_INT >= 25) {
+            val shortcutManager: ShortcutManager? =
+                ContextCompat.getSystemService(this,ShortcutManager::class.java)
+            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:*222" + Uri.encode("#")))
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.putExtra("com.android.phone.force.slot", true)
+            intent.putExtra("Cdma_Supp", true)
+            if (sim == "0") {
+                for (s in CuentasFragment.simSlotName) {
+                    intent.putExtra(s, 0)
+                    intent.putExtra("com.android.phone.extra.slot", 0)
+                }
+            } else if (sim == "1") {
+                for (s in CuentasFragment.simSlotName) {
+                    intent.putExtra(s, 1)
+                    intent.putExtra("com.android.phone.extra.slot", 1)
+                }
+            }
+            val saldoShortcut = ShortcutInfo.Builder(this, "shortcut_saldo")
+                .setShortLabel("Saldo")
+                .setLongLabel("Saldo")
+                .setIcon(Icon.createWithResource(this, R.drawable.saldosh))
+                .setIntent(intent)
+                .setRank(2)
+                .build()
+            // shrtcuts bonos
+            val bonos = Intent(Intent.ACTION_CALL, Uri.parse("tel:*222*266" + Uri.encode("#")))
+            bonos.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            bonos.putExtra("com.android.phone.force.slot", true)
+            bonos.putExtra("Cdma_Supp", true)
+            if (sim == "0") {
+                for (s in CuentasFragment.simSlotName) {
+                    bonos.putExtra(s, 0)
+                    bonos.putExtra("com.android.phone.extra.slot", 0)
+                }
+            } else if (sim == "1") {
+                for (s in CuentasFragment.simSlotName) {
+                    bonos.putExtra(s, 1)
+                    bonos.putExtra("com.android.phone.extra.slot", 1)
+                }
+            }
+            val bonosShortcut = ShortcutInfo.Builder(this, "shortcut_bono")
+                .setShortLabel("Bonos")
+                .setLongLabel("Bonos")
+                .setIcon(Icon.createWithResource(this, R.drawable.bolsash))
+                .setIntent(bonos)
+                .setRank(1)
+                .build()
+            // shrtcuts datos
+            val datos = Intent(Intent.ACTION_CALL, Uri.parse("tel:*222*328" + Uri.encode("#")))
+            datos.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            datos.putExtra("com.android.phone.force.slot", true)
+            datos.putExtra("Cdma_Supp", true)
+            if (sim == "0") {
+                for (s in CuentasFragment.simSlotName) {
+                    datos.putExtra(s, 0)
+                    datos.putExtra("com.android.phone.extra.slot", 0)
+                }
+            } else if (sim == "1") {
+                for (s in CuentasFragment.simSlotName) {
+                    datos.putExtra(s, 1)
+                    datos.putExtra("com.android.phone.extra.slot", 1)
+                }
+            }
+            val datosShortcut = ShortcutInfo.Builder(this, "shortcut_datos")
+                .setShortLabel("Datos")
+                .setLongLabel("Datos")
+                .setIcon(Icon.createWithResource(this, R.drawable.datossh))
+                .setIntent(datos)
+                .setRank(0)
+                .build()
+            if (shortcutManager != null) {
+                shortcutManager.dynamicShortcuts =
+                    Arrays.asList(saldoShortcut, bonosShortcut, datosShortcut)
+            }
+        }
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     public override fun onResume() {
         super.onResume()
@@ -972,7 +1086,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         private var titleLayout: LinearLayout? = null
 
         // PROMO ETECSA CAROUSEL
-        private var carouselLayout: CardView? = null
+        private var carouselLayout: RelativeLayout? = null
         private var sliderView: SliderView? = null
         var navigationView: NavigationView? = null
         private var punViewModel: PunViewModel? = null

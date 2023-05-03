@@ -1110,5 +1110,8 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="ajustes1">Ajustes</string>
     <string name="preferencias1">Preferencias</string>
     <string name="acerca_de1">Acerca de</string>
+    <string name="hola">Hola</string>
+    <string name="todo">TODO</string>
+    <string name="advertencia">Lo sentimos mucho!! este apartado solo funciona en versiones Android 8+ puede consultar su saldo y otras opciones en el apartado de Servicios </string>
 
 </resources>

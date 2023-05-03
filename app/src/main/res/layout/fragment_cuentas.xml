@@ -15,7 +15,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <LinearLayout
-                android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -38,8 +37,8 @@
                     android:marqueeRepeatLimit="marquee_forever"
                     android:scrollHorizontally="true"
                     android:singleLine="true"
-                    android:fontFamily="@font/dosislight"
-                    android:textSize="13sp"
+                    android:fontFamily="@font/displaybold"
+                    android:textSize="15sp"
                     android:textStyle="bold"/>
             </LinearLayout>
             <!--Profile Tab-->
@@ -55,7 +54,7 @@
                     android:id="@+id/img_drawer_perfil"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    app:civ_border_color="@color/colorProgress"
+                    app:civ_border_color="@color/white"
                     android:layout_marginTop="4dp"
                     app:civ_border_width="2dp"
                     android:src="@drawable/portal1" />
@@ -63,7 +62,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="10dp"
                     android:orientation="vertical"
                     android:layout_weight="1">
 
@@ -133,13 +132,14 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/editar"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_gravity="center"
                     android:layout_marginStart="10dp"
-                    app:tint="@color/colorDes"
-                    android:id="@+id/editar"
+                    android:contentDescription="@string/edit_user"
                     android:src="@drawable/outline_mode_edit_outline_24"
-                    android:layout_gravity="center"/>
+                    app:tint="@color/colorDes" />
 
             </LinearLayout>
             <!--Profile Tab-->
@@ -153,20 +153,28 @@
                 android:padding="4dp"
                 android:background="@drawable/background_text">
 
-                <ImageView
-                    android:id="@+id/img_greetings"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/baseline_light_mode_24" />
-
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="6dp"
                     android:orientation="vertical"
                     android:layout_weight="1">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <CheckBox
+                            android:layout_alignParentEnd="true"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
+                            android:layout_width="wrap_content"
+                            android:button="@drawable/sl_type_sim_24dp"
+                            app:buttonTint="@color/predeterminado"
+                            android:id="@+id/check_sim_dual" />
+
+                    </RelativeLayout>
+
 
                     <!--Big Text-->
                     <LinearLayout
@@ -176,18 +184,27 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/title_good_morning"
+                            android:text="@string/hola"
                             android:id="@+id/text_saludo_perfil"
                             android:ellipsize="marquee"
                             android:marqueeRepeatLimit="marquee_forever"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:fontFamily="@font/dosisbold"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/displaybold"
                             android:textColor="@color/colorDes"
-                            android:textSize="15sp" />
+                            android:textSize="20sp" />
+
+                        <ImageView
+                            android:id="@+id/img_greetings"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="6dp"
+                            android:src="@drawable/baseline_light_mode_24"
+                            android:contentDescription="@string/todo" />
+
 
                     </LinearLayout>
-
                     <TextView
                         android:layout_width="match_parent"
                         android:id="@+id/text_hora_update"
@@ -198,9 +215,8 @@
                         android:marqueeRepeatLimit="marquee_forever"
                         android:scrollHorizontally="true"
                         android:singleLine="true"
-                        android:fontFamily="@font/dosislight"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
+                        android:fontFamily="@font/displaybold"
+                        android:textSize="13sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -274,6 +290,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:layout_marginBottom="4dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
@@ -298,11 +315,10 @@
                             android:marqueeRepeatLimit="marquee_forever"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:fontFamily="@font/dosislight"
+                            android:fontFamily="@font/displaybold"
                             android:id="@+id/text_cuentas_vence_min_sms"
                             android:textColor="@color/colorDes"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
+                            android:textSize="13sp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -315,6 +331,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:visibility="gone"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="6dp"
@@ -329,7 +346,7 @@
                     android:id="@+id/button_cuentas_bono"
                     android:fontFamily="@font/displaybold"
                     android:text="@string/promociones_activas"
-                    android:textAllCaps="false"
+                    android:textAllCaps="true"
                     android:textStyle="bold"
                     android:ellipsize="marquee"
                     android:marqueeRepeatLimit="marquee_forever"
@@ -388,8 +405,7 @@
                                 android:singleLine="true"
                                 android:fontFamily="@font/displaybold"
                                 android:textColor="@color/white"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
+                                android:textSize="13sp" />
 
 
                         </RelativeLayout>
@@ -431,8 +447,7 @@
                                 android:singleLine="true"
                                 android:fontFamily="@font/displaybold"
                                 android:textColor="@color/white"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
+                                android:textSize="13sp" />
 
 
                         </RelativeLayout>
@@ -483,8 +498,7 @@
                                 android:singleLine="true"
                                 android:fontFamily="@font/displaybold"
                                 android:textColor="@color/white"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
+                                android:textSize="13sp" />
 
 
                         </RelativeLayout>
@@ -525,8 +539,7 @@
                                 android:singleLine="true"
                                 android:fontFamily="@font/displaybold"
                                 android:textColor="@color/white"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
+                                android:textSize="13sp" />
 
 
                         </RelativeLayout>
@@ -575,8 +588,7 @@
                         android:singleLine="true"
                         android:fontFamily="@font/displaybold"
                         android:textColor="@color/white"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -614,8 +626,7 @@
                         android:singleLine="true"
                         android:fontFamily="@font/displaybold"
                         android:textColor="@color/white"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
+                        android:textSize="13sp" />
                 </RelativeLayout>
             </RelativeLayout>
 
@@ -653,8 +664,7 @@
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/displaybold"
                         android:textColor="@color/white"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -680,6 +690,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Expira"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:fontFamily="@font/displaybold"
                             android:textColor="@color/white"
                             android:textSize="13sp" />
 
@@ -696,8 +711,7 @@
                             android:singleLine="true"
                             android:fontFamily="@font/displaybold"
                             android:textColor="@color/white"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
+                            android:textSize="13sp" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -724,8 +738,7 @@
                         android:singleLine="true"
                         android:fontFamily="@font/displaybold"
                         android:textColor="@color/white"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
+                        android:textSize="13sp" />
                 </RelativeLayout>
             </RelativeLayout>
 
@@ -760,8 +773,7 @@
                         android:ellipsize="marquee"
                         android:marqueeRepeatLimit="marquee_forever"
                         android:scrollHorizontally="true"
-                        android:singleLine="true"
-                        android:textStyle="bold" />
+                        android:singleLine="true" />
 
                 </LinearLayout>
 
@@ -786,6 +798,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Expira"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:fontFamily="@font/displaybold"
                             android:textColor="@color/white"
                             android:textSize="13sp" />
 
@@ -802,8 +819,7 @@
                             android:singleLine="true"
                             android:textColor="@color/white"
                             android:textSize="13sp"
-                            android:fontFamily="@font/displaybold"
-                            android:textStyle="bold" />
+                            android:fontFamily="@font/displaybold" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -830,8 +846,7 @@
                         android:singleLine="true"
                         android:fontFamily="@font/displaybold"
                         android:textColor="@color/white"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
+                        android:textSize="13sp" />
                 </RelativeLayout>
             </RelativeLayout>
 

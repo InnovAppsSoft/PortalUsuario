@@ -14,8 +14,6 @@ import com.marlon.portalusuario.R;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private RoundedImageView logo;
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,13 +27,6 @@ public class SplashActivity extends AppCompatActivity {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         }
-//        Animation rotate = new RotateAnimation(0, 360);
-//        rotate.setInterpolator(new DecelerateInterpolator()); //add this
-//        rotate.setDuration(1000);
-//        logo = findViewById(R.id.logo);
-//        logo.setAnimation(rotate);
-//        logo.animate();
-        //rotate.startNow();
 
     new CountDownTimer(1000, 1000) {
             @Override
