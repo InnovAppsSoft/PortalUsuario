@@ -1,5 +1,7 @@
 package com.marlon.portalusuario.view.fragments;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,7 +9,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Icon;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,6 +35,8 @@ import com.marlon.portalusuario.util.Util;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,6 +44,7 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -53,11 +62,13 @@ public class CuentasFragment extends Fragment {
     SharedPreferences sp_cuentas;
     SharedPreferences.Editor editor;
 
+    CheckBox escogerSim;
+
     AlertDialog alertDialog;
 
     // TODO: account handle and sim slot
     private List<PhoneAccountHandle> phoneAccountHandleList;
-    private static final String simSlotName[] = {
+    public static final String simSlotName[] = {
             "extra_asus_dial_use_dualsim",
             "com.android.phone.extra.slot",
             "slot",
@@ -76,13 +87,12 @@ public class CuentasFragment extends Fragment {
             "slotIdx"
     };
     // TODO: preference dualSim
-    String sim;
-    SharedPreferences sp_sim;
+    public String sim = "1";
+    public SharedPreferences sp_sim;
 
     private CircleImageView imgperfil;
     private ImageView imgGreetings;
     private ImageView Editar, refreshButton;
-
     TextView Promo;
 
     @Override
@@ -90,6 +100,16 @@ public class CuentasFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_cuentas, container, false);
+
+        // Mensaje para Android menor que 8
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            AlertDialog.Builder alertdialogo1 = new AlertDialog.Builder(requireActivity());
+            alertdialogo1.setTitle("Advertencia");
+            alertdialogo1.setMessage(R.string.advertencia);
+            alertdialogo1.setPositiveButton("Ok",null);
+            alertdialogo1.create().show();
+        }
+
         // ui components init
         Refrescar = v.findViewById(R.id.swipeRefresh);
         saldotext = v.findViewById(R.id.text_cuentas_saldo);
@@ -112,16 +132,35 @@ public class CuentasFragment extends Fragment {
         Editar = v.findViewById(R.id.editar);
         Numero = v.findViewById(R.id.numerotext);
         Correo = v.findViewById(R.id.correotext);
+        escogerSim = v.findViewById(R.id.check_sim_dual);
         Promo = v.findViewById(R.id.button_cuentas_bono);
         imgGreetings = v.findViewById(R.id.img_greetings);
-//        refreshButton = v.findViewById(R.id.refreshButton);
-//        refreshButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-        //
+
+        // TODO: SharedPreferences para guardar datos de cuentas
+        sp_cuentas = requireActivity().getSharedPreferences("cuentas", Context.MODE_PRIVATE);
+        editor = sp_cuentas.edit();
+
+        // TODO: Preferences DualSIM
+        sp_sim = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sim = (sp_sim.getString(getString(R.string.sim_key), "1"));
+
+        // ESCOGER SIM0-SIM1
+        escogerSim.setChecked(sim.equals("0"));
+        escogerSim.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    sim = "0";
+                } else {
+                    sim = "1";
+                }
+                sp_sim.edit().putString("sim_key", sim).apply();
+                }
+
+        });
+
+
+
         return v;
     }
 
@@ -133,10 +172,6 @@ public class CuentasFragment extends Fragment {
     @Override
     public void onViewCreated(View arg0, Bundle arg1) {
         super.onViewCreated(arg0, arg1);
-
-        // TODO: SharedPreferences para guardar datos de cuentas
-        sp_cuentas = getActivity().getSharedPreferences("cuentas", Context.MODE_PRIVATE);
-        editor = sp_cuentas.edit();
 
         // TODO: Mostrar saludo con el nombre del usuario
         SharedPreferences sp_perfil = getActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);

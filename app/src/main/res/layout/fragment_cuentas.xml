@@ -15,7 +15,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <LinearLayout
-                android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -63,7 +62,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="10dp"
                     android:orientation="vertical"
                     android:layout_weight="1">
 
@@ -133,14 +132,14 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/editar"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginStart="10dp"
-                    app:tint="@color/colorDes"
-                    android:id="@+id/editar"
-                    android:src="@drawable/outline_mode_edit_outline_24"
                     android:layout_gravity="center"
-                    android:contentDescription="@string/edit_user" />
+                    android:layout_marginStart="10dp"
+                    android:contentDescription="@string/edit_user"
+                    android:src="@drawable/outline_mode_edit_outline_24"
+                    app:tint="@color/colorDes" />
 
             </LinearLayout>
             <!--Profile Tab-->
@@ -161,6 +160,22 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <CheckBox
+                            android:layout_alignParentEnd="true"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
+                            android:layout_width="wrap_content"
+                            android:button="@drawable/sl_type_sim_24dp"
+                            app:buttonTint="@color/predeterminado"
+                            android:id="@+id/check_sim_dual" />
+
+                    </RelativeLayout>
+
+
                     <!--Big Text-->
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -169,7 +184,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/title_good_morning"
+                            android:text="@string/hola"
                             android:id="@+id/text_saludo_perfil"
                             android:ellipsize="marquee"
                             android:marqueeRepeatLimit="marquee_forever"
@@ -185,10 +200,11 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_marginStart="6dp"
-                            android:src="@drawable/baseline_light_mode_24" />
+                            android:src="@drawable/baseline_light_mode_24"
+                            android:contentDescription="@string/todo" />
+
 
                     </LinearLayout>
-
                     <TextView
                         android:layout_width="match_parent"
                         android:id="@+id/text_hora_update"
@@ -274,6 +290,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:layout_marginBottom="4dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
@@ -314,6 +331,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:visibility="gone"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="6dp"
