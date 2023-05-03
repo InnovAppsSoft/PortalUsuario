@@ -378,7 +378,7 @@ class NautaViewModel @Inject constructor(
 
     fun onChangeCaptchaCode(captchaCode: String) {
         resetStatus()
-        _isReadyToUpdate.postValue(captchaCode.isValidCaptchaCode())
+        _isReadyToUpdate.value = captchaCode.isValidCaptchaCode()
         _captchaCode.value = captchaCode
     }
 
@@ -392,8 +392,8 @@ class NautaViewModel @Inject constructor(
 
     fun onTransferChange(destinationAccount: TextFieldValue, amount: TextFieldValue) {
         resetStatus()
-        _destinationAccount.postValue(destinationAccount)
-        _amount.postValue(amount)
+        _destinationAccount.value = destinationAccount
+        _amount.value = amount
     }
 
     fun onLoginChanged(userName: TextFieldValue, password: String, captchaCode: String) {
@@ -418,7 +418,7 @@ class NautaViewModel @Inject constructor(
     fun onChangeLimiterTime(newLimiterTime: Pair<Int, Int>) {
         resetStatus()
         val (hour, minute) = newLimiterTime
-        _limitedTime.postValue(String.format("%02d:%02d:00", hour, minute))
+        _limitedTime.value = String.format("%02d:%02d:00", hour, minute)
     }
 
     override fun onTimeLeftChanged(timeLeftInMillis: Long) {
@@ -426,22 +426,22 @@ class NautaViewModel @Inject constructor(
         val reservedTime = pref.reservedTime
         if (_currentUser.value!!.username == _userConnected.value!!) {
             if (reservedTime != 0) {
-                _leftTime.postValue(secondsToTimeString((timeLeftInMillis / 1000).toInt() + reservedTime))
+                _leftTime.value = ((timeLeftInMillis / 1000).toInt() + reservedTime).toTimeString()
             } else {
-                _leftTime.postValue(secondsToTimeString((timeLeftInMillis / 1000).toInt()))
+                _leftTime.value = ((timeLeftInMillis / 1000).toInt()).toTimeString()
             }
         }
-        _limitedTime.postValue(secondsToTimeString((timeLeftInMillis / 1000).toInt()))
+        _limitedTime.value = ((timeLeftInMillis / 1000).toInt()).toTimeString()
     }
 
     override fun onTimerFinished() {
         resetStatus()
         val reservedTime = pref.reservedTime
         if (reservedTime != 0) {
-            _leftTime.postValue(secondsToTimeString(reservedTime))
-        } else _leftTime.postValue("00:00:00")
-        _limitedTime.postValue("00:00:00")
-        _isLoggedIn.postValue(false)
+            _leftTime.value = reservedTime.toTimeString()
+        } else _leftTime.value = "00:00:00"
+        _limitedTime.value = "00:00:00"
+        _isLoggedIn.value = false
     }
 
     private fun clearFields() {

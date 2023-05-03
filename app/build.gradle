@@ -9,14 +9,14 @@ plugins {
 }
 
 android {
-    signingConfigs {
-        debug {
-            storeFile file('/Users/marlon/Documents/AndroidStudioProjects/keystore.jks')
-            storePassword '54871663'
-            keyAlias 'upload'
-            keyPassword '54871663'
-        }
-    }
+//    signingConfigs {
+//        debug {
+//            storeFile file('/Users/marlon/Documents/AndroidStudioProjects/keystore.jks')
+//            storePassword '54871663'
+//            keyAlias 'upload'
+//            keyPassword '54871663'
+//        }
+//    }
     compileSdk 33
     buildToolsVersion = '30.0.3'
     defaultConfig {
@@ -24,8 +24,8 @@ android {
         applicationId "com.marlon.portalusuario"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 55
-        versionName '7.0.5'
+        versionCode 56
+        versionName '7.1.0b05.03.1'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         signingConfig signingConfigs.debug
