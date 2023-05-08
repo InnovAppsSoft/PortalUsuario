@@ -147,55 +147,55 @@ public class LogFileViewerActivity extends AppCompatActivity {
         return super.onPrepareOptionsMenu(menu);
     }
 
-    @SuppressLint({"ShowToast", "NonConstantResourceId"})
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_refresh:
-                refresh_log();
-                return true;
+        int item2 = item.getItemId();
+        if (item2 == R.id.menu_refresh) {
+            refresh_log();
+            return true;
 
-            case R.id.menu_share_log:
-                try {
-                    String log = JCLogging.readAllFromFile(new File(JCLogging.getDirectory(), "log.txt"));
-                    ClipboardManager clipboard = (ClipboardManager) LogFileViewerActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
-                   ClipData clip = ClipData.newPlainText("log", log);
-                   clipboard.setPrimaryClip(clip);
-                   Toast.makeText(LogFileViewerActivity.this, "Registro copiado al portapapeles", Toast.LENGTH_SHORT);
-                    Intent share = new Intent(Intent.ACTION_SEND);
-                    share.setType("text/plain");
-                    share.putExtra(Intent.EXTRA_SUBJECT, "Registro de actividades de Portal Usuario");
-                    share.putExtra(Intent.EXTRA_TEXT, log);
-                    startActivity(Intent.createChooser(share, "Enviar registro de Portal Usuario"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    JCLogging.error(null, null, e);
+        }else if (item2 == R.id.menu_share_log) {
+            try {
+                String log = JCLogging.readAllFromFile(new File(JCLogging.getDirectory(), "log.txt"));
+                ClipboardManager clipboard = (ClipboardManager) LogFileViewerActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("log", log);
+                clipboard.setPrimaryClip(clip);
+                Toast.makeText(LogFileViewerActivity.this, "Registro copiado al portapapeles", Toast.LENGTH_SHORT);
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("text/plain");
+                share.putExtra(Intent.EXTRA_SUBJECT, "Registro de actividades de Portal Usuario");
+                share.putExtra(Intent.EXTRA_TEXT, log);
+                startActivity(Intent.createChooser(share, "Enviar registro de Portal Usuario"));
+            } catch (IOException e) {
+                e.printStackTrace();
+                JCLogging.error(null, null, e);
+            }
+            return true;
+
+        }else if(item2 == R.id.menu_go_to_final) {
+            if (logAdapter != null) {
+                int pos = logAdapter.getItemCount();
+                if (pos > -1) {
+                    recyclerView.scrollToPosition(pos - 1);
                 }
-                return true;
+            }
+            return true;
 
-            case R.id.menu_go_to_final:
-                if (logAdapter != null){
-					int pos = logAdapter.getItemCount();
-					if (pos > -1){
-						recyclerView.scrollToPosition(pos-1);
-					}
-				}
-                return true;
-
-            case R.id.menu_clear:
-                new AlertDialog.Builder(this)
-                        .setMessage(R.string.msg_sure)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                JCLogging.clearLog();
-                                refresh_log();
-                                Toast.makeText(LogFileViewerActivity.this, "Archivo de registro limpiado", Toast.LENGTH_LONG);
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, null)
-                        .show();
-            default:
+        }else if (item2 == R.id.menu_clear) {
+            new AlertDialog.Builder(this)
+                    .setMessage(R.string.msg_sure)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            JCLogging.clearLog();
+                            refresh_log();
+                            Toast.makeText(LogFileViewerActivity.this, "Archivo de registro limpiado", Toast.LENGTH_LONG);
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .show();
+            return true;
+        }else {
                 return super.onOptionsItemSelected(item);
         }
     }

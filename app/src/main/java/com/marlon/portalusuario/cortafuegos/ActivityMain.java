@@ -1,7 +1,5 @@
 package com.marlon.portalusuario.cortafuegos;
 
-import static java.util.Objects.requireNonNull;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -84,8 +82,6 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.firewall_activity);
-
-        requestNotificationPermission();
 
         running = true;
 
@@ -198,6 +194,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         }
     };
 
+    @SuppressLint("StaticFieldLeak")
     private void fillApplicationList() {
         // Get recycler view
         final RecyclerView rvApplication = (RecyclerView) findViewById(R.id.rvApplication);
@@ -331,76 +328,74 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     public boolean onOptionsItemSelected(MenuItem item) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.menu_network:
-                Intent settings = new Intent(Util.isWifiActive(this)
-                        ? Settings.ACTION_WIFI_SETTINGS : Settings.ACTION_WIRELESS_SETTINGS);
-                if (settings.resolveActivity(getPackageManager()) != null)
-                    startActivity(settings);
-                else
-                    Log.w(TAG, settings + " not available");
-                return true;
+        int item1 = item.getItemId();
+        if (item1 == R.id.menu_network) {
+            Intent settings = new Intent(Util.isWifiActive(this)
+                    ? Settings.ACTION_WIFI_SETTINGS : Settings.ACTION_WIRELESS_SETTINGS);
+            if (settings.resolveActivity(getPackageManager()) != null)
+                startActivity(settings);
+            else
+                Log.w(TAG, settings + " not available");
+            return true;
 
-            case R.id.menu_show_system_apps:
-                prefs.edit().putBoolean("show_sys_apps", !prefs.getBoolean("show_sys_apps", true)).apply();
-                fillApplicationList();
-                return true;
 
-            case R.id.menu_refresh:
-                fillApplicationList();
-                return true;
+        } else if( item1 == R.id.menu_show_system_apps ){
+            prefs.edit().putBoolean("show_sys_apps", !prefs.getBoolean("show_sys_apps", true)).apply();
+            fillApplicationList();
+            return true;
+        } else if( item1 == R.id.menu_refresh ){
+            fillApplicationList();
+            return true;
 
-            case R.id.menu_whitelist_wifi:
-                prefs.edit().putBoolean("whitelist_wifi", !prefs.getBoolean("whitelist_wifi", true)).apply();
-                fillApplicationList();
-                BlackHoleService.reload("wifi", this);
-                return true;
+        } else if( item1 == R.id.menu_whitelist_wifi ){
 
-            case R.id.menu_whitelist_other:
-                prefs.edit().putBoolean("whitelist_other", !prefs.getBoolean("whitelist_other", true)).apply();
-                fillApplicationList();
-                BlackHoleService.reload("other", this);
-                return true;
+            prefs.edit().putBoolean("whitelist_wifi", !prefs.getBoolean("whitelist_wifi", true)).apply();
+            fillApplicationList();
+            BlackHoleService.reload("wifi", this);
+            return true;
+        } else if( item1 == R.id.menu_whitelist_other ){
+            prefs.edit().putBoolean("whitelist_other", !prefs.getBoolean("whitelist_other", true)).apply();
+            fillApplicationList();
+            BlackHoleService.reload("other", this);
+            return true;
+        } else if( item1 == R.id.menu_reset_wifi ){
+            new AlertDialog.Builder(this)
+                    .setMessage(R.string.msg_sure)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            reset("wifi");
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .show();
+            return true;
+        } else if( item1 == R.id.menu_reset_other ){
+            new AlertDialog.Builder(this)
+                    .setMessage(R.string.msg_sure)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            reset("other");
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .show();
+            return true;
 
-            case R.id.menu_reset_wifi:
-                new AlertDialog.Builder(this)
-                        .setMessage(R.string.msg_sure)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                reset("wifi");
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, null)
-                        .show();
-                return true;
+        } else if( item1 == R.id.menu_vpn_settings ){
+            // Open VPN settings
+            Intent vpn = new Intent("android.net.vpn.SETTINGS");
+            if (vpn.resolveActivity(getPackageManager()) != null)
+                startActivity(vpn);
+            else
+                Log.w(TAG, vpn + " not available");
+            return true;
 
-            case R.id.menu_reset_other:
-                new AlertDialog.Builder(this)
-                        .setMessage(R.string.msg_sure)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                reset("other");
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, null)
-                        .show();
-                return true;
-
-            case R.id.menu_vpn_settings:
-                // Open VPN settings
-                Intent vpn = new Intent("android.net.vpn.SETTINGS");
-                if (vpn.resolveActivity(getPackageManager()) != null)
-                    startActivity(vpn);
-                else
-                    Log.w(TAG, vpn + " not available");
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+        }else{
+            return super.onOptionsItemSelected(item);
         }
+
     }
 
     private void reset(String network) {
@@ -428,17 +423,6 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             super.onActivityResult(requestCode, resultCode, data);
 
 
-    }
-
-    private void requestNotificationPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NOTIFICATION_POLICY) == PackageManager.PERMISSION_GRANTED)
-            return;
-
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_NOTIFICATION_POLICY)) {
-
-        }
-
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_NOTIFICATION_POLICY}, NOTIFICATION_PERMISSION_CODE );
     }
 
     public void createNotification(Context context) {
@@ -495,24 +479,6 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             }
         }
 
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        // Checking the request code of our request
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == NOTIFICATION_PERMISSION_CODE) {
-
-            // If permission is granted
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Displaying a toast
-                Toast.makeText(this, "Permission granted now you can read the storage", Toast.LENGTH_LONG).show();
-            } else {
-                // Displaying another toast if permission is not granted
-                Toast.makeText(this, "Oops you just denied the permission", Toast.LENGTH_LONG).show();
-            }
-        }
     }
 
 }

@@ -160,25 +160,12 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
 
-                        <CheckBox
-                            android:layout_alignParentEnd="true"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="4dp"
-                            android:layout_width="wrap_content"
-                            android:button="@drawable/sl_type_sim_24dp"
-                            app:buttonTint="@color/predeterminado"
-                            android:id="@+id/check_sim_dual" />
-
-                    </RelativeLayout>
 
 
                     <!--Big Text-->
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                         <TextView
@@ -202,6 +189,21 @@
                             android:layout_marginStart="6dp"
                             android:src="@drawable/baseline_light_mode_24"
                             android:contentDescription="@string/todo" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <CheckBox
+                                android:layout_alignParentEnd="true"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="4dp"
+                                android:layout_width="wrap_content"
+                                android:button="@drawable/sl_type_sim_24dp"
+                                app:buttonTint="@color/predeterminado"
+                                android:id="@+id/check_sim_dual" />
+
+                        </RelativeLayout>
 
 
                     </LinearLayout>

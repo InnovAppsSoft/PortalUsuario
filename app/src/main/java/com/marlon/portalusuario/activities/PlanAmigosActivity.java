@@ -48,18 +48,13 @@ public class PlanAmigosActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
 
-
-        switch (v.getId()){
-            case R.id.activar: USSDcall("*133*4*1%23");
-
-                break;
-            case R.id.adicionar : USSDcall("*133*4*2%23");
-
-                break;
-            case R.id.consultar : USSDcall("*133*4*3%23");
-
-                break;
-            default:break;
+        int id = v.getId();
+        if (id == R.id.activar) {
+            USSDcall("*133*4*1%23");
+        } else if (id == R.id.adicionar) {
+            USSDcall("*133*4*2%23");
+        } else if (id == R.id.consultar) {
+            USSDcall("*133*4*3%23");
         }
 
     }

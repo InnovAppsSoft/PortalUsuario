@@ -679,7 +679,8 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     var error2 =
         "            Cuidado ..\n Faltan caracteres o su número seleccionado no es un número de telefonia móvil  "
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         for (fragment in supportFragmentManager.fragments) {
@@ -874,9 +875,16 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 }
             }
         }
+
+
         // FLOATING BUBBLE SERVICE
         if (requestCode == 0) {
-            if (!Settings.canDrawOverlays(this)) {
+            if (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    !Settings.canDrawOverlays(this)
+                } else {
+                    TODO("VERSION.SDK_INT < M")
+                }
+            ) {
             } else {
                 startService(Intent(this, FloatingBubbleService::class.java))
             }

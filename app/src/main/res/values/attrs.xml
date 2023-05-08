@@ -6,6 +6,7 @@
         <attr name="dividerColor" format="color"/>
         <attr name="backgroundCardColor" format="color"/>
         <attr name="iconPlaceholder" format="integer"/>
+        <attr name="colorPrimary" format="color"/>
     </declare-styleable>
 
     <!--<attr name="itemLayout" format="reference" />-->
@@ -20,8 +21,5 @@
         <enum name="normal" value="1" />
         <enum name="large" value="2" />
     </attr>
-
-
-
 
 </resources>

@@ -9,23 +9,24 @@ plugins {
 }
 
 android {
-//    signingConfigs {
-//        debug {
-//            storeFile file('/Users/marlon/Documents/AndroidStudioProjects/keystore.jks')
-//            storePassword '54871663'
-//            keyAlias 'upload'
-//            keyPassword '54871663'
-//        }
-//    }
+    signingConfigs {
+        debug {
+            storeFile file('/Users/marlon/Documents/AndroidStudioProjects/keystore.jks')
+            storePassword '54871663'
+            keyAlias 'upload'
+            keyPassword '54871663'
+        }
+    }
     compileSdk 33
+//    31.0.0 rc4
     buildToolsVersion = '30.0.3'
     defaultConfig {
         resConfig "en"
         applicationId "com.marlon.portalusuario"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 56
-        versionName '7.1.0b05.03.1'
+        versionCode 54
+        versionName '7.0.4'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         signingConfig signingConfigs.debug
@@ -41,14 +42,6 @@ android {
             jniDebuggable false
             renderscriptDebuggable false
             shrinkResources true
-
-        }
-
-        debug {
-            minifyEnabled false
-            debuggable true
-            jniDebuggable true
-            renderscriptDebuggable true
         }
     }
 
@@ -57,8 +50,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = 17
     }
 
     buildFeatures {
@@ -191,6 +188,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics:18.3.7'
 
     implementation 'mobi.gspd:segmentedbarview:1.1.6@aar'
     implementation 'com.budiyev.android:code-scanner:2.1.0'

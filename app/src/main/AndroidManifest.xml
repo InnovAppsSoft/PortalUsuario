@@ -170,7 +170,7 @@
                 tools:ignore="LockedOrientationActivity" />
 
         <receiver
-                android:name=".widgets.PrincipalWidget"
+                android:name=".widgets.Widget"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

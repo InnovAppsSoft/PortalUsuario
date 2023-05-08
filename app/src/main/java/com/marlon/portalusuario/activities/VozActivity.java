@@ -55,23 +55,17 @@ public class VozActivity extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
 
 
-        switch (v.getId()){
-            case R.id.min5: USSDcall("*133*3*1%23");
-
-                break;
-            case R.id.min10 : USSDcall("*133*3*2%23");
-
-                break;
-            case R.id.min15 : USSDcall("*133*3*3%23");
-
-                break;
-            case R.id.min25 : USSDcall("*133*3*4%23");
-
-                break;
-            case R.id.min40 : USSDcall("*133*3*5%23");
-
-                break;
-            default:break;
+        int id = v.getId();
+        if (id == R.id.min5) {
+            USSDcall("*133*3*1%23");
+        } else if (id == R.id.min10) {
+            USSDcall("*133*3*2%23");
+        } else if (id == R.id.min15) {
+            USSDcall("*133*3*3%23");
+        } else if (id == R.id.min25) {
+            USSDcall("*133*3*4%23");
+        } else if (id == R.id.min40) {
+            USSDcall("*133*3*5%23");
         }
 
     }

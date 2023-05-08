@@ -4,6 +4,11 @@
     <dimen name="newsMoreTextSize">16sp</dimen>
     <dimen name="signup_text_margin_top">5dp</dimen>
 
+
+    <dimen name="widget_margin">0dp</dimen>
+    <dimen name="widget_button_icon">25.0dip</dimen>
+    <dimen name="widget_button_back">40.0dip</dimen>
+
     <dimen name="titleTextSize">21sp</dimen>
     <dimen name="buttonHeight">55dp</dimen>
     <dimen name="large_32_margin">32dp</dimen>
@@ -97,16 +102,9 @@
     <dimen name="margin_large">15dp</dimen>
     <dimen name="margin_xlarge">18dp</dimen>
     <dimen name="margin_xxlarge">22dp</dimen>
-
-
-
     <dimen name="padding_large">14dp</dimen>
-
-
     <dimen name="font_title">18sp</dimen>
     <dimen name="font_subtitle">13sp</dimen>
-
-
     <dimen name="biometric_bg_size">20dp</dimen>
     <dimen name="biometric_logo_size">48dp</dimen>
     <dimen name="biometric_bottom_sheet_padding">16dp</dimen>

@@ -24,6 +24,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.elevation.SurfaceColors;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -44,9 +45,9 @@ public class PerfilActivity extends AppCompatActivity {
 
     CircleImageView imgperfil;
     TextInputEditText nameperfil,numeroperfil,perfilnauta;
-    CollapsingToolbarLayout UsuarioName;
+    TextView UsuarioName;
     Button guardarbtn;
-    FloatingActionButton Add,Eliminar;
+    ImageView Add,Eliminar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +115,7 @@ public class PerfilActivity extends AppCompatActivity {
         nameperfil.setText(sp_perfil.getString("nombre", "").toString());
         numeroperfil.setText(sp_perfil.getString("numero", "").toString());
         perfilnauta.setText(sp_perfil.getString("nauta", "").toString());
-        UsuarioName.setTitle(sp_perfil.getString("nombre", "Usuario").toString());
+        UsuarioName.setText(sp_perfil.getString("nombre", "Usuario").toString());
         // buttom
         guardarbtn.setOnClickListener(
                 new View.OnClickListener() {
@@ -123,7 +124,7 @@ public class PerfilActivity extends AppCompatActivity {
                         Snackbar.make(arg0, "Guardado con exito", Snackbar.LENGTH_LONG).show();
 
                         editor.putString(
-                                "nombre", UsuarioName.getTitle().toString().trim());
+                                "nombre", UsuarioName.getText().toString().trim());
                         editor.putString(
                                 "nombre", nameperfil.getText().toString().trim());
                         editor.putString(

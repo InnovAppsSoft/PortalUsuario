@@ -54,20 +54,15 @@ public class SmsActivity extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
 
 
-        switch (v.getId()){
-            case R.id.plan: USSDcall("*133*2*1%23");
-
-                break;
-            case R.id.plan20 : USSDcall("*133*2*2%23");
-
-                break;
-            case R.id.plan35 : USSDcall("*133*2*3%23");
-
-                break;
-            case R.id.plan45 : USSDcall("*133*2*4%23");
-
-                break;
-            default:break;
+        int id = v.getId();
+        if (id == R.id.plan) {
+            USSDcall("*133*2*1%23");
+        } else if (id == R.id.plan20) {
+            USSDcall("*133*2*2%23");
+        } else if (id == R.id.plan35) {
+            USSDcall("*133*2*3%23");
+        } else if (id == R.id.plan45) {
+            USSDcall("*133*2*4%23");
         }
 
     }
