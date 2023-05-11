@@ -49,13 +49,13 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="60dp"
                         android:layout_marginTop="6dp">
 
                         <RelativeLayout
                             android:id="@+id/saldo"
                             android:layout_width="wrap_content"
-                            android:layout_height="80dp"
+                            android:layout_height="60dp"
                             android:background="@drawable/my_gradient_drawable2"
                             android:minHeight="100dp"
                             android:padding="10dp">
@@ -94,7 +94,7 @@
                         <RelativeLayout
                             android:id="@+id/llamar99"
                             android:layout_width="wrap_content"
-                            android:layout_height="80dp"
+                            android:layout_height="60dp"
                             android:background="@drawable/my_gradient_drawable3"
                             android:minHeight="80dp"
                             android:padding="10dp">
@@ -135,13 +135,13 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="60dp"
                         android:layout_marginTop="6dp">
 
                         <RelativeLayout
                             android:id="@+id/megas"
                             android:layout_width="wrap_content"
-                            android:layout_height="80dp"
+                            android:layout_height="60dp"
                             android:background="@drawable/my_gradient_drawable"
                             android:minHeight="100dp"
                             android:padding="10dp">
@@ -180,7 +180,7 @@
                         <RelativeLayout
                             android:id="@+id/llamarPrivado"
                             android:layout_width="wrap_content"
-                            android:layout_height="80dp"
+                            android:layout_height="60dp"
                             android:background="@drawable/my_gradient_drawable_"
                             android:minHeight="80dp"
                             android:padding="10dp">
@@ -229,13 +229,13 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="60dp"
                         android:layout_marginTop="6dp">
 
                         <RelativeLayout
                             android:id="@+id/PlanAmigos1"
                             android:layout_width="wrap_content"
-                            android:layout_height="80dp"
+                            android:layout_height="60dp"
                             android:background="@drawable/my_gradient_drawable2"
                             android:minHeight="80dp"
                             android:padding="10dp">
@@ -275,7 +275,7 @@
                         <RelativeLayout
                             android:id="@+id/sms"
                             android:layout_width="wrap_content"
-                            android:layout_height="80dp"
+                            android:layout_height="60dp"
                             android:background="@drawable/my_gradient_drawable3"
                             android:minHeight="80dp"
                             android:padding="10dp">
@@ -319,13 +319,13 @@
                     <LinearLayout
                         android:id="@+id/teacherll"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="60dp"
                         android:layout_marginTop="6dp">
 
                         <RelativeLayout
                             android:id="@+id/voz"
                             android:layout_width="wrap_content"
-                            android:layout_height="80dp"
+                            android:layout_height="60dp"
                             android:background="@drawable/my_gradient_drawable"
                             android:minHeight="80dp"
                             android:padding="10dp">
@@ -364,8 +364,8 @@
                         <RelativeLayout
                             android:id="@+id/emergancia"
                             android:layout_width="wrap_content"
-                            android:layout_height="80dp"
-                            android:background="@drawable/my_gradient_drawable_"
+                            android:layout_height="60dp"
+                            android:background="@drawable/my_gradient_drawable5"
                             android:minHeight="80dp"
                             android:padding="10dp">
 
@@ -401,7 +401,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="8dp"
                 android:transitionName="card"
@@ -439,7 +439,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -485,7 +485,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="8dp"
                 android:transitionName="card"
@@ -506,7 +506,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="10dp"
                         android:text="@string/adelantar_saldo"
                         android:transitionName="title"
                         android:fontFamily="@font/displaybold"
@@ -523,14 +523,13 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="6dp"
                     android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp">
-
 
                         <ImageView
                             android:id="@+id/adelantar"
@@ -572,7 +571,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="150dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="8dp"
                 android:transitionName="card"
@@ -594,7 +593,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="10dp"
                         android:text="@string/transferir_mi_saldo"
                         android:transitionName="title"
                         android:fontFamily="@font/displaybold"
@@ -611,7 +610,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="vertical">
 
                     <RelativeLayout

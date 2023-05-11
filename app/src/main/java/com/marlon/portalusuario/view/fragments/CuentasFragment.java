@@ -1,19 +1,14 @@
 package com.marlon.portalusuario.view.fragments;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.pm.ShortcutInfo;
-import android.content.pm.ShortcutManager;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Icon;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,10 +23,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.errores_log.JCLogging;
 import com.marlon.portalusuario.perfil.ImageSaver;
 import com.marlon.portalusuario.perfil.PerfilActivity;
-import com.marlon.portalusuario.util.Util;
+import com.marlon.portalusuario.widgets.WidgetUSSD;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +38,6 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -52,6 +45,15 @@ import java.util.Objects;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CuentasFragment extends Fragment {
+
+    private static Context context;
+
+    static Fragment newInstance(Context ctx) {
+        context = ctx;
+        return new CuentasFragment();
+
+    }
+
 
     private SwipeRefreshLayout Refrescar;
 
@@ -87,7 +89,7 @@ public class CuentasFragment extends Fragment {
             "slotIdx"
     };
     // TODO: preference dualSim
-    public String sim = "1";
+    public String sim ="0";
     public SharedPreferences sp_sim;
 
     private CircleImageView imgperfil;
@@ -109,6 +111,7 @@ public class CuentasFragment extends Fragment {
             alertdialogo1.setPositiveButton("Ok",null);
             alertdialogo1.create().show();
         }
+
 
         // ui components init
         Refrescar = v.findViewById(R.id.swipeRefresh);
@@ -142,10 +145,10 @@ public class CuentasFragment extends Fragment {
 
         // TODO: Preferences DualSIM
         sp_sim = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        sim = (sp_sim.getString(getString(R.string.sim_key), "1"));
+        sim = (sp_sim.getString(getString(R.string.sim_key), "0"));
 
         // ESCOGER SIM0-SIM1
-        escogerSim.setChecked(sim.equals("0"));
+        escogerSim.setChecked(sim.equals("1"));
         escogerSim.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -446,7 +449,6 @@ public class CuentasFragment extends Fragment {
                                                                                                                                                         .setText(
                                                                                                                                                                 "Actualizado: "
                                                                                                                                                                         + time);
-
                                                                                                                                                 new Handler(
                                                                                                                                                         Looper
                                                                                                                                                                 .getMainLooper())
@@ -457,6 +459,7 @@ public class CuentasFragment extends Fragment {
                                                                                                                                                                     void
                                                                                                                                                                     run() {
                                                                                                                                                                         progressDialog.dismiss();
+
                                                                                                                                                                     }
                                                                                                                                                                 },
                                                                                                                                                                 8000);
@@ -476,8 +479,11 @@ public class CuentasFragment extends Fragment {
                                         },
                                         1000);
                     }
+
                 });
+
     }
+
 
     public void consultaSaldo(String ussdCode, int sim) {
         if (ussdCode.equalsIgnoreCase("")) return;
@@ -911,8 +917,10 @@ public class CuentasFragment extends Fragment {
                         }
                     },
                     new Handler(Looper.getMainLooper()));
+
         }
     }
+
 
     public void consultaBonos(String ussdCode, int sim) {
         if (ussdCode.equalsIgnoreCase("")) return;
@@ -1063,6 +1071,7 @@ public class CuentasFragment extends Fragment {
         // update hora
         String time = sp_cuentas.getString("hora", "00:00");
         Actulizar.setText("Actualizado: " + time);
+
     }
 
 }

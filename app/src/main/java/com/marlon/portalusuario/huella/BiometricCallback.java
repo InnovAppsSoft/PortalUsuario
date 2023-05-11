@@ -21,4 +21,5 @@ public interface BiometricCallback {
     void onAuthenticationHelp(int helpCode, CharSequence helpString);
 
     void onAuthenticationError(int errorCode, CharSequence errString);
+
 }

@@ -374,12 +374,12 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="60dp"
                         android:layout_marginTop="6dp">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="80dp"
+                            android:layout_height="60dp"
                             android:background="@drawable/my_gradient_drawable2"
                             android:minHeight="100dp"
                             android:padding="10dp">
@@ -422,7 +422,7 @@
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="80dp"
+                            android:layout_height="60dp"
                             android:background="@drawable/my_gradient_drawable3"
                             android:minHeight="100dp"
                             android:padding="10dp">
@@ -468,12 +468,12 @@
                     <LinearLayout
                         android:id="@+id/teacherll"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="60dp"
                         android:layout_marginTop="6dp">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="80dp"
+                            android:layout_height="60dp"
                             android:background="@drawable/my_gradient_drawable"
                             android:minHeight="100dp"
                             android:padding="10dp">
@@ -514,7 +514,7 @@
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="80dp"
+                            android:layout_height="60dp"
                             android:background="@drawable/my_gradient_drawable_"
                             android:minHeight="100dp"
                             android:padding="10dp">
@@ -552,14 +552,10 @@
 
             </LinearLayout>
 
-
-
-
-
             <!--List View (Adding just one item)-->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="8dp"
                 android:transitionName="card"
@@ -572,25 +568,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
+                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="8dp"
                     android:layout_marginRight="15dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
-                        android:text="Datos Nacionales"
-                        android:transitionName="title"
-                        android:ellipsize="marquee"
-                        android:marqueeRepeatLimit="marquee_forever"
-                        android:scrollHorizontally="true"
-                        android:singleLine="true"
-                        android:fontFamily="@font/displaybold"
-                        android:textColor="@color/white"
-                        android:textSize="13sp" />
+                        android:layout_marginEnd="3dp"
+                        app:tint="@color/white"
+                        android:src="@drawable/ic_cuentas_nacionales"/>
 
                 </LinearLayout>
 
@@ -609,7 +598,6 @@
                 <RelativeLayout
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginTop="15dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true">
 
@@ -619,7 +607,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentTop="true"
                         android:layout_marginEnd="20dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="20dp"
                         android:id="@+id/text_cuentas_datos_nacionales"
                         android:text="0 MB"
                         android:ellipsize="marquee"

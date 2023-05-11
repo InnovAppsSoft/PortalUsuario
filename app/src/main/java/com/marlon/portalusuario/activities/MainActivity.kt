@@ -3,7 +3,9 @@ package com.marlon.portalusuario.activities
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.appwidget.AppWidgetManager
 import android.content.BroadcastReceiver
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
@@ -68,6 +70,7 @@ import com.marlon.portalusuario.util.Util
 import com.marlon.portalusuario.view.fragments.CuentasFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.ServiciosFragment
+import com.marlon.portalusuario.widgets.WidgetUSSD
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
@@ -168,7 +171,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
 
         // TODO: Preferences DualSIM
         sp_sim = PreferenceManager.getDefaultSharedPreferences(this)
-
         context = this
         // drawer Layout
         drawer = findViewById(R.id.drawer_layout)
@@ -613,6 +615,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
     }
 
+
     // Invitar Usuario
     private fun inviteUser() {
         IntentBuilder(this)
@@ -891,6 +894,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
     }
 
+
     private fun shorcut() {
         if (Build.VERSION.SDK_INT >= 25) {
             val shortcutManager: ShortcutManager? =
@@ -969,6 +973,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             }
         }
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public override fun onResume() {

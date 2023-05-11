@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="CTAppTheme">
-        <attr name="primaryTextColor" format="color"/>
-        <attr name="secondaryTextColor" format="color"/>
-        <attr name="dividerColor" format="color"/>
-        <attr name="backgroundCardColor" format="color"/>
-        <attr name="iconPlaceholder" format="integer"/>
-        <attr name="colorPrimary" format="color"/>
+        <attr name="primaryTextColor" format="color" />
+        <attr name="secondaryTextColor" format="color" />
+        <attr name="dividerColor" format="color" />
+        <attr name="backgroundCardColor" format="color" />
+        <attr name="iconPlaceholder" format="integer" />
+        <attr name="colorPrimary" format="color" />
     </declare-styleable>
 
     <!--<attr name="itemLayout" format="reference" />-->
@@ -21,5 +21,10 @@
         <enum name="normal" value="1" />
         <enum name="large" value="2" />
     </attr>
+    <declare-styleable name="AppWidgetAttrs">
+        <attr name="appWidgetPadding" format="dimension" />
+        <attr name="appWidgetInnerRadius" format="dimension" />
+        <attr name="appWidgetRadius" format="dimension" />
+    </declare-styleable>
 
 </resources>

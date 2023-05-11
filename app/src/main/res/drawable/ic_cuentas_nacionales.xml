@@ -6,19 +6,19 @@
     android:viewportHeight="1536"
     android:width="24dp"
     android:height="24dp"
-    android:tint="?attr/colorControlNormal">
+    android:tint="@color/white">
     <path
         android:pathData="M413.5 397L442 397.5L413.5 398L413.5 397Z"
-        android:fillColor="#000000"
+        android:fillColor="#FFFFFF"
         android:fillAlpha="0.7647059"
-        android:strokeColor="#000000"
+        android:strokeColor="#FFFFFF"
         android:strokeAlpha="0.7647059"
         android:strokeWidth="1" />
     <path
         android:pathData="M863.5 397L877 397.5L863.5 398L863.5 397Z"
-        android:fillColor="#000000"
+        android:fillColor="#FFFFFF"
         android:fillAlpha="0.7647059"
-        android:strokeColor="#000000"
+        android:strokeColor="#FFFFFF"
         android:strokeAlpha="0.7647059"
         android:strokeWidth="1" />
     <path

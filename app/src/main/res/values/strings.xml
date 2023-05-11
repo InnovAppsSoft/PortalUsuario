@@ -1113,5 +1113,8 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="hola">Hola</string>
     <string name="todo">TODO</string>
     <string name="advertencia">Lo sentimos mucho!! este apartado solo funciona en versiones Android 8+ puede consultar su saldo y otras opciones en el apartado de Servicios </string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 
 </resources>
