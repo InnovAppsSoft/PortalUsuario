@@ -5,16 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/swipeRefresh"
-    >
+    android:id="@+id/swipeRefresh">
+
     <androidx.core.widget.NestedScrollView
         android:layout_height="match_parent"
         android:layout_width="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <LinearLayout
+                android:id="@+id/deslizar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -42,13 +44,63 @@
                     android:textStyle="bold"/>
             </LinearLayout>
             <!--Profile Tab-->
-            <LinearLayout
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/background_text"
-                android:padding="10dp">
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="@string/hola"
+                    android:id="@+id/text_saludo_perfil"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/displaybold"
+                    android:textColor="@color/colorDes"
+                    android:textSize="17sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/dinero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/displaybold"
+                    android:text="$"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textColor="@color/predeterminado"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="@+id/text_saludo_perfil"
+                    app:layout_constraintTop_toBottomOf="@+id/text_saludo_perfil"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/displaybold"
+                    android:id="@+id/text_cuentas_saldo"
+                    android:text="0.00 CUP"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textColor="@color/predeterminado"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="@+id/dinero"
+                    app:layout_constraintTop_toBottomOf="@+id/text_saludo_perfil"
+                    android:textStyle="bold" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/img_drawer_perfil"
@@ -57,23 +109,31 @@
                     app:civ_border_color="@color/white"
                     android:layout_marginTop="4dp"
                     app:civ_border_width="2dp"
-                    android:src="@drawable/portal1" />
+                    android:src="@drawable/portal1"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_saludo_perfil" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView11"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="6dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardBackgroundColor="@color/dark_shadow"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_cuentas_saldo">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical">
+                        android:padding="14dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:fontFamily="@font/displaybold"
                             android:text="Usuario"
                             android:ellipsize="marquee"
@@ -82,20 +142,15 @@
                             android:singleLine="true"
                             android:id="@+id/textname"
                             android:textColor="@color/colorDes"
-                            android:textSize="15sp"
-                            android:textStyle="bold"/>
-                        <!--<div>Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a></div>-->
+                            android:textSize="17sp"
+                            android:layout_width="0dp"
+                            android:textStyle="bold"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="Nauta"
                             android:ellipsize="marquee"
                             android:marqueeRepeatLimit="marquee_forever"
@@ -104,52 +159,63 @@
                             android:id="@+id/correotext"
                             android:fontFamily="@font/displaybold"
                             android:textColor="@color/colorDes"
-                            android:textSize="13sp" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical">
+                            android:textSize="13sp"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline"
+                            app:layout_constraintStart_toStartOf="@+id/textname"
+                            app:layout_constraintTop_toBottomOf="@+id/textname" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/numero"
+                            android:id="@+id/numerotext"
                             android:ellipsize="marquee"
+                            android:fontFamily="@font/displaybold"
                             android:marqueeRepeatLimit="marquee_forever"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:id="@+id/numerotext"
-                            android:fontFamily="@font/displaybold"
+                            android:text="@string/numero"
                             android:textColor="@color/colorDes"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline"
+                            app:layout_constraintStart_toStartOf="@+id/correotext"
+                            app:layout_constraintTop_toBottomOf="@+id/correotext" />
 
-                    </LinearLayout>
 
-                </LinearLayout>
+                        <ImageView
+                            android:id="@+id/editar"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/outline_mode_edit_outline_24"
+                            app:tint="@color/colorDes"
+                            app:layout_constraintBottom_toBottomOf="@+id/numerotext"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textname" />
 
-                <ImageView
-                    android:id="@+id/editar"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:contentDescription="@string/edit_user"
-                    android:src="@drawable/outline_mode_edit_outline_24"
-                    app:tint="@color/colorDes" />
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_begin="272dp" />
 
-            </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
             <!--Profile Tab-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="8dp"
                 android:padding="4dp"
                 android:background="@drawable/background_text">
 
@@ -160,65 +226,43 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
 
-
-
-
                     <!--Big Text-->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/hola"
-                            android:id="@+id/text_saludo_perfil"
-                            android:ellipsize="marquee"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/displaybold"
-                            android:textColor="@color/colorDes"
-                            android:textSize="20sp" />
-
-                        <ImageView
-                            android:id="@+id/img_greetings"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginStart="6dp"
-                            android:src="@drawable/baseline_light_mode_24"
-                            android:contentDescription="@string/todo" />
-
                         <RelativeLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:id="@+id/text_hora_update"
+                                android:layout_height="wrap_content"
+                                android:text="@string/ultima_actualizacion_00_00"
+                                android:textColor="@color/colorDes"
+                                android:ellipsize="marquee"
+                                android:marqueeRepeatLimit="marquee_forever"
+                                android:scrollHorizontally="true"
+                                android:singleLine="true"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/displaybold"
+                                android:textSize="17sp" />
 
                             <CheckBox
                                 android:layout_alignParentEnd="true"
-                                android:layout_height="wrap_content"
+                                android:layout_height="24dp"
                                 android:layout_marginEnd="4dp"
-                                android:layout_width="wrap_content"
+                                android:layout_width="24dp"
+                                android:minHeight="24dp"
+                                android:minWidth="24dp"
                                 android:button="@drawable/sl_type_sim_24dp"
                                 app:buttonTint="@color/predeterminado"
                                 android:id="@+id/check_sim_dual" />
 
                         </RelativeLayout>
 
-
                     </LinearLayout>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:id="@+id/text_hora_update"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ultima_actualizacion_00_00"
-                        android:textColor="@color/colorDes"
-                        android:ellipsize="marquee"
-                        android:marqueeRepeatLimit="marquee_forever"
-                        android:scrollHorizontally="true"
-                        android:singleLine="true"
-                        android:fontFamily="@font/displaybold"
-                        android:textSize="13sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -228,29 +272,21 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/text_cuentas_saldo"
-                            android:text="0.00 CUP"
+                            android:text="Expira Saldo:"
                             android:ellipsize="marquee"
                             android:marqueeRepeatLimit="marquee_forever"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:fontFamily="@font/displaybold"
                             android:textColor="@color/colorDes"
-                            android:textSize="13sp" />
-
-                        <ImageView
-                            android:layout_width="5dp"
-                            android:layout_height="5dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:alpha="0.6"
-                            android:src="@drawable/circle_dark_grey_fil" />
+                            android:textSize="13sp"
+                            android:fontFamily="@font/displaybold"
+                            android:layout_marginEnd="10dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/text_cuentas_vence_sim"
-                            android:text="Expira: 00/00/00"
+                            android:text="00/00/00"
                             android:ellipsize="marquee"
                             android:marqueeRepeatLimit="marquee_forever"
                             android:scrollHorizontally="true"
@@ -258,6 +294,7 @@
                             android:fontFamily="@font/displaybold"
                             android:textColor="@color/colorDes"
                             android:textSize="13sp" />
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -336,6 +373,7 @@
                 android:visibility="gone"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="6dp"
                 android:background="@drawable/background_text"
                 android:padding="4dp">
@@ -557,7 +595,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:transitionName="card"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/my_gradient_drawable5"
@@ -625,7 +663,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:transitionName="card"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/my_gradient_drawable3"
@@ -736,7 +774,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/my_violet_background_drawable"

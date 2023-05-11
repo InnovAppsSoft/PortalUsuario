@@ -14,34 +14,58 @@
         android:layout_marginTop="1dp"
         android:gravity="center"
         android:orientation="vertical">
-<!--        TIEMPO -->
+<!--        SALDO -->
         <LinearLayout
             android:id="@+id/time_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:gravity="left"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="17dp"
                 android:layout_height="17dp"
-                android:src="@drawable/ic_time" />
+                android:src="@drawable/outline_payments" />
 
             <TextView
-                android:id="@+id/bubble_time_text"
+                android:id="@+id/text_cuentas_saldo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_2sdp"
                 android:fontFamily="@font/displaybold"
                 android:gravity="center_horizontal"
-                android:text="00:00:00"
+                android:text="0.00 CUP"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_10ssp" />
 
         </LinearLayout>
+        <!--        DATOS -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:gravity="left"
+            android:orientation="horizontal">
 
+            <ImageView
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:src="@drawable/outline_data" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:fontFamily="@font/displaybold"
+                android:gravity="center_horizontal"
+                android:id="@+id/text_cuentas_datos"
+                android:text="0 MB"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp" />
+
+        </LinearLayout>
+        <!--  VELOCIDAD -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

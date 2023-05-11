@@ -3,9 +3,7 @@ package com.marlon.portalusuario.activities
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.appwidget.AppWidgetManager
 import android.content.BroadcastReceiver
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
@@ -64,13 +62,13 @@ import com.marlon.portalusuario.errores_log.LogFileViewerActivity
 import com.marlon.portalusuario.huella.BiometricCallback
 import com.marlon.portalusuario.huella.BiometricManager
 import com.marlon.portalusuario.nauta.ui.ConnectivityFragment
+import com.marlon.portalusuario.perfil.ImageSaver
 import com.marlon.portalusuario.une.UneActivity
 import com.marlon.portalusuario.util.SSLHelper
 import com.marlon.portalusuario.util.Util
 import com.marlon.portalusuario.view.fragments.CuentasFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.ServiciosFragment
-import com.marlon.portalusuario.widgets.WidgetUSSD
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
@@ -81,12 +79,18 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), BiometricCallback {
+
+
     private lateinit var binding: ActivityMainBinding
     @Inject lateinit var connectivityFragment: ConnectivityFragment
 
     private var details: TextView? = null
     private var titleTextView: TextView? = null
     private var log: TextView? = null
+
+    private var Textnombre: TextView? = null
+    private var Textcorreo: TextView? = null
+    private var Imgimgperfil: ImageView? = null
 
     // UI ELEMENTOS
     private var mBottomSheetLayout: LinearLayout? = null
@@ -165,11 +169,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions()
         }
-        // TODO: Preferences DualSIM
 
         // TODO: Preferences DualSIM
+        // TODO: Mostrar saludo con el nombre del usuario
+        // TODO: SharedPreferences para guardar datos de cuentas
 
-        // TODO: Preferences DualSIM
+
         sp_sim = PreferenceManager.getDefaultSharedPreferences(this)
         context = this
         // drawer Layout
@@ -177,6 +182,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         // drawer Nav View
         navigationView = findViewById(R.id.nav_view)
         navigationView!!.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
+
             val i: Intent
             when (item.itemId) {
                 R.id.micuenta -> setFragment(CuentasFragment(), "Mi Cuenta")
@@ -233,6 +239,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                     facebookLaunch.data = Uri.parse(facebookUrl)
                     startActivity(facebookLaunch)
                 }
+                R.id.whatsapp -> {
+                    val betaUrl = ("https://chat.whatsapp.com/HT6bKjpXHrN4FAyTAcy1Xn")
+                    val betaLaunch = Intent(Intent.ACTION_VIEW)
+                    betaLaunch.data = Uri.parse(betaUrl)
+                    startActivity(betaLaunch)
+                }
 
                 R.id.betatesters -> {
                     val betaUrl = ("https://t.me/portalusuarioBT")
@@ -259,6 +271,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                     startActivity(i)
                 }
 
+
             }
             drawer!!.closeDrawer(GravityCompat.START)
             false
@@ -275,6 +288,11 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         val log = findViewById<TextView>(R.id.log)
         download_apklis = findViewById(R.id.download_apklis)
         remind_me_later = findViewById(R.id.remind_me_later)
+        Textnombre = findViewById(R.id.textname)
+        Textcorreo = findViewById(R.id.correotext)
+        Imgimgperfil = findViewById(R.id.img_drawer_perfil)
+
+
 
         //
         Logging = JCLogging(this)
@@ -422,6 +440,8 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         //
         setFragment(CuentasFragment(), "Servicios")
     }
+
+
 
     private fun setupBadge() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)

@@ -9,7 +9,6 @@ import android.content.Intent
 import android.net.Uri
 import android.widget.RemoteViews
 import com.marlon.portalusuario.R
-import com.marlon.portalusuario.activities.MainActivity
 
 /**
  * Implementation of App Widget functionality.

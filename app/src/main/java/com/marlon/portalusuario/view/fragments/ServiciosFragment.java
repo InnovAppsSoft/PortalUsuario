@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.marlon.portalusuario.activities.EmergenciaActivity;
@@ -37,15 +40,16 @@ import com.marlon.portalusuario.escaner_recarga.ScannerActivity;
 import com.marlon.portalusuario.errores_log.JCLogging;
 import com.marlon.portalusuario.util.Util;
 
+import java.util.List;
+
 public class ServiciosFragment<b> extends Fragment {
 
     private static Context context;
 
     private CardView activar,adicionar,consultar;
-    private SharedPreferences salva,nochesalva;
 
     private RelativeLayout VOZ, PlanAmigos1, Emergencia,SMS;
-    private RelativeLayout creditBtn, mobileDataBtn, callPrivateBtn, call99Btn;
+    private RelativeLayout creditBtn, mobileDataBtn, callPrivateBtn, call99Btn,pospago,bonos;
     private EditText donateMount, donateKey, rechargeCode, adelantaSaldoMount;
     public static EditText phoneNumber;
     private ImageView sendDonation, adelantaSaldoBtn, rechargeBtn, contactSBtn, scanQRRechargeCode;
@@ -76,6 +80,9 @@ public class ServiciosFragment<b> extends Fragment {
         VOZ = view.findViewById(R.id.voz);
         SMS = view.findViewById(R.id.sms);
         Emergencia = view.findViewById(R.id.emergancia);
+        bonos= view.findViewById(R.id.Bonos);
+        pospago = view.findViewById(R.id.card_consulta_pospago);
+
 
 
         contactSBtn = view.findViewById(R.id.Contactos);
@@ -123,6 +130,24 @@ public class ServiciosFragment<b> extends Fragment {
             }
 
         });
+
+        pospago.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                USSDcall("*111" + Uri.encode("#"));
+            }
+        });
+
+        bonos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                USSDcall("*222*266" + Uri.encode("#"));
+            }
+        });
+
+
+
+
 
         creditBtn.setOnClickListener(new View.OnClickListener() {
             @Override

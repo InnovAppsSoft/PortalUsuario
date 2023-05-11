@@ -2,7 +2,9 @@ package com.marlon.portalusuario.burbuja_trafico;
 
 import android.annotation.SuppressLint;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.net.TrafficStats;
 import android.os.Build;
@@ -45,7 +47,7 @@ public class FloatingBubbleService extends Service {
     private ImageView TimeImage;
     private TextView Text;
     private ImageView ConnectionTypeImage;
-    private TextView UploadText;
+    private TextView UploadText, Datostext, Saldotext;
     private TextView DownloadText;
     // TIME
     private static LinearLayout timeLayout;
@@ -55,10 +57,13 @@ public class FloatingBubbleService extends Service {
     // VARS
     private long mLastRxBytes = 0;
     private long mLastTxBytes = 0;
+
     private long mLastTime = 0;
     public static boolean isStarted = false;
     public int screenWidth;
     public int screenHeight;
+
+    SharedPreferences sp_cuentas;
 
     @SuppressLint("RtlHardcoded")
     @Override
@@ -165,8 +170,9 @@ public class FloatingBubbleService extends Service {
                 UploadText = FloatingBubbleInflated.findViewById(R.id.bubble_traffic_upload_text);
                 DownloadText = FloatingBubbleInflated.findViewById(R.id.bubble_traffic_download_text);
                 //
-                timeLayout = FloatingBubbleInflated.findViewById(R.id.time_layout);
-                bubbleTimeText = FloatingBubbleInflated.findViewById(R.id.bubble_time_text);
+                Datostext = FloatingBubbleInflated.findViewById(R.id.text_cuentas_datos);
+                Saldotext = FloatingBubbleInflated.findViewById(R.id.text_cuentas_saldo);
+
                 //
                 FloatingBubbleInflated.setOnTouchListener(new FloatingOnTouchListener());
                 //
@@ -267,6 +273,12 @@ public class FloatingBubbleService extends Service {
                 ex.printStackTrace();
                 logging.error("Calculating Traffic Speed", null, ex);
             }
+            sp_cuentas = getApplicationContext().getSharedPreferences("cuentas", Context.MODE_PRIVATE);
+            String saldo = sp_cuentas.getString("saldo", "0.00 CUP").toString();
+            Saldotext.setText(saldo);
+            String datos = sp_cuentas.getString("paquete", "0 MB").toString();
+            Datostext.setText(datos);
+
         }
     };
 
@@ -279,6 +291,7 @@ public class FloatingBubbleService extends Service {
         private int initialX;
         private int initialY;
         private boolean erase = false;
+
 
         @SuppressLint("ClickableViewAccessibility")
         @Override

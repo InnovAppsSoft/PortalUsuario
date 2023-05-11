@@ -1116,5 +1116,6 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
+    <string name="comunidad_en_whatsapp">Comunidad en WhatsApp</string>
 
 </resources>

@@ -26,7 +26,7 @@
                 android:fontFamily="@font/displaybold"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                android:text="@string/adquirir_un_servicio"
+                android:text="@string/consultar"
                 android:textAllCaps="false"
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
@@ -113,7 +113,7 @@
                                 android:layout_alignParentBottom="true"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginBottom="5dp"
-                                android:text="Llamar *99"
+                                android:text="*99"
                                 android:fontFamily="@font/displaybold"
                                 android:textColor="@color/white"
                                 android:textSize="13sp"
@@ -152,7 +152,7 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
-                                android:src="@drawable/baseline_moving_24"
+                                android:src="@drawable/outline_data"
                                 />
 
                             <TextView
@@ -200,6 +200,92 @@
                                 android:layout_marginStart="5dp"
                                 android:layout_marginBottom="5dp"
                                 android:text="Privado"
+                                android:fontFamily="@font/displaybold"
+                                android:textColor="@color/white"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="6dp">
+
+                        <RelativeLayout
+                            android:id="@+id/card_consulta_pospago"
+                            android:layout_width="wrap_content"
+                            android:layout_height="60dp"
+                            android:background="@drawable/my_gradient_drawable6"
+                            android:minHeight="100dp"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginEnd="3dp"
+                                android:src="@drawable/outline_sim_card_240"
+                                />
+
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:text="Pospago"
+                                android:fontFamily="@font/displaybold"
+                                android:textColor="@color/white"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp">
+
+                        <RelativeLayout
+                            android:id="@+id/Bonos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="60dp"
+                            android:background="@drawable/my_gradient_drawable4"
+                            android:minHeight="80dp"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginEnd="3dp"
+                                android:src="@drawable/outline_bono" />
+
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:text="Bonos"
                                 android:fontFamily="@font/displaybold"
                                 android:textColor="@color/white"
                                 android:textSize="13sp"
@@ -276,7 +362,7 @@
                             android:id="@+id/sms"
                             android:layout_width="wrap_content"
                             android:layout_height="60dp"
-                            android:background="@drawable/my_gradient_drawable3"
+                            android:background="@drawable/my_gradient_drawable6"
                             android:minHeight="80dp"
                             android:padding="10dp">
 

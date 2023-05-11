@@ -93,7 +93,6 @@ public class CuentasFragment extends Fragment {
     public SharedPreferences sp_sim;
 
     private CircleImageView imgperfil;
-    private ImageView imgGreetings;
     private ImageView Editar, refreshButton;
     TextView Promo;
 
@@ -137,7 +136,7 @@ public class CuentasFragment extends Fragment {
         Correo = v.findViewById(R.id.correotext);
         escogerSim = v.findViewById(R.id.check_sim_dual);
         Promo = v.findViewById(R.id.button_cuentas_bono);
-        imgGreetings = v.findViewById(R.id.img_greetings);
+
 
         // TODO: SharedPreferences para guardar datos de cuentas
         sp_cuentas = requireActivity().getSharedPreferences("cuentas", Context.MODE_PRIVATE);
@@ -200,13 +199,10 @@ public class CuentasFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             LocalDateTime currentTime = LocalDateTime.now();
             if (currentTime.getHour() < 12) {
-                imgGreetings.setImageResource(R.drawable.baseline_light_mode_24);
                 Saludo.setText(getString(R.string.title_good_morning));
             } else if (currentTime.getHour() >= 12 && currentTime.getHour() < 18) {
-                imgGreetings.setImageResource(R.drawable.outline_brightness_4_24);
                 Saludo.setText(getString(R.string.title_good_afternoon));
             } else {
-                imgGreetings.setImageResource(R.drawable.outline_dark_mode_24);
                 Saludo.setText(getString(R.string.title_good_night));
             }
         } else {
@@ -988,23 +984,6 @@ public class CuentasFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(getView() == null){
-            return;
-        }
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
-                    // handle back button's click listener
-                    return true;
-                }
-                return false;
-            }
-        });
-
         SharedPreferences sp_perfil = requireActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
         String name = sp_perfil.getString("nombre", "").toString();
         String numero = sp_perfil.getString("numero", "").toString();
@@ -1028,7 +1007,7 @@ public class CuentasFragment extends Fragment {
         String saldo = sp_cuentas.getString("saldo", "0.00 CUP");
         saldotext.setText(saldo);
         // vence saldo movil
-        String vence_saldo = sp_cuentas.getString("vence_saldo", "Expira: 00/00/00");
+        String vence_saldo = sp_cuentas.getString("vence_saldo", "00/00/00");
         expiratext.setText(vence_saldo);
         // minutos
         String minutos = sp_cuentas.getString("minutos", "00:00:00");

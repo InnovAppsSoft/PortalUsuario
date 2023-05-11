@@ -5,7 +5,7 @@
     android:icon="@drawable/outline_emoji_events_24"
     android:title="@string/donar_al_proyecto"/>
 
-<item android:title="@string/serviciosmenu">
+<item android:title="@string/mi_cuenta">
     <menu>
         <item
                 android:id="@+id/micuenta"
@@ -68,6 +68,10 @@
             android:id="@+id/betatesters"
             android:icon="@drawable/ic_baseline_developer_mode_24"
             android:title="@string/grupo_de_testers_en_telegram"/>
+        <item
+            android:id="@+id/whatsapp"
+            android:icon="@drawable/whatsapp2"
+            android:title="@string/comunidad_en_whatsapp"/>
         <item
             android:id="@+id/invite"
             android:icon="@drawable/outline_group_add_24"

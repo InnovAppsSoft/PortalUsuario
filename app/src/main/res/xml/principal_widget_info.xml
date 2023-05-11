@@ -5,7 +5,7 @@
     android:initialLayout="@layout/widget"
     android:minWidth="250dp"
     android:minHeight="100dp"
-    android:previewImage="@drawable/portal"
+    android:previewImage="@drawable/widgetcuadrado"
     android:resizeMode="none|horizontal|vertical"
-    android:updatePeriodMillis="86400000"
+    android:updatePeriodMillis="10000"
     android:widgetCategory="home_screen|keyguard" />

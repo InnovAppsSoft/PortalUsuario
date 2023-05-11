@@ -16,16 +16,21 @@
         android:orientation="horizontal"
         android:layout_margin="10dp"
         android:layout_gravity="bottom">
+
         <ImageView
+            android:id="@+id/img_drawer_perfil"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/portal" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginLeft="10dp">
+            android:layout_marginStart="10dp">
+
             <TextView
+                android:id="@+id/textname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
@@ -33,7 +38,9 @@
                 android:textStyle="bold"
                 android:fontFamily="@font/displaybold"
                 android:textColor="@color/colorDes"/>
+
             <TextView
+                android:id="@+id/correotext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/displaybold"
@@ -41,6 +48,9 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/colorDes"
                 android:layout_weight="1"/>
+
         </LinearLayout>
+
     </LinearLayout>
+
 </FrameLayout>
