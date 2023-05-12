@@ -62,11 +62,7 @@ public class SettingsActivity extends AppCompatActivity{
             getPreferenceScreen().getSharedPreferences()
                     .registerOnSharedPreferenceChangeListener(this);
             //
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
-                show_traffic_speed_bubble.setEnabled(false);
-            }else{
-                show_traffic_speed_bubble.setEnabled(true);
-            }
+            show_traffic_speed_bubble.setEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M);
             //
             if (!Settings.canDrawOverlays(getContext())) {
                 show_traffic_speed_bubble.setChecked(false);

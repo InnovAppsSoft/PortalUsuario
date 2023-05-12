@@ -11,13 +11,13 @@ import com.marlon.portalusuario.model.User;
 import java.util.List;
 
 public class UserRepository {
-    private UserDAO userDao;
-    private UserDataBase database;
-    private LiveData<List<User>> allUsers;
+    private final UserDAO userDao;
+    private final UserDataBase database;
+    private final LiveData<List<User>> allUsers;
     private static Application application;
 
     public UserRepository(Application application){
-        this.application = application;
+        UserRepository.application = application;
         database = UserDataBase.getInstance(application);
         userDao = database.DAO();
         allUsers = userDao.getAllUser();
@@ -44,7 +44,7 @@ public class UserRepository {
     }
 
     public static class InsertUserAsyncTask extends AsyncTask<User, Void, Void> {
-        private UserDAO userDao;
+        private final UserDAO userDao;
         private SharedPreferences sharedPreferences;
 
         private InsertUserAsyncTask(UserDAO userDao){
@@ -60,7 +60,7 @@ public class UserRepository {
     }
 
     public static class UpdateUserAsyncTask extends AsyncTask<User, Void, Void> {
-        private UserDAO userDao;
+        private final UserDAO userDao;
 
         private UpdateUserAsyncTask(UserDAO userDao){
             this.userDao = userDao;
@@ -74,7 +74,7 @@ public class UserRepository {
     }
 
     public static class DeleteUserAsyncTask extends AsyncTask<User, Void, Void> {
-        private UserDAO userDao;
+        private final UserDAO userDao;
 
         private DeleteUserAsyncTask(UserDAO userDao){
             this.userDao = userDao;
@@ -88,7 +88,7 @@ public class UserRepository {
     }
 
     public static class DeleteAllUsersAsyncTask extends AsyncTask<Void, Void, Void> {
-        private UserDAO userDao;
+        private final UserDAO userDao;
 
         private DeleteAllUsersAsyncTask(UserDAO userDao){
             this.userDao = userDao;

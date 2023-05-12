@@ -1,6 +1,6 @@
 package com.marlon.portalusuario.cortafuegos;
 
-import static com.felipecsl.gifimageview.library.GifHeaderParser.TAG;
+import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -20,11 +20,11 @@ import java.util.Map;
 
 public class Rule implements Comparable<Rule> {
 
-    private static Map<PackageInfo, Boolean> cacheEnabled = new HashMap();
-    private static Map<String, Boolean> cacheInternet = new HashMap();
-    private static Map<PackageInfo, String> cacheLabel = new HashMap();
+    private static final Map<PackageInfo, Boolean> cacheEnabled = new HashMap();
+    private static final Map<String, Boolean> cacheInternet = new HashMap();
+    private static final Map<PackageInfo, String> cacheLabel = new HashMap();
     private static List<PackageInfo> cachePackageInfo;
-    private static Map<String, Boolean> cacheSystem = new HashMap();
+    private static final Map<String, Boolean> cacheSystem = new HashMap();
 
     public PackageInfo info;
     public String name;

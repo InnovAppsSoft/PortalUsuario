@@ -20,11 +20,11 @@ public class WidgetUSSD extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
         sp_cuentas = context.getSharedPreferences("cuentas", Context.MODE_PRIVATE);
-        String saldo = sp_cuentas.getString("saldo", "0.00 CUP").toString();
-        String nacionales = sp_cuentas.getString("datos_nacionales", "0 MB").toString();
-        String datos = sp_cuentas.getString("paquete", "0 MB").toString();
-        String lte = sp_cuentas.getString("lte", "0 MB").toString();
-        String vence_saldo = sp_cuentas.getString("vence_saldo", "00/00/00").toString();
+        String saldo = sp_cuentas.getString("saldo", "0.00 CUP");
+        String nacionales = sp_cuentas.getString("datos_nacionales", "0 MB");
+        String datos = sp_cuentas.getString("paquete", "0 MB");
+        String lte = sp_cuentas.getString("lte", "0 MB");
+        String vence_saldo = sp_cuentas.getString("vence_saldo", "00/00/00");
         String vence_datos = sp_cuentas.getString("vence_datos", "0 días");
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_u_s_s_d);
@@ -52,7 +52,7 @@ public class WidgetUSSD extends AppWidgetProvider {
             // update receiver widgets
             Intent intent = new Intent(context, WidgetUSSD.class);
             intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-            int ids[] = AppWidgetManager.getInstance(context.getApplicationContext())
+            int[] ids = AppWidgetManager.getInstance(context.getApplicationContext())
                     .getAppWidgetIds(new ComponentName(context.getApplicationContext(), WidgetUSSD.class));
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
             context.sendBroadcast(intent);

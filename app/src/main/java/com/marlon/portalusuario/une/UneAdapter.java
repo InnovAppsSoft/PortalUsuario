@@ -30,8 +30,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class UneAdapter extends RecyclerView.Adapter<UneAdapter.UneViewHolder> {
-    private Context context;
-    private List<Une> registersList;
+    private final Context context;
+    private final List<Une> registersList;
 
     public UneAdapter(List<Une> notifications, Context context) {
         registersList = notifications;
@@ -49,16 +49,16 @@ public class UneAdapter extends RecyclerView.Adapter<UneAdapter.UneViewHolder> {
         Une une = registersList.get(position);
 
         double lastRegister = une.getLastRegister();
-        holder.previousRead.setText("Lectura anterior: " + String.valueOf(lastRegister));
+        holder.previousRead.setText("Lectura anterior: " + lastRegister);
         //
         double currentRegister = une.getCurrentRegister();
-        holder.currentRead.setText("Lectura actual: " + String.valueOf(currentRegister));
+        holder.currentRead.setText("Lectura actual: " + currentRegister);
         //
         double totalConsumption = une.getTotalConsumption();
-        holder.totalConsumption.setText("Consumo: " + String.valueOf(totalConsumption) + " Kw/h");
+        holder.totalConsumption.setText("Consumo: " + totalConsumption + " Kw/h");
         //
         double totalToPay = une.getTotalToPay();
-        holder.totalToPay.setText("$ " + String.valueOf(totalToPay));
+        holder.totalToPay.setText("$ " + totalToPay);
         //
         long dateLongType = une.getDate();
         if (dateLongType != 0) {
@@ -73,11 +73,11 @@ public class UneAdapter extends RecyclerView.Adapter<UneAdapter.UneViewHolder> {
     }
 
     class UneViewHolder extends RecyclerView.ViewHolder {
-        private TextView currentRead;
-        private TextView previousRead;
-        private TextView totalConsumption;
-        private TextView totalToPay;
-        private CardView cardView;
+        private final TextView currentRead;
+        private final TextView previousRead;
+        private final TextView totalConsumption;
+        private final TextView totalToPay;
+        private final CardView cardView;
 
         public UneViewHolder(View itemView) {
             super(itemView);

@@ -18,8 +18,8 @@ import java.util.Calendar;
 public class Save {
 
     private Context TheThis;
-    private String NameOfFolder = "/PortaUsuario";
-    private String NameOfFile = "imagen";
+    private final String NameOfFolder = "/PortaUsuario";
+    private final String NameOfFile = "imagen";
 
     public void SaveImage(Context context, Bitmap ImageToSave) {
 

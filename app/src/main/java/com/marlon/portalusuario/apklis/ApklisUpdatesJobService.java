@@ -41,7 +41,6 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.List;
 
-@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class ApklisUpdatesJobService extends JobService {
 
     private Context context;
@@ -58,7 +57,6 @@ public class ApklisUpdatesJobService extends JobService {
 
         try {
             ApklisUpdateServiceHandler = new Handler(Looper.getMainLooper()) {
-                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void handleMessage(Message msg) {
                     if (msg.what == 1) {
@@ -70,15 +68,13 @@ public class ApklisUpdatesJobService extends JobService {
 
                         boolean AppActive = false;
                         ActivityManager am = (ActivityManager) getApplicationContext().getSystemService(ACTIVITY_SERVICE);
-                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
 
-                            List<ActivityManager.RunningAppProcessInfo> runningAppProcessInfoList = am.getRunningAppProcesses();
-                            for (ActivityManager.RunningAppProcessInfo processInfo : runningAppProcessInfoList) {
-                                if (processInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
-                                    for (String activeProcess : processInfo.pkgList) {
-                                        if (activeProcess.equals(getApplicationContext().getPackageName())) {
-                                            AppActive = true;
-                                        }
+                        List<ActivityManager.RunningAppProcessInfo> runningAppProcessInfoList = am.getRunningAppProcesses();
+                        for (ActivityManager.RunningAppProcessInfo processInfo : runningAppProcessInfoList) {
+                            if (processInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                                for (String activeProcess : processInfo.pkgList) {
+                                    if (activeProcess.equals(getApplicationContext().getPackageName())) {
+                                        AppActive = true;
                                     }
                                 }
                             }
@@ -87,7 +83,7 @@ public class ApklisUpdatesJobService extends JobService {
                         if (update_exist) {
                             SharedPreferences updates = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                             if (!AppActive || !updates.getBoolean("show_update_window", true)) {
-                                Logging.message("Showing Update Details Notification", null);
+                                JCLogging.message("Showing Update Details Notification", null);
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                     NotificationManager notificationManager = getSystemService(NotificationManager.class);
                                     NotificationChannel chanel = new NotificationChannel("chanel", "ApklisUpdate", NotificationManager.IMPORTANCE_DEFAULT);
@@ -113,7 +109,7 @@ public class ApklisUpdatesJobService extends JobService {
                                 }
                                 notificationManagerCompat.notify(0, builder.build());
                             } else {
-                                Logging.message("Launching Update Intent", null);
+                                JCLogging.message("Launching Update Intent", null);
                                 Intent intent = new Intent("apklis_update");
                                 intent.putExtra("update_exist", update_exist);
                                 intent.putExtra("version_name", version_name);
@@ -131,11 +127,10 @@ public class ApklisUpdatesJobService extends JobService {
             };
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+            JCLogging.error(null, null, ex);
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public boolean onStartJob(JobParameters params) {
         try{
@@ -144,7 +139,7 @@ public class ApklisUpdatesJobService extends JobService {
             new Thread(netWorkThread).start();
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+            JCLogging.error(null, null, ex);
         }
         return true;
     }
@@ -168,7 +163,7 @@ public class ApklisUpdatesJobService extends JobService {
             }
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+            JCLogging.error(null, null, ex);
         }
         return string_value;
     }
@@ -185,7 +180,7 @@ public class ApklisUpdatesJobService extends JobService {
         @Override
         public void run() {
 
-            String api_apklis_json = "";
+            StringBuilder api_apklis_json = new StringBuilder();
             boolean update_exist = false;
             int apklis_version_code = 0;
             String apklis_version_name = "";
@@ -197,7 +192,7 @@ public class ApklisUpdatesJobService extends JobService {
                 pinfo = getApplicationContext().getPackageManager().getPackageInfo(getPackageName(), 0);
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
-                Logging.error(null, null, e);
+                JCLogging.error(null, null, e);
             }
             int this_version_code = pinfo.versionCode;
 
@@ -208,29 +203,24 @@ public class ApklisUpdatesJobService extends JobService {
                 url = new URL("https://api.apklis.cu/v1/application/?package_name=" + APP_PACKAGE);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-                Logging.error(null, null, e);
+                JCLogging.error(null, null, e);
             }
 
             try {
+                assert url != null;
                 BufferedReader api_apklis = new BufferedReader(new InputStreamReader(url.openStream()));
 
                 String inputLine;
                 while ((inputLine = api_apklis.readLine()) != null) {
-                    api_apklis_json = api_apklis_json + inputLine;
+                    api_apklis_json.append(inputLine);
                 }
 
-            } catch (UnknownHostException e) {
-                e.printStackTrace();
-                Logging.error(null, null, e);
-            } catch (SocketException se) {
-                se.printStackTrace();
-                Logging.error(null, null, se);
             } catch (IOException e) {
                 e.printStackTrace();
-                Logging.error(null, null, e);
+                JCLogging.error(null, null, e);
             }
 
-            if (!api_apklis_json.equals("")) {
+            if (!api_apklis_json.toString().equals("")) {
                 String apklis_version_code_tem = "";
                 String version_code = "\"version_code\":";
                 int cd_Index = api_apklis_json.indexOf(version_code);
@@ -258,16 +248,16 @@ public class ApklisUpdatesJobService extends JobService {
                 }
                 // tamanno del APK ultima version
                 try {
-                    new_version_size = parse(api_apklis_json, "\"human_readable_size\":");
+                    new_version_size = parse(api_apklis_json.toString(), "\"human_readable_size\":");
                     Log.e("Main", new_version_size);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     Log.e("Main", ex.getMessage());
-                    Logging.error(null, null, ex);
+                    JCLogging.error(null, null, ex);
                 }
                 // la descripcion de la ultima version
                 try {
-                    changelog = parse(api_apklis_json, "\"changelog\":");
+                    changelog = parse(api_apklis_json.toString(), "\"changelog\":");
                     if (changelog.length() > 0){
                         changelog = changelog.replaceAll("<p>", "• ");
                         changelog = changelog.replaceAll("</p>", "\n");
@@ -275,12 +265,12 @@ public class ApklisUpdatesJobService extends JobService {
                     Log.e("Main", changelog);
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    Logging.error(null, null, ex);
+                    JCLogging.error(null, null, ex);
                 }
                 // la descripcion de la ultima version
                 String downloadCount;
                 try {
-                    changelog = parse(api_apklis_json, "\"changelog\":");
+                    changelog = parse(api_apklis_json.toString(), "\"changelog\":");
                     if (changelog.length() > 0){
                         changelog = changelog.replaceAll("<p>", "• ");
                         changelog = changelog.replaceAll("</p>", "\n");
@@ -288,7 +278,7 @@ public class ApklisUpdatesJobService extends JobService {
                     Log.e("Main", changelog);
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    Logging.error(null, null, ex);
+                    JCLogging.error(null, null, ex);
                 }
             }
 

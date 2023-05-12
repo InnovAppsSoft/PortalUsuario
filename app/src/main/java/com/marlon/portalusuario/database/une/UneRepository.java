@@ -13,13 +13,13 @@ import com.marlon.portalusuario.une.Une;
 import java.util.List;
 
 public class UneRepository {
-    private UneDAO uneDao;
-    private UneDataBase database;
-    private LiveData<List<Une>> allUnes;
+    private final UneDAO uneDao;
+    private final UneDataBase database;
+    private final LiveData<List<Une>> allUnes;
     private static Application application;
 
     public UneRepository(Application application){
-        this.application = application;
+        UneRepository.application = application;
         database = UneDataBase.getInstance(application);
         uneDao = database.DAO();
         allUnes = uneDao.getAllUne();
@@ -46,7 +46,7 @@ public class UneRepository {
     }
 
     public static class InsertUneAsyncTask extends AsyncTask<Une, Void, Void> {
-        private UneDAO uneDao;
+        private final UneDAO uneDao;
         private SharedPreferences sharedPreferences;
 
         private InsertUneAsyncTask(UneDAO uneDao){
@@ -62,7 +62,7 @@ public class UneRepository {
     }
 
     public static class UpdateUneAsyncTask extends AsyncTask<Une, Void, Void> {
-        private UneDAO uneDao;
+        private final UneDAO uneDao;
 
         private UpdateUneAsyncTask(UneDAO uneDao){
             this.uneDao = uneDao;
@@ -76,7 +76,7 @@ public class UneRepository {
     }
 
     public static class DeleteUneAsyncTask extends AsyncTask<Une, Void, Void> {
-        private UneDAO uneDao;
+        private final UneDAO uneDao;
 
         private DeleteUneAsyncTask(UneDAO uneDao){
             this.uneDao = uneDao;
@@ -90,7 +90,7 @@ public class UneRepository {
     }
 
     public static class DeleteAllUnesAsyncTask extends AsyncTask<Void, Void, Void> {
-        private UneDAO uneDao;
+        private final UneDAO uneDao;
 
         private DeleteAllUnesAsyncTask(UneDAO uneDao){
             this.uneDao = uneDao;

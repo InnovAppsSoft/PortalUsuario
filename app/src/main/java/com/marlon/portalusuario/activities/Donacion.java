@@ -73,7 +73,6 @@ public class Donacion extends AppCompatActivity {
 
                 }
 
-                return;
             }
         });
 
@@ -114,8 +113,6 @@ public class Donacion extends AppCompatActivity {
                     startActivity(r);
 
                 }
-
-                return;
 
             }
         });

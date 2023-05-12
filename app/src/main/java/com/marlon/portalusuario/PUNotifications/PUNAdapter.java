@@ -36,8 +36,8 @@ import java.util.List;
 import co.dift.ui.SwipeToAction;
 
 public class PUNAdapter extends RecyclerView.Adapter<PUNAdapter.PUNViewHolder> {
-    private Context context;
-    private List<PUNotification> notificationsList;
+    private final Context context;
+    private final List<PUNotification> notificationsList;
 
     public PUNAdapter(List<PUNotification> notifications, Context context) {
         notificationsList = notifications;
@@ -109,15 +109,15 @@ public class PUNAdapter extends RecyclerView.Adapter<PUNAdapter.PUNViewHolder> {
     }
 
     class PUNViewHolder extends RecyclerView.ViewHolder {//SwipeToAction.ViewHolder {
-        private ImageView circleImage;
-        private TextView titleTv;
-        private TextView dateTv;
-        private TextView detailsTv;
-        private Button arrowBtn;
-        private ConstraintLayout expandableView;
-        private CardView cardView;
-        private ImageView bigImage;
-        private CardView circleImageContainer;
+        private final ImageView circleImage;
+        private final TextView titleTv;
+        private final TextView dateTv;
+        private final TextView detailsTv;
+        private final Button arrowBtn;
+        private final ConstraintLayout expandableView;
+        private final CardView cardView;
+        private final ImageView bigImage;
+        private final CardView circleImageContainer;
 
         public PUNViewHolder(View itemView) {
             super(itemView);

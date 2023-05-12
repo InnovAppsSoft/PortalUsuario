@@ -119,7 +119,7 @@ public class BiometricManager extends BiometricManagerV23 {
         private String description;
         private String negativeButtonText;
 
-        private Context context;
+        private final Context context;
         public BiometricBuilder(Context context) {
             this.context = context;
         }

@@ -31,7 +31,7 @@ public abstract class UneDataBase extends RoomDatabase {
         return instance;
     }
 
-    private static Callback roomCallback = new Callback() {
+    private static final Callback roomCallback = new Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);

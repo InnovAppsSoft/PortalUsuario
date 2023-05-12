@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ApklisUtil {
 
-    private JCLogging Logging;
+    private final JCLogging Logging;
 
     public final String DOWNLOADS = "\"download_count\":";
     public final String SALES = "\"sale_count\":";
@@ -70,11 +70,10 @@ public class ApklisUtil {
             check_for_updates.schedule(check_for_updates_job);
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+            JCLogging.error(null, null, ex);
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void startLookingForUpdates(int MINUTES, boolean PERIODIC){
         try{
             PersistableBundle bundle = new PersistableBundle();
@@ -89,7 +88,7 @@ public class ApklisUtil {
             check_for_updates.schedule(check_for_updates_job);
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+            JCLogging.error(null, null, ex);
         }
     }
 
@@ -115,7 +114,7 @@ public class ApklisUtil {
             }
         } catch (RemoteException e1) {
             e1.printStackTrace();
-            Logging.error(null, null, e1);
+            JCLogging.error(null, null, e1);
         }
 
         return paid;
@@ -143,7 +142,7 @@ public class ApklisUtil {
             }
         } catch (RemoteException e1) {
             e1.printStackTrace();
-            Logging.error(null, null, e1);
+            JCLogging.error(null, null, e1);
         }
 
         return username;
@@ -166,7 +165,7 @@ public class ApklisUtil {
             }
         }catch (Exception e){
             e.printStackTrace();
-            Logging.error(null, null, e);
+            JCLogging.error(null, null, e);
         }
         return  string_value;
     }
@@ -192,7 +191,7 @@ public class ApklisUtil {
                     url = new URL("https://api.apklis.cu/v1/application/?package_name=" + APP_PACKAGE);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
-                    Logging.error(null, null, e);
+                    JCLogging.error(null, null, e);
                 }
 
                 try {
@@ -205,20 +204,20 @@ public class ApklisUtil {
 
                 } catch (UnknownHostException e) {
                     e.printStackTrace();
-                    Logging.error(null, null, e);
+                    JCLogging.error(null, null, e);
                 } catch (SocketException se) {
                     se.printStackTrace();
-                    Logging.error(null, null, se);
+                    JCLogging.error(null, null, se);
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Logging.error(null, null, e);
+                    JCLogging.error(null, null, e);
                 }
                 if (!api_apklis_json.equals("")) {
                     String string_value = parse(api_apklis_json, option);
                     Log.e("Main", string_value);
-                    Logging.message("Successfully JSON parsing::value=" + string_value, null);
+                    JCLogging.message("Successfully JSON parsing::value=" + string_value, null);
                     Intent intent = new Intent("apklis_app_info");
-                    intent.putExtra("info_value", new String(option + ":" + string_value));
+                    intent.putExtra("info_value", option + ":" + string_value);
                     LocalBroadcastManager.getInstance(CONTEXT).sendBroadcast(intent);
                 }
 

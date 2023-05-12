@@ -24,7 +24,7 @@ public class PromoSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolde
 
     private final List<Promo> mSliderItems;
     private final Context context;
-    private JCLogging Logging;
+    private final JCLogging Logging;
 
     // Constructor
     public PromoSliderAdapter(Context context, ArrayList<Promo> promoArrayList) {
@@ -78,7 +78,7 @@ public class PromoSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolde
             });
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+            JCLogging.error(null, null, ex);
         }
     }
 

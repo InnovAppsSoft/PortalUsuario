@@ -86,7 +86,7 @@ public class BlackHoleService extends VpnService {
                 try {
                     builder.addDisallowedApplication(rule.info.packageName);
                 } catch (PackageManager.NameNotFoundException ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                 }
             }
 
@@ -100,7 +100,7 @@ public class BlackHoleService extends VpnService {
             return builder.establish();
 
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
 
             // Disable firewall
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -118,11 +118,11 @@ public class BlackHoleService extends VpnService {
         try {
             pfd.close();
         } catch (IOException ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
         }
     }
 
-    private BroadcastReceiver connectivityChangedReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver connectivityChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i(TAG, "Received " + intent);
@@ -133,7 +133,7 @@ public class BlackHoleService extends VpnService {
         }
     };
 
-    private BroadcastReceiver packageAddedReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver packageAddedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i(TAG, "Received " + intent);
@@ -197,7 +197,7 @@ public class BlackHoleService extends VpnService {
     }
 
     public static void reload(String network, Context context) {
-        if (network == null || ("wifi".equals(network) ? Util.isWifiActive(context) : !Util.isWifiActive(context))) {
+        if (network == null || ("wifi".equals(network) == Util.isWifiActive(context))) {
             Intent intent = new Intent(context, BlackHoleService.class);
             intent.putExtra(EXTRA_COMMAND, Command.reload);
             context.startService(intent);

@@ -15,13 +15,13 @@ import com.marlon.portalusuario.database.notifications.PunDataBase;
 import java.util.List;
 
 public class PunRepository {
-    private PunDAO punDao;
-    private PunDataBase database;
-    private LiveData<List<PUNotification>> allPUN;
+    private final PunDAO punDao;
+    private final PunDataBase database;
+    private final LiveData<List<PUNotification>> allPUN;
     private static Application application;
 
     public PunRepository(Application application){
-        this.application = application;
+        PunRepository.application = application;
         database = PunDataBase.getInstance(application);
         punDao = database.DAO();
         allPUN = punDao.getAllPUNotification();
@@ -48,7 +48,7 @@ public class PunRepository {
     }
 
     public static class InsertPUNotificationAsyncTask extends AsyncTask<PUNotification, Void, Void> {
-        private PunDAO punDao;
+        private final PunDAO punDao;
         private SharedPreferences sharedPreferences;
 
         private InsertPUNotificationAsyncTask(PunDAO punDao){
@@ -76,7 +76,7 @@ public class PunRepository {
     }
 
     public static class UpdatePUNotificationAsyncTask extends AsyncTask<PUNotification, Void, Void> {
-        private PunDAO punDao;
+        private final PunDAO punDao;
 
         private UpdatePUNotificationAsyncTask(PunDAO punDao){
             this.punDao = punDao;
@@ -90,7 +90,7 @@ public class PunRepository {
     }
 
     public static class DeletePUNotificationAsyncTask extends AsyncTask<PUNotification, Void, Void> {
-        private PunDAO punDao;
+        private final PunDAO punDao;
 
         private DeletePUNotificationAsyncTask(PunDAO punDao){
             this.punDao = punDao;
@@ -104,7 +104,7 @@ public class PunRepository {
     }
 
     public static class DeleteAllPUNotificationsAsyncTask extends AsyncTask<Void, Void, Void> {
-        private PunDAO punDao;
+        private final PunDAO punDao;
 
         private DeleteAllPUNotificationsAsyncTask(PunDAO punDao){
             this.punDao = punDao;

@@ -12,7 +12,7 @@ import com.marlon.portalusuario.une.Une;
 import java.util.List;
 
 public class UneViewModel extends AndroidViewModel {
-    private UneRepository uneRepository;
+    private final UneRepository uneRepository;
 
     public UneViewModel(@NonNull Application application) {
         super(application);

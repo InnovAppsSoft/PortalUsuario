@@ -112,10 +112,10 @@ public class PerfilActivity extends AppCompatActivity {
         }
 
         // TODO:  Save info
-        nameperfil.setText(sp_perfil.getString("nombre", "").toString());
-        numeroperfil.setText(sp_perfil.getString("numero", "").toString());
-        perfilnauta.setText(sp_perfil.getString("nauta", "").toString());
-        UsuarioName.setText(sp_perfil.getString("nombre", "Usuario").toString());
+        nameperfil.setText(sp_perfil.getString("nombre", ""));
+        numeroperfil.setText(sp_perfil.getString("numero", ""));
+        perfilnauta.setText(sp_perfil.getString("nauta", ""));
+        UsuarioName.setText(sp_perfil.getString("nombre", "Usuario"));
         // buttom
         guardarbtn.setOnClickListener(
                 new View.OnClickListener() {

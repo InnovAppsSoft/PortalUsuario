@@ -49,8 +49,7 @@ final class Point {
     public boolean equals(final Object obj) {
         if (obj == this) {
             return true;
-        } else if (obj instanceof Point) {
-            final Point other = (Point) obj;
+        } else if (obj instanceof final Point other) {
             return mX == other.mX && mY == other.mY;
         } else {
             return false;

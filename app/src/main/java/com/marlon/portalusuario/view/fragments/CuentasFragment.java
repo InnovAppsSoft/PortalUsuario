@@ -70,7 +70,7 @@ public class CuentasFragment extends Fragment {
 
     // TODO: account handle and sim slot
     private List<PhoneAccountHandle> phoneAccountHandleList;
-    public static final String simSlotName[] = {
+    public static final String[] simSlotName = {
             "extra_asus_dial_use_dualsim",
             "com.android.phone.extra.slot",
             "slot",
@@ -177,9 +177,9 @@ public class CuentasFragment extends Fragment {
 
         // TODO: Mostrar saludo con el nombre del usuario
         SharedPreferences sp_perfil = getActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
-        String name = sp_perfil.getString("nombre", "").toString();
-        String numero = sp_perfil.getString("numero", "").toString();
-        String nauta = sp_perfil.getString("nauta", "").toString();
+        String name = sp_perfil.getString("nombre", "");
+        String numero = sp_perfil.getString("numero", "");
+        String nauta = sp_perfil.getString("nauta", "");
         if (name.isEmpty()) {
             TextoNombre.setText("Usuario");
         } else {
@@ -437,8 +437,7 @@ public class CuentasFragment extends Fragment {
                                                                                                                                                 editor
                                                                                                                                                         .putString(
                                                                                                                                                                 "hora",
-                                                                                                                                                                time
-                                                                                                                                                                        .toString());
+                                                                                                                                                                time);
                                                                                                                                                 editor
                                                                                                                                                         .commit();
                                                                                                                                                 Actulizar
@@ -522,7 +521,7 @@ public class CuentasFragment extends Fragment {
                                             .replace(".", "")
                                             .trim();
                             StringBuilder sb2 = new StringBuilder();
-                            sb2.append("Expira: ");
+                            sb2.append("");
                             sb2.append(message_vence);
                             expiratext.setText(sb2);
                             editor.putString("vence_saldo", sb2.toString());
@@ -575,7 +574,7 @@ public class CuentasFragment extends Fragment {
                                             .replaceFirst("MIN(.*)", "")
                                             .trim();
                             minutostext.setText(minutos);
-                            editor.putString("minutos", minutos.toString());
+                            editor.putString("minutos", minutos);
                             editor.commit();
                         }
 
@@ -630,7 +629,7 @@ public class CuentasFragment extends Fragment {
                                             .replaceFirst("SMS(.*)", "")
                                             .trim();
                             mensajestext.setText(message_sms);
-                            editor.putString("sms", message_sms.toString());
+                            editor.putString("sms", message_sms);
                             editor.commit();
 
                             // Fecha vencimiento sms y voz
@@ -648,14 +647,13 @@ public class CuentasFragment extends Fragment {
                             editor.putString(
                                     "vence_sms",
                                     message_vence_sms
-                                            .toString()
                                             .replaceFirst("(.*)no activos.", "0 días"));
                             editor.commit();
                             venceminutossms.setText(message_vence_sms);
 
                             // no usp
                             String vence_sms_min =
-                                    sp_cuentas.getString("vence_sms", message_vence_sms.toString());
+                                    sp_cuentas.getString("vence_sms", message_vence_sms);
                         }
 
                         @Override
@@ -717,12 +715,12 @@ public class CuentasFragment extends Fragment {
                                             .trim();
                             editor.putString(
                                     "diaria",
-                                    diaria.toString()
+                                    diaria
                                             .replace("no activos.", "")
                                             .replaceFirst("validos(.*)", "")
                                             .replace("No dispone de MB.", "0 MB"));
                             editor.commit();
-                            String bolsa_diaria = sp_cuentas.getString("diaria", diaria.toString());
+                            String bolsa_diaria = sp_cuentas.getString("diaria", diaria);
                             bolsadiaria.setText(bolsa_diaria);
 
                             // vencimiento de bolsa diaria
@@ -742,7 +740,6 @@ public class CuentasFragment extends Fragment {
                             editor.putString(
                                     "vence_diaria",
                                     message_vence_diaria
-                                            .toString()
                                             .replaceFirst("(.*)no activos.", "sin consumir")
                                             .replaceFirst("(.*)validos", "")
                                             .replace("No dispone de MB.", "0 horas")
@@ -750,7 +747,7 @@ public class CuentasFragment extends Fragment {
                             editor.commit();
                             String vence_diaria =
                                     sp_cuentas.getString(
-                                            "vence_diaria", message_vence_diaria.toString());
+                                            "vence_diaria", message_vence_diaria);
                             vencebolsadiaria.setText(vence_diaria);
 
                             // bolsa de mensajeria
@@ -779,13 +776,12 @@ public class CuentasFragment extends Fragment {
                             editor.putString(
                                     "mensajeria",
                                     message_mensajeria
-                                            .toString()
                                             .replace("vencen hoy.", "")
                                             .replaceFirst("validos(.*)", ""));
                             editor.commit();
                             String bolsa_msg =
                                     sp_cuentas.getString(
-                                            "mensajeria", message_mensajeria.toString());
+                                            "mensajeria", message_mensajeria);
                             bolsasms.setText(bolsa_msg);
 
                             // vence mensajeria
@@ -813,7 +809,6 @@ public class CuentasFragment extends Fragment {
                             editor.putString(
                                     "vence_mensajeria",
                                     message_vence_mensajeria
-                                            .toString()
                                             .replaceFirst("(.*)validos", "")
                                             .replaceFirst("(.*)vencen hoy.", "vence hoy")
                                             .replace("dias.", "días"));
@@ -840,12 +835,11 @@ public class CuentasFragment extends Fragment {
                             editor.putString(
                                     "paquete",
                                     message_paquete
-                                            .toString()
                                             .replaceFirst("(.*)LTE(.*)", "0 MB")
                                             .replaceFirst("validos(.*)", ""));
                             editor.commit();
                             String paquete =
-                                    sp_cuentas.getString("paquete", message_paquete.toString());
+                                    sp_cuentas.getString("paquete", message_paquete);
                             datostext.setText(paquete);
 
                             // TODO: message paquete LTE
@@ -865,11 +859,10 @@ public class CuentasFragment extends Fragment {
                                             .trim();
                             String lte =
                                     message_lte
-                                            .toString()
                                             .replaceFirst("LTE(.*)", "")
                                             .replaceFirst("(.*)validos(.*)", "0 MB")
                                             .replace("no activos.", "");
-                            editor.putString("lte", lte.toString());
+                            editor.putString("lte", lte);
                             editor.commit();
                             datoslte.setText(lte);
 
@@ -889,12 +882,11 @@ public class CuentasFragment extends Fragment {
                                             .trim();
                             String vence =
                                     vencimiento_datos
-                                            .toString()
                                             .replaceFirst("(.*)validos", "")
                                             .replace("dias.", "días")
                                             .replace("no activos", "0 días")
                                             .replaceFirst("(.*)LTE", "");
-                            editor.putString("vence_datos", vence.toString());
+                            editor.putString("vence_datos", vence);
                             editor.commit();
                             VenceDatosI.setText(vence);
                         }
@@ -944,7 +936,7 @@ public class CuentasFragment extends Fragment {
                                             .replaceFirst("(.*)Datos.cu ", "")
                                             .replaceFirst("vence(.*)", "")
                                             .trim();
-                            editor.putString("datos_nacionales", datos_nacionales.toString());
+                            editor.putString("datos_nacionales", datos_nacionales);
                             editor.commit();
                             datosnacionales.setText(datos_nacionales);
 
@@ -954,13 +946,13 @@ public class CuentasFragment extends Fragment {
                                             .replace("Usted no dispone de bonos activos.", "")
                                             .replaceFirst("Datos.cu(.*)", "")
                                             .trim();
-                            String string_bono = bonos.toString();
+                            String string_bono = bonos;
                             if (!TextUtils.isEmpty(string_bono)) {
                                 Promo.setVisibility(View.VISIBLE);
                             } else {
                                 Promo.setVisibility(View.GONE);
                             }
-                            editor.putString("bonos", string_bono.toString());
+                            editor.putString("bonos", string_bono);
                             editor.commit();
                         }
 
@@ -985,9 +977,9 @@ public class CuentasFragment extends Fragment {
     public void onResume() {
         super.onResume();
         SharedPreferences sp_perfil = requireActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
-        String name = sp_perfil.getString("nombre", "").toString();
-        String numero = sp_perfil.getString("numero", "").toString();
-        String nauta = sp_perfil.getString("nauta", "").toString();
+        String name = sp_perfil.getString("nombre", "");
+        String numero = sp_perfil.getString("numero", "");
+        String nauta = sp_perfil.getString("nauta", "");
         if (name.isEmpty()) {
             TextoNombre.setText("Usuario");
         } else {

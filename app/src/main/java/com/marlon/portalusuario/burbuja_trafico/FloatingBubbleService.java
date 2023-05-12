@@ -151,10 +151,10 @@ public class FloatingBubbleService extends Service {
                 // INFLATER
                 LayoutInflater layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
                 // INFLATING BUBBLE LAYOUT
-                FloatingBubbleInflated = layoutInflater.inflate(R.layout.floating_bubble, (ViewGroup) null);
+                FloatingBubbleInflated = layoutInflater.inflate(R.layout.floating_bubble, null);
                 // TRASH ICON
-                trashFloatingBubble = layoutInflater.inflate(R.layout.floating_bubble_delete, (ViewGroup) null);
-                trashOverFloatingBubble = layoutInflater.inflate(R.layout.back_burbuja_delete_over, (ViewGroup) null);
+                trashFloatingBubble = layoutInflater.inflate(R.layout.floating_bubble_delete, null);
+                trashOverFloatingBubble = layoutInflater.inflate(R.layout.back_burbuja_delete_over, null);
                 //
                 BubbleLayout = FloatingBubbleInflated.findViewById(R.id.bubble_back_layout);
                 ConnectionTypeImage = FloatingBubbleInflated.findViewById(R.id.ConnectionTypeImage);
@@ -224,16 +224,16 @@ public class FloatingBubbleService extends Service {
             windowManager.removeView(FloatingBubbleInflated);
             windowManager.removeView(trashFloatingBubble);
             windowManager.removeView(trashOverFloatingBubble);
-//            windowManager = null;
-//            FloatingBubbleInflated = null;
-//            trashFloatingBubble = null;
-//            trashOverFloatingBubble = null;
+   //         windowManager = null;
+    //        FloatingBubbleInflated = null;
+    //        trashFloatingBubble = null;
+    //        trashOverFloatingBubble = null;
             isStarted = false;
-            //stopService(intent);
+            stopService(intent);
         }catch (Exception ex){
             Log.e("Floating Bubble Service", "An error was ocurred", ex);
             ex.printStackTrace();
-            logging.error("Destroying Everything", null, ex);
+            JCLogging.error("Destroying Everything", null, ex);
         }
     }
 
@@ -271,12 +271,12 @@ public class FloatingBubbleService extends Service {
             }catch (Exception ex){
                 Log.e("Floating Bubble Service", "An error was ocurred", ex);
                 ex.printStackTrace();
-                logging.error("Calculating Traffic Speed", null, ex);
+                JCLogging.error("Calculating Traffic Speed", null, ex);
             }
             sp_cuentas = getApplicationContext().getSharedPreferences("cuentas", Context.MODE_PRIVATE);
-            String saldo = sp_cuentas.getString("saldo", "0.00 CUP").toString();
+            String saldo = sp_cuentas.getString("saldo", "0.00 CUP");
             Saldotext.setText(saldo);
-            String datos = sp_cuentas.getString("paquete", "0 MB").toString();
+            String datos = sp_cuentas.getString("paquete", "0 MB");
             Datostext.setText(datos);
 
         }
@@ -354,9 +354,9 @@ public class FloatingBubbleService extends Service {
             }catch (Exception ex){
                 Log.e("Floating Bubble Service", "An error was ocurred", ex);
                 ex.printStackTrace();
-                logging.error("Moving Floating Bubble", null, ex);
+                JCLogging.error("Moving Floating Bubble", null, ex);
             }
             return false;
         }
-    };
+    }
 }

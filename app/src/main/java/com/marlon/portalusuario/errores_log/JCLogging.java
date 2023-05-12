@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 public final class JCLogging {
-    private static String log_title = "PortalUsuarioLog";
+    private static final String log_title = "PortalUsuarioLog";
     @SuppressLint("SimpleDateFormat")
     private static final Format date = new SimpleDateFormat("dd-MM-yyyy | HH:mm:ss.SSS");
     private static final String logger_name = JCLogging.class.getName();
@@ -33,7 +33,7 @@ public final class JCLogging {
     private static Context context;
 
     public JCLogging(Context context){
-        this.context = context;
+        JCLogging.context = context;
         setWriter();
     }
 

@@ -26,12 +26,12 @@ public class EmergenciaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_emergencia);
 
 
-        Ambulancia = (CardView) findViewById(R.id.ambulancia);
-        Policia = (CardView) findViewById(R.id.policia);
-        Bomberos = (CardView) findViewById(R.id.bomberos);
-        Antidrogas= (CardView) findViewById(R.id.antidrogas);
-        Maritimo = (CardView) findViewById(R.id.Mar);
-        Cubacel = (CardView) findViewById(R.id.cubacel);
+        Ambulancia = findViewById(R.id.ambulancia);
+        Policia = findViewById(R.id.policia);
+        Bomberos = findViewById(R.id.bomberos);
+        Antidrogas= findViewById(R.id.antidrogas);
+        Maritimo = findViewById(R.id.Mar);
+        Cubacel = findViewById(R.id.cubacel);
 
         Atras = findViewById(R.id.atras4);
 

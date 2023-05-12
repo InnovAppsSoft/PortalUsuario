@@ -8,7 +8,7 @@ import android.os.Build;
 @RequiresApi(api = Build.VERSION_CODES.P)
 public class BiometricCallbackV28 extends BiometricPrompt.AuthenticationCallback {
 
-    private BiometricCallback biometricCallback;
+    private final BiometricCallback biometricCallback;
     public BiometricCallbackV28(BiometricCallback biometricCallback) {
         this.biometricCallback = biometricCallback;
     }

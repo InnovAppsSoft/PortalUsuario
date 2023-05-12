@@ -16,9 +16,9 @@ import com.marlon.portalusuario.une.Une;
 import java.util.List;
 
 public class PunViewModel extends AndroidViewModel {
-    private PunRepository punRepository;
-    private UserRepository userRepository;
-    private UneRepository uneRepository;
+    private final PunRepository punRepository;
+    private final UserRepository userRepository;
+    private final UneRepository uneRepository;
 
     public PunViewModel(@NonNull Application application) {
         super(application);

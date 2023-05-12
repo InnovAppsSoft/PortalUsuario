@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         titleTextView!!.text = title
     }
 
-    public val simSlotName = arrayOf(
+    val simSlotName = arrayOf(
         "extra_asus_dial_use_dualsim",
         "com.android.phone.extra.slot",
         "slot",
@@ -391,7 +391,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                                 details.text = v
                             }
                             Log.e("Showing info", "True")
-                            sheetBehavior!!.setState(BottomSheetBehavior.STATE_COLLAPSED)
+                            sheetBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
                             JCLogging.message(
                                 "Update data received succesfully::version_name=$version_name::version_size=$version_size",
                                 null
@@ -527,7 +527,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
 
         @Deprecated("Deprecated in Java")
-        override fun doInBackground(vararg p0: Void?): List<Promo>? {
+        override fun doInBackground(vararg p0: Void?): List<Promo> {
             val promos: MutableList<Promo> = ArrayList()
             try {
                 val response = SSLHelper.getConnection("https://www.etecsa.cu")
@@ -1006,10 +1006,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)

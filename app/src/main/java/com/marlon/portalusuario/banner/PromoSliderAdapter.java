@@ -23,7 +23,7 @@ public class PromoSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolde
 
     private final List<Banner> mSliderItems;
     private final Context context;
-    private JCLogging Logging;
+    private final JCLogging Logging;
 
     // Constructor
     public PromoSliderAdapter(Context context, ArrayList<Banner> BannerArrayList) {
@@ -59,7 +59,7 @@ public class PromoSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolde
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Logging.message("Opening PROMO URL::url=" + sliderItem.getLink(), null);
+                    JCLogging.message("Opening PROMO URL::url=" + sliderItem.getLink(), null);
                     Uri url = Uri.parse(sliderItem.getLink());
                     Intent openUrl = new Intent(Intent.ACTION_VIEW, url);
                     context.startActivity(openUrl);
@@ -67,7 +67,7 @@ public class PromoSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolde
             });
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+            JCLogging.error(null, null, ex);
         }
     }
 

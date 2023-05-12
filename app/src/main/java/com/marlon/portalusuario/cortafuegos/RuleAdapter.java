@@ -26,11 +26,11 @@ import java.util.List;
 public class RuleAdapter extends RecyclerView.Adapter<RuleAdapter.ViewHolder> implements Filterable {
     private static final String TAG = "Firewall.Adapter";
 
-    private Context context;
-    private int colorText;
-    private int colorAccent;
-    private List<Rule> listAll;
-    private List<Rule> listSelected;
+    private final Context context;
+    private final int colorText;
+    private final int colorAccent;
+    private final List<Rule> listAll;
+    private final List<Rule> listSelected;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View view;
@@ -43,11 +43,11 @@ public class RuleAdapter extends RecyclerView.Adapter<RuleAdapter.ViewHolder> im
         public ViewHolder(View itemView) {
             super(itemView);
             view = itemView;
-            ivIcon = (ImageView) itemView.findViewById(R.id.ivIcon);
-            tvName = (TextView) itemView.findViewById(R.id.tvName);
-            tvPackage = (TextView) itemView.findViewById(R.id.tvPackage);
-            cbWifi = (CheckBox) itemView.findViewById(R.id.cbWifi);
-            cbOther = (CheckBox) itemView.findViewById(R.id.cbOther);
+            ivIcon = itemView.findViewById(R.id.ivIcon);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvPackage = itemView.findViewById(R.id.tvPackage);
+            cbWifi = itemView.findViewById(R.id.cbWifi);
+            cbOther = itemView.findViewById(R.id.cbOther);
         }
     }
 

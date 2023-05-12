@@ -96,14 +96,14 @@ public class LogFileViewerActivity extends AppCompatActivity {
         }
 
         public List<String> doInBackground(Void... voidArr) {
-            File file = new File(JCLogging.getDirectory(), "log.txt");
+            File file = new File(com.marlon.portalusuario.errores_log.JCLogging.getDirectory(), "log.txt");
             if (!file.exists()) {
                 return new ArrayList<>();
             }
             try {
-                return JCLogging.readFromFile(file);
+                return com.marlon.portalusuario.errores_log.JCLogging.readFromFile(file);
             } catch (IOException ex) {
-                JCLogging.error(null, null,ex);
+                com.marlon.portalusuario.errores_log.JCLogging.error(null, null,ex);
                 return null;
             }
         }
@@ -156,7 +156,7 @@ public class LogFileViewerActivity extends AppCompatActivity {
 
         }else if (item2 == R.id.menu_share_log) {
             try {
-                String log = JCLogging.readAllFromFile(new File(JCLogging.getDirectory(), "log.txt"));
+                String log = com.marlon.portalusuario.errores_log.JCLogging.readAllFromFile(new File(com.marlon.portalusuario.errores_log.JCLogging.getDirectory(), "log.txt"));
                 ClipboardManager clipboard = (ClipboardManager) LogFileViewerActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("log", log);
                 clipboard.setPrimaryClip(clip);
@@ -168,7 +168,7 @@ public class LogFileViewerActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(share, "Enviar registro de Portal Usuario"));
             } catch (IOException e) {
                 e.printStackTrace();
-                JCLogging.error(null, null, e);
+                com.marlon.portalusuario.errores_log.JCLogging.error(null, null, e);
             }
             return true;
 
@@ -187,7 +187,7 @@ public class LogFileViewerActivity extends AppCompatActivity {
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            JCLogging.clearLog();
+                            com.marlon.portalusuario.errores_log.JCLogging.clearLog();
                             refresh_log();
                             Toast.makeText(LogFileViewerActivity.this, "Archivo de registro limpiado", Toast.LENGTH_LONG);
                         }

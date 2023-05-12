@@ -58,7 +58,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     private static final int NOTIFICATION_PERMISSION_CODE = 123;
     private NotificationManagerCompat notificationManagerCompat;
     private static final int NOTIFICATION_ID = 0;
-    private static String CHANNEL_ID = "Servicio de Cortafuegos";
+    private static final String CHANNEL_ID = "Servicio de Cortafuegos";
 
     private boolean running = false;
     private RuleAdapter adapter = null;
@@ -92,7 +92,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
 
         // On/off switch
-        SwitchCompat swEnabled = (SwitchCompat) findViewById(R.id.swEnabled);
+        SwitchCompat swEnabled = findViewById(R.id.swEnabled);
         swEnabled.setChecked(prefs.getBoolean("enabled", false));
         swEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -107,7 +107,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                         try {
                             startActivityForResult(prepare, REQUEST_VPN);
                         } catch (Throwable ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                             onActivityResult(REQUEST_VPN, RESULT_CANCELED, null);
                             Toast.makeText(ActivityMain.this, ex.toString(), Toast.LENGTH_LONG).show();
                         }
@@ -176,7 +176,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         super.onDestroy();
     }
 
-    private BroadcastReceiver connectivityChangedReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver connectivityChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i(TAG, "Received " + intent);
@@ -185,7 +185,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         }
     };
 
-    private BroadcastReceiver packageChangedReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver packageChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i(TAG, "Received " + intent);
@@ -197,7 +197,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     @SuppressLint("StaticFieldLeak")
     private void fillApplicationList() {
         // Get recycler view
-        final RecyclerView rvApplication = (RecyclerView) findViewById(R.id.rvApplication);
+        final RecyclerView rvApplication = findViewById(R.id.rvApplication);
         rvApplication.setHasFixedSize(true);
         rvApplication.setLayoutManager(new LinearLayoutManager(this));
 
@@ -261,7 +261,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             boolean enabled = prefs.getBoolean(name, false);
 
             // Check switch state
-            SwitchCompat swEnabled = (SwitchCompat) findViewById(R.id.swEnabled);
+            SwitchCompat swEnabled = findViewById(R.id.swEnabled);
             if (swEnabled.isChecked() != enabled)
                 swEnabled.setChecked(enabled);
         }

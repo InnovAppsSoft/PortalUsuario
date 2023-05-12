@@ -25,8 +25,8 @@ android {
         applicationId "com.marlon.portalusuario"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 54
-        versionName '7.0.4'
+        versionCode 55
+        versionName '7.0.5'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         signingConfig signingConfigs.debug
@@ -42,7 +42,9 @@ android {
             jniDebuggable false
             renderscriptDebuggable false
             shrinkResources true
+
         }
+
     }
 
     buildFeatures {
@@ -85,24 +87,22 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'org.jsoup:jsoup:1.15.4'
-
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-
     implementation("com.google.guava:guava:29.0-android")
 
 
     // ViewPaper2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
-    implementation 'com.felipecsl:gifimageview:2.1.0'
     implementation 'com.github.GwonHyeok:StickySwitch:0.0.15'
 
     //Library Barcode
+    //dexter permissions
+    implementation 'com.github.yalantis:ucrop:2.2.2'
     implementation 'com.google.zxing:android-integration:3.3.0'
     implementation 'me.dm7.barcodescanner:zxing:1.9.13'
-    implementation 'com.karumi:dexter:6.2.2'
+    implementation 'com.karumi:dexter:6.2.3'
 
     //add these libraries
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
@@ -113,7 +113,7 @@ dependencies {
 
     // wifietecsa
     implementation 'com.github.suitetecsa:suitetecsa-sdk-kotlin:0.1.8'
-    implementation 'org.jsoup:jsoup:1.15.4'
+    implementation 'org.jsoup:jsoup:1.16.1'
     implementation 'com.google.code.gson:gson:2.10.1'
 
     // Jetpack Compose
@@ -164,10 +164,10 @@ dependencies {
     implementation "com.google.accompanist:accompanist-permissions:0.31.1-alpha"
 
     // QR scanner
-    implementation 'com.google.zxing:core:3.3.3'
+    implementation 'com.google.zxing:core:3.5.1'
 
     //Tap Tarjet
-    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
+    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.3'
     implementation 'com.an.deviceinfo:deviceinfo:0.1.5'
 
     // Nuevas
@@ -178,7 +178,7 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
     implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
-    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
 
 
     //FIREBASE
@@ -195,35 +195,29 @@ dependencies {
     implementation 'com.github.hajiyevelnur92:intentanimation:1.0'
 
 
-    implementation 'com.intuit.sdp:sdp-android:1.0.6'
-    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
+    implementation 'com.intuit.ssp:ssp-android:1.1.0'
     implementation 'com.github.fornewid:neumorphism:0.3.0'
     implementation 'com.makeramen:roundedimageview:2.3.0'
-
-
-    //dexter permissions
-    implementation "com.karumi:dexter:6.2.2"
-    implementation 'com.mikhaellopez:circularimageview:3.2.0'
-    implementation 'com.github.yalantis:ucrop:2.2.2'
 
 
     implementation 'com.github.2coffees1team:GlideToVectorYou:v2.0.0'
 
 
     //Glide
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
-    implementation 'com.github.bumptech.glide:annotations:4.12.0'
-    implementation('com.github.bumptech.glide:okhttp3-integration:4.12.0') {
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    implementation 'com.github.bumptech.glide:annotations:4.15.1'
+    implementation('com.github.bumptech.glide:okhttp3-integration:4.15.1') {
         exclude group: 'glide-parent'
     }
 
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'the.bot.box:appusagemonitor:2.1.0'
 
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.11'
 
 
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
@@ -233,8 +227,8 @@ dependencies {
     implementation 'com.synnapps:carouselview:0.1.5'
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
 
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.6'
 
 
     implementation 'com.github.kizitonwose.colorpreference:core:1.1.0'
@@ -242,20 +236,17 @@ dependencies {
     implementation 'com.larswerkman:lobsterpicker:1.0.1'
 
     /////////////////////
-    implementation "com.vanniktech:emoji-material:0.8.0"
+    implementation "com.vanniktech:emoji-material:0.16.0"
     implementation 'com.github.linger1216:labelview:v1.1.2'
-    implementation 'com.nex3z:toggle-button-group:1.1.9'
+    implementation 'com.nex3z:toggle-button-group:1.2.3'
     implementation 'com.github.HeyAlex:BottomDrawer:v1.0.0'
     implementation "androidx.biometric:biometric:1.1.0"
     implementation(group: 'com.an.biometric', name: 'biometric-auth', version: '0.1.0', ext: 'aar', classifier: '')
-
     implementation 'com.caverock:androidsvg-aar:1.4'
-    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     implementation 'com.pixplicity.sharp:library:1.1.0'
 
-
     // for pretty time format -> hace momentos, hace un dia, etc.
-    implementation 'org.ocpsoft.prettytime:prettytime:4.0.4.Final'
+    implementation 'org.ocpsoft.prettytime:prettytime:5.0.6.Final'
 
     // swipe list item
     implementation 'co.dift.ui.swipetoaction:library:1.1'
@@ -269,14 +260,14 @@ dependencies {
     //noinspection GradleDependency
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     // Room
-    final def room_version = "2.4.3"
+    final def room_version = "2.5.1"
     //noinspection GradleDependency
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     //
     implementation 'com.getbase:floatingactionbutton:1.10.1'
     // Sweet Alert Dialog
-    implementation 'com.github.f0ris.sweetalert:library:1.5.1'
+    implementation 'com.github.f0ris.sweetalert:library:1.6.2'
     // Show case
     implementation 'com.github.amlcurran.showcaseview:library:5.4.3'
     //

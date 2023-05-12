@@ -28,9 +28,9 @@ public class Llamada_99Activity extends AppCompatActivity {
 
 
         private String numero_llamar = "";
-        private String data = "";
+        private final String data = "";
 
-        private Intent i = new Intent();
+        private final Intent i = new Intent();
 
         @Override
         protected void onCreate(Bundle _savedInstanceState) {
@@ -343,14 +343,14 @@ super.onStart();
 
         @Deprecated
         public int getLocationX(View _v) {
-            int _location[] = new int[2];
+            int[] _location = new int[2];
             _v.getLocationInWindow(_location);
             return _location[0];
         }
 
         @Deprecated
         public int getLocationY(View _v) {
-            int _location[] = new int[2];
+            int[] _location = new int[2];
             _v.getLocationInWindow(_location);
             return _location[1];
         }

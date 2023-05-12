@@ -27,11 +27,11 @@ public class RangoConsumo {
     }
 
     public void setFinRango(int finRango2) {
-        this.finRango = (double) finRango2;
+        this.finRango = finRango2;
     }
 
     public void setInicioRango(int inicioRango2) {
-        this.inicioRango = (double) inicioRango2;
+        this.inicioRango = inicioRango2;
     }
 
     public void setPrecioRango(double precioRango2) {

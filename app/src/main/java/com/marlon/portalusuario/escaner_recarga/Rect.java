@@ -171,8 +171,7 @@ final class Rect {
     public boolean equals(final Object obj) {
         if (obj == this) {
             return true;
-        } else if (obj instanceof Rect) {
-            final Rect other = (Rect) obj;
+        } else if (obj instanceof final Rect other) {
             return mLeft == other.mLeft && mTop == other.mTop && mRight == other.mRight &&
                     mBottom == other.mBottom;
         } else {

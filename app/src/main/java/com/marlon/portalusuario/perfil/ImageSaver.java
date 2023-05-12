@@ -16,7 +16,7 @@ public class ImageSaver {
 
     private String directoryName = "PortalUsuario";
     private String fileName = "";
-    private Context context;
+    private final Context context;
     private boolean external;
 
     public ImageSaver(Context context) {

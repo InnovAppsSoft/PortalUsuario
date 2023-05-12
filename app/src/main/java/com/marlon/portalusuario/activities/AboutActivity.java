@@ -32,19 +32,19 @@ public class AboutActivity extends AppCompatActivity {
         experiencebtn = findViewById(R.id.experiencebtn);
         reviewbtn = findViewById(R.id.reviewbtn);
 
-        Back = (ImageView)findViewById(R.id.virarhaciatras);
+        Back = findViewById(R.id.virarhaciatras);
 
         //
-        javierFacebook = (TextView) findViewById(R.id.javier_facebook);
-        javierTwitter = (TextView) findViewById(R.id.javier_twitter);
-        javierInsta = (TextView) findViewById(R.id.javier_insta);
-        javierGitHub = (TextView) findViewById(R.id.javier_github);
-        javierTelegram = (TextView) findViewById(R.id.javier_telegram);
-        javierTelegramChannel = (TextView) findViewById(R.id.javier_canal_telegram);
+        javierFacebook = findViewById(R.id.javier_facebook);
+        javierTwitter = findViewById(R.id.javier_twitter);
+        javierInsta = findViewById(R.id.javier_insta);
+        javierGitHub = findViewById(R.id.javier_github);
+        javierTelegram = findViewById(R.id.javier_telegram);
+        javierTelegramChannel = findViewById(R.id.javier_canal_telegram);
 
-        Google = (LinearLayout) findViewById(R.id.google);
-        Apklis = (LinearLayout) findViewById(R.id.apklis);
-        Politica = (LinearLayout) findViewById(R.id.politicadeprivacidad);
+        Google = findViewById(R.id.google);
+        Apklis = findViewById(R.id.apklis);
+        Politica = findViewById(R.id.politicadeprivacidad);
 
         javierFacebook.setOnClickListener(new View.OnClickListener() {
             @Override

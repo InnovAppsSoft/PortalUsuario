@@ -26,11 +26,11 @@ public class VozActivity extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_voz);
 
         //Definiendo Card
-        min5 = (CardView) findViewById(R.id.min5);
-        min10 = (CardView) findViewById(R.id.min10);
-        min15 = (CardView) findViewById(R.id.min15);
-        min25 = (CardView) findViewById(R.id.min25);
-        min40 = (CardView) findViewById(R.id.min40);
+        min5 = findViewById(R.id.min5);
+        min10 = findViewById(R.id.min10);
+        min15 = findViewById(R.id.min15);
+        min25 = findViewById(R.id.min25);
+        min40 = findViewById(R.id.min40);
         Atras = findViewById(R.id.atras2);
 
 

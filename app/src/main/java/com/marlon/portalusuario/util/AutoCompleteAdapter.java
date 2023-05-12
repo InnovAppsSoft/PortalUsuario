@@ -37,8 +37,8 @@ public class AutoCompleteAdapter extends ArrayAdapter implements Filterable {
                 if (constraint != null) {
                     ArrayList<String> suggestions = new ArrayList<>();
                     if (!constraint.toString().contains("@")) {
-                        suggestions.add(constraint.toString() + "@nauta.com.cu");
-                        suggestions.add(constraint.toString() + "@nauta.co.cu");
+                        suggestions.add(constraint + "@nauta.com.cu");
+                        suggestions.add(constraint + "@nauta.co.cu");
                     } else {
                         int indexOf = constraint.toString().indexOf("@");
                         String substring = constraint.toString().substring(indexOf);

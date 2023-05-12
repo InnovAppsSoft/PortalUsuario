@@ -33,7 +33,7 @@ public abstract class PunDataBase extends RoomDatabase {
         return instance;
     }
 
-    private static RoomDatabase.Callback roomCallback = new Callback() {
+    private static final RoomDatabase.Callback roomCallback = new Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
@@ -42,7 +42,7 @@ public abstract class PunDataBase extends RoomDatabase {
     };
 
     public static class PopulateDBAsyncTask extends AsyncTask<Void, Void, Void>{
-        private PunDAO punDao;
+        private final PunDAO punDao;
 
         private PopulateDBAsyncTask(PunDataBase db){
             punDao = db.DAO();

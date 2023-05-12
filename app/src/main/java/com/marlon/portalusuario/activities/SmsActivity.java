@@ -26,10 +26,10 @@ public class SmsActivity extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_sms);
 
         //Definiendo Card
-        plan = (CardView) findViewById(R.id.plan);
-        plan20 = (CardView) findViewById(R.id.plan20);
-        plan35 = (CardView) findViewById(R.id.plan35);
-        plan45 = (CardView) findViewById(R.id.plan45);
+        plan = findViewById(R.id.plan);
+        plan20 = findViewById(R.id.plan20);
+        plan35 = findViewById(R.id.plan35);
+        plan45 = findViewById(R.id.plan45);
         Atras = findViewById(R.id.atras1);
 
         //Añadiendo Clic a los Card

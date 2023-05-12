@@ -33,7 +33,7 @@ public class Util {
     private static JCLogging Logging;
 
     public Util(Context context2) {
-        this.context = context2;
+        context = context2;
         Logging = new JCLogging(context2);
     }
 
@@ -52,7 +52,7 @@ public class Util {
                 /* Estas conectado a internet usando wifi o redes moviles, puedes enviar tus datos */
             }catch (Exception ex){
                 ex.printStackTrace();
-                Logging.error(null, null, ex);
+                JCLogging.error(null, null, ex);
                 return false;
             }
         }
@@ -70,7 +70,7 @@ public class Util {
             }
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+            JCLogging.error(null, null, ex);
         }
         return false;
     }
@@ -84,7 +84,7 @@ public class Util {
             }
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+            JCLogging.error(null, null, ex);
         }
         return false;
     }
@@ -173,7 +173,7 @@ public class Util {
             return Double.parseDouble(new DecimalFormat("###.##").format(numero));
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+            JCLogging.error(null, null, ex);
         }
         return new Double(0);
     }

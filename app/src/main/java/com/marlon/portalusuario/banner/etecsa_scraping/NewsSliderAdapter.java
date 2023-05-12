@@ -26,7 +26,7 @@ public class NewsSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolder
     private final List<News> mSliderItems;
     private final Context context;
     // LOGGING
-    private JCLogging Logging;
+    private final JCLogging Logging;
 
     // Constructor
     public NewsSliderAdapter(Context context, ArrayList<News> BannerArrayList) {
@@ -63,7 +63,7 @@ public class NewsSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolder
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Logging.message("Opening news URL::url=" + sliderItem.getLink(), null);
+                    JCLogging.message("Opening news URL::url=" + sliderItem.getLink(), null);
                     Uri url = Uri.parse(sliderItem.getLink());
                     Intent openUrl = new Intent(Intent.ACTION_VIEW, url);
                     context.startActivity(openUrl);
@@ -71,7 +71,7 @@ public class NewsSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolder
             });
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+            JCLogging.error(null, null, ex);
         }
     }
 

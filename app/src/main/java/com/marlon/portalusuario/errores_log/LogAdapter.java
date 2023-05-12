@@ -20,8 +20,8 @@ import com.marlon.portalusuario.R;
 import java.util.List;
 
 public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder> {
-    private Context context;
-    private List<String> logsList;
+    private final Context context;
+    private final List<String> logsList;
 
     public LogAdapter(List<String> logs, Context context) {
         this.logsList = logs;

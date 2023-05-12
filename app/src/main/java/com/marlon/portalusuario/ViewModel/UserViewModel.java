@@ -12,7 +12,7 @@ import com.marlon.portalusuario.database.users.UserRepository;
 import java.util.List;
 
 public class UserViewModel extends AndroidViewModel {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserViewModel(@NonNull Application application) {
         super(application);

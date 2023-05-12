@@ -26,8 +26,8 @@ import java.util.List;
 
 public class UneActivity extends AppCompatActivity {
 
-    private int lecturaActual = 0;
-    private int lecturaAnterior = 0;
+    private final int lecturaActual = 0;
+    private final int lecturaAnterior = 0;
     private SharedPreferences preferences;
     private TextView tVLecturaActualUne;
     private TextView tVLecturaAnteriorUne;
@@ -62,13 +62,13 @@ public class UneActivity extends AppCompatActivity {
 
         e = new tarifaElect();
         Logging = new JCLogging(UneActivity.this);
-        lecturaAnterior2 = (EditText) findViewById(R.id.lecturaAnteriorTf);
-        lecturaActual2 = (EditText) findViewById(R.id.lecturaActualTf);
-        consumo = (TextView) findViewById(R.id.consumoTV);
-        aPagar = (TextView) findViewById(R.id.aPagarTV);
-        Borrar = (Button) findViewById(R.id.LimpiarBt);
-        Calcular = (Button) findViewById(R.id.CalcularBt);
-        Virar = (ImageView)findViewById(R.id.virarhaciatras);
+        lecturaAnterior2 = findViewById(R.id.lecturaAnteriorTf);
+        lecturaActual2 = findViewById(R.id.lecturaActualTf);
+        consumo = findViewById(R.id.consumoTV);
+        aPagar = findViewById(R.id.aPagarTV);
+        Borrar = findViewById(R.id.LimpiarBt);
+        Calcular = findViewById(R.id.CalcularBt);
+        Virar = findViewById(R.id.virarhaciatras);
         totalConsumption = findViewById(R.id.total_consumption);
         totalToPay = findViewById(R.id.total_to_pay);
 
@@ -130,22 +130,22 @@ public class UneActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(lecturaAnterior2.getText().toString())) {
             lectInicial = Double.parseDouble(lecturaAnterior2.getText().toString());
         } else {
-            msg = String.valueOf(msg) + "Lectura Anterior: Valor inválido \n";
+            msg = msg + "Lectura Anterior: Valor inválido \n";
         }
         if (!TextUtils.isEmpty(lecturaActual2.getText().toString())) {
             lectFinal = Double.parseDouble(lecturaActual2.getText().toString());
         } else {
-            msg = String.valueOf(msg) + "Lectura Actual: Valor inválido \n";
+            msg = msg + "Lectura Actual: Valor inválido \n";
         }
         if (msg == "") {
             if (lectFinal < 0.0d) {
-                msg = String.valueOf(msg) + "Lectura Actual: Valor inválido \n";
+                msg = msg + "Lectura Actual: Valor inválido \n";
             } else if (lectInicial < 0.0d) {
-                msg = String.valueOf(msg) + "Lectua Anterior: Valor inválido \n";
+                msg = msg + "Lectua Anterior: Valor inválido \n";
             } else if (lectFinal < lectInicial) {
-                msg = String.valueOf(msg) + "La lectura Anterior no puede ser mayor a la Actual \n";
+                msg = msg + "La lectura Anterior no puede ser mayor a la Actual \n";
             } else if (lectFinal == lectInicial) {
-                msg = String.valueOf(msg) + "Lectura anterior y Lectura Actual no deben ser iguales \n";
+                msg = msg + "Lectura anterior y Lectura Actual no deben ser iguales \n";
             }
         }
         if (msg == "") {
@@ -156,11 +156,10 @@ public class UneActivity extends AppCompatActivity {
             cadena = cadena + "Usted debe pagar: " + Util.roundDouble(consumoTotal) + " Pesos \n";
             consumoElectrico = Util.roundDouble(consumoElectrico);
             double totalAPagar = Util.roundDouble(consumoTotal);
-            consumo.setText("Consumo total: " + String.valueOf(consumoElectrico) + " Kwh");
-            aPagar.setText("Usted debe pagar: " + String.valueOf(totalAPagar) + " Pesos");
+            consumo.setText("Consumo total: " + consumoElectrico + " Kwh");
+            aPagar.setText("Usted debe pagar: " + totalAPagar + " Pesos");
             //
             uneViewModel.insertUne(new Une(Util.currentDate2Long(), lectInicial, lectFinal, consumoElectrico, totalAPagar));
-            return;
         }
             //Toast.makeText(UneActivity.this, msg, Toast.LENGTH_SHORT).show();
 //        }catch (Exception ex){
@@ -198,7 +197,7 @@ public class UneActivity extends AppCompatActivity {
             //b.add(Double.valueOf(consumoElectrico - e.rangosConsumo.get(i).getInicioRango()));
             consumoTotal += (consumoElectrico - e.rangosConsumo.get(i).getInicioRango()) * e.rangosConsumo.get(i).getPrecioRango();
         }catch (Exception ex){
-            Logging.error(null, null, ex);
+            JCLogging.error(null, null, ex);
             Toast.makeText(this, "Ha ocurrido un error. Revise el registro para detalles", Toast.LENGTH_LONG);
         }
     }
