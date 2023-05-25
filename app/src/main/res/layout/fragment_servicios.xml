@@ -60,14 +60,6 @@
                             android:minHeight="100dp"
                             android:padding="10dp">
 
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginTop="3dp"
-                                android:layout_marginEnd="3dp"
-                                android:src="@drawable/outline_payments_24"
-                                />
 
                             <TextView
                                 android:layout_width="100dp"
@@ -98,14 +90,6 @@
                             android:background="@drawable/my_gradient_drawable3"
                             android:minHeight="80dp"
                             android:padding="10dp">
-
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginTop="3dp"
-                                android:layout_marginEnd="3dp"
-                                android:src="@drawable/outline_phone_forwarded_24" />
 
                             <TextView
                                 android:layout_width="100dp"
@@ -146,14 +130,6 @@
                             android:minHeight="100dp"
                             android:padding="10dp">
 
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginTop="3dp"
-                                android:layout_marginEnd="3dp"
-                                android:src="@drawable/outline_data"
-                                />
 
                             <TextView
                                 android:layout_width="100dp"
@@ -185,13 +161,6 @@
                             android:minHeight="80dp"
                             android:padding="10dp">
 
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginTop="3dp"
-                                android:layout_marginEnd="3dp"
-                                android:src="@drawable/outline_phone_locked_24" />
 
                             <TextView
                                 android:layout_width="100dp"
@@ -232,15 +201,6 @@
                             android:minHeight="100dp"
                             android:padding="10dp">
 
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginTop="3dp"
-                                android:layout_marginEnd="3dp"
-                                android:src="@drawable/outline_sim_card_240"
-                                />
-
                             <TextView
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
@@ -270,14 +230,6 @@
                             android:background="@drawable/my_gradient_drawable4"
                             android:minHeight="80dp"
                             android:padding="10dp">
-
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginTop="3dp"
-                                android:layout_marginEnd="3dp"
-                                android:src="@drawable/outline_bono" />
 
                             <TextView
                                 android:layout_width="100dp"

@@ -181,7 +181,7 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.1.0'
 
 
-    //FIREBASE
+    //GOOGLE
     implementation platform('com.google.firebase:firebase-bom:31.5.0')
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-analytics'
@@ -189,10 +189,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics:18.3.7'
-
     implementation 'mobi.gspd:segmentedbarview:1.1.6@aar'
     implementation 'com.budiyev.android:code-scanner:2.1.0'
     implementation 'com.github.hajiyevelnur92:intentanimation:1.0'
+    implementation 'com.google.android.gms:play-services-ads:22.1.0'
 
 
     implementation 'com.intuit.sdp:sdp-android:1.1.0'

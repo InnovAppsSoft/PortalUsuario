@@ -22,6 +22,14 @@ import android.view.LayoutInflater;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.marlon.portalusuario.R;
 import com.marlon.portalusuario.perfil.ImageSaver;
 import com.marlon.portalusuario.perfil.PerfilActivity;
@@ -45,28 +53,13 @@ import java.util.Objects;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CuentasFragment extends Fragment {
-
-    private static Context context;
-
-    static Fragment newInstance(Context ctx) {
-        context = ctx;
-        return new CuentasFragment();
-
-    }
-
-
     private SwipeRefreshLayout Refrescar;
-
     private TextView saldotext, expiratext, minutostext, mensajestext, venceminutossms, datostext, datoslte, datosnacionales, VenceDatosI, bolsasms,vencebolsasms,bolsadiaria,vencebolsadiaria,Actulizar;
     TelephonyManager manager, manager2, managerMain;
-
     private TextView TextoNombre,Saludo,Numero, Correo;
     SharedPreferences sp_cuentas;
     SharedPreferences.Editor editor;
-
     CheckBox escogerSim;
-
-    AlertDialog alertDialog;
 
     // TODO: account handle and sim slot
     private List<PhoneAccountHandle> phoneAccountHandleList;
@@ -92,16 +85,15 @@ public class CuentasFragment extends Fragment {
     public String sim ="0";
     public SharedPreferences sp_sim;
 
+    AdView mAdView;
     private CircleImageView imgperfil;
-    private ImageView Editar, refreshButton;
-    TextView Promo;
-
+    private ImageView editarimagen;
+    private TextView promobonos;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_cuentas, container, false);
-
         // Mensaje para Android menor que 8
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             AlertDialog.Builder alertdialogo1 = new AlertDialog.Builder(requireActivity());
@@ -110,8 +102,6 @@ public class CuentasFragment extends Fragment {
             alertdialogo1.setPositiveButton("Ok",null);
             alertdialogo1.create().show();
         }
-
-
         // ui components init
         Refrescar = v.findViewById(R.id.swipeRefresh);
         saldotext = v.findViewById(R.id.text_cuentas_saldo);
@@ -131,12 +121,11 @@ public class CuentasFragment extends Fragment {
         TextoNombre = v.findViewById(R.id.textname);
         Saludo = v.findViewById(R.id.text_saludo_perfil);
         imgperfil = v.findViewById(R.id.img_drawer_perfil);
-        Editar = v.findViewById(R.id.editar);
+        editarimagen = v.findViewById(R.id.editar);
         Numero = v.findViewById(R.id.numerotext);
         Correo = v.findViewById(R.id.correotext);
         escogerSim = v.findViewById(R.id.check_sim_dual);
-        Promo = v.findViewById(R.id.button_cuentas_bono);
-
+        promobonos = v.findViewById(R.id.button_cuentas_bono);
 
         // TODO: SharedPreferences para guardar datos de cuentas
         sp_cuentas = requireActivity().getSharedPreferences("cuentas", Context.MODE_PRIVATE);
@@ -145,6 +134,52 @@ public class CuentasFragment extends Fragment {
         // TODO: Preferences DualSIM
         sp_sim = PreferenceManager.getDefaultSharedPreferences(getActivity());
         sim = (sp_sim.getString(getString(R.string.sim_key), "0"));
+
+        // ADS //
+        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = v.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+
+            @Override
+            public void onAdFailedToLoad(LoadAdError adError) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdImpression() {
+                // Code to be executed when an impression is recorded
+                // for an ad.
+            }
+
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+        });
 
         // ESCOGER SIM0-SIM1
         escogerSim.setChecked(sim.equals("1"));
@@ -160,11 +195,9 @@ public class CuentasFragment extends Fragment {
                 }
 
         });
-
-
-
         return v;
     }
+
 
     @Override
     public void onDestroyView() {
@@ -208,7 +241,7 @@ public class CuentasFragment extends Fragment {
         } else {
             Saludo.setText("Hola");
         }
-        Editar.setOnClickListener(new View.OnClickListener() {
+        editarimagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), PerfilActivity.class));
@@ -248,7 +281,7 @@ public class CuentasFragment extends Fragment {
 
 
         // TODO: Ver bonos promocionales
-        Promo.setOnClickListener(
+       promobonos.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -909,7 +942,6 @@ public class CuentasFragment extends Fragment {
         }
     }
 
-
     public void consultaBonos(String ussdCode, int sim) {
         if (ussdCode.equalsIgnoreCase("")) return;
         if (ContextCompat.checkSelfPermission(Objects.requireNonNull(requireActivity()), Manifest.permission.CALL_PHONE)
@@ -948,9 +980,9 @@ public class CuentasFragment extends Fragment {
                                             .trim();
                             String string_bono = bonos;
                             if (!TextUtils.isEmpty(string_bono)) {
-                                Promo.setVisibility(View.VISIBLE);
+                                promobonos.setVisibility(View.VISIBLE);
                             } else {
-                                Promo.setVisibility(View.GONE);
+                                promobonos.setVisibility(View.GONE);
                             }
                             editor.putString("bonos", string_bono);
                             editor.commit();
@@ -1013,9 +1045,9 @@ public class CuentasFragment extends Fragment {
         // bonos en promo
         String promo = sp_cuentas.getString("bonos", null);
         if (!TextUtils.isEmpty(promo)) {
-            Promo.setVisibility(View.VISIBLE);
+            promobonos.setVisibility(View.VISIBLE);
         } else {
-            Promo.setVisibility(View.GONE);
+            promobonos.setVisibility(View.GONE);
         }
         // datos nacionales
         String nacionales = sp_cuentas.getString("datos_nacionales", "0 MB");

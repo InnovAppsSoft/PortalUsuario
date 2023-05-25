@@ -26,22 +26,9 @@
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
-    <uses-permission
-        android:name="android.permission.BLUETOOTH"
-        android:maxSdkVersion="30" />
-    <uses-permission
-        android:name="android.permission.BLUETOOTH_ADMIN"
-        android:maxSdkVersion="30" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" /> <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> -->
-    <!-- <uses-permission -->
-    <!-- android:name="android.permission.WRITE_EXTERNAL_STORAGE" -->
-    <!-- tools:ignore="ScopedStorage" /> -->
-    <!-- <uses-permission -->
-    <!-- android:name="android.permission.PACKAGE_USAGE_STATS" -->
-    <!-- tools:ignore="ProtectedPermissions" /> -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <uses-permission android:name="android.permission.VIBRATE" />
-
     <queries>
         <intent>
             <action android:name="android.intent.action.MAIN" />
@@ -78,56 +65,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon"
-        tools:targetApi="m">
-        <receiver
-            android:name=".widgets.WidgetDark"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
+        tools:targetApi="m"
+        android:hardwareAccelerated="true">
 
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_dark_info" />
-        </receiver>
-        <receiver
-            android:name=".widgets.WidgetUSSD"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_u_s_s_d_info" />
-        </receiver>
-
-        <activity
-            android:name=".perfil.PerfilActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.Donacion"
-            android:exported="false" />
-        <activity
-            android:name=".activities.PermissionActivity"
-            android:exported="true" /> <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" -->
-        <activity
-            android:name=".PUNotifications.PUNotificationsActivity"
-            android:exported="false" />
-        <!--
-     Set custom default icon. This is used when no icon is set for incoming notification messages.
-     See README(https://goo.gl/l4GJaQ) for more.
-        -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_event" />
-        <!--
- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more.
-        -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorAccent" /> <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" -->
         <activity
             android:name=".intro_app.IntroActivity"
             android:exported="true"
@@ -144,6 +84,19 @@
             android:name=".activities.MainActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
+
+        <activity
+            android:name=".perfil.PerfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Donacion"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PermissionActivity"
+            android:exported="true" />
+        <activity
+            android:name=".PUNotifications.PUNotificationsActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.SettingsActivity"
             android:label="Configuración" />
@@ -181,10 +134,6 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/Firewall">
-
-            <!-- <meta-data -->
-            <!-- android:name="android.app.searchable" -->
-            <!-- android:resource="@xml/searchable" /> -->
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -193,6 +142,33 @@
             android:name=".une.UneActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
+
+        <!--AdMob -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9665109922019776~6118514078"/>
+        <receiver
+            android:name=".widgets.WidgetDark"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_dark_info" />
+        </receiver>
+        <receiver
+            android:name=".widgets.WidgetUSSD"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_u_s_s_d_info" />
+        </receiver>
 
         <receiver
             android:name=".widgets.Widget"
@@ -223,6 +199,13 @@
             android:name=".burbuja_trafico.FloatingBubbleService"
             android:enabled="true"
             android:exported="true" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_event" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
 
         <receiver
             android:name=".burbuja_trafico.BootReceiver"
