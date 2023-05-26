@@ -25,6 +25,7 @@ import androidx.preference.PreferenceManager;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
@@ -144,6 +145,9 @@ public class CuentasFragment extends Fragment {
 
         mAdView = v.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
+        AdView adView = new AdView(getContext());
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-9665109922019776/1173610479");
         mAdView.loadAd(adRequest);
         mAdView.setAdListener(new AdListener() {
             @Override
