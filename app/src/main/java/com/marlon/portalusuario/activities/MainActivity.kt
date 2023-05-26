@@ -255,6 +255,10 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 R.id.invite -> {
                     inviteUser()
                 }
+                R.id.politicadeprivacidad-> {
+                    i = Intent(this@MainActivity, PrivacyActivity::class.java)
+                    startActivity(i)
+                }
 
                 R.id.settings -> {
                     i = Intent(this@MainActivity, SettingsActivity::class.java)

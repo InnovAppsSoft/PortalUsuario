@@ -321,6 +321,20 @@
 
                 </androidx.cardview.widget.CardView>
 
+
+                <com.google.android.gms.ads.AdView
+                    xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/adViewsms"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    ads:adSize="BANNER"
+                    ads:adUnitId="ca-app-pub-9665109922019776/1173610479">
+                </com.google.android.gms.ads.AdView>
+
             </LinearLayout>
 
         </ScrollView>

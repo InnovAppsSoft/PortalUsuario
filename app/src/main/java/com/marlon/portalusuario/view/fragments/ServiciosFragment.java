@@ -30,6 +30,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.marlon.portalusuario.activities.EmergenciaActivity;
 import com.marlon.portalusuario.activities.LlamadaOcultoActivity;
 import com.marlon.portalusuario.activities.Llamada_99Activity;
@@ -63,6 +71,7 @@ public class ServiciosFragment<b> extends Fragment {
     private JCLogging logging;
 
     static final int PICK_CONTACT_REQUEST = 1;
+    AdView mAdView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -99,6 +108,54 @@ public class ServiciosFragment<b> extends Fragment {
         adelantaSaldoBtn = view.findViewById(R.id.adelantar);
 
 
+        // ADS //
+        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = view.findViewById(R.id.adViewservicios);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        AdView adView = new AdView(getContext());
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-9665109922019776/5591970278");
+        mAdView.loadAd(adRequest);
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+
+            @Override
+            public void onAdFailedToLoad(LoadAdError adError) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdImpression() {
+                // Code to be executed when an impression is recorded
+                // for an ad.
+            }
+
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+        });
 
         scanQRRechargeCode.setOnClickListener(new View.OnClickListener() {
             @Override

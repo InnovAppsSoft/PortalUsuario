@@ -1,39 +1,35 @@
-<PreferenceScreen
+    <PreferenceScreen
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--<PreferenceCategory app:title="General">
-
-        <EditTextPreference
-            app:key="signature"
-            app:title="@string/signature_title"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:key="reply"
-            app:title="@string/reply_title"
-            app:useSimpleSummaryProvider="true" />
-
-    </PreferenceCategory>-->
     <PreferenceCategory app:title="Apariencia">
         <ListPreference
             app:defaultValue="sistema"
             app:entries="@array/temas_ui"
-            app:icon="@drawable/outline_nights_stay_24"
+            app:icon="@drawable/outline_nightlight_24"
             app:entryValues="@array/temas_ui_values"
             app:key="keynoche"
             app:title="@string/apariecia_settings"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 
+        <PreferenceCategory app:title="Eliminar Anuncios (Proximamente)">
+
+            <SwitchPreferenceCompat
+                app:key="quit_ads"
+                app:icon="@drawable/outline_ads_click_24"
+                app:defaultValue="false"
+                app:title="Elimninar anuncios"/>
+
+        </PreferenceCategory>
+
+
+
     <PreferenceCategory app:title="Inicio">
 
         <SwitchPreferenceCompat
             app:key="show_etecsa_promo_carousel"
-            app:icon="@drawable/outline_settings_24_confi"
+            app:icon="@drawable/outline_remove_red_eye_24"
             app:defaultValue="true"
             app:title="Mostar promociones de Etecsa"/>
 
@@ -44,7 +40,7 @@
         <SwitchPreferenceCompat
             app:key="start_checking_for_updates"
             app:defaultValue="true"
-            app:icon="@drawable/outline_settings_24_confi"
+            app:icon="@drawable/outline_system_update_alt_24"
             app:title="Buscar actualizaciones" />
 
         <!-- <SwitchPreferenceCompat
@@ -54,7 +50,7 @@
         <SwitchPreferenceCompat
             app:key="show_update_window"
             app:defaultValue="true"
-            app:icon="@drawable/outline_settings_24_confi"
+            app:icon="@drawable/outline_remove_red_eye_24"
             app:title="Mostrar actualización" />
 
         <!--<SwitchPreferenceCompat
@@ -69,7 +65,7 @@
     <SwitchPreferenceCompat
         app:key="save_logs"
         app:defaultValue="true"
-        app:icon="@drawable/outline_bug_report_24_errr"
+        app:icon="@drawable/outline_bug_report_24"
         app:title="Guardar errores en Registro de Errores" />
     </PreferenceCategory>
     <PreferenceCategory app:title="Servicios">
@@ -77,19 +73,19 @@
         <SwitchPreferenceCompat
             app:key="show_traffic_speed_bubble"
             app:defaultValue="false"
-            app:icon="@drawable/outline_mobiledata_off_24"
+            app:icon="@drawable/outline_bubble_chart_24"
             app:title="Mostrar burbuja flotante" />
 
         <SwitchPreferenceCompat
             app:key="show_notifications"
             app:defaultValue="true"
-            app:icon="@drawable/outline_notifications_active_24"
+            app:icon="@drawable/outline_remove_red_eye_24"
             app:title="Mostrar Notificaciones" />
 
         <SwitchPreferenceCompat
             app:key="storage_ads"
             app:defaultValue="true"
-            app:icon="@drawable/outline_notifications_active_24"
+            app:icon="@drawable/outline_save_24"
             app:title="Guardar Notificaciones" />
 
     </PreferenceCategory>

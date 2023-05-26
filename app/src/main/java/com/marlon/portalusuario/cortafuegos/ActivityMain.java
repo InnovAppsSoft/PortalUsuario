@@ -49,6 +49,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
 import com.marlon.portalusuario.R;
 
 import java.util.List;
@@ -76,12 +81,55 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
     String titulo = "Cortafuegos";
 
+    AdView mAdViewfirewall;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "Create");
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.firewall_activity);
+
+        mAdViewfirewall = findViewById(R.id.adViewfirewall);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-9665109922019776/1173610479");
+        mAdViewfirewall.loadAd(adRequest);
+        mAdViewfirewall.setAdListener(new AdListener() {
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+
+            @Override
+            public void onAdFailedToLoad(LoadAdError adError) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdImpression() {
+                // Code to be executed when an impression is recorded
+                // for an ad.
+            }
+
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+        });
 
         running = true;
 

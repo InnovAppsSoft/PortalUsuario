@@ -20,7 +20,7 @@ public class PrivacyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_privacy);
 
         WebView myWebView = findViewById(R.id.webview_privacy);
-        myWebView.loadUrl("https://sites.google.com/view/marlondejesusmilanesrivero/pol%C3%ADtica-de-privacidad");
+        myWebView.loadUrl("https://portalusuarioapp.blogspot.com/p/portal-usuario-mas-que-una-simple.html");
 
     }
 }

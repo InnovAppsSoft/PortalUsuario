@@ -86,7 +86,7 @@
     <string name="msg_sure">¿Estás seguro?</string>
 
     <string name="send_feedback">Enviar Feedback</string>
-    <string name="feedback_email" translatable="false">portalusuarioapk@gmail.com</string>
+    <string name="feedback_email" translatable="false">portalusuariosoporte@gmail.com</string>
     <string name="feedback_subject">Feedback sobre la aplicación Portal Usuario</string>
 
 
@@ -1117,5 +1117,6 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
     <string name="comunidad_en_whatsapp">Comunidad en WhatsApp</string>
+    <string name="politica_de_privacidad">Politica de Privacidad</string>
 
 </resources>

@@ -13,6 +13,11 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
 import com.marlon.portalusuario.R;
 
 public class VozActivity extends AppCompatActivity implements View.OnClickListener{
@@ -20,10 +25,53 @@ public class VozActivity extends AppCompatActivity implements View.OnClickListen
     private CardView min5,min10,min15,min25,min40;
     private ImageView Atras;
 
+    AdView mAdViewvoz;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voz);
+
+        mAdViewvoz = findViewById(R.id.adViewvoz);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-9665109922019776/1173610479");
+        mAdViewvoz.loadAd(adRequest);
+        mAdViewvoz.setAdListener(new AdListener() {
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+
+            @Override
+            public void onAdFailedToLoad(LoadAdError adError) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdImpression() {
+                // Code to be executed when an impression is recorded
+                // for an ad.
+            }
+
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+        });
 
         //Definiendo Card
         min5 = findViewById(R.id.min5);

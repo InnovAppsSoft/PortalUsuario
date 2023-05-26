@@ -16,6 +16,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.marlon.portalusuario.R;
 import com.marlon.portalusuario.ViewModel.UneViewModel;
 import com.marlon.portalusuario.errores_log.JCLogging;
@@ -54,6 +62,9 @@ public class UneActivity extends AppCompatActivity {
     
     private UneViewModel uneViewModel;
 
+    AdView mAdViewune;
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     public void onCreate(Bundle bundle) {
@@ -75,6 +86,55 @@ public class UneActivity extends AppCompatActivity {
         consumoTotal = 0.0;
         consumoElectrico = 0;
         cadena = "";
+
+        // ADS //
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdViewune = findViewById(R.id.adViewune);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-9665109922019776/5591970278");
+        mAdViewune.loadAd(adRequest);
+        mAdViewune.setAdListener(new AdListener() {
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+
+            @Override
+            public void onAdFailedToLoad(LoadAdError adError) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdImpression() {
+                // Code to be executed when an impression is recorded
+                // for an ad.
+            }
+
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+        });
 
         BottomSheetDialogUne bottomSheetDialog = new BottomSheetDialogUne();
 

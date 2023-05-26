@@ -15,6 +15,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.marlon.portalusuario.R;
 
 /**
@@ -34,6 +42,8 @@ public class PaquetesFragment extends Fragment {
 
     private AppCompatButton Pb, Pm, Pe ,bolsac,tarifa,bolsad,P1,P2,P16;
 
+    AdView mAdViewp1;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_paquetes, container, false);
@@ -51,6 +61,55 @@ public class PaquetesFragment extends Fragment {
         bolsad = view.findViewById(R.id.bolsad);
         tarifa = view.findViewById(R.id.tarifa);
 
+
+        // ADS //
+        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdViewp1= view.findViewById(R.id.adViewp1);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        AdView adView = new AdView(getContext());
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-9665109922019776/5591970278");
+        mAdViewp1.loadAd(adRequest);
+        mAdViewp1.setAdListener(new AdListener() {
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+
+            @Override
+            public void onAdFailedToLoad(LoadAdError adError) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdImpression() {
+                // Code to be executed when an impression is recorded
+                // for an ad.
+            }
+
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+        });
 
 
         Pb.setOnClickListener(new View.OnClickListener() {

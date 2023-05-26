@@ -78,6 +78,15 @@
             android:title="@string/invitar_amigos"/>
     </menu>
 </item>
+    <item android:title="@string/politica_de_privacidad">
+        <menu>
+            <item
+                android:id="@+id/politicadeprivacidad"
+                android:icon="@drawable/outline_privacy_tip_24"
+                android:title="@string/pol_tica_de_privacidad"/>
+        </menu>
+    </item>
+
 <item android:title="@string/ajustes1">
     <menu>
         <item
