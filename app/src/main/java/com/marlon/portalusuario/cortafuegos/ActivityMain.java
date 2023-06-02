@@ -53,6 +53,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.marlon.portalusuario.R;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ActivityMain extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "Firewall.Main";
@@ -80,6 +81,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "Create");
+        final SharedPreferences prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.firewall_activity);
 
@@ -91,10 +93,12 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         Datos = findViewById(R.id.lock_data_icon);
 
 
-        final SharedPreferences prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
-        boolean enabled = prefs.getBoolean("enabled", false);
-        boolean initialized = prefs.getBoolean("initialized", false);
+        // Action bar
+        View view = getLayoutInflater().inflate(R.layout.actionbar, null);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(view);
 
+        /// on/Of
         SwitchCompat swEnabled = findViewById(R.id.swEnabled);
         swEnabled.setChecked(prefs.getBoolean("enabled", false));
         swEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -315,7 +319,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         SharedPreferences prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
 
         MenuItem network = menu.findItem(R.id.menu_network);
-        network.setIcon(Util.isWifiActive(this) ? R.drawable.wifi_on : R.drawable.other_on);
+        network.setIcon(Util.isWifiActive(this) ? R.drawable.wifi_bar : R.drawable.sim_on);
 
         MenuItem show_sys_apps = menu.findItem(R.id.menu_show_system_apps);
         show_sys_apps.setChecked(prefs.getBoolean("show_sys_apps", true));
