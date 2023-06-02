@@ -19,7 +19,7 @@
                 app:key="quit_ads"
                 app:icon="@drawable/outline_ads_click_24"
                 app:defaultValue="false"
-                app:title="Elimninar anuncios"/>
+                app:title="Eliminar anuncios"/>
 
         </PreferenceCategory>
 
