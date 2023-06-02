@@ -1,5 +1,7 @@
 package com.marlon.portalusuario.cortafuegos;
 
+import static com.google.zxing.integration.android.IntentIntegrator.REQUEST_CODE;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -23,6 +25,7 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.os.Bundle;
+
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -33,7 +36,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -43,17 +45,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
+
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.LoadAdError;
 import com.marlon.portalusuario.R;
 
 import java.util.List;
@@ -62,6 +58,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     private static final String TAG = "Firewall.Main";
     private static final int NOTIFICATION_PERMISSION_CODE = 123;
     private NotificationManagerCompat notificationManagerCompat;
+
     private static final int NOTIFICATION_ID = 0;
     private static final String CHANNEL_ID = "Servicio de Cortafuegos";
 
@@ -72,7 +69,6 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
     private androidx.appcompat.widget.SearchView searchView;
 
-    private SwitchCompat swEnabled;
     private AppCompatImageView Wifi, Datos;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private Toolbar toolbar;
@@ -81,55 +77,11 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
     String titulo = "Cortafuegos";
 
-    AdView mAdViewfirewall;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "Create");
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.firewall_activity);
-
-        mAdViewfirewall = findViewById(R.id.adViewfirewall);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-9665109922019776/1173610479");
-        mAdViewfirewall.loadAd(adRequest);
-        mAdViewfirewall.setAdListener(new AdListener() {
-            @Override
-            public void onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-            }
-
-            @Override
-            public void onAdFailedToLoad(LoadAdError adError) {
-                // Code to be executed when an ad request fails.
-            }
-
-            @Override
-            public void onAdImpression() {
-                // Code to be executed when an impression is recorded
-                // for an ad.
-            }
-
-            @Override
-            public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-        });
 
         running = true;
 
@@ -139,11 +91,17 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         Datos = findViewById(R.id.lock_data_icon);
 
 
-        // On/off switch
+        final SharedPreferences prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
+        boolean enabled = prefs.getBoolean("enabled", false);
+        boolean initialized = prefs.getBoolean("initialized", false);
+
         SwitchCompat swEnabled = findViewById(R.id.swEnabled);
         swEnabled.setChecked(prefs.getBoolean("enabled", false));
         swEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.i(TAG, "Switch=" + isChecked);
+                prefs.edit().putBoolean("enabled", isChecked).apply();
+
                 if (isChecked) {
                     Log.i(TAG, "Switch on");
                     Intent prepare = VpnService.prepare(ActivityMain.this);
@@ -155,21 +113,20 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                         try {
                             startActivityForResult(prepare, REQUEST_VPN);
                         } catch (Throwable ex) {
-                            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
+                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
                             onActivityResult(REQUEST_VPN, RESULT_CANCELED, null);
-                            Toast.makeText(ActivityMain.this, ex.toString(), Toast.LENGTH_LONG).show();
+                            prefs.edit().putBoolean("enabled", false).apply();
                         }
                     }
-                    // MOSTRAR NOTIFIACION
-                    createNotification(ActivityMain.this);
                     BlackHoleService.start(ActivityMain.this);
+                    createNotification(ActivityMain.this);
                 } else {
                     // OCULTAR NOTIFIACION EN CASO DE QUE SE DETUVIERA EL SERVICIO
                     // STOPING SERVICE
                     Log.i(TAG, "Switch off");
                     prefs.edit().putBoolean("enabled", false).apply();
-                    //deleteNotification();
                     BlackHoleService.stop(ActivityMain.this);
+
                 }
             }
         });
@@ -218,7 +175,8 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     public void onDestroy() {
         Log.i(TAG, "Destroy");
         running = false;
-        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
+        SharedPreferences prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
+        androidx.preference.PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
         unregisterReceiver(connectivityChangedReceiver);
         unregisterReceiver(packageChangedReceiver);
         super.onDestroy();
@@ -242,7 +200,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         }
     };
 
-    @SuppressLint("StaticFieldLeak")
+
     private void fillApplicationList() {
         // Get recycler view
         final RecyclerView rvApplication = findViewById(R.id.rvApplication);
@@ -354,10 +312,10 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
 
         MenuItem network = menu.findItem(R.id.menu_network);
-        network.setIcon(Util.isWifiActive(this) ? R.drawable.ic_network_wifi_white_24dp : R.drawable.ic_network_cell_white_24dp);
+        network.setIcon(Util.isWifiActive(this) ? R.drawable.wifi_on : R.drawable.other_on);
 
         MenuItem show_sys_apps = menu.findItem(R.id.menu_show_system_apps);
         show_sys_apps.setChecked(prefs.getBoolean("show_sys_apps", true));
@@ -371,11 +329,9 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         return super.onPrepareOptionsMenu(menu);
     }
 
-    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-
+        SharedPreferences prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
         int item1 = item.getItemId();
         if (item1 == R.id.menu_network) {
             Intent settings = new Intent(Util.isWifiActive(this)
@@ -387,26 +343,26 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             return true;
 
 
-        } else if( item1 == R.id.menu_show_system_apps ){
+        } else if (item1 == R.id.menu_show_system_apps) {
             prefs.edit().putBoolean("show_sys_apps", !prefs.getBoolean("show_sys_apps", true)).apply();
             fillApplicationList();
             return true;
-        } else if( item1 == R.id.menu_refresh ){
+        } else if (item1 == R.id.menu_refresh) {
             fillApplicationList();
             return true;
 
-        } else if( item1 == R.id.menu_whitelist_wifi ){
+        } else if (item1 == R.id.menu_whitelist_wifi) {
 
             prefs.edit().putBoolean("whitelist_wifi", !prefs.getBoolean("whitelist_wifi", true)).apply();
             fillApplicationList();
             BlackHoleService.reload("wifi", this);
             return true;
-        } else if( item1 == R.id.menu_whitelist_other ){
+        } else if (item1 == R.id.menu_whitelist_other) {
             prefs.edit().putBoolean("whitelist_other", !prefs.getBoolean("whitelist_other", true)).apply();
             fillApplicationList();
             BlackHoleService.reload("other", this);
             return true;
-        } else if( item1 == R.id.menu_reset_wifi ){
+        } else if (item1 == R.id.menu_reset_wifi) {
             new AlertDialog.Builder(this)
                     .setMessage(R.string.msg_sure)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -418,7 +374,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                     .setNegativeButton(android.R.string.no, null)
                     .show();
             return true;
-        } else if( item1 == R.id.menu_reset_other ){
+        } else if (item1 == R.id.menu_reset_other) {
             new AlertDialog.Builder(this)
                     .setMessage(R.string.msg_sure)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -431,7 +387,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                     .show();
             return true;
 
-        } else if( item1 == R.id.menu_vpn_settings ){
+        } else if (item1 == R.id.menu_vpn_settings) {
             // Open VPN settings
             Intent vpn = new Intent("android.net.vpn.SETTINGS");
             if (vpn.resolveActivity(getPackageManager()) != null)
@@ -440,7 +396,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                 Log.w(TAG, vpn + " not available");
             return true;
 
-        }else{
+        } else {
             return super.onOptionsItemSelected(item);
         }
 
@@ -460,7 +416,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_VPN) {
             // Update enabled state
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
             prefs.edit().putBoolean("enabled", resultCode == RESULT_OK).apply();
 
             // Start service
@@ -483,8 +439,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
             stackBuilder.addNextIntentWithParentStack(resultIntent);
             // OBTENER EL INTENT PENDIENTE A MOSTRAR
-            PendingIntent resultPendingIntent =
-                    stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(REQUEST_CODE, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
             // SI ES VERSION ANDROID 8 EN ADELANTE
 
             // CREA CANAL DE NOTIFIACION

@@ -14,7 +14,7 @@
     <color name="data_usage_high">#81C784</color>
 
     <color name="predeterminado">#FF4081</color>
-
+    <color name="bar">#FF4081</color>
 
     <color name="botoncolorStart">#7041FF</color>
     <color name="colorboton">#4D53E0</color>

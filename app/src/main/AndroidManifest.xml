@@ -102,7 +102,7 @@
             android:label="Configuración" />
         <activity
             android:name=".errores_log.LogFileViewerActivity"
-            android:theme="@style/Traffic" />
+            android:theme="@style/Firewall"/>
         <activity
             android:name=".activities.SplashActivity"
             android:screenOrientation="portrait"

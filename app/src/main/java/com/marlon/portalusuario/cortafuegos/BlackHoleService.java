@@ -1,5 +1,9 @@
 package com.marlon.portalusuario.cortafuegos;
 
+import static android.net.ConnectivityManager.EXTRA_REASON;
+
+import static com.google.zxing.integration.android.IntentIntegrator.REQUEST_CODE;
+
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -92,7 +96,7 @@ public class BlackHoleService extends VpnService {
 
         // Build configure intent
         Intent configure = new Intent(this, ActivityMain.class);
-        PendingIntent pi = PendingIntent.getActivity(this, 0, configure, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pi = PendingIntent.getBroadcast(this, REQUEST_CODE, configure, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setConfigureIntent(pi);
 
         // Start VPN service

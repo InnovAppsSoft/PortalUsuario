@@ -14,6 +14,7 @@
 
     <color name="transparent_white">#99000000</color>
     <color name="botoncolorStart">#7041FF</color>
+    <color name="bar">#99000000</color>
 
     <color name="colorTextHit">#ffffff</color>
 

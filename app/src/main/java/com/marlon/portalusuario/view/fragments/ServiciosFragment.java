@@ -114,49 +114,6 @@ public class ServiciosFragment<b> extends Fragment {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-
-        mAdView = view.findViewById(R.id.adViewservicios);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        AdView adView = new AdView(getContext());
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-9665109922019776/5591970278");
-        mAdView.loadAd(adRequest);
-        mAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-            }
-
-            @Override
-            public void onAdFailedToLoad(LoadAdError adError) {
-                // Code to be executed when an ad request fails.
-            }
-
-            @Override
-            public void onAdImpression() {
-                // Code to be executed when an impression is recorded
-                // for an ad.
-            }
-
-            @Override
-            public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-        });
-
         scanQRRechargeCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

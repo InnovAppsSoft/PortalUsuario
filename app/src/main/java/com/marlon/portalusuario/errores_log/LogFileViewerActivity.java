@@ -51,10 +51,11 @@ public class LogFileViewerActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("Registro de depuración");
+            this.setTitleColor(Color.BLACK);
         }
         // INIT DE ELEMENTOS
         this.setTitle("Registro de depuración");
-        this.setTitleColor(Color.GREEN);
+        this.setTitleColor(Color.BLACK);
         JCLogging = new JCLogging(LogFileViewerActivity.this);
         recyclerView = findViewById(R.id.rvLogs);
         recyclerView.setHasFixedSize(true);

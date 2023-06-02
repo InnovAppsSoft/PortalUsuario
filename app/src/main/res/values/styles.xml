@@ -332,8 +332,8 @@
     </style>
 
     <style name="Firewall" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/downloadBackgroundStart</item>
-        <item name="colorPrimaryDark">@color/downloadBackgroundEnd</item>
+        <item name="colorPrimary">@color/bar</item>
+        <item name="colorPrimaryDark">@color/bar</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowDisablePreview">true</item>
     </style>
