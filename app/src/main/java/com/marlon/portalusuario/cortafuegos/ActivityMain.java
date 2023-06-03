@@ -69,7 +69,6 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
     private androidx.appcompat.widget.SearchView searchView;
 
-    private AppCompatImageView Wifi, Datos;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private Toolbar toolbar;
 
@@ -147,26 +146,6 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         intentFilter.addAction(Intent.ACTION_PACKAGE_REMOVED);
         intentFilter.addDataScheme("package");
         registerReceiver(packageChangedReceiver, intentFilter);
-
-        Wifi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                prefs.edit().putBoolean("whitelist_wifi", !prefs.getBoolean("whitelist_wifi", true)).apply();
-                fillApplicationList();
-                BlackHoleService.reload("wifi", ActivityMain.this);
-
-            }
-        });
-
-        Datos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                prefs.edit().putBoolean("whitelist_other", !prefs.getBoolean("whitelist_other", true)).apply();
-                fillApplicationList();
-                BlackHoleService.reload("other", ActivityMain.this);
-
-            }
-        });
 
     }
 
