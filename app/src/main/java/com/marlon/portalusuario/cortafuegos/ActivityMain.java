@@ -57,7 +57,6 @@ import java.util.Objects;
 
 public class ActivityMain extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "Firewall.Main";
-    private static final int NOTIFICATION_PERMISSION_CODE = 123;
     private NotificationManagerCompat notificationManagerCompat;
 
     private static final int NOTIFICATION_ID = 0;
@@ -89,17 +88,13 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
         this.setTitle(R.string.cortafuegos);
 
-        Wifi = findViewById(R.id.lock_wifi_icon);
-        Datos = findViewById(R.id.lock_data_icon);
-
-
         // Action bar
         View view = getLayoutInflater().inflate(R.layout.actionbar, null);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(view);
 
         /// on/Of
-        SwitchCompat swEnabled = findViewById(R.id.swEnabled);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) SwitchCompat swEnabled = findViewById(R.id.swEnabled);
         swEnabled.setChecked(prefs.getBoolean("enabled", false));
         swEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
