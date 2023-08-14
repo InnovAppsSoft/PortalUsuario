@@ -31,11 +31,8 @@ import com.marlon.portalusuario.nauta.domain.model.UserModel
 @Composable
 fun CardNautaDetails(
     modifier: Modifier = Modifier,
-    user: UserModel,
-    isLoading: Boolean,
-    loginStatus: Pair<Boolean, String?>
+    user: UserModel
 ) {
-    val (isOk, _) = loginStatus
     Column(modifier = modifier) {
         Text(
             text = "Nauta",
@@ -50,8 +47,6 @@ fun CardNautaDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.ic_baseline_attach_money_24),
                 detailName = stringResource(id = R.string.new_account_credit),
                 detailValue = "${user.credit.toPriceString()} CUP",
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFFFF4747),
                 modifier = Modifier
                     .padding(top = 4.dp, end = 4.dp, bottom = 4.dp)
@@ -61,8 +56,6 @@ fun CardNautaDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_lock_clock_24),
                 detailName = stringResource(id = R.string.new_blocking_date),
                 detailValue = user.blockingDate,
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFF00BCD4),
                 modifier = Modifier
                     .padding(top = 4.dp, start = 4.dp, bottom = 4.dp)
@@ -74,8 +67,6 @@ fun CardNautaDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.outline_auto_delete_24),
                 detailName = stringResource(id = R.string.new_date_of_elimination),
                 detailValue = user.dateOfElimination,
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFF553096),
                 modifier = Modifier
                     .padding(top = 4.dp, end = 4.dp, bottom = 4.dp)
@@ -85,8 +76,6 @@ fun CardNautaDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.outline_wifi_24),
                 detailName = stringResource(id = R.string.new_account_type),
                 detailValue = user.accountType,
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFFE28906),
                 modifier = Modifier
                     .padding(top = 4.dp, start = 4.dp, bottom = 4.dp)
@@ -98,8 +87,6 @@ fun CardNautaDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_payment_24),
                 detailName = stringResource(id = R.string.new_service_type),
                 detailValue = if (user.serviceType == NavigationType.INTERNATIONAL) "Internacional" else "Nacional",
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFF009688),
                 modifier = Modifier
                     .padding(top = 4.dp, end = 4.dp, bottom = 4.dp)
@@ -109,8 +96,6 @@ fun CardNautaDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_alternate_email_24),
                 detailName = stringResource(id = R.string.new_mail_account),
                 detailValue = user.email,
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFF3F51B5),
                 modifier = Modifier
                     .padding(top = 4.dp, start = 4.dp, bottom = 4.dp)
@@ -126,15 +111,11 @@ fun NautaDetail(
     detailIcon: ImageVector,
     detailName: String,
     detailValue: String,
-    backgroundColor: Color,
-    isLoading: Boolean,
-    isFoundErrors: Boolean
+    backgroundColor: Color
 ) {
     PrettyCard(
         modifier = modifier,
-        backgroundColor = backgroundColor,
-        isLoading = isLoading,
-        isFoundErrors = isFoundErrors
+        backgroundColor = backgroundColor
     ) {
         Column(
             modifier = Modifier
@@ -188,9 +169,7 @@ fun CardNautaDetailsPreview() {
             user = user,
             modifier = Modifier
                 .padding(16.dp)
-                .fillMaxWidth(),
-            loginStatus = Pair(true, null),
-            isLoading = false
+                .fillMaxWidth()
         )
     }
 }
@@ -203,9 +182,7 @@ fun CardNautaDetailsPreviewDark() {
             user = user,
             modifier = Modifier
                 .padding(16.dp)
-                .fillMaxWidth(),
-            loginStatus = Pair(true, null),
-            isLoading = false
+                .fillMaxWidth()
         )
     }
 }

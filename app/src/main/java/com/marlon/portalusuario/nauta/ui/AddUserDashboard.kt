@@ -28,10 +28,11 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.commons.ui.AnimatedPlaceholder
-import com.marlon.portalusuario.nauta.ui.components.CaptchaCanvas
+import com.marlon.portalusuario.nauta.ui.components.captchaview.CaptchaView
 import com.marlon.portalusuario.nauta.ui.components.PasswordField
 import com.marlon.portalusuario.nauta.ui.components.PrettyCard
 import com.marlon.portalusuario.nauta.ui.components.UserField
+import com.marlon.portalusuario.nauta.ui.components.captchaview.CaptchaViewState
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -40,25 +41,13 @@ fun AddUserDashboard(viewModel: NautaViewModel) {
     val password: String by viewModel.password.observeAsState(initial = "")
     val captchaCode: String by viewModel.captchaCode.observeAsState(initial = "")
     val updateButtonIsEnabled: Boolean by viewModel.loginEnable.observeAsState(initial = false)
-    val captchaImage: Bitmap? by viewModel.captchaImage.observeAsState(initial = null)
-    val isLoadingCaptcha: Boolean by viewModel.isLoadingCaptcha.observeAsState(initial = false)
-    val isLogging: Boolean by viewModel.isLogging.observeAsState(initial = false)
-    val loginStatus: Pair<Boolean, String?> by viewModel.loginStatus.observeAsState(
-        initial = Pair(
-            true,
-            null
-        )
-    )
-    val captchaLoadStatus: Pair<Boolean, String?> by viewModel.captchaLoadStatus.observeAsState(
-        initial = Pair(true, null)
-    )
+    val captchaViewState: CaptchaViewState by viewModel.captchaViewState
+        .observeAsState(initial = CaptchaViewState.Loading)
+    val isRunningSomeTask: Boolean by viewModel.isRunningSomeTask.observeAsState(initial = false)
 
-    val context = LocalContext.current
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    PrettyCard(isLoading = isLogging) {
-        val (isOk, err) = loginStatus
-        if (!isOk) Toast.makeText(context, err, Toast.LENGTH_LONG).show()
+    PrettyCard(isLoading = isRunningSomeTask) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -66,10 +55,8 @@ fun AddUserDashboard(viewModel: NautaViewModel) {
             Spacer(modifier = Modifier.padding(4.dp))
             PasswordField(password) { viewModel.onLoginChanged(userName, it, captchaCode) }
             Spacer(modifier = Modifier.padding(4.dp))
-            CaptchaCanvas(
-                captchaImage = captchaImage,
-                isLoading = isLoadingCaptcha,
-                captchaLoadStatus = captchaLoadStatus
+            CaptchaView(
+                state = captchaViewState
             ) { viewModel.getCaptcha() }
             Spacer(modifier = Modifier.padding(4.dp))
             TextField(

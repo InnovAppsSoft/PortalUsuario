@@ -26,11 +26,8 @@ import com.marlon.portalusuario.nauta.domain.model.UserModel
 @Composable
 fun CardNautaHomeDetails(
     modifier: Modifier = Modifier,
-    user: UserModel,
-    isLoading: Boolean,
-    loginStatus: Pair<Boolean, String?>
+    user: UserModel
 ) {
-    val (isOk, _) = loginStatus
     Column(modifier = modifier) {
         Text(
             text = "Enlace",
@@ -41,8 +38,6 @@ fun CardNautaHomeDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.ic_baseline_attach_money_24),
                 detailName = stringResource(id = R.string.new_monthly_fee),
                 detailValue = user.monthlyFee!!.replace("$", ""),
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFFFF9AA2),
                 modifier = Modifier
                     .padding(top = 4.dp, end = 4.dp, bottom = 4.dp)
@@ -52,8 +47,6 @@ fun CardNautaHomeDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_download_24),
                 detailName = stringResource(id = R.string.new_download_speed),
                 detailValue = user.downloadSpeeds!!,
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFFB2C1FA),
                 modifier = Modifier
                     .padding(top = 4.dp, start = 4.dp, bottom = 4.dp)
@@ -65,8 +58,6 @@ fun CardNautaHomeDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_upload_24),
                 detailName = stringResource(id = R.string.new_upload_speed),
                 detailValue = user.uploadSpeeds!!,
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFFEC9F6B),
                 modifier = Modifier
                     .padding(top = 4.dp, end = 4.dp, bottom = 4.dp)
@@ -76,8 +67,6 @@ fun CardNautaHomeDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_numbers_24),
                 detailName = stringResource(id = R.string.new_phone),
                 detailValue = user.phone!!,
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFFF44336),
                 modifier = Modifier
                     .padding(top = 4.dp, start = 4.dp, bottom = 4.dp)
@@ -89,8 +78,6 @@ fun CardNautaHomeDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_phonelink_24),
                 detailName = stringResource(id = R.string.new_link_identifier),
                 detailValue = user.linkIdentifiers!!,
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFF009688),
                 modifier = Modifier
                     .padding(top = 4.dp, end = 4.dp, bottom = 4.dp)
@@ -100,8 +87,6 @@ fun CardNautaHomeDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_link_24),
                 detailName = stringResource(id = R.string.new_link_status),
                 detailValue = user.linkStatus!!,
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFFB57DAD),
                 modifier = Modifier
                     .padding(top = 4.dp, start = 4.dp, bottom = 4.dp)
@@ -113,8 +98,6 @@ fun CardNautaHomeDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_local_offer_24),
                 detailName = stringResource(id = R.string.new_offer),
                 detailValue = user.offer!!,
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFF673AB7),
                 modifier = Modifier
                     .padding(top = 4.dp, bottom = 4.dp)
@@ -126,8 +109,6 @@ fun CardNautaHomeDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_lock_clock_24),
                 detailName = stringResource(id = R.string.new_blocking_date),
                 detailValue = user.blockingDateHome!!,
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFF03A9F4),
                 modifier = Modifier
                     .padding(top = 4.dp, end = 4.dp, bottom = 4.dp)
@@ -137,8 +118,6 @@ fun CardNautaHomeDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_lock_clock_24),
                 detailName = stringResource(id = R.string.new_blocking_date),
                 detailValue = user.blockingDateHome,
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFFF59070),
                 modifier = Modifier
                     .padding(top = 4.dp, start = 4.dp, bottom = 4.dp)
@@ -150,8 +129,6 @@ fun CardNautaHomeDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_auto_delete_24),
                 detailName = stringResource(id = R.string.new_date_of_elimination),
                 detailValue = user.dateOfEliminationHome!!,
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFF828686),
                 modifier = Modifier
                     .padding(top = 4.dp, end = 4.dp, bottom = 4.dp)
@@ -161,8 +138,6 @@ fun CardNautaHomeDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.baseline_request_quote_24),
                 detailName = stringResource(id = R.string.new_quote_fund),
                 detailValue = user.quotePaid!!,
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFFADAF62),
                 modifier = Modifier
                     .padding(top = 4.dp, start = 4.dp, bottom = 4.dp)
@@ -174,8 +149,6 @@ fun CardNautaHomeDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.ic_baseline_attach_money_24),
                 detailName = stringResource(id = R.string.new_voucher),
                 detailValue = user.voucher!!,
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFF857564),
                 modifier = Modifier
                     .padding(top = 4.dp, end = 4.dp, bottom = 4.dp)
@@ -185,8 +158,6 @@ fun CardNautaHomeDetails(
                 detailIcon = ImageVector.vectorResource(id = R.drawable.ic_baseline_attach_money_24),
                 detailName = stringResource(id = R.string.new_debt),
                 detailValue = user.debt!!,
-                isLoading = isLoading,
-                isFoundErrors = !isOk,
                 backgroundColor = Color(0xFF046B79),
                 modifier = Modifier
                     .padding(top = 4.dp, start = 4.dp, bottom = 4.dp)
@@ -231,8 +202,6 @@ fun CardNautaHomeDetailsPreview() {
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 8.dp)
                 .fillMaxWidth(),
-            loginStatus = Pair(true, null),
-            isLoading = false
         )
     }
 }
@@ -246,8 +215,6 @@ fun CardNautaHomeDetailsPreviewDark() {
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 8.dp)
                 .fillMaxWidth(),
-            loginStatus = Pair(true, null),
-            isLoading = false
         )
     }
 }
