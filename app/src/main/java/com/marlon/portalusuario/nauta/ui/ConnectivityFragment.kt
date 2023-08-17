@@ -29,7 +29,7 @@ class ConnectivityFragment @Inject constructor() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        nautaViewModel.onCreated()
+        nautaViewModel.recoverSession()
     }
 
     @Preview(showSystemUi = true)

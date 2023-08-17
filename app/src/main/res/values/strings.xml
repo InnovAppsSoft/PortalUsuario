@@ -1114,6 +1114,8 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="todo">TODO</string>
     <string name="message_scanner_qr_code">Enfoque el QR para recargar</string>
     <string name="advertencia">Lo sentimos mucho!! este apartado solo funciona en versiones Android 8+ puede consultar su saldo y otras opciones en el apartado de Servicios </string>
+    <string name="reintent">Reintentar</string>
+    <string name="forgot">Olvidar</string>
 
 
     <string name="tarifa_activa">Tarifa activa</string>

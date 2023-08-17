@@ -1,6 +1,5 @@
 package com.marlon.portalusuario.nauta.ui
 
-import android.graphics.Bitmap
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,15 +23,18 @@ import com.marlon.portalusuario.nauta.core.isValidRechargeCode
 import com.marlon.portalusuario.nauta.core.toSeconds
 import com.marlon.portalusuario.nauta.core.toTimeString
 import com.marlon.portalusuario.nauta.domain.model.UserModel
-import com.marlon.portalusuario.nauta.ui.components.CaptchaDialog
+import com.marlon.portalusuario.nauta.ui.components.captchadialog.CaptchaDialog
 import com.marlon.portalusuario.nauta.ui.components.CardChangeEmailPassword
 import com.marlon.portalusuario.nauta.ui.components.CardChangePassword
-import com.marlon.portalusuario.nauta.ui.components.CardConnect
+import com.marlon.portalusuario.nauta.ui.components.connectview.ConnectView
 import com.marlon.portalusuario.nauta.ui.components.CardNautaDetails
 import com.marlon.portalusuario.nauta.ui.components.CardNautaHomeDetails
 import com.marlon.portalusuario.nauta.ui.components.CardRecharge
 import com.marlon.portalusuario.nauta.ui.components.CardTransfer
 import com.marlon.portalusuario.nauta.ui.components.UserDetailsHead
+import com.marlon.portalusuario.nauta.ui.components.captchadialog.CaptchaDialogState
+import com.marlon.portalusuario.nauta.ui.components.captchaview.CaptchaViewState
+import com.marlon.portalusuario.nauta.ui.components.connectview.ConnectViewState
 import com.marlon.portalusuario.nauta.ui.components.timepicker.TimePickerDialog
 
 @Composable
@@ -43,101 +45,76 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
 
     //Update
     val captchaCode: String by viewModel.captchaCode.observeAsState(initial = "")
-    val captchaImage: Bitmap? by viewModel.captchaImage.observeAsState(initial = null)
-    val isLoadingCaptcha: Boolean by viewModel.isLoadingCaptcha.observeAsState(initial = false)
-    val captchaLoadStatus: Pair<Boolean, String?> by viewModel.captchaLoadStatus.observeAsState(
-        initial = Pair(true, null)
-    )
+    val captchaViewState: CaptchaViewState by viewModel.captchaViewState
+        .observeAsState(initial = CaptchaViewState.Loading)
 
-    val isReadyToUpdate: Boolean by viewModel.isReadyToUpdate.observeAsState(initial = false)
+    val postUpdateAction: () -> Unit by viewModel.postUpdateAction.observeAsState { }
 
     // Connect
-    val leftTime: String by viewModel.leftTime.observeAsState(initial = currentUser.remainingTime.toTimeString())
+    val leftTime: String by viewModel.leftTime
+        .observeAsState(initial = currentUser.remainingTime.toTimeString())
     val limitedTime: String by viewModel.limitedTime.observeAsState(initial = leftTime)
-    val isConnecting: Boolean by viewModel.isConnecting.observeAsState(initial = false)
-    val connectStatus: Pair<Boolean, String?> by viewModel.connectStatus.observeAsState(
-        initial = Pair(
-            true,
-            null
-        )
-    )
-    val (isConnected, connectError) = connectStatus
-    if (!isConnected) Toast.makeText(context, connectError, Toast.LENGTH_LONG).show()
-
-    val isLoggedIn: Boolean by viewModel.isLoggedIn.observeAsState(initial = false)
-
-    // User
-    val isLogging: Boolean by viewModel.isLogging.observeAsState(initial = false)
-    val loginStatus: Pair<Boolean, String?> by viewModel.loginStatus.observeAsState(
-        initial = Pair(
-            true,
-            null
-        )
-    )
-    val (isLogged, loginError) = loginStatus
-    if (!isLogged) Toast.makeText(context, loginError, Toast.LENGTH_LONG).show()
+    val connectViewState: ConnectViewState by viewModel.connectViewState
+        .observeAsState(initial = ConnectViewState.Disconnected)
 
     // Recharge
     val isRecharging: Boolean by viewModel.isRecharging.observeAsState(initial = false)
-    val isEnabledRechargeButton: Boolean by viewModel.isEnabledRechargeButton.observeAsState(initial = false)
+    val isEnabledRechargeButton: Boolean by viewModel.isEnabledRechargeButton
+        .observeAsState(initial = false)
     val rechargeCode: String by viewModel.rechargeCode.observeAsState(initial = "")
-    val rechargeStatus: Pair<Boolean, String?> by viewModel.rechargeStatus.observeAsState(
-        initial = Pair(
-            true,
-            null
-        )
-    )
+    val rechargeStatus: Pair<Boolean, String?> by viewModel.rechargeStatus
+        .observeAsState(initial = Pair(true, null))
     val (isRecharged, rechargeError) = rechargeStatus
     if (!isRecharged) Toast.makeText(context, rechargeError, Toast.LENGTH_LONG).show()
 
     // Transfer
-    val destinationAccount: TextFieldValue by viewModel.destinationAccount.observeAsState(
-        initial = TextFieldValue(
-            ""
-        )
-    )
+    val destinationAccount: TextFieldValue by viewModel.destinationAccount
+        .observeAsState(initial = TextFieldValue(""))
     val amount: TextFieldValue by viewModel.amount.observeAsState(initial = TextFieldValue(""))
-    val isEnabledTransferButton: Boolean by viewModel.isEnabledTransferButton.observeAsState(initial = false)
+    val isEnabledTransferButton: Boolean by viewModel.isEnabledTransferButton
+        .observeAsState(initial = false)
     val isTransferring: Boolean by viewModel.isTransferring.observeAsState(initial = false)
-    val transferStatus: Pair<Boolean, String?> by viewModel.transferStatus.observeAsState(
-        initial = Pair(
-            true,
-            null
-        )
-    )
+    val transferStatus: Pair<Boolean, String?> by viewModel.transferStatus
+        .observeAsState(initial = Pair(true, null))
     val (isTransferred, transferError) = transferStatus
     if (!isTransferred) Toast.makeText(context, transferError, Toast.LENGTH_LONG).show()
 
     // Change password
-    val accessAccountNewPassword: String by viewModel.accessAccountNewPassword.observeAsState(
-        initial = ""
-    )
-    val isChangingAccountAccessPassword: Boolean by viewModel.isChangingAccountAccessPassword.observeAsState(
-        initial = false
-    )
-    val accessAccountChangePasswordStatus: Pair<Boolean, String?> by viewModel.accessAccountChangePasswordStatus.observeAsState(
-        initial = Pair(true, null)
-    )
-    val (isAccessAccountPasswordChanged, accessAccountPasswordChangeError) = accessAccountChangePasswordStatus
-    if (!isAccessAccountPasswordChanged) Toast.makeText(context, accessAccountPasswordChangeError, Toast.LENGTH_LONG).show()
+    val accessAccountNewPassword: String by viewModel.accessAccountNewPassword
+        .observeAsState(initial = "")
+    val isChangingAccountAccessPassword: Boolean by viewModel.isChangingAccountAccessPassword
+        .observeAsState(initial = false)
+    val accessAccountChangePasswordStatus: Pair<Boolean, String?> by viewModel
+        .accessAccountChangePasswordStatus.observeAsState(initial = Pair(true, null))
+    val (isAccessAccountPasswordChanged, accessAccountPasswordChangeError) =
+        accessAccountChangePasswordStatus
+    if (!isAccessAccountPasswordChanged) Toast.makeText(
+        context,
+        accessAccountPasswordChangeError,
+        Toast.LENGTH_LONG
+    ).show()
 
     // ChangeEmailPassword
     val emailOldPassword: String by viewModel.emailOldPassword.observeAsState(initial = "")
     val emailNewPassword: String by viewModel.emailNewPassword.observeAsState(initial = "")
-    val isChangingEmailPassword: Boolean by viewModel.isChangingEmailPassword.observeAsState(initial = false)
-    val emailChangePasswordStatus: Pair<Boolean, String?> by viewModel.emailChangePasswordStatus.observeAsState(
-        initial = Pair(true, null)
-    )
+    val isChangingEmailPassword: Boolean by viewModel.isChangingEmailPassword
+        .observeAsState(initial = false)
+    val emailChangePasswordStatus: Pair<Boolean, String?> by viewModel.emailChangePasswordStatus
+        .observeAsState(initial = Pair(true, null))
     val (isEmailPasswordChanged, emailPasswordChangeError) = emailChangePasswordStatus
-    if (!isEmailPasswordChanged) Toast.makeText(context, emailPasswordChangeError, Toast.LENGTH_LONG).show()
+    if (!isEmailPasswordChanged) Toast.makeText(
+        context,
+        emailPasswordChangeError,
+        Toast.LENGTH_LONG
+    ).show()
 
     // Dialog
-    val showTimePickerDialog: Boolean by viewModel.showTimePickerDialog.observeAsState(initial = false)
-    val showCaptchaDialog: Pair<Boolean, () -> Unit> by viewModel.showCaptchaDialog.observeAsState(
-        initial = Pair(false) {})
-    val (isShowCaptchaDialog, postLoginAction) = showCaptchaDialog
-    val showQRCodeDialog: Pair<Boolean, (String) -> Unit> by viewModel.showQRCodeScanner.observeAsState(
-        initial = Pair(false) {})
+    val showTimePickerDialog: Boolean by viewModel.showTimePickerDialog
+        .observeAsState(initial = false)
+    val captchaDialogState: CaptchaDialogState by viewModel.captchaDialogState
+        .observeAsState(CaptchaDialogState.Hidden)
+    val showQRCodeDialog: Pair<Boolean, (String) -> Unit> by viewModel.showQRCodeScanner
+        .observeAsState(initial = Pair(false) {})
     val (isShowQRCodeDialog, onQRCodeRead) = showQRCodeDialog
 
 
@@ -158,19 +135,15 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
         })
 
     CaptchaDialog(
-        show = isShowCaptchaDialog,
-        captchaImage = captchaImage,
+        state = captchaDialogState,
+        captchaViewState = captchaViewState,
         captchaCode = captchaCode,
-        isLoading = isLogging,
-        isLoadingCaptcha = isLoadingCaptcha,
-        isExecutable = isReadyToUpdate,
-        captchaLoadStatus = captchaLoadStatus,
         onClickImage = { viewModel.getCaptcha() },
         onChangeCaptchaCode = { viewModel.onChangeCaptchaCode(it) },
-        loginFunction = {
+        actionRun = {
             viewModel.updateUser(it) {
                 viewModel.showCaptchaDialog(false) {}
-                postLoginAction()
+                postUpdateAction()
             }
         },
         onDismiss = {
@@ -196,28 +169,24 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
             remainingTime = leftTime,
             modifier = Modifier.padding(vertical = 8.dp)
         )
-        CardConnect(
+        ConnectView(
+            state = connectViewState,
             remainingTime = limitedTime,
-            connectButtonEnabled = currentUser.remainingTime != 0 && !isLogging,
-            isLoading = isConnecting,
-            connectStatus = connectStatus,
-            isLoggedIn = isLoggedIn,
+            isRunningSomeTask = false,
             modifier = Modifier.padding(vertical = 8.dp),
-            onLogin = {
-                if (!isLoggedIn) viewModel.connect(currentUser.username, currentUser.password)
-                else viewModel.disconnect()
-            }) { viewModel.showTimePickerDialog(true) }
+            onLogin = if (connectViewState is ConnectViewState.Disconnected) {
+                { viewModel.connect(currentUser.username, currentUser.password) }
+            } else viewModel::disconnect,
+            onRecoverSession = viewModel::recoverSession,
+            onForgotSession = viewModel::forgotSession,
+        ) { viewModel.showTimePickerDialog(true) }
         CardNautaDetails(
             user = currentUser,
-            isLoading = isLogging,
-            loginStatus = loginStatus,
             modifier = Modifier.padding(vertical = 8.dp)
         )
         if (!currentUser.offer.isNullOrEmpty()) {
             CardNautaHomeDetails(
                 user = currentUser,
-                isLoading = isLogging,
-                loginStatus = loginStatus,
                 modifier = Modifier.padding(vertical = 8.dp)
             )
         }
