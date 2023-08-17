@@ -17,21 +17,6 @@
             android:layout_marginTop="@dimen/_8sdp"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/displaybold"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:text="@string/paquetes_combinados"
-                    android:textSize="20sp" />
-            </LinearLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -365,11 +350,11 @@
                         android:layout_marginBottom="6dp"
                         android:background="?android:attr/listDivider" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <Button
                         android:id="@+id/planbasico"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/my_gradient_drawable_"
+
                         android:text="@string/comprar"
                         android:fontFamily="@font/displaybold"
                         android:textColor="@color/white"
@@ -714,11 +699,10 @@
                         android:layout_marginBottom="6dp"
                         android:background="?android:attr/listDivider" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <Button
                         android:id="@+id/planmedio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/my_grandient_drawable6"
                         android:text="@string/comprar"
                         android:fontFamily="@font/displaybold"
                         android:textColor="@color/white"
@@ -1060,11 +1044,10 @@
                         android:layout_marginBottom="6dp"
                         android:background="?android:attr/listDivider" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <Button
                         android:id="@+id/planextra"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/my_gradient_drawable4"
                         android:text="@string/comprar"
                         android:textColor="@color/white"
                         android:fontFamily="@font/displaybold"
@@ -1184,16 +1167,15 @@
                         app:layout_constraintTop_toBottomOf="@+id/h_mb_lte7" />
 
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <Button
                         android:id="@+id/plan1gb"
-                        android:layout_width="100dp"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7dp"
                         android:layout_marginBottom="@dimen/_8sdp"
                         android:text="@string/comprar"
                         android:textSize="@dimen/_10ssp"
                         android:textColor="@color/white"
-                        android:background="@drawable/my_gradient_drawable"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.7"
@@ -1312,16 +1294,16 @@
                         app:layout_constraintTop_toBottomOf="@+id/h_mb_lte6" />
 
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <Button
                         android:id="@+id/plan2gb"
-                        android:layout_width="100dp"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7dp"
                         android:layout_marginBottom="@dimen/_8sdp"
                         android:text="@string/comprar"
                         android:textSize="@dimen/_10ssp"
                         android:textColor="@color/white"
-                        android:background="@drawable/my_gradient_drawable3"
+
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.7"
@@ -1441,16 +1423,16 @@
                         app:layout_constraintTop_toBottomOf="@+id/h_mb_lte5" />
 
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <Button
                         android:id="@+id/plan16"
-                        android:layout_width="100dp"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7dp"
                         android:layout_marginBottom="@dimen/_8sdp"
                         android:text="@string/comprar"
-                        android:textSize="@dimen/_10ssp"
+                        android:textSize="13sp"
                         android:textColor="@color/white"
-                        android:background="@drawable/my_gradient_drawable_"
+
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.7"
@@ -1568,16 +1550,15 @@
                         app:layout_constraintTop_toBottomOf="@+id/h_mb_lte" />
 
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <Button
                         android:id="@+id/bolsad"
-                        android:layout_width="100dp"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7dp"
                         android:layout_marginBottom="@dimen/_8sdp"
                         android:text="@string/comprar"
                         android:textSize="@dimen/_10ssp"
                         android:textColor="@color/white"
-                        android:background="@drawable/my_grandient_drawable6"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.7"
@@ -1696,16 +1677,15 @@
                         app:layout_constraintTop_toBottomOf="@+id/h_mb_lte4" />
 
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <Button
                         android:id="@+id/bolsac"
-                        android:layout_width="100dp"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7dp"
                         android:layout_marginBottom="@dimen/_8sdp"
                         android:text="@string/comprar"
                         android:textSize="@dimen/_10ssp"
                         android:textColor="@color/white"
-                        android:background="@drawable/my_gradient_drawable2"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.7"
@@ -1796,7 +1776,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/text_price3" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <Button
                         android:id="@+id/tarifa"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1804,7 +1784,6 @@
                         android:text="@string/activar"
                         android:textSize="@dimen/_10ssp"
                         android:textColor="@color/white"
-                        android:background="@drawable/my_gradient_drawable4"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.7"

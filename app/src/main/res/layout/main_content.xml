@@ -4,9 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-        android:background="@color/background"
+    android:background="@color/background"
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
@@ -136,7 +137,7 @@
                         android:layout_width="40dp"
                         android:layout_height="match_parent"
                         android:src="@drawable/outline_menu_open_24"
-                        app:tint="@color/colorDes"
+                        app:tint="@color/white"
                         android:layout_marginStart="@dimen/_12sdp"
                         android:contentDescription="Menú"
                         />
@@ -148,41 +149,10 @@
                         android:fontFamily="@font/displaybold"
                         android:text="@string/portal_usuario"
                         android:textAlignment="textStart"
-                        android:textColor="@color/colorDes"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/_20ssp"
                         android:layout_weight="1"/>
 
-                    <FrameLayout
-                        android:id="@+id/notificationBtn"
-                        style="?attr/actionButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentEnd="true"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:clipToPadding="false"
-                        android:focusable="true"
-                        android:layout_marginEnd="@dimen/_8sdp">
-                        <ImageView
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_baseline_notifications_none_24"
-                            app:tint="@color/colorDes"/>
-
-                        <TextView
-                            android:id="@+id/cart_badge"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_gravity="right|top"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginRight="-10dp"
-                            android:background="@drawable/badge_background"
-                            android:gravity="center"
-                            android:padding="3dp"
-                            android:text="0"
-                            android:textColor="@color/white"
-                            android:textSize="10sp"/>
-                    </FrameLayout>
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>

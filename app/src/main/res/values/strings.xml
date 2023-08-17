@@ -1112,6 +1112,39 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="acerca_de1">Acerca de</string>
     <string name="hola">Hola</string>
     <string name="todo">TODO</string>
+    <string name="message_scanner_qr_code">Enfoque el QR para recargar</string>
     <string name="advertencia">Lo sentimos mucho!! este apartado solo funciona en versiones Android 8+ puede consultar su saldo y otras opciones en el apartado de Servicios </string>
+
+
+    <string name="tarifa_activa">Tarifa activa</string>
+    <string name="message_scanner_numero">Enfoque el QR para escanear el número</string>
+    <string name="tarifa_desactiva">Tarifa desactivada</string>
+    <string name="tarifa_sin_obtener">Tarifa sin obtener</string>
+    <string name="vence_saldo">Expira:</string>
+    <string name="cuentas_categ_internet">Internet</string>
+    <string name="vence_internet">Vence en:</string>
+    <string name="cuentas_categ_bolsas_bonos">Bolsas y Bonos</string>
+    <string name="vence_dias">0 días</string>
+    <string name="vence_horas">0 horas</string>
+    <string name="dias">días</string>
+    <string name="horas">horas</string>
+
+    <string name="validate_numero_digitos">El número es de 8 dígitos</string>
+    <string name="validate_numero_empty">Hay campos vacios</string>
+    <string name="validate_clave_digitos">Faltan dígitos</string>
+    <string name="toast_centavos">Para enviar cantidades con centavos déje el monto en blanco</string>
+    <string name="hint_recarga">Código de Recarga</string>
+    <string name="hint_transfer_numero">Número</string>
+    <string name="hint_transfer_clave">Clave</string>
+    <string name="hint_transfer_monto">Monto</string>
+    <string name="hint_adelanta">Cantidad</string>
+    <string name="buttom_recarga">Recargar</string>
+    <string name="buttom_transfer">Transferir</string>
+    <string name="buttom_adelanta">Solicitar</string>
+    <string name="categoria_recarga">Recarga</string>
+    <string name="categoria_transferir">Enviar saldo</string>
+    <string name="categoria_adelanta">Adelanta saldo</string>
+    <string name="summary_notification_not_comp">Lo sentimos, pero la versión de Android que está utilizando actualmente no es compatible con esta opción.</string>
+
 
 </resources>

@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 
-import com.marlon.portalusuario.errores_log.JCLogging;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,11 +29,9 @@ import java.util.GregorianCalendar;
 public class Util {
     private static Context context;
     // LOGGING
-    private static JCLogging Logging;
 
     public Util(Context context2) {
         this.context = context2;
-        Logging = new JCLogging(context2);
     }
 
     public Util() {
@@ -52,7 +49,7 @@ public class Util {
                 /* Estas conectado a internet usando wifi o redes moviles, puedes enviar tus datos */
             }catch (Exception ex){
                 ex.printStackTrace();
-                Logging.error(null, null, ex);
+
                 return false;
             }
         }
@@ -70,7 +67,7 @@ public class Util {
             }
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+
         }
         return false;
     }
@@ -84,7 +81,7 @@ public class Util {
             }
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+
         }
         return false;
     }
@@ -173,7 +170,7 @@ public class Util {
             return Double.parseDouble(new DecimalFormat("###.##").format(numero));
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+
         }
         return new Double(0);
     }

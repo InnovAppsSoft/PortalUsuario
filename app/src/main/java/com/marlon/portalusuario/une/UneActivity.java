@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.marlon.portalusuario.R;
 import com.marlon.portalusuario.ViewModel.UneViewModel;
-import com.marlon.portalusuario.errores_log.JCLogging;
 import com.marlon.portalusuario.util.Util;
 
 import java.util.ArrayList;
@@ -45,7 +44,6 @@ public class UneActivity extends AppCompatActivity {
     private EditText lecturaActual2;
     private EditText lecturaAnterior2;
     private Button Borrar,Calcular;
-    private JCLogging Logging;
     private ImageView Virar;
     private RecyclerView recyclerView;
     private List<Une> uneRegisters;
@@ -61,7 +59,6 @@ public class UneActivity extends AppCompatActivity {
         setContentView(R.layout.activity_une);
 
         e = new tarifaElect();
-        Logging = new JCLogging(UneActivity.this);
         lecturaAnterior2 = (EditText) findViewById(R.id.lecturaAnteriorTf);
         lecturaActual2 = (EditText) findViewById(R.id.lecturaActualTf);
         consumo = (TextView) findViewById(R.id.consumoTV);
@@ -198,7 +195,6 @@ public class UneActivity extends AppCompatActivity {
             //b.add(Double.valueOf(consumoElectrico - e.rangosConsumo.get(i).getInicioRango()));
             consumoTotal += (consumoElectrico - e.rangosConsumo.get(i).getInicioRango()) * e.rangosConsumo.get(i).getPrecioRango();
         }catch (Exception ex){
-            Logging.error(null, null, ex);
             Toast.makeText(this, "Ha ocurrido un error. Revise el registro para detalles", Toast.LENGTH_LONG);
         }
     }

@@ -31,12 +31,10 @@
         <item>Importe(Pesos)</item>
     </array>
 
-    <string-array name="egg_array">
-        <item>Test only, better not use it for cooking :)</item>
-        <item>Soft Boiled</item>
-        <item>Slightly Firmer</item>
-        <item>Firm Yolk</item>
-        <item>Hard Boiled</item>
+
+    <string-array name="adelanta">
+        <item>25.00 CUP</item>
+        <item>50.00 CUP</item>
     </string-array>
 
     <declare-styleable name="CodeScannerView">

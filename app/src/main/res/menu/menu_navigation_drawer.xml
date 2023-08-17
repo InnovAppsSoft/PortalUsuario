@@ -45,10 +45,6 @@
 <item android:title="@string/feedback1">
     <menu>
         <item
-            android:id="@+id/errors_register"
-            android:icon="@drawable/outline_bug_report_24"
-            android:title="@string/registro_de_errores1"/>
-        <item
             android:id="@+id/feedback"
             android:icon="@drawable/outline_feedback_24"
             android:title="@string/reportar"/>

@@ -46,8 +46,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.preference.PreferenceManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.navigation.NavigationView
-import com.marlon.portalusuario.PUNotifications.PUNotification
-import com.marlon.portalusuario.PUNotifications.PUNotificationsActivity
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ViewModel.PunViewModel
 import com.marlon.portalusuario.apklis.ApklisUtil
@@ -57,17 +55,15 @@ import com.marlon.portalusuario.burbuja_trafico.BootReceiver
 import com.marlon.portalusuario.burbuja_trafico.FloatingBubbleService
 import com.marlon.portalusuario.cortafuegos.ActivityMain
 import com.marlon.portalusuario.databinding.ActivityMainBinding
-import com.marlon.portalusuario.errores_log.JCLogging
-import com.marlon.portalusuario.errores_log.LogFileViewerActivity
 import com.marlon.portalusuario.huella.BiometricCallback
 import com.marlon.portalusuario.huella.BiometricManager
 import com.marlon.portalusuario.nauta.ui.ConnectivityFragment
 import com.marlon.portalusuario.une.UneActivity
 import com.marlon.portalusuario.util.SSLHelper
 import com.marlon.portalusuario.util.Util
-import com.marlon.portalusuario.view.fragments.CuentasFragment
+import com.marlon.portalusuario.view.fragments.BalanceFragment
+import com.marlon.portalusuario.view.fragments.HomeFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
-import com.marlon.portalusuario.view.fragments.ServiciosFragment
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
@@ -108,8 +104,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     // SETTINGS
     var settings: SharedPreferences? = null
 
-    // LOGGING
-    private var Logging: JCLogging? = null
 
     // APKLIS
     private var apklis: ApklisUtil? = null
@@ -177,8 +171,8 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         navigationView!!.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
             val i: Intent
             when (item.itemId) {
-                R.id.micuenta -> setFragment(CuentasFragment(), "Mi Cuenta")
-                R.id.services -> setFragment(ServiciosFragment<Any?>(), "Servicios")
+                R.id.micuenta -> setFragment(BalanceFragment(), "Mi Cuenta")
+                R.id.services -> setFragment(HomeFragment(), "Servicios")
                 R.id.plans -> setFragment(PaquetesFragment(), "Planes")
                 R.id.connectivity -> setFragment(connectivityFragment, "Conectividad")
                 R.id.firewall -> {
@@ -191,12 +185,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                     i = Intent(this@MainActivity, UneActivity::class.java)
                     startActivity(i)
                 }
-                R.id.errors_register -> startActivity(
-                    Intent(
-                        this@MainActivity,
-                        LogFileViewerActivity::class.java
-                    ).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                )
 
                 R.id.feedback -> {
                     var debugInfo = "\n\n\n---"
@@ -219,7 +207,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 }
 
                 R.id.telegram_channel -> {
-                    val telgramUrl = ("https://t.me/portalusuario")
+                    val telgramUrl = ("https://t.me/innovapp")
                     val telegramLauch = Intent(Intent.ACTION_VIEW)
                     telegramLauch.data = Uri.parse(telgramUrl)
                     startActivity(telegramLauch)
@@ -233,7 +221,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 }
 
                 R.id.betatesters -> {
-                    val betaUrl = ("https://t.me/portalusuarioBT")
+                    val betaUrl = ("https://t.me/innovappcomunidad")
                     val betaLaunch = Intent(Intent.ACTION_VIEW)
                     betaLaunch.data = Uri.parse(betaUrl)
                     startActivity(betaLaunch)
@@ -275,7 +263,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         remind_me_later = findViewById(R.id.remind_me_later)
 
         //
-        Logging = JCLogging(this)
+
         download_apklis = findViewById(R.id.download_apklis)
         download_ps = findViewById(R.id.download_ps)
         remind_me_later = findViewById(R.id.remind_me_later)
@@ -283,7 +271,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
 
         // Burbuja de Trafico
         val bootReceiver = BootReceiver()
-        JCLogging.message("Registering networkStateReceiver", null)
+
         LocalBroadcastManager.getInstance(this)
             .registerReceiver(bootReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
         if (settings!!.getBoolean("show_traffic_speed_bubble", false)) {
@@ -315,7 +303,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         // DESCARGAR DE APKLIS
         download_apklis!!.setOnClickListener(View.OnClickListener {
             val URL = "https://www.apklis.cu/application/$APP_NAME"
-            JCLogging.message("Opening Apklis URL::url=$URL", null)
+
             //Toast.makeText(this, URL, Toast.LENGTH_LONG);
             val url = Uri.parse(URL)
             val openUrl = Intent(Intent.ACTION_VIEW, url)
@@ -325,7 +313,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         // DESCARGAR DE GOOGLE PLAY
         download_ps!!.setOnClickListener(View.OnClickListener {
             val URL = "https://play.google.com/store/apps/details?id=$APP_NAME"
-            JCLogging.message("Opening PlayStore URL::url=$URL", null)
+
             //Toast.makeText(this, URL, Toast.LENGTH_LONG);
             val url = Uri.parse(URL)
             val openUrl = Intent(Intent.ACTION_VIEW, url)
@@ -354,7 +342,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                                                                                            Si Existe Una Actualización */
                             val new_version_size = intent.getStringExtra("new_version_size")
                             val changelog = intent.getStringExtra("changelog")
-                            JCLogging.message("On receive Update info", null)
+
                             var version_size = "?? MB"
                             if (new_version_size != null) {
                                 version_size = new_version_size
@@ -372,16 +360,14 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                             }
                             Log.e("Showing info", "True")
                             sheetBehavior!!.setState(BottomSheetBehavior.STATE_COLLAPSED)
-                            JCLogging.message(
-                                "Update data received succesfully::version_name=$version_name::version_size=$version_size",
-                                null
-                            )
+
+
                             return
                         }
                         sheetBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
                     } catch (ex: Exception) {
                         ex.printStackTrace()
-                        JCLogging.error(null, null, ex)
+
                     }
                 }
             }
@@ -402,39 +388,10 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             try_again!!.paintFlags = try_again!!.paintFlags or Paint.UNDERLINE_TEXT_FLAG
             try_again!!.setOnClickListener(View.OnClickListener { loadPromo() })
             loadPromo()
+        }
             //
-            // check if there are unseen notifications
-            cartBadge = findViewById(R.id.cart_badge)
-            setupBadge()
-            notificationBtn = findViewById(R.id.notificationBtn)
-            notificationBtn!!.setOnClickListener(View.OnClickListener {
-                val i = Intent(this@MainActivity, PUNotificationsActivity::class.java)
-                startActivity(i)
-                Toast.makeText(
-                    this@MainActivity,
-                    "Espera la nueva funcionalidad en próximas versiones 😉",
-                    Toast.LENGTH_SHORT
-                ).show()
-            })
-        }
         //
-        setFragment(CuentasFragment(), "Servicios")
-    }
-
-    private fun setupBadge() {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val count = sharedPreferences.getInt("notifications_count", 0)
-        Log.e("UNSEE NOTIFICATIONS", count.toString())
-        if (count == 0) {
-            if (cartBadge!!.visibility != View.GONE) {
-                cartBadge!!.visibility = View.GONE
-            }
-        } else {
-            if (cartBadge!!.visibility != View.VISIBLE) {
-                cartBadge!!.visibility = View.VISIBLE
-            }
-        }
-        cartBadge!!.text = count.toString()
+        setFragment(BalanceFragment(), "Servicios")
     }
 
     // Carrusel de ETECSA
@@ -574,16 +531,16 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
 
 
     //Servicio de Apklis
+    @SuppressLint("SuspiciousIndentation")
     fun startService(apklis: ApklisUtil?, latency: Int) {
         val settings = PreferenceManager.getDefaultSharedPreferences(this)
-        JCLogging.message(
-            "Starting 'checking for updates' service::enabled=" + settings.getBoolean(
+            settings.getBoolean(
                 "start_checking_for_updates",
                 true
             )
-                .toString() + "::latency=" + latency + "::update_info_already_showed=" + update_info_already_showed,
+                .toString() + "::latency=" + latency + "::update_info_already_showed=" + update_info_already_showed
             null
-        )
+
         if (!update_info_already_showed) {
             apklis!!.startLookingForUpdates(latency)
             update_info_already_showed = true
@@ -685,195 +642,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         for (fragment in supportFragmentManager.fragments) {
             fragment.onActivityResult(requestCode, resultCode, data)
         }
-        if (requestCode == PICK_CONTACT_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                val uri = data!!.data
-                val cursor = contentResolver.query(uri!!, null, null, null, null)
-                if (cursor!!.moveToFirst()) {
-                    val columnaNombre =
-                        cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
-                    val columnaNumero =
-                        cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
-                    val nombre = cursor.getString(columnaNombre)
-                    val numero = cursor.getString(columnaNumero)
-                    union = ""
-                    if (numero.length > 0) {
-                        ca0 = "" + numero[0] + ""
-                        qwe = ca0!!
-                        if (((((qwe == "0") || qwe == "1" || qwe == "2") || qwe == "3" || qwe == "4" || qwe == "5" || qwe == "6") || qwe == "7" || qwe == "8") || qwe == "9") {
-                            union += qwe
-                        }
-                        if (numero.length > 1) {
-                            ca1 = "" + numero[1] + ""
-                            qwe = ca1!!
-                            if (((((qwe == "0") || qwe == "1" || qwe == "2" || qwe == "3" || qwe == "4" || qwe == "5") || qwe == "6") || qwe == "7" || qwe == "8") || qwe == "9") {
-                                union += qwe
-                            }
-                            if (numero.length > 2) {
-                                ca2 = "" + numero[2] + ""
-                                qwe = ca2!!
-                                if ((((((qwe == "0" || qwe == "1" || qwe == "2") || qwe == "3") || qwe == "4") || qwe == "5") || qwe == "6" || qwe == "7" || qwe == "8") || qwe == "9") {
-                                    union += qwe
-                                }
-                                if (numero.length > 3) {
-                                    ca3 = "" + numero[3] + ""
-                                    qwe = ca3!!
-                                    if ((((qwe == "0" || qwe == "1" || qwe == "2" || qwe == "3") || qwe == "4" || qwe == "5" || qwe == "6") || qwe == "7" || qwe == "8") || qwe == "9") {
-                                        union += qwe
-                                    }
-                                    if (numero.length > 4) {
-                                        ca4 = "" + numero[4] + ""
-                                        qwe = ca4!!
-                                        if ((((qwe == "0" || qwe == "1" || qwe == "2" || qwe == "3") || qwe == "4") || qwe == "5" || qwe == "6" || qwe == "7" || qwe == "8") || qwe == "9") {
-                                            union += qwe
-                                        }
-                                        if (numero.length > 5) {
-                                            ca5 = "" + numero[5] + ""
-                                            qwe = ca5!!
-                                            if ((((((qwe == "0") || qwe == "1" || qwe == "2" || qwe == "3") || qwe == "4") || qwe == "5") || qwe == "6" || qwe == "7") || qwe == "8" || qwe == "9") {
-                                                union += qwe
-                                            }
-                                            if (numero.length > 6) {
-                                                ca6 = "" + numero[6] + ""
-                                                qwe = ca6!!
-                                                if (((((qwe == "0") || qwe == "1") || qwe == "2" || qwe == "3") || qwe == "4" || qwe == "5") || qwe == "6" || qwe == "7" || qwe == "8" || qwe == "9") {
-                                                    union += qwe
-                                                }
-                                                if (numero.length > 7) {
-                                                    ca7 = "" + numero[7] + ""
-                                                    qwe = ca7!!
-                                                    if (((((((((qwe == "0") || qwe == "1") || qwe == "2") || qwe == "3") || qwe == "4") || qwe == "5") || qwe == "6" || qwe == "7") || qwe == "8") || qwe == "9") {
-                                                        union += qwe
-                                                    }
-                                                    if (numero.length > 8) {
-                                                        ca8 = "" + numero[8] + ""
-                                                        qwe = ca8!!
-                                                        if ((((((qwe == "0" || qwe == "1" || qwe == "2") || qwe == "3" || qwe == "4") || qwe == "5") || qwe == "6") || qwe == "7") || qwe == "8" || qwe == "9") {
-                                                            union += qwe
-                                                        }
-                                                        if (numero.length > 9) {
-                                                            ca9 = "" + numero[9] + ""
-                                                            qwe = ca9!!
-                                                            if (((((((qwe == "0" || qwe == "1") || qwe == "2" || qwe == "3") || qwe == "4" || qwe == "5") || qwe == "6") || qwe == "7") || qwe == "8") || qwe == "9") {
-                                                                union += qwe
-                                                            }
-                                                            if (numero.length > 10) {
-                                                                ca10 = "" + numero[10] + ""
-                                                                qwe = ca10!!
-                                                                if ((((((qwe == "0" || qwe == "1") || qwe == "2") || qwe == "3" || qwe == "4") || qwe == "5" || qwe == "6") || qwe == "7") || qwe == "8" || qwe == "9") {
-                                                                    union += qwe
-                                                                }
-                                                                if (numero.length > 11) {
-                                                                    ca11 = "" + numero[11] + ""
-                                                                    qwe = ca11!!
-                                                                    if (((((((qwe == "0" || qwe == "1") || qwe == "2" || qwe == "3" || qwe == "4") || qwe == "5") || qwe == "6") || qwe == "7") || qwe == "8") || qwe == "9") {
-                                                                        union += qwe
-                                                                    }
-                                                                    if (numero.length > 12) {
-                                                                        ca12 = "" + numero[12] + ""
-                                                                        qwe = ca12!!
-                                                                        if (((((((qwe == "0" || qwe == "1" || qwe == "2") || qwe == "3") || qwe == "4") || qwe == "5") || qwe == "6" || qwe == "7") || qwe == "8") || qwe == "9") {
-                                                                            union += qwe
-                                                                        }
-                                                                        if (numero.length > 13) {
-                                                                            ca13 =
-                                                                                "" + numero[13] + ""
-                                                                            qwe = ca13!!
-                                                                            if ((((((qwe == "0") || qwe == "1" || qwe == "2") || qwe == "3" || qwe == "4") || qwe == "5" || qwe == "6" || qwe == "7") || qwe == "8") || qwe == "9") {
-                                                                                union += qwe
-                                                                            }
-                                                                            if (numero.length > 14) {
-                                                                                ca14 =
-                                                                                    "" + numero[14] + ""
-                                                                                qwe = ca14!!
-                                                                                if ((((((qwe == "0") || qwe == "1") || qwe == "2" || qwe == "3") || qwe == "4") || qwe == "5") || qwe == "6" || qwe == "7" || qwe == "8" || qwe == "9") {
-                                                                                    union += qwe
-                                                                                }
-                                                                                if (numero.length > 15) {
-                                                                                    ca15 =
-                                                                                        "" + numero[15] + ""
-                                                                                    qwe = ca15!!
-                                                                                    if (((((qwe == "0" || qwe == "1" || qwe == "2") || qwe == "3" || qwe == "4" || qwe == "5") || qwe == "6" || qwe == "7") || qwe == "8") || qwe == "9") {
-                                                                                        union += qwe
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if (union.length == 8) {
-                        val ewq = "" + union[0] + ""
-                        if (ewq == "5") {
-                            ServiciosFragment.phoneNumber.setText(union)
-                        } else {
-                            showMessage(this, errorMessage)
-                        }
-                    } else {
-                        if (union.length < 15) {
-                            cuantos_caracteres = union.length
-                            if (cuantos_caracteres == 14) {
-                                as0 = "" + union[0] + ""
-                                as1 = "" + union[1] + ""
-                                as2 = "" + union[2] + ""
-                                as3 = "" + union[3] + ""
-                                as4 = "" + union[4] + ""
-                                as12 = "" + union[12] + ""
-                                as13 = "" + union[13] + ""
-                                if (((((as0 == "9") && as1 == "9" && as2 == "5") && as3 == "3") && as4 == "5" && as12 == "9") && as13 == "9") {
-                                    val nuu =
-                                        "" + union[4] + union[5] + union[6] + union[7] + union[8] + union[9] + union[10] + union[11] + ""
-                                    ServiciosFragment.phoneNumber.setText(nuu)
-                                } else {
-                                    showMessage(this, errorMessage)
-                                }
-                            } else {
-                                cuantos_caracteres = union.length
-                                if (cuantos_caracteres == 10) {
-                                    as0 = "" + union[0] + ""
-                                    as1 = "" + union[1] + ""
-                                    as2 = "" + union[2] + ""
-                                    if ((as0 == "5" && as1 == "3") || (as0 == "9" && as1 == "9")) {
-                                        if (as2 == "5") {
-                                            val nuu =
-                                                "" + union[2] + union[3] + union[4] + union[5] + union[6] + union[7] + union[8] + union[9] + ""
-                                            ServiciosFragment.phoneNumber.setText(nuu)
-                                        } else {
-                                            showMessage(this, errorMessage)
-                                        }
-                                    } else {
-                                        showMessage(this, errorMessage)
-                                    }
-                                } else {
-                                    if (cuantos_caracteres < 8) {
-                                        ServiciosFragment.phoneNumber.setText(union)
-                                        showMessage(this, error2)
-                                    } else {
-                                        showMessage(this, errorMessage)
-                                    }
-                                }
-                            }
-                        } else {
-                            showMessage(this, errorMessage)
-                        }
-                    }
-
-
-                    //textnombre.setText(nombre);
-                    // editnumero.setText(numero);
-                }
-            }
-        }
         // FLOATING BUBBLE SERVICE
         if (requestCode == 0) {
             if (!Settings.canDrawOverlays(this)) {
@@ -892,12 +660,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             intent.putExtra("com.android.phone.force.slot", true)
             intent.putExtra("Cdma_Supp", true)
             if (sim == "0") {
-                for (s in CuentasFragment.simSlotName) {
+                for (s in BalanceFragment.simSlotName) {
                     intent.putExtra(s, 0)
                     intent.putExtra("com.android.phone.extra.slot", 0)
                 }
             } else if (sim == "1") {
-                for (s in CuentasFragment.simSlotName) {
+                for (s in BalanceFragment.simSlotName) {
                     intent.putExtra(s, 1)
                     intent.putExtra("com.android.phone.extra.slot", 1)
                 }
@@ -915,12 +683,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             bonos.putExtra("com.android.phone.force.slot", true)
             bonos.putExtra("Cdma_Supp", true)
             if (sim == "0") {
-                for (s in CuentasFragment.simSlotName) {
+                for (s in BalanceFragment.simSlotName) {
                     bonos.putExtra(s, 0)
                     bonos.putExtra("com.android.phone.extra.slot", 0)
                 }
             } else if (sim == "1") {
-                for (s in CuentasFragment.simSlotName) {
+                for (s in BalanceFragment.simSlotName) {
                     bonos.putExtra(s, 1)
                     bonos.putExtra("com.android.phone.extra.slot", 1)
                 }
@@ -938,12 +706,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             datos.putExtra("com.android.phone.force.slot", true)
             datos.putExtra("Cdma_Supp", true)
             if (sim == "0") {
-                for (s in CuentasFragment.simSlotName) {
+                for (s in BalanceFragment.simSlotName) {
                     datos.putExtra(s, 0)
                     datos.putExtra("com.android.phone.extra.slot", 0)
                 }
             } else if (sim == "1") {
-                for (s in CuentasFragment.simSlotName) {
+                for (s in BalanceFragment.simSlotName) {
                     datos.putExtra(s, 1)
                     datos.putExtra("com.android.phone.extra.slot", 1)
                 }
@@ -1090,10 +858,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         private var sliderView: SliderView? = null
         var navigationView: NavigationView? = null
         private var punViewModel: PunViewModel? = null
-        @JvmStatic
-        fun insertNotification(pun: PUNotification?) {
-            punViewModel!!.insertPUN(null)
-        }
 
         const val PICK_CONTACT_REQUEST = 1
         fun showConnectedTime(status: Boolean) {

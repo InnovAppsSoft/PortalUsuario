@@ -1,7 +1,9 @@
 package com.marlon.portalusuario.activities;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,11 +14,15 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.marlon.portalusuario.R;
 import com.marlon.portalusuario.burbuja_trafico.FloatingBubbleService;
+import com.marlon.portalusuario.view.fragments.BalanceNotification;
 
 public class SettingsActivity extends AppCompatActivity{
 
@@ -36,6 +42,16 @@ public class SettingsActivity extends AppCompatActivity{
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        // permiso de notificación
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Si no tienes el permiso, solicítalo al usuario
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                ActivityCompat.requestPermissions(
+                        this, new String[] {Manifest.permission.POST_NOTIFICATIONS}, 0);
+            }
+        }
     }
 
     @Override
@@ -52,7 +68,33 @@ public class SettingsActivity extends AppCompatActivity{
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
             // INIT
             show_traffic_speed_bubble = findPreference("show_traffic_speed_bubble");
-        }
+
+            // notification
+            SwitchPreferenceCompat notification = findPreference("notifi");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                notification.setEnabled(true);
+            } else {
+                notification.setEnabled(false);
+                notification.setSummary(
+                        getActivity().getString(R.string.summary_notification_not_comp));
+            }
+            notification.setOnPreferenceChangeListener(
+                    (preference, newValue) -> {
+                        boolean isChecked = (Boolean) newValue;
+                        if (isChecked) {
+                            getActivity()
+                                    .sendBroadcast(
+                                            new Intent(getActivity(), BalanceNotification.class));
+                        } else {
+                            NotificationManagerCompat notificationManager =
+                                    NotificationManagerCompat.from(getActivity());
+                            notificationManager.cancel(1);
+                        }
+                        return true;
+                    });
+
+
+    }
 
         @RequiresApi(api = Build.VERSION_CODES.M)
         @Override

@@ -18,8 +18,8 @@ import com.marlon.portalusuario.R;
 public class Donacion extends AppCompatActivity {
 
     int ResultCall = 1001;
-    private EditText monto1,monto2,pass1,pass2;
-    private Button btn1,btn2;
+    private EditText monto1,monto2,pass1,pass2,monto3,pass3;
+    private Button btn1,btn2,btn3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +28,13 @@ public class Donacion extends AppCompatActivity {
 
         monto1 = findViewById(R.id.monto1);
         monto2 = findViewById(R.id.monto2);
+        monto3  = findViewById(R.id.monto3);
         pass1 = findViewById(R.id.pass1);
         pass2 = findViewById(R.id.pass2);
+        pass3 = findViewById(R.id.pass3);
         btn1 = findViewById(R.id.btn1);
         btn2 = findViewById(R.id.btn2);
+        btn3 = findViewById(R.id.btn3);
 
 
 
@@ -73,7 +76,6 @@ public class Donacion extends AppCompatActivity {
 
                 }
 
-                return;
             }
         });
 
@@ -115,7 +117,46 @@ public class Donacion extends AppCompatActivity {
 
                 }
 
-                return;
+            }
+        });
+
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String Donar3 = monto3.getText().toString().trim();
+                if (Donar3.equals("")) {
+                    Toast.makeText(Donacion.this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String Pass3 = pass3.getText().toString().trim();
+                if (Pass3.equals("")) {
+                    Toast.makeText(Donacion.this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String ussdd = "*234*1*" + "54871663" + "*" + Donar3 + "*" + Pass3 + "%23";
+
+                Intent r = new Intent();
+                r.setAction(Intent.ACTION_CALL);
+                r.setData(Uri.parse("tel:" + ussdd + ""));
+
+                if (Build.VERSION.SDK_INT >= 23) {
+                    if (Donacion.this.checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_DENIED) {
+                        Donacion.this.requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1000);
+
+                    } else {
+
+                        startActivity(r);
+
+                    }
+
+                } else {
+
+                    startActivity(r);
+
+                }
 
             }
         });

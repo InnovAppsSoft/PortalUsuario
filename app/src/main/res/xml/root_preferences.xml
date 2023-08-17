@@ -1,28 +1,14 @@
 <PreferenceScreen
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--<PreferenceCategory app:title="General">
-
-        <EditTextPreference
-            app:key="signature"
-            app:title="@string/signature_title"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:key="reply"
-            app:title="@string/reply_title"
-            app:useSimpleSummaryProvider="true" />
-
-    </PreferenceCategory>-->
-    <PreferenceCategory app:title="Apariencia">
+     <PreferenceCategory
+         app:iconSpaceReserved="false"
+         app:title="Apariencia">
         <ListPreference
             app:defaultValue="sistema"
             app:entries="@array/temas_ui"
-            app:icon="@drawable/outline_nights_stay_24"
+            app:icon="@drawable/noche_icon"
             app:entryValues="@array/temas_ui_values"
             app:key="keynoche"
             app:title="@string/apariecia_settings"
@@ -35,7 +21,9 @@
             app:key="show_etecsa_promo_carousel"
             app:icon="@drawable/outline_settings_24_confi"
             app:defaultValue="true"
-            app:title="Mostar promociones de Etecsa"/>
+            android:widgetLayout="@layout/layout_preference_switch_m3"
+            android:summary="Mostrar promociones de ETECSA"
+            app:title="Mostar Banner"/>
 
     </PreferenceCategory>
 
@@ -45,52 +33,35 @@
             app:key="start_checking_for_updates"
             app:defaultValue="true"
             app:icon="@drawable/outline_settings_24_confi"
-            app:title="Buscar actualizaciones" />
-
-        <!-- <SwitchPreferenceCompat
-            app:key="check_for_updates_periodically"
-            app:title="Comprobar actualizaciones periódicamente" /> -->
+            android:widgetLayout="@layout/layout_preference_switch_m3"
+            app:title="Actualizar"
+            android:summary="Buscar actualizaciones de Apklis"/>
 
         <SwitchPreferenceCompat
             app:key="show_update_window"
             app:defaultValue="true"
             app:icon="@drawable/outline_settings_24_confi"
+            android:widgetLayout="@layout/layout_preference_switch_m3"
             app:title="Mostrar actualización" />
-
-        <!--<SwitchPreferenceCompat
-            app:dependency="sync"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" /> -->
     </PreferenceCategory>
-    <PreferenceCategory app:title="Desarrollo">
 
     <SwitchPreferenceCompat
-        app:key="save_logs"
-        app:defaultValue="true"
-        app:icon="@drawable/outline_bug_report_24_errr"
-        app:title="Guardar errores en Registro de Errores" />
-    </PreferenceCategory>
+        android:icon="@drawable/ic_notification_24px"
+        android:key="notifi"
+        android:widgetLayout="@layout/layout_preference_switch_m3"
+        android:title="Notificación"
+        android:summary="Mostrar datos en la barra de tareas"
+        android:defaultValue="false" />
+
     <PreferenceCategory app:title="Servicios">
 
         <SwitchPreferenceCompat
             app:key="show_traffic_speed_bubble"
             app:defaultValue="false"
             app:icon="@drawable/outline_mobiledata_off_24"
-            app:title="Mostrar burbuja flotante" />
-
-        <SwitchPreferenceCompat
-            app:key="show_notifications"
-            app:defaultValue="true"
-            app:icon="@drawable/outline_notifications_active_24"
-            app:title="Mostrar Notificaciones" />
-
-        <SwitchPreferenceCompat
-            app:key="storage_ads"
-            app:defaultValue="true"
-            app:icon="@drawable/outline_notifications_active_24"
-            app:title="Guardar Notificaciones" />
+            android:widgetLayout="@layout/layout_preference_switch_m3"
+            android:summary="Mostrar velocidad de red"
+            app:title="Burbuja flotante" />
 
     </PreferenceCategory>
 
@@ -99,6 +70,8 @@
         <SwitchPreferenceCompat
             app:key="show_fingerprint"
             app:defaultValue="false"
+            android:widgetLayout="@layout/layout_preference_switch_m3"
+            android:summary="Dale mayor seguridad a tu datos"
             app:icon="@drawable/outline_fingerprint_24"
             app:title="Huella Dactilar" />
 

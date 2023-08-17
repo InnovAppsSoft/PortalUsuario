@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/saldo"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    app:icon="@drawable/dinero_icon"
+                    app:iconTint="@color/colorCard"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorOnSurface"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="5dp"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1.0"
+                    android:text="Saldo" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/megas"
+                    android:layout_height="55dp"
+                    android:layout_width="match_parent"
+                    app:icon="@drawable/datos_icon"
+                    app:iconTint="@color/colorCard"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorOnSurface"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="8dp"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1.0"
+                    android:text="Datos" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_height="55dp"
+                    android:layout_width="match_parent"
+                    app:icon="@drawable/ic_bonos_24px"
+                    android:gravity="center_vertical"
+                    app:iconTint="@color/colorCard"
+                    android:textColor="@color/colorOnSurface"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="8dp"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1.0"
+                    android:id="@+id/buttomConsultaBonos"
+                    android:text="Bonos" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_height="55dp"
+                    android:layout_width="match_parent"
+                    app:icon="@drawable/ic_pospago_24px"
+                    android:gravity="center_vertical"
+                    app:iconTint="@color/colorCard"
+                    android:textColor="@color/colorOnSurface"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="8dp"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1.0"
+                    android:id="@+id/buttomConsultaPospago"
+                    android:text="Pospago" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/llamar99"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    app:icon="@drawable/outline_phone_forwarded_24"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorOnSurface"
+                    app:iconTint="@color/colorCard"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="5dp"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1.0"
+                    android:text="Llamar *99" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/llamarPrivado"
+                    android:layout_height="55dp"
+                    android:layout_width="match_parent"
+                    app:icon="@drawable/outline_phone_locked_24"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorOnSurface"
+                    android:layout_marginLeft="5dp"
+                    app:iconTint="@color/colorCard"
+                    android:layout_marginRight="8dp"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1.0"
+                    android:text="Privado" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/sms"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    app:icon="@drawable/outline_comment_24"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorOnSurface"
+                    android:layout_marginLeft="8dp"
+                    app:iconTint="@color/colorCard"
+                    android:layout_marginRight="5dp"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1.0"
+                    android:text="Plan SMS" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/emergancia"
+                    android:layout_height="55dp"
+                    android:layout_width="match_parent"
+                    app:icon="@drawable/outline_emergency_24"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorOnSurface"
+                    android:layout_marginLeft="5dp"
+                    app:iconTint="@color/colorCard"
+                    android:layout_marginRight="8dp"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1.0"
+                    android:text="Emergencias" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/PlanAmigos1"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    app:icon="@drawable/outline_spatial_audio_off_24"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorOnSurface"
+                    android:layout_marginLeft="8dp"
+                    app:iconTint="@color/colorCard"
+                    android:layout_marginRight="5dp"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1.0"
+                    android:text="Plan Amigo"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/voz"
+                    android:layout_height="55dp"
+                    android:layout_width="match_parent"
+                    app:icon="@drawable/outline_local_phone_24"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorOnSurface"
+                    android:layout_marginLeft="5dp"
+                    app:iconTint="@color/colorCard"
+                    android:layout_marginRight="8dp"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1.0"
+                    android:text="Plan Voz" />
+
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="3dp"
+                app:cardElevation="1dp"
+                app:strokeWidth="0dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:padding="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="Adelantar Saldo" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        app:boxCornerRadiusBottomEnd="30dp"
+                        app:boxCornerRadiusTopStart="30dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxCornerRadiusTopEnd="30dp"
+                        app:endIconMode="dropdown_menu"
+                        android:hint="Selecciona"
+                        android:typeface="normal"
+                        android:textColor="@android:color/black"
+                        app:boxCornerRadiusBottomStart="30dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                        app:errorEnabled="true"
+                        android:id="@+id/inputAdelanta">
+
+                        <AutoCompleteTextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            app:simpleItems="@array/adelanta"
+                            android:inputType="none"
+                            android:id="@+id/autocomplete" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/buttomAdalanta"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:text="Solicitar" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:cardElevation="1dp"
+                app:strokeWidth="0dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:padding="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="Recargar Saldo" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        app:boxCornerRadiusBottomEnd="30dp"
+                        app:boxCornerRadiusTopStart="30dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxCornerRadiusTopEnd="30dp"
+                        app:endIconMode="custom"
+                        android:hint="@string/recharge_credit_hint"
+                        app:boxCornerRadiusBottomStart="30dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:endIconDrawable="@drawable/ic_scanner_code_qr_24px"
+                        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                        app:errorEnabled="true"
+                        android:id="@+id/inputRecarga">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:maxLength="16"
+                            android:inputType="numberDecimal"
+                            android:id="@+id/editRecarga" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:id="@+id/buttomRecargar"
+                        android:text="Recargar" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:focusableInTouchMode="true"
+                app:cardElevation="1dp"
+                app:strokeWidth="0dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="20dp"
+                android:focusable="true">
+
+                <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:padding="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="Transferir Saldo" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        app:boxCornerRadiusBottomEnd="30dp"
+                        app:boxCornerRadiusTopStart="30dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxCornerRadiusTopEnd="30dp"
+                        app:endIconMode="custom"
+                        android:hint="Nùmero Telefónico"
+                        app:boxCornerRadiusBottomStart="30dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:endIconDrawable="@drawable/outline_contact_page_24"
+                        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                        app:errorEnabled="true"
+                        android:id="@+id/inputNumero">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:maxLength="8"
+                            android:inputType="phone"
+                            android:id="@+id/editNumero" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            app:boxCornerRadiusBottomEnd="30dp"
+                            app:boxCornerRadiusTopStart="30dp"
+                            app:boxStrokeWidth="0dp"
+                            app:boxCornerRadiusTopEnd="30dp"
+                            android:hint="Clave"
+                            android:layout_margin="3dp"
+                            app:boxCornerRadiusBottomStart="30dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            app:passwordToggleEnabled="true"
+                            style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                            app:errorEnabled="true"
+                            android:layout_weight="1.0"
+                            android:id="@+id/inputClave">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:maxLength="4"
+                                android:inputType="numberPassword"
+                                android:id="@+id/editClave" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            app:boxCornerRadiusBottomEnd="30dp"
+                            app:boxCornerRadiusTopStart="30dp"
+                            app:boxStrokeWidth="0dp"
+                            app:boxCornerRadiusTopEnd="30dp"
+                            android:hint="Monto"
+                            android:layout_margin="3dp"
+                            app:boxCornerRadiusBottomStart="30dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                            app:errorEnabled="true"
+                            android:layout_weight="1.0"
+                            android:id="@+id/inputMonto">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:inputType="numberDecimal"
+                                android:id="@+id/editMonto" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:id="@+id/buttomTransferir"
+                            android:text="Transferir" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

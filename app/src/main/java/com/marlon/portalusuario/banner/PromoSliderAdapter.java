@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.errores_log.JCLogging;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 import com.marlon.portalusuario.banner.PromoSliderAdapter.SliderAdapterViewHolder;
 import com.squareup.picasso.Picasso;
@@ -23,13 +22,12 @@ public class PromoSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolde
 
     private final List<Banner> mSliderItems;
     private final Context context;
-    private JCLogging Logging;
 
     // Constructor
     public PromoSliderAdapter(Context context, ArrayList<Banner> BannerArrayList) {
         this.mSliderItems = BannerArrayList;
         this.context = context;
-        Logging = new JCLogging(context);
+
     }
 
     // We are inflating the slider_layout
@@ -59,7 +57,6 @@ public class PromoSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolde
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Logging.message("Opening PROMO URL::url=" + sliderItem.getLink(), null);
                     Uri url = Uri.parse(sliderItem.getLink());
                     Intent openUrl = new Intent(Intent.ACTION_VIEW, url);
                     context.startActivity(openUrl);
@@ -67,7 +64,7 @@ public class PromoSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolde
             });
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+
         }
     }
 
@@ -98,7 +95,6 @@ public class PromoSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolde
         return "PromoSliderAdapter{" +
                 "mSliderItems=" + mSliderItems +
                 ", context=" + context +
-                ", Logging=" + Logging +
                 '}';
     }
 }

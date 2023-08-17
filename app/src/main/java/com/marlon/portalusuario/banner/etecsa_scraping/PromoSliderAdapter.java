@@ -12,7 +12,6 @@ import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYouListener;
 import com.marlon.portalusuario.activities.MainActivity;
 import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.errores_log.JCLogging;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 import com.marlon.portalusuario.banner.etecsa_scraping.PromoSliderAdapter.SliderAdapterViewHolder;
 import com.squareup.picasso.Picasso;
@@ -24,13 +23,11 @@ public class PromoSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolde
 
     private final List<Promo> mSliderItems;
     private final Context context;
-    private JCLogging Logging;
 
     // Constructor
     public PromoSliderAdapter(Context context, ArrayList<Promo> promoArrayList) {
         this.mSliderItems = promoArrayList;
         this.context = context;
-        Logging = new JCLogging(context);
         //
     }
 
@@ -78,7 +75,6 @@ public class PromoSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolde
             });
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
         }
     }
 

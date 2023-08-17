@@ -1,6 +1,6 @@
 package com.marlon.portalusuario.cortafuegos;
 
-import static java.util.Objects.requireNonNull;
+import static com.google.zxing.integration.android.IntentIntegrator.REQUEST_CODE;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -25,6 +25,7 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.os.Bundle;
+
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -35,7 +36,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -45,22 +45,22 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
+
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.marlon.portalusuario.R;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ActivityMain extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "Firewall.Main";
-    private static final int NOTIFICATION_PERMISSION_CODE = 123;
     private NotificationManagerCompat notificationManagerCompat;
+
     private static final int NOTIFICATION_ID = 0;
-    private static String CHANNEL_ID = "Servicio de Cortafuegos";
+    private static final String CHANNEL_ID = "Servicio de Cortafuegos";
 
     private boolean running = false;
     private RuleAdapter adapter = null;
@@ -69,8 +69,6 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
     private androidx.appcompat.widget.SearchView searchView;
 
-    private SwitchCompat swEnabled;
-    private AppCompatImageView Wifi, Datos;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private Toolbar toolbar;
 
@@ -81,25 +79,27 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "Create");
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.firewall_activity);
-
-        requestNotificationPermission();
 
         running = true;
 
         this.setTitle(R.string.cortafuegos);
 
-        Wifi = findViewById(R.id.lock_wifi_icon);
-        Datos = findViewById(R.id.lock_data_icon);
+        // Action bar
+        View view = getLayoutInflater().inflate(R.layout.actionbar, null);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(view);
 
-
-        // On/off switch
-        SwitchCompat swEnabled = (SwitchCompat) findViewById(R.id.swEnabled);
+        /// on/Of
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) SwitchCompat swEnabled = findViewById(R.id.swEnabled);
         swEnabled.setChecked(prefs.getBoolean("enabled", false));
         swEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.i(TAG, "Switch=" + isChecked);
+                prefs.edit().putBoolean("enabled", isChecked).apply();
+
                 if (isChecked) {
                     Log.i(TAG, "Switch on");
                     Intent prepare = VpnService.prepare(ActivityMain.this);
@@ -113,19 +113,18 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                         } catch (Throwable ex) {
                             Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
                             onActivityResult(REQUEST_VPN, RESULT_CANCELED, null);
-                            Toast.makeText(ActivityMain.this, ex.toString(), Toast.LENGTH_LONG).show();
+                            prefs.edit().putBoolean("enabled", false).apply();
                         }
                     }
-                    // MOSTRAR NOTIFIACION
-                    createNotification(ActivityMain.this);
                     BlackHoleService.start(ActivityMain.this);
+                    createNotification(ActivityMain.this);
                 } else {
                     // OCULTAR NOTIFIACION EN CASO DE QUE SE DETUVIERA EL SERVICIO
                     // STOPING SERVICE
                     Log.i(TAG, "Switch off");
                     prefs.edit().putBoolean("enabled", false).apply();
-                    //deleteNotification();
                     BlackHoleService.stop(ActivityMain.this);
+
                 }
             }
         });
@@ -148,39 +147,20 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         intentFilter.addDataScheme("package");
         registerReceiver(packageChangedReceiver, intentFilter);
 
-        Wifi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                prefs.edit().putBoolean("whitelist_wifi", !prefs.getBoolean("whitelist_wifi", true)).apply();
-                fillApplicationList();
-                BlackHoleService.reload("wifi", ActivityMain.this);
-
-            }
-        });
-
-        Datos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                prefs.edit().putBoolean("whitelist_other", !prefs.getBoolean("whitelist_other", true)).apply();
-                fillApplicationList();
-                BlackHoleService.reload("other", ActivityMain.this);
-
-            }
-        });
-
     }
 
     @Override
     public void onDestroy() {
         Log.i(TAG, "Destroy");
         running = false;
-        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
+        SharedPreferences prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
+        androidx.preference.PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
         unregisterReceiver(connectivityChangedReceiver);
         unregisterReceiver(packageChangedReceiver);
         super.onDestroy();
     }
 
-    private BroadcastReceiver connectivityChangedReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver connectivityChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i(TAG, "Received " + intent);
@@ -189,7 +169,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         }
     };
 
-    private BroadcastReceiver packageChangedReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver packageChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i(TAG, "Received " + intent);
@@ -198,9 +178,10 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         }
     };
 
+
     private void fillApplicationList() {
         // Get recycler view
-        final RecyclerView rvApplication = (RecyclerView) findViewById(R.id.rvApplication);
+        final RecyclerView rvApplication = findViewById(R.id.rvApplication);
         rvApplication.setHasFixedSize(true);
         rvApplication.setLayoutManager(new LinearLayoutManager(this));
 
@@ -264,7 +245,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             boolean enabled = prefs.getBoolean(name, false);
 
             // Check switch state
-            SwitchCompat swEnabled = (SwitchCompat) findViewById(R.id.swEnabled);
+            SwitchCompat swEnabled = findViewById(R.id.swEnabled);
             if (swEnabled.isChecked() != enabled)
                 swEnabled.setChecked(enabled);
         }
@@ -309,10 +290,10 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
 
         MenuItem network = menu.findItem(R.id.menu_network);
-        network.setIcon(Util.isWifiActive(this) ? R.drawable.ic_network_wifi_white_24dp : R.drawable.ic_network_cell_white_24dp);
+        network.setIcon(Util.isWifiActive(this) ? R.drawable.wifi_icon : R.drawable.data_icon);
 
         MenuItem show_sys_apps = menu.findItem(R.id.menu_show_system_apps);
         show_sys_apps.setChecked(prefs.getBoolean("show_sys_apps", true));
@@ -326,81 +307,77 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         return super.onPrepareOptionsMenu(menu);
     }
 
-    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
+        int item1 = item.getItemId();
+        if (item1 == R.id.menu_network) {
+            Intent settings = new Intent(Util.isWifiActive(this)
+                    ? Settings.ACTION_WIFI_SETTINGS : Settings.ACTION_WIRELESS_SETTINGS);
+            if (settings.resolveActivity(getPackageManager()) != null)
+                startActivity(settings);
+            else
+                Log.w(TAG, settings + " not available");
+            return true;
 
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.menu_network:
-                Intent settings = new Intent(Util.isWifiActive(this)
-                        ? Settings.ACTION_WIFI_SETTINGS : Settings.ACTION_WIRELESS_SETTINGS);
-                if (settings.resolveActivity(getPackageManager()) != null)
-                    startActivity(settings);
-                else
-                    Log.w(TAG, settings + " not available");
-                return true;
 
-            case R.id.menu_show_system_apps:
-                prefs.edit().putBoolean("show_sys_apps", !prefs.getBoolean("show_sys_apps", true)).apply();
-                fillApplicationList();
-                return true;
+        } else if (item1 == R.id.menu_show_system_apps) {
+            prefs.edit().putBoolean("show_sys_apps", !prefs.getBoolean("show_sys_apps", true)).apply();
+            fillApplicationList();
+            return true;
+        } else if (item1 == R.id.menu_refresh) {
+            fillApplicationList();
+            return true;
 
-            case R.id.menu_refresh:
-                fillApplicationList();
-                return true;
+        } else if (item1 == R.id.menu_whitelist_wifi) {
 
-            case R.id.menu_whitelist_wifi:
-                prefs.edit().putBoolean("whitelist_wifi", !prefs.getBoolean("whitelist_wifi", true)).apply();
-                fillApplicationList();
-                BlackHoleService.reload("wifi", this);
-                return true;
+            prefs.edit().putBoolean("whitelist_wifi", !prefs.getBoolean("whitelist_wifi", true)).apply();
+            fillApplicationList();
+            BlackHoleService.reload("wifi", this);
+            return true;
+        } else if (item1 == R.id.menu_whitelist_other) {
+            prefs.edit().putBoolean("whitelist_other", !prefs.getBoolean("whitelist_other", true)).apply();
+            fillApplicationList();
+            BlackHoleService.reload("other", this);
+            return true;
+        } else if (item1 == R.id.menu_reset_wifi) {
+            new AlertDialog.Builder(this)
+                    .setMessage(R.string.msg_sure)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            reset("wifi");
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .show();
+            return true;
+        } else if (item1 == R.id.menu_reset_other) {
+            new AlertDialog.Builder(this)
+                    .setMessage(R.string.msg_sure)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            reset("other");
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .show();
+            return true;
 
-            case R.id.menu_whitelist_other:
-                prefs.edit().putBoolean("whitelist_other", !prefs.getBoolean("whitelist_other", true)).apply();
-                fillApplicationList();
-                BlackHoleService.reload("other", this);
-                return true;
+        } else if (item1 == R.id.menu_vpn_settings) {
+            // Open VPN settings
+            Intent vpn = new Intent("android.net.vpn.SETTINGS");
+            if (vpn.resolveActivity(getPackageManager()) != null)
+                startActivity(vpn);
+            else
+                Log.w(TAG, vpn + " not available");
+            return true;
 
-            case R.id.menu_reset_wifi:
-                new AlertDialog.Builder(this)
-                        .setMessage(R.string.msg_sure)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                reset("wifi");
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, null)
-                        .show();
-                return true;
-
-            case R.id.menu_reset_other:
-                new AlertDialog.Builder(this)
-                        .setMessage(R.string.msg_sure)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                reset("other");
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, null)
-                        .show();
-                return true;
-
-            case R.id.menu_vpn_settings:
-                // Open VPN settings
-                Intent vpn = new Intent("android.net.vpn.SETTINGS");
-                if (vpn.resolveActivity(getPackageManager()) != null)
-                    startActivity(vpn);
-                else
-                    Log.w(TAG, vpn + " not available");
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+        } else {
+            return super.onOptionsItemSelected(item);
         }
+
     }
 
     private void reset(String network) {
@@ -417,7 +394,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_VPN) {
             // Update enabled state
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
             prefs.edit().putBoolean("enabled", resultCode == RESULT_OK).apply();
 
             // Start service
@@ -430,17 +407,6 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
     }
 
-    private void requestNotificationPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NOTIFICATION_POLICY) == PackageManager.PERMISSION_GRANTED)
-            return;
-
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_NOTIFICATION_POLICY)) {
-
-        }
-
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_NOTIFICATION_POLICY}, NOTIFICATION_PERMISSION_CODE );
-    }
-
     public void createNotification(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // INTENT QUE LANZARA LA ACTIVITY
@@ -451,8 +417,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
             stackBuilder.addNextIntentWithParentStack(resultIntent);
             // OBTENER EL INTENT PENDIENTE A MOSTRAR
-            PendingIntent resultPendingIntent =
-                    stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(REQUEST_CODE, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
             // SI ES VERSION ANDROID 8 EN ADELANTE
 
             // CREA CANAL DE NOTIFIACION
@@ -495,24 +460,6 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             }
         }
 
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        // Checking the request code of our request
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == NOTIFICATION_PERMISSION_CODE) {
-
-            // If permission is granted
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Displaying a toast
-                Toast.makeText(this, "Permission granted now you can read the storage", Toast.LENGTH_LONG).show();
-            } else {
-                // Displaying another toast if permission is not granted
-                Toast.makeText(this, "Oops you just denied the permission", Toast.LENGTH_LONG).show();
-            }
-        }
     }
 
 }

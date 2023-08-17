@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutDialogoContainer"
-                                                   android:background="@color/background"
+    android:background="@color/background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -17,7 +17,6 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:background="@drawable/circular_grey_bordersolid"
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_8sdp"

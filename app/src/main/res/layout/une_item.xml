@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
@@ -16,6 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -27,7 +29,6 @@
                 android:layout_height="wrap_content"
                 android:text="Lectura actual: 0"
                 android:fontFamily="@font/displaybold"
-                style="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/colorDes"/>
             <TextView
                 android:id="@+id/previous_read"
@@ -35,7 +36,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/displaybold"
                 android:text="Lectura anterior: 0"
-                style="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/colorDes"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,8 +47,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Consumo: 0 kW"
+                    android:textColor="@color/colorDes"
                     android:fontFamily="@font/displaybold"
-                    style="@style/TextAppearance.AppCompat.Small"
                     android:textStyle="bold"
                     android:layout_weight="1"
                     android:gravity="left"/>
@@ -57,8 +57,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$0.0"
+                    android:textColor="@color/colorDes"
                     android:fontFamily="@font/displaybold"
-                    style="@style/TextAppearance.AppCompat.Small"
                     android:textStyle="bold"
                     android:layout_weight="1"
                     android:gravity="right"/>

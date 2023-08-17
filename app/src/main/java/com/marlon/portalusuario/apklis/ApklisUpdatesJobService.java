@@ -30,7 +30,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.preference.PreferenceManager;
 
 import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.errores_log.JCLogging;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,14 +46,12 @@ public class ApklisUpdatesJobService extends JobService {
     private Context context;
 
     private Handler ApklisUpdateServiceHandler;
-    private JCLogging Logging;
+
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        // Util
-        Logging = new JCLogging(ApklisUpdatesJobService.this);
 
         try {
             ApklisUpdateServiceHandler = new Handler(Looper.getMainLooper()) {
@@ -87,7 +84,7 @@ public class ApklisUpdatesJobService extends JobService {
                         if (update_exist) {
                             SharedPreferences updates = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                             if (!AppActive || !updates.getBoolean("show_update_window", true)) {
-                                Logging.message("Showing Update Details Notification", null);
+
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                     NotificationManager notificationManager = getSystemService(NotificationManager.class);
                                     NotificationChannel chanel = new NotificationChannel("chanel", "ApklisUpdate", NotificationManager.IMPORTANCE_DEFAULT);
@@ -113,7 +110,7 @@ public class ApklisUpdatesJobService extends JobService {
                                 }
                                 notificationManagerCompat.notify(0, builder.build());
                             } else {
-                                Logging.message("Launching Update Intent", null);
+
                                 Intent intent = new Intent("apklis_update");
                                 intent.putExtra("update_exist", update_exist);
                                 intent.putExtra("version_name", version_name);
@@ -131,7 +128,7 @@ public class ApklisUpdatesJobService extends JobService {
             };
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+
         }
     }
 
@@ -144,7 +141,7 @@ public class ApklisUpdatesJobService extends JobService {
             new Thread(netWorkThread).start();
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+
         }
         return true;
     }
@@ -168,7 +165,7 @@ public class ApklisUpdatesJobService extends JobService {
             }
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+
         }
         return string_value;
     }
@@ -197,7 +194,7 @@ public class ApklisUpdatesJobService extends JobService {
                 pinfo = getApplicationContext().getPackageManager().getPackageInfo(getPackageName(), 0);
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
-                Logging.error(null, null, e);
+
             }
             int this_version_code = pinfo.versionCode;
 
@@ -208,7 +205,7 @@ public class ApklisUpdatesJobService extends JobService {
                 url = new URL("https://api.apklis.cu/v1/application/?package_name=" + APP_PACKAGE);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-                Logging.error(null, null, e);
+
             }
 
             try {
@@ -221,13 +218,13 @@ public class ApklisUpdatesJobService extends JobService {
 
             } catch (UnknownHostException e) {
                 e.printStackTrace();
-                Logging.error(null, null, e);
+
             } catch (SocketException se) {
                 se.printStackTrace();
-                Logging.error(null, null, se);
+
             } catch (IOException e) {
                 e.printStackTrace();
-                Logging.error(null, null, e);
+
             }
 
             if (!api_apklis_json.equals("")) {
@@ -263,7 +260,7 @@ public class ApklisUpdatesJobService extends JobService {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     Log.e("Main", ex.getMessage());
-                    Logging.error(null, null, ex);
+
                 }
                 // la descripcion de la ultima version
                 try {
@@ -275,7 +272,7 @@ public class ApklisUpdatesJobService extends JobService {
                     Log.e("Main", changelog);
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    Logging.error(null, null, ex);
+
                 }
                 // la descripcion de la ultima version
                 String downloadCount;
@@ -288,7 +285,7 @@ public class ApklisUpdatesJobService extends JobService {
                     Log.e("Main", changelog);
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    Logging.error(null, null, ex);
+
                 }
             }
 

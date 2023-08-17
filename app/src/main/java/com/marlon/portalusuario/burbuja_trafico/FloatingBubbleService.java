@@ -25,15 +25,14 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 
 import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.errores_log.JCLogging;
+
 
 import java.util.Calendar;
 
 import javax.annotation.Nullable;
 
 public class FloatingBubbleService extends Service {
-    // UTIL
-    private JCLogging logging;
+
     // UI
     private WindowManager windowManager;
     private WindowManager.LayoutParams bubbleLayoutParams;
@@ -86,7 +85,6 @@ public class FloatingBubbleService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         this.intent = intent;
-        logging = new JCLogging(getApplicationContext());
         showFloatingWindow();
         return Service.START_STICKY;// - return START_NOT_STICKY;
     }
@@ -227,7 +225,7 @@ public class FloatingBubbleService extends Service {
         }catch (Exception ex){
             Log.e("Floating Bubble Service", "An error was ocurred", ex);
             ex.printStackTrace();
-            logging.error("Destroying Everything", null, ex);
+
         }
     }
 
@@ -265,7 +263,7 @@ public class FloatingBubbleService extends Service {
             }catch (Exception ex){
                 Log.e("Floating Bubble Service", "An error was ocurred", ex);
                 ex.printStackTrace();
-                logging.error("Calculating Traffic Speed", null, ex);
+
             }
         }
     };
@@ -341,7 +339,6 @@ public class FloatingBubbleService extends Service {
             }catch (Exception ex){
                 Log.e("Floating Bubble Service", "An error was ocurred", ex);
                 ex.printStackTrace();
-                logging.error("Moving Floating Bubble", null, ex);
             }
             return false;
         }

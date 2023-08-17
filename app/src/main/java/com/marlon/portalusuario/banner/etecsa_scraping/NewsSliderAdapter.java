@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.errores_log.JCLogging;
 import com.marlon.portalusuario.banner.etecsa_scraping.NewsSliderAdapter.SliderAdapterViewHolder;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
@@ -26,13 +25,11 @@ public class NewsSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolder
     private final List<News> mSliderItems;
     private final Context context;
     // LOGGING
-    private JCLogging Logging;
 
     // Constructor
     public NewsSliderAdapter(Context context, ArrayList<News> BannerArrayList) {
         this.mSliderItems = BannerArrayList;
         this.context = context;
-        Logging = new JCLogging(context);
     }
 
     // We are inflating the slider_layout
@@ -63,7 +60,7 @@ public class NewsSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolder
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Logging.message("Opening news URL::url=" + sliderItem.getLink(), null);
+
                     Uri url = Uri.parse(sliderItem.getLink());
                     Intent openUrl = new Intent(Intent.ACTION_VIEW, url);
                     context.startActivity(openUrl);
@@ -71,7 +68,7 @@ public class NewsSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolder
             });
         }catch (Exception ex){
             ex.printStackTrace();
-            Logging.error(null, null, ex);
+
         }
     }
 
