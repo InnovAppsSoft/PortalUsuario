@@ -12,7 +12,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -21,15 +20,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.elevation.SurfaceColors;
+
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.view.fragments.CuentasFragment;
 import com.marlon.portalusuario.activities.MainActivity;
 
 import androidx.appcompat.app.AppCompatActivity;

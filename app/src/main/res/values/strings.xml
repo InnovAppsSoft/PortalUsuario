@@ -1104,5 +1104,8 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="hola">Hola</string>
     <string name="todo">TODO</string>
     <string name="advertencia">Lo sentimos mucho!! este apartado solo funciona en versiones Android 8+ puede consultar su saldo y otras opciones en el apartado de Servicios </string>
+    <string name="phone_number_string">Número de teléfono</string>
+    <string name="mail_nauta_string">mail@nauta.cu</string>
+    <string name="user_string">Usuario</string>
 
 </resources>

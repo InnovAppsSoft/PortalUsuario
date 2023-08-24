@@ -101,7 +101,7 @@
                             android:marqueeRepeatLimit="marquee_forever"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:id="@+id/correotext"
+                            android:id="@+id/text_email"
                             android:fontFamily="@font/displaybold"
                             android:textColor="@color/colorDes"
                             android:textSize="13sp" />
@@ -122,7 +122,7 @@
                             android:marqueeRepeatLimit="marquee_forever"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:id="@+id/numerotext"
+                            android:id="@+id/text_phone_number"
                             android:fontFamily="@font/displaybold"
                             android:textColor="@color/colorDes"
                             android:textSize="13sp" />

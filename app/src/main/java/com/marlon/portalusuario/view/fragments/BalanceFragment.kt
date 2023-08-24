@@ -1,74 +1,945 @@
-package com.marlon.portalusuario.view.fragments;
+package com.marlon.portalusuario.view.fragments
 
-import static androidx.core.content.ContextCompat.getSystemService;
+import android.Manifest
+import android.app.ProgressDialog
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.os.Build
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.telephony.TelephonyManager
+import android.telephony.TelephonyManager.UssdResponseCallback
+import android.text.TextUtils
+import android.util.Log
+import android.view.KeyEvent
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
+import com.marlon.portalusuario.R
+import com.marlon.portalusuario.databinding.FragmentCuentasBinding
+import com.marlon.portalusuario.perfil.ImageSaver
+import com.marlon.portalusuario.perfil.PerfilActivity
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.Date
+import java.util.Objects
 
-import android.Manifest;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.content.pm.ShortcutInfo;
-import android.content.pm.ShortcutManager;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Icon;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.telecom.PhoneAccountHandle;
-import android.telephony.TelephonyManager;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
-import androidx.preference.PreferenceManager;
-import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.errores_log.JCLogging;
-import com.marlon.portalusuario.perfil.ImageSaver;
-import com.marlon.portalusuario.perfil.PerfilActivity;
-import com.marlon.portalusuario.util.Util;
+class BalanceFragment : Fragment() {
+    private lateinit var binding: FragmentCuentasBinding
 
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.TextView;
+    private var manager: TelephonyManager? = null
+    private var manager2: TelephonyManager? = null
+    private var managerMain: TelephonyManager? = null
 
-import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+    var spBalance: SharedPreferences? = null
+    var editor: SharedPreferences.Editor? = null
 
-import de.hdodenhof.circleimageview.CircleImageView;
+    // preference dualSim
+    private var simCardSelected: String? = "1"
+    private var spSim: SharedPreferences? = null
 
-public class CuentasFragment extends Fragment {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentCuentasBinding.inflate(layoutInflater)
 
-    private SwipeRefreshLayout Refrescar;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            // Show an alert dialog to the user that the feature is not supported
+            showFeatureUnsupportedAlert()
+        }
 
-    private TextView saldotext, expiratext, minutostext, mensajestext, venceminutossms, datostext, datoslte, datosnacionales, VenceDatosI, bolsasms,vencebolsasms,bolsadiaria,vencebolsadiaria,Actulizar;
-    TelephonyManager manager, manager2, managerMain;
+        // SharedPreferences para guardar datos de cuentas
+        spBalance = requireActivity().getSharedPreferences("cuentas", Context.MODE_PRIVATE)
+        editor = spBalance?.edit()
 
-    private TextView TextoNombre,Saludo,Numero, Correo;
-    SharedPreferences sp_cuentas;
-    SharedPreferences.Editor editor;
+        // Preferences DualSIM
+        spSim = PreferenceManager.getDefaultSharedPreferences(requireActivity())
+        simCardSelected = spSim?.getString(getString(R.string.sim_key), "1")
 
-    CheckBox escogerSim;
+        // ESCOGER SIM0-SIM1
+        binding.checkSimDual.isChecked = simCardSelected == "0"
+        binding.checkSimDual.setOnCheckedChangeListener { _, isChecked ->
+            simCardSelected = if (isChecked) {
+                "0"
+            } else {
+                "1"
+            }
+            spSim?.edit()?.putString("sim_key", simCardSelected)?.apply()
+        }
+        return binding.root
+    }
 
-    AlertDialog alertDialog;
+    private fun showFeatureUnsupportedAlert() {
+        val featureUnsupportedDialog = AlertDialog.Builder(requireActivity())
+        featureUnsupportedDialog.setTitle("Advertencia")
+        featureUnsupportedDialog.setMessage(R.string.advertencia)
+        featureUnsupportedDialog.setPositiveButton("Ok", null)
+        featureUnsupportedDialog.create().show()
+    }
 
-    // TODO: account handle and sim slot
-    private List<PhoneAccountHandle> phoneAccountHandleList;
-    public static final String simSlotName[] = {
+    override fun onViewCreated(arg0: View, arg1: Bundle?) {
+        super.onViewCreated(arg0, arg1)
+
+        // Mostrar saludo con el nombre del usuario
+        val spPerfil = requireActivity().getSharedPreferences("profile", Context.MODE_PRIVATE)
+        val name = spPerfil.getString("nombre", "").toString()
+        val numero = spPerfil.getString("numero", "").toString()
+        val nauta = spPerfil.getString("nauta", "").toString()
+        if (name.isEmpty()) {
+            binding.textname.text = "Usuario"
+        } else {
+            binding.textname.text = name
+        }
+        if (numero.isEmpty()) {
+            binding.textPhoneNumber.text = "Numero"
+        } else {
+            binding.textPhoneNumber.text = numero
+        }
+        if (nauta.isEmpty()) {
+            binding.textEmail.text = "Nauta"
+        } else {
+            binding.textEmail.text = nauta
+        }
+        // saludo
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val currentTime = LocalDateTime.now()
+            if (currentTime.hour < 12) {
+                binding.imgGreetings.setImageResource(R.drawable.baseline_light_mode_24)
+                binding.textSaludoPerfil.text = getString(R.string.title_good_morning)
+            } else if (currentTime.hour in 12..17) {
+                binding.imgGreetings.setImageResource(R.drawable.outline_brightness_4_24)
+                binding.textSaludoPerfil.text = getString(R.string.title_good_afternoon)
+            } else {
+                binding.imgGreetings.setImageResource(R.drawable.outline_dark_mode_24)
+                binding.textSaludoPerfil.text = getString(R.string.title_good_night)
+            }
+        } else {
+            binding.textSaludoPerfil.text = "Hola"
+        }
+        binding.editar.setOnClickListener { startActivity(Intent(context, PerfilActivity::class.java)) }
+
+        // Perfil en el header
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val load = ImageSaver(context)
+                .setFileName("IMG.png")
+                .setDirectoryName("PortalUsuario")
+                .load()
+            if (load == null) {
+                binding.imgDrawerPerfil.setImageResource(R.drawable.portal)
+            } else {
+                binding.imgDrawerPerfil.setImageBitmap(load)
+            }
+        } else {
+            val load = ImageSaver(context)
+                .setExternal(true)
+                .setFileName("IMG.png")
+                .setDirectoryName("PortalUsuario")
+                .load()
+            if (load == null) {
+                binding.imgDrawerPerfil.setImageResource(R.drawable.portal)
+            } else {
+                binding.imgDrawerPerfil.setImageBitmap(load)
+            }
+        }
+
+        // Preferences DualSIM
+        spSim = PreferenceManager.getDefaultSharedPreferences(requireActivity())
+        simCardSelected = spSim?.getString(getString(R.string.sim_key), "0")
+
+
+        // Ver bonos promocionales
+        binding.buttonCuentasBono.setOnClickListener {
+            val promo = spBalance!!.getString("bonos", null)
+            val alertdialogo = AlertDialog.Builder(requireActivity())
+            alertdialogo.setMessage(promo)
+            alertdialogo.setPositiveButton("Ok", null)
+            alertdialogo.create().show()
+        }
+
+        // SwipeRefresh
+        binding.swipeRefresh.setOnRefreshListener {
+            // Progress dialog
+            val progressDialog = ProgressDialog(activity)
+            progressDialog.max = 100
+            progressDialog.setTitle("Actualizando USSD")
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
+            progressDialog.setCancelable(false)
+            progressDialog.show()
+
+            // UPDATE
+            Handler(Looper.getMainLooper())
+                .postDelayed(
+                    {
+                        if (simCardSelected == "0") {
+                            for (s in simSlotName) {
+                                getBalance(0)
+                            }
+                        } else if (simCardSelected == "1") {
+                            for (s in simSlotName) {
+                                getBalance(1)
+                            }
+                        }
+                        progressDialog.setTitle(
+                            "Actualizando saldo"
+                        )
+                        progressDialog.progress = 20
+
+                        //// MINUTOS
+                        Handler(Looper.getMainLooper())
+                            .postDelayed(
+                                {
+                                    if (simCardSelected == "0") {
+                                        for (s in simSlotName) {
+                                            getMinutes(
+                                                0
+                                            )
+                                        }
+                                    } else if (simCardSelected ==
+                                        "1"
+                                    ) {
+                                        for (s in simSlotName) {
+                                            getMinutes(
+                                                1
+                                            )
+                                        }
+                                    }
+                                    progressDialog.setTitle(
+                                        "Actualizando minutos"
+                                    )
+                                    progressDialog.progress = 40
+
+                                    // MENSAJES
+                                    Handler(
+                                        Looper
+                                            .getMainLooper()
+                                    )
+                                        .postDelayed(
+                                            {
+                                                if (simCardSelected
+                                                    ==
+                                                    "0"
+                                                ) {
+                                                    for (s in simSlotName) {
+                                                        getRemainingSMS(
+                                                            0
+                                                        )
+                                                    }
+                                                } else if (simCardSelected
+                                                    ==
+                                                    "1"
+                                                ) {
+                                                    for (s in simSlotName) {
+                                                        getRemainingSMS(
+                                                            1
+                                                        )
+                                                    }
+                                                }
+                                                progressDialog.setTitle(
+                                                    "Actualizando mensajes"
+                                                )
+                                                progressDialog.progress = 60
+                                                // BONOS
+                                                Handler(
+                                                    Looper
+                                                        .getMainLooper()
+                                                )
+                                                    .postDelayed(
+                                                        {
+                                                            if (simCardSelected
+                                                                ==
+                                                                "0"
+                                                            ) {
+                                                                for (s in simSlotName) {
+                                                                    getRemainingBonuses(
+                                                                        0
+                                                                    )
+                                                                }
+                                                            } else if (simCardSelected
+                                                                ==
+                                                                "1"
+                                                            ) {
+                                                                for (s in simSlotName) {
+                                                                    getRemainingBonuses(
+                                                                        1
+                                                                    )
+                                                                }
+                                                            }
+                                                            progressDialog.setTitle(
+                                                                "Actualizando bonos"
+                                                            )
+                                                            progressDialog.progress = 80
+
+                                                            /// DATOS
+                                                            Handler(
+                                                                Looper
+                                                                    .getMainLooper()
+                                                            )
+                                                                .postDelayed(
+                                                                    {
+                                                                        if (simCardSelected
+                                                                            ==
+                                                                            "0"
+                                                                        ) {
+                                                                            for (s in simSlotName) {
+                                                                                getRemainingData(
+                                                                                    0
+                                                                                )
+                                                                            }
+                                                                        } else if (simCardSelected
+                                                                            ==
+                                                                            "1"
+                                                                        ) {
+                                                                            for (s in simSlotName) {
+                                                                                getRemainingData(
+                                                                                    1
+                                                                                )
+                                                                            }
+                                                                        }
+                                                                        progressDialog.setTitle(
+                                                                            "Actualizando datos"
+                                                                        )
+                                                                        progressDialog.progress = 100
+                                                                        binding.swipeRefresh.isRefreshing = false
+                                                                        // hora
+                                                                        val hora = SimpleDateFormat(
+                                                                            "h:mm a"
+                                                                        )
+                                                                        val time = hora
+                                                                            .format(
+                                                                                Date()
+                                                                            )
+                                                                        editor
+                                                                            ?.putString(
+                                                                                "hora",
+                                                                                time
+                                                                                    .toString()
+                                                                            )
+                                                                        editor
+                                                                            ?.commit()
+                                                                        binding.textHoraUpdate.text = "Actualizado: $time"
+                                                                        Handler(
+                                                                            Looper
+                                                                                .getMainLooper()
+                                                                        )
+                                                                            .postDelayed(
+                                                                                { progressDialog.dismiss() },
+                                                                                8000
+                                                                            )
+                                                                    },
+                                                                    6000
+                                                                )
+                                                        },
+                                                        6000
+                                                    )
+                                            },
+                                            5000
+                                        )
+                                },
+                                4000
+                            )
+                    },
+                    1000
+                )
+        }
+    }
+
+    private fun getBalance(sim: Int) {
+        val ussdCode = "*222#"
+        if (ussdCode.equals("", ignoreCase = true)) return
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CALL_PHONE)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(arrayOf(Manifest.permission.CALL_PHONE), 234)
+            return
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            manager = requireActivity().getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            manager2 = manager!!.createForSubscriptionId(2)
+            managerMain = if (sim == 0) manager else manager2
+            managerMain!!.sendUssdRequest(
+                ussdCode,
+                object : UssdResponseCallback() {
+                    override fun onReceiveUssdResponse(
+                        telephonyManager: TelephonyManager,
+                        request: String,
+                        response: CharSequence
+                    ) {
+                        super.onReceiveUssdResponse(telephonyManager, request, response)
+                        val messageSaldo = response.toString()
+                            .replace("Saldo:", "")
+                            .replaceFirst("CUP(.*)".toRegex(), "")
+                            .trim { it <= ' ' }
+                        val sb1 = StringBuilder()
+                        sb1.append(messageSaldo)
+                        sb1.append(" CUP")
+                        binding.textCuentasSaldo.text = sb1
+                        editor!!.putString("saldo", sb1.toString())
+                        editor!!.commit()
+
+                        // String mostrar fecha de vencimiento de saldo principal
+                        val messageVence = response.toString()
+                            .replaceFirst("(.*)vence".toRegex(), "")
+                            .replace("-", "/")
+                            .replace(".", "")
+                            .trim { it <= ' ' }
+                        val sb2 = StringBuilder()
+                        sb2.append("Expira: ")
+                        sb2.append(messageVence)
+                        binding.textCuentasVenceSim.text = sb2
+                        editor!!.putString("vence_saldo", sb2.toString())
+                        editor!!.commit()
+                    }
+
+                    override fun onReceiveUssdResponseFailed(
+                        telephonyManager: TelephonyManager,
+                        request: String,
+                        failureCode: Int
+                    ) {
+                        super.onReceiveUssdResponseFailed(
+                            telephonyManager, request, failureCode
+                        )
+                        Log.e(
+                            "TAG",
+                            "onReceiveUssdResponseFailed: $failureCode$request"
+                        )
+                    }
+                },
+                Handler(Looper.getMainLooper())
+            )
+        }
+    }
+
+    private fun getMinutes(sim: Int) {
+        val ussdCode = "*222*869#"
+        if (ussdCode.equals("", ignoreCase = true)) return
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CALL_PHONE)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(arrayOf(Manifest.permission.CALL_PHONE), 234)
+            return
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            manager = requireActivity().getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            manager2 = manager!!.createForSubscriptionId(2)
+            managerMain = if (sim == 0) manager else manager2
+            managerMain!!.sendUssdRequest(
+                ussdCode,
+                object : UssdResponseCallback() {
+                    override fun onReceiveUssdResponse(
+                        telephonyManager: TelephonyManager,
+                        request: String,
+                        response: CharSequence
+                    ) {
+                        super.onReceiveUssdResponse(telephonyManager, request, response)
+                        val minutos = response.toString()
+                            .replace(
+                                "Usted debe adquirir un plan de minutos. Para una nueva compra marque *133#",
+                                "00.00.00"
+                            )
+                            .replace("Usted dispone de", "")
+                            .replaceFirst("MIN(.*)".toRegex(), "")
+                            .trim { it <= ' ' }
+                        binding.textCuentasMinutos.text = minutos
+                        editor!!.putString("minutos", minutos)
+                        editor!!.commit()
+                    }
+
+                    override fun onReceiveUssdResponseFailed(
+                        telephonyManager: TelephonyManager,
+                        request: String,
+                        failureCode: Int
+                    ) {
+                        super.onReceiveUssdResponseFailed(
+                            telephonyManager, request, failureCode
+                        )
+                        Log.e(
+                            "TAG",
+                            "onReceiveUssdResponseFailed: $failureCode$request"
+                        )
+                    }
+                },
+                Handler(Looper.getMainLooper())
+            )
+        }
+    }
+
+    private fun getRemainingSMS(sim: Int) {
+        val ussdCode = "*222*767#"
+        if (ussdCode.equals("", ignoreCase = true)) return
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CALL_PHONE)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(arrayOf(Manifest.permission.CALL_PHONE), 234)
+            return
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            manager = requireActivity().getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            manager2 = manager!!.createForSubscriptionId(2)
+            managerMain = if (sim == 0) manager else manager2
+            managerMain!!.sendUssdRequest(
+                ussdCode,
+                object : UssdResponseCallback() {
+                    override fun onReceiveUssdResponse(
+                        telephonyManager: TelephonyManager,
+                        request: String,
+                        response: CharSequence
+                    ) {
+                        super.onReceiveUssdResponse(telephonyManager, request, response)
+                        // cantidad de mensajes
+                        val messageSms = response.toString()
+                            .replace(
+                                "Usted debe adquirir un plan de SMS. Para una nueva compra marque *133#",
+                                "0"
+                            )
+                            .replace(
+                                "Usted no dispone de SMS. Para una nueva compra marque *133#",
+                                "0"
+                            )
+                            .replace("Usted dispone de", "")
+                            .replace("no activos.", "")
+                            .replaceFirst("SMS(.*)".toRegex(), "")
+                            .trim { it <= ' ' }
+                        binding.textCuentasMensajes.text = messageSms
+                        editor!!.putString("sms", messageSms)
+                        editor!!.commit()
+
+                        // Fecha vencimiento sms y voz
+                        val messageVenceSms = response.toString()
+                            .replace(
+                                "Usted debe adquirir un plan de SMS. Para una nueva compra marque *133#",
+                                "0 días"
+                            )
+                            .replace(
+                                "Usted no dispone de SMS. Para una nueva compra marque *133#",
+                                "0 días"
+                            )
+                            .replaceFirst("(.*)por".toRegex(), "")
+                            .replace("dias", "días")
+                            .trim { it <= ' ' }
+                        editor!!.putString(
+                            "vence_sms",
+                            messageVenceSms
+                                .replaceFirst("(.*)no activos.".toRegex(), "0 días")
+                        )
+                        editor!!.commit()
+                        binding.textCuentasVenceMinSms.text = messageVenceSms
+
+                        // no usp
+                        spBalance!!.getString("vence_sms", messageVenceSms)
+                    }
+
+                    override fun onReceiveUssdResponseFailed(
+                        telephonyManager: TelephonyManager,
+                        request: String,
+                        failureCode: Int
+                    ) {
+                        super.onReceiveUssdResponseFailed(
+                            telephonyManager, request, failureCode
+                        )
+                        Log.e(
+                            "TAG",
+                            "onReceiveUssdResponseFailed: $failureCode$request"
+                        )
+                    }
+                },
+                Handler(Looper.getMainLooper())
+            )
+        }
+    }
+
+    private fun getRemainingData(sim: Int) {
+        val ussdCode = "*222*328#"
+        if (ussdCode.equals("", ignoreCase = true)) return
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CALL_PHONE)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(arrayOf(Manifest.permission.CALL_PHONE), 234)
+            return
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            manager =
+                requireActivity().getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            manager2 = manager!!.createForSubscriptionId(2)
+            managerMain = if (sim == 0) manager else manager2
+            managerMain!!.sendUssdRequest(
+                ussdCode,
+                object : UssdResponseCallback() {
+                    override fun onReceiveUssdResponse(
+                        telephonyManager: TelephonyManager,
+                        request: String,
+                        response: CharSequence
+                    ) {
+                        super.onReceiveUssdResponse(telephonyManager, request, response)
+
+                        // bolsa diaria
+                        val diaria = response.toString()
+                            .replace(
+                                "Tarifa: No activa. Ud debe adquirir una oferta. Para una nueva compra marque *133#",
+                                "0 MB"
+                            )
+                            .replace(
+                                "Tarifa: No activa. Paquetes: No dispone de MB.",
+                                "0 MB"
+                            )
+                            .replace("Tarifa: No activa. Diaria:", "")
+                            .replace(
+                                "Tarifa: No activa. Diaria: No dispone de MB.",
+                                "0 MB"
+                            )
+                            .replace("Tarifa: No activa.", "0 MB")
+                            .replaceFirst("Mensajeria:(.*)".toRegex(), "")
+                            .replaceFirst("Paquetes:(.*)".toRegex(), "")
+                            .trim { it <= ' ' }
+                        editor!!.putString(
+                            "diaria",
+                            diaria
+                                .replace("no activos.", "")
+                                .replaceFirst("validos(.*)".toRegex(), "")
+                                .replace("No dispone de MB.", "0 MB")
+                        )
+                        editor!!.commit()
+                        val bolsaDiaria = spBalance!!.getString("diaria", diaria)
+                        binding.textCuentasDiaria.text = bolsaDiaria
+
+                        // vencimiento de bolsa diaria
+                        val messageVenceDiaria = response.toString()
+                            .replace(
+                                "Tarifa: No activa. Ud debe adquirir una oferta. Para una nueva compra marque *133#",
+                                "Debe adquirir un paquete"
+                            )
+                            .replace(
+                                "Tarifa: No activa. Paquetes: No dispone de MB.",
+                                "0 horas"
+                            )
+                            .replace("Tarifa: No activa. Diaria:", "")
+                            .replace("Tarifa: No activa.", "0 horas")
+                            .replaceFirst("Mensajeria:(.*)".toRegex(), "")
+                            .replaceFirst("Paquetes:(.*)".toRegex(), "")
+                            .trim { it <= ' ' }
+                        editor!!.putString(
+                            "vence_diaria",
+                            messageVenceDiaria
+                                .replaceFirst("(.*)no activos.".toRegex(), "sin consumir")
+                                .replaceFirst("(.*)validos".toRegex(), "")
+                                .replace("No dispone de MB.", "0 horas")
+                                .replace("horas.", "horas")
+                        )
+                        editor!!.commit()
+                        val venceDiaria = spBalance!!.getString(
+                            "vence_diaria", messageVenceDiaria
+                        )
+                        binding.textCuentasVenceDiaria.text = venceDiaria
+
+                        // bolsa de mensajeria
+                        val messageMensajeria = response.toString()
+                            .replace(
+                                "Tarifa: No activa. Ud debe adquirir una oferta. Para una nueva compra marque *133#",
+                                "0 MB"
+                            )
+                            .replace(
+                                "Tarifa: No activa. Paquetes: No dispone de MB.",
+                                "0 MB"
+                            )
+                            .replace(
+                                "Tarifa: No activa. Diaria: No dispone de MB. Mensajeria:",
+                                ""
+                            )
+                            .replaceFirst("(.*)no activos. Mensajeria:".toRegex(), "")
+                            .replaceFirst("(.*)horas. Mensajeria:".toRegex(), "")
+                            .replace(
+                                "Tarifa: No activa. Mensajeria: No dispone de MB.",
+                                "0 MB"
+                            )
+                            .replace("Tarifa: No activa. Mensajeria:", "")
+                            .replace("Tarifa: No activa.", "0 MB")
+                            .replaceFirst("Diaria:(.*)".toRegex(), "")
+                            .replaceFirst("Paquetes:(.*)".toRegex(), "")
+                            .trim { it <= ' ' }
+                        editor!!.putString(
+                            "mensajeria",
+                            messageMensajeria
+                                .replace("vencen hoy.", "")
+                                .replaceFirst("validos(.*)".toRegex(), "")
+                        )
+                        editor!!.commit()
+                        val bolsaMsg = spBalance!!.getString(
+                            "mensajeria", messageMensajeria
+                        )
+                        binding.textCuentasMensajeria.text = bolsaMsg
+
+                        // vence mensajeria
+                        val messageVenceMensajeria = response.toString()
+                            .replace(
+                                "Tarifa: No activa. Ud debe adquirir una oferta. Para una nueva compra marque *133#",
+                                "0 días"
+                            )
+                            .replace(
+                                "Tarifa: No activa. Paquetes: No dispone de MB.",
+                                "0 días"
+                            )
+                            .replace(
+                                "Tarifa: No activa. Diaria: No dispone de MB. Mensajeria:",
+                                ""
+                            )
+                            .replaceFirst("(.*)no activos. Mensajeria:".toRegex(), "")
+                            .replaceFirst("(.*)horas. Mensajeria:".toRegex(), "")
+                            .replace(
+                                "Tarifa: No activa. Mensajeria: No dispone de MB.",
+                                "0 días"
+                            )
+                            .replace("Tarifa: No activa. Mensajeria:", "")
+                            .replace("Tarifa: No activa.", "0 días")
+                            .replaceFirst("Diaria:(.*)".toRegex(), "")
+                            .replaceFirst("Paquetes:(.*)".toRegex(), "")
+                            .trim { it <= ' ' }
+                        editor!!.putString(
+                            "vence_mensajeria",
+                            messageVenceMensajeria
+                                .replaceFirst("(.*)validos".toRegex(), "")
+                                .replaceFirst("(.*)vencen hoy.".toRegex(), "vence hoy")
+                                .replace("dias.", "días")
+                        )
+                        editor!!.commit()
+                        val venceMensajeria = spBalance!!.getString("vence_mensajeria", "0 días")
+                        binding.textCuentasVenceMensajeria.text = venceMensajeria
+
+                        // paquetes
+                        val message_paquete = response.toString()
+                            .replace(
+                                "Tarifa: No activa. Ud debe adquirir una oferta. Para una nueva compra marque *133#",
+                                "0 MB"
+                            )
+                            .replace(
+                                "Tarifa: No activa. Diaria: No dispone de MB.",
+                                "0 MB"
+                            )
+                            .replaceFirst("(.*)Paquetes:".toRegex(), "")
+                            .replaceFirst("\\+(.*)".toRegex(), "")
+                            .replaceFirst("Tarifa: No activa. Diaria:(.*)".toRegex(), "0 MB")
+                            .replaceFirst(
+                                "Tarifa: No activa. Mensajeria:(.*)".toRegex(), "0 MB"
+                            )
+                            .trim { it <= ' ' }
+                        editor!!.putString(
+                            "paquete",
+                            message_paquete
+                                .replaceFirst("(.*)LTE(.*)".toRegex(), "0 MB")
+                                .replaceFirst("validos(.*)".toRegex(), "")
+                        )
+                        editor!!.commit()
+                        val paquete = spBalance!!.getString("paquete", message_paquete)
+                        binding.textCuentasDatos.text = paquete
+
+                        // message paquete LTE
+                        val messageLte = response.toString()
+                            .replace(
+                                "Tarifa: No activa. Ud debe adquirir una oferta. Para una nueva compra marque *133#",
+                                "0 MB"
+                            )
+                            .replace(
+                                "Tarifa: No activa. Diaria: No dispone de MB.",
+                                "0 MB"
+                            )
+                            .replaceFirst("(.*)Paquetes:".toRegex(), "")
+                            .replaceFirst("(.*)\\+".toRegex(), "")
+                            .replaceFirst("Tarifa: No activa. Diaria:(.*)".toRegex(), "0 MB")
+                            .replaceFirst(
+                                "Tarifa: No activa. Mensajeria:(.*)".toRegex(), "0 MB"
+                            )
+                            .trim { it <= ' ' }
+                        val lte = messageLte
+                            .replaceFirst("LTE(.*)".toRegex(), "")
+                            .replaceFirst("(.*)validos(.*)".toRegex(), "0 MB")
+                            .replace("no activos.", "")
+                        editor!!.putString("lte", lte)
+                        editor!!.commit()
+                        binding.textCuentasDatosLte.text = lte
+
+                        // vencimiento de datos
+                        val vencimientoDatos = response.toString()
+                            .replace(
+                                "Tarifa: No activa. Ud debe adquirir una oferta. Para una nueva compra marque *133#",
+                                "0 días"
+                            )
+                            .replace(
+                                "Tarifa: No activa. Diaria: No dispone de MB.",
+                                "0 MB"
+                            )
+                            .replaceFirst("(.*)Paquetes:".toRegex(), "")
+                            .replaceFirst("Tarifa: No activa. Diaria:(.*)".toRegex(), "0 MB")
+                            .replaceFirst(
+                                "Tarifa: No activa. Mensajeria:(.*)".toRegex(), "0 MB"
+                            )
+                            .trim { it <= ' ' }
+                        val vence = vencimientoDatos
+                            .replaceFirst("(.*)validos".toRegex(), "")
+                            .replace("dias.", "días")
+                            .replace("no activos", "0 días")
+                            .replaceFirst("(.*)LTE".toRegex(), "")
+                        editor!!.putString("vence_datos", vence)
+                        editor!!.commit()
+                        binding.textCuentasVenceDatos.text = vence
+                    }
+
+                    override fun onReceiveUssdResponseFailed(
+                        telephonyManager: TelephonyManager,
+                        request: String,
+                        failureCode: Int
+                    ) {
+                        super.onReceiveUssdResponseFailed(
+                            telephonyManager, request, failureCode
+                        )
+                        Log.e(
+                            "TAG",
+                            "onReceiveUssdResponseFailed: $failureCode$request"
+                        )
+                    }
+                },
+                Handler(Looper.getMainLooper())
+            )
+        }
+    }
+
+    private fun getRemainingBonuses(sim: Int) {
+        val ussdCode = "*222*266#"
+        if (ussdCode.equals("", ignoreCase = true)) return
+        if (ContextCompat.checkSelfPermission(
+                Objects.requireNonNull(requireActivity()),
+                Manifest.permission.CALL_PHONE
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(arrayOf(Manifest.permission.CALL_PHONE), 234)
+            return
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            manager =
+                requireActivity().getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            manager2 = manager!!.createForSubscriptionId(2)
+            managerMain = if (sim == 0) manager else manager2
+            managerMain!!.sendUssdRequest(
+                ussdCode,
+                object : UssdResponseCallback() {
+                    override fun onReceiveUssdResponse(
+                        telephonyManager: TelephonyManager,
+                        request: String,
+                        response: CharSequence
+                    ) {
+                        super.onReceiveUssdResponse(telephonyManager, request, response)
+                        val datosNacionales = response.toString()
+                            .replace("Usted no dispone de bonos activos.", "0 MB")
+                            .replaceFirst("(.*)Datos.cu ".toRegex(), "")
+                            .replaceFirst("vence(.*)".toRegex(), "")
+                            .trim { it <= ' ' }
+                        editor!!.putString("datos_nacionales", datosNacionales)
+                        editor!!.commit()
+                        binding.textCuentasDatosNacionales.text = datosNacionales
+
+                        // Bonos en promoción
+                        val bonos = response.toString()
+                            .replace("Usted no dispone de bonos activos.", "")
+                            .replaceFirst("Datos.cu(.*)".toRegex(), "")
+                            .trim { it <= ' ' }
+                        if (!TextUtils.isEmpty(bonos)) {
+                            binding.buttonCuentasBono.visibility = View.VISIBLE
+                        } else {
+                            binding.buttonCuentasBono.visibility = View.GONE
+                        }
+                        editor!!.putString("bonos", bonos)
+                        editor!!.commit()
+                    }
+
+                    override fun onReceiveUssdResponseFailed(
+                        telephonyManager: TelephonyManager,
+                        request: String,
+                        failureCode: Int
+                    ) {
+                        super.onReceiveUssdResponseFailed(
+                            telephonyManager, request, failureCode
+                        )
+                        Log.e(
+                            "TAG",
+                            "onReceiveUssdResponseFailed: $failureCode$request"
+                        )
+                    }
+                },
+                Handler(Looper.getMainLooper())
+            )
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (view == null) {
+            return
+        }
+        requireView().isFocusableInTouchMode = true
+        requireView().requestFocus()
+        requireView().setOnKeyListener { _, keyCode, event ->
+            event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK
+        }
+        val spProfile = requireActivity().getSharedPreferences("profile", Context.MODE_PRIVATE)
+
+        binding.textname.text =
+            spProfile.getString("nombre", "")?.takeIf { it.isNotEmpty() } ?: getString(R.string.user_string)
+        binding.textPhoneNumber.text =
+            spProfile.getString("numero", "")?.takeIf { it.isNotEmpty() } ?: getString(R.string.phone_number_string)
+        binding.textEmail.text =
+            spProfile.getString("nauta", "")?.takeIf { it.isNotEmpty() } ?: getString(R.string.mail_nauta_string)
+
+        // saldo movil
+        binding.textCuentasSaldo.text = spBalance!!.getString("saldo", "0.00 CUP")
+
+        // vence saldo movil
+        binding.textCuentasVenceSim.text = spBalance!!.getString("vence_saldo", "Expira: 00/00/00")
+
+        // minutos
+        binding.textCuentasMinutos.text = spBalance!!.getString("minutos", "00:00:00")
+
+        // mensajes
+        binding.textCuentasMensajes.text = spBalance!!.getString("sms", "0")
+
+        // vence sms y voz
+        binding.textCuentasVenceMinSms.text = spBalance!!.getString("vence_sms", "0 días")
+
+        // bonos en promo
+        val promo = spBalance?.getString("bonos", null)
+        binding.buttonCuentasBono.visibility = if (!promo.isNullOrEmpty()) View.VISIBLE else View.GONE
+
+        // datos nacionales
+        binding.textCuentasDatosNacionales.text = spBalance!!.getString("datos_nacionales", "0 MB")
+
+        // paquetes
+        binding.textCuentasDatos.text = spBalance!!.getString("paquete", "0 MB")
+
+        // lte
+        binding.textCuentasDatosLte.text = spBalance!!.getString("lte", "0 MB")
+
+        // vence datos
+        binding.textCuentasVenceDatos.text = spBalance!!.getString("vence_datos", "0 días")
+
+        // mensajeria y vencimiento
+        binding.textCuentasMensajeria.text = spBalance!!.getString("mensajeria", "0 MB")
+        binding.textCuentasVenceMensajeria.text = spBalance!!.getString("vence_mensajeria", "0 días")
+
+        // diaria y vencimiento
+        binding.textCuentasDiaria.text = spBalance!!.getString("diaria", "0 MB")
+        binding.textCuentasVenceDiaria.text = spBalance!!.getString("vence_diaria", "0 horas")
+
+        // update hora
+        binding.textHoraUpdate.text = "Actualizado: ${spBalance!!.getString("hora", "00:00")}"
+    }
+
+    companion object {
+        val simSlotName = arrayOf(
             "extra_asus_dial_use_dualsim",
             "com.android.phone.extra.slot",
             "slot",
@@ -85,984 +956,6 @@ public class CuentasFragment extends Fragment {
             "phone_type",
             "slotId",
             "slotIdx"
-    };
-    // TODO: preference dualSim
-    public String sim = "1";
-    public SharedPreferences sp_sim;
-
-    private CircleImageView imgperfil;
-    private ImageView imgGreetings;
-    private ImageView Editar, refreshButton;
-    TextView Promo;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_cuentas, container, false);
-
-        // Mensaje para Android menor que 8
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            AlertDialog.Builder alertdialogo1 = new AlertDialog.Builder(requireActivity());
-            alertdialogo1.setTitle("Advertencia");
-            alertdialogo1.setMessage(R.string.advertencia);
-            alertdialogo1.setPositiveButton("Ok",null);
-            alertdialogo1.create().show();
-        }
-
-        // ui components init
-        Refrescar = v.findViewById(R.id.swipeRefresh);
-        saldotext = v.findViewById(R.id.text_cuentas_saldo);
-        expiratext = v.findViewById(R.id.text_cuentas_vence_sim);
-        minutostext = v.findViewById(R.id.text_cuentas_minutos);
-        mensajestext = v.findViewById(R.id.text_cuentas_mensajes);
-        venceminutossms = v.findViewById(R.id.text_cuentas_vence_min_sms);
-        datostext = v.findViewById(R.id.text_cuentas_datos);
-        datoslte = v.findViewById(R.id.text_cuentas_datos_lte);
-        datosnacionales = v.findViewById(R.id.text_cuentas_datos_nacionales);
-        VenceDatosI = v.findViewById(R.id.text_cuentas_vence_datos);
-        bolsasms = v.findViewById(R.id.text_cuentas_mensajeria);
-        vencebolsasms = v.findViewById(R.id.text_cuentas_vence_mensajeria);
-        bolsadiaria = v.findViewById(R.id.text_cuentas_diaria);
-        vencebolsadiaria = v.findViewById(R.id.text_cuentas_vence_diaria);
-        Actulizar =v.findViewById(R.id.text_hora_update);
-        TextoNombre = v.findViewById(R.id.textname);
-        Saludo = v.findViewById(R.id.text_saludo_perfil);
-        imgperfil = v.findViewById(R.id.img_drawer_perfil);
-        Editar = v.findViewById(R.id.editar);
-        Numero = v.findViewById(R.id.numerotext);
-        Correo = v.findViewById(R.id.correotext);
-        escogerSim = v.findViewById(R.id.check_sim_dual);
-        Promo = v.findViewById(R.id.button_cuentas_bono);
-        imgGreetings = v.findViewById(R.id.img_greetings);
-
-        // TODO: SharedPreferences para guardar datos de cuentas
-        sp_cuentas = requireActivity().getSharedPreferences("cuentas", Context.MODE_PRIVATE);
-        editor = sp_cuentas.edit();
-
-        // TODO: Preferences DualSIM
-        sp_sim = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        sim = (sp_sim.getString(getString(R.string.sim_key), "1"));
-
-        // ESCOGER SIM0-SIM1
-        escogerSim.setChecked(sim.equals("0"));
-        escogerSim.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    sim = "0";
-                } else {
-                    sim = "1";
-                }
-                sp_sim.edit().putString("sim_key", sim).apply();
-                }
-
-        });
-
-
-
-        return v;
+        )
     }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onViewCreated(View arg0, Bundle arg1) {
-        super.onViewCreated(arg0, arg1);
-
-        // TODO: Mostrar saludo con el nombre del usuario
-        SharedPreferences sp_perfil = getActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
-        String name = sp_perfil.getString("nombre", "").toString();
-        String numero = sp_perfil.getString("numero", "").toString();
-        String nauta = sp_perfil.getString("nauta", "").toString();
-        if (name.isEmpty()) {
-            TextoNombre.setText("Usuario");
-        } else {
-            TextoNombre.setText(name);
-        }
-        if (numero.isEmpty()) {
-            Numero.setText("Numero");
-        } else {
-            Numero.setText(numero);
-        }
-        if (nauta.isEmpty()) {
-            Correo.setText("Nauta");
-        } else {
-            Correo.setText(nauta);
-        }
-        // saludo
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            LocalDateTime currentTime = LocalDateTime.now();
-            if (currentTime.getHour() < 12) {
-                imgGreetings.setImageResource(R.drawable.baseline_light_mode_24);
-                Saludo.setText(getString(R.string.title_good_morning));
-            } else if (currentTime.getHour() >= 12 && currentTime.getHour() < 18) {
-                imgGreetings.setImageResource(R.drawable.outline_brightness_4_24);
-                Saludo.setText(getString(R.string.title_good_afternoon));
-            } else {
-                imgGreetings.setImageResource(R.drawable.outline_dark_mode_24);
-                Saludo.setText(getString(R.string.title_good_night));
-            }
-        } else {
-            Saludo.setText("Hola");
-        }
-        Editar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), PerfilActivity.class));
-
-            }
-        });
-
-        // TODO: Perfil en el header
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            Bitmap load =
-                    new ImageSaver(getContext())
-                            .setFileName("IMG.png")
-                            .setDirectoryName("PortalUsuario")
-                            .load();
-            if (load == null) {
-                imgperfil.setImageResource(R.drawable.portal);
-            } else {
-                imgperfil.setImageBitmap(load);
-            }
-        } else {
-            Bitmap load =
-                    new ImageSaver(getContext())
-                            .setExternal(true)
-                            .setFileName("IMG.png")
-                            .setDirectoryName("PortalUsuario")
-                            .load();
-            if (load == null) {
-                imgperfil.setImageResource(R.drawable.portal);
-            } else {
-                imgperfil.setImageBitmap(load);
-            }
-        }
-
-        // TODO: Preferences DualSIM
-        sp_sim = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        sim = (sp_sim.getString(getString(R.string.sim_key), "0"));
-
-
-        // TODO: Ver bonos promocionales
-        Promo.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String promo = sp_cuentas.getString("bonos", null);
-                        AlertDialog.Builder alertdialogo = new AlertDialog.Builder(requireActivity());
-                        alertdialogo.setMessage(promo);
-                        alertdialogo.setPositiveButton("Ok",null);
-                        alertdialogo.create().show();
-                    }
-                });
-
-        // TODO: SwipeRefresh
-        Refrescar.setOnRefreshListener(
-                new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        // Progress dialog
-                        ProgressDialog progressDialog = new ProgressDialog(getActivity());
-                        progressDialog.setMax(100);
-                        progressDialog.setTitle("Actualizando USSD");
-                        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                        progressDialog.setCancelable(false);
-                        progressDialog.show();
-
-                        // UPDATE
-                        new Handler(Looper.getMainLooper())
-                                .postDelayed(
-                                        new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                if (sim.equals("0")) {
-                                                    for (String s : simSlotName) {
-                                                        consultaSaldo("*222#", 0);
-                                                    }
-                                                } else if (sim.equals("1")) {
-                                                    for (String s : simSlotName) {
-                                                        consultaSaldo("*222#", 1);
-                                                    }
-                                                }
-                                                progressDialog.setTitle(
-                                                        "Actualizando saldo");
-                                                progressDialog.setProgress(20);
-
-                                                //// MINUTOS
-                                                new Handler(Looper.getMainLooper())
-                                                        .postDelayed(
-                                                                new Runnable() {
-                                                                    @Override
-                                                                    public void run() {
-                                                                        if (sim.equals("0")) {
-                                                                            for (String s :
-                                                                                    simSlotName) {
-                                                                                consultaMinutos(
-                                                                                        "*222*869#",
-                                                                                        0);
-                                                                            }
-                                                                        } else if (sim.equals(
-                                                                                "1")) {
-                                                                            for (String s :
-                                                                                    simSlotName) {
-                                                                                consultaMinutos(
-                                                                                        "*222*869#",
-                                                                                        1);
-                                                                            }
-                                                                        }
-                                                                        progressDialog.setTitle(
-                                                                                        "Actualizando minutos");
-                                                                        progressDialog.setProgress(40);
-
-                                                                        // MENSAJES
-                                                                        new Handler(
-                                                                                Looper
-                                                                                        .getMainLooper())
-                                                                                .postDelayed(
-                                                                                        new Runnable() {
-                                                                                            @Override
-                                                                                            public
-                                                                                            void
-                                                                                            run() {
-                                                                                                if (sim
-                                                                                                        .equals(
-                                                                                                                "0")) {
-                                                                                                    for (String
-                                                                                                            s :
-                                                                                                            simSlotName) {
-                                                                                                        consultaMensajes(
-                                                                                                                "*222*767#",
-                                                                                                                0);
-                                                                                                    }
-                                                                                                } else if (sim
-                                                                                                        .equals(
-                                                                                                                "1")) {
-                                                                                                    for (String
-                                                                                                            s :
-                                                                                                            simSlotName) {
-                                                                                                        consultaMensajes(
-                                                                                                                "*222*767#",
-                                                                                                                1);
-                                                                                                    }
-                                                                                                }
-                                                                                                progressDialog.setTitle(
-                                                                                                                "Actualizando mensajes");
-                                                                                                progressDialog.setProgress(60);
-                                                                                                // BONOS
-                                                                                                new Handler(
-                                                                                                        Looper
-                                                                                                                .getMainLooper())
-                                                                                                        .postDelayed(
-                                                                                                                new Runnable() {
-                                                                                                                    @Override
-                                                                                                                    public
-                                                                                                                    void
-                                                                                                                    run() {
-                                                                                                                        if (sim
-                                                                                                                                .equals(
-                                                                                                                                        "0")) {
-                                                                                                                            for (String
-                                                                                                                                    s :
-                                                                                                                                    simSlotName) {
-                                                                                                                                consultaBonos(
-                                                                                                                                        "*222*266#",
-                                                                                                                                        0);
-                                                                                                                            }
-                                                                                                                        } else if (sim
-                                                                                                                                .equals(
-                                                                                                                                        "1")) {
-                                                                                                                            for (String
-                                                                                                                                    s :
-                                                                                                                                    simSlotName) {
-                                                                                                                                consultaBonos(
-                                                                                                                                        "*222*266#",
-                                                                                                                                        1);
-                                                                                                                            }
-                                                                                                                        }
-                                                                                                                        progressDialog.setTitle(
-                                                                                                                                        "Actualizando bonos");
-                                                                                                                        progressDialog.setProgress(80);
-
-                                                                                                                        /// DATOS
-                                                                                                                        new Handler(
-                                                                                                                                Looper
-                                                                                                                                        .getMainLooper())
-                                                                                                                                .postDelayed(
-                                                                                                                                        new Runnable() {
-                                                                                                                                            @Override
-                                                                                                                                            public
-                                                                                                                                            void
-                                                                                                                                            run() {
-                                                                                                                                                if (sim
-                                                                                                                                                        .equals(
-                                                                                                                                                                "0")) {
-                                                                                                                                                    for (String
-                                                                                                                                                            s :
-                                                                                                                                                            simSlotName) {
-                                                                                                                                                        consultaDatos(
-                                                                                                                                                                "*222*328#",
-                                                                                                                                                                0);
-                                                                                                                                                    }
-                                                                                                                                                } else if (sim
-                                                                                                                                                        .equals(
-                                                                                                                                                                "1")) {
-                                                                                                                                                    for (String
-                                                                                                                                                            s :
-                                                                                                                                                            simSlotName) {
-                                                                                                                                                        consultaDatos(
-                                                                                                                                                                "*222*328#",
-                                                                                                                                                                1);
-                                                                                                                                                    }
-                                                                                                                                                }
-                                                                                                                                                progressDialog.setTitle(
-                                                                                                                                                                "Actualizando datos");
-                                                                                                                                                progressDialog.setProgress(100);
-                                                                                                                                                        Refrescar
-                                                                                                                                                        .setRefreshing(
-                                                                                                                                                                false);
-                                                                                                                                                // hora
-                                                                                                                                                SimpleDateFormat
-                                                                                                                                                        hora =
-                                                                                                                                                        new SimpleDateFormat(
-                                                                                                                                                                "h:mm a");
-                                                                                                                                                String
-                                                                                                                                                        time =
-                                                                                                                                                        hora
-                                                                                                                                                                .format(
-                                                                                                                                                                        new Date());
-                                                                                                                                                editor
-                                                                                                                                                        .putString(
-                                                                                                                                                                "hora",
-                                                                                                                                                                time
-                                                                                                                                                                        .toString());
-                                                                                                                                                editor
-                                                                                                                                                        .commit();
-                                                                                                                                                Actulizar
-                                                                                                                                                        .setText(
-                                                                                                                                                                "Actualizado: "
-                                                                                                                                                                        + time);
-
-                                                                                                                                                new Handler(
-                                                                                                                                                        Looper
-                                                                                                                                                                .getMainLooper())
-                                                                                                                                                        .postDelayed(
-                                                                                                                                                                new Runnable() {
-                                                                                                                                                                    @Override
-                                                                                                                                                                    public
-                                                                                                                                                                    void
-                                                                                                                                                                    run() {
-                                                                                                                                                                        progressDialog.dismiss();
-                                                                                                                                                                    }
-                                                                                                                                                                },
-                                                                                                                                                                8000);
-                                                                                                                                            }
-                                                                                                                                        },
-                                                                                                                                        6000);
-                                                                                                                    }
-                                                                                                                },
-                                                                                                                6000);
-                                                                                            }
-                                                                                        },
-                                                                                        5000);
-                                                                    }
-                                                                },
-                                                                4000);
-                                            }
-                                        },
-                                        1000);
-                    }
-                });
-    }
-
-    public void consultaSaldo(String ussdCode, int sim) {
-        if (ussdCode.equalsIgnoreCase("")) return;
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, 234);
-            return;
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            manager = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-            manager2 = manager.createForSubscriptionId(2);
-            managerMain = (sim == 0) ? manager : manager2;
-            managerMain.sendUssdRequest(
-                    ussdCode,
-                    new TelephonyManager.UssdResponseCallback() {
-                        @Override
-                        public void onReceiveUssdResponse(
-                                TelephonyManager telephonyManager,
-                                String request,
-                                CharSequence response) {
-                            super.onReceiveUssdResponse(telephonyManager, request, response);
-
-                            String message_saldo =
-                                    response.toString()
-                                            .replace("Saldo:", "")
-                                            .replaceFirst("CUP(.*)", "")
-                                            .trim();
-                            StringBuilder sb1 = new StringBuilder();
-                            sb1.append(message_saldo);
-                            sb1.append(" CUP");
-                            saldotext.setText(sb1);
-                            editor.putString("saldo", sb1.toString());
-                            editor.commit();
-
-                            // TODO: String mostrar fecha de vencimiento de saldo principal
-                            String message_vence =
-                                    response.toString()
-                                            .replaceFirst("(.*)vence", "")
-                                            .replace("-", "/")
-                                            .replace(".", "")
-                                            .trim();
-                            StringBuilder sb2 = new StringBuilder();
-                            sb2.append("Expira: ");
-                            sb2.append(message_vence);
-                            expiratext.setText(sb2);
-                            editor.putString("vence_saldo", sb2.toString());
-                            editor.commit();
-                        }
-
-                        @Override
-                        public void onReceiveUssdResponseFailed(
-                                TelephonyManager telephonyManager,
-                                String request,
-                                int failureCode) {
-                            super.onReceiveUssdResponseFailed(
-                                    telephonyManager, request, failureCode);
-
-                            Log.e(
-                                    "TAG",
-                                    "onReceiveUssdResponseFailed: " + "" + failureCode + request);
-                        }
-                    },
-                    new Handler(Looper.getMainLooper()));
-        }
-    }
-
-    public void consultaMinutos(String ussdCode, int sim) {
-        if (ussdCode.equalsIgnoreCase("")) return;
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, 234);
-            return;
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            manager = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-            manager2 = manager.createForSubscriptionId(2);
-            managerMain = (sim == 0) ? manager : manager2;
-            managerMain.sendUssdRequest(
-                    ussdCode,
-                    new TelephonyManager.UssdResponseCallback() {
-                        @Override
-                        public void onReceiveUssdResponse(
-                                TelephonyManager telephonyManager,
-                                String request,
-                                CharSequence response) {
-                            super.onReceiveUssdResponse(telephonyManager, request, response);
-                            String minutos =
-                                    response.toString()
-                                            .replace(
-                                                    "Usted debe adquirir un plan de minutos. Para una nueva compra marque *133#",
-                                                    "00.00.00")
-                                            .replace("Usted dispone de", "")
-                                            .replaceFirst("MIN(.*)", "")
-                                            .trim();
-                            minutostext.setText(minutos);
-                            editor.putString("minutos", minutos.toString());
-                            editor.commit();
-                        }
-
-                        @Override
-                        public void onReceiveUssdResponseFailed(
-                                TelephonyManager telephonyManager,
-                                String request,
-                                int failureCode) {
-                            super.onReceiveUssdResponseFailed(
-                                    telephonyManager, request, failureCode);
-
-                            Log.e(
-                                    "TAG",
-                                    "onReceiveUssdResponseFailed: " + "" + failureCode + request);
-                        }
-                    },
-                    new Handler(Looper.getMainLooper()));
-        }
-    }
-
-    public void consultaMensajes(String ussdCode, int sim) {
-        if (ussdCode.equalsIgnoreCase("")) return;
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, 234);
-            return;
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            manager = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-            manager2 = manager.createForSubscriptionId(2);
-            managerMain = (sim == 0) ? manager : manager2;
-            managerMain.sendUssdRequest(
-                    ussdCode,
-                    new TelephonyManager.UssdResponseCallback() {
-                        @Override
-                        public void onReceiveUssdResponse(
-                                TelephonyManager telephonyManager,
-                                String request,
-                                CharSequence response) {
-                            super.onReceiveUssdResponse(telephonyManager, request, response);
-                            // cantidad de mensajes
-                            String message_sms =
-                                    response.toString()
-                                            .replace(
-                                                    "Usted debe adquirir un plan de SMS. Para una nueva compra marque *133#",
-                                                    "0")
-                                            .replace(
-                                                    "Usted no dispone de SMS. Para una nueva compra marque *133#",
-                                                    "0")
-                                            .replace("Usted dispone de", "")
-                                            .replace("no activos.", "")
-                                            .replaceFirst("SMS(.*)", "")
-                                            .trim();
-                            mensajestext.setText(message_sms);
-                            editor.putString("sms", message_sms.toString());
-                            editor.commit();
-
-                            // Fecha vencimiento sms y voz
-                            String message_vence_sms =
-                                    response.toString()
-                                            .replace(
-                                                    "Usted debe adquirir un plan de SMS. Para una nueva compra marque *133#",
-                                                    "0 días")
-                                            .replace(
-                                                    "Usted no dispone de SMS. Para una nueva compra marque *133#",
-                                                    "0 días")
-                                            .replaceFirst("(.*)por", "")
-                                            .replace("dias", "días")
-                                            .trim();
-                            editor.putString(
-                                    "vence_sms",
-                                    message_vence_sms
-                                            .toString()
-                                            .replaceFirst("(.*)no activos.", "0 días"));
-                            editor.commit();
-                            venceminutossms.setText(message_vence_sms);
-
-                            // no usp
-                            String vence_sms_min =
-                                    sp_cuentas.getString("vence_sms", message_vence_sms.toString());
-                        }
-
-                        @Override
-                        public void onReceiveUssdResponseFailed(
-                                TelephonyManager telephonyManager,
-                                String request,
-                                int failureCode) {
-                            super.onReceiveUssdResponseFailed(
-                                    telephonyManager, request, failureCode);
-
-                            Log.e(
-                                    "TAG",
-                                    "onReceiveUssdResponseFailed: " + "" + failureCode + request);
-                        }
-                    },
-                    new Handler(Looper.getMainLooper()));
-        }
-    }
-
-    public void consultaDatos(String ussdCode, int sim) {
-        if (ussdCode.equalsIgnoreCase("")) return;
-        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CALL_PHONE)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, 234);
-            return;
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            manager = (TelephonyManager) requireActivity().getSystemService(Context.TELEPHONY_SERVICE);
-            manager2 = manager.createForSubscriptionId(2);
-            managerMain = (sim == 0) ? manager : manager2;
-            managerMain.sendUssdRequest(
-                    ussdCode,
-                    new TelephonyManager.UssdResponseCallback() {
-                        @Override
-                        public void onReceiveUssdResponse(
-                                TelephonyManager telephonyManager,
-                                String request,
-                                CharSequence response) {
-                            super.onReceiveUssdResponse(telephonyManager, request, response);
-                            String todos_los_paquetes =
-                                    "Tarifa: No activa. Diaria: 200 MB no activos. Mensajeria: 599.53 MB validos 8 dias. Paquetes: 3.57 GB + 3.10 GB LTE no activos.";
-
-                            // bolsa diaria
-                            String diaria =
-                                    response.toString()
-                                            .replace(
-                                                    "Tarifa: No activa. Ud debe adquirir una oferta. Para una nueva compra marque *133#",
-                                                    "0 MB")
-                                            .replace(
-                                                    "Tarifa: No activa. Paquetes: No dispone de MB.",
-                                                    "0 MB")
-                                            .replace("Tarifa: No activa. Diaria:", "")
-                                            .replace(
-                                                    "Tarifa: No activa. Diaria: No dispone de MB.",
-                                                    "0 MB")
-                                            .replace("Tarifa: No activa.", "0 MB")
-                                            .replaceFirst("Mensajeria:(.*)", "")
-                                            .replaceFirst("Paquetes:(.*)", "")
-                                            .trim();
-                            editor.putString(
-                                    "diaria",
-                                    diaria.toString()
-                                            .replace("no activos.", "")
-                                            .replaceFirst("validos(.*)", "")
-                                            .replace("No dispone de MB.", "0 MB"));
-                            editor.commit();
-                            String bolsa_diaria = sp_cuentas.getString("diaria", diaria.toString());
-                            bolsadiaria.setText(bolsa_diaria);
-
-                            // vencimiento de bolsa diaria
-                            String message_vence_diaria =
-                                    response.toString()
-                                            .replace(
-                                                    "Tarifa: No activa. Ud debe adquirir una oferta. Para una nueva compra marque *133#",
-                                                    "Debe adquirir un paquete")
-                                            .replace(
-                                                    "Tarifa: No activa. Paquetes: No dispone de MB.",
-                                                    "0 horas")
-                                            .replace("Tarifa: No activa. Diaria:", "")
-                                            .replace("Tarifa: No activa.", "0 horas")
-                                            .replaceFirst("Mensajeria:(.*)", "")
-                                            .replaceFirst("Paquetes:(.*)", "")
-                                            .trim();
-                            editor.putString(
-                                    "vence_diaria",
-                                    message_vence_diaria
-                                            .toString()
-                                            .replaceFirst("(.*)no activos.", "sin consumir")
-                                            .replaceFirst("(.*)validos", "")
-                                            .replace("No dispone de MB.", "0 horas")
-                                            .replace("horas.", "horas"));
-                            editor.commit();
-                            String vence_diaria =
-                                    sp_cuentas.getString(
-                                            "vence_diaria", message_vence_diaria.toString());
-                            vencebolsadiaria.setText(vence_diaria);
-
-                            // bolsa de mensajeria
-                            String message_mensajeria =
-                                    response.toString()
-                                            .replace(
-                                                    "Tarifa: No activa. Ud debe adquirir una oferta. Para una nueva compra marque *133#",
-                                                    "0 MB")
-                                            .replace(
-                                                    "Tarifa: No activa. Paquetes: No dispone de MB.",
-                                                    "0 MB")
-                                            .replace(
-                                                    "Tarifa: No activa. Diaria: No dispone de MB. Mensajeria:",
-                                                    "")
-                                            .replaceFirst("(.*)no activos. Mensajeria:", "")
-                                            .replaceFirst("(.*)horas. Mensajeria:", "")
-                                            .replace(
-                                                    "Tarifa: No activa. Mensajeria: No dispone de MB.",
-                                                    "0 MB")
-                                            .replace("Tarifa: No activa. Mensajeria:", "")
-                                            .replace("Tarifa: No activa.", "0 MB")
-                                            .replaceFirst("Diaria:(.*)", "")
-                                            .replaceFirst("Paquetes:(.*)", "")
-                                            .trim();
-
-                            editor.putString(
-                                    "mensajeria",
-                                    message_mensajeria
-                                            .toString()
-                                            .replace("vencen hoy.", "")
-                                            .replaceFirst("validos(.*)", ""));
-                            editor.commit();
-                            String bolsa_msg =
-                                    sp_cuentas.getString(
-                                            "mensajeria", message_mensajeria.toString());
-                            bolsasms.setText(bolsa_msg);
-
-                            // vence mensajeria
-                            String message_vence_mensajeria =
-                                    response.toString()
-                                            .replace(
-                                                    "Tarifa: No activa. Ud debe adquirir una oferta. Para una nueva compra marque *133#",
-                                                    "0 días")
-                                            .replace(
-                                                    "Tarifa: No activa. Paquetes: No dispone de MB.",
-                                                    "0 días")
-                                            .replace(
-                                                    "Tarifa: No activa. Diaria: No dispone de MB. Mensajeria:",
-                                                    "")
-                                            .replaceFirst("(.*)no activos. Mensajeria:", "")
-                                            .replaceFirst("(.*)horas. Mensajeria:", "")
-                                            .replace(
-                                                    "Tarifa: No activa. Mensajeria: No dispone de MB.",
-                                                    "0 días")
-                                            .replace("Tarifa: No activa. Mensajeria:", "")
-                                            .replace("Tarifa: No activa.", "0 días")
-                                            .replaceFirst("Diaria:(.*)", "")
-                                            .replaceFirst("Paquetes:(.*)", "")
-                                            .trim();
-                            editor.putString(
-                                    "vence_mensajeria",
-                                    message_vence_mensajeria
-                                            .toString()
-                                            .replaceFirst("(.*)validos", "")
-                                            .replaceFirst("(.*)vencen hoy.", "vence hoy")
-                                            .replace("dias.", "días"));
-                            editor.commit();
-                            String vence_mensajeria =
-                                    sp_cuentas.getString("vence_mensajeria", "0 días");
-                            vencebolsasms.setText(vence_mensajeria);
-
-                            // paquetes
-                            String message_paquete =
-                                    response.toString()
-                                            .replace(
-                                                    "Tarifa: No activa. Ud debe adquirir una oferta. Para una nueva compra marque *133#",
-                                                    "0 MB")
-                                            .replace(
-                                                    "Tarifa: No activa. Diaria: No dispone de MB.",
-                                                    "0 MB")
-                                            .replaceFirst("(.*)Paquetes:", "")
-                                            .replaceFirst("\\+(.*)", "")
-                                            .replaceFirst("Tarifa: No activa. Diaria:(.*)", "0 MB")
-                                            .replaceFirst(
-                                                    "Tarifa: No activa. Mensajeria:(.*)", "0 MB")
-                                            .trim();
-                            editor.putString(
-                                    "paquete",
-                                    message_paquete
-                                            .toString()
-                                            .replaceFirst("(.*)LTE(.*)", "0 MB")
-                                            .replaceFirst("validos(.*)", ""));
-                            editor.commit();
-                            String paquete =
-                                    sp_cuentas.getString("paquete", message_paquete.toString());
-                            datostext.setText(paquete);
-
-                            // TODO: message paquete LTE
-                            String message_lte =
-                                    response.toString()
-                                            .replace(
-                                                    "Tarifa: No activa. Ud debe adquirir una oferta. Para una nueva compra marque *133#",
-                                                    "0 MB")
-                                            .replace(
-                                                    "Tarifa: No activa. Diaria: No dispone de MB.",
-                                                    "0 MB")
-                                            .replaceFirst("(.*)Paquetes:", "")
-                                            .replaceFirst("(.*)\\+", "")
-                                            .replaceFirst("Tarifa: No activa. Diaria:(.*)", "0 MB")
-                                            .replaceFirst(
-                                                    "Tarifa: No activa. Mensajeria:(.*)", "0 MB")
-                                            .trim();
-                            String lte =
-                                    message_lte
-                                            .toString()
-                                            .replaceFirst("LTE(.*)", "")
-                                            .replaceFirst("(.*)validos(.*)", "0 MB")
-                                            .replace("no activos.", "");
-                            editor.putString("lte", lte.toString());
-                            editor.commit();
-                            datoslte.setText(lte);
-
-                            // TODO: vencimiento de datos
-                            String vencimiento_datos =
-                                    response.toString()
-                                            .replace(
-                                                    "Tarifa: No activa. Ud debe adquirir una oferta. Para una nueva compra marque *133#",
-                                                    "0 días")
-                                            .replace(
-                                                    "Tarifa: No activa. Diaria: No dispone de MB.",
-                                                    "0 MB")
-                                            .replaceFirst("(.*)Paquetes:", "")
-                                            .replaceFirst("Tarifa: No activa. Diaria:(.*)", "0 MB")
-                                            .replaceFirst(
-                                                    "Tarifa: No activa. Mensajeria:(.*)", "0 MB")
-                                            .trim();
-                            String vence =
-                                    vencimiento_datos
-                                            .toString()
-                                            .replaceFirst("(.*)validos", "")
-                                            .replace("dias.", "días")
-                                            .replace("no activos", "0 días")
-                                            .replaceFirst("(.*)LTE", "");
-                            editor.putString("vence_datos", vence.toString());
-                            editor.commit();
-                            VenceDatosI.setText(vence);
-                        }
-
-                        @Override
-                        public void onReceiveUssdResponseFailed(
-                                TelephonyManager telephonyManager,
-                                String request,
-                                int failureCode) {
-                            super.onReceiveUssdResponseFailed(
-                                    telephonyManager, request, failureCode);
-
-                            Log.e(
-                                    "TAG",
-                                    "onReceiveUssdResponseFailed: " + "" + failureCode + request);
-                        }
-                    },
-                    new Handler(Looper.getMainLooper()));
-        }
-    }
-
-    public void consultaBonos(String ussdCode, int sim) {
-        if (ussdCode.equalsIgnoreCase("")) return;
-        if (ContextCompat.checkSelfPermission(Objects.requireNonNull(requireActivity()), Manifest.permission.CALL_PHONE)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, 234);
-            return;
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            manager = (TelephonyManager) requireActivity().getSystemService(Context.TELEPHONY_SERVICE);
-            manager2 = manager.createForSubscriptionId(2);
-            managerMain = (sim == 0) ? manager : manager2;
-            managerMain.sendUssdRequest(
-                    ussdCode,
-                    new TelephonyManager.UssdResponseCallback() {
-                        @Override
-                        public void onReceiveUssdResponse(
-                                TelephonyManager telephonyManager,
-                                String request,
-                                CharSequence response) {
-                            super.onReceiveUssdResponse(telephonyManager, request, response);
-                            String datos_nacionales =
-                                    response.toString()
-                                            .replace("Usted no dispone de bonos activos.", "0 MB")
-                                            .replaceFirst("(.*)Datos.cu ", "")
-                                            .replaceFirst("vence(.*)", "")
-                                            .trim();
-                            editor.putString("datos_nacionales", datos_nacionales.toString());
-                            editor.commit();
-                            datosnacionales.setText(datos_nacionales);
-
-                            // TODO: Bonos en promoción
-                            String bonos =
-                                    response.toString()
-                                            .replace("Usted no dispone de bonos activos.", "")
-                                            .replaceFirst("Datos.cu(.*)", "")
-                                            .trim();
-                            String string_bono = bonos.toString();
-                            if (!TextUtils.isEmpty(string_bono)) {
-                                Promo.setVisibility(View.VISIBLE);
-                            } else {
-                                Promo.setVisibility(View.GONE);
-                            }
-                            editor.putString("bonos", string_bono.toString());
-                            editor.commit();
-                        }
-
-                        @Override
-                        public void onReceiveUssdResponseFailed(
-                                TelephonyManager telephonyManager,
-                                String request,
-                                int failureCode) {
-                            super.onReceiveUssdResponseFailed(
-                                    telephonyManager, request, failureCode);
-
-                            Log.e(
-                                    "TAG",
-                                    "onReceiveUssdResponseFailed: " + "" + failureCode + request);
-                        }
-                    },
-                    new Handler(Looper.getMainLooper()));
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(getView() == null){
-            return;
-        }
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
-                    // handle back button's click listener
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        SharedPreferences sp_perfil = requireActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
-        String name = sp_perfil.getString("nombre", "").toString();
-        String numero = sp_perfil.getString("numero", "").toString();
-        String nauta = sp_perfil.getString("nauta", "").toString();
-        if (name.isEmpty()) {
-            TextoNombre.setText("Usuario");
-        } else {
-            TextoNombre.setText(name);
-        }
-        if (numero.isEmpty()) {
-            Numero.setText("Numero");
-        } else {
-            Numero.setText(numero);
-        }
-        if (nauta.isEmpty()) {
-            Correo.setText("Nauta");
-        } else {
-            Correo.setText(nauta);
-        }
-        // saldo movil
-        String saldo = sp_cuentas.getString("saldo", "0.00 CUP");
-        saldotext.setText(saldo);
-        // vence saldo movil
-        String vence_saldo = sp_cuentas.getString("vence_saldo", "Expira: 00/00/00");
-        expiratext.setText(vence_saldo);
-        // minutos
-        String minutos = sp_cuentas.getString("minutos", "00:00:00");
-        minutostext.setText(minutos);
-        // mensajes
-        String mensajes = sp_cuentas.getString("sms", "0");
-        mensajestext.setText(mensajes);
-        // vence sms y voz
-        String vence_min_sms = sp_cuentas.getString("vence_sms", "0 días");
-        venceminutossms.setText(vence_min_sms);
-        // bonos en promo
-        String promo = sp_cuentas.getString("bonos", null);
-        if (!TextUtils.isEmpty(promo)) {
-            Promo.setVisibility(View.VISIBLE);
-        } else {
-            Promo.setVisibility(View.GONE);
-        }
-        // datos nacionales
-        String nacionales = sp_cuentas.getString("datos_nacionales", "0 MB");
-        datosnacionales.setText(nacionales);
-        // paquetes
-        String datos = sp_cuentas.getString("paquete", "0 MB");
-        datostext.setText(datos);
-        // lte
-        String lte = sp_cuentas.getString("lte", "0 MB");
-        datoslte.setText(lte);
-        // vence datos
-        String vence_datos = sp_cuentas.getString("vence_datos", "0 días");
-        VenceDatosI.setText(vence_datos);
-        // mensajeria y vencimiento
-        String mensajeria = sp_cuentas.getString("mensajeria", "0 MB");
-        String vence_mensajeria = sp_cuentas.getString("vence_mensajeria", "0 días");
-        bolsasms.setText(mensajeria);
-        vencebolsasms.setText(vence_mensajeria);
-        // diaria y vencimiento
-        String diaria = sp_cuentas.getString("diaria", "0 MB");
-        String vence_diaria = sp_cuentas.getString("vence_diaria", "0 horas");
-        bolsadiaria.setText(diaria);
-        vencebolsadiaria.setText(vence_diaria);
-        // update hora
-        String time = sp_cuentas.getString("hora", "00:00");
-        Actulizar.setText("Actualizado: " + time);
-    }
-
 }
