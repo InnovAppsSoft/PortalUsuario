@@ -157,6 +157,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
+                    android:gravity="center_horizontal"
                     android:orientation="vertical"
                     android:layout_weight="1">
 
@@ -165,20 +166,22 @@
                         android:layout_height="wrap_content">
 
                         <CheckBox
-                            android:layout_alignParentEnd="true"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="4dp"
+                            android:id="@+id/check_sim_dual"
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="4dp"
                             android:button="@drawable/sl_type_sim_24dp"
-                            app:buttonTint="@color/predeterminado"
-                            android:id="@+id/check_sim_dual" />
+                            android:checked="false"
+                            android:visibility="gone"
+                            app:buttonTint="@color/predeterminado" />
 
                     </RelativeLayout>
 
 
                     <!--Big Text-->
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                         <TextView
@@ -206,7 +209,7 @@
 
                     </LinearLayout>
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:id="@+id/text_hora_update"
                         android:layout_height="wrap_content"
                         android:text="@string/ultima_actualizacion_00_00"
@@ -219,20 +222,22 @@
                         android:textSize="13sp" />
 
                     <LinearLayout
+                        android:id="@+id/ll_credit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:visibility="visible">
 
                         <TextView
+                            android:id="@+id/text_cuentas_saldo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/text_cuentas_saldo"
-                            android:text="0.00 CUP"
                             android:ellipsize="marquee"
+                            android:fontFamily="@font/displaybold"
                             android:marqueeRepeatLimit="marquee_forever"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:fontFamily="@font/displaybold"
+                            android:text="0.00 CUP"
                             android:textColor="@color/colorDes"
                             android:textSize="13sp" />
 
@@ -245,78 +250,82 @@
                             android:src="@drawable/circle_dark_grey_fil" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:id="@+id/text_cuentas_vence_sim"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:fontFamily="@font/displaybold"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
                             android:text="Expira: 00/00/00"
-                            android:ellipsize="marquee"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:fontFamily="@font/displaybold"
                             android:textColor="@color/colorDes"
                             android:textSize="13sp" />
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_data_remaining_days"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:ellipsize="marquee"
+                            android:fontFamily="@font/displaybold"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
                             android:text="@string/expira_datos"
-                            android:ellipsize="marquee"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
                             android:textColor="@color/colorDes"
-                            android:textSize="13sp"
-                            android:fontFamily="@font/displaybold"
-                            android:layout_marginEnd="10dp" />
+                            android:textSize="13sp" />
 
                         <TextView
+                            android:id="@+id/text_cuentas_vence_datos"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/text_cuentas_vence_datos"
-                            android:text="0 dias"
                             android:ellipsize="marquee"
+                            android:fontFamily="@font/displaybold"
                             android:marqueeRepeatLimit="marquee_forever"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
+                            android:text="0 dias"
                             android:textColor="@color/colorDes"
-                            android:fontFamily="@font/displaybold"
                             android:textSize="13sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_marginBottom="4dp"
+                        android:id="@+id/ll_sms_due_date"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:ellipsize="marquee"
+                            android:fontFamily="@font/displaybold"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
                             android:text="@string/expira_sms_voz"
-                            android:ellipsize="marquee"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:fontFamily="@font/displaybold"
                             android:textColor="@color/colorDes"
-                            android:textSize="13sp"
-                            android:layout_marginEnd="10dp" />
+                            android:textSize="13sp" />
 
                         <TextView
+                            android:id="@+id/text_cuentas_vence_min_sms"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0 dias"
                             android:ellipsize="marquee"
+                            android:fontFamily="@font/displaybold"
                             android:marqueeRepeatLimit="marquee_forever"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:fontFamily="@font/displaybold"
-                            android:id="@+id/text_cuentas_vence_min_sms"
+                            android:text="0 dias"
                             android:textColor="@color/colorDes"
                             android:textSize="13sp" />
                     </LinearLayout>
@@ -330,50 +339,57 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:visibility="gone"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="6dp"
                 android:background="@drawable/background_text"
-                android:padding="4dp">
+                android:padding="4dp"
+                android:visibility="gone">
 
                 <TextView
+                    android:id="@+id/button_cuentas_bono"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:textAlignment="center"
-                    android:id="@+id/button_cuentas_bono"
-                    android:fontFamily="@font/displaybold"
-                    android:text="@string/promociones_activas"
-                    android:textAllCaps="true"
-                    android:textStyle="bold"
                     android:ellipsize="marquee"
+                    android:fontFamily="@font/displaybold"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:scrollHorizontally="true"
                     android:singleLine="true"
+                    android:text="@string/promociones_activas"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
                     android:textColor="@color/colorDes"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
             <!--Options-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp">
+                android:layout_height="0dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/ll_data_voice"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="2"
-                    android:orientation="vertical">
+                    android:padding="4dp"
+                    android:orientation="horizontal">
+
 
                     <LinearLayout
+                        android:id="@+id/card_voice"
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:layout_marginTop="6dp">
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
@@ -388,22 +404,21 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginEnd="3dp"
-                                android:src="@drawable/outline_local_phone_24"
-                                />
+                                android:src="@drawable/outline_local_phone_24" />
 
                             <TextView
+                                android:id="@+id/text_cuentas_minutos"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginBottom="5dp"
-                                android:id="@+id/text_cuentas_minutos"
-                                android:text="00:00:00"
                                 android:ellipsize="marquee"
+                                android:fontFamily="@font/displaybold"
                                 android:marqueeRepeatLimit="marquee_forever"
                                 android:scrollHorizontally="true"
                                 android:singleLine="true"
-                                android:fontFamily="@font/displaybold"
+                                android:text="00:00:00"
                                 android:textColor="@color/white"
                                 android:textSize="13sp" />
 
@@ -411,12 +426,14 @@
                         </RelativeLayout>
                     </LinearLayout>
 
-
                     <LinearLayout
+                        android:id="@+id/card_data"
+                        android:visibility="gone"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        >
+                        android:layout_height="80dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
@@ -434,18 +451,18 @@
                                 android:src="@drawable/ic_data_wiget" />
 
                             <TextView
+                                android:id="@+id/text_cuentas_datos"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginBottom="5dp"
-                                android:id="@+id/text_cuentas_datos"
-                                android:text="0 MB"
                                 android:ellipsize="marquee"
+                                android:fontFamily="@font/displaybold"
                                 android:marqueeRepeatLimit="marquee_forever"
                                 android:scrollHorizontally="true"
                                 android:singleLine="true"
-                                android:fontFamily="@font/displaybold"
+                                android:text="0 MB"
                                 android:textColor="@color/white"
                                 android:textSize="13sp" />
 
@@ -457,17 +474,22 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_sms_lte"
+                    android:visibility="visible"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
+                    android:layout_height="0dp"
+                    android:padding="4dp"
                     android:layout_weight="2"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
                     <LinearLayout
-                        android:id="@+id/teacherll"
+                        android:id="@+id/card_sms"
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:layout_marginTop="6dp">
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
@@ -485,18 +507,18 @@
                                 android:src="@drawable/outline_comment_24" />
 
                             <TextView
+                                android:id="@+id/text_cuentas_mensajes"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginBottom="5dp"
-                                android:id="@+id/text_cuentas_mensajes"
-                                android:text="0"
                                 android:ellipsize="marquee"
+                                android:fontFamily="@font/displaybold"
                                 android:marqueeRepeatLimit="marquee_forever"
                                 android:scrollHorizontally="true"
                                 android:singleLine="true"
-                                android:fontFamily="@font/displaybold"
+                                android:text="0"
                                 android:textColor="@color/white"
                                 android:textSize="13sp" />
 
@@ -506,9 +528,13 @@
 
 
                     <LinearLayout
+                        android:id="@+id/card_data_lte"
+                        android:visibility="gone"
                         android:layout_width="match_parent"
-                        android:layout_marginTop="6dp"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
@@ -526,18 +552,18 @@
                                 android:src="@drawable/outline_lte_mobiledata_24" />
 
                             <TextView
+                                android:id="@+id/text_cuentas_datos_lte"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginBottom="5dp"
-                                android:id="@+id/text_cuentas_datos_lte"
-                                android:text="0 MB"
                                 android:ellipsize="marquee"
+                                android:fontFamily="@font/displaybold"
                                 android:marqueeRepeatLimit="marquee_forever"
                                 android:scrollHorizontally="true"
                                 android:singleLine="true"
-                                android:fontFamily="@font/displaybold"
+                                android:text="0 MB"
                                 android:textColor="@color/white"
                                 android:textSize="13sp" />
 
@@ -550,18 +576,16 @@
 
             </LinearLayout>
 
-
-
-
-
-            <!--List View (Adding just one item)-->
             <RelativeLayout
+                android:id="@+id/card_data_cu"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
                 android:transitionName="card"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
                 android:background="@drawable/my_gradient_drawable5"
                 android:orientation="vertical">
 
@@ -631,13 +655,15 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/card"
+                android:id="@+id/card_data_mail"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
                 android:transitionName="card"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
                 android:background="@drawable/my_gradient_drawable3"
                 android:orientation="vertical">
 
@@ -743,12 +769,14 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/card_data_daily"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
                 android:background="@drawable/my_violet_background_drawable"
                 android:orientation="vertical">
 

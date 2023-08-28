@@ -317,7 +317,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/teacherll"
+                        android:id="@+id/card_sms"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
                         android:layout_marginTop="6dp">

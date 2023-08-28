@@ -1107,5 +1107,10 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="phone_number_string">Número de teléfono</string>
     <string name="mail_nauta_string">mail@nauta.cu</string>
     <string name="user_string">Usuario</string>
+    <string name="hello_string">Hola</string>
+    <string name="credit_placeholder">%.2f CUP</string>
+    <string name="sms_placeholder">%d SMS</string>
+    <string name="last_update_placeholder">Actualizado: %s</string>
+    <string name="balance_updating_string">Actualizando su balance...</string>
 
 </resources>

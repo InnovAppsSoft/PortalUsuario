@@ -65,7 +65,7 @@ import com.marlon.portalusuario.nauta.ui.ConnectivityFragment
 import com.marlon.portalusuario.une.UneActivity
 import com.marlon.portalusuario.util.SSLHelper
 import com.marlon.portalusuario.util.Util
-import com.marlon.portalusuario.view.fragments.BalanceFragment
+import com.marlon.portalusuario.feature.balancemanagement.view.BalanceManagementFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.ServiciosFragment
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
@@ -177,7 +177,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         navigationView!!.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
             val i: Intent
             when (item.itemId) {
-                R.id.micuenta -> setFragment(BalanceFragment(), "Mi Cuenta")
+                R.id.micuenta -> setFragment(BalanceManagementFragment(), "Mi Cuenta")
                 R.id.services -> setFragment(ServiciosFragment<Any?>(), "Servicios")
                 R.id.plans -> setFragment(PaquetesFragment(), "Planes")
                 R.id.connectivity -> setFragment(connectivityFragment, "Conectividad")
@@ -418,7 +418,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             })
         }
         //
-        setFragment(BalanceFragment(), "Servicios")
+        setFragment(BalanceManagementFragment(), "Servicios")
     }
 
     private fun setupBadge() {
@@ -892,12 +892,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             intent.putExtra("com.android.phone.force.slot", true)
             intent.putExtra("Cdma_Supp", true)
             if (sim == "0") {
-                for (s in BalanceFragment.simSlotName) {
+                for (s in BalanceManagementFragment.simSlotName) {
                     intent.putExtra(s, 0)
                     intent.putExtra("com.android.phone.extra.slot", 0)
                 }
             } else if (sim == "1") {
-                for (s in BalanceFragment.simSlotName) {
+                for (s in BalanceManagementFragment.simSlotName) {
                     intent.putExtra(s, 1)
                     intent.putExtra("com.android.phone.extra.slot", 1)
                 }
@@ -915,12 +915,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             bonos.putExtra("com.android.phone.force.slot", true)
             bonos.putExtra("Cdma_Supp", true)
             if (sim == "0") {
-                for (s in BalanceFragment.simSlotName) {
+                for (s in BalanceManagementFragment.simSlotName) {
                     bonos.putExtra(s, 0)
                     bonos.putExtra("com.android.phone.extra.slot", 0)
                 }
             } else if (sim == "1") {
-                for (s in BalanceFragment.simSlotName) {
+                for (s in BalanceManagementFragment.simSlotName) {
                     bonos.putExtra(s, 1)
                     bonos.putExtra("com.android.phone.extra.slot", 1)
                 }
@@ -938,12 +938,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             datos.putExtra("com.android.phone.force.slot", true)
             datos.putExtra("Cdma_Supp", true)
             if (sim == "0") {
-                for (s in BalanceFragment.simSlotName) {
+                for (s in BalanceManagementFragment.simSlotName) {
                     datos.putExtra(s, 0)
                     datos.putExtra("com.android.phone.extra.slot", 0)
                 }
             } else if (sim == "1") {
-                for (s in BalanceFragment.simSlotName) {
+                for (s in BalanceManagementFragment.simSlotName) {
                     datos.putExtra(s, 1)
                     datos.putExtra("com.android.phone.extra.slot", 1)
                 }
