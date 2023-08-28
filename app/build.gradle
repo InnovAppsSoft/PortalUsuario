@@ -114,6 +114,12 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'com.android.support:customtabs:28.0.0'
 
+    // SuitEtecsa
+    implementation("com.github.suitetecsa:sdk-android:363f628693")
+
+    // DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
     // wifietecsa
     implementation 'com.github.suitetecsa:suitetecsa-sdk-kotlin:0.1.7'
     implementation 'org.jsoup:jsoup:1.15.4'
