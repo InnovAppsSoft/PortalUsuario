@@ -1,6 +1,6 @@
-package com.marlon.portalusuario.feature.balancemanagement.data.datasource
+package com.marlon.portalusuario.feature.balancemanagement.domain.data.datasource
 
-import com.marlon.portalusuario.feature.balancemanagement.data.model.BalancePreferences
+import com.marlon.portalusuario.feature.balancemanagement.domain.model.BalancePreferences
 import kotlinx.coroutines.flow.Flow
 
 interface BalanceManagementPreferencesDataSource {

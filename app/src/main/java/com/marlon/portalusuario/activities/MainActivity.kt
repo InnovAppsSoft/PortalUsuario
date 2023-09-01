@@ -65,7 +65,7 @@ import com.marlon.portalusuario.nauta.ui.ConnectivityFragment
 import com.marlon.portalusuario.une.UneActivity
 import com.marlon.portalusuario.util.SSLHelper
 import com.marlon.portalusuario.util.Util
-import com.marlon.portalusuario.feature.balancemanagement.view.BalanceManagementFragment
+import com.marlon.portalusuario.feature.balancemanagement.framework.view.BalanceManagementFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.ServiciosFragment
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType

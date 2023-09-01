@@ -1112,5 +1112,9 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="sms_placeholder">%d SMS</string>
     <string name="last_update_placeholder">Actualizado: %s</string>
     <string name="balance_updating_string">Actualizando su balance...</string>
+    <string name="profile_picture_path">IMG.png</string>
+    <string name="warning_string">Advertencia</string>
+    <string name="remaining_days_hint">%d dias</string>
+    <string name="sms_count_hint">%d sms</string>
 
 </resources>

@@ -8,20 +8,12 @@ plugins {
 }
 
 android {
-    signingConfigs {
-        debug {
-            storeFile file('/Users/marlon/Documents/AndroidStudioProjects/keystore.jks')
-            storePassword '54871663'
-            keyAlias 'upload'
-            keyPassword '54871663'
-        }
-    }
     compileSdk 33
     buildToolsVersion = '30.0.3'
     defaultConfig {
         resConfig "en"
         applicationId "com.marlon.portalusuario"
-        minSdkVersion 21
+        minSdkVersion 22
         targetSdkVersion 33
         versionCode 54
         versionName '7.0.4'
@@ -43,11 +35,11 @@ android {
 
         }
 
-            debug {
-                minifyEnabled false
-                debuggable true
-                jniDebuggable true
-                renderscriptDebuggable true
+        debug {
+            minifyEnabled false
+            debuggable true
+            jniDebuggable true
+            renderscriptDebuggable true
         }
     }
 

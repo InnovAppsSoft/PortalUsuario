@@ -5,17 +5,23 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.marlon.portalusuario.feature.balancemanagement.data.model.BalancePreferences
+import com.marlon.portalusuario.feature.balancemanagement.domain.model.BalancePreferences
+import com.marlon.portalusuario.feature.balancemanagement.domain.data.datasource.BalanceManagementPreferencesDataSource
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
+import javax.inject.Inject
+import javax.inject.Singleton
 
 private const val BALANCE_PREFERENCES_NAME = "balance_preferences"
 private val Context.dataStore by preferencesDataStore(name = BALANCE_PREFERENCES_NAME)
 
-class BalanceManagementPreferencesDataSourceImpl(
-    private val context: Context
+@Singleton
+class BalanceManagementPreferencesDataSourceImpl
+@Inject constructor (
+    @ApplicationContext private val context: Context
 ) : BalanceManagementPreferencesDataSource {
     override fun balancePreferences(): Flow<BalancePreferences> = context.dataStore.data
         .catch { exception ->
@@ -26,17 +32,17 @@ class BalanceManagementPreferencesDataSourceImpl(
             }
         }
         .map { preferences ->
-            val currentSimCardId = preferences[PreferencesKeys.CURRENT_SIM_CARD_ID] ?: ""
+            val currentSimCardId = preferences[BalanceManagementPreferencesKeys.CURRENT_SIM_CARD_ID] ?: ""
             BalancePreferences(currentSimCardId)
         }
 
     override suspend fun updateCurrentSimCardId(simCardId: String) {
         context.dataStore.edit { preferences ->
-            preferences[PreferencesKeys.CURRENT_SIM_CARD_ID] = simCardId
+            preferences[BalanceManagementPreferencesKeys.CURRENT_SIM_CARD_ID] = simCardId
         }
     }
 }
 
-private object PreferencesKeys {
+private object BalanceManagementPreferencesKeys {
     val CURRENT_SIM_CARD_ID = stringPreferencesKey("CURRENT_SIM_CARD_ID")
 }

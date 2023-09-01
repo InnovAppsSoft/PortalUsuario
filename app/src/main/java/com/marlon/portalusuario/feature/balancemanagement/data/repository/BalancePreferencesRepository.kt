@@ -1,6 +1,6 @@
 package com.marlon.portalusuario.feature.balancemanagement.data.repository
 
-import com.marlon.portalusuario.feature.balancemanagement.data.datasource.BalanceManagementPreferencesDataSource
+import com.marlon.portalusuario.feature.balancemanagement.domain.data.datasource.BalanceManagementPreferencesDataSource
 import javax.inject.Inject
 
 class BalancePreferencesRepository @Inject constructor(

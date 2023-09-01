@@ -188,7 +188,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/hola"
-                            android:id="@+id/text_saludo_perfil"
+                            android:id="@+id/profile_greeting_string"
                             android:ellipsize="marquee"
                             android:marqueeRepeatLimit="marquee_forever"
                             android:scrollHorizontally="true"
@@ -229,7 +229,7 @@
                         android:visibility="visible">
 
                         <TextView
-                            android:id="@+id/text_cuentas_saldo"
+                            android:id="@+id/remaining_credit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -250,7 +250,7 @@
                             android:src="@drawable/circle_dark_grey_fil" />
 
                         <TextView
-                            android:id="@+id/text_cuentas_vence_sim"
+                            android:id="@+id/sim_card_due_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -283,7 +283,7 @@
                             android:textSize="13sp" />
 
                         <TextView
-                            android:id="@+id/text_cuentas_vence_datos"
+                            android:id="@+id/data_remaining_days"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -317,7 +317,7 @@
                             android:textSize="13sp" />
 
                         <TextView
-                            android:id="@+id/text_cuentas_vence_min_sms"
+                            android:id="@+id/sms_and_min_remaining_days"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -407,7 +407,7 @@
                                 android:src="@drawable/outline_local_phone_24" />
 
                             <TextView
-                                android:id="@+id/text_cuentas_minutos"
+                                android:id="@+id/remaining_mins"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"
@@ -451,7 +451,7 @@
                                 android:src="@drawable/ic_data_wiget" />
 
                             <TextView
-                                android:id="@+id/text_cuentas_datos"
+                                android:id="@+id/remaining_data"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"
@@ -507,7 +507,7 @@
                                 android:src="@drawable/outline_comment_24" />
 
                             <TextView
-                                android:id="@+id/text_cuentas_mensajes"
+                                android:id="@+id/messages_count_text"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"
@@ -552,7 +552,7 @@
                                 android:src="@drawable/outline_lte_mobiledata_24" />
 
                             <TextView
-                                android:id="@+id/text_cuentas_datos_lte"
+                                android:id="@+id/remaining_lte_data"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"
@@ -729,7 +729,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="25dp"
-                            android:id="@+id/text_cuentas_vence_mensajeria"
+                            android:id="@+id/mail_data_remaining_days"
                             android:text="0 dias"
                             android:ellipsize="marquee"
                             android:marqueeRepeatLimit="marquee_forever"
@@ -756,7 +756,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="20dp"
                         android:layout_marginBottom="20dp"
-                        android:id="@+id/text_cuentas_mensajeria"
+                        android:id="@+id/remaining_mail_data"
                         android:text="0 MB"
                         android:ellipsize="marquee"
                         android:marqueeRepeatLimit="marquee_forever"
@@ -839,7 +839,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="25dp"
-                            android:id="@+id/text_cuentas_vence_diaria"
+                            android:id="@+id/daily_data_remaining_days"
                             android:text="0 horas"
                             android:ellipsize="marquee"
                             android:marqueeRepeatLimit="marquee_forever"
@@ -866,7 +866,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="20dp"
                         android:layout_marginBottom="20dp"
-                        android:id="@+id/text_cuentas_diaria"
+                        android:id="@+id/remaining_daily_data"
                         android:text="0 MB"
                         android:ellipsize="marquee"
                         android:marqueeRepeatLimit="marquee_forever"
