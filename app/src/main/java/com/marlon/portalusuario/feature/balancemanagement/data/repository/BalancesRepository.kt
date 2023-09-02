@@ -9,9 +9,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 import com.marlon.portalusuario.feature.balancemanagement.domain.model.BonusBalanceDomainEntity as BonusBalance
 import com.marlon.portalusuario.feature.balancemanagement.domain.model.MainBalanceDomainEntity as MainBalance
 
+@Singleton
 class BalancesRepository @Inject constructor(
     private val mainBalanceDao: MainBalanceDao,
     private val bonusBalanceDao: BonusBalanceDao,

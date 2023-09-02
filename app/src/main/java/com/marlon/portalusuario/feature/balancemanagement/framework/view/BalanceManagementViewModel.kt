@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marlon.portalusuario.feature.balancemanagement.data.repository.BalancePreferencesRepository
 import com.marlon.portalusuario.feature.balancemanagement.data.repository.BalancesRepository
-import com.marlon.portalusuario.feature.balancemanagement.data.repository.ProfilePreferencesRepository
+import com.marlon.portalusuario.feature.profile.domain.data.repository.ProfilePreferencesRepository
 import com.marlon.portalusuario.feature.balancemanagement.data.repository.SimCardsRepository
 import com.marlon.portalusuario.feature.balancemanagement.usecases.UpdateBalancesUseCase
 import cu.suitetecsa.sdk.sim.model.SimCard
@@ -23,11 +23,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BalanceManagementViewModel @Inject constructor(
-    simCardsRepository: SimCardsRepository,
-    balancesRepository: BalancesRepository,
-    profilePreferencesRepository: ProfilePreferencesRepository,
-    private val balancePreferencesRepository: BalancePreferencesRepository,
-    private val updateBalancesUseCase: UpdateBalancesUseCase
+        simCardsRepository: SimCardsRepository,
+        balancesRepository: BalancesRepository,
+        profilePreferencesRepository: ProfilePreferencesRepository,
+        private val balancePreferencesRepository: BalancePreferencesRepository,
+        private val updateBalancesUseCase: UpdateBalancesUseCase
 ) : ViewModel() {
 
     private val _simCards = MutableStateFlow<List<SimCard>>(listOf())

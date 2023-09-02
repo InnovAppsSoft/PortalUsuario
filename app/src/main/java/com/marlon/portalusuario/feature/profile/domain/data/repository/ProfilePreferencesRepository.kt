@@ -1,8 +1,10 @@
-package com.marlon.portalusuario.feature.balancemanagement.data.repository
+package com.marlon.portalusuario.feature.profile.domain.data.repository
 
-import com.marlon.portalusuario.feature.balancemanagement.domain.data.datasource.ProfilePreferencesDataSource
+import com.marlon.portalusuario.feature.profile.domain.data.datasource.ProfilePreferencesDataSource
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class ProfilePreferencesRepository @Inject constructor(
     private val dataSource: ProfilePreferencesDataSource
 ) {

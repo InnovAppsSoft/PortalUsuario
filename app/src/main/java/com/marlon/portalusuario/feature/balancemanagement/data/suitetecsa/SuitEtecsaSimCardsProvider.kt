@@ -6,6 +6,7 @@ import cu.suitetecsa.sdk.sim.model.SimCard
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@Singleton
 class SuitEtecsaSimCardsProvider @Inject constructor(
     private val simCardsAPI: SimCardsAPI
 ) : SimCardDataSource {

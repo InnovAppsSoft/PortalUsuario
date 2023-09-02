@@ -25,8 +25,8 @@ import com.marlon.portalusuario.feature.balancemanagement.framework.view.extensi
 import com.marlon.portalusuario.feature.balancemanagement.framework.view.extensions.updateDataView
 import com.marlon.portalusuario.feature.balancemanagement.framework.view.extensions.updateSmsView
 import com.marlon.portalusuario.feature.balancemanagement.framework.view.extensions.updateVoiceView
-import com.marlon.portalusuario.perfil.ImageSaver
-import com.marlon.portalusuario.perfil.PerfilActivity
+import com.marlon.portalusuario.feature.profile.util.ImageSaver
+import com.marlon.portalusuario.feature.profile.presentation.ProfileFragment
 import cu.suitetecsa.sdk.sim.model.SimCard
 import cu.suitetecsa.sdk.ussd.uitls.toSizeString
 import java.time.LocalDateTime
@@ -103,7 +103,7 @@ class BalanceManagementFragment : Fragment() {
             startActivity(
                 Intent(
                     context,
-                    PerfilActivity::class.java
+                    ProfileFragment::class.java
                 )
             )
         }
@@ -197,28 +197,6 @@ class BalanceManagementFragment : Fragment() {
                 currentTime.hour in NOON..EVENING_END -> R.string.title_good_afternoon
                 else -> R.string.title_good_night
             }
-        )
-    }
-
-    companion object {
-
-        val simSlotName = arrayOf(
-            "extra_asus_dial_use_dualsim",
-            "com.android.phone.extra.slot",
-            "slot",
-            "simslot",
-            "sim_slot",
-            "subscription",
-            "Subscription",
-            "phone",
-            "com.android.phone.DialingMode",
-            "simSlot",
-            "slot_id",
-            "simId",
-            "simnum",
-            "phone_type",
-            "slotId",
-            "slotIdx"
         )
     }
 }

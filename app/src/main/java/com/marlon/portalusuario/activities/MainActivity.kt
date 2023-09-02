@@ -79,7 +79,10 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), BiometricCallback {
     private lateinit var binding: ActivityMainBinding
-    @Inject lateinit var connectivityFragment: ConnectivityFragment
+    @Inject
+    lateinit var connectivityFragment: ConnectivityFragment
+    @Inject
+    lateinit var balanceManagementFragment: BalanceManagementFragment
 
     private var details: TextView? = null
     private var titleTextView: TextView? = null
@@ -88,13 +91,13 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     // UI ELEMENTOS
     private var mBottomSheetLayout: LinearLayout? = null
     private var sheetBehavior: BottomSheetBehavior<*>? = null
-    private var download_apklis: Button? = null
-    private var download_ps: Button? = null
-    private var remind_me_later: Button? = null
+    private var downloadApklis: Button? = null
+    private var downloadPs: Button? = null
+    private var remindMeLater: Button? = null
     private var progressBar: ProgressBar? = null
     private var errorLayout: LinearLayout? = null
-    private var try_again: TextView? = null
-    var promoCache: List<Promo>? = null
+    private var tryAgain: TextView? = null
+    private var promoCache: List<Promo>? = null
     private var notificationBtn: FrameLayout? = null
     private var menu: ImageView? = null
     private var cartBadge: TextView? = null
@@ -109,14 +112,13 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     var settings: SharedPreferences? = null
 
     // LOGGING
-    private var Logging: JCLogging? = null
+    private var jcLogging: JCLogging? = null
 
     // APKLIS
     private var apklis: ApklisUtil? = null
-    var mBiometricManager: BiometricManager? = null
+    private var mBiometricManager: BiometricManager? = null
 
-    var ResultCall = 1001
-    fun setFragment(fragment: Fragment?, title: String?) {
+    private fun setFragment(fragment: Fragment?, title: String?) {
         supportFragmentManager
             .beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -125,7 +127,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         titleTextView!!.text = title
     }
 
-    public val simSlotName = arrayOf(
+    private val simSlotName = arrayOf(
         "extra_asus_dial_use_dualsim",
         "com.android.phone.extra.slot",
         "slot",
@@ -144,14 +146,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         "slotIdx"
     )
 
-    // TODO: preference dualSim
-    var sp_sim: SharedPreferences? = null
+    var spSim: SharedPreferences? = null
     var sim: String? = null
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // TODO: Shorcuts
         shorcut()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -162,22 +162,17 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions()
         }
-        // TODO: Preferences DualSIM
-
-        // TODO: Preferences DualSIM
-
-        // TODO: Preferences DualSIM
-        sp_sim = PreferenceManager.getDefaultSharedPreferences(this)
+        spSim = PreferenceManager.getDefaultSharedPreferences(this)
 
         context = this
         // drawer Layout
         drawer = findViewById(R.id.drawer_layout)
         // drawer Nav View
         navigationView = findViewById(R.id.nav_view)
-        navigationView!!.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
+        navigationView!!.setNavigationItemSelectedListener { item ->
             val i: Intent
             when (item.itemId) {
-                R.id.micuenta -> setFragment(BalanceManagementFragment(), "Mi Cuenta")
+                R.id.micuenta -> setFragment(balanceManagementFragment, "Mi Cuenta")
                 R.id.services -> setFragment(ServiciosFragment<Any?>(), "Servicios")
                 R.id.plans -> setFragment(PaquetesFragment(), "Planes")
                 R.id.connectivity -> setFragment(connectivityFragment, "Conectividad")
@@ -191,6 +186,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                     i = Intent(this@MainActivity, UneActivity::class.java)
                     startActivity(i)
                 }
+
                 R.id.errors_register -> startActivity(
                     Intent(
                         this@MainActivity,
@@ -199,17 +195,22 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 )
 
                 R.id.feedback -> {
-                    var debugInfo = "\n\n\n---"
-                    debugInfo += "\nOS Version: " + System.getProperty("os.version") + " (" + Build.VERSION.INCREMENTAL + ")"
-                    debugInfo += "\nAndroid API: " + Build.VERSION.SDK_INT
-                    debugInfo += "\nModel (Device): " + Build.MODEL + " (" + Build.DEVICE + ")"
-                    debugInfo += "\nManufacturer: " + Build.MANUFACTURER
-                    debugInfo += "\n---"
+                    val debugInfo = """
+                        |---
+                        |OS Version: ${System.getProperty("os.version")} (${Build.VERSION.INCREMENTAL})
+                        |Android API: ${Build.VERSION.SDK_INT}
+                        |Model (Device): ${Build.MODEL} (${Build.DEVICE})
+                        |Manufacturer: ${Build.MANUFACTURER}
+                        |---
+                    """.trimMargin()
                     val intent = Intent(
                         Intent.ACTION_SENDTO,
                         Uri.fromParts("mailto", context!!.getString(R.string.feedback_email), null)
                     )
-                    intent.putExtra(Intent.EXTRA_EMAIL, context!!.getString(R.string.feedback_email))
+                    intent.putExtra(
+                        Intent.EXTRA_EMAIL,
+                        context!!.getString(R.string.feedback_email)
+                    )
                     intent.putExtra(
                         Intent.EXTRA_SUBJECT,
                         context!!.getString(R.string.feedback_subject)
@@ -219,10 +220,10 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 }
 
                 R.id.telegram_channel -> {
-                    val telgramUrl = ("https://t.me/portalusuario")
-                    val telegramLauch = Intent(Intent.ACTION_VIEW)
-                    telegramLauch.data = Uri.parse(telgramUrl)
-                    startActivity(telegramLauch)
+                    val telegramUrl = ("https://t.me/portalusuario")
+                    val telegramLaunch = Intent(Intent.ACTION_VIEW)
+                    telegramLaunch.data = Uri.parse(telegramUrl)
+                    startActivity(telegramLaunch)
                 }
 
                 R.id.facebook -> {
@@ -238,6 +239,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                     betaLaunch.data = Uri.parse(betaUrl)
                     startActivity(betaLaunch)
                 }
+
                 R.id.invite -> {
                     inviteUser()
                 }
@@ -261,24 +263,24 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             drawer!!.closeDrawer(GravityCompat.START)
             false
 
-        })
+        }
         menu = findViewById(R.id.menu)
-        menu!!.setOnClickListener(View.OnClickListener { drawer!!.openDrawer(GravityCompat.START) })
+        menu!!.setOnClickListener { drawer!!.openDrawer(GravityCompat.START) }
         titleLayout = findViewById(R.id.titleLayout)
         titleTextView = findViewById(R.id.puTV)
         details = findViewById(R.id.details)
         log = findViewById(R.id.log)
-        download_apklis = findViewById(R.id.download_apklis)
+        downloadApklis = findViewById(R.id.download_apklis)
         val details = findViewById<TextView>(R.id.details)
         val log = findViewById<TextView>(R.id.log)
-        download_apklis = findViewById(R.id.download_apklis)
-        remind_me_later = findViewById(R.id.remind_me_later)
+        downloadApklis = findViewById(R.id.download_apklis)
+        remindMeLater = findViewById(R.id.remind_me_later)
 
         //
-        Logging = JCLogging(this)
-        download_apklis = findViewById(R.id.download_apklis)
-        download_ps = findViewById(R.id.download_ps)
-        remind_me_later = findViewById(R.id.remind_me_later)
+        jcLogging = JCLogging(this)
+        downloadApklis = findViewById(R.id.download_apklis)
+        downloadPs = findViewById(R.id.download_ps)
+        remindMeLater = findViewById(R.id.remind_me_later)
         settings = PreferenceManager.getDefaultSharedPreferences(this)
 
         // Burbuja de Trafico
@@ -313,26 +315,26 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         updateBtn.setOnClickListener { sheetBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED) }
 
         // DESCARGAR DE APKLIS
-        download_apklis!!.setOnClickListener(View.OnClickListener {
-            val URL = "https://www.apklis.cu/application/$APP_NAME"
-            JCLogging.message("Opening Apklis URL::url=$URL", null)
+        downloadApklis!!.setOnClickListener(View.OnClickListener {
+            val uriString = "https://www.apklis.cu/application/$APP_NAME"
+            JCLogging.message("Opening Apklis URL::url=$uriString", null)
             //Toast.makeText(this, URL, Toast.LENGTH_LONG);
-            val url = Uri.parse(URL)
+            val url = Uri.parse(uriString)
             val openUrl = Intent(Intent.ACTION_VIEW, url)
             startActivity(openUrl)
         })
 
         // DESCARGAR DE GOOGLE PLAY
-        download_ps!!.setOnClickListener(View.OnClickListener {
-            val URL = "https://play.google.com/store/apps/details?id=$APP_NAME"
-            JCLogging.message("Opening PlayStore URL::url=$URL", null)
+        downloadPs!!.setOnClickListener(View.OnClickListener {
+            val uriString = "https://play.google.com/store/apps/details?id=$APP_NAME"
+            JCLogging.message("Opening PlayStore URL::url=$uriString", null)
             //Toast.makeText(this, URL, Toast.LENGTH_LONG);
-            val url = Uri.parse(URL)
+            val url = Uri.parse(uriString)
             val openUrl = Intent(Intent.ACTION_VIEW, url)
             startActivity(openUrl)
         })
         // RECORDAR LUEGO
-        remind_me_later!!.setOnClickListener(View.OnClickListener {
+        remindMeLater!!.setOnClickListener(View.OnClickListener {
             update_info_already_showed = false
             startService(apklis, WAITING_TIME)
             sheetBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
@@ -350,14 +352,13 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                         val updateExist = intent.getBooleanExtra("update_exist", false)
                         Log.e("IS UPDATE", updateExist.toString())
                         if (updateExist) {
-                            val version_name = intent.getStringExtra("version_name") /* Respuesta Del Método startLookingForUpdates() Valor De La Versión Name De La App
-                                                                                           Si Existe Una Actualización */
-                            val new_version_size = intent.getStringExtra("new_version_size")
+                            val versionName = intent.getStringExtra("version_name")
+                            val newVersionSize = intent.getStringExtra("new_version_size")
                             val changelog = intent.getStringExtra("changelog")
                             JCLogging.message("On receive Update info", null)
-                            var version_size = "?? MB"
-                            if (new_version_size != null) {
-                                version_size = new_version_size
+                            var versionSize = "?? MB"
+                            if (newVersionSize != null) {
+                                versionSize = newVersionSize
                             }
                             // DETALLES de la NUEVA VERSION
                             if (changelog != null) {
@@ -366,14 +367,14 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                                 log.text = "• Nada nuevo, todo igual :-)"
                             }
                             // NOMBRE DE LA VERSION Y TAMANNO
-                            if (version_name != null && !version_name.isEmpty()) {
-                                val v = "Versión $version_name • $version_size"
-                                details.text = v
+                            if (!versionName.isNullOrEmpty()) {
+                                details.text = "Versión $versionName • $versionSize"
                             }
                             Log.e("Showing info", "True")
-                            sheetBehavior!!.setState(BottomSheetBehavior.STATE_COLLAPSED)
+                            sheetBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
                             JCLogging.message(
-                                "Update data received succesfully::version_name=$version_name::version_size=$version_size",
+                                "Update data received succesfully::version_name=" +
+                                        "$versionName::version_size=$versionSize",
                                 null
                             )
                             return
@@ -385,7 +386,9 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                     }
                 }
             }
-            /* Registro De Recibidores Para Manejar Existencia De Actualización U Obtención De Info Respectivamente */LocalBroadcastManager.getInstance(
+            /* Registro De Recibidores Para Manejar Existencia De Actualización U Obtención De Info
+            Respectivamente */
+            LocalBroadcastManager.getInstance(
                 this
             ).registerReceiver(apklisUpdate, IntentFilter("apklis_update"))
             LocalBroadcastManager.getInstance(this)
@@ -398,9 +401,9 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             sliderView = findViewById(R.id.imageSlider)
             progressBar = findViewById(R.id.progressBar)
             errorLayout = findViewById(R.id.errorLayoutBanner)
-            try_again = findViewById(R.id.try_again)
-            try_again!!.paintFlags = try_again!!.paintFlags or Paint.UNDERLINE_TEXT_FLAG
-            try_again!!.setOnClickListener(View.OnClickListener { loadPromo() })
+            tryAgain = findViewById(R.id.try_again)
+            tryAgain!!.paintFlags = tryAgain!!.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+            tryAgain!!.setOnClickListener(View.OnClickListener { loadPromo() })
             loadPromo()
             //
             // check if there are unseen notifications
@@ -418,7 +421,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             })
         }
         //
-        setFragment(BalanceManagementFragment(), "Servicios")
+        setFragment(balanceManagementFragment, "Servicios")
     }
 
     private fun setupBadge() {
@@ -438,11 +441,11 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     }
 
     // Carrusel de ETECSA
-    fun loadPromo() {
+    private fun loadPromo() {
         // hiding promos card view
         val settings = PreferenceManager.getDefaultSharedPreferences(this)
-        val show_etecsa_promo_carousel = settings.getBoolean("show_etecsa_promo_carousel", true)
-        if (show_etecsa_promo_carousel) {
+        val showEtecsaPromoCarousel = settings.getBoolean("show_etecsa_promo_carousel", true)
+        if (showEtecsaPromoCarousel) {
             // mostrar progress && ocultar carrusel
             sliderView!!.visibility = View.INVISIBLE
             progressBar!!.visibility = View.VISIBLE
@@ -457,7 +460,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             if (Util.isConnected(this@MainActivity)) {
                 // llamada al metodo de scraping
                 try {
-                    SrapingPromo().execute()
+                    ScrapingPromo().execute()
                 } catch (ex: Exception) {
                     ex.printStackTrace()
                 }
@@ -469,11 +472,11 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 errorLayout!!.visibility = View.VISIBLE
             }
         }
-        setCarouselVisibility(show_etecsa_promo_carousel)
+        setCarouselVisibility(showEtecsaPromoCarousel)
     }
 
     // scrapear Promo de Etecsa
-    inner class SrapingPromo : AsyncTask<Void?, Void?, List<Promo>>() {
+    inner class ScrapingPromo : AsyncTask<Void?, Void?, List<Promo>>() {
         private var success = false
 
         // cuando se termine de ejecutar la accion doInBackground
@@ -505,24 +508,25 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
 
         @Deprecated("Deprecated in Java")
-        override fun doInBackground(vararg p0: Void?): List<Promo>? {
+        override fun doInBackground(vararg p0: Void?): List<Promo> {
             val promos: MutableList<Promo> = ArrayList()
             try {
                 val response = SSLHelper.getConnection("https://www.etecsa.cu")
-                    .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.122 Safari/534.30")
+                    .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.30 " +
+                            "(KHTML, like Gecko) Chrome/12.0.742.122 Safari/534.30")
                     .timeout(30000).ignoreContentType(true).method(
-                    Connection.Method.GET
-                ).followRedirects(true).execute()
+                        Connection.Method.GET
+                    ).followRedirects(true).execute()
                 if (response.statusCode() == 200) {
                     val parsed = response.parse()
                     // CAROUSEL
                     val carousel = parsed.select("div.carousel-inner").select("div.carousel-item")
                     for (i in carousel.indices) {
                         val items = carousel[i]
-                        val mipromoContent = items.selectFirst("div.carousel-item")
+                        val myPromoContent = items.selectFirst("div.carousel-item")
                         val link = items.selectFirst("div.mipromocion-contenido")!!
                             .select("a").attr("href")
-                        val toText = mipromoContent.toString()
+                        val toText = myPromoContent.toString()
                         val idx1 = toText.indexOf("<div style=\"background: url(\'")
                         val idx2 = toText.indexOf("\');")
                         var divStyle = toText.substring(idx1, idx2)
@@ -552,7 +556,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     }
 
     fun updatePromoSlider(list: List<Promo>) {
-        if (!list.isEmpty()) {
+        if (list.isNotEmpty()) {
             val adapter =
                 PromoSliderAdapter(
                     this,
@@ -574,7 +578,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
 
 
     //Servicio de Apklis
-    fun startService(apklis: ApklisUtil?, latency: Int) {
+    private fun startService(apklis: ApklisUtil?, latency: Int) {
         val settings = PreferenceManager.getDefaultSharedPreferences(this)
         JCLogging.message(
             "Starting 'checking for updates' service::enabled=" + settings.getBoolean(
@@ -590,16 +594,16 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
     }
 
-    private fun showMessage(c: Context?, _s: String?) {
-        Toast.makeText(c, _s, Toast.LENGTH_SHORT).show()
+    private fun showMessage(c: Context?, message: String?) {
+        Toast.makeText(c, message, Toast.LENGTH_SHORT).show()
     }
 
     // Huella de Seguridad
     @RequiresApi(api = Build.VERSION_CODES.M)
     fun startFingerprint() {
         val settings = PreferenceManager.getDefaultSharedPreferences(this)
-        val show_fingerprint = settings.getBoolean("show_fingerprint", false)
-        if (show_fingerprint) {
+        val showFingerprint = settings.getBoolean("show_fingerprint", false)
+        if (showFingerprint) {
             mBiometricManager = BiometricManager.BiometricBuilder(this@MainActivity)
                 .setTitle(getString(R.string.biometric_title))
                 .setSubtitle(getString(R.string.biometric_subtitle))
@@ -886,18 +890,18 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     private fun shorcut() {
         if (Build.VERSION.SDK_INT >= 25) {
             val shortcutManager: ShortcutManager? =
-                ContextCompat.getSystemService(this,ShortcutManager::class.java)
+                ContextCompat.getSystemService(this, ShortcutManager::class.java)
             val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:*222" + Uri.encode("#")))
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             intent.putExtra("com.android.phone.force.slot", true)
             intent.putExtra("Cdma_Supp", true)
             if (sim == "0") {
-                for (s in BalanceManagementFragment.simSlotName) {
+                for (s in simSlotName) {
                     intent.putExtra(s, 0)
                     intent.putExtra("com.android.phone.extra.slot", 0)
                 }
             } else if (sim == "1") {
-                for (s in BalanceManagementFragment.simSlotName) {
+                for (s in simSlotName) {
                     intent.putExtra(s, 1)
                     intent.putExtra("com.android.phone.extra.slot", 1)
                 }
@@ -915,12 +919,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             bonos.putExtra("com.android.phone.force.slot", true)
             bonos.putExtra("Cdma_Supp", true)
             if (sim == "0") {
-                for (s in BalanceManagementFragment.simSlotName) {
+                for (s in simSlotName) {
                     bonos.putExtra(s, 0)
                     bonos.putExtra("com.android.phone.extra.slot", 0)
                 }
             } else if (sim == "1") {
-                for (s in BalanceManagementFragment.simSlotName) {
+                for (s in simSlotName) {
                     bonos.putExtra(s, 1)
                     bonos.putExtra("com.android.phone.extra.slot", 1)
                 }
@@ -938,12 +942,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             datos.putExtra("com.android.phone.force.slot", true)
             datos.putExtra("Cdma_Supp", true)
             if (sim == "0") {
-                for (s in BalanceManagementFragment.simSlotName) {
+                for (s in simSlotName) {
                     datos.putExtra(s, 0)
                     datos.putExtra("com.android.phone.extra.slot", 0)
                 }
             } else if (sim == "1") {
-                for (s in BalanceManagementFragment.simSlotName) {
+                for (s in simSlotName) {
                     datos.putExtra(s, 1)
                     datos.putExtra("com.android.phone.extra.slot", 1)
                 }
@@ -970,13 +974,9 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -1039,6 +1039,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         mBiometricManager!!.cancelAuthentication()
         finish()
     }
+
     override fun onAuthenticationSuccessful() {}
     override fun onAuthenticationHelp(helpCode: Int, helpString: CharSequence) {}
     override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
@@ -1090,6 +1091,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         private var sliderView: SliderView? = null
         var navigationView: NavigationView? = null
         private var punViewModel: PunViewModel? = null
+
         @JvmStatic
         fun insertNotification(pun: PUNotification?) {
             punViewModel!!.insertPUN(null)

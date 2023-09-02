@@ -77,7 +77,7 @@
             tools:replace="android:icon"
             tools:targetApi="m">
         <activity
-                android:name=".perfil.PerfilActivity"
+                android:name=".feature.profile.presentation.ProfileFragment"
                 android:exported="false" />
         <activity
                 android:name=".activities.Donacion"

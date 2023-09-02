@@ -1,4 +1,4 @@
-package com.marlon.portalusuario.feature.balancemanagement.data.datasource
+package com.marlon.portalusuario.feature.profile.data.datasource
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
@@ -6,7 +6,7 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.marlon.portalusuario.feature.balancemanagement.domain.model.PreferencesProfile
-import com.marlon.portalusuario.feature.balancemanagement.domain.data.datasource.ProfilePreferencesDataSource
+import com.marlon.portalusuario.feature.profile.domain.data.datasource.ProfilePreferencesDataSource
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -21,7 +21,7 @@ private val Context.dataStore by preferencesDataStore(name = PROFILE_PREFERENCES
 @Singleton
 class ProfilePreferencesDataSourceImpl
 @Inject constructor(@ApplicationContext private val context: Context) :
-    ProfilePreferencesDataSource {
+        ProfilePreferencesDataSource {
     override fun profilePreferences(): Flow<PreferencesProfile> = context.dataStore.data
         .catch { exception ->
             if (exception is IOException) {

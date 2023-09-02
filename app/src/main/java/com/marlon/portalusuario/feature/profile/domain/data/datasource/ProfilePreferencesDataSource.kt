@@ -1,4 +1,4 @@
-package com.marlon.portalusuario.feature.balancemanagement.domain.data.datasource
+package com.marlon.portalusuario.feature.profile.domain.data.datasource
 
 import com.marlon.portalusuario.feature.balancemanagement.domain.model.PreferencesProfile
 import kotlinx.coroutines.flow.Flow
