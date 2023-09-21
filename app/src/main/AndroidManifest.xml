@@ -191,10 +191,6 @@
             </intent-filter>
         </service>
         <service
-            android:name=".apklis.ApklisUpdatesJobService"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-        <service
             android:name=".burbuja_trafico.FloatingBubbleService"
             android:enabled="true"
             android:exported="true" />
