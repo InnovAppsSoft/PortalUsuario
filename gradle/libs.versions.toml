@@ -1,0 +1,8 @@
+[versions]
+apklisupdate = "1.4"
+
+[libraries]
+apklisupdate = {  group = "com.github.Z17-CU", name = "apklisupdate", version.ref = "apklisupdate" }
+
+[plugins]
+

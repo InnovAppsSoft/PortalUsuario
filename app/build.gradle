@@ -10,7 +10,7 @@ plugins {
 
 android {
     compileSdk 33
-    buildToolsVersion = '30.0.3'
+    buildToolsVersion = '33.0.1'
     defaultConfig {
         resConfig "en"
         applicationId "com.marlon.portalusuario"
@@ -86,6 +86,7 @@ dependencies {
     implementation 'androidx.work:work-runtime-ktx:2.8.1'
     implementation 'androidx.work:work-runtime:2.8.1'
 
+    implementation(libs.apklisupdate)
 
     // ViewPaper2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
