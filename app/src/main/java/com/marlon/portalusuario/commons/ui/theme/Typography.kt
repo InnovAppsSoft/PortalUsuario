@@ -1,6 +1,6 @@
 package com.marlon.portalusuario.commons.ui.theme
 
-import androidx.compose.material.Typography
+import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -16,53 +16,33 @@ private val Dosis = FontFamily(
 )
 
 val SuitEtecsaTypography = Typography(
-    h4 = TextStyle(
+    displayMedium = TextStyle(
         fontFamily = Dosis,
         fontWeight = FontWeight.W600,
         fontSize = 30.sp
     ),
-    h5 = TextStyle(
+    displaySmall = TextStyle(
         fontFamily = Dosis,
         fontWeight = FontWeight.W600,
         fontSize = 24.sp
     ),
-    h6 = TextStyle(
-        fontFamily = Dosis,
-        fontWeight = FontWeight.W600,
-        fontSize = 20.sp
-    ),
-    subtitle1 = TextStyle(
+    headlineMedium = TextStyle(
         fontFamily = Dosis,
         fontWeight = FontWeight.W600,
         fontSize = 16.sp
     ),
-    subtitle2 = TextStyle(
+    headlineSmall = TextStyle(
         fontFamily = Dosis,
         fontWeight = FontWeight.W500,
         fontSize = 14.sp
     ),
-    body1 = TextStyle(
+    bodyLarge = TextStyle(
         fontFamily = Dosis,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
     ),
-    body2 = TextStyle(
+    bodyMedium = TextStyle(
         fontFamily = Dosis,
         fontSize = 14.sp
-    ),
-    button = TextStyle(
-        fontFamily = Dosis,
-        fontWeight = FontWeight.W500,
-        fontSize = 14.sp
-    ),
-    caption = TextStyle(
-        fontFamily = Dosis,
-        fontWeight = FontWeight.W500,
-        fontSize = 12.sp
-    ),
-    overline = TextStyle(
-        fontFamily = Dosis,
-        fontWeight = FontWeight.W500,
-        fontSize = 12.sp
     )
 )

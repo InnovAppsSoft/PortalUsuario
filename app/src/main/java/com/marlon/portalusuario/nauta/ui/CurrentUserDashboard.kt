@@ -5,8 +5,8 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -225,7 +225,7 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
         Column {
             Text(
                 text = stringResource(id = R.string.recharge),
-                style = MaterialTheme.typography.subtitle1.copy(color = MaterialTheme.colors.onBackground)
+                style = MaterialTheme.typography.headlineMedium.copy(color = MaterialTheme.colorScheme.onBackground)
             )
             Spacer(modifier = Modifier.padding(4.dp))
             CardRecharge(
@@ -248,7 +248,7 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
         Column {
             Text(
                 text = stringResource(id = R.string.transfer),
-                style = MaterialTheme.typography.subtitle1.copy(color = MaterialTheme.colors.onBackground)
+                style = MaterialTheme.typography.headlineMedium.copy(color = MaterialTheme.colorScheme.onBackground)
             )
             Spacer(modifier = Modifier.padding(4.dp))
             CardTransfer(
@@ -274,7 +274,7 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
         Column {
             Text(
                 text = stringResource(id = R.string.change_password),
-                style = MaterialTheme.typography.subtitle1.copy(color = MaterialTheme.colors.onBackground)
+                style = MaterialTheme.typography.headlineMedium.copy(color = MaterialTheme.colorScheme.onBackground)
             )
             Spacer(modifier = Modifier.padding(4.dp))
             CardChangePassword(
@@ -291,7 +291,7 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
         Column {
             Text(
                 text = stringResource(R.string.change_email_password),
-                style = MaterialTheme.typography.subtitle1.copy(color = MaterialTheme.colors.onBackground)
+                style = MaterialTheme.typography.headlineMedium.copy(color = MaterialTheme.colorScheme.onBackground)
             )
             Spacer(modifier = Modifier.padding(4.dp))
             CardChangeEmailPassword(

@@ -3,11 +3,30 @@ package com.marlon.portalusuario.nauta.ui.components.timepicker
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -36,8 +55,8 @@ fun TimerPicker(
     var selectedPart by remember { mutableStateOf(TimePart.Hour) }
 
     val (timeHour, timeMinute) = time
-    var selectedHour by remember { mutableStateOf(timeHour) }
-    var selectedMinute by remember { mutableStateOf(timeMinute) }
+    var selectedHour by remember { mutableIntStateOf(timeHour) }
+    var selectedMinute by remember { mutableIntStateOf(timeMinute) }
     val selectedTime by remember {
         derivedStateOf { if (selectedPart == TimePart.Hour) selectedHour else selectedMinute / 5 }
     }
@@ -134,8 +153,8 @@ fun Clock(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
-    var radiusPx by remember { mutableStateOf(0) }
-    var radiusInsidePx by remember { mutableStateOf(0) }
+    var radiusPx by remember { mutableIntStateOf(0) }
+    var radiusInsidePx by remember { mutableIntStateOf(0) }
 
     fun posX(index: Int) =
         ((if (index < 12) radiusPx else radiusInsidePx) * cos(angleForIndex(index))).toInt()
@@ -229,7 +248,7 @@ fun TimeCard(
 ) {
     Card(
         shape = RoundedCornerShape(6.dp),
-        backgroundColor = if (isSelected) selectedColor else secondaryColor,
+        colors = CardDefaults.cardColors(containerColor = if (isSelected) selectedColor else secondaryColor),
         modifier = Modifier.clickable { onClick() }
     ) {
         Text(

@@ -1,25 +1,22 @@
 package com.marlon.portalusuario.commons.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-private val LightColors = lightColors(
+private val LightColors = lightColorScheme(
     primary = Purple800,
-    primaryVariant = Purple700,
     onPrimary = Color.White,
     secondary = Purple900,
-    secondaryVariant = Purple700,
     onSecondary = Color.White,
     error = Red800
 )
 
-private val DarkColors = darkColors(
+private val DarkColors = darkColorScheme(
     primary = Orange900,
-    primaryVariant = Orange800,
     onPrimary = Color.White,
     secondary = Orange600,
     onSecondary = Color.White,
@@ -32,7 +29,7 @@ fun SuitEtecsaTheme(
     content: @Composable () -> Unit
 ) {
     MaterialTheme(
-        colors = if (darkTheme) DarkColors else LightColors,
+        colorScheme = if (darkTheme) DarkColors else LightColors,
         typography = SuitEtecsaTypography,
         shapes = SuitEtecsaShapes,
         content = content

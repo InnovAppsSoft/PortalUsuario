@@ -8,9 +8,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,8 +39,8 @@ fun CardNautaDetails(
     Column(modifier = modifier) {
         Text(
             text = "Nauta",
-            style = MaterialTheme.typography.h5,
-            color = MaterialTheme.colors.onBackground,
+            style = MaterialTheme.typography.displayMedium,
+            color = MaterialTheme.colorScheme.onBackground,
             fontStyle = FontStyle.Italic,
             modifier = Modifier
                 .padding(4.dp)
@@ -157,7 +157,7 @@ fun NautaDetail(
                     .padding(start = 8.dp, bottom = 8.dp)
                     .fillMaxWidth()
                     .wrapContentSize(align = Alignment.BottomStart),
-                style = MaterialTheme.typography.subtitle1,
+                style = MaterialTheme.typography.headlineMedium,
                 color = Color.White,
                 maxLines = 1,
                 softWrap = false,

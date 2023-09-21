@@ -5,10 +5,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -25,7 +25,7 @@ fun PrettyCard(
     content: (@Composable () -> Unit)
 ) {
     val shadowColor =
-        if (isFoundErrors) MaterialTheme.colors.error else MaterialTheme.colors.onSurface
+        if (isFoundErrors) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface
 
     val privateModifier = if (backgroundColor != null) Modifier.background(color = backgroundColor) else Modifier
 

@@ -1,16 +1,12 @@
 package com.marlon.portalusuario.commons.ui
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
-import androidx.compose.ui.graphics.Color
 import com.marlon.portalusuario.commons.utils.doWhenHasNextOrPrevious
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AnimatedPlaceholder(
     hints: List<String>
@@ -24,7 +20,7 @@ fun AnimatedPlaceholder(
 
     AnimatedContent(
         targetState = target,
-        transitionSpec = { ScrollAnimation() }
+        transitionSpec = { ScrollAnimation() }, label = ""
     ) { str ->
         Text(
             text = str

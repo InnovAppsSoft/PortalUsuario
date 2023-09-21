@@ -11,9 +11,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,7 +53,7 @@ fun CardConnect(
                     .weight(1f)
                     .wrapContentWidth()
                     .clickable { if (isEnabled) { onSelectLimitedTime() } },
-                style = MaterialTheme.typography.h5
+                style = MaterialTheme.typography.displayMedium
             )
             Button(
                 onClick = { onLogin() },
@@ -64,12 +64,12 @@ fun CardConnect(
                 if (!isLoggedIn) {
                     Text(
                         text = stringResource(R.string.connect),
-                        style = MaterialTheme.typography.button
+                        style = MaterialTheme.typography.labelMedium
                     )
                 } else {
                     Text(
                         text = stringResource(R.string.disconnect),
-                        style = MaterialTheme.typography.button
+                        style = MaterialTheme.typography.labelMedium
                     )
                 }
             }

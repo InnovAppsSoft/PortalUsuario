@@ -1,7 +1,7 @@
 package com.marlon.portalusuario.nauta.ui.components
 
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Color
 @Composable
 fun CustomLinearProgressBar(
     modifier: Modifier,
-    color: Color = MaterialTheme.colors.primary,
+    color: Color = MaterialTheme.colorScheme.primary,
     progress: Float? = null
 ) {
     if (progress != null) {
@@ -17,13 +17,13 @@ fun CustomLinearProgressBar(
             progress = progress,
             modifier = modifier,
             color = color,
-            backgroundColor = MaterialTheme.colors.surface
+            trackColor = MaterialTheme.colorScheme.surface
         )
     } else {
         LinearProgressIndicator(
             modifier = modifier,
             color = color,
-            backgroundColor = MaterialTheme.colors.surface
+            trackColor = MaterialTheme.colorScheme.surface
         )
     }
 
