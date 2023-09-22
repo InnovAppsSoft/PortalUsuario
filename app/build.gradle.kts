@@ -15,7 +15,7 @@ android {
     defaultConfig {
         resourceConfigurations.add("en")
         applicationId = "com.marlon.portalusuario"
-        minSdk = 21
+        minSdk = 22
         targetSdk = 34
         versionCode = 58
         versionName = "7.0.7"
@@ -70,6 +70,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:2.5.3")
     implementation("androidx.navigation:navigation-fragment:2.5.3")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
+    implementation(project(":feature:nauta-nav"))
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     implementation("de.hdodenhof:circleimageview:3.1.0")
@@ -147,9 +148,9 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     // LiveData
-    implementation("androidx.compose.runtime:runtime-livedata:1.4.1")
-    implementation("androidx.lifecycle:lifecycle-livedata:2.6.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+    implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.lifecycle.livedata)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
 
     //Camerax
     val camerax_version = "1.2.2"

@@ -17,3 +17,4 @@ dependencyResolutionManagement {
 
 include(":app")
 rootProject.name = "Portal Usuario"
+include(":feature:nauta-nav")
