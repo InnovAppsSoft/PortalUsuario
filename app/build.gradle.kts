@@ -70,7 +70,6 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:2.5.3")
     implementation("androidx.navigation:navigation-fragment:2.5.3")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
-    implementation(project(":feature:nauta-nav"))
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     implementation("de.hdodenhof:circleimageview:3.1.0")
@@ -80,6 +79,11 @@ dependencies {
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("com.google.guava:guava:29.0-android")
 
+    //Features
+    implementation(project(":feature:nauta-nav"))
+
+    // apklisupdate
+    implementation(libs.apklisupdate)
 
     // Firebase
     implementation(platform(libs.firebase.bom))
