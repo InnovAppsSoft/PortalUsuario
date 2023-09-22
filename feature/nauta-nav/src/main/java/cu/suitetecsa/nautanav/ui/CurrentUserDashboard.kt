@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
@@ -16,7 +17,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import cu.suitetecsa.nauta_nav.R
-import cu.suitetecsa.nautanav.util.INITIAL_USER
 import cu.suitetecsa.nautanav.core.isValidAmountToTransfer
 import cu.suitetecsa.nautanav.core.isValidPassword
 import cu.suitetecsa.nautanav.core.isValidRechargeCode
@@ -26,19 +26,23 @@ import cu.suitetecsa.nautanav.domain.model.UserModel
 import cu.suitetecsa.nautanav.ui.components.CaptchaDialog
 import cu.suitetecsa.nautanav.ui.components.CardChangeEmailPassword
 import cu.suitetecsa.nautanav.ui.components.CardChangePassword
-import cu.suitetecsa.nautanav.ui.components.CardConnect
+import cu.suitetecsa.nautanav.ui.components.connectview.ConnectView
 import cu.suitetecsa.nautanav.ui.components.CardNautaDetails
 import cu.suitetecsa.nautanav.ui.components.CardNautaHomeDetails
 import cu.suitetecsa.nautanav.ui.components.CardRecharge
 import cu.suitetecsa.nautanav.ui.components.CardTransfer
 import cu.suitetecsa.nautanav.ui.components.UserDetailsHead
+import cu.suitetecsa.nautanav.ui.components.connectview.ConnectViewState
 import cu.suitetecsa.nautanav.ui.components.timepicker.TimePickerDialog
 
 @Composable
 fun CurrentUserDashboard(viewModel: NautaViewModel) {
     val isLoading: Boolean by viewModel.isLoading.observeAsState(initial = false)
     val context = LocalContext.current
-    val currentUser: UserModel by viewModel.currentUser.observeAsState(initial = INITIAL_USER)
+    val currentUser: UserModel by viewModel.currentUser.collectAsState()
+
+    // ViewStates
+    val connectViewState: ConnectViewState by viewModel.connectViewState.collectAsState()
 
     //Update
     val captchaCode: String by viewModel.captchaCode.observeAsState(initial = "")
@@ -53,7 +57,6 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
     // Connect
     val leftTime: String by viewModel.leftTime.observeAsState(initial = currentUser.remainingTime.toTimeString())
     val limitedTime: String by viewModel.limitedTime.observeAsState(initial = leftTime)
-    val isConnecting: Boolean by viewModel.isConnecting.observeAsState(initial = false)
     val connectStatus: Pair<Boolean, String?> by viewModel.connectStatus.observeAsState(
         initial = Pair(
             true,
@@ -62,8 +65,6 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
     )
     val (isConnected, connectError) = connectStatus
     if (!isConnected) Toast.makeText(context, connectError, Toast.LENGTH_LONG).show()
-
-    val isLoggedIn: Boolean by viewModel.isLoggedIn.observeAsState(initial = false)
 
     // User
     val isLogging: Boolean by viewModel.isLogging.observeAsState(initial = false)
@@ -118,7 +119,11 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
         initial = Pair(true, null)
     )
     val (isAccessAccountPasswordChanged, accessAccountPasswordChangeError) = accessAccountChangePasswordStatus
-    if (!isAccessAccountPasswordChanged) Toast.makeText(context, accessAccountPasswordChangeError, Toast.LENGTH_LONG).show()
+    if (!isAccessAccountPasswordChanged) Toast.makeText(
+        context,
+        accessAccountPasswordChangeError,
+        Toast.LENGTH_LONG
+    ).show()
 
     // ChangeEmailPassword
     val emailOldPassword: String by viewModel.emailOldPassword.observeAsState(initial = "")
@@ -128,7 +133,11 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
         initial = Pair(true, null)
     )
     val (isEmailPasswordChanged, emailPasswordChangeError) = emailChangePasswordStatus
-    if (!isEmailPasswordChanged) Toast.makeText(context, emailPasswordChangeError, Toast.LENGTH_LONG).show()
+    if (!isEmailPasswordChanged) Toast.makeText(
+        context,
+        emailPasswordChangeError,
+        Toast.LENGTH_LONG
+    ).show()
 
     // Dialog
     val showTimePickerDialog: Boolean by viewModel.showTimePickerDialog.observeAsState(initial = false)
@@ -180,17 +189,10 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
             remainingTime = leftTime,
             modifier = Modifier.padding(vertical = 8.dp)
         )
-        CardConnect(
-            remainingTime = limitedTime,
-            connectButtonEnabled = currentUser.remainingTime != 0 && !isLogging,
-            isLoading = isConnecting,
-            connectStatus = connectStatus,
-            isLoggedIn = isLoggedIn,
+        ConnectView(
             modifier = Modifier.padding(vertical = 8.dp),
-            onLogin = {
-                if (!isLoggedIn) viewModel.connect(currentUser.username, currentUser.password)
-                else viewModel.disconnect()
-            }) { viewModel.showTimePickerDialog(true) }
+            connectViewState
+        )
         CardNautaDetails(
             user = currentUser,
             isLoading = isLogging,
@@ -221,11 +223,7 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
                 onRecharge = {
                     if (!isLoading && rechargeCode.isValidRechargeCode()) viewModel.toUp(it)
                 },
-                onClickQRScannerIcon = {
-                    viewModel.showQRCodeScanner(true) {
-                        viewModel.onChangeRechargeCode(it)
-                    }
-                }
+                onClickQRScannerIcon = {}
             )
         }
         Spacer(modifier = Modifier.padding(8.dp))

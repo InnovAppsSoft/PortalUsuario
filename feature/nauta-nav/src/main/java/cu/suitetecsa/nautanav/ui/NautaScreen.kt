@@ -9,6 +9,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
@@ -20,10 +21,8 @@ import cu.suitetecsa.nautanav.ui.components.CardUserManager
 
 @Composable
 fun NautaScreen(viewModel: NautaViewModel) {
-    val users: Users by viewModel.users.observeAsState(initial = listOf())
-    val currentUser: UserModel by viewModel.currentUser.observeAsState(
-        initial = INITIAL_USER
-    )
+    val users: Users by viewModel.users.collectAsState()
+    val currentUser: UserModel by viewModel.currentUser.collectAsState()
     val isUpdatingUserInformation: Boolean by viewModel.isUpdatingUserInfo.observeAsState(initial = false)
     val isLoading: Boolean by viewModel.isLoading.observeAsState(initial = false)
     val isLoggedIn: Boolean by viewModel.isLoggedIn.observeAsState(initial = false)

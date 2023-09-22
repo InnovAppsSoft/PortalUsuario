@@ -29,10 +29,14 @@ import cu.suitetecsa.nautanav.domain.dto.UserDTO
 import cu.suitetecsa.nautanav.domain.model.UserModel
 import cu.suitetecsa.nautanav.service.CountdownServiceClient
 import cu.suitetecsa.nautanav.service.CountdownSubscriber
+import cu.suitetecsa.nautanav.ui.components.connectview.ConnectViewState
 import cu.suitetecsa.nautanav.util.Pref
 import cu.suitetecsa.sdk.nauta.core.exceptions.NotLoggedIn
 import cu.suitetecsa.sdk.nauta.domain.util.timeStringToSeconds
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -49,6 +53,20 @@ class NautaViewModel @Inject constructor(
     private val deleteUserUseCase: DeleteUserUseCase
 ) : ViewModel(), CountdownSubscriber {
 
+    // ViewStates
+    private val _connectViewState = MutableStateFlow<ConnectViewState>(
+        ConnectViewState.Disconnected("00:00:00", {}, {})
+    )
+    val connectViewState: StateFlow<ConnectViewState> get() = _connectViewState.asStateFlow()
+
+    // ValuesState
+    private val _users = MutableStateFlow<Users>(listOf())
+    val users: StateFlow<Users> = _users.asStateFlow()
+    private val _userName = MutableStateFlow(TextFieldValue(""))
+    val userName: StateFlow<TextFieldValue> = _userName.asStateFlow()
+    private val _password = MutableStateFlow("")
+    val password: StateFlow<String> = _password.asStateFlow()
+
     // Login section
     // Captcha
     private val _isReadyToUpdate = MutableLiveData<Boolean>()
@@ -62,16 +80,12 @@ class NautaViewModel @Inject constructor(
     val captchaLoadStatus: LiveData<Pair<Boolean, String?>> = _captchaLoadStatus
 
     // Add user
-    private val _userName = MutableLiveData<TextFieldValue>()
-    private val _password = MutableLiveData<String>()
     private val _captchaCode = MutableLiveData<String>()
     private val _loginEnable = MutableLiveData<Boolean>()
     private val _isLoading = MutableLiveData<Boolean>()
     private val _isLoggedIn = MutableLiveData<Boolean>()
     private val _suggestion: MutableState<String> = mutableStateOf("")
 
-    val userName: LiveData<TextFieldValue> = _userName
-    val password: LiveData<String> = _password
     val captchaCode: LiveData<String> = _captchaCode
     val loginEnable: LiveData<Boolean> = _loginEnable
     val isLoggedIn: LiveData<Boolean> = _isLoggedIn
@@ -106,8 +120,7 @@ class NautaViewModel @Inject constructor(
     private val _rechargeStatus = MutableLiveData<Pair<Boolean, String?>>()
     private val _transferStatus = MutableLiveData<Pair<Boolean, String?>>()
     private val _showCaptchaDialog = MutableLiveData<Pair<Boolean, () -> Unit>>()
-    private val _users = MutableLiveData<Users>()
-    private val _currentUser = MutableLiveData<UserModel>()
+    private val _currentUser = MutableStateFlow(INITIAL_USER)
     private val _isChangingAccountAccessPassword = MutableLiveData<Boolean>()
     private val _accessAccountNewPassword = MutableLiveData<String>()
     private val _accessAccountChangePasswordStatus = MutableLiveData<Pair<Boolean, String?>>()
@@ -129,8 +142,7 @@ class NautaViewModel @Inject constructor(
     val rechargeStatus: LiveData<Pair<Boolean, String?>> = _rechargeStatus
     val transferStatus: LiveData<Pair<Boolean, String?>> = _transferStatus
     val showCaptchaDialog: LiveData<Pair<Boolean, () -> Unit>> = _showCaptchaDialog
-    val users: LiveData<Users> = _users
-    val currentUser: LiveData<UserModel> = _currentUser
+    val currentUser: StateFlow<UserModel> = _currentUser.asStateFlow()
     val isChangingAccountAccessPassword: LiveData<Boolean> = _isChangingAccountAccessPassword
     val accessAccountNewPassword: LiveData<String> = _accessAccountNewPassword
     val accessAccountChangePasswordStatus: LiveData<Pair<Boolean, String?>> =
@@ -140,30 +152,30 @@ class NautaViewModel @Inject constructor(
     val emailNewPassword: LiveData<String> = _emailNewPassword
     val emailChangePasswordStatus: LiveData<Pair<Boolean, String?>> = _emailChangePasswordStatus
 
-    // QRScanner
-    private val _showQRCodeScanner = MutableLiveData<Pair<Boolean, (String) -> Unit>>()
-    val showQRCodeScanner: LiveData<Pair<Boolean, (String) -> Unit>> = _showQRCodeScanner
-
     // Initialize UI
     init {
         viewModelScope.launch {
             // Subscribe to service
-            countdownServiceClient.isBound.observeForever {
-                if (it) countdownServiceClient.serviceSubscribe(this@NautaViewModel)
+            countdownServiceClient.isBound.observeForever { isBound ->
+                if (isBound) countdownServiceClient.serviceSubscribe(this@NautaViewModel)
             }
 
             // Initialize list of users
-            if (_users.value.isNullOrEmpty()) {
-                repository.getUsersFromRoom {
-                    _users.value = it
-                    if (it.isNotEmpty()) {
-                        if (pref.currentUserId != 0) {
-                            _currentUser.value =
-                                it.first { user -> user.id == pref.currentUserId }
-                        } else _currentUser.value = it.last()
-                    }
+            repository.getUsersFromRoom { userList ->
+                _users.value = userList
+                if (userList.isNotEmpty()) {
+                    if (pref.currentUserId != 0) {
+                        _currentUser.value =
+                            userList.firstOrNull { user -> user.id == pref.currentUserId }
+                                ?: userList.last()
+                    } else _currentUser.value = userList.last()
+                    _connectViewState.value = ConnectViewState.Disconnected(
+                        _currentUser.value.remainingTime.toTimeString(),
+                        { showTimePickerDialog(true) },
+                        ::connect
+                    )
                 }
-            } else _currentUser.value = _users.value!!.last()
+            }
         }
     }
 
@@ -173,15 +185,32 @@ class NautaViewModel @Inject constructor(
             val dataSession = pref.getSession()
             if (dataSession.isNotEmpty()) {
                 service.setDataSession(dataSession)
-                _isLoggedIn.postValue(true)
+                _isLoggedIn.value = true
+                _connectViewState.value = ConnectViewState.Loading(_currentUser.value.remainingTime.toTimeString())
                 try {
-                    service.getRemainingTime { _leftTime.postValue(it) }
-                    _userConnected.postValue(dataSession["username"])
-                    if (_leftTime.value!!.toSeconds() > pref.reservedTime) {
-                        countdownServiceClient.setParams(pref.reservedTime, service)
-                        countdownServiceClient.serviceConnect()
-                    } else {
-                        disconnect()
+                    service.getRemainingTime().takeIf {  it != "errorop" }?.also {  timeResponse ->
+                        _leftTime.value = timeResponse
+                        _connectViewState.value = ConnectViewState.Connected(timeResponse, ::disconnect)
+                        _userConnected.value = dataSession["username"]
+                        if (_leftTime.value!!.toSeconds() > pref.reservedTime) {
+                            countdownServiceClient.setParams(pref.reservedTime, service)
+                            countdownServiceClient.serviceConnect()
+                        } else {
+                            disconnect()
+                        }
+                    } ?: run {
+                        _connectViewState.value = ConnectViewState.Failure("errorop", "Olvidar") {
+                            countdownServiceClient.serviceDisconnect()
+
+                            // Removing data session
+                            pref.removeSession(pref.getSession())
+                            pref.reservedTime = 0
+                            _connectViewState.value = ConnectViewState.Disconnected(
+                                "errorop",
+                                { showTimePickerDialog(true) },
+                                ::connect
+                            )
+                        }
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -190,15 +219,15 @@ class NautaViewModel @Inject constructor(
             }
 
             //PreLogin on user portal
-            if (_currentUser.value == null) {
+            if (_currentUser.value == INITIAL_USER) {
                 try {
-                    _isLoadingCaptcha.postValue(true)
-                    _captchaImage.postValue(convertImageByteArrayToBitmap(service.getCaptcha()))
-                    _isLoadingCaptcha.postValue(false)
+                    _isLoadingCaptcha.value = true
+                    _captchaImage.value = convertImageByteArrayToBitmap(service.getCaptcha())
+                    _isLoadingCaptcha.value = false
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    _isLoadingCaptcha.postValue(false)
-                    _captchaLoadStatus.postValue(Pair(false, e.message))
+                    _isLoadingCaptcha.value = false
+                    _captchaLoadStatus.value = Pair(false, e.message)
                 }
             }
         }
@@ -207,15 +236,15 @@ class NautaViewModel @Inject constructor(
     // User managing
     fun onUserSelected(user: UserModel) {
         clearFields()
-        _currentUser.postValue(user)
-        if (user.id == 0) getCaptcha() else _leftTime.postValue(user.remainingTime.toTimeString())
+        _currentUser.value = user
+        if (user.id == 0) getCaptcha() else _leftTime.value = user.remainingTime.toTimeString()
     }
 
     fun addUser(userName: String, password: String, captchaCode: String) {
         resetStatus()
         viewModelScope.launch {
-            _isLogging.postValue(true)
-            _isLoading.postValue(true)
+            _isLogging.value = true
+            _isLoading.value = true
             addUserUseCase(
                 UserDTO(
                     id = 0,
@@ -227,20 +256,25 @@ class NautaViewModel @Inject constructor(
                 .collect {
                     when (it) {
                         is ResultType.Error -> {
-                            _isLogging.postValue(false)
-                            _isLoading.postValue(false)
-                            _loginStatus.postValue(Pair(false, it.message))
+                            _isLogging.value = false
+                            _isLoading.value = false
+                            _loginStatus.value = Pair(false, it.message)
                         }
 
                         is ResultType.Success -> {
-                            _isLogging.postValue(false)
-                            _isLoading.postValue(false)
-                            _loginStatus.postValue(Pair(true, null))
+                            _isLogging.value = false
+                            _isLoading.value = false
+                            _loginStatus.value = Pair(true, null)
                             repository.getUsersFromRoom { users ->
                                 _users.value = users
 
                                 _currentUser.value = it.data
                                 pref.currentUserId = it.data.id
+                                _connectViewState.value = ConnectViewState.Disconnected(
+                                    _currentUser.value.remainingTime.toTimeString(),
+                                    { _showTimePickerDialog.value = true },
+                                    ::connect
+                                )
                             }
                             clearFields()
                         }
@@ -257,15 +291,15 @@ class NautaViewModel @Inject constructor(
         clearFields()
         resetStatus()
         viewModelScope.launch {
-            _isLogging.postValue(true)
-            _isUpdatingUserInfo.postValue(true)
-            _isLoading.postValue(true)
-            if (_currentUser.value!!.id == pref.currentUserId) {
+            _isLogging.value = true
+            _isUpdatingUserInfo.value = true
+            _isLoading.value = true
+            if (_currentUser.value.id == pref.currentUserId) {
                 updateUserUseCase(
                     UserDTO(
-                        id = _currentUser.value!!.id,
-                        username = _currentUser.value!!.username,
-                        password = _currentUser.value!!.password,
+                        id = _currentUser.value.id,
+                        username = _currentUser.value.username,
+                        password = _currentUser.value.password,
                         captchaCode = captchaCode
                     )
                 )
@@ -274,35 +308,35 @@ class NautaViewModel @Inject constructor(
                             is ResultType.Error -> {
                                 if (it.message == "Not logged in") {
                                     showCaptchaDialog(true) {}
-                                    _isLogging.postValue(false)
-                                    _isUpdatingUserInfo.postValue(false)
-                                    _isLoading.postValue(false)
+                                    _isLogging.value = false
+                                    _isUpdatingUserInfo.value = false
+                                    _isLoading.value = false
                                 } else {
-                                    _isLogging.postValue(false)
-                                    _isUpdatingUserInfo.postValue(false)
-                                    _isLoading.postValue(false)
-                                    _loginStatus.postValue(Pair(false, it.message))
+                                    _isLogging.value = false
+                                    _isUpdatingUserInfo.value = false
+                                    _isLoading.value = false
+                                    _loginStatus.value = Pair(false, it.message)
                                     getCaptcha()
                                 }
                             }
 
                             is ResultType.Success -> {
-                                _isLogging.postValue(false)
-                                _isUpdatingUserInfo.postValue(false)
-                                _isLoading.postValue(false)
-                                _loginStatus.postValue(Pair(true, null))
+                                _isLogging.value = false
+                                _isUpdatingUserInfo.value = false
+                                _isLoading.value = false
+                                _loginStatus.value = Pair(true, null)
                                 repository.getUsersFromRoom { users ->
                                     _users.value = users
 
-                                    _currentUser.postValue(it.data!!)
-                                    pref.currentUserId = _currentUser.value!!.id
+                                    _currentUser.value = it.data
+                                    pref.currentUserId = _currentUser.value.id
                                 }
                                 postUpdate()
                             }
                         }
                     }
             } else {
-                pref.currentUserId = _currentUser.value!!.id
+                pref.currentUserId = _currentUser.value.id
                 showCaptchaDialog(true) {}
             }
         }
@@ -314,7 +348,7 @@ class NautaViewModel @Inject constructor(
         viewModelScope.launch {
             deleteUserUseCase(
                 UserDTO(
-                    id = _currentUser.value!!.id, username = "", password = "", captchaCode = null
+                    id = _currentUser.value.id, username = "", password = "", captchaCode = null
                 )
             )
                 .collect {
@@ -322,22 +356,22 @@ class NautaViewModel @Inject constructor(
                     when (it) {
                         is ResultType.Error -> {}
                         is ResultType.Success -> {
-                            _users.postValue(it.data!!)
+                            _users.value = it.data
                             if (it.data.isNotEmpty()) {
-                                _currentUser.postValue(it.data.last())
+                                _currentUser.value = it.data.last()
                             } else {
-                                _currentUser.postValue(cu.suitetecsa.nautanav.util.INITIAL_USER)
+                                _currentUser.value = INITIAL_USER
                             }
                         }
                     }
-                    _isLoading.postValue(false)
+                    _isLoading.value = false
                 }
         }
     }
 
     // Data validate
     fun isValidDestinationAccount(destinationAccount: String) =
-        (_currentUser.value!!.offer != null && destinationAccount.isEmpty()) || destinationAccount.isValidUsername()
+        (_currentUser.value.offer != null && destinationAccount.isEmpty()) || destinationAccount.isValidUsername()
 
     // Manage data
     private fun onChangeUserName(userName: TextFieldValue) {
@@ -386,7 +420,7 @@ class NautaViewModel @Inject constructor(
         if (rechargeCode.length <= 16) {
             _rechargeCode.value = rechargeCode
         }
-        _isEnabledRechargeButton.postValue(rechargeCode.length == 12 || rechargeCode.length == 16)
+        _isEnabledRechargeButton.value = rechargeCode.length == 12 || rechargeCode.length == 16
     }
 
     fun onTransferChange(destinationAccount: TextFieldValue, amount: TextFieldValue) {
@@ -402,8 +436,8 @@ class NautaViewModel @Inject constructor(
         onChangeUserName(userName)
         onChangePassword(password)
         onChangeCaptchaCode(captchaCode)
-        _loginEnable.postValue(userName.text.isValidUsername() && password.isValidPassword() &&
-                captchaCode.isValidCaptchaCode())
+        _loginEnable.value = userName.text.isValidUsername() && password.isValidPassword() &&
+                captchaCode.isValidCaptchaCode()
     }
 
     fun onAccountAccessPasswordChange(password: String) {
@@ -418,19 +452,23 @@ class NautaViewModel @Inject constructor(
     fun onChangeLimiterTime(newLimiterTime: Pair<Int, Int>) {
         resetStatus()
         val (hour, minute) = newLimiterTime
-        _limitedTime.value = String.format("%02d:%02d:00", hour, minute)
+        _limitedTime.value = "%02d:%02d:00".format(hour, minute)
     }
 
     override fun onTimeLeftChanged(timeLeftInMillis: Long) {
         resetStatus()
         val reservedTime = pref.reservedTime
-        if (_currentUser.value!!.username == _userConnected.value!!) {
+        if (_currentUser.value.username == _userConnected.value!!) {
             if (reservedTime != 0) {
                 _leftTime.value = ((timeLeftInMillis / 1000).toInt() + reservedTime).toTimeString()
             } else {
                 _leftTime.value = ((timeLeftInMillis / 1000).toInt()).toTimeString()
             }
         }
+        _connectViewState.value = ConnectViewState.Connected(
+            ((timeLeftInMillis / 1000).toInt()).toTimeString(),
+            ::disconnect
+        )
         _limitedTime.value = ((timeLeftInMillis / 1000).toInt()).toTimeString()
     }
 
@@ -441,64 +479,64 @@ class NautaViewModel @Inject constructor(
             _leftTime.value = reservedTime.toTimeString()
         } else _leftTime.value = "00:00:00"
         _limitedTime.value = "00:00:00"
+        _connectViewState.value = ConnectViewState.Disconnected(
+            "00:00:00",
+            { showTimePickerDialog(true) },
+            ::connect
+        )
         _isLoggedIn.value = false
     }
 
     private fun clearFields() {
-        _userName.postValue(TextFieldValue(""))
-        _password.postValue("")
-        _captchaCode.postValue("")
-        _rechargeCode.postValue("")
-        _amount.postValue(TextFieldValue(""))
-        _destinationAccount.postValue(TextFieldValue(""))
-        _accessAccountNewPassword.postValue("")
-        _emailNewPassword.postValue("")
-        _emailOldPassword.postValue("")
+        _userName.value = TextFieldValue("")
+        _password.value = ""
+        _captchaCode.value = ""
+        _rechargeCode.value = ""
+        _amount.value = TextFieldValue("")
+        _destinationAccount.value = TextFieldValue("")
+        _accessAccountNewPassword.value = ""
+        _emailNewPassword.value = ""
+        _emailOldPassword.value = ""
     }
 
     fun resetStatus() {
-        _rechargeStatus.postValue(Pair(true, null))
-        _transferStatus.postValue(Pair(true, null))
-        _loginStatus.postValue(Pair(true, null))
-        _connectStatus.postValue(Pair(true, null))
-        _captchaLoadStatus.postValue(Pair(true, null))
-        _emailChangePasswordStatus.postValue(Pair(true, null))
-        _accessAccountChangePasswordStatus.postValue(Pair(true, null))
+        _rechargeStatus.value = Pair(true, null)
+        _transferStatus.value = Pair(true, null)
+        _loginStatus.value = Pair(true, null)
+        _connectStatus.value = Pair(true, null)
+        _captchaLoadStatus.value = Pair(true, null)
+        _emailChangePasswordStatus.value = Pair(true, null)
+        _accessAccountChangePasswordStatus.value = Pair(true, null)
     }
 
     // Show/hide dialogs
     fun showCaptchaDialog(isShow: Boolean, postLoginAction: () -> Unit) {
-        _showCaptchaDialog.postValue(Pair(isShow, postLoginAction))
-    }
-
-    fun showQRCodeScanner(isShow: Boolean, postLoginAction: (String) -> Unit) {
-        _showQRCodeScanner.postValue(Pair(isShow, postLoginAction))
+        _showCaptchaDialog.value = Pair(isShow, postLoginAction)
     }
 
     fun showTimePickerDialog(isShow: Boolean) {
-        _showTimePickerDialog.postValue(isShow)
+        _showTimePickerDialog.value = isShow
     }
 
     // Network tasks
-    fun connect(userName: String, password: String) {
+    fun connect() {
         resetStatus()
         viewModelScope.launch {
             try {
-                _isConnecting.postValue(true)
-                _isLoading.postValue(true)
-                service.connect(userName, password)
-                _connectStatus.postValue(Pair(true, null))
-                _userConnected.postValue(_currentUser.value!!.username)
+                _isConnecting.value = true
+                _isLoading.value = true
+                _connectViewState.value = ConnectViewState.Loading(_currentUser.value.remainingTime.toTimeString())
+                service.connect(_currentUser.value.username, _currentUser.value.password)
+                _connectStatus.value = Pair(true, null)
+                _userConnected.value = _currentUser.value.username
                 pref.saveSession(service.getDataSession())
-                pref.currentUserId = currentUser.value!!.id
-                _isLoggedIn.postValue(true)
-                service.getRemainingTime {
-                    _leftTime.postValue(it)
-                    if (_limitedTime.value == null) {
-                        _limitedTime.postValue(it)
-                    }
+                pref.currentUserId = currentUser.value.id
+                _isLoggedIn.value = true
+                val timeResponse = service.getRemainingTime()
+                _leftTime.value = timeResponse
+                if (_limitedTime.value == null) {
+                    _limitedTime.value = timeResponse
                 }
-                println(_limitedTime.value)
                 if (_limitedTime.value != _leftTime.value) {
                     pref.reservedTime =
                         timeStringToSeconds(_leftTime.value!!) - timeStringToSeconds(_limitedTime.value!!)
@@ -507,13 +545,24 @@ class NautaViewModel @Inject constructor(
                 countdownServiceClient.setParams(pref.reservedTime, service)
                 countdownServiceClient.serviceConnect()
 
-                _isConnecting.postValue(false)
-                _isLoading.postValue(false)
+                _isConnecting.value = false
+                _isLoading.value = false
+                _connectViewState.value = ConnectViewState.Connected(_limitedTime.value!!, ::disconnect)
             } catch (e: Exception) {
                 e.printStackTrace()
-                _connectStatus.postValue(Pair(false, e.message.toString()))
-                _isConnecting.postValue(false)
-                _isLoading.postValue(false)
+                _connectStatus.value = Pair(false, e.message.toString())
+                _isConnecting.value = false
+                _isLoading.value = false
+                _connectViewState.value = ConnectViewState.Failure(
+                    e.message.toString(),
+                    "OK"
+                ) {
+                    _connectViewState.value = ConnectViewState.Disconnected(
+                        _currentUser.value.remainingTime.toTimeString(),
+                        { _showTimePickerDialog.value = true },
+                        ::connect
+                    )
+                }
             }
         }
     }
@@ -523,15 +572,18 @@ class NautaViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 // Updating remaining time
-                service.getRemainingTime { _currentUser.value!!.remainingTime = it.toSeconds() }
+                service.getRemainingTime {
+                    _currentUser.value.remainingTime = it.toSeconds()
+                    _connectViewState.value = ConnectViewState.Loading(it)
+                }
 
                 // Disconnecting
-                _isConnecting.postValue(true)
-                _isLoading.postValue(true)
+                _isConnecting.value = true
+                _isLoading.value = true
                 service.disconnect()
-                _connectStatus.postValue(Pair(true, null))
-                _isLoggedIn.postValue(false)
-                _userConnected.postValue("")
+                _connectStatus.value = Pair(true, null)
+                _isLoggedIn.value = false
+                _userConnected.value = ""
                 countdownServiceClient.serviceDisconnect()
 
                 // Removing data session
@@ -540,22 +592,27 @@ class NautaViewModel @Inject constructor(
 
                 // Updating credit
                 service.getConnectInfo(
-                    _currentUser.value!!.username,
-                    _currentUser.value!!.password
+                    _currentUser.value.username,
+                    _currentUser.value.password
                 ) {
-                    _currentUser.value!!.credit = it.toPriceFloat()
+                    _currentUser.value.credit = it.toPriceFloat()
                 }
 
                 // Updating user
-                repository.updateUserInRoom(_currentUser.value!!)
+                repository.updateUserInRoom(_currentUser.value)
 
-                _isConnecting.postValue(false)
-                _isLoading.postValue(false)
+                _isConnecting.value = false
+                _isLoading.value = false
+                _connectViewState.value = ConnectViewState.Disconnected(
+                    _currentUser.value.remainingTime.toTimeString(),
+                    { _showTimePickerDialog.value = true },
+                    ::connect
+                )
             } catch (e: Exception) {
                 e.printStackTrace()
-                _connectStatus.postValue(Pair(false, e.message))
-                _isConnecting.postValue(false)
-                _isLoading.postValue(false)
+                _connectStatus.value = Pair(false, e.message)
+                _isConnecting.value = false
+                _isLoading.value = false
             }
         }
     }
@@ -564,16 +621,16 @@ class NautaViewModel @Inject constructor(
         resetStatus()
         viewModelScope.launch {
             try {
-                _isLoadingCaptcha.postValue(true)
-                _isLoading.postValue(true)
-                _captchaImage.postValue(convertImageByteArrayToBitmap(service.getCaptcha()))
-                _isLoadingCaptcha.postValue(false)
-                _isLoading.postValue(false)
-                _captchaLoadStatus.postValue(Pair(true, null))
+                _isLoadingCaptcha.value = true
+                _isLoading.value = true
+                _captchaImage.value = convertImageByteArrayToBitmap(service.getCaptcha())
+                _isLoadingCaptcha.value = false
+                _isLoading.value = false
+                _captchaLoadStatus.value = Pair(true, null)
             } catch (e: Exception) {
                 e.printStackTrace()
-                _isLoadingCaptcha.postValue(false)
-                _captchaLoadStatus.postValue(Pair(false, e.message))
+                _isLoadingCaptcha.value = false
+                _captchaLoadStatus.value = Pair(false, e.message)
             }
         }
     }
@@ -582,9 +639,9 @@ class NautaViewModel @Inject constructor(
         resetStatus()
         viewModelScope.launch {
             try {
-                _isRecharging.postValue(true)
-                _isLoading.postValue(true)
-                if (pref.currentUserId == _currentUser.value!!.id) {
+                _isRecharging.value = true
+                _isLoading.value = true
+                if (pref.currentUserId == _currentUser.value.id) {
                     Log.i(TAG, "Trying to top up the account balance")
                     service.toUp(rechargeCode)
                     Log.i(TAG, "Account balance recharged")
@@ -597,10 +654,10 @@ class NautaViewModel @Inject constructor(
                     getCaptcha()
                     Log.i(TAG, "Captcha image loaded")
                 }
-                _rechargeStatus.postValue(Pair(true, null))
-                _isRecharging.postValue(false)
-                _isLoading.postValue(false)
-                _rechargeCode.postValue("")
+                _rechargeStatus.value = Pair(true, null)
+                _isRecharging.value = false
+                _isLoading.value = false
+                _rechargeCode.value = ""
                 updateUser()
             } catch (e: NotLoggedIn) {
                 e.printStackTrace()
@@ -608,9 +665,9 @@ class NautaViewModel @Inject constructor(
                 getCaptcha()
             } catch (e: Exception) {
                 e.printStackTrace()
-                _isRecharging.postValue(false)
-                _isLoading.postValue(false)
-                _rechargeStatus.postValue(Pair(false, e.message))
+                _isRecharging.value = false
+                _isLoading.value = false
+                _rechargeStatus.value = Pair(false, e.message)
             }
         }
     }
@@ -619,9 +676,9 @@ class NautaViewModel @Inject constructor(
         resetStatus()
         viewModelScope.launch {
             try {
-                _isTransferring.postValue(true)
-                _isLoading.postValue(true)
-                if (pref.currentUserId == _currentUser.value!!.id) {
+                _isTransferring.value = true
+                _isLoading.value = true
+                if (pref.currentUserId == _currentUser.value.id) {
                     if (destinationAccount == "") service.payQuote(amount)
                     else service.transfer(amount, destinationAccount)
                     clearFields()
@@ -629,21 +686,21 @@ class NautaViewModel @Inject constructor(
                     showCaptchaDialog(true) { transfer(amount, destinationAccount) }
                     getCaptcha()
                 }
-                _transferStatus.postValue(Pair(true, null))
-                _isTransferring.postValue(false)
-                _isLoading.postValue(false)
+                _transferStatus.value = Pair(true, null)
+                _isTransferring.value = false
+                _isLoading.value = false
             } catch (e: NotLoggedIn) {
                 e.printStackTrace()
                 showCaptchaDialog(true) { transfer(amount, destinationAccount) }
                 getCaptcha()
-                _transferStatus.postValue(Pair(true, null))
-                _isTransferring.postValue(false)
-                _isLoading.postValue(false)
+                _transferStatus.value = Pair(true, null)
+                _isTransferring.value = false
+                _isLoading.value = false
             } catch (e: Exception) {
                 e.printStackTrace()
-                _isTransferring.postValue(false)
-                _isLoading.postValue(false)
-                _transferStatus.postValue(Pair(false, e.message))
+                _isTransferring.value = false
+                _isLoading.value = false
+                _transferStatus.value = Pair(false, e.message)
             }
         }
     }
@@ -652,29 +709,29 @@ class NautaViewModel @Inject constructor(
         resetStatus()
         viewModelScope.launch {
             try {
-                _isChangingAccountAccessPassword.postValue(true)
-                _isLoading.postValue(true)
-                if (pref.currentUserId == _currentUser.value!!.id) {
+                _isChangingAccountAccessPassword.value = true
+                _isLoading.value = true
+                if (pref.currentUserId == _currentUser.value.id) {
                     service.changePassword(newPassword)
-                    _currentUser.value!!.password = newPassword
+                    _currentUser.value.password = newPassword
                     updateUser()
                     clearFields()
                 } else {
                     showCaptchaDialog(true) { changePassword(newPassword) }
                     getCaptcha()
                 }
-                _isChangingAccountAccessPassword.postValue(false)
-                _isLoading.postValue(false)
+                _isChangingAccountAccessPassword.value = false
+                _isLoading.value = false
             } catch (e: NotLoggedIn) {
                 e.printStackTrace()
                 showCaptchaDialog(true) { changePassword(newPassword) }
                 getCaptcha()
-                _isChangingAccountAccessPassword.postValue(false)
-                _isLoading.postValue(false)
+                _isChangingAccountAccessPassword.value = false
+                _isLoading.value = false
             } catch (e: Exception) {
                 e.printStackTrace()
-                _isChangingAccountAccessPassword.postValue(false)
-                _isLoading.postValue(false)
+                _isChangingAccountAccessPassword.value = false
+                _isLoading.value = false
             }
         }
     }
@@ -683,27 +740,27 @@ class NautaViewModel @Inject constructor(
         resetStatus()
         viewModelScope.launch {
             try {
-                _isChangingEmailPassword.postValue(true)
-                _isLoading.postValue(true)
-                if (pref.currentUserId == _currentUser.value!!.id) {
+                _isChangingEmailPassword.value = true
+                _isLoading.value = true
+                if (pref.currentUserId == _currentUser.value.id) {
                     service.changeEmailPassword(oldPassword, newPassword)
                     clearFields()
                 } else {
                     showCaptchaDialog(true) { changeEmailPassword(oldPassword, newPassword) }
                     getCaptcha()
                 }
-                _isChangingEmailPassword.postValue(false)
-                _isLoading.postValue(false)
+                _isChangingEmailPassword.value = false
+                _isLoading.value = false
             } catch (e: NotLoggedIn) {
                 e.printStackTrace()
                 showCaptchaDialog(true) { changeEmailPassword(oldPassword, newPassword) }
                 getCaptcha()
-                _isChangingEmailPassword.postValue(false)
-                _isLoading.postValue(false)
+                _isChangingEmailPassword.value = false
+                _isLoading.value = false
             } catch (e: Exception) {
                 e.printStackTrace()
-                _isChangingEmailPassword.postValue(false)
-                _isLoading.postValue(false)
+                _isChangingEmailPassword.value = false
+                _isLoading.value = false
             }
         }
     }
@@ -714,8 +771,8 @@ class NautaViewModel @Inject constructor(
 
     fun generatePassword(isEmailPassword: Boolean) {
         resetStatus()
-        if (isEmailPassword) _emailNewPassword.postValue(service.generatePassword())
-        else _accessAccountNewPassword.postValue(service.generatePassword())
+        if (isEmailPassword) _emailNewPassword.value = service.generatePassword()
+        else _accessAccountNewPassword.value = service.generatePassword()
     }
 
     override fun onCleared() {

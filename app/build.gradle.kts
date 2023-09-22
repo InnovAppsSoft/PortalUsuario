@@ -89,18 +89,6 @@ dependencies {
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.crashlytics.ktx)
 
-    // Jetpack Compose
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.material.icons.extended)
-    implementation(libs.androidx.constraintlayout.compose)
-
-    // wifietecsa
-    implementation(libs.suitetecsa.sdk.kotlin)
-
     // ViewModel
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel)
@@ -158,12 +146,6 @@ dependencies {
     implementation("androidx.camera:camera-camera2:${camerax_version}")
     implementation("androidx.camera:camera-lifecycle:${camerax_version}")
     implementation("androidx.camera:camera-view:${camerax_version}")
-
-    //Barcode
-    implementation("com.google.mlkit:barcode-scanning:17.1.0")
-
-    //Camera Permission
-    implementation("com.google.accompanist:accompanist-permissions:0.31.1-alpha")
 
     // QR scanner
     implementation("com.google.zxing:core:3.5.1")

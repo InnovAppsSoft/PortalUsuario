@@ -12,6 +12,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -36,8 +37,8 @@ import cu.suitetecsa.nautanav.ui.components.UserField
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AddUserDashboard(viewModel: NautaViewModel) {
-    val userName: TextFieldValue by viewModel.userName.observeAsState(initial = TextFieldValue(text = ""))
-    val password: String by viewModel.password.observeAsState(initial = "")
+    val userName: TextFieldValue by viewModel.userName.collectAsState()
+    val password: String by viewModel.password.collectAsState()
     val captchaCode: String by viewModel.captchaCode.observeAsState(initial = "")
     val updateButtonIsEnabled: Boolean by viewModel.loginEnable.observeAsState(initial = false)
     val captchaImage: Bitmap? by viewModel.captchaImage.observeAsState(initial = null)
