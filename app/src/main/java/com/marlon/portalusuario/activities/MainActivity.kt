@@ -1,9 +1,7 @@
 package com.marlon.portalusuario.activities
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
@@ -44,13 +42,10 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.preference.PreferenceManager
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.navigation.NavigationView
-import com.marlon.portalusuario.PUNotifications.PUNotification
 import com.marlon.portalusuario.PUNotifications.PUNotificationsActivity
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ViewModel.PunViewModel
-import com.marlon.portalusuario.apklis.ApklisUtil
 import com.marlon.portalusuario.banner.etecsa_scraping.Promo
 import com.marlon.portalusuario.banner.etecsa_scraping.PromoSliderAdapter
 import com.marlon.portalusuario.burbuja_trafico.BootReceiver
@@ -72,9 +67,12 @@ import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnima
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
 import cu.suitetecsa.nautanav.ui.ConnectivityFragment
+import cu.uci.apklisupdate.ApklisUpdate
+import cu.uci.apklisupdate.UpdateCallback
+import cu.uci.apklisupdate.model.AppUpdateInfo
+import cu.uci.apklisupdate.view.ApklisUpdateDialog
 import dagger.hilt.android.AndroidEntryPoint
 import org.jsoup.Connection
-import java.util.Arrays
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -92,9 +90,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     private var Textcorreo: TextView? = null
     private var Imgimgperfil: ImageView? = null
 
-    // UI ELEMENTOS
-    private var mBottomSheetLayout: LinearLayout? = null
-    private var sheetBehavior: BottomSheetBehavior<*>? = null
     private var download_apklis: Button? = null
     private var download_ps: Button? = null
     private var remind_me_later: Button? = null
@@ -109,8 +104,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
 
     // VARS
     private var APP_NAME: String? = null
-    private val WAITING_TIME = 300
-    private var update_info_already_showed = false
 
     // SETTINGS
     var settings: SharedPreferences? = null
@@ -118,11 +111,8 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     // LOGGING
     private var Logging: JCLogging? = null
 
-    // APKLIS
-    private var apklis: ApklisUtil? = null
     var mBiometricManager: BiometricManager? = null
 
-    var ResultCall = 1001
     fun setFragment(fragment: Fragment?, title: String?) {
         supportFragmentManager
             .beginTransaction()
@@ -131,25 +121,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             .commit()
         titleTextView!!.text = title
     }
-
-    val simSlotName = arrayOf(
-        "extra_asus_dial_use_dualsim",
-        "com.android.phone.extra.slot",
-        "slot",
-        "simslot",
-        "sim_slot",
-        "subscription",
-        "Subscription",
-        "phone",
-        "com.android.phone.DialingMode",
-        "simSlot",
-        "slot_id",
-        "simId",
-        "simnum",
-        "phone_type",
-        "slotId",
-        "slotIdx"
-    )
 
     // TODO: preference dualSim
     var sp_sim: SharedPreferences? = null
@@ -181,7 +152,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         drawer = findViewById(R.id.drawer_layout)
         // drawer Nav View
         navigationView = findViewById(R.id.nav_view)
-        navigationView!!.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
+        navigationView!!.setNavigationItemSelectedListener { item ->
 
             val i: Intent
             when (item.itemId) {
@@ -199,6 +170,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                     i = Intent(this@MainActivity, UneActivity::class.java)
                     startActivity(i)
                 }
+
                 R.id.errors_register -> startActivity(
                     Intent(
                         this@MainActivity,
@@ -217,7 +189,10 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                         Intent.ACTION_SENDTO,
                         Uri.fromParts("mailto", context!!.getString(R.string.feedback_email), null)
                     )
-                    intent.putExtra(Intent.EXTRA_EMAIL, context!!.getString(R.string.feedback_email))
+                    intent.putExtra(
+                        Intent.EXTRA_EMAIL,
+                        context!!.getString(R.string.feedback_email)
+                    )
                     intent.putExtra(
                         Intent.EXTRA_SUBJECT,
                         context!!.getString(R.string.feedback_subject)
@@ -239,6 +214,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                     facebookLaunch.data = Uri.parse(facebookUrl)
                     startActivity(facebookLaunch)
                 }
+
                 R.id.whatsapp -> {
                     val betaUrl = ("https://chat.whatsapp.com/HT6bKjpXHrN4FAyTAcy1Xn")
                     val betaLaunch = Intent(Intent.ACTION_VIEW)
@@ -252,10 +228,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                     betaLaunch.data = Uri.parse(betaUrl)
                     startActivity(betaLaunch)
                 }
+
                 R.id.invite -> {
                     inviteUser()
                 }
-                R.id.politicadeprivacidad-> {
+
+                R.id.politicadeprivacidad -> {
                     i = Intent(this@MainActivity, PrivacyActivity::class.java)
                     startActivity(i)
                 }
@@ -280,25 +258,20 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             drawer!!.closeDrawer(GravityCompat.START)
             false
 
-        })
+        }
         menu = findViewById(R.id.menu)
-        menu!!.setOnClickListener(View.OnClickListener { drawer!!.openDrawer(GravityCompat.START) })
+        menu!!.setOnClickListener { drawer!!.openDrawer(GravityCompat.START) }
         titleLayout = findViewById(R.id.titleLayout)
         titleTextView = findViewById(R.id.puTV)
         details = findViewById(R.id.details)
         log = findViewById(R.id.log)
         download_apklis = findViewById(R.id.download_apklis)
-        val details = findViewById<TextView>(R.id.details)
-        val log = findViewById<TextView>(R.id.log)
         download_apklis = findViewById(R.id.download_apklis)
         remind_me_later = findViewById(R.id.remind_me_later)
         Textnombre = findViewById(R.id.textname)
         Textcorreo = findViewById(R.id.correotext)
         Imgimgperfil = findViewById(R.id.img_drawer_perfil)
 
-
-
-        //
         Logging = JCLogging(this)
         download_apklis = findViewById(R.id.download_apklis)
         download_ps = findViewById(R.id.download_ps)
@@ -320,127 +293,50 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
 
         // Actualizacion de Aplicacion Apklis
-        val updateBtn = findViewById<Button>(R.id.updateBtn)
-        mBottomSheetLayout = findViewById(R.id.bottom_sheet_update)
-        sheetBehavior = BottomSheetBehavior.from(mBottomSheetLayout!!)
-        sheetBehavior!!.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    updateBtn.visibility = View.GONE
-                } else {
-                    updateBtn.visibility = View.VISIBLE
-                }
-            }
-
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
-        })
-        updateBtn.setOnClickListener { sheetBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED) }
-
-        // DESCARGAR DE APKLIS
-        download_apklis!!.setOnClickListener(View.OnClickListener {
-            val URL = "https://www.apklis.cu/application/$APP_NAME"
-            JCLogging.message("Opening Apklis URL::url=$URL", null)
-            //Toast.makeText(this, URL, Toast.LENGTH_LONG);
-            val url = Uri.parse(URL)
-            val openUrl = Intent(Intent.ACTION_VIEW, url)
-            startActivity(openUrl)
-        })
-
-        // DESCARGAR DE GOOGLE PLAY
-        download_ps!!.setOnClickListener(View.OnClickListener {
-            val URL = "https://play.google.com/store/apps/details?id=$APP_NAME"
-            JCLogging.message("Opening PlayStore URL::url=$URL", null)
-            //Toast.makeText(this, URL, Toast.LENGTH_LONG);
-            val url = Uri.parse(URL)
-            val openUrl = Intent(Intent.ACTION_VIEW, url)
-            startActivity(openUrl)
-        })
-        // RECORDAR LUEGO
-        remind_me_later!!.setOnClickListener(View.OnClickListener {
-            update_info_already_showed = false
-            startService(apklis, WAITING_TIME)
-            sheetBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
-        })
-        sheetBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
-        // CHECK FOR UPDATES
-        val apklisUpdate: BroadcastReceiver
         if (settings!!.getBoolean("start_checking_for_updates", true)) {
-
-            // BROADCAST
-            apklisUpdate = object : BroadcastReceiver() {
-                @SuppressLint("SetTextI18n")
-                override fun onReceive(context: Context, intent: Intent) {
-                    try {
-                        val updateExist = intent.getBooleanExtra("update_exist", false)
-                        Log.e("IS UPDATE", updateExist.toString())
-                        if (updateExist) {
-                            val version_name = intent.getStringExtra("version_name") /* Respuesta Del Método startLookingForUpdates() Valor De La Versión Name De La App
-                                                                                           Si Existe Una Actualización */
-                            val new_version_size = intent.getStringExtra("new_version_size")
-                            val changelog = intent.getStringExtra("changelog")
-                            JCLogging.message("On receive Update info", null)
-                            var version_size = "?? MB"
-                            if (new_version_size != null) {
-                                version_size = new_version_size
-                            }
-                            // DETALLES de la NUEVA VERSION
-                            if (changelog != null) {
-                                log.text = changelog
-                            } else {
-                                log.text = "• Nada nuevo, todo igual :-)"
-                            }
-                            // NOMBRE DE LA VERSION Y TAMANNO
-                            if (version_name != null && !version_name.isEmpty()) {
-                                val v = "Versión $version_name • $version_size"
-                                details.text = v
-                            }
-                            Log.e("Showing info", "True")
-                            sheetBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
-                            JCLogging.message(
-                                "Update data received succesfully::version_name=$version_name::version_size=$version_size",
-                                null
-                            )
-                            return
-                        }
-                        sheetBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
-                    } catch (ex: Exception) {
-                        ex.printStackTrace()
-                        JCLogging.error(null, null, ex)
-                    }
+            ApklisUpdate.hasAppUpdate(this, object : UpdateCallback {
+                override fun onError(e: Throwable) {
+                    // Not yet implemented
                 }
-            }
-            /* Registro De Recibidores Para Manejar Existencia De Actualización U Obtención De Info Respectivamente */LocalBroadcastManager.getInstance(
-                this
-            ).registerReceiver(apklisUpdate, IntentFilter("apklis_update"))
-            LocalBroadcastManager.getInstance(this)
-                .registerReceiver(apklisUpdate, IntentFilter("apklis_app_info"))
-            apklis = ApklisUtil(this, APP_NAME)
-            startService(apklis, 0)
 
-            // etecsa carousel
-            carouselLayout = findViewById(R.id.carouselLayout)
-            sliderView = findViewById(R.id.imageSlider)
-            progressBar = findViewById(R.id.progressBar)
-            errorLayout = findViewById(R.id.errorLayoutBanner)
-            try_again = findViewById(R.id.try_again)
-            try_again!!.paintFlags = try_again!!.paintFlags or Paint.UNDERLINE_TEXT_FLAG
-            try_again!!.setOnClickListener(View.OnClickListener { loadPromo() })
-            loadPromo()
-            //
-            // check if there are unseen notifications
-            cartBadge = findViewById(R.id.cart_badge)
-            setupBadge()
-            notificationBtn = findViewById(R.id.notificationBtn)
-            notificationBtn!!.setOnClickListener(View.OnClickListener {
-                val i = Intent(this@MainActivity, PUNotificationsActivity::class.java)
-                startActivity(i)
-                Toast.makeText(
-                    this@MainActivity,
-                    "Espera la nueva funcionalidad en próximas versiones 😉",
-                    Toast.LENGTH_SHORT
-                ).show()
+                override fun onNewUpdate(appUpdateInfo: AppUpdateInfo) {
+                    ApklisUpdateDialog(
+                        this@MainActivity,
+                        appUpdateInfo,
+                        ContextCompat.getColor(this@MainActivity, R.color.colorPrimary)
+                    ).show()
+                }
+
+                override fun onOldUpdate(appUpdateInfo: AppUpdateInfo) {
+                    // Not yet implemented
+                }
             })
         }
+
+        // etecsa carousel
+        carouselLayout = findViewById(R.id.carouselLayout)
+        sliderView = findViewById(R.id.imageSlider)
+        progressBar = findViewById(R.id.progressBar)
+        errorLayout = findViewById(R.id.errorLayoutBanner)
+        try_again = findViewById(R.id.try_again)
+        try_again!!.paintFlags = try_again!!.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+        try_again!!.setOnClickListener { loadPromo() }
+        loadPromo()
+        //
+        // check if there are unseen notifications
+        cartBadge = findViewById(R.id.cart_badge)
+        setupBadge()
+        notificationBtn = findViewById(R.id.notificationBtn)
+        notificationBtn!!.setOnClickListener {
+            val i = Intent(this@MainActivity, PUNotificationsActivity::class.java)
+            startActivity(i)
+            Toast.makeText(
+                this@MainActivity,
+                "Espera la nueva funcionalidad en próximas versiones 😉",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
         //
         setFragment(CuentasFragment(), "Servicios")
     }
@@ -578,7 +474,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     }
 
     fun updatePromoSlider(list: List<Promo>) {
-        if (!list.isEmpty()) {
+        if (list.isNotEmpty()) {
             val adapter =
                 PromoSliderAdapter(
                     this,
@@ -598,23 +494,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
     }
 
-
-    //Servicio de Apklis
-    fun startService(apklis: ApklisUtil?, latency: Int) {
-        val settings = PreferenceManager.getDefaultSharedPreferences(this)
-        JCLogging.message(
-            "Starting 'checking for updates' service::enabled=" + settings.getBoolean(
-                "start_checking_for_updates",
-                true
-            )
-                .toString() + "::latency=" + latency + "::update_info_already_showed=" + update_info_already_showed,
-            null
-        )
-        if (!update_info_already_showed) {
-            apklis!!.startLookingForUpdates(latency)
-            update_info_already_showed = true
-        }
-    }
 
     private fun showMessage(c: Context?, _s: String?) {
         Toast.makeText(c, _s, Toast.LENGTH_SHORT).show()
@@ -993,7 +872,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 .build()
             if (shortcutManager != null) {
                 shortcutManager.dynamicShortcuts =
-                    Arrays.asList(saldoShortcut, bonosShortcut, datosShortcut)
+                    listOf(saldoShortcut, bonosShortcut, datosShortcut)
             }
         }
     }
@@ -1124,18 +1003,11 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         var navigationView: NavigationView? = null
         private var punViewModel: PunViewModel? = null
         @JvmStatic
-        fun insertNotification(pun: PUNotification?) {
+        fun insertNotification() {
             punViewModel!!.insertPUN(null)
         }
 
         const val PICK_CONTACT_REQUEST = 1
-        fun showConnectedTime(status: Boolean) {
-            FloatingBubbleService.showConnectedTime(status)
-        }
-
-        fun setConnectedTime(time: String?) {
-            FloatingBubbleService.setConnectedTime(time)
-        }
 
         @JvmStatic
         fun openLink(link: String?) {

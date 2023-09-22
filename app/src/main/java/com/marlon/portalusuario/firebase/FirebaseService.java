@@ -136,7 +136,7 @@ public class FirebaseService extends FirebaseMessagingService {
                     }
                 }
                 //
-                MainActivity.insertNotification(pun);
+                MainActivity.insertNotification();
                 //
             }
             sendNotification(pun);
