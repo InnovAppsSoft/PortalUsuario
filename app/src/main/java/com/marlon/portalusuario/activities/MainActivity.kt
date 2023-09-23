@@ -56,7 +56,7 @@ import com.marlon.portalusuario.errores_log.JCLogging
 import com.marlon.portalusuario.errores_log.LogFileViewerActivity
 import com.marlon.portalusuario.huella.BiometricCallback
 import com.marlon.portalusuario.huella.BiometricManager
-import com.marlon.portalusuario.nauta.ui.ConnectivityFragment
+import com.marlon.portalusuario.perfil.ImageSaver
 import com.marlon.portalusuario.une.UneActivity
 import com.marlon.portalusuario.util.SSLHelper
 import com.marlon.portalusuario.util.Util
@@ -66,6 +66,7 @@ import com.marlon.portalusuario.view.fragments.ServiciosFragment
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
+import cu.suitetecsa.nautanav.ui.ConnectivityFragment
 import cu.uci.apklisupdate.ApklisUpdate
 import cu.uci.apklisupdate.UpdateCallback
 import cu.uci.apklisupdate.model.AppUpdateInfo

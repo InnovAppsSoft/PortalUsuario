@@ -221,7 +221,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".nauta.service.CountdownServiceImpl"
+            android:name="cu.suitetecsa.nautanav.service.CountdownServiceImpl"
             android:exported="false"
             android:permission="android.permission.INTERNET" />
 

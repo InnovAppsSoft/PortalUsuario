@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="captcha_code">Código CAPTCHA</string>
+    <string name="current_password_placeholder">Contraseña actual</string>
+    <string name="current_password_example">Micontraseñaactual123.*</string>
+    <string name="password_placeholder">Contraseña actual</string>
+    <string name="hide_password">Ocultar contraseña</string>
+    <string name="show_password">Mostrar contraseña</string>
+    <string name="new_password_placeholder">Nueva contraseña</string>
+    <string name="new_password_example">Minuevacontraseña.1234*</string>
+    <string name="generate_password">Generar contraseña</string>
+    <string name="change_password">Cambiar contraseña</string>
+    <string name="connect">Conectar</string>
+    <string name="disconnect">Desconectar</string>
+    <string name="new_account_credit">Saldo restante</string>
+    <string name="new_blocking_date">Fecha de bloqueo</string>
+    <string name="new_date_of_elimination">Fecha de eliminación</string>
+    <string name="new_account_type">Tipo de cuenta</string>
+    <string name="new_service_type">Tipo de servicio</string>
+    <string name="new_mail_account">Cuenta de correo</string>
+    <string name="new_nauta">Nauta</string>
+    <string name="new_link">Enlace</string>
+    <string name="new_offer">Oferta</string>
+    <string name="new_monthly_fee">Cuota mensual</string>
+    <string name="new_download_speed">Velocidad de bajada</string>
+    <string name="new_upload_speed">Velocidad de subida</string>
+    <string name="new_phone">Teléfono</string>
+    <string name="new_link_identifier">Identificador del enlace</string>
+    <string name="new_link_status">Estado del enlace</string>
+    <string name="new_activation_date">Fecha de activación</string>
+    <string name="new_quote_fund">Fondo de cuota</string>
+    <string name="new_voucher">Bono</string>
+    <string name="new_debt">Deuda</string>
+    <string name="new_recharge_content_description">Recargar saldo de la cuenta</string>
+    <string name="new_recharge_text_field_placeholder_one">Recargar saldo</string>
+    <string name="new_recharge_text_field_placeholder_two">1234 5678 9012 3456</string>
+    <string name="amount">Monto</string>
+    <string name="update">Actualizar</string>
+    <string name="change_email_password">Cambiar contraseña de la cuenta de correo</string>
+    <string name="transfer">Transferir</string>
+    <string name="recharge">Recargar</string>
+</resources>
