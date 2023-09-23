@@ -237,7 +237,7 @@ dependencies {
     //noinspection GradleDependency
     implementation("androidx.lifecycle:lifecycle-viewmodel:2.6.1")
     //noinspection GradleDependency
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     //
     implementation("com.getbase:floatingactionbutton:1.10.1")
     // Sweet Alert Dialog
