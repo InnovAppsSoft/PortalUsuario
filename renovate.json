@@ -3,7 +3,8 @@
    "labels": ["dependencies"], 
    "extends": [ 
      "config:base", 
-     ":semanticCommits" 
+     ":semanticCommits",
+     "helpers:pinGitHubActionDigests"
    ],
   "packageRules": [
     {
