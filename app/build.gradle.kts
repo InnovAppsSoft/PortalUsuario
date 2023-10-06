@@ -180,7 +180,7 @@ dependencies {
     implementation("com.makeramen:roundedimageview:2.3.0")
 
 
-    implementation("com.github.2coffees1team:GlideToVectorYou:v2.0.0")
+    implementation("com.github.2coffees1team:GlideToVectorYou:1.0")
 
 
     //Glide
