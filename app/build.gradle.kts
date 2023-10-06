@@ -176,7 +176,7 @@ dependencies {
 
     implementation("com.intuit.sdp:sdp-android:1.1.0")
     implementation("com.intuit.ssp:ssp-android:1.1.0")
-    implementation("com.github.fornewid:neumorphism:0.3.0")
+    implementation("com.github.fornewid:neumorphism:0.3.2")
     implementation("com.makeramen:roundedimageview:2.3.0")
 
 
