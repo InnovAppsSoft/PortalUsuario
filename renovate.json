@@ -1,6 +1,38 @@
-{
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base"
+{ 
+   "$schema": "https://docs.renovatebot.com/renovate-schema.json", 
+   "labels": ["dependencies"], 
+   "extends": [ 
+     "config:base", 
+     ":semanticCommits",
+     "helpers:pinGitHubActionDigests"
+   ],
+  "packageRules": [
+    {
+      "description": "Add the gradle GitHub label to Gradle dependency bump PRs",
+      "matchManagers": ["gradle"],
+      "addLabels": ["gradle"]
+    },
+    {
+      "description": "Add the gradle-wrapper GitHub label to Gradle wrapper update PRs",
+      "matchManagers": ["gradle-wrapper"],
+      "addLabels": ["gradle-wrapper"]
+    },
+    {
+      "description": "Group Kotlin specific dependencies",
+      "groupName": "Kotlin",
+      "matchPackagePrefixes": [
+        "org.jetbrains.kotlin"
+      ],
+      "matchPackageNames": [
+        "com.google.devtools.ksp"
+      ]
+    },
+    {
+      "description": "Group Detekt specific dependencies",
+      "groupName": "detekt",
+      "matchPackagePrefixes": [
+        "io.gitlab.arturbosch.detekt"
+      ]
+    }
   ]
 }
