@@ -125,7 +125,7 @@
             tools:ignore="LockedOrientationActivity" />
         <activity android:name=".activities.LlamadaOcultoActivity" />
         <activity android:name=".activities.Llamada_99Activity" />
-        <activity android:name=".activities.EmergenciaActivity" />
+        <activity android:name=".activities.EmergencyCallsActivity" />
         <activity android:name=".activities.PrivacyActivity" />
         <activity
             android:name=".cortafuegos.ActivityMain"

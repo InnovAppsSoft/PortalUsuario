@@ -6,13 +6,11 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,19 +24,13 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.marlon.portalusuario.activities.EmergenciaActivity;
+import com.marlon.portalusuario.activities.EmergencyCallsActivity;
 import com.marlon.portalusuario.activities.LlamadaOcultoActivity;
 import com.marlon.portalusuario.activities.Llamada_99Activity;
 import com.marlon.portalusuario.R;
@@ -47,8 +39,6 @@ import com.marlon.portalusuario.activities.VozActivity;
 import com.marlon.portalusuario.escaner_recarga.ScannerActivity;
 import com.marlon.portalusuario.errores_log.JCLogging;
 import com.marlon.portalusuario.util.Util;
-
-import java.util.List;
 
 public class ServiciosFragment<b> extends Fragment {
 
@@ -257,7 +247,7 @@ public class ServiciosFragment<b> extends Fragment {
         Emergencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getContext().startActivity(new Intent(getContext(), EmergenciaActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                getContext().startActivity(new Intent(getContext(), EmergencyCallsActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
