@@ -124,7 +124,7 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity android:name=".activities.LlamadaOcultoActivity" />
-        <activity android:name=".activities.Llamada_99Activity" />
+        <activity android:name=".activities.CallForReverseChargeActivity" />
         <activity android:name=".activities.EmergencyCallsActivity" />
         <activity android:name=".activities.PrivacyActivity" />
         <activity

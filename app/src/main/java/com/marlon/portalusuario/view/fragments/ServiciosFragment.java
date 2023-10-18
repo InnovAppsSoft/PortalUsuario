@@ -32,7 +32,7 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.marlon.portalusuario.activities.EmergencyCallsActivity;
 import com.marlon.portalusuario.activities.LlamadaOcultoActivity;
-import com.marlon.portalusuario.activities.Llamada_99Activity;
+import com.marlon.portalusuario.activities.CallForReverseChargeActivity;
 import com.marlon.portalusuario.R;
 import com.marlon.portalusuario.activities.SmsActivity;
 import com.marlon.portalusuario.activities.VozActivity;
@@ -123,7 +123,7 @@ public class ServiciosFragment<b> extends Fragment {
         call99Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getContext().startActivity(new Intent(getContext(), Llamada_99Activity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                getContext().startActivity(new Intent(getContext(), CallForReverseChargeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
