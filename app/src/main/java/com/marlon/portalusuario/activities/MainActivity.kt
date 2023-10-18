@@ -56,7 +56,6 @@ import com.marlon.portalusuario.errores_log.JCLogging
 import com.marlon.portalusuario.errores_log.LogFileViewerActivity
 import com.marlon.portalusuario.huella.BiometricCallback
 import com.marlon.portalusuario.huella.BiometricManager
-import com.marlon.portalusuario.perfil.ImageSaver
 import com.marlon.portalusuario.une.UneActivity
 import com.marlon.portalusuario.util.SSLHelper
 import com.marlon.portalusuario.util.Util
@@ -249,7 +248,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 }
 
                 R.id.donate -> {
-                    i = Intent(this@MainActivity, Donacion::class.java)
+                    i = Intent(this@MainActivity, DonationActivity::class.java)
                     startActivity(i)
                 }
 
