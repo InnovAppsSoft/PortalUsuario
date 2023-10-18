@@ -11,7 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.marlon.portalusuario.databinding.ActivityCallForReverseChargeBinding
+import com.marlon.portalusuario.databinding.ActivityPrivateCallBinding
 
 private const val RequestCode = 1000
 private const val IdealPhoneNumberLength = 8
@@ -21,7 +21,8 @@ private const val UnionIndex2 = 2
 private const val UnionIndex4 = 4
 private const val UnionIndex12 = 12
 
-class CallForReverseChargeActivity : AppCompatActivity() {
+class PrivateCallActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityPrivateCallBinding
     private var numberToCall = ""
     private val i = Intent()
 
@@ -32,9 +33,7 @@ class CallForReverseChargeActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val binding = ActivityCallForReverseChargeBinding.inflate(
-            layoutInflater
-        )
+        binding = ActivityPrivateCallBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initialize()
@@ -56,7 +55,6 @@ class CallForReverseChargeActivity : AppCompatActivity() {
             pickContactLauncher.launch(null)
         }
     }
-
     private fun processSelectedContact(uri: Uri) {
         val cursor = contentResolver.query(uri, null, null, null, null)
         if (cursor != null && cursor.moveToFirst()) {
@@ -67,9 +65,7 @@ class CallForReverseChargeActivity : AppCompatActivity() {
 
             if (numberToCall.isNotEmpty()) {
                 i.setAction(Intent.ACTION_CALL)
-                val reverseChargePreferences = getSharedPreferences("share_99", MODE_PRIVATE)
-                val key99 = reverseChargePreferences.getString("key99", "")
-                i.setData(getCallUri(key99, numberToCall))
+                i.setData(Uri.parse("tel:%2331%23$numberToCall"))
                 startActivity(i)
             }
         }
@@ -109,16 +105,7 @@ class CallForReverseChargeActivity : AppCompatActivity() {
         (union.startsWith("53") || union.startsWith("99")) &&
         union[UnionIndex2] == '5'
 
-    private fun getCallUri(key99: String?, numberToCall: String): Uri {
-        return when (key99) {
-            null, "", "null", "1" -> Uri.parse("tel:*99$numberToCall")
-            "2" -> Uri.parse("tel:*+99$numberToCall")
-            "3" -> Uri.parse("tel:+539953$numberToCall")
-            else -> Uri.parse("tel:*99$numberToCall")
-        }
-    }
-
     private fun launchError(message: String) {
-        Toast.makeText(this@CallForReverseChargeActivity, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this@PrivateCallActivity, message, Toast.LENGTH_SHORT).show()
     }
 }

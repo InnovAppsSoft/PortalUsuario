@@ -31,7 +31,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.marlon.portalusuario.activities.EmergencyCallsActivity;
-import com.marlon.portalusuario.activities.LlamadaOcultoActivity;
+import com.marlon.portalusuario.activities.PrivateCallActivity;
 import com.marlon.portalusuario.activities.CallForReverseChargeActivity;
 import com.marlon.portalusuario.R;
 import com.marlon.portalusuario.activities.SmsActivity;
@@ -130,7 +130,7 @@ public class ServiciosFragment<b> extends Fragment {
         callPrivateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getContext().startActivity(new Intent(getContext(), LlamadaOcultoActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                getContext().startActivity(new Intent(getContext(), PrivateCallActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
 
         });

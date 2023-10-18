@@ -123,7 +123,7 @@
             android:name=".activities.PlanAmigosActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".activities.LlamadaOcultoActivity" />
+        <activity android:name=".activities.PrivateCallActivity" />
         <activity android:name=".activities.CallForReverseChargeActivity" />
         <activity android:name=".activities.EmergencyCallsActivity" />
         <activity android:name=".activities.PrivacyActivity" />
