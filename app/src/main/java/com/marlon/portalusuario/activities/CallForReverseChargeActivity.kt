@@ -62,6 +62,7 @@ class CallForReverseChargeActivity : AppCompatActivity() {
         if (cursor != null && cursor.moveToFirst()) {
             val phoneNumberColumn = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
             val phoneNumber = cursor.getString(phoneNumberColumn)
+            launchError(phoneNumber)
             val union = extractDigits(phoneNumber)
             numberToCall = getNumberToCall(union)
 
@@ -72,8 +73,8 @@ class CallForReverseChargeActivity : AppCompatActivity() {
                 i.setData(getCallUri(key99, numberToCall))
                 startActivity(i)
             }
+            cursor.close()
         }
-        cursor?.close()
         finish()
     }
 
