@@ -93,7 +93,7 @@ class CallForReverseChargeActivity : AppCompatActivity() {
             union.length ==
                 ContaminatedPhoneNumberLength && union.startsWith("99535") &&
                 union.endsWith("99") -> union.substring(UnionIndex4, UnionIndex12)
-            itCanBeImproved(union) -> union.substring(UnionIndex2, CanBeOptimizedPhoneNumberLength)
+            itCanBeImproved(union) -> union.substring(UnionIndex2, CanBeOptimizedPhoneNumberLength - 1)
             union.length < IdealPhoneNumberLength -> {
                 launchError("Cuidado...\nFaltan caracteres o su número seleccionado no es un número de telefonia móvil")
                 ""
