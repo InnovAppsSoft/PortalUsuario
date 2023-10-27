@@ -79,13 +79,8 @@ class CallForReverseChargeActivity : AppCompatActivity() {
     }
 
     private fun extractDigits(phoneNumber: String): String {
-        var union = ""
-        for (element in phoneNumber) {
-            if (Character.isDigit(element)) {
-                union += element
-            }
-        }
-        return union
+        val regex = Regex("[^0-9]")
+        return phoneNumber.replace(regex, "")
     }
 
     private fun getNumberToCall(union: String): String {
