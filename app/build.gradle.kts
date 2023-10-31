@@ -116,7 +116,7 @@ dependencies {
 
     // ViewPaper2
     implementation("androidx.viewpager2:viewpager2:1.0.0")
-    implementation("com.github.GwonHyeok:StickySwitch:0.0.15")
+    implementation("com.github.GwonHyeok:StickySwitch:0.0.16")
 
     // Library Barcode
     // dexter permissions
