@@ -120,7 +120,7 @@ dependencies {
 
     // Library Barcode
     // dexter permissions
-    implementation("com.github.yalantis:ucrop:2.2.2")
+    implementation("com.github.yalantis:ucrop:2.2.8")
     implementation("com.google.zxing:android-integration:3.3.0")
     implementation("me.dm7.barcodescanner:zxing:1.9.13")
     implementation("com.karumi:dexter:6.2.3")
