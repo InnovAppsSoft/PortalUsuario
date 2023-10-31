@@ -216,7 +216,7 @@ dependencies {
     implementation("androidx.biometric:biometric:1.1.0")
     implementation(group = "com.an.biometric", name = "biometric-auth", version = "0.1.0", ext = "aar", classifier = "")
     implementation("com.caverock:androidsvg-aar:1.4")
-    implementation("com.pixplicity.sharp:library:1.1.0")
+    implementation("com.pixplicity.sharp:library:1.1.2")
 
     // for pretty time format -> hace momentos, hace un dia, etc.
     implementation("org.ocpsoft.prettytime:prettytime:5.0.6.Final")
