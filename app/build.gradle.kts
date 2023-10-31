@@ -212,7 +212,7 @@ dependencies {
     implementation("com.vanniktech:emoji-material:0.16.0")
     implementation("com.github.linger1216:labelview:v1.1.2")
     implementation("com.nex3z:toggle-button-group:1.2.3")
-    implementation("com.github.HeyAlex:BottomDrawer:v1.0.0")
+    implementation("com.github.HeyAlex:BottomDrawer:1.0.0")
     implementation("androidx.biometric:biometric:1.1.0")
     implementation(group = "com.an.biometric", name = "biometric-auth", version = "0.1.0", ext = "aar", classifier = "")
     implementation("com.caverock:androidsvg-aar:1.4")
