@@ -198,7 +198,7 @@ dependencies {
     implementation("androidx.palette:palette:1.0.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
-    implementation("com.synnapps:carouselview:0.1.5")
+    implementation("com.synnapps:carouselview:0.1.6")
     implementation("com.github.smarteist:autoimageslider:1.4.0")
 
     implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
