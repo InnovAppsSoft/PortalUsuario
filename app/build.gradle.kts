@@ -65,7 +65,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.android.play:core:1.10.3")
-    implementation("androidx.preference:preference-ktx:1.2.0")
+    implementation("androidx.preference:preference-ktx:1.2.1")
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.navigation:navigation-ui:2.5.3")
     implementation("androidx.navigation:navigation-fragment:2.5.3")
