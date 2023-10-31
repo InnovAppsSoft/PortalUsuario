@@ -88,7 +88,7 @@
             android:name=".perfil.PerfilActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.Donacion"
+            android:name=".activities.DonationActivity"
             android:exported="false" />
         <activity
             android:name=".activities.PermissionActivity"
@@ -123,20 +123,10 @@
             android:name=".activities.PlanAmigosActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".activities.LlamadaOcultoActivity" />
-        <activity android:name=".activities.Llamada_99Activity" />
-        <activity android:name=".activities.EmergenciaActivity" />
+        <activity android:name=".activities.PrivateCallActivity" />
+        <activity android:name=".activities.CallForReverseChargeActivity" />
+        <activity android:name=".activities.EmergencyCallsActivity" />
         <activity android:name=".activities.PrivacyActivity" />
-        <activity
-            android:name=".cortafuegos.ActivityMain"
-            android:configChanges="orientation|screenSize"
-            android:exported="true"
-            android:launchMode="singleTop"
-            android:theme="@style/Firewall">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".une.UneActivity"
             android:screenOrientation="portrait"
@@ -213,26 +203,9 @@
         </receiver>
 
         <service
-            android:name=".cortafuegos.BlackHoleService"
-            android:exported="true"
-            android:permission="android.permission.BIND_VPN_SERVICE">
-            <intent-filter>
-                <action android:name="android.net.VpnService" />
-            </intent-filter>
-        </service>
-        <service
             android:name="cu.suitetecsa.nautanav.service.CountdownServiceImpl"
             android:exported="false"
             android:permission="android.permission.INTERNET" />
-
-        <receiver
-            android:name=".cortafuegos.Receiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>

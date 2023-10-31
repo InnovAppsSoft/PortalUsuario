@@ -2,7 +2,6 @@ package cu.suitetecsa.nautanav.di
 
 import android.content.Context
 import androidx.room.Room
-import cu.suitetecsa.nautanav.commons.USER_TABLE
 import cu.suitetecsa.nautanav.data.UserDao
 import cu.suitetecsa.nautanav.data.network.NautaService
 import cu.suitetecsa.nautanav.data.network.UserDb
@@ -28,7 +27,9 @@ class AppModule {
 
     @Provides
     fun provideUserDb(@ApplicationContext context: Context) =
-        Room.databaseBuilder(context, UserDb::class.java,
+        Room.databaseBuilder(
+            context,
+            UserDb::class.java,
             cu.suitetecsa.nautanav.commons.USER_TABLE
         ).build()
 

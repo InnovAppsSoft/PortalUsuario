@@ -17,8 +17,8 @@ android {
         applicationId = "com.marlon.portalusuario"
         minSdk = 22
         targetSdk = 34
-        versionCode = 58
-        versionName = "7.0.7"
+        versionCode = 59
+        versionName = "7.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         signingConfig = signingConfigs.getByName("debug")
@@ -79,7 +79,7 @@ dependencies {
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("com.google.guava:guava:29.0-android")
 
-    //Features
+    // Features
     implementation(project(":feature:nauta-nav"))
 
     // apklisupdate
@@ -114,19 +114,18 @@ dependencies {
     implementation("androidx.work:work-runtime-ktx:2.8.1")
     implementation("androidx.work:work-runtime:2.8.1")
 
-
     // ViewPaper2
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("com.github.GwonHyeok:StickySwitch:0.0.15")
 
-    //Library Barcode
-    //dexter permissions
+    // Library Barcode
+    // dexter permissions
     implementation("com.github.yalantis:ucrop:2.2.2")
     implementation("com.google.zxing:android-integration:3.3.0")
     implementation("me.dm7.barcodescanner:zxing:1.9.13")
     implementation("com.karumi:dexter:6.2.3")
 
-    //add these libraries
+    // add these libraries
     implementation("com.rengwuxian.materialedittext:library:2.1.4")
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
@@ -144,7 +143,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata)
     implementation(libs.androidx.lifecycle.livedata.ktx)
 
-    //Camerax
+    // Camerax
     val camerax_version = "1.2.3"
     implementation("androidx.camera:camera-core:${camerax_version}")
     implementation("androidx.camera:camera-camera2:${camerax_version}")
@@ -154,7 +153,7 @@ dependencies {
     // QR scanner
     implementation("com.google.zxing:core:3.5.2")
 
-    //Tap Tarjet
+    // Tap Tarjet
     implementation("com.getkeepsafe.taptargetview:taptargetview:1.13.3")
     implementation("com.an.deviceinfo:deviceinfo:0.1.5")
 
@@ -173,17 +172,14 @@ dependencies {
     implementation("com.github.hajiyevelnur92:intentanimation:1.0")
     implementation("com.google.android.gms:play-services-ads:22.1.0")
 
-
     implementation("com.intuit.sdp:sdp-android:1.1.0")
     implementation("com.intuit.ssp:ssp-android:1.1.0")
     implementation("com.github.fornewid:neumorphism:0.3.0")
     implementation("com.makeramen:roundedimageview:2.3.0")
 
-
     implementation("com.github.2coffees1team:GlideToVectorYou:v2.0.0")
 
-
-    //Glide
+    // Glide
     implementation("com.github.bumptech.glide:glide:4.15.1")
     implementation("com.github.bumptech.glide:annotations:4.15.1")
     implementation("com.github.bumptech.glide:okhttp3-integration:4.15.1") {
@@ -198,7 +194,6 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11")
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.11")
 
-
     implementation("androidx.vectordrawable:vectordrawable:1.1.0")
     implementation("androidx.palette:palette:1.0.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
@@ -209,12 +204,11 @@ dependencies {
     implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
     implementation("io.reactivex.rxjava3:rxjava:3.1.6")
 
-
     implementation("com.github.kizitonwose.colorpreference:core:1.1.0")
     implementation("com.github.kizitonwose.colorpreference:support:1.1.0")
     implementation("com.larswerkman:lobsterpicker:1.0.1")
 
-    /////////////////////
+    // ///////////////////
     implementation("com.vanniktech:emoji-material:0.16.0")
     implementation("com.github.linger1216:labelview:v1.1.2")
     implementation("com.nex3z:toggle-button-group:1.2.3")

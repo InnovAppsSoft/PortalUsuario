@@ -50,13 +50,11 @@ import com.marlon.portalusuario.banner.etecsa_scraping.Promo
 import com.marlon.portalusuario.banner.etecsa_scraping.PromoSliderAdapter
 import com.marlon.portalusuario.burbuja_trafico.BootReceiver
 import com.marlon.portalusuario.burbuja_trafico.FloatingBubbleService
-import com.marlon.portalusuario.cortafuegos.ActivityMain
 import com.marlon.portalusuario.databinding.ActivityMainBinding
 import com.marlon.portalusuario.errores_log.JCLogging
 import com.marlon.portalusuario.errores_log.LogFileViewerActivity
 import com.marlon.portalusuario.huella.BiometricCallback
 import com.marlon.portalusuario.huella.BiometricManager
-import com.marlon.portalusuario.perfil.ImageSaver
 import com.marlon.portalusuario.une.UneActivity
 import com.marlon.portalusuario.util.SSLHelper
 import com.marlon.portalusuario.util.Util
@@ -78,8 +76,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), BiometricCallback {
 
-
     private lateinit var binding: ActivityMainBinding
+
     @Inject lateinit var connectivityFragment: ConnectivityFragment
 
     private var details: TextView? = null
@@ -145,7 +143,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         // TODO: Mostrar saludo con el nombre del usuario
         // TODO: SharedPreferences para guardar datos de cuentas
 
-
         sp_sim = PreferenceManager.getDefaultSharedPreferences(this)
         context = this
         // drawer Layout
@@ -160,10 +157,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 R.id.services -> setFragment(ServiciosFragment<Any?>(), "Servicios")
                 R.id.plans -> setFragment(PaquetesFragment(), "Planes")
                 R.id.connectivity -> setFragment(connectivityFragment, "Conectividad")
-                R.id.firewall -> {
-                    i = Intent(this@MainActivity, ActivityMain::class.java)
-                    startActivity(i)
-                }
 
                 R.id.networkChange -> SetLTEModeDialog(context)
                 R.id.une -> {
@@ -249,15 +242,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 }
 
                 R.id.donate -> {
-                    i = Intent(this@MainActivity, Donacion::class.java)
+                    i = Intent(this@MainActivity, DonationActivity::class.java)
                     startActivity(i)
                 }
-
-
             }
             drawer!!.closeDrawer(GravityCompat.START)
             false
-
         }
         menu = findViewById(R.id.menu)
         menu!!.setOnClickListener { drawer!!.openDrawer(GravityCompat.START) }
@@ -294,23 +284,26 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
 
         // Actualizacion de Aplicacion Apklis
         if (settings!!.getBoolean("start_checking_for_updates", true)) {
-            ApklisUpdate.hasAppUpdate(this, object : UpdateCallback {
-                override fun onError(e: Throwable) {
-                    // Not yet implemented
-                }
+            ApklisUpdate.hasAppUpdate(
+                this,
+                object : UpdateCallback {
+                    override fun onError(e: Throwable) {
+                        // Not yet implemented
+                    }
 
-                override fun onNewUpdate(appUpdateInfo: AppUpdateInfo) {
-                    ApklisUpdateDialog(
-                        this@MainActivity,
-                        appUpdateInfo,
-                        ContextCompat.getColor(this@MainActivity, R.color.colorPrimary)
-                    ).show()
-                }
+                    override fun onNewUpdate(appUpdateInfo: AppUpdateInfo) {
+                        ApklisUpdateDialog(
+                            this@MainActivity,
+                            appUpdateInfo,
+                            ContextCompat.getColor(this@MainActivity, R.color.colorPrimary)
+                        ).show()
+                    }
 
-                override fun onOldUpdate(appUpdateInfo: AppUpdateInfo) {
-                    // Not yet implemented
+                    override fun onOldUpdate(appUpdateInfo: AppUpdateInfo) {
+                        // Not yet implemented
+                    }
                 }
-            })
+            )
         }
 
         // etecsa carousel
@@ -340,8 +333,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         //
         setFragment(CuentasFragment(), "Servicios")
     }
-
-
 
     private fun setupBadge() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
@@ -431,10 +422,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             val promos: MutableList<Promo> = ArrayList()
             try {
                 val response = SSLHelper.getConnection("https://www.etecsa.cu")
-                    .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.122 Safari/534.30")
+                    .userAgent(
+                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.122 Safari/534.30"
+                    )
                     .timeout(30000).ignoreContentType(true).method(
-                    Connection.Method.GET
-                ).followRedirects(true).execute()
+                        Connection.Method.GET
+                    ).followRedirects(true).execute()
                 if (response.statusCode() == 200) {
                     val parsed = response.parse()
                     // CAROUSEL
@@ -494,7 +487,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
     }
 
-
     private fun showMessage(c: Context?, _s: String?) {
         Toast.makeText(c, _s, Toast.LENGTH_SHORT).show()
     }
@@ -508,16 +500,14 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             mBiometricManager = BiometricManager.BiometricBuilder(this@MainActivity)
                 .setTitle(getString(R.string.biometric_title))
                 .setSubtitle(getString(R.string.biometric_subtitle))
-
                 .setDescription(getString(R.string.biometric_description))
                 .setNegativeButtonText(getString(R.string.biometric_negative_button_text))
                 .build()
 
-            //start authentication
+            // start authentication
             mBiometricManager!!.authenticate(this@MainActivity)
         }
     }
-
 
     // Invitar Usuario
     private fun inviteUser() {
@@ -531,22 +521,30 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     // Permisos Consedidos
     @RequiresApi(api = Build.VERSION_CODES.M)
     fun requestPermissions() {
-        if (((((ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.CALL_PHONE
-            ) != PackageManager.PERMISSION_GRANTED) || ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.CAMERA
-            ) != PackageManager.PERMISSION_GRANTED) || ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_CONTACTS
-            ) != PackageManager.PERMISSION_GRANTED) || ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED) || ContextCompat.checkSelfPermission(
+        if ((
+                (
+                    (
+                        (
+                            ContextCompat.checkSelfPermission(
+                                this,
+                                Manifest.permission.CALL_PHONE
+                            ) != PackageManager.PERMISSION_GRANTED
+                            ) || ContextCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.CAMERA
+                        ) != PackageManager.PERMISSION_GRANTED
+                        ) || ContextCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.READ_CONTACTS
+                    ) != PackageManager.PERMISSION_GRANTED
+                    ) || ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+                ) || ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
@@ -584,7 +582,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     var cuantos_caracteres = 0
     var error2 =
         "            Cuidado ..\n Faltan caracteres o su número seleccionado no es un número de telefonia móvil  "
-
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -775,13 +772,11 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                         }
                     }
 
-
-                    //textnombre.setText(nombre);
+                    // textnombre.setText(nombre);
                     // editnumero.setText(numero);
                 }
             }
         }
-
 
         // FLOATING BUBBLE SERVICE
         if (requestCode == 0) {
@@ -797,11 +792,10 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
     }
 
-
     private fun shorcut() {
         if (Build.VERSION.SDK_INT >= 25) {
             val shortcutManager: ShortcutManager? =
-                ContextCompat.getSystemService(this,ShortcutManager::class.java)
+                ContextCompat.getSystemService(this, ShortcutManager::class.java)
             val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:*222" + Uri.encode("#")))
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             intent.putExtra("com.android.phone.force.slot", true)
@@ -877,7 +871,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     public override fun onResume() {
         super.onResume()
@@ -905,7 +898,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
 
     public override fun onPause() {
         if (settings!!.getBoolean("show_traffic_speed_bubble", false)) {
-            //unregisterReceiver(networkStateReceiver);
+            // unregisterReceiver(networkStateReceiver);
         }
         super.onPause()
     }
@@ -1002,6 +995,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         private var sliderView: SliderView? = null
         var navigationView: NavigationView? = null
         private var punViewModel: PunViewModel? = null
+
         @JvmStatic
         fun insertNotification() {
             punViewModel!!.insertPUN(null)
@@ -1012,7 +1006,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         @JvmStatic
         fun openLink(link: String?) {
             try {
-                //JCLogging.message("Opening PROMO URL::url=" + link, null);
+                // JCLogging.message("Opening PROMO URL::url=" + link, null);
                 val url = Uri.parse(link)
                 val openUrl = Intent(Intent.ACTION_VIEW, url)
                 context!!.startActivity(openUrl)

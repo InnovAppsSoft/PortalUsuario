@@ -29,10 +29,6 @@
 <item android:title="@string/utiles1">
     <menu>
         <item
-            android:id="@+id/firewall"
-            android:icon="@drawable/outline_local_fire_department_24"
-            android:title="@string/Cortafuegos"/>
-        <item
             android:id="@+id/networkChange"
             android:icon="@drawable/outline_network_locked_24"
             android:title="@string/forzar_4g"/>
