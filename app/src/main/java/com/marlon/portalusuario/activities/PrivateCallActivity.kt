@@ -23,14 +23,17 @@ private const val UnionIndex12 = 12
 
 class PrivateCallActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPrivateCallBinding
-    private var numberToCall = ""
-    private val i = Intent()
 
-    private val pickContactLauncher = registerForActivityResult(ActivityResultContracts.PickContact()) { uri ->
-        if (uri != null) {
-            processSelectedContact(uri)
+    private val pickContactLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                result.data?.data?.also { uri ->
+                    processSelectedContact(uri)?.also { phoneNumber ->
+                        makePhoneCall(phoneNumber)
+                    }
+                }
+            }
         }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityPrivateCallBinding.inflate(layoutInflater)
@@ -55,48 +58,47 @@ class PrivateCallActivity : AppCompatActivity() {
             pickContactLauncher.launch(null)
         }
     }
-    private fun processSelectedContact(uri: Uri) {
-        val cursor = contentResolver.query(uri, null, null, null, null)
-        if (cursor != null && cursor.moveToFirst()) {
-            val phoneNumberColumn = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
-            val phoneNumber = cursor.getString(phoneNumberColumn)
-            val union = extractDigits(phoneNumber)
-            numberToCall = getNumberToCall(union)
-
-            if (numberToCall.isNotEmpty()) {
-                i.setAction(Intent.ACTION_CALL)
-                i.setData(Uri.parse("tel:%2331%23$numberToCall"))
-                startActivity(i)
+    private fun processSelectedContact(uri: Uri): String? {
+        contentResolver.query(uri, null, null, null, null)?.use { cursor ->
+            if (cursor.moveToFirst()) {
+                val phoneNumberColumn = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+                return getNumberToCall(cursor.getString(phoneNumberColumn))
             }
         }
-        cursor?.close()
+        return null
+    }
+
+    private fun makePhoneCall(numberToCall: String) {
+        val intent = Intent(Intent.ACTION_CALL).apply {
+            data = Uri.parse("#31#$numberToCall")
+        }
+        startActivity(intent)
         finish()
     }
 
-    private fun extractDigits(phoneNumber: String): String {
-        var union = ""
-        for (element in phoneNumber) {
-            if (Character.isDigit(element)) {
-                union += element
-            }
-        }
-        return union
-    }
-
-    private fun getNumberToCall(union: String): String {
+    private fun getNumberToCall(phoneNumber: String): String? {
+        val regex = Regex("[^0-9]")
+        val phoneNumberToProcess = phoneNumber.replace(regex, "")
         return when {
-            union.length == IdealPhoneNumberLength && union[0] == '5' -> union
-            union.length ==
-                ContaminatedPhoneNumberLength && union.startsWith("99535") &&
-                union.endsWith("99") -> union.substring(UnionIndex4, UnionIndex12)
-            itCanBeImproved(union) -> union.substring(UnionIndex2, CanBeOptimizedPhoneNumberLength)
-            union.length < IdealPhoneNumberLength -> {
-                launchError("Cuidado...\nFaltan caracteres o su número seleccionado no es un número de telefonia móvil")
-                ""
+            phoneNumberToProcess.length == IdealPhoneNumberLength &&
+                phoneNumberToProcess[0] == '5' -> phoneNumberToProcess
+            phoneNumberToProcess.length ==
+                ContaminatedPhoneNumberLength && phoneNumberToProcess.startsWith("99535") &&
+                phoneNumberToProcess.endsWith("99") -> phoneNumberToProcess.substring(UnionIndex4, UnionIndex12)
+            itCanBeImproved(
+                phoneNumberToProcess
+            ) -> phoneNumberToProcess.substring(UnionIndex2, CanBeOptimizedPhoneNumberLength)
+            phoneNumberToProcess.length < IdealPhoneNumberLength -> {
+                Toast.makeText(
+                    this,
+                    "Cuidado...\nFaltan caracteres o su número seleccionado no es un número de telefonia móvil",
+                    Toast.LENGTH_SHORT
+                ).show()
+                null
             }
             else -> {
-                launchError("Numero erroneo")
-                ""
+                Toast.makeText(this, "Numero erroneo", Toast.LENGTH_SHORT).show()
+                null
             }
         }
     }
@@ -104,8 +106,4 @@ class PrivateCallActivity : AppCompatActivity() {
     private fun itCanBeImproved(union: String) = union.length == CanBeOptimizedPhoneNumberLength &&
         (union.startsWith("53") || union.startsWith("99")) &&
         union[UnionIndex2] == '5'
-
-    private fun launchError(message: String) {
-        Toast.makeText(this@PrivateCallActivity, message, Toast.LENGTH_SHORT).show()
-    }
 }
