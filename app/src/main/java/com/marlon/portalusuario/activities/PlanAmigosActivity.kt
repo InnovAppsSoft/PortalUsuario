@@ -1,87 +1,55 @@
-package com.marlon.portalusuario.activities;
+package com.marlon.portalusuario.activities
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
+import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import com.marlon.portalusuario.R
+import com.marlon.portalusuario.databinding.DialogPlanAmigosBinding
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+private const val RequestCode = 1000
 
-import com.marlon.portalusuario.R;
+class PlanAmigosActivity : AppCompatActivity(), View.OnClickListener {
 
-public class PlanAmigosActivity extends AppCompatActivity implements View.OnClickListener{
+    private lateinit var binding: DialogPlanAmigosBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = DialogPlanAmigosBinding.inflate(
+            layoutInflater
+        )
+        setContentView(binding.root)
 
-    private CardView activar,adicionar,consultar;
-    private ImageView Atras;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialog_plan_amigos);
-
-        //Definiendo Card
-        activar = findViewById(R.id.activar);
-        adicionar = findViewById(R.id.adicionar);
-        consultar = findViewById(R.id.consultar);
-
-        //Añadiendo Clic a los Card
-        activar.setOnClickListener(this);
-        adicionar.setOnClickListener(this);
-        consultar.setOnClickListener(this);
-
-        Atras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PlanAmigosActivity.super.onBackPressed();
-            }
-        });
-
+        binding.activar.setOnClickListener(this)
+        binding.adicionar.setOnClickListener(this)
+        binding.consultar.setOnClickListener(this)
     }
 
     @SuppressLint("NonConstantResourceId")
-    @Override
-    public void onClick(View v) {
-
-        int id = v.getId();
-        if (id == R.id.activar) {
-            USSDcall("*133*4*1%23");
-        } else if (id == R.id.adicionar) {
-            USSDcall("*133*4*2%23");
-        } else if (id == R.id.consultar) {
-            USSDcall("*133*4*3%23");
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.activar -> { makeCall("*133*4*1%23") }
+            R.id.adicionar -> { makeCall("*133*4*2%23") }
+            R.id.consultar -> { makeCall("*133*4*3%23") }
         }
-
     }
 
-    public void USSDcall(String ussd){
-
-        Intent r = new Intent();
-        r.setAction(Intent.ACTION_CALL); r.setData(Uri.parse("tel:"+ussd + ""));
-
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_DENIED ) {
-                requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, 1000);
-
-
+    private fun makeCall(ussd: String) {
+        val r = Intent()
+        r.setAction(Intent.ACTION_CALL)
+        r.setData(Uri.parse("tel:$ussd"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_DENIED) {
+                requestPermissions(arrayOf(Manifest.permission.CALL_PHONE), RequestCode)
             } else {
-
-                startActivity(r);
-
+                startActivity(r)
             }
-
         } else {
-
-            startActivity(r);
-
+            startActivity(r)
         }
-
     }
-
 }
-
