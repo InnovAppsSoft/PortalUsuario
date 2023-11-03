@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".activities.VozActivity">
+    tools:context=".activities.VoicePlansActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                     android:padding="1dp">
 
                     <ImageView
-                        android:id="@+id/atras2"
+                        android:id="@+id/minutes_go_back"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:contentDescription="@string/app_name"
@@ -70,7 +70,7 @@
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/min5"
+                    android:id="@+id/five_minutes"
                     app:cardUseCompatPadding="true"
                     app:cardBackgroundColor="@color/background_color_50"
                     app:cardCornerRadius="@dimen/_16sdp"
@@ -135,7 +135,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/min10"
+                    android:id="@+id/ten_minutes"
                     app:cardUseCompatPadding="true"
                     app:cardBackgroundColor="@color/background_color_50"
                     app:cardCornerRadius="@dimen/_16sdp"
@@ -199,7 +199,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/min15"
+                    android:id="@+id/fifteen_minutes"
                     app:cardUseCompatPadding="true"
                     app:cardBackgroundColor="@color/background_color_50"
                     app:cardCornerRadius="@dimen/_16sdp"
@@ -264,7 +264,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/min25"
+                    android:id="@+id/twenty_five_minutes"
                     app:cardUseCompatPadding="true"
                     app:cardBackgroundColor="@color/background_color_50"
                     app:cardCornerRadius="@dimen/_16sdp"
@@ -328,7 +328,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/min40"
+                    android:id="@+id/forty_minutes"
                     app:cardUseCompatPadding="true"
                     app:cardBackgroundColor="@color/background_color_50"
                     app:cardCornerRadius="@dimen/_16sdp"
@@ -393,7 +393,7 @@
 
                 <com.google.android.gms.ads.AdView
                     xmlns:ads="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/adViewvoz"
+                    android:id="@+id/ad_view_voice"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
                     android:layout_width="match_parent"

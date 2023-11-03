@@ -35,7 +35,7 @@ import com.marlon.portalusuario.activities.PrivateCallActivity;
 import com.marlon.portalusuario.activities.CallForReverseChargeActivity;
 import com.marlon.portalusuario.R;
 import com.marlon.portalusuario.activities.SmsActivity;
-import com.marlon.portalusuario.activities.VozActivity;
+import com.marlon.portalusuario.activities.VoicePlansActivity;
 import com.marlon.portalusuario.escaner_recarga.ScannerActivity;
 import com.marlon.portalusuario.errores_log.JCLogging;
 import com.marlon.portalusuario.util.Util;
@@ -233,7 +233,7 @@ public class ServiciosFragment<b> extends Fragment {
         VOZ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getContext().startActivity(new Intent(getContext(), VozActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                getContext().startActivity(new Intent(getContext(), VoicePlansActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
