@@ -38,7 +38,7 @@
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:id="@+id/atras1"
+                        android:id="@+id/sms_go_back"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:contentDescription="@string/app_name"
@@ -70,7 +70,7 @@
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/plan"
+                    android:id="@+id/sms_basic_plan"
                     app:cardUseCompatPadding="true"
                     app:cardCornerRadius="@dimen/_16sdp"
                     android:layout_width="match_parent"
@@ -133,7 +133,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/plan20"
+                    android:id="@+id/twuenty_sms"
                     app:cardUseCompatPadding="true"
                     app:cardCornerRadius="@dimen/_16sdp"
                     android:layout_width="match_parent"
@@ -196,7 +196,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/plan35"
+                    android:id="@+id/thirty_five_sms"
                     app:cardUseCompatPadding="true"
                     app:cardCornerRadius="@dimen/_16sdp"
                     android:layout_width="match_parent"
@@ -259,7 +259,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/plan45"
+                    android:id="@+id/forty_five_sms"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:cardUseCompatPadding="true"
@@ -324,7 +324,7 @@
 
                 <com.google.android.gms.ads.AdView
                     xmlns:ads="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/adViewsms"
+                    android:id="@+id/ad_view_sms"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
                     android:layout_width="match_parent"
