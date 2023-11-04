@@ -30,3 +30,7 @@
 -keep class cu.suitetecsa.sdk.**{
 *;
 }
+
+-keep class cu.uci.apklisupdate.**{
+*;
+}
