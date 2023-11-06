@@ -809,7 +809,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="@font/displaybold"
-                                            android:text="7.0.7"
+                                            android:text="7.1.1"
                                             android:textColor="@color/colorDes"
                                             android:textSize="12sp"
                                             android:textStyle="bold"

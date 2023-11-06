@@ -195,7 +195,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 }
 
                 R.id.telegram_channel -> {
-                    val telgramUrl = ("https://t.me/portalusuario")
+                    val telgramUrl = ("https://t.me/innovapp")
                     val telegramLauch = Intent(Intent.ACTION_VIEW)
                     telegramLauch.data = Uri.parse(telgramUrl)
                     startActivity(telegramLauch)
@@ -208,15 +208,8 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                     startActivity(facebookLaunch)
                 }
 
-                R.id.whatsapp -> {
-                    val betaUrl = ("https://chat.whatsapp.com/HT6bKjpXHrN4FAyTAcy1Xn")
-                    val betaLaunch = Intent(Intent.ACTION_VIEW)
-                    betaLaunch.data = Uri.parse(betaUrl)
-                    startActivity(betaLaunch)
-                }
-
                 R.id.betatesters -> {
-                    val betaUrl = ("https://t.me/portalusuarioBT")
+                    val betaUrl = ("https://t.me/innovappcomunidad")
                     val betaLaunch = Intent(Intent.ACTION_VIEW)
                     betaLaunch.data = Uri.parse(betaUrl)
                     startActivity(betaLaunch)
@@ -282,29 +275,29 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             startFingerprint()
         }
 
-        // Actualizacion de Aplicacion Apklis
-        if (settings!!.getBoolean("start_checking_for_updates", true)) {
-            ApklisUpdate.hasAppUpdate(
-                this,
-                object : UpdateCallback {
-                    override fun onError(e: Throwable) {
-                        // Not yet implemented
-                    }
-
-                    override fun onNewUpdate(appUpdateInfo: AppUpdateInfo) {
-                        ApklisUpdateDialog(
-                            this@MainActivity,
-                            appUpdateInfo,
-                            ContextCompat.getColor(this@MainActivity, R.color.colorPrimary)
-                        ).show()
-                    }
-
-                    override fun onOldUpdate(appUpdateInfo: AppUpdateInfo) {
-                        // Not yet implemented
-                    }
-                }
-            )
-        }
+//        // Actualizacion de Aplicacion Apklis
+//        if (settings!!.getBoolean("start_checking_for_updates", true)) {
+//            ApklisUpdate.hasAppUpdate(
+//                this,
+//                object : UpdateCallback {
+//                    override fun onError(e: Throwable) {
+//                        // Not yet implemented
+//                    }
+//
+//                    override fun onNewUpdate(appUpdateInfo: AppUpdateInfo) {
+//                        ApklisUpdateDialog(
+//                            this@MainActivity,
+//                            appUpdateInfo,
+//                            ContextCompat.getColor(this@MainActivity, R.color.colorPrimary)
+//                        ).show()
+//                    }
+//
+//                    override fun onOldUpdate(appUpdateInfo: AppUpdateInfo) {
+//                        // Not yet implemented
+//                    }
+//                }
+//            )
+//        }
 
         // etecsa carousel
         carouselLayout = findViewById(R.id.carouselLayout)

@@ -85,8 +85,6 @@ public class CuentasFragment extends Fragment {
     // TODO: preference dualSim
     public String sim ="0";
     public SharedPreferences sp_sim;
-
-    AdView mAdView;
     private CircleImageView imgperfil;
     private ImageView editarimagen;
     private TextView promobonos;
@@ -136,54 +134,6 @@ public class CuentasFragment extends Fragment {
         sp_sim = PreferenceManager.getDefaultSharedPreferences(getActivity());
         sim = (sp_sim.getString(getString(R.string.sim_key), "0"));
 
-        // ADS //
-        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        mAdView = v.findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        AdView adView = new AdView(getContext());
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-9665109922019776/1173610479");
-        mAdView.loadAd(adRequest);
-        mAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-            }
-
-            @Override
-            public void onAdFailedToLoad(LoadAdError adError) {
-                // Code to be executed when an ad request fails.
-            }
-
-            @Override
-            public void onAdImpression() {
-                // Code to be executed when an impression is recorded
-                // for an ad.
-            }
-
-            @Override
-            public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-        });
 
         // ESCOGER SIM0-SIM1
         escogerSim.setChecked(sim.equals("1"));

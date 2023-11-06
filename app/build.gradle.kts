@@ -17,8 +17,8 @@ android {
         applicationId = "com.marlon.portalusuario"
         minSdk = 22
         targetSdk = 34
-        versionCode = 59
-        versionName = "7.1.0"
+        versionCode = 61
+        versionName = "7.1.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         signingConfig = signingConfigs.getByName("debug")
@@ -27,16 +27,15 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.getByName("debug")
-            isDebuggable = false
-            isJniDebuggable = false
-            isRenderscriptDebuggable = false
             isShrinkResources = true
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
-
+    
     buildFeatures {
         viewBinding = true
         compose = true

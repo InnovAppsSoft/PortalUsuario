@@ -13,18 +13,6 @@
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 
-        <PreferenceCategory app:title="Eliminar Anuncios (Proximamente)">
-
-            <SwitchPreferenceCompat
-                app:key="quit_ads"
-                app:icon="@drawable/outline_ads_click_24"
-                app:defaultValue="false"
-                app:title="Eliminar anuncios"/>
-
-        </PreferenceCategory>
-
-
-
     <PreferenceCategory app:title="Inicio">
 
         <SwitchPreferenceCompat
@@ -35,31 +23,31 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="Actualización de la aplicación">
+<!--    <PreferenceCategory app:title="Actualización de la aplicación">-->
 
-        <SwitchPreferenceCompat
-            app:key="start_checking_for_updates"
-            app:defaultValue="true"
-            app:icon="@drawable/outline_system_update_alt_24"
-            app:title="Buscar actualizaciones" />
+<!--        <SwitchPreferenceCompat-->
+<!--            app:key="start_checking_for_updates"-->
+<!--            app:defaultValue="false"-->
+<!--            app:icon="@drawable/outline_system_update_alt_24"-->
+<!--            app:title="Buscar actualizaciones" />-->
 
-        <!-- <SwitchPreferenceCompat
-            app:key="check_for_updates_periodically"
-            app:title="Comprobar actualizaciones periódicamente" /> -->
+<!--        &lt;!&ndash; <SwitchPreferenceCompat-->
+<!--            app:key="check_for_updates_periodically"-->
+<!--            app:title="Comprobar actualizaciones periódicamente" /> &ndash;&gt;-->
 
-        <SwitchPreferenceCompat
-            app:key="show_update_window"
-            app:defaultValue="true"
-            app:icon="@drawable/outline_remove_red_eye_24"
-            app:title="Mostrar actualización" />
+<!--        <SwitchPreferenceCompat-->
+<!--            app:key="show_update_window"-->
+<!--            app:defaultValue="false"-->
+<!--            app:icon="@drawable/outline_remove_red_eye_24"-->
+<!--            app:title="Mostrar actualización" />-->
 
-        <!--<SwitchPreferenceCompat
-            app:dependency="sync"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" /> -->
-    </PreferenceCategory>
+<!--        &lt;!&ndash;<SwitchPreferenceCompat-->
+<!--            app:dependency="sync"-->
+<!--            app:key="attachment"-->
+<!--            app:summaryOff="@string/attachment_summary_off"-->
+<!--            app:summaryOn="@string/attachment_summary_on"-->
+<!--            app:title="@string/attachment_title" /> &ndash;&gt;-->
+<!--    </PreferenceCategory>-->
     <PreferenceCategory app:title="Desarrollo">
 
     <SwitchPreferenceCompat

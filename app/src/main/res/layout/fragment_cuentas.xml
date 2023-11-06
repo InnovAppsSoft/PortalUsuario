@@ -9,7 +9,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:layout_width="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -104,8 +104,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/img_drawer_perfil"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     app:civ_border_color="@color/white"
                     android:layout_marginTop="4dp"
                     app:civ_border_width="2dp"
@@ -251,11 +251,9 @@
 
                             <CheckBox
                                 android:layout_alignParentEnd="true"
-                                android:layout_height="24dp"
-                                android:layout_marginEnd="4dp"
-                                android:layout_width="24dp"
-                                android:minHeight="24dp"
-                                android:minWidth="24dp"
+                                android:layout_height="48dp"
+                                android:layout_width="48dp"
+                                android:layout_centerHorizontal="true"
                                 android:button="@drawable/sl_type_sim_24dp"
                                 app:buttonTint="@color/predeterminado"
                                 android:id="@+id/check_sim_dual" />
@@ -395,22 +393,6 @@
                     android:textSize="13sp" />
 
             </RelativeLayout>
-
-            <com.google.android.gms.ads.AdView
-                xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/adView"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
-                ads:adSize="BANNER"
-                ads:adUnitId="ca-app-pub-9665109922019776/1173610479">
-            </com.google.android.gms.ads.AdView>
-
-
-
             <!--Options-->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -633,17 +615,6 @@
                         app:tint="@color/white"
                         android:src="@drawable/ic_cuentas_nacionales"/>
 
-                </LinearLayout>
-
-                <!--Date and location-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="vertical">
                 </LinearLayout>
 
                 <!--Price-->
