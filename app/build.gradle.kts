@@ -219,7 +219,7 @@ dependencies {
     implementation("com.pixplicity.sharp:library:1.1.0")
 
     // for pretty time format -> hace momentos, hace un dia, etc.
-    implementation("org.ocpsoft.prettytime:prettytime:5.0.6.Final")
+    implementation("org.ocpsoft.prettytime:prettytime:5.0.7.Final")
 
     // swipe list item
     implementation("co.dift.ui.swipetoaction:library:1.1")
