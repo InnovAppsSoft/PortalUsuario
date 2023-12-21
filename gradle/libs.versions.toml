@@ -1,5 +1,5 @@
 [versions]
-activity-ktx = "1.7.2"
+activity-ktx = "1.8.2"
 constraintlayout-compose = "1.0.1"
 firebase-appdistribution-gradle = "4.0.0"
 firebase-crashlytics-gradle = "2.9.9"
