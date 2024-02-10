@@ -10,6 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        mavenLocal()
         maven { url = uri("https://jitpack.io") }
         jcenter()
     }
@@ -17,4 +18,5 @@ dependencyResolutionManagement {
 
 include(":app")
 rootProject.name = "Portal Usuario"
-include(":feature:nauta-nav")
+include(":feature:cubacelmanager")
+include(":core:ui")

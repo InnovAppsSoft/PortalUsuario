@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="recharge_code_placeholder">Recargar saldo</string>
+    <string name="remaining">Restantes</string>
+    <string name="not_active">no activos</string>
+</resources>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bonus">Bonos</string>
+    <string name="voice">Voz</string>
+    <string name="data">Datos</string>
+    <string name="data_cu">Datos CU</string>
+    <string name="balance_credit">Saldo</string>
+    <string name="phone_number_to_transfer">Número a transferir</string>
+    <string name="hide_password">ocultar password</string>
+    <string name="show_password">mostrar password</string>
+    <string name="active_plan">Activar Plan</string>
+    <string name="consult_plan">Consultar Plan</string>
+    <string name="manager_friend">Agregar o eliminar amigo</string>
+    <string name="ambulance">Ambulancia</string>
+    <string name="firefighters">bomberos</string>
+    <string name="maritime_rescue">Salvamento Maritimo</string>
+    <string name="police">Policia</string>
+    <string name="anti_drug">Antidrogas</string>
+    <string name="customer_service">Atención al Cliente</string>
+    <string name="services">Servicios</string>
+    <string name="private_call">Privado</string>
+    <string name="to_buy">Comprar</string>
+    <string name="data_plans">Planes de dato</string>
+    <string name="all_networks">Todas las redes</string>
+    <string name="daily_data">Bolsa diaria</string>
+    <string name="mail_data">Mensajeria</string>
+    <string name="sim_active_until">Activa:</string>
+    <string name="expires">Bence:</string>
+    <string name="requesting">Consultando %1$s</string>
+    <string name="usage_based_pricing">Tarifa por consumo</string>
+    <string name="buying_package">Comprando paquete</string>
+    <string name="topping_balance">Recargando Saldo</string>
+    <string name="turn_on_ubp">Activando TPC</string>
+    <string name="turn_off_ubp">Desactivando TPC</string>
+    <string name="all_network">Todas las redes</string>
+    <string name="lte_4g">LTE (4G)</string>
+    <string name="national">Nacional</string>
+    <string name="minutes">Minutos</string>
+</resources>

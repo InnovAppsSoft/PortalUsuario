@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sms" translatable="false">SMS</string>
+    <string name="bonus">Bonus</string>
+    <string name="voice">Voice</string>
+    <string name="data">Data</string>
+    <string name="data_cu">Data CU</string>
+    <string name="balance_credit">Balance</string>
+    <string name="phone_number_to_transfer">Phone number to transfer</string>
+    <string name="phone_number_example" translatable="false">51234567</string>
+    <string name="hide_password">hide password</string>
+    <string name="show_password">show password</string>
+    <string name="active_plan">Active Plan</string>
+    <string name="consult_plan">Consult Plan</string>
+    <string name="manager_friend">Manager Friend</string>
+    <string name="ambulance">Ambulance</string>
+    <string name="firefighters">firefighters</string>
+    <string name="maritime_rescue">Maritime Rescue</string>
+    <string name="police">Police</string>
+    <string name="anti_drug">Anti-drug</string>
+    <string name="customer_service">Customer service</string>
+    <string name="services">Services</string>
+    <string name="private_call">Private Call</string>
+    <string name="to_buy">To Buy</string>
+    <string name="data_plans">Data Plans</string>
+    <string name="all_networks">All Networks</string>
+    <string name="daily_data">Daily data</string>
+    <string name="mail_data">Mail data</string>
+    <string name="sim_active_until">Active until:</string>
+    <string name="expires">Expires:</string>
+    <string name="requesting">Consulting %1$s</string>
+    <string name="usage_based_pricing">Usage Based Pricing</string>
+    <string name="buying_package">Buying Package</string>
+    <string name="topping_balance">Topping balance</string>
+    <string name="turn_on_ubp">Turn on TPC</string>
+    <string name="turn_off_ubp">Turn off TPC</string>
+    <string name="all_network">Todas las redes</string>
+    <string name="lte_4g">LTE (4G)</string>
+    <string name="national">Nacional</string>
+    <string name="minutes">Minutos</string>
+</resources>

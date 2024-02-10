@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="recharge_code_placeholder">TopUp balance</string>
+    <string name="recharge_code_example" translatable="false">1234 5678 9012 3456</string>
+    <string name="remaining">Remaining</string>
+    <string name="not_active">not active</string>
+</resources>
