@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cu.suitetecsa.cubacelmanager.data.source.PreferencesDataSource
 import cu.suitetecsa.cubacelmanager.domain.model.Preferences
-import cu.suitetecsa.cubacelmanager.usecases.ExecuteUSSD
+import cu.suitetecsa.cubacelmanager.usecases.UssdFetch
 import cu.suitetecsa.sdk.android.SimCardCollector
 import cu.suitetecsa.sdk.android.model.SimCard
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class ShopViewModel @Inject constructor(
     private val preferencesDataSource: PreferencesDataSource,
     private val simCardCollector: SimCardCollector,
-    private val executeUSSD: ExecuteUSSD,
+    private val ussdFetch: UssdFetch,
 ) : ViewModel() {
     private val preferences: StateFlow<Preferences> = preferencesDataSource.preferences()
         .stateIn(
@@ -72,26 +72,38 @@ class ShopViewModel @Inject constructor(
         when (event) {
             is ShopEvent.Buy -> {
                 currentSimCard?.let { simCard ->
-                    executeUSSD(simCard, event.ussdCode, {
-                        event.onChangeState(true)
-                        _state.value = _state.value.copy(
-                            canRun = false,
-                            loading = true,
-                        )
-                    }, {
-                        _state.value = _state.value.copy(
-                            canRun = true,
-                            loading = false,
-                        )
-                    })
+                    ussdFetch(
+                        simCard = simCard,
+                        ussdCode = event.ussdCode,
+                        onRequest = {
+                            event.onChangeState(true)
+                            _state.value = _state.value.copy(
+                                canRun = false,
+                                loading = true,
+                            )
+                        },
+                        onFinish = {
+                            event.onChangeState(false)
+                            _state.value = _state.value.copy(
+                                canRun = true,
+                                loading = false,
+                                resultMessage = it
+                            )
+                        }
+                    )
                 }
             }
 
             is ShopEvent.ChangeSimCard -> {
                 viewModelScope.launch {
                     preferencesDataSource.updateCurrentSimCardId(event.simCard.serialNumber)
-                    _state.value = _state.value.copy(currentSimCard = currentSimCard, simCards = simCards)
+                    _state.value =
+                        _state.value.copy(currentSimCard = currentSimCard, simCards = simCards)
                 }
+            }
+
+            ShopEvent.DismissDialog -> {
+                _state.value = _state.value.copy(resultMessage = null)
             }
         }
     }

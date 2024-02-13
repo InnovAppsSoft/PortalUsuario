@@ -4,4 +4,5 @@
     <string name="recharge_code_example" translatable="false">1234 5678 9012 3456</string>
     <string name="remaining">Remaining</string>
     <string name="not_active">not active</string>
+    <string name="ok" translatable="false">OK</string>
 </resources>

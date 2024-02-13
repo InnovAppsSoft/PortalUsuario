@@ -56,7 +56,7 @@ class ShopViewModel @Inject constructor(
         when (event) {
             is ShopEvent.Buy -> {
                 currentSimCard?.let { simCard ->
-                    executeUSSD(simCard, event.ussdCode, {}) {}
+                    executeUSSD(simCard, event.ussdCode)
                 }
             }
 

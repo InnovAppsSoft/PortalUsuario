@@ -108,17 +108,17 @@ class BalanceViewModel @Inject constructor(
             }
 
             is BalanceEvent.MakeCall -> {
-                currentSimCard?.let { executeUSSD(it, event.ussdCode, {}) {} }
+                currentSimCard?.let { executeUSSD(it, event.ussdCode) }
             }
             BalanceEvent.TopUpBalance -> {
                 currentSimCard?.let {
-                    executeUSSD(it, "*662*${_state.value.rechargeState.code}%23", {}) {}
+                    executeUSSD(it, "*662*${_state.value.rechargeState.code}%23")
                 }
             }
 
             BalanceEvent.TransferFunds -> {
                 currentSimCard?.let {
-                    executeUSSD(it, "", {}) {}
+                    executeUSSD(it, "")
                 }
             }
         }

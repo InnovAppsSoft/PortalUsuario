@@ -19,11 +19,11 @@ import cu.suitetecsa.cubacelmanager.usecases.ExecuteUSSD
 import cu.suitetecsa.cubacelmanager.usecases.GetConsultMessage
 import cu.suitetecsa.cubacelmanager.usecases.UpdateBalance
 import cu.suitetecsa.sdk.android.SimCardCollector
-import cu.suitetecsa.sdk.android.balance.ConsultBalanceCallBack
+import cu.suitetecsa.sdk.android.balance.FetchBalanceCallBack
 import cu.suitetecsa.sdk.android.balance.consult.UssdRequest
 import cu.suitetecsa.sdk.android.balance.response.Custom
 import cu.suitetecsa.sdk.android.balance.response.UssdResponse
-import cu.suitetecsa.sdk.android.kotlin.ussdExecute
+import cu.suitetecsa.sdk.android.kotlin.ussdFetch
 import cu.suitetecsa.sdk.android.model.SimCard
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -38,8 +38,8 @@ internal class BalanceViewModel @Inject constructor(
     private val balanceRepository: BalanceRepository,
     private val simCardCollector: SimCardCollector,
     private val updateBalance: UpdateBalance,
-    private val executeUSSD: ExecuteUSSD,
-    private val getConsultMessage: GetConsultMessage
+    private val getConsultMessage: GetConsultMessage,
+    private val executeUSSD: ExecuteUSSD
 ) : ViewModel() {
     private val balances: StateFlow<List<Balance>> = balanceRepository.getBalances().stateIn(
         scope = viewModelScope,
@@ -157,7 +157,9 @@ internal class BalanceViewModel @Inject constructor(
                 }
             }
 
-            else -> {}
+            BalanceEvent.DismissDialog -> {
+                updateState(_state.value.copy(resultMessage = null))
+            }
         }
     }
 
@@ -168,17 +170,16 @@ internal class BalanceViewModel @Inject constructor(
                 it,
                 "*234*1*${_state.value.transferState.dest}*" +
                     "${_state.value.transferState.pinPassword}*" +
-                    "${_state.value.transferState.amount}%23",
-                {}
-            ) {}
+                    "${_state.value.transferState.amount}${Uri.parse("#")}"
+            )
         }
     }
 
     @RequiresPermission(Manifest.permission.CALL_PHONE)
     private fun topUpBalance() {
-        _state.value.currentSimCard?.ussdExecute(
-            "*662*${_state.value.rechargeState.code}%23",
-            object : ConsultBalanceCallBack {
+        _state.value.currentSimCard?.ussdFetch(
+            "*662*${_state.value.rechargeState.code}${Uri.parse("#")}",
+            object : FetchBalanceCallBack {
                 override fun onFailure(throwable: Throwable) {
                     updateState(
                         _state.value.copy(
@@ -186,12 +187,12 @@ internal class BalanceViewModel @Inject constructor(
                             loading = false,
                             canRun = true,
                             rechargeState = _state.value.rechargeState.copy(isLoading = false),
+                            resultMessage = throwable.message.toString()
                         )
                     )
-                    throwable.printStackTrace()
                 }
 
-                override fun onRequesting(request: UssdRequest) {
+                override fun onFetching(request: UssdRequest) {
                     updateState(
                         _state.value.copy(
                             canRun = false,
@@ -200,7 +201,7 @@ internal class BalanceViewModel @Inject constructor(
                                 request,
                                 customType = CustomConsult.TopUpBalance
                             ),
-                            rechargeState = _state.value.rechargeState.copy(isLoading = true),
+                            rechargeState = _state.value.rechargeState.copy(isLoading = true, code = ""),
                         )
                     )
                 }
@@ -212,6 +213,7 @@ internal class BalanceViewModel @Inject constructor(
                             loading = false,
                             canRun = true,
                             rechargeState = _state.value.rechargeState.copy(isLoading = false),
+                            resultMessage = (response as Custom).response,
                         )
                     )
                 }
@@ -229,9 +231,9 @@ internal class BalanceViewModel @Inject constructor(
     @RequiresPermission(Manifest.permission.CALL_PHONE)
     private fun turnUsageBasedPricing(active: Boolean) {
         val ussdCode = if (active) "*133*1*1*1${Uri.parse("#")}" else "*133*1*1*2${Uri.parse("#")}"
-        _state.value.currentSimCard?.ussdExecute(
+        _state.value.currentSimCard?.ussdFetch(
             ussdCode,
-            object : ConsultBalanceCallBack {
+            object : FetchBalanceCallBack {
                 override fun onFailure(throwable: Throwable) {
                     _state.value = _state.value.copy(
                         runningMessage = null,
@@ -241,7 +243,7 @@ internal class BalanceViewModel @Inject constructor(
                     throwable.printStackTrace()
                 }
 
-                override fun onRequesting(request: UssdRequest) {
+                override fun onFetching(request: UssdRequest) {
                     _state.value = _state.value.copy(
                         loading = true,
                         canRun = false,

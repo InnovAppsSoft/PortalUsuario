@@ -1,5 +1,6 @@
 package cu.suitetecsa.cubacelmanager.presentation.shop
 
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -33,6 +34,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import cu.suitetecsa.core.ui.components.ResultDialog
 import cu.suitetecsa.core.ui.theme.DeepLavender
 import cu.suitetecsa.core.ui.theme.SuitEtecsaTheme
 import cu.suitetecsa.core.ui.theme.VibrantGreen
@@ -61,6 +63,10 @@ internal fun ShopRoute(
                 sim?.let { viewModel.onEvent(ShopEvent.ChangeSimCard(it)) }
             }
         )
+    }
+
+    viewModel.state.value.resultMessage?.let {
+        ResultDialog(message = it, onDismiss = { viewModel.onEvent(ShopEvent.DismissDialog) })
     }
 
     ShopScreen(
@@ -149,7 +155,7 @@ private fun SectionDataPlans(
         smsCount = "0 SMS",
         planPrice = "$950",
         color = DeepLavender,
-        ussdCode = "*133*1*4*3*1%23",
+        ussdCode = "*133*1*4*3*1${Uri.parse("#")}",
         canRun = canRun,
         onEvent = onEvent
     )
@@ -170,7 +176,7 @@ private fun SectionOnlyLte(
         smsCount = "0 SMS",
         planPrice = "$100",
         color = onlyLteColor,
-        ussdCode = "*133*1*4*1*1%23",
+        ussdCode = "*133*1*4*1*1${Uri.parse("#")}",
         canRun = canRun,
         onEvent = onEvent
     )
@@ -183,7 +189,7 @@ private fun SectionOnlyLte(
         smsCount = "0 SMS",
         planPrice = "$200",
         color = onlyLteColor,
-        ussdCode = "*133*1*4*2*1%23",
+        ussdCode = "*133*1*4*2*1${Uri.parse("#")}",
         canRun = canRun,
         onEvent = onEvent
     )
@@ -204,7 +210,7 @@ private fun SectionAllNetwork(
         smsCount = "20 SMS",
         planPrice = "$110",
         color = allNetworksColor,
-        ussdCode = "*133*5*1*1%23",
+        ussdCode = "*133*5*1*1${Uri.parse("#")}",
         canRun = canRun,
         onEvent = onEvent
     )
@@ -217,7 +223,7 @@ private fun SectionAllNetwork(
         smsCount = "40 SMS",
         planPrice = "$250",
         color = allNetworksColor,
-        ussdCode = "*133*5*2*1%23",
+        ussdCode = "*133*5*2*1${Uri.parse("#")}",
         canRun = canRun,
         onEvent = onEvent
     )
@@ -230,7 +236,7 @@ private fun SectionAllNetwork(
         smsCount = "80 SMS",
         planPrice = "$500",
         color = allNetworksColor,
-        ussdCode = "*133*5*3*1%23",
+        ussdCode = "*133*5*3*1${Uri.parse("#")}",
         canRun = canRun,
         onEvent = onEvent
     )
@@ -290,7 +296,7 @@ private fun SectionMinutes(
         minutesCount = "5 MIN",
         planPrice = "$37.50",
         color = minutesColor,
-        ussdCode = "*133*3*1*1%23",
+        ussdCode = "*133*3*1*1${Uri.parse("#")}",
         canRun = canRun,
         onEvent = onEvent
     )
@@ -299,7 +305,7 @@ private fun SectionMinutes(
         minutesCount = "10 MIN",
         planPrice = "$72.50",
         color = minutesColor,
-        ussdCode = "*133*3*2*1%23",
+        ussdCode = "*133*3*2*1${Uri.parse("#")}",
         canRun = canRun,
         onEvent = onEvent
     )
@@ -308,7 +314,7 @@ private fun SectionMinutes(
         minutesCount = "15 MIN",
         planPrice = "$105.50",
         color = minutesColor,
-        ussdCode = "*133*3*3*1%23",
+        ussdCode = "*133*3*3*1${Uri.parse("#")}",
         canRun = canRun,
         onEvent = onEvent
     )
@@ -317,7 +323,7 @@ private fun SectionMinutes(
         minutesCount = "25 MIN",
         planPrice = "$162.50",
         color = minutesColor,
-        ussdCode = "*133*3*4*1%23",
+        ussdCode = "*133*3*4*1${Uri.parse("#")}",
         canRun = canRun,
         onEvent = onEvent
     )
@@ -326,7 +332,7 @@ private fun SectionMinutes(
         minutesCount = "40 MIN",
         planPrice = "$250",
         color = minutesColor,
-        ussdCode = "*133*3*5*1%23",
+        ussdCode = "*133*3*5*1${Uri.parse("#")}",
         canRun = canRun,
         onEvent = onEvent
     )
@@ -343,7 +349,7 @@ private fun SectionSms(
         smsCount = "20 SMS",
         planPrice = "$15",
         color = smsColor,
-        ussdCode = "*133*2*1*1%23",
+        ussdCode = "*133*2*1*1${Uri.parse("#")}",
         canRun = canRun,
         onEvent = onEvent
     )
@@ -352,7 +358,7 @@ private fun SectionSms(
         smsCount = "50 SMS",
         planPrice = "$30",
         color = smsColor,
-        ussdCode = "*133*2*2*1%23",
+        ussdCode = "*133*2*2*1${Uri.parse("#")}",
         canRun = canRun,
         onEvent = onEvent
     )
@@ -361,7 +367,7 @@ private fun SectionSms(
         smsCount = "90 SMS",
         planPrice = "$50",
         color = smsColor,
-        ussdCode = "*133*2*3*1%23",
+        ussdCode = "*133*2*3*1${Uri.parse("#")}",
         canRun = canRun,
         onEvent = onEvent
     )
@@ -370,7 +376,7 @@ private fun SectionSms(
         smsCount = "120 SMS",
         planPrice = "$60",
         color = smsColor,
-        ussdCode = "*133*2*4*1%23",
+        ussdCode = "*133*2*4*1${Uri.parse("#")}",
         canRun = canRun,
         onEvent = onEvent
     )

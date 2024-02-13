@@ -72,14 +72,14 @@ fun BalanceManager(
                 stringResource(id = R.string.sim_active_until),
                 balance.activeUntil.asDateString,
                 balance.activeUntil.asRemainingDays,
-                360,
+                330,
                 BrightOrange
             )
             ExpireSection(
                 stringResource(id = R.string.expires),
                 balance.dueDate.asDateString,
                 balance.dueDate.asRemainingDays,
-                330,
+                360,
                 BrightCoralRed
             )
         }

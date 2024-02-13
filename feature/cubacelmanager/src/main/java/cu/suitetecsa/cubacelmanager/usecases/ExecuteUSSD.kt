@@ -10,9 +10,7 @@ import javax.inject.Inject
 
 class ExecuteUSSD @Inject constructor(@ApplicationContext private val context: Context) {
     @RequiresPermission(Manifest.permission.CALL_PHONE)
-    operator fun invoke(simCard: SimCard, ussdCode: String, onRequest: () -> Unit, function: () -> Unit) {
-        onRequest()
-        function()
+    operator fun invoke(simCard: SimCard, ussdCode: String) {
         simCard.makeCall(context, ussdCode)
     }
 }

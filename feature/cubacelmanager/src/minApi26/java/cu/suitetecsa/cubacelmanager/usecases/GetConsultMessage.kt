@@ -30,7 +30,7 @@ internal class GetConsultMessage @Inject constructor(
             UssdRequest.PRINCIPAL_BALANCE -> context.getString(R.string.balance_credit)
             UssdRequest.VOICE_BALANCE -> context.getString(R.string.voice)
         }
-        return context.getString(R.string.requesting, typeConsult)
+        return if (request != UssdRequest.CUSTOM) context.getString(R.string.requesting, typeConsult) else typeConsult
     }
 }
 

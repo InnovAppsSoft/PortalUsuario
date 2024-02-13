@@ -8,4 +8,5 @@ data class ShopState(
     val canRun: Boolean = false,
     val loading: Boolean = false,
     val runningMessage: String? = null,
+    val resultMessage: String? = null,
 )

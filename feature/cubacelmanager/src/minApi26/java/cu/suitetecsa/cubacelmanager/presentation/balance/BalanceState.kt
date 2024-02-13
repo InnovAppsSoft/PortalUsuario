@@ -12,4 +12,5 @@ data class BalanceState(
     val transferState: CardTransferState = CardTransferState(),
     val simCards: List<SimCard> = listOf(),
     val currentSimCard: SimCard? = null,
+    val resultMessage: String? = null,
 )

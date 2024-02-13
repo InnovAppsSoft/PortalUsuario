@@ -12,5 +12,5 @@ sealed class BalanceEvent {
     data class ChangeAmountToTransfer(val amount: String) : BalanceEvent()
     data class ChangePinPassword(val pinPassword: String) : BalanceEvent()
     data object TransferFunds : BalanceEvent()
-    data class MakeCall(val ussdCode: String) : BalanceEvent()
+    data object DismissDialog : BalanceEvent()
 }

@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.util.Log
 import cu.suitetecsa.cubacelmanager.data.sources.BalanceRepository
 import cu.suitetecsa.cubacelmanager.domain.model.Balance
-import cu.suitetecsa.sdk.android.balance.ConsultBalanceCallBack
+import cu.suitetecsa.sdk.android.balance.FetchBalanceCallBack
 import cu.suitetecsa.sdk.android.balance.consult.UssdRequest
 import cu.suitetecsa.sdk.android.balance.response.BonusBalance
 import cu.suitetecsa.sdk.android.balance.response.DataBalance
@@ -12,7 +12,7 @@ import cu.suitetecsa.sdk.android.balance.response.MessagesBalance
 import cu.suitetecsa.sdk.android.balance.response.PrincipalBalance
 import cu.suitetecsa.sdk.android.balance.response.UssdResponse
 import cu.suitetecsa.sdk.android.balance.response.VoiceBalance
-import cu.suitetecsa.sdk.android.kotlin.consultBalance
+import cu.suitetecsa.sdk.android.kotlin.smartFetchBalance
 import cu.suitetecsa.sdk.android.model.SimCard
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,13 +27,13 @@ internal class UpdateBalance @Inject constructor(
 ) {
     @SuppressLint("MissingPermission")
     operator fun invoke(simCard: SimCard, onRequest: (String?) -> Unit, onFinish: () -> Unit) {
-        simCard.consultBalance(object : ConsultBalanceCallBack {
+        simCard.smartFetchBalance(object : FetchBalanceCallBack {
             override fun onFailure(throwable: Throwable) {
                 Log.e(TAG, "onFailure: ", throwable.cause)
                 onFinish()
             }
 
-            override fun onRequesting(request: UssdRequest) {
+            override fun onFetching(request: UssdRequest) {
                 Log.d(TAG, "onRequesting: ${request.ussdCode}")
                 onRequest(getConsultMessage(request))
             }
@@ -82,6 +82,15 @@ internal class UpdateBalance @Inject constructor(
                                 activeUntil = response.activeUntil,
                                 dueDate = response.dueDate
                             )
+                            if (UssdRequest.DATA_BALANCE !in response.consults) {
+                                balance = balance.copy(data = null, dataLte = null, dataRemainingDays = null, mailData = null, mailDataRemainingDays = null, dailyData = null, dailyDataRemainingHours = null)
+                            }
+                            if (UssdRequest.VOICE_BALANCE !in response.consults) {
+                                balance = balance.copy(voice = null, voiceRemainingDays = null)
+                            }
+                            if (UssdRequest.MESSAGES_BALANCE !in response.consults) {
+                                balance = balance.copy(sms = null, smsRemainingDays = null)
+                            }
                         }
                         UssdRequest.VOICE_BALANCE -> {
                             balance = balance.copy(

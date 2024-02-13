@@ -37,7 +37,7 @@ hilt-navigation-compose = "1.1.0"
 
 datastore-preferences = "1.0.0"
 
-suitetecsa-sdk-android = "bdfd7b0e7c"
+suitetecsa-sdk-android = "71960127e6"
 
 room-compiler = "2.6.1"
 room-runtime = "2.6.1"

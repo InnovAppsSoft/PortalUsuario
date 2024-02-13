@@ -12,6 +12,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import cu.suitetecsa.core.ui.components.ResultDialog
 import cu.suitetecsa.core.ui.components.rechargeview.RechargeView
 import cu.suitetecsa.cubacelmanager.presentation.balance.components.BalanceActions
 import cu.suitetecsa.cubacelmanager.presentation.balance.components.BalanceManager
@@ -39,6 +40,10 @@ internal fun BalanceScreen(
             canRun = viewModel.state.value.canRun,
             isLoading = viewModel.state.value.loading
         )
+    }
+
+    viewModel.state.value.resultMessage?.let {
+        ResultDialog(message = it, onDismiss = { viewModel.onEvent(BalanceEvent.DismissDialog) })
     }
 
     Column(

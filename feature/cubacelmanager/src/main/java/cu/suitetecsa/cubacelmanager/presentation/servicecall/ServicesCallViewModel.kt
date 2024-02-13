@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cu.suitetecsa.cubacelmanager.data.source.PreferencesDataSource
 import cu.suitetecsa.cubacelmanager.domain.model.Preferences
-import cu.suitetecsa.cubacelmanager.usecases.ExecuteUSSD
+import cu.suitetecsa.cubacelmanager.usecases.UssdFetch
 import cu.suitetecsa.sdk.android.SimCardCollector
 import cu.suitetecsa.sdk.android.model.SimCard
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +21,7 @@ import javax.inject.Inject
 internal class ServicesCallViewModel @Inject constructor(
     private val preferencesDataSource: PreferencesDataSource,
     private val simCardCollector: SimCardCollector,
-    private val executeUSSD: ExecuteUSSD,
+    private val ussdFetch: UssdFetch,
 ) : ViewModel() {
     private val preferences: StateFlow<Preferences> = preferencesDataSource.preferences()
         .stateIn(
@@ -53,7 +53,7 @@ internal class ServicesCallViewModel @Inject constructor(
     fun onEvent(event: ServiceCallEvent) {
         when (event) {
             is ServiceCallEvent.Call -> {
-                currentSimCard?.let { executeUSSD(it, event.number, {}) {} }
+                currentSimCard?.let { ussdFetch(it, event.number, {}) {} }
             }
             is ServiceCallEvent.ChangeSimCard -> {
                 viewModelScope.launch {
