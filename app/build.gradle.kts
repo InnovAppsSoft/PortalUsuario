@@ -17,8 +17,8 @@ android {
         applicationId = "com.marlon.portalusuario"
         minSdk = 22
         targetSdk = 34
-        versionCode = 57
-        versionName = "7.1.0"
+        versionCode = 62
+        versionName = "8.0.0-alpha01"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
