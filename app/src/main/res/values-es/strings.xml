@@ -5,11 +5,11 @@
     <!-- Nauta Manager -->
     <string name="location">Localización</string>
     <string name="fine_location">Localización Precisa</string>
-    <string name="call_phone">Lamadas Telefonicas</string>
+    <string name="call_phone">Llamadas Telefónicas</string>
     <string name="read_phone_state">Leer Estado del Dispositivo</string>
     <string name="access_contacts">Acceso a Contactos</string>
     <string name="access_camera">Acceso a Cámara</string>
-    <string name="well_done">Bien hecho</string>
+    <string name="well_done">Bien Hecho</string>
     <string name="request_permission">Solicitar Permiso</string>
     <string name="finish">Finalizar</string>
 </resources>
