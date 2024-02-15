@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -71,10 +72,9 @@ private fun PinPasswordField(
     state: CardTransferState,
     canRun: Boolean,
 ) {
-    val passwordVisible by rememberSaveable { mutableStateOf(false) }
+    var passwordVisible by rememberSaveable { mutableStateOf(false) }
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    var passwordVisible1 = passwordVisible
     TextField(
         value = state.pinPassword,
         onValueChange = state.onChangePinPassword,
@@ -92,7 +92,7 @@ private fun PinPasswordField(
                 }
             }
         ),
-        visualTransformation = if (passwordVisible1) {
+        visualTransformation = if (passwordVisible) {
             VisualTransformation.None
         } else {
             PasswordVisualTransformation()
@@ -112,14 +112,14 @@ private fun PinPasswordField(
             )
         },
         trailingIcon = {
-            val image = if (passwordVisible1) {
+            val image = if (passwordVisible) {
                 Icons.Outlined.Visibility
             } else {
                 Icons.Outlined.VisibilityOff
             }
 
             val description =
-                if (passwordVisible1) {
+                if (passwordVisible) {
                     stringResource(R.string.hide_password)
                 } else {
                     stringResource(
@@ -127,7 +127,7 @@ private fun PinPasswordField(
                     )
                 }
 
-            IconButton(onClick = { passwordVisible1 = !passwordVisible1 }) {
+            IconButton(onClick = { passwordVisible = !passwordVisible }) {
                 Icon(imageVector = image, contentDescription = description)
             }
         }

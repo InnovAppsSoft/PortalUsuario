@@ -85,7 +85,8 @@ internal class BalanceViewModel @Inject constructor(
             transferState = CardTransferState(
                 onChangeDest = { onEvent(BalanceEvent.ChangeNumberToTransfer(it)) },
                 onChangeAmount = { onEvent(BalanceEvent.ChangeAmountToTransfer(it)) },
-                onChangePinPassword = { onEvent(BalanceEvent.ChangePinPassword(it)) }
+                onChangePinPassword = { onEvent(BalanceEvent.ChangePinPassword(it)) },
+                onTransfer = { onEvent(BalanceEvent.TransferFunds) }
             )
         )
     )
