@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.arturbosch.detekt)
 }
 
 android {
@@ -26,6 +27,17 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    lint {
+        lintConfig = file("$rootDir/android-lint.xml")
+        abortOnError = false
+        sarifReport = true
+    }
+    detekt {
+        buildUponDefaultConfig = true
+        allRules = false
+        config.setFrom(files("${rootProject.projectDir}/detekt.yml"))
+        autoCorrect = true
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -59,4 +71,6 @@ dependencies {
     implementation(libs.androidx.material.icons.extended)
 
     implementation(libs.androidx.constraintlayout.compose)
+
+    implementation(libs.zxing.android)
 }

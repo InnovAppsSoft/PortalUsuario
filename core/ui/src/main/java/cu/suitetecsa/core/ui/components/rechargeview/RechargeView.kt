@@ -52,9 +52,7 @@ fun RechargeView(
     PrettyCard(modifier = modifier, isLoading = state.isLoading) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(IntrinsicSize.Min)
+            modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min)
         ) {
             TextField(
                 value = state.code,

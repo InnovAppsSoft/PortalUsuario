@@ -23,13 +23,13 @@ fun NavGraphBuilder.splashGraph(navController: NavHostController) {
 
         composable(route = "splash_screen") {
             SplashScreen(
-                navigateToMain = navigateToMain,
-                navigateToOnBoarding = navigateToOnBoarding
+                onNavigateToMain = navigateToMain,
+                onNavigateToOnBoarding = navigateToOnBoarding
             )
         }
 
         composable(route = "on_boarding_screen") {
-            PermissionsScreen(navigateToMainScreen = navigateToMain)
+            PermissionsScreen(onNavigateToMainScreen = navigateToMain)
         }
     }
 }

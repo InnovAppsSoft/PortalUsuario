@@ -27,12 +27,14 @@ private const val DelayDuration = 2000L
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun SplashScreen(navigateToMain: () -> Unit, navigateToOnBoarding: () -> Unit) {
+fun SplashScreen(onNavigateToMain: () -> Unit, onNavigateToOnBoarding: () -> Unit) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         val permissions = listOf(
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.CALL_PHONE,
             Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.CAMERA,
         )
         val missingPermissions = mutableListOf<String>()
         val multiplePermissionsState = rememberMultiplePermissionsState(permissions = permissions)
@@ -42,23 +44,22 @@ fun SplashScreen(navigateToMain: () -> Unit, navigateToOnBoarding: () -> Unit) {
         if (result) {
             LaunchedEffect(key1 = true) {
                 delay(DelayDuration)
-                navigateToMain()
+                onNavigateToMain()
             }
         } else {
-            multiplePermissionsState.permissions.forEach {
-                if (it.status != PermissionStatus.Granted) {
-                    missingPermissions.add(it.permission)
-                }
-            }
+            missingPermissions.addAll(
+                multiplePermissionsState.permissions.filter {
+                    it.status != PermissionStatus.Granted
+                }.map { it.permission })
             LaunchedEffect(key1 = true) {
                 delay(DelayDuration)
-                navigateToOnBoarding()
+                onNavigateToOnBoarding()
             }
         }
     } else {
         LaunchedEffect(key1 = true) {
             delay(DelayDuration)
-            navigateToMain()
+            onNavigateToMain()
         }
     }
     Splash()
@@ -73,7 +74,7 @@ fun Splash() {
     ) {
         Image(
             modifier = Modifier.size(150.dp, 150.dp),
-            painter = painterResource(id = R.mipmap.ic_launcher),
+            painter = painterResource(id = R.drawable.app_icon),
             contentDescription = null
         )
         Text(text = "Bienvenidos", fontSize = 30.sp, fontWeight = FontWeight.Bold)
@@ -82,6 +83,6 @@ fun Splash() {
 
 @Preview(showBackground = true)
 @Composable
-fun SplashScreenView() {
-    SplashScreen(navigateToMain = {}, navigateToOnBoarding = {})
+private fun SplashScreenView() {
+    SplashScreen(onNavigateToMain = {}, onNavigateToOnBoarding = {})
 }

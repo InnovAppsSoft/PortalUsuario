@@ -26,7 +26,7 @@
     <string name="all_networks">All Networks</string>
     <string name="daily_data">Daily data</string>
     <string name="mail_data">Mail data</string>
-    <string name="sim_active_until">Active until:</string>
+    <string name="sim_active_until">Active:</string>
     <string name="expires">Expires:</string>
     <string name="requesting">Consulting %1$s</string>
     <string name="usage_based_pricing">Usage Based Pricing</string>
@@ -38,4 +38,7 @@
     <string name="lte_4g">LTE (4G)</string>
     <string name="national">Nacional</string>
     <string name="minutes">Minutos</string>
+    <string name="el_contenido_del_qr_no_es_un_numero_telefonico_valido">El contenido del QR no es un numero telefonico valido.</string>
+    <string name="invalid_top_up_code_message">El contenido del QR no es un codigo de recarga valido.</string>
+    <string name="scan_recharge_code">Scan recharge code</string>
 </resources>

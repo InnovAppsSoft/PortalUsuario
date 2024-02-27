@@ -13,8 +13,8 @@ import cu.suitetecsa.cubacelmanager.presentation.CubacelRoute
 fun MainNavGraph(
     navController: NavHostController,
     paddingValues: PaddingValues,
-    setTitle: (String) -> Unit,
-    setActions: (@Composable (RowScope.() -> Unit)) -> Unit
+    onSetTitle: (String) -> Unit,
+    onSetActions: (@Composable (RowScope.() -> Unit)) -> Unit
 ) {
     NavHost(
         navController = navController,
@@ -24,8 +24,8 @@ fun MainNavGraph(
         composable(route = CubacelGraph) {
             CubacelRoute(
                 paddingValues = paddingValues,
-                onSetTitle = setTitle,
-                onSetActions = setActions
+                onSetTitle = onSetTitle,
+                onSetActions = onSetActions
             )
         }
     }

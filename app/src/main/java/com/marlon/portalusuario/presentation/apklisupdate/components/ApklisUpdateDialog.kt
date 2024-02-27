@@ -80,7 +80,7 @@ fun ApklisUpdateDialog(
 }
 
 @Composable
-fun Html(modifier: Modifier = Modifier, text: String) {
+fun Html(text: String, modifier: Modifier = Modifier) {
     AndroidView(
         modifier = modifier,
         factory = { context ->
@@ -97,7 +97,7 @@ fun Html(modifier: Modifier = Modifier, text: String) {
     uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
 )
 @Composable
-fun ApklisUpdateDialogPreview() {
+private fun ApklisUpdateDialogPreview() {
     SuitEtecsaTheme {
         Surface {
             ApklisUpdateDialog(

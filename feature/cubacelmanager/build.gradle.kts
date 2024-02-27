@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.arturbosch.detekt)
 }
 
 android {
@@ -28,10 +29,10 @@ android {
 
     flavorDimensions += "api"
     productFlavors {
-        create("minApi22") {
+        create("api22") {
             dimension = "api"
         }
-        create("minApi26") {
+        create("api26") {
             dimension = "api"
             minSdk = 26
         }
@@ -40,6 +41,17 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+    lint {
+        lintConfig = file("$rootDir/android-lint.xml")
+        abortOnError = false
+        sarifReport = true
+    }
+    detekt {
+        buildUponDefaultConfig = true
+        allRules = false
+        config.setFrom(files("${rootProject.projectDir}/detekt.yml"))
+        autoCorrect = true
     }
     kotlinOptions {
         jvmTarget = "17"
@@ -80,6 +92,8 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
 
     implementation(libs.suitetecsa.sdk.android)
+    implementation(libs.nauta.connect)
+    implementation(libs.zxing.android)
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
@@ -87,9 +101,9 @@ dependencies {
     implementation(libs.androidx.constraintlayout.compose)
 
     // Room
-    "minApi26Implementation"(libs.androidx.room.ktx)
-    "minApi26Implementation"(libs.androidx.room.runtime)
-    "kspMinApi26"(libs.androidx.room.compiler)
+    "api26Implementation"(libs.androidx.room.ktx)
+    "api26Implementation"(libs.androidx.room.runtime)
+    "kspApi26"(libs.androidx.room.compiler)
 
     // Hilt
     implementation(libs.hilt.android)

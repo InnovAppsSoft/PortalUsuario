@@ -62,8 +62,8 @@ internal fun BalanceActions(
 @Composable
 private fun BalanceActionsPreview() {
     val simCards = listOf(
-        SimCard("", "", 1, 1, null),
-        SimCard("ih", "", 2, 2, null)
+        SimCard(null, null, null, 0, 1, null),
+        SimCard(null, null, null, 0, 1, null)
     )
     MaterialTheme {
         Surface {

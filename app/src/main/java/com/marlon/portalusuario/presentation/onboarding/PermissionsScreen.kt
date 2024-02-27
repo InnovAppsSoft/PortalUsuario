@@ -1,7 +1,6 @@
 package com.marlon.portalusuario.presentation.onboarding
 
 import android.Manifest
-import android.os.Build
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
@@ -32,18 +31,19 @@ import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.marlon.portalusuario.R
 import kotlinx.coroutines.launch
 
+private const val Fraction = .5f
 val permissions = mutableListOf(
     Manifest.permission.READ_PHONE_STATE,
-    Manifest.permission.ACCESS_COARSE_LOCATION,
     Manifest.permission.CALL_PHONE,
+    Manifest.permission.READ_CONTACTS,
+    Manifest.permission.CAMERA,
 )
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalPermissionsApi::class)
 @Composable
 internal fun PermissionsScreen(
-    navigateToMainScreen: () -> Unit
+    onNavigateToMainScreen: () -> Unit
 ) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) permissions.add(Manifest.permission.ACCESS_FINE_LOCATION)
     val multiplePermissionsState = rememberMultiplePermissionsState(permissions = permissions)
 
     val pages = remember { mutableStateListOf<OnBoardingPage>() }
@@ -52,9 +52,9 @@ internal fun PermissionsScreen(
             multiplePermissionsState.permissions.filter { it.status != PermissionStatus.Granted }.map {
                 when (it.permission) {
                     Manifest.permission.READ_PHONE_STATE -> PhoneState
-                    Manifest.permission.ACCESS_COARSE_LOCATION -> Location
-                    Manifest.permission.ACCESS_FINE_LOCATION -> FineLocation
                     Manifest.permission.CALL_PHONE -> Call
+                    Manifest.permission.READ_CONTACTS -> Contact
+                    Manifest.permission.CAMERA -> Camera
                     else -> Finish
                 }
             }
@@ -73,7 +73,7 @@ internal fun PermissionsScreen(
         ) { index ->
             PagerScreen(
                 onBoardingPage = pages[index],
-                navigateToNext = {
+                onNavigateToNext = {
                     if (index != pages.size - 1) {
                         scope.launch { pagerState.animateScrollToPage(index + 1) }
                     }
@@ -83,7 +83,7 @@ internal fun PermissionsScreen(
         Row(
             modifier = Modifier
                 .offset(y = -(16).dp)
-                .fillMaxWidth(0.5f)
+                .fillMaxWidth(Fraction)
                 .padding(8.dp)
                 .align(Alignment.BottomCenter)
         ) {
@@ -92,7 +92,7 @@ internal fun PermissionsScreen(
                 visible = pagerState.currentPage == pages.size - 1
             ) {
                 Button(
-                    onClick = navigateToMainScreen,
+                    onClick = onNavigateToMainScreen,
                     colors = ButtonDefaults.buttonColors(
                         contentColor = Color.White
                     ),

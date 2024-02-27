@@ -49,8 +49,8 @@ fun MainScreen(navController: NavHostController = rememberNavController()) {
             MainNavGraph(
                 navController = navController,
                 paddingValues = paddingValues,
-                setTitle = { title = it },
-                setActions = { actions = it }
+                onSetTitle = { title = it },
+                onSetActions = { actions = it }
             )
         }
     }
@@ -58,6 +58,6 @@ fun MainScreen(navController: NavHostController = rememberNavController()) {
 
 @Preview
 @Composable
-fun MainScreenPreview() {
+private fun MainScreenPreview() {
     MainScreen()
 }

@@ -33,6 +33,7 @@ import cu.suitetecsa.cubacelmanager.presentation.shop.ShopEvent
 
 private const val ColumnWeight = .3f
 
+@Suppress("LongMethod")
 @Composable
 fun DataPlan(
     modifier: Modifier = Modifier,
@@ -80,45 +81,33 @@ fun DataPlan(
                         Text(
                             text = stringResource(R.string.all_network),
                             style = TextStyle(fontSize = 10.sp),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentWidth()
+                            modifier = Modifier.fillMaxWidth().wrapContentWidth()
                         )
                         Text(
                             text = allNetworksData,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentWidth()
+                            modifier = Modifier.fillMaxWidth().wrapContentWidth()
                         )
                     }
                     Column(modifier = Modifier.weight(ColumnWeight)) {
                         Text(
                             text = stringResource(R.string.lte_4g),
                             style = TextStyle(fontSize = 10.sp),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentWidth()
+                            modifier = Modifier.fillMaxWidth().wrapContentWidth()
                         )
                         Text(
                             text = lteNetworkData,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentWidth()
+                            modifier = Modifier.fillMaxWidth().wrapContentWidth()
                         )
                     }
                     Column(modifier = Modifier.weight(ColumnWeight)) {
                         Text(
                             text = stringResource(R.string.national),
                             style = TextStyle(fontSize = 10.sp),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentWidth()
+                            modifier = Modifier.fillMaxWidth().wrapContentWidth()
                         )
                         Text(
                             text = nationalVoucherData,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentWidth()
+                            modifier = Modifier.fillMaxWidth().wrapContentWidth()
                         )
                     }
                 }
@@ -127,30 +116,22 @@ fun DataPlan(
                         Text(
                             text = stringResource(R.string.minutes),
                             style = TextStyle(fontSize = 10.sp),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentWidth()
+                            modifier = Modifier.fillMaxWidth().wrapContentWidth()
                         )
                         Text(
                             text = minutesCount,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentWidth()
+                            modifier = Modifier.fillMaxWidth().wrapContentWidth()
                         )
                     }
                     Column(modifier = Modifier.weight(ColumnWeight)) {
                         Text(
                             text = stringResource(id = R.string.sms),
                             style = TextStyle(fontSize = 10.sp),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentWidth()
+                            modifier = Modifier.fillMaxWidth().wrapContentWidth()
                         )
                         Text(
                             text = smsCount,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentWidth()
+                            modifier = Modifier.fillMaxWidth().wrapContentWidth()
                         )
                     }
                     Column(modifier = Modifier.weight(ColumnWeight)) {
@@ -159,9 +140,7 @@ fun DataPlan(
                             shape = MaterialTheme.shapes.small,
                             contentPadding = PaddingValues(8.dp),
                             enabled = canRun,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentWidth()
+                            modifier = Modifier.fillMaxWidth().wrapContentWidth()
                         ) {
                             Text(text = planPrice, style = TextStyle(fontSize = 12.sp))
                         }

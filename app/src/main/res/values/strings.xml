@@ -8,7 +8,14 @@
     <string name="read_phone_state">Read Phone State</string>
     <string name="access_contacts">Access Contacts</string>
     <string name="access_camera">Access Camera</string>
-    <string name="well_done">Well done</string>
+    <string name="well_done">Welcome to PortalUsuario!</string>
     <string name="request_permission">Request Permission</string>
     <string name="finish">Finish</string>
+    <string name="message_for_read_phone_state">This permission is used to read the device\'s state and perform automated USSD queries (available from Android 8.0, API 26) as well as to obtain the phone number of each inserted SIM (available from Android 11, API 30). These capabilities are fundamental in providing you with an enhanced and personalized user experience, especially if you use a multiSIM device. They allow us to offer you advanced and specific features, such as efficient management of your mobile lines and optimization of services according to your SIM configuration. We ensure responsible use of this information, exclusively to improve your experience with our app.</string>
+    <string name="message_for_call_phone">To make it easier for you to directly contact customer service, emergency services, or use quick call features within our app, we require your permission to make phone calls directly from the app. This permission will be used exclusively to initiate calls to numbers you select or that are part of our integrated features, ensuring a smooth and secure user experience. Your safety and privacy are our top priority, and we assure you that this permission is requested solely to enhance the services we provide to you.</string>
+    <string name="message_for_read_contacts">To enhance your experience and make communicating with your friends and family easier, our app needs to access your contacts. This permission allows us to quickly suggest contacts when sharing content or making calls, ensuring efficient integration with your address book. We respect your privacy: contact information is only used to enrich your user experience and is not shared with third parties.</string>
+    <string name="message_for_camera">To provide you with the QR code scanning feature, we need your permission to access your device\'s camera. This access enables us to quickly read QR codes for payments, authentication, or device linking, facilitating secure and efficient operations. We assure you that the camera will only be used for QR code scanning and will not be used for any other purpose without your consent.</string>
+    <string name="message_well_done">That\'s it. Now you can fully enjoy PortalUsuario. Explore, discover, and take advantage of all the functionalities designed for you. Thank you for joining us!</string>
+    <string name="bug_send_title">Unexpected Error</string>
+    <string name="bug_send_message">The application has stopped due to an error. Would you like to help us by sending an error report to prevent this from happening in the future? It will only take a moment.</string>
 </resources>

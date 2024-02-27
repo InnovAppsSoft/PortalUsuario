@@ -25,31 +25,32 @@ android {
     }
 
     buildTypes {
-        getByName("debug") {
+        val supportEmail = System.getenv("SUPPORT_EMAIL")
+        debug {
             applicationIdSuffix = ".debug"
+            buildConfigField("String", "SUPPORT_EMAIL", "\"$supportEmail\"")
         }
-        getByName("release") {
+        release {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("debug")
+            buildConfigField("String", "SUPPORT_EMAIL", "\"$supportEmail\"")
         }
     }
 
-    flavorDimensions += listOf("version", "api")
+    flavorDimensions += listOf("publish", "api")
     productFlavors {
         create("google-play") {
-            dimension = "version"
-            versionNameSuffix = "-google-play"
+            dimension = "publish"
         }
-        create("full") {
-            dimension = "version"
-            applicationIdSuffix = ".full"
-            versionNameSuffix = "-full"
+        create("pro") {
+            dimension = "publish"
+            applicationIdSuffix = ".pro"
         }
-        create("minApi22") {
+        create("api22") {
             dimension = "api"
         }
-        create("minApi26") {
+        create("api26") {
             dimension = "api"
             minSdk = 26
         }
@@ -62,8 +63,20 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    lint {
+        lintConfig = file("$rootDir/android-lint.xml")
+        abortOnError = false
+        sarifReport = true
+    }
+    detekt {
+        buildUponDefaultConfig = true
+        allRules = false
+        config.setFrom(files("${rootProject.projectDir}/config/detekt/detekt.yml"))
+        autoCorrect = true
+    }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.7"
@@ -124,4 +137,9 @@ dependencies {
 
     // Detekt rules
     detektPlugins(libs.detekt.rules.compose)
+
+    implementation(libs.zxing.android)
+
+    // BugSend
+    implementation(libs.applifycu.bugsend)
 }

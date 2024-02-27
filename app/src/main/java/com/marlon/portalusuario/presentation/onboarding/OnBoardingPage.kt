@@ -9,58 +9,40 @@ internal sealed class OnBoardingPage(
     @RawRes val animation: Int,
     val permission: String,
     @StringRes val title: Int,
-    val description: String,
+    @StringRes val description: Int,
 )
 
-internal object Location : OnBoardingPage(
-    R.raw.location,
-    Manifest.permission.ACCESS_COARSE_LOCATION,
-    R.string.location,
-    "Se utiliza para leer el estado del teléfeno y asi obtener las tarjetas SIM insertadas en el mismo"
-)
-
-internal object FineLocation : OnBoardingPage(
-    R.raw.location,
-    Manifest.permission.ACCESS_FINE_LOCATION,
-    R.string.fine_location,
-    "Se utiliza para leer el estado del teléfeno y asi obtener las tarjetas SIM insertadas en el mismo"
-)
-
-internal object PhoneState : OnBoardingPage(
+internal data object PhoneState : OnBoardingPage(
     R.raw.call,
     Manifest.permission.READ_PHONE_STATE,
     R.string.read_phone_state,
-    "Se utiliza para la gestión de los códigos USSD y llamadas"
+    R.string.message_for_read_phone_state
 )
 
-internal object Call : OnBoardingPage(
+internal data object Call : OnBoardingPage(
     R.raw.call,
     Manifest.permission.CALL_PHONE,
     R.string.call_phone,
-    "Se utiliza para la gestión de los códigos USSD y llamadas"
+    R.string.message_for_call_phone
 )
 
-internal object Contact : OnBoardingPage(
+internal data object Contact : OnBoardingPage(
     R.raw.contact,
-    "",
+    Manifest.permission.READ_CONTACTS,
     R.string.access_contacts,
-    "Necesitamos el permiso de ubicacion para muchas cosas blablabla blablabla blablabla " +
-        "blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla " +
-        "blablabla blablabla blablabla blablabla blablabla blablabla blablabla"
+    R.string.message_for_read_contacts
 )
 
-internal object Camera : OnBoardingPage(
+internal data object Camera : OnBoardingPage(
     R.raw.camera,
-    "",
+    Manifest.permission.CAMERA,
     R.string.access_camera,
-    "Necesitamos el permiso de ubicacion para muchas cosas blablabla blablabla " +
-        "blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla " +
-        "blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla"
+    R.string.message_for_camera
 )
 
-internal object Finish : OnBoardingPage(
+internal data object Finish : OnBoardingPage(
     R.raw.finish,
     "",
     R.string.well_done,
-    "Eso es todo , ya puedes disfrutar de Portal Usuario"
+    R.string.message_well_done
 )

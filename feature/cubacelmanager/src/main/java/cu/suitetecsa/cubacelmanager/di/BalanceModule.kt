@@ -2,6 +2,7 @@ package cu.suitetecsa.cubacelmanager.di
 
 import android.content.Context
 import cu.suitetecsa.cubacelmanager.data.source.PreferencesDataSource
+import cu.suitetecsa.sdk.android.ContactsCollector
 import cu.suitetecsa.sdk.android.SimCardCollector
 import dagger.Module
 import dagger.Provides
@@ -23,4 +24,9 @@ class BalanceModule {
     fun simCardCollector(@ApplicationContext context: Context): SimCardCollector =
         SimCardCollector.Builder()
             .build(context)
+
+    @Provides
+    @Singleton
+    fun provideContactsCollector(@ApplicationContext context: Context): ContactsCollector =
+        ContactsCollector.Builder().build(context)
 }

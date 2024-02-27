@@ -35,7 +35,7 @@ private const val WidthHalf = 0.5f
 @Composable
 internal fun PagerScreen(
     onBoardingPage: OnBoardingPage,
-    navigateToNext: () -> Unit,
+    onNavigateToNext: () -> Unit,
 ) {
     val permissionState = onBoardingPage.permission.takeIf { it != "" }?.let {
         rememberPermissionState(permission = it)
@@ -46,14 +46,14 @@ internal fun PagerScreen(
         content = { shouldShowRationale ->
             DeniedContent(
                 title = stringResource(id = onBoardingPage.title),
-                deniedMessage = onBoardingPage.description,
-                rationaleMessage = onBoardingPage.description,
+                deniedMessage = stringResource(id = onBoardingPage.description),
+                rationaleMessage = stringResource(id = onBoardingPage.description),
                 animation = onBoardingPage.animation,
                 shouldShowRationale = shouldShowRationale,
                 onRequestPermission = { permissionState?.launchPermissionRequest() }
             )
         },
-        navigateToNext = navigateToNext
+        onNavigateToNext = onNavigateToNext
     )
 }
 
@@ -62,7 +62,7 @@ internal fun PagerScreen(
 private fun HandleRequest(
     permissionState: PermissionState?,
     content: @Composable (Boolean) -> Unit,
-    navigateToNext: () -> Unit
+    onNavigateToNext: () -> Unit
 ) {
     permissionState?.let {
         when (val status = it.status) {
@@ -71,7 +71,7 @@ private fun HandleRequest(
             }
 
             PermissionStatus.Granted -> {
-                navigateToNext()
+                onNavigateToNext()
             }
         }
     } ?: run { content(false) }
@@ -135,7 +135,7 @@ private fun DeniedContent(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun PagerScreenPreview() {
     PagerScreen(onBoardingPage = Finish) {}
