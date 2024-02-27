@@ -24,7 +24,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@ef76a971e2fa3f867b617efd72f2fbd72cf6f8bc # v2.8.0
       - name: Decode Google Services JSON
-        run: echo ${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }} | base64 --decode > app/google-services.json
+        run: echo "${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }}" | base64 --decode > app/google-services.json
       - name: Assemble debug APKs
         run: ./gradlew assembleDebug
       - name: Create publish bundle
