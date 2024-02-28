@@ -42,4 +42,5 @@ Thumbs.db
 obj/
 /.idea/
 /.gradle/
-local.properties
+
+app/google-services.json

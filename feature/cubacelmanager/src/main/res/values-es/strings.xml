@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bonus">Bonos</string>
+    <string name="voice">Voz</string>
+    <string name="data">Datos</string>
+    <string name="data_cu">Datos CU</string>
+    <string name="balance_credit">Saldo</string>
+    <string name="phone_number_to_transfer">Número a Transferir</string>
+    <string name="hide_password">Ocultar Contraseña</string>
+    <string name="show_password">Mostrar Contraseña</string>
+    <string name="active_plan">Activar Plan</string>
+    <string name="consult_plan">Consultar Plan</string>
+    <string name="manager_friend">Agregar o Eliminar Amigo</string>
+    <string name="ambulance">Ambulancia</string>
+    <string name="firefighters">Bomberos</string>
+    <string name="maritime_rescue">Salvamento Marítimo</string>
+    <string name="police">Policía</string>
+    <string name="anti_drug">Antidrogas</string>
+    <string name="customer_service">Atención al Cliente</string>
+    <string name="services">Servicios</string>
+    <string name="private_call">Privado</string>
+    <string name="to_buy">Comprar</string>
+    <string name="data_plans">Planes de Datos</string>
+    <string name="all_networks">Todas las Redes</string>
+    <string name="daily_data">Bolsa Diaria</string>
+    <string name="mail_data">Mensajería</string>
+    <string name="sim_active_until">Activa:</string>
+    <string name="expires">Vence:</string>
+    <string name="requesting">Consultando %1$s</string>
+    <string name="usage_based_pricing">Tarifa por Consumo</string>
+    <string name="buying_package">Comprando Paquete</string>
+    <string name="topping_balance">Recargando Saldo</string>
+    <string name="turn_on_ubp">Activando TPC</string>
+    <string name="turn_off_ubp">Desactivando TPC</string>
+    <string name="all_network">Todas las Redes</string>
+    <string name="lte_4g">LTE (4G)</string>
+    <string name="national">Nacional</string>
+    <string name="minutes">Minutos</string>
+    <string name="el_contenido_del_qr_no_es_un_numero_telefonico_valido">El contenido del QR no es un numero telefonico valido.</string>
+    <string name="invalid_top_up_code_message">El contenido del QR no es un codigo de recarga valido.</string>
+    <string name="scan_recharge_code">Scan recharge code</string>
+</resources>

@@ -21,12 +21,4 @@
 #-renamesourcefileattribute SourceFile
 
 # You can specify any path and filename.
-
-# jsoup
--keeppackagenames org.jsoup.nodes
-
--keepnames @dagger.hilt.android.lifecycle.HiltViewModel class * extends androidx.lifecycle.ViewModel
-
--keep class cu.suitetecsa.sdk.**{
-*;
-}
+-printconfiguration full-r8-config.txt
