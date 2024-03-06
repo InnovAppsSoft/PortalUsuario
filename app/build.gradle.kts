@@ -144,7 +144,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
 
     // Camerax
-    val camerax_version = "1.2.3"
+    val camerax_version = "1.3.2"
     implementation("androidx.camera:camera-core:${camerax_version}")
     implementation("androidx.camera:camera-camera2:${camerax_version}")
     implementation("androidx.camera:camera-lifecycle:${camerax_version}")
