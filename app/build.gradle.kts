@@ -151,7 +151,7 @@ dependencies {
     implementation("androidx.camera:camera-view:${camerax_version}")
 
     // QR scanner
-    implementation("com.google.zxing:core:3.5.2")
+    implementation("com.google.zxing:core:3.5.3")
 
     // Tap Tarjet
     implementation("com.getkeepsafe.taptargetview:taptargetview:1.13.3")
