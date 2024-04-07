@@ -136,7 +136,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
 
     // Navigation Compose
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     // LiveData
     implementation(libs.androidx.runtime.livedata)
