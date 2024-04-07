@@ -67,7 +67,7 @@ dependencies {
     implementation("com.google.android.play:core:1.10.3")
     implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.navigation:navigation-ui:2.5.3")
+    implementation("androidx.navigation:navigation-ui:2.7.7")
     implementation("androidx.navigation:navigation-fragment:2.5.3")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
     testImplementation("junit:junit:4.13.2")
