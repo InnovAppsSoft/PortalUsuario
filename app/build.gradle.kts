@@ -165,14 +165,14 @@ dependencies {
     implementation("com.github.PhilJay:MPAndroidChart:v3.0.3")
 
     implementation("me.zhanghai.android.materialprogressbar:library:1.6.1")
-    implementation("com.intuit.sdp:sdp-android:1.1.0")
+    implementation("com.intuit.sdp:sdp-android:1.1.1")
 
     implementation("mobi.gspd:segmentedbarview:1.1.6@aar")
     implementation("com.budiyev.android:code-scanner:2.1.0")
     implementation("com.github.hajiyevelnur92:intentanimation:1.0")
     implementation("com.google.android.gms:play-services-ads:22.1.0")
 
-    implementation("com.intuit.sdp:sdp-android:1.1.0")
+    implementation("com.intuit.sdp:sdp-android:1.1.1")
     implementation("com.intuit.ssp:ssp-android:1.1.0")
     implementation("com.github.fornewid:neumorphism:0.3.0")
     implementation("com.makeramen:roundedimageview:2.3.0")
