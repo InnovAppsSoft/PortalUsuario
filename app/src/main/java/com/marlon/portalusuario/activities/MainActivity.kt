@@ -48,8 +48,8 @@ import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ViewModel.PunViewModel
 import com.marlon.portalusuario.banner.etecsa_scraping.Promo
 import com.marlon.portalusuario.banner.etecsa_scraping.PromoSliderAdapter
-import com.marlon.portalusuario.burbuja_trafico.BootReceiver
-import com.marlon.portalusuario.burbuja_trafico.FloatingBubbleService
+import com.marlon.portalusuario.trafficbubble.BootReceiver
+import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
 import com.marlon.portalusuario.databinding.ActivityMainBinding
 import com.marlon.portalusuario.errores_log.JCLogging
 import com.marlon.portalusuario.errores_log.LogFileViewerActivity

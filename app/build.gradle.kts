@@ -15,7 +15,7 @@ android {
     defaultConfig {
         resourceConfigurations.add("en")
         applicationId = "com.marlon.portalusuario"
-        minSdk = 22
+        minSdk = 23
         targetSdk = 34
         versionCode = 58
         versionName = "7.0.7"
