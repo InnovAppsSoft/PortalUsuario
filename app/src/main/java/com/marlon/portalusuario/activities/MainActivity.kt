@@ -70,6 +70,8 @@ import cu.uci.apklisupdate.UpdateCallback
 import cu.uci.apklisupdate.model.AppUpdateInfo
 import cu.uci.apklisupdate.view.ApklisUpdateDialog
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.suitetecsa.sdk.android.utils.extractShortNumber
+import io.github.suitetecsa.sdk.android.utils.validateFormat
 import org.jsoup.Connection
 import javax.inject.Inject
 
@@ -84,34 +86,34 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     private var titleTextView: TextView? = null
     private var log: TextView? = null
 
-    private var Textnombre: TextView? = null
-    private var Textcorreo: TextView? = null
-    private var Imgimgperfil: ImageView? = null
+    private var nameTV: TextView? = null
+    private var mailTV: TextView? = null
+    private var profileIV: ImageView? = null
 
-    private var download_apklis: Button? = null
-    private var download_ps: Button? = null
-    private var remind_me_later: Button? = null
+    private var downloadApklis: Button? = null
+    private var downloadPs: Button? = null
+    private var remindMeLater: Button? = null
     private var progressBar: ProgressBar? = null
     private var errorLayout: LinearLayout? = null
-    private var try_again: TextView? = null
-    var promoCache: List<Promo>? = null
+    private var tryAgain: TextView? = null
+    private var promoCache: List<Promo>? = null
     private var notificationBtn: FrameLayout? = null
     private var menu: ImageView? = null
     private var cartBadge: TextView? = null
     private var drawer: DrawerLayout? = null
 
     // VARS
-    private var APP_NAME: String? = null
+    private var appName: String? = null
 
     // SETTINGS
     var settings: SharedPreferences? = null
 
     // LOGGING
-    private var Logging: JCLogging? = null
+    private var jcLogging: JCLogging? = null
 
-    var mBiometricManager: BiometricManager? = null
+    private var mBiometricManager: BiometricManager? = null
 
-    fun setFragment(fragment: Fragment?, title: String?) {
+    private fun setFragment(fragment: Fragment?, title: String?) {
         supportFragmentManager
             .beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -120,30 +122,26 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         titleTextView!!.text = title
     }
 
-    // TODO: preference dualSim
-    var sp_sim: SharedPreferences? = null
-    var sim: String? = null
+    // preference dualSim
+    private var simPreferences: SharedPreferences? = null
+    private var simCard: String? = null
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // TODO: Shorcuts
+        // Shorcuts
         shorcut()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         punViewModel = ViewModelProvider(this)[PunViewModel::class.java]
-        APP_NAME = packageName
+        appName = packageName
         // VALORES POR DEFECTO EN LAS PREFERENCIAS
         PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions()
         }
 
-        // TODO: Preferences DualSIM
-        // TODO: Mostrar saludo con el nombre del usuario
-        // TODO: SharedPreferences para guardar datos de cuentas
-
-        sp_sim = PreferenceManager.getDefaultSharedPreferences(this)
+        simPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         context = this
         // drawer Layout
         drawer = findViewById(R.id.drawer_layout)
@@ -195,10 +193,10 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 }
 
                 R.id.telegram_channel -> {
-                    val telgramUrl = ("https://t.me/portalusuario")
-                    val telegramLauch = Intent(Intent.ACTION_VIEW)
-                    telegramLauch.data = Uri.parse(telgramUrl)
-                    startActivity(telegramLauch)
+                    val telegramUrl = ("https://t.me/portalusuario")
+                    val telegramLaunch = Intent(Intent.ACTION_VIEW)
+                    telegramLaunch.data = Uri.parse(telegramUrl)
+                    startActivity(telegramLaunch)
                 }
 
                 R.id.facebook -> {
@@ -255,17 +253,17 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         titleTextView = findViewById(R.id.puTV)
         details = findViewById(R.id.details)
         log = findViewById(R.id.log)
-        download_apklis = findViewById(R.id.download_apklis)
-        download_apklis = findViewById(R.id.download_apklis)
-        remind_me_later = findViewById(R.id.remind_me_later)
-        Textnombre = findViewById(R.id.textname)
-        Textcorreo = findViewById(R.id.correotext)
-        Imgimgperfil = findViewById(R.id.img_drawer_perfil)
+        downloadApklis = findViewById(R.id.download_apklis)
+        downloadApklis = findViewById(R.id.download_apklis)
+        remindMeLater = findViewById(R.id.remind_me_later)
+        nameTV = findViewById(R.id.textname)
+        mailTV = findViewById(R.id.correotext)
+        profileIV = findViewById(R.id.img_drawer_perfil)
 
-        Logging = JCLogging(this)
-        download_apklis = findViewById(R.id.download_apklis)
-        download_ps = findViewById(R.id.download_ps)
-        remind_me_later = findViewById(R.id.remind_me_later)
+        jcLogging = JCLogging(this)
+        downloadApklis = findViewById(R.id.download_apklis)
+        downloadPs = findViewById(R.id.download_ps)
+        remindMeLater = findViewById(R.id.remind_me_later)
         settings = PreferenceManager.getDefaultSharedPreferences(this)
 
         // Burbuja de Trafico
@@ -311,9 +309,9 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         sliderView = findViewById(R.id.imageSlider)
         progressBar = findViewById(R.id.progressBar)
         errorLayout = findViewById(R.id.errorLayoutBanner)
-        try_again = findViewById(R.id.try_again)
-        try_again!!.paintFlags = try_again!!.paintFlags or Paint.UNDERLINE_TEXT_FLAG
-        try_again!!.setOnClickListener { loadPromo() }
+        tryAgain = findViewById(R.id.try_again)
+        tryAgain!!.paintFlags = tryAgain!!.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+        tryAgain!!.setOnClickListener { loadPromo() }
         loadPromo()
         //
         // check if there are unseen notifications
@@ -351,18 +349,18 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     }
 
     // Carrusel de ETECSA
-    fun loadPromo() {
+    private fun loadPromo() {
         // hiding promos card view
         val settings = PreferenceManager.getDefaultSharedPreferences(this)
-        val show_etecsa_promo_carousel = settings.getBoolean("show_etecsa_promo_carousel", true)
-        if (show_etecsa_promo_carousel) {
+        val showEtecsaPromoCarousel = settings.getBoolean("show_etecsa_promo_carousel", true)
+        if (showEtecsaPromoCarousel) {
             // mostrar progress && ocultar carrusel
             sliderView!!.visibility = View.INVISIBLE
             progressBar!!.visibility = View.VISIBLE
             // mostrar error
             errorLayout!!.visibility = View.INVISIBLE
             //
-            if (promoCache != null && !promoCache!!.isEmpty()) {
+            if (promoCache != null && promoCache!!.isNotEmpty()) {
                 updatePromoSlider(promoCache!!)
                 return
             }
@@ -382,7 +380,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 errorLayout!!.visibility = View.VISIBLE
             }
         }
-        setCarouselVisibility(show_etecsa_promo_carousel)
+        setCarouselVisibility(showEtecsaPromoCarousel)
     }
 
     // scrapear Promo de Etecsa
@@ -487,16 +485,16 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
     }
 
-    private fun showMessage(c: Context?, _s: String?) {
-        Toast.makeText(c, _s, Toast.LENGTH_SHORT).show()
+    private fun showMessage(c: Context?, message: String?) {
+        Toast.makeText(c, message, Toast.LENGTH_SHORT).show()
     }
 
     // Huella de Seguridad
     @RequiresApi(api = Build.VERSION_CODES.M)
     fun startFingerprint() {
         val settings = PreferenceManager.getDefaultSharedPreferences(this)
-        val show_fingerprint = settings.getBoolean("show_fingerprint", false)
-        if (show_fingerprint) {
+        val showFingerprint = settings.getBoolean("show_fingerprint", false)
+        if (showFingerprint) {
             mBiometricManager = BiometricManager.BiometricBuilder(this@MainActivity)
                 .setTitle(getString(R.string.biometric_title))
                 .setSubtitle(getString(R.string.biometric_subtitle))
@@ -553,39 +551,11 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
     }
 
-    var ca0: String? = null
-    var ca1: String? = null
-    var ca2: String? = null
-    var ca3: String? = null
-    var ca4: String? = null
-    var ca5: String? = null
-    var ca6: String? = null
-    var ca7: String? = null
-    var ca8: String? = null
-    var ca9: String? = null
-    var ca10: String? = null
-    var ca11: String? = null
-    var ca12: String? = null
-    var ca13: String? = null
-    var ca14: String? = null
-    var ca15: String? = null
-    var as0: String? = null
-    var as1: String? = null
-    var as2: String? = null
-    var as3: String? = null
-    var as4: String? = null
-    var as12: String? = null
-    var as13: String? = null
-    var qwe = ""
-    var union = ""
-    var errorMessage = "Numero erroneo"
-    var cuantos_caracteres = 0
-    var error2 =
-        "            Cuidado ..\n Faltan caracteres o su número seleccionado no es un número de telefonia móvil  "
-
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        val errorMessage =
+            "Cuidado... Faltan caracteres o su número seleccionado no es un número de telefonia móvil."
         for (fragment in supportFragmentManager.fragments) {
             fragment.onActivityResult(requestCode, resultCode, data)
         }
@@ -594,201 +564,25 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 val uri = data!!.data
                 val cursor = contentResolver.query(uri!!, null, null, null, null)
                 if (cursor!!.moveToFirst()) {
-                    val columnaNombre =
-                        cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
-                    val columnaNumero =
+                    val numberColumn =
                         cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
-                    val nombre = cursor.getString(columnaNombre)
-                    val numero = cursor.getString(columnaNumero)
-                    union = ""
-                    if (numero.length > 0) {
-                        ca0 = "" + numero[0] + ""
-                        qwe = ca0!!
-                        if (((((qwe == "0") || qwe == "1" || qwe == "2") || qwe == "3" || qwe == "4" || qwe == "5" || qwe == "6") || qwe == "7" || qwe == "8") || qwe == "9") {
-                            union += qwe
-                        }
-                        if (numero.length > 1) {
-                            ca1 = "" + numero[1] + ""
-                            qwe = ca1!!
-                            if (((((qwe == "0") || qwe == "1" || qwe == "2" || qwe == "3" || qwe == "4" || qwe == "5") || qwe == "6") || qwe == "7" || qwe == "8") || qwe == "9") {
-                                union += qwe
-                            }
-                            if (numero.length > 2) {
-                                ca2 = "" + numero[2] + ""
-                                qwe = ca2!!
-                                if ((((((qwe == "0" || qwe == "1" || qwe == "2") || qwe == "3") || qwe == "4") || qwe == "5") || qwe == "6" || qwe == "7" || qwe == "8") || qwe == "9") {
-                                    union += qwe
-                                }
-                                if (numero.length > 3) {
-                                    ca3 = "" + numero[3] + ""
-                                    qwe = ca3!!
-                                    if ((((qwe == "0" || qwe == "1" || qwe == "2" || qwe == "3") || qwe == "4" || qwe == "5" || qwe == "6") || qwe == "7" || qwe == "8") || qwe == "9") {
-                                        union += qwe
-                                    }
-                                    if (numero.length > 4) {
-                                        ca4 = "" + numero[4] + ""
-                                        qwe = ca4!!
-                                        if ((((qwe == "0" || qwe == "1" || qwe == "2" || qwe == "3") || qwe == "4") || qwe == "5" || qwe == "6" || qwe == "7" || qwe == "8") || qwe == "9") {
-                                            union += qwe
-                                        }
-                                        if (numero.length > 5) {
-                                            ca5 = "" + numero[5] + ""
-                                            qwe = ca5!!
-                                            if ((((((qwe == "0") || qwe == "1" || qwe == "2" || qwe == "3") || qwe == "4") || qwe == "5") || qwe == "6" || qwe == "7") || qwe == "8" || qwe == "9") {
-                                                union += qwe
-                                            }
-                                            if (numero.length > 6) {
-                                                ca6 = "" + numero[6] + ""
-                                                qwe = ca6!!
-                                                if (((((qwe == "0") || qwe == "1") || qwe == "2" || qwe == "3") || qwe == "4" || qwe == "5") || qwe == "6" || qwe == "7" || qwe == "8" || qwe == "9") {
-                                                    union += qwe
-                                                }
-                                                if (numero.length > 7) {
-                                                    ca7 = "" + numero[7] + ""
-                                                    qwe = ca7!!
-                                                    if (((((((((qwe == "0") || qwe == "1") || qwe == "2") || qwe == "3") || qwe == "4") || qwe == "5") || qwe == "6" || qwe == "7") || qwe == "8") || qwe == "9") {
-                                                        union += qwe
-                                                    }
-                                                    if (numero.length > 8) {
-                                                        ca8 = "" + numero[8] + ""
-                                                        qwe = ca8!!
-                                                        if ((((((qwe == "0" || qwe == "1" || qwe == "2") || qwe == "3" || qwe == "4") || qwe == "5") || qwe == "6") || qwe == "7") || qwe == "8" || qwe == "9") {
-                                                            union += qwe
-                                                        }
-                                                        if (numero.length > 9) {
-                                                            ca9 = "" + numero[9] + ""
-                                                            qwe = ca9!!
-                                                            if (((((((qwe == "0" || qwe == "1") || qwe == "2" || qwe == "3") || qwe == "4" || qwe == "5") || qwe == "6") || qwe == "7") || qwe == "8") || qwe == "9") {
-                                                                union += qwe
-                                                            }
-                                                            if (numero.length > 10) {
-                                                                ca10 = "" + numero[10] + ""
-                                                                qwe = ca10!!
-                                                                if ((((((qwe == "0" || qwe == "1") || qwe == "2") || qwe == "3" || qwe == "4") || qwe == "5" || qwe == "6") || qwe == "7") || qwe == "8" || qwe == "9") {
-                                                                    union += qwe
-                                                                }
-                                                                if (numero.length > 11) {
-                                                                    ca11 = "" + numero[11] + ""
-                                                                    qwe = ca11!!
-                                                                    if (((((((qwe == "0" || qwe == "1") || qwe == "2" || qwe == "3" || qwe == "4") || qwe == "5") || qwe == "6") || qwe == "7") || qwe == "8") || qwe == "9") {
-                                                                        union += qwe
-                                                                    }
-                                                                    if (numero.length > 12) {
-                                                                        ca12 = "" + numero[12] + ""
-                                                                        qwe = ca12!!
-                                                                        if (((((((qwe == "0" || qwe == "1" || qwe == "2") || qwe == "3") || qwe == "4") || qwe == "5") || qwe == "6" || qwe == "7") || qwe == "8") || qwe == "9") {
-                                                                            union += qwe
-                                                                        }
-                                                                        if (numero.length > 13) {
-                                                                            ca13 =
-                                                                                "" + numero[13] + ""
-                                                                            qwe = ca13!!
-                                                                            if ((((((qwe == "0") || qwe == "1" || qwe == "2") || qwe == "3" || qwe == "4") || qwe == "5" || qwe == "6" || qwe == "7") || qwe == "8") || qwe == "9") {
-                                                                                union += qwe
-                                                                            }
-                                                                            if (numero.length > 14) {
-                                                                                ca14 =
-                                                                                    "" + numero[14] + ""
-                                                                                qwe = ca14!!
-                                                                                if ((((((qwe == "0") || qwe == "1") || qwe == "2" || qwe == "3") || qwe == "4") || qwe == "5") || qwe == "6" || qwe == "7" || qwe == "8" || qwe == "9") {
-                                                                                    union += qwe
-                                                                                }
-                                                                                if (numero.length > 15) {
-                                                                                    ca15 =
-                                                                                        "" + numero[15] + ""
-                                                                                    qwe = ca15!!
-                                                                                    if (((((qwe == "0" || qwe == "1" || qwe == "2") || qwe == "3" || qwe == "4" || qwe == "5") || qwe == "6" || qwe == "7") || qwe == "8") || qwe == "9") {
-                                                                                        union += qwe
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if (union.length == 8) {
-                        val ewq = "" + union[0] + ""
-                        if (ewq == "5") {
-                            ServiciosFragment.phoneNumber.setText(union)
-                        } else {
+                    val phoneNumber = cursor.getString(numberColumn)
+                    validateFormat(phoneNumber)?.let {
+                        extractShortNumber(it)?.let { shortNumber ->
+                            ServiciosFragment.phoneNumber.setText(shortNumber)
+                        } ?: run {
                             showMessage(this, errorMessage)
                         }
-                    } else {
-                        if (union.length < 15) {
-                            cuantos_caracteres = union.length
-                            if (cuantos_caracteres == 14) {
-                                as0 = "" + union[0] + ""
-                                as1 = "" + union[1] + ""
-                                as2 = "" + union[2] + ""
-                                as3 = "" + union[3] + ""
-                                as4 = "" + union[4] + ""
-                                as12 = "" + union[12] + ""
-                                as13 = "" + union[13] + ""
-                                if (((((as0 == "9") && as1 == "9" && as2 == "5") && as3 == "3") && as4 == "5" && as12 == "9") && as13 == "9") {
-                                    val nuu =
-                                        "" + union[4] + union[5] + union[6] + union[7] + union[8] + union[9] + union[10] + union[11] + ""
-                                    ServiciosFragment.phoneNumber.setText(nuu)
-                                } else {
-                                    showMessage(this, errorMessage)
-                                }
-                            } else {
-                                cuantos_caracteres = union.length
-                                if (cuantos_caracteres == 10) {
-                                    as0 = "" + union[0] + ""
-                                    as1 = "" + union[1] + ""
-                                    as2 = "" + union[2] + ""
-                                    if ((as0 == "5" && as1 == "3") || (as0 == "9" && as1 == "9")) {
-                                        if (as2 == "5") {
-                                            val nuu =
-                                                "" + union[2] + union[3] + union[4] + union[5] + union[6] + union[7] + union[8] + union[9] + ""
-                                            ServiciosFragment.phoneNumber.setText(nuu)
-                                        } else {
-                                            showMessage(this, errorMessage)
-                                        }
-                                    } else {
-                                        showMessage(this, errorMessage)
-                                    }
-                                } else {
-                                    if (cuantos_caracteres < 8) {
-                                        ServiciosFragment.phoneNumber.setText(union)
-                                        showMessage(this, error2)
-                                    } else {
-                                        showMessage(this, errorMessage)
-                                    }
-                                }
-                            }
-                        } else {
-                            showMessage(this, errorMessage)
-                        }
+                    } ?: run {
+                        showMessage(this, errorMessage)
                     }
-
-                    // textnombre.setText(nombre);
-                    // editnumero.setText(numero);
                 }
             }
         }
 
         // FLOATING BUBBLE SERVICE
-        if (requestCode == 0) {
-            if (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    !Settings.canDrawOverlays(this)
-                } else {
-                    TODO("VERSION.SDK_INT < M")
-                }
-            ) {
-            } else {
-                startService(Intent(this, FloatingBubbleService::class.java))
-            }
+        if (requestCode == 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Settings.canDrawOverlays(this)) {
+            startService(Intent(this, FloatingBubbleService::class.java))
         }
     }
 
@@ -800,12 +594,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             intent.putExtra("com.android.phone.force.slot", true)
             intent.putExtra("Cdma_Supp", true)
-            if (sim == "0") {
+            if (simCard == "0") {
                 for (s in CuentasFragment.simSlotName) {
                     intent.putExtra(s, 0)
                     intent.putExtra("com.android.phone.extra.slot", 0)
                 }
-            } else if (sim == "1") {
+            } else if (simCard == "1") {
                 for (s in CuentasFragment.simSlotName) {
                     intent.putExtra(s, 1)
                     intent.putExtra("com.android.phone.extra.slot", 1)
@@ -823,12 +617,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             bonos.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             bonos.putExtra("com.android.phone.force.slot", true)
             bonos.putExtra("Cdma_Supp", true)
-            if (sim == "0") {
+            if (simCard == "0") {
                 for (s in CuentasFragment.simSlotName) {
                     bonos.putExtra(s, 0)
                     bonos.putExtra("com.android.phone.extra.slot", 0)
                 }
-            } else if (sim == "1") {
+            } else if (simCard == "1") {
                 for (s in CuentasFragment.simSlotName) {
                     bonos.putExtra(s, 1)
                     bonos.putExtra("com.android.phone.extra.slot", 1)
@@ -846,12 +640,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             datos.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             datos.putExtra("com.android.phone.force.slot", true)
             datos.putExtra("Cdma_Supp", true)
-            if (sim == "0") {
+            if (simCard == "0") {
                 for (s in CuentasFragment.simSlotName) {
                     datos.putExtra(s, 0)
                     datos.putExtra("com.android.phone.extra.slot", 0)
                 }
-            } else if (sim == "1") {
+            } else if (simCard == "1") {
                 for (s in CuentasFragment.simSlotName) {
                     datos.putExtra(s, 1)
                     datos.putExtra("com.android.phone.extra.slot", 1)
@@ -897,9 +691,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     }
 
     public override fun onPause() {
-        if (settings!!.getBoolean("show_traffic_speed_bubble", false)) {
-            // unregisterReceiver(networkStateReceiver);
-        }
         super.onPause()
     }
 
@@ -939,13 +730,13 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         Toast.makeText(applicationContext, error, Toast.LENGTH_LONG).show()
     }
 
-    override fun onAuthenticationFailed() {}
+    override fun onAuthenticationFailed() { /* no-op */ }
     override fun onAuthenticationCancelled() {
         mBiometricManager!!.cancelAuthentication()
         finish()
     }
-    override fun onAuthenticationSuccessful() {}
-    override fun onAuthenticationHelp(helpCode: Int, helpString: CharSequence) {}
+    override fun onAuthenticationSuccessful() { /* no-op */ }
+    override fun onAuthenticationHelp(helpCode: Int, helpString: CharSequence) { /* no-op */ }
     override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
         mBiometricManager!!.cancelAuthentication()
         finish()
