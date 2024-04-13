@@ -181,7 +181,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".burbuja_trafico.FloatingBubbleService"
+            android:name=".trafficbubble.FloatingBubbleService"
             android:enabled="true"
             android:exported="true" />
         <meta-data
@@ -193,7 +193,7 @@
 
 
         <receiver
-            android:name=".burbuja_trafico.BootReceiver"
+            android:name=".trafficbubble.BootReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

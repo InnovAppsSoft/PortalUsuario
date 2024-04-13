@@ -7,6 +7,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("com.google.firebase.appdistribution")
     id("com.google.firebase.crashlytics")
+    alias(libs.plugins.arturbosch.detekt)
 }
 
 android {
@@ -15,7 +16,7 @@ android {
     defaultConfig {
         resourceConfigurations.add("en")
         applicationId = "com.marlon.portalusuario"
-        minSdk = 22
+        minSdk = 23
         targetSdk = 34
         versionCode = 58
         versionName = "7.0.7"
@@ -45,6 +46,18 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    lint {
+        lintConfig = file("$rootDir/android-lint.xml")
+        abortOnError = false
+        sarifReport = true
+    }
+
+    detekt {
+        buildUponDefaultConfig = true
+        allRules = false
+        autoCorrect = true
     }
 
     kotlinOptions {
@@ -245,4 +258,7 @@ dependencies {
     // Show case
     implementation("com.github.amlcurran.showcaseview:library:5.4.3")
     //
+
+    //SuitEtecsa libs
+    implementation(libs.suitetecsa.sdk.android)
 }

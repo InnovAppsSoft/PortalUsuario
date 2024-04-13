@@ -88,7 +88,7 @@ fun CaptchaCanvas(
             val backgroundBlur = captchaImage?.copy(captchaImage.config, true)
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
                 if (backgroundBlur != null) {
-                    LegacyBlurImage(bitmap = backgroundBlur, blurRadio = 25f)
+                    LegacyBlurImage(modifier = Modifier.fillMaxSize(), bitmap = backgroundBlur, blurRadio = 25f)
                 }
             } else {
                 if (backgroundBlur != null) {

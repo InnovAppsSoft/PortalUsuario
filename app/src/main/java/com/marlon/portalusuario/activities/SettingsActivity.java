@@ -16,7 +16,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.burbuja_trafico.FloatingBubbleService;
+import com.marlon.portalusuario.trafficbubble.FloatingBubbleService;
 
 public class SettingsActivity extends AppCompatActivity{
 

@@ -1,3 +1,6 @@
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     dependencies {
@@ -18,8 +21,17 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.devtools.ksp) apply false
     alias(libs.plugins.androidLibrary) apply false
+    alias(libs.plugins.arturbosch.detekt) apply false
 }
 
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
+}
+
+tasks.withType<Detekt>().configureEach {
+    jvmTarget = "17"
+}
+
+tasks.withType<DetektCreateBaselineTask>().configureEach {
+    jvmTarget = "17"
 }

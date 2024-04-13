@@ -16,7 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 fun LegacyBlurImage(
     bitmap: Bitmap,
     blurRadio: Float,
-    modifier: Modifier = Modifier.fillMaxSize()
+    modifier: Modifier = Modifier
 ) {
     val renderScript = RenderScript.create(LocalContext.current)
     val bitmapAlloc = Allocation.createFromBitmap(renderScript, bitmap)
@@ -32,7 +32,7 @@ fun LegacyBlurImage(
 }
 
 @Composable
-fun BlurImage(bitmap: Bitmap, modifier: Modifier = Modifier.fillMaxSize()) {
+fun BlurImage(bitmap: Bitmap, modifier: Modifier = Modifier) {
     Image(
         bitmap = bitmap.asImageBitmap(),
         contentDescription = null,

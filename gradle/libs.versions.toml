@@ -27,6 +27,10 @@ appcompat = "1.6.1"
 material = "1.9.0"
 apklisupdate = "1.4"
 
+arturbosch-detekt = "1.23.6"
+
+suitetecsa-sdk-android = "0.1.0-alpha01"
+
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity-ktx" }
 androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayout-compose" }
@@ -72,8 +76,12 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 apklisupdate = {  group = "com.github.Z17-CU", name = "apklisupdate", version.ref = "apklisupdate" }
 
+suitetecsa-sdk-android = { group = "io.github.suitetecsa.sdk", name = "android", version.ref = "suitetecsa-sdk-android" }
+
 [plugins]
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt-android" }
 devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "devtools-ksp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin-android"}
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+
+arturbosch-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "arturbosch-detekt" }

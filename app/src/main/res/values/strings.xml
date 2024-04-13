@@ -1118,5 +1118,7 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="app_widget_description">This is an app widget description</string>
     <string name="comunidad_en_whatsapp">Comunidad en WhatsApp</string>
     <string name="politica_de_privacidad">Politica de Privacidad</string>
+    <string name="upload_traffic_template">↑ %1$s</string>
+    <string name="download_traffic_template">↓ %1$s</string>
 
 </resources>
