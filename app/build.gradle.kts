@@ -261,4 +261,6 @@ dependencies {
 
     //SuitEtecsa libs
     implementation(libs.suitetecsa.sdk.android)
+    implementation(libs.suitetecsa.sdk.kotlin)
+    implementation(libs.suitetecsa.sdk.kotlin.old)
 }

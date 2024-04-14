@@ -15,7 +15,6 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Icon
 import android.net.ConnectivityManager
 import android.net.Uri
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -31,6 +30,7 @@ import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat.IntentBuilder
@@ -42,10 +42,13 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.preference.PreferenceManager
+import androidx.preference.PreferenceManager.getDefaultSharedPreferences
 import com.google.android.material.navigation.NavigationView
 import com.marlon.portalusuario.PUNotifications.PUNotificationsActivity
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ViewModel.PunViewModel
+import com.marlon.portalusuario.banner.PromotionEvent
+import com.marlon.portalusuario.banner.PromotionsViewModel
 import com.marlon.portalusuario.banner.etecsa_scraping.Promo
 import com.marlon.portalusuario.banner.etecsa_scraping.PromoSliderAdapter
 import com.marlon.portalusuario.trafficbubble.BootReceiver
@@ -56,7 +59,6 @@ import com.marlon.portalusuario.errores_log.LogFileViewerActivity
 import com.marlon.portalusuario.huella.BiometricCallback
 import com.marlon.portalusuario.huella.BiometricManager
 import com.marlon.portalusuario.une.UneActivity
-import com.marlon.portalusuario.util.SSLHelper
 import com.marlon.portalusuario.util.Util
 import com.marlon.portalusuario.view.fragments.CuentasFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
@@ -72,8 +74,9 @@ import cu.uci.apklisupdate.view.ApklisUpdateDialog
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.suitetecsa.sdk.android.utils.extractShortNumber
 import io.github.suitetecsa.sdk.android.utils.validateFormat
-import org.jsoup.Connection
+import io.github.suitetecsa.sdk.promotion.model.Promotion
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), BiometricCallback {
@@ -81,6 +84,10 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     private lateinit var binding: ActivityMainBinding
 
     @Inject lateinit var connectivityFragment: ConnectivityFragment
+    private val promotionsViewModel by viewModels<PromotionsViewModel>()
+
+    // Promotions
+    private var showPromotions by Delegates.notNull<Boolean>()
 
     private var details: TextView? = null
     private var titleTextView: TextView? = null
@@ -93,12 +100,11 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     private var downloadApklis: Button? = null
     private var downloadPs: Button? = null
     private var remindMeLater: Button? = null
-    private var progressBar: ProgressBar? = null
-    private var errorLayout: LinearLayout? = null
+    private lateinit var progressBar: ProgressBar
+    private lateinit var errorLayout: LinearLayout
     private var tryAgain: TextView? = null
-    private var promoCache: List<Promo>? = null
     private var notificationBtn: FrameLayout? = null
-    private var menu: ImageView? = null
+    private lateinit var menu: ImageView
     private var cartBadge: TextView? = null
     private var drawer: DrawerLayout? = null
 
@@ -126,13 +132,22 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     private var simPreferences: SharedPreferences? = null
     private var simCard: String? = null
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Shorcuts
         shorcut()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Settings preferences
+        val settings = getDefaultSharedPreferences(this)
+        showPromotions = settings.getBoolean("show_etecsa_promo_carousel", true)
+        settings.registerOnSharedPreferenceChangeListener { sharedPreferences, key ->
+            if (key == "show_etecsa_promo_carousel") {
+                showPromotions = sharedPreferences.getBoolean(key, true)
+            }
+        }
+
         punViewModel = ViewModelProvider(this)[PunViewModel::class.java]
         appName = packageName
         // VALORES POR DEFECTO EN LAS PREFERENCIAS
@@ -141,7 +156,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             requestPermissions()
         }
 
-        simPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        simPreferences = getDefaultSharedPreferences(this)
         context = this
         // drawer Layout
         drawer = findViewById(R.id.drawer_layout)
@@ -248,7 +263,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             false
         }
         menu = findViewById(R.id.menu)
-        menu!!.setOnClickListener { drawer!!.openDrawer(GravityCompat.START) }
+        menu.setOnClickListener { drawer!!.openDrawer(GravityCompat.START) }
         titleLayout = findViewById(R.id.titleLayout)
         titleTextView = findViewById(R.id.puTV)
         details = findViewById(R.id.details)
@@ -264,7 +279,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         downloadApklis = findViewById(R.id.download_apklis)
         downloadPs = findViewById(R.id.download_ps)
         remindMeLater = findViewById(R.id.remind_me_later)
-        settings = PreferenceManager.getDefaultSharedPreferences(this)
 
         // Burbuja de Trafico
         val bootReceiver = BootReceiver()
@@ -276,12 +290,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
 
         // Huella Seguridad
-        if (settings!!.getBoolean("show_fingerprint", false)) {
+        if (settings.getBoolean("show_fingerprint", false)) {
             startFingerprint()
         }
 
         // Actualizacion de Aplicacion Apklis
-        if (settings!!.getBoolean("start_checking_for_updates", true)) {
+        if (settings.getBoolean("start_checking_for_updates", true)) {
             ApklisUpdate.hasAppUpdate(
                 this,
                 object : UpdateCallback {
@@ -311,8 +325,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         errorLayout = findViewById(R.id.errorLayoutBanner)
         tryAgain = findViewById(R.id.try_again)
         tryAgain!!.paintFlags = tryAgain!!.paintFlags or Paint.UNDERLINE_TEXT_FLAG
-        tryAgain!!.setOnClickListener { loadPromo() }
-        loadPromo()
+        tryAgain!!.setOnClickListener {
+            if (Util.isConnected(this)) {
+                promotionsViewModel.onEvent(PromotionEvent.Reload)
+            }
+        }
+        setupPromotions()
         //
         // check if there are unseen notifications
         cartBadge = findViewById(R.id.cart_badge)
@@ -333,7 +351,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     }
 
     private fun setupBadge() {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val sharedPreferences = getDefaultSharedPreferences(this)
         val count = sharedPreferences.getInt("notifications_count", 0)
         Log.e("UNSEE NOTIFICATIONS", count.toString())
         if (count == 0) {
@@ -348,151 +366,66 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         cartBadge!!.text = count.toString()
     }
 
-    // Carrusel de ETECSA
-    private fun loadPromo() {
-        // hiding promos card view
-        val settings = PreferenceManager.getDefaultSharedPreferences(this)
-        val showEtecsaPromoCarousel = settings.getBoolean("show_etecsa_promo_carousel", true)
-        if (showEtecsaPromoCarousel) {
-            // mostrar progress && ocultar carrusel
-            sliderView!!.visibility = View.INVISIBLE
-            progressBar!!.visibility = View.VISIBLE
-            // mostrar error
-            errorLayout!!.visibility = View.INVISIBLE
-            //
-            if (promoCache != null && promoCache!!.isNotEmpty()) {
-                updatePromoSlider(promoCache!!)
-                return
+    // setUp carousel state
+    private fun setupPromotions() {
+        if (showPromotions) {
+            if (Util.isConnected(this)) {
+                promotionsViewModel.onEvent(PromotionEvent.Reload)
             }
-            //
-            if (Util.isConnected(this@MainActivity)) {
-                // llamada al metodo de scraping
-                try {
-                    SrapingPromo().execute()
-                } catch (ex: Exception) {
-                    ex.printStackTrace()
+
+            promotionsViewModel.state.observe(this) { state ->
+                if (state.promotions.isEmpty() && !state.isLoading) {
+                    // hide progressBar and carousel
+                    progressBar.visibility = View.INVISIBLE
+                    sliderView.visibility = View.INVISIBLE
+                    //show error
+                    errorLayout.visibility = View.VISIBLE
+                } else if (state.promotions.isNotEmpty()) {
+                    updatePromoSlider(state.promotions)
+                    // hide progressBar and error
+                    progressBar.visibility = View.INVISIBLE
+                    errorLayout.visibility = View.INVISIBLE
+                    //show carousel
+                    sliderView.visibility = View.VISIBLE
                 }
-            } else {
-                // ocultar progress && carrusel
-                sliderView!!.visibility = View.INVISIBLE
-                progressBar!!.visibility = View.INVISIBLE
-                // mostrar error
-                errorLayout!!.visibility = View.VISIBLE
+
+                if (state.isLoading) {
+                    // show progressBar
+                    progressBar.visibility = View.VISIBLE
+                    // hide carousel and error
+                    sliderView.visibility = View.INVISIBLE
+                    errorLayout.visibility = View.INVISIBLE
+                }
             }
         }
-        setCarouselVisibility(showEtecsaPromoCarousel)
+        setCarouselVisibility(showPromotions)
     }
 
-    // scrapear Promo de Etecsa
-    inner class SrapingPromo : AsyncTask<Void?, Void?, List<Promo>>() {
-        private var success = false
-
-        // cuando se termine de ejecutar la accion doInBackground
-        @Deprecated("Deprecated in Java")
-        public override fun onPostExecute(promos: List<Promo>) {
-            super.onPostExecute(promos)
-            // adapter para cada item
-            if (success) {
-                try {
-                    // ocultar error
-                    errorLayout!!.visibility = View.INVISIBLE
-                    // mostrar card view
-                    sliderView!!.visibility = View.VISIBLE
-                    //
-                    updatePromoSlider(promos)
-                    // ocultar progress bar
-                    progressBar!!.visibility = View.INVISIBLE
-                } catch (ex: Exception) {
-                    ex.printStackTrace()
-                }
-            } else {
-                // ocultar progress bar
-                progressBar!!.visibility = View.INVISIBLE
-                // ocultar card view
-                sliderView!!.visibility = View.INVISIBLE
-                // mostrar error
-                errorLayout!!.visibility = View.VISIBLE
-            }
-        }
-
-        @Deprecated("Deprecated in Java")
-        override fun doInBackground(vararg p0: Void?): List<Promo> {
-            val promos: MutableList<Promo> = ArrayList()
-            try {
-                val response = SSLHelper.getConnection("https://www.etecsa.cu")
-                    .userAgent(
-                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.122 Safari/534.30"
-                    )
-                    .timeout(30000).ignoreContentType(true).method(
-                        Connection.Method.GET
-                    ).followRedirects(true).execute()
-                if (response.statusCode() == 200) {
-                    val parsed = response.parse()
-                    // CAROUSEL
-                    val carousel = parsed.select("div.carousel-inner").select("div.carousel-item")
-                    for (i in carousel.indices) {
-                        val items = carousel[i]
-                        val mipromoContent = items.selectFirst("div.carousel-item")
-                        val link = items.selectFirst("div.mipromocion-contenido")!!
-                            .select("a").attr("href")
-                        val toText = mipromoContent.toString()
-                        val idx1 = toText.indexOf("<div style=\"background: url(\'")
-                        val idx2 = toText.indexOf("\');")
-                        var divStyle = toText.substring(idx1, idx2)
-                        divStyle = divStyle.replace("<div style=\"background: url(\'", "")
-                        //
-                        val imageSvg = items.selectFirst("div.mipromocion-contenido")!!
-                            .selectFirst("img")
-                        val svg = imageSvg!!.attr("src")
-                        //
-                        promos.add(
-                            Promo(
-                                svg,
-                                divStyle,
-                                link
-                            )
-                        )
-                    }
-                    success = true
-                } else {
-                    success = false
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            return promos
-        }
-    }
-
-    fun updatePromoSlider(list: List<Promo>) {
-        if (list.isNotEmpty()) {
-            val adapter =
-                PromoSliderAdapter(
-                    this,
-                    list as ArrayList<Promo>
-                )
-            sliderView!!.setSliderAdapter(adapter)
+    private fun updatePromoSlider(promotions: List<Promotion>) {
+        if (promotions.isNotEmpty()) {
+            val adapter = PromoSliderAdapter(this, promotions)
+            sliderView.setSliderAdapter(adapter)
             // setting up el slider view
-            sliderView!!.setIndicatorAnimation(IndicatorAnimationType.WORM)
-            sliderView!!.setSliderTransformAnimation(SliderAnimations.CUBEINSCALINGTRANSFORMATION)
-            sliderView!!.autoCycleDirection = SliderView.AUTO_CYCLE_DIRECTION_RIGHT
-            sliderView!!.indicatorSelectedColor = Color.WHITE
-            sliderView!!.indicatorUnselectedColor = Color.GRAY
-            sliderView!!.scrollTimeInSec = 4
-            sliderView!!.startAutoCycle()
+            sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM)
+            sliderView.setSliderTransformAnimation(SliderAnimations.CUBEINSCALINGTRANSFORMATION)
+            sliderView.autoCycleDirection = SliderView.AUTO_CYCLE_DIRECTION_RIGHT
+            sliderView.indicatorSelectedColor = Color.WHITE
+            sliderView.indicatorUnselectedColor = Color.GRAY
+            sliderView.scrollTimeInSec = 4
+            sliderView.startAutoCycle()
         } else {
-            carouselLayout!!.visibility = View.GONE
+            carouselLayout.visibility = View.GONE
         }
     }
 
-    private fun showMessage(c: Context?, message: String?) {
-        Toast.makeText(c, message, Toast.LENGTH_SHORT).show()
+    private fun String?.showMessage(c: Context?) {
+        Toast.makeText(c, this, Toast.LENGTH_SHORT).show()
     }
 
     // Huella de Seguridad
     @RequiresApi(api = Build.VERSION_CODES.M)
     fun startFingerprint() {
-        val settings = PreferenceManager.getDefaultSharedPreferences(this)
+        val settings = getDefaultSharedPreferences(this)
         val showFingerprint = settings.getBoolean("show_fingerprint", false)
         if (showFingerprint) {
             mBiometricManager = BiometricManager.BiometricBuilder(this@MainActivity)
@@ -571,10 +504,10 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                         extractShortNumber(it)?.let { shortNumber ->
                             ServiciosFragment.phoneNumber.setText(shortNumber)
                         } ?: run {
-                            showMessage(this, errorMessage)
+                            errorMessage.showMessage(this)
                         }
                     } ?: run {
-                        showMessage(this, errorMessage)
+                        errorMessage.showMessage(this)
                     }
                 }
             }
@@ -774,6 +707,16 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 ).show()
             }
         }
+
+        fun switchIsLoading(isLoading: Boolean) {
+            if (isLoading) {
+                progressBar.visibility = View.VISIBLE
+                errorLayout.visibility = View.GONE
+            } else {
+                progressBar.visibility = View.GONE
+                errorLayout.visibility = View.GONE
+            }
+        }
     }
 
     // Promo ETECSA
@@ -782,8 +725,8 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         private var titleLayout: LinearLayout? = null
 
         // PROMO ETECSA CAROUSEL
-        private var carouselLayout: RelativeLayout? = null
-        private var sliderView: SliderView? = null
+        private lateinit var carouselLayout: RelativeLayout
+        private lateinit var sliderView: SliderView
         var navigationView: NavigationView? = null
         private var punViewModel: PunViewModel? = null
 
@@ -807,12 +750,8 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
 
         @JvmStatic
-        fun setCarouselVisibility(b: Boolean) {
-            if (b) {
-                carouselLayout!!.visibility = View.VISIBLE
-            } else {
-                carouselLayout!!.visibility = View.GONE
-            }
+        fun setCarouselVisibility(isVisible: Boolean) {
+            carouselLayout.visibility = if (isVisible) View.VISIBLE else View.GONE
         }
     }
 }
