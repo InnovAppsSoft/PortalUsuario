@@ -1,6 +1,5 @@
 package com.marlon.portalusuario.banner
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,8 +9,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-
-private const val TAG = "PromotionsViewModel"
 
 @HiltViewModel
 class PromotionsViewModel @Inject constructor() : ViewModel() {
@@ -30,7 +27,6 @@ class PromotionsViewModel @Inject constructor() : ViewModel() {
             state.value = withContext(Dispatchers.IO) {
                 runCatching {
                     val promotions = PromotionsCollector.collect()
-                    Log.d(TAG, "loadPromotions: ${promotions.size}")
                     PromotionState(promotions)
                 }.getOrNull() ?: PromotionState(onError = true)
             }

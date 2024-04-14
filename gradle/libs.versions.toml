@@ -28,7 +28,7 @@ apklisupdate = "1.4"
 
 arturbosch-detekt = "1.23.6"
 
-suitetecsa-sdk-kotlin = "0.2.0"
+suitetecsa-sdk-kotlin = "0.2.1"
 suitetecsa-sdk-kotlin-old = "0.1.8"
 suitetecsa-sdk-android = "0.1.0-alpha01"
 

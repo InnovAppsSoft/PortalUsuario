@@ -48,10 +48,10 @@ public class PromoSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolde
         final Promotion sliderItem = mSliderItems.get(position);
         // from url in your imageview.
         Picasso.get()
-                .load("https://www.etecsa.cu/" + sliderItem.getJpgUrl())
+                .load(sliderItem.getJpgUrl())
                 .fit().centerInside()
                 .into(viewHolder.imageViewBackground);
-        Uri uri = Uri.parse("https://www.etecsa.cu/" + sliderItem.getSvgUrl());
+        Uri uri = Uri.parse(sliderItem.getSvgUrl());
         GlideToVectorYou
                 .init()
                 .with(context)
@@ -68,7 +68,7 @@ public class PromoSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolde
                 })
                 .load(uri, viewHolder.imageViewSVG);
         // evento on click
-        viewHolder.itemView.setOnClickListener(v -> MainActivity.openLink("https://www.etecsa.cu/" + sliderItem.getPromotionUrl()));
+        viewHolder.itemView.setOnClickListener(v -> MainActivity.openLink(sliderItem.getPromotionUrl()));
     }
 
     // this method will return

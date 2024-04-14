@@ -22,7 +22,7 @@
             app:titleEnabled="false">
 
             <RelativeLayout
-                android:id="@+id/carouselLayout"
+                android:id="@+id/carousel_layout"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_width="match_parent"
@@ -36,7 +36,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:id="@+id/progressBar"
+                    android:id="@+id/progress_bar"
                     style="?android:attr/progressBarStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
