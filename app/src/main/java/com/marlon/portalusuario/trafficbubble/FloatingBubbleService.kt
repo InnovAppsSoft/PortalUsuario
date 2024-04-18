@@ -6,8 +6,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.PixelFormat
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
 import android.net.TrafficStats
-import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
@@ -15,16 +17,12 @@ import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.provider.Settings
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
 import android.view.WindowManager
-import android.widget.TextView
-import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.databinding.BackBurbujaDeleteOverBinding
@@ -36,12 +34,15 @@ import com.marlon.portalusuario.trafficbubble.Util.humanReadableByteCount
 import com.marlon.portalusuario.util.Util
 import java.lang.ref.WeakReference
 
+
 private const val VIBRATE_TIME = 100L
 private const val GRAVITY_CENTER = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
 private const val INITIAL_POSITION_X = 0 // Posición inicial X para la burbuja
 private const val INITIAL_POSITION_Y = 0 // Posición inicial Y para la burbuja
 
 class FloatingBubbleService : Service() {
+    private lateinit var networkType: String
+
     // UI
     private lateinit var windowManager: WindowManager
     private lateinit var bubbleLayoutParams: WindowManager.LayoutParams
@@ -66,17 +67,19 @@ class FloatingBubbleService : Service() {
 
     private lateinit var sharedPreferences: SharedPreferences
 
-    private val preferenceChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { prefs, key ->
-        when (key) {
-            "saldo" -> {
-                bubbleState.accountBalance = prefs.getString(key, "0.00 CUP")!!
+    private val preferenceChangeListener =
+        SharedPreferences.OnSharedPreferenceChangeListener { prefs, key ->
+            when (key) {
+                "saldo" -> {
+                    bubbleState.accountBalance = prefs.getString(key, "0.00 CUP")!!
+                }
+
+                "paquete" -> {
+                    bubbleState.dataBalance = prefs.getString(key, "0 B")!!
+                }
             }
-            "paquete" -> {
-                bubbleState.dataBalance = prefs.getString(key, "0 B")!!
-            }
+            updateBubbleUI()
         }
-        updateBubbleUI()
-    }
 
     private fun updateBubbleUI() {
         bubbleBinding.bubbleTrafficUploadText.text = getString(
@@ -133,8 +136,8 @@ class FloatingBubbleService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        weakReference = WeakReference(this)
         isStarted = true
+        weakReference = WeakReference(this)
         //
         screenWidth = applicationContext.resources.displayMetrics.widthPixels
         screenHeight = applicationContext.resources.displayMetrics.heightPixels
@@ -162,6 +165,7 @@ class FloatingBubbleService : Service() {
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
+        networkType = intent.getStringExtra("networkType").toString()
         // UTIL
         showFloatingWindow()
         return START_STICKY // - return START_NOT_STICKY;
@@ -205,7 +209,10 @@ class FloatingBubbleService : Service() {
         if (Settings.canDrawOverlays(this)) {
             // INFLATER
             val layoutInflater =
-                ContextCompat.getSystemService(applicationContext, LayoutInflater::class.java) as LayoutInflater
+                ContextCompat.getSystemService(
+                    applicationContext,
+                    LayoutInflater::class.java
+                ) as LayoutInflater
 
             // INFLATING BUBBLE LAYOUT
             bubbleBinding = FloatingBubbleBinding.inflate(layoutInflater)
@@ -215,12 +222,10 @@ class FloatingBubbleService : Service() {
             trashOverBinding = BackBurbujaDeleteOverBinding.inflate(layoutInflater)
 
             //
-            if (Util.isConnectedByMobileData(applicationContext)) {
-                bubbleBinding.ConnectionTypeImage.setImageResource(R.drawable.ic_round_signal_cellular)
-            } else if (Util.isConnectedByWifi(applicationContext)) {
-                bubbleBinding.ConnectionTypeImage.setImageResource(R.drawable.ic_round_wifi_24)
-            } else {
-                bubbleBinding.ConnectionTypeImage.visibility = View.GONE
+            when (networkType) {
+                "Mobile" -> bubbleBinding.ConnectionTypeImage.setImageResource(R.drawable.ic_round_signal_cellular)
+                "WiFi" -> bubbleBinding.ConnectionTypeImage.setImageResource(R.drawable.ic_round_wifi_24)
+                else -> bubbleBinding.ConnectionTypeImage.visibility = View.GONE
             }
 
             //
@@ -244,6 +249,7 @@ class FloatingBubbleService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         destroyFloatingWindow()
+        isStarted = false
     }
 
     private fun destroyFloatingWindow() {

@@ -4,16 +4,17 @@ import android.Manifest
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Icon
 import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -26,8 +27,6 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -40,32 +39,24 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.preference.PreferenceManager
 import androidx.preference.PreferenceManager.getDefaultSharedPreferences
 import com.google.android.material.navigation.NavigationView
 import com.marlon.portalusuario.PUNotifications.PUNotificationsActivity
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ViewModel.PunViewModel
-import com.marlon.portalusuario.banner.PromotionEvent
 import com.marlon.portalusuario.banner.PromotionsConfig
 import com.marlon.portalusuario.banner.PromotionsViewModel
-import com.marlon.portalusuario.banner.etecsa_scraping.PromoSliderAdapter
 import com.marlon.portalusuario.databinding.ActivityMainBinding
 import com.marlon.portalusuario.errores_log.JCLogging
 import com.marlon.portalusuario.errores_log.LogFileViewerActivity
 import com.marlon.portalusuario.huella.BiometricCallback
 import com.marlon.portalusuario.huella.BiometricManager
-import com.marlon.portalusuario.trafficbubble.BootReceiver
 import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
 import com.marlon.portalusuario.une.UneActivity
-import com.marlon.portalusuario.util.Util
 import com.marlon.portalusuario.view.fragments.CuentasFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.ServiciosFragment
-import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
-import com.smarteist.autoimageslider.SliderAnimations
-import com.smarteist.autoimageslider.SliderView
 import cu.suitetecsa.nautanav.ui.ConnectivityFragment
 import cu.uci.apklisupdate.ApklisUpdate
 import cu.uci.apklisupdate.UpdateCallback
@@ -74,7 +65,6 @@ import cu.uci.apklisupdate.view.ApklisUpdateDialog
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.suitetecsa.sdk.android.utils.extractShortNumber
 import io.github.suitetecsa.sdk.android.utils.validateFormat
-import io.github.suitetecsa.sdk.promotion.model.Promotion
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
@@ -83,12 +73,62 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
 
     private lateinit var binding: ActivityMainBinding
 
-    @Inject lateinit var connectivityFragment: ConnectivityFragment
+    @Inject
+    lateinit var connectivityFragment: ConnectivityFragment
     private val promotionsViewModel by viewModels<PromotionsViewModel>()
 
     // Promotions
     private var showPromotions by Delegates.notNull<Boolean>()
     private lateinit var promotionsConfig: PromotionsConfig
+
+    // Network change listener
+    private var showTrafficBubble by Delegates.notNull<Boolean>()
+    private lateinit var connectivityManager: ConnectivityManager
+    private val networkRequest = NetworkRequest.Builder()
+        .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+        .build()
+    private val networkCallback = object : ConnectivityManager.NetworkCallback() {
+
+        override fun onAvailable(network: Network) {
+            Log.d("NetworkCallback", "Network is available: $network")
+            val networkType = getNetworkType()
+            if (showTrafficBubble) {
+                Log.d("NetworkCallback", "Starting floating bubble service :: $networkType")
+                stopService(Intent(applicationContext, FloatingBubbleService::class.java))
+                startService(Intent(applicationContext, FloatingBubbleService::class.java).apply {
+                    this.putExtra("networkType", networkType)
+                })
+            }
+        }
+
+        override fun onLost(network: Network) {
+            // La red se ha perdido
+            Log.d("NetworkCallback", "Network is lost: $network")
+            val networkType = getNetworkType()
+            Log.d("NetworkCallback", "Stopping floating bubble service :: $networkType")
+            stopService(Intent(applicationContext, FloatingBubbleService::class.java))
+
+            networkType?.also {
+                Log.d("NetworkCallback", "Starting floating bubble service :: $it")
+                startService(Intent(applicationContext, FloatingBubbleService::class.java).apply {
+                    this.putExtra("networkType", it)
+                })
+            }
+        }
+
+        private fun getNetworkType(): String? {
+            val manager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+            return manager.activeNetwork?.let { network ->
+                manager.getNetworkCapabilities(network)?.let { capabilities ->
+                    when {
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> "WiFi"
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> "Mobile"
+                        else -> null
+                    }
+                }
+            }
+        }
+    }
 
     private var details: TextView? = null
     private var titleTextView: TextView? = null
@@ -134,12 +174,14 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         key?.let {
             when (it) {
                 "show_etecsa_promo_carousel" -> {
-                    promotionsConfig.setCarouselVisibility(preferences.getBoolean(key, true))
+                    promotionsConfig.setCarouselVisibility(preferences.getBoolean(it, true))
                 }
+
                 "keynoche" -> when (preferences.getString("keynoche", "oscuro")) {
                     "claro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     "oscuro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 }
+
                 "show_traffic_speed_bubble" -> {
                     if (preferences.getBoolean("show_traffic_speed_bubble", false)) {
                         if (!Settings.canDrawOverlays(this)) {
@@ -177,11 +219,17 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         showPromotions = settings.getBoolean("show_etecsa_promo_carousel", true)
         setupPromotions()
 
+        // Traffic bubble
+        showTrafficBubble = settings.getBoolean("show_traffic_speed_bubble", false)
+        connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
+
         // Listen preferences
         settings.registerOnSharedPreferenceChangeListener(::listenPreferences)
 
         punViewModel = ViewModelProvider(this)[PunViewModel::class.java]
         appName = packageName
+
         // VALORES POR DEFECTO EN LAS PREFERENCIAS
         PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false)
         requestPermissions()
@@ -310,15 +358,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         downloadPs = findViewById(R.id.download_ps)
         remindMeLater = findViewById(R.id.remind_me_later)
 
-        // Burbuja de Trafico
-        val bootReceiver = BootReceiver()
-        JCLogging.message("Registering networkStateReceiver", null)
-        LocalBroadcastManager.getInstance(this)
-            .registerReceiver(bootReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
-        if (settings.getBoolean("show_traffic_speed_bubble", false)) {
-            startFloatingBubbleService()
-        }
-
         // Huella Seguridad
         if (settings.getBoolean("show_fingerprint", false)) {
             startFingerprint()
@@ -425,29 +464,29 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     // Permisos Consedidos
     fun requestPermissions() {
         if ((
-                (
                     (
-                        (
-                            ContextCompat.checkSelfPermission(
+                            (
+                                    (
+                                            ContextCompat.checkSelfPermission(
+                                                this,
+                                                Manifest.permission.CALL_PHONE
+                                            ) != PackageManager.PERMISSION_GRANTED
+                                            ) || ContextCompat.checkSelfPermission(
+                                        this,
+                                        Manifest.permission.CAMERA
+                                    ) != PackageManager.PERMISSION_GRANTED
+                                    ) || ContextCompat.checkSelfPermission(
                                 this,
-                                Manifest.permission.CALL_PHONE
+                                Manifest.permission.READ_CONTACTS
                             ) != PackageManager.PERMISSION_GRANTED
                             ) || ContextCompat.checkSelfPermission(
-                            this,
-                            Manifest.permission.CAMERA
-                        ) != PackageManager.PERMISSION_GRANTED
-                        ) || ContextCompat.checkSelfPermission(
                         this,
-                        Manifest.permission.READ_CONTACTS
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
                     ) != PackageManager.PERMISSION_GRANTED
                     ) || ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-                ) || ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
@@ -486,7 +525,10 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
 
         // FLOATING BUBBLE SERVICE
-        if (requestCode == 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Settings.canDrawOverlays(this)) {
+        if (requestCode == 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Settings.canDrawOverlays(
+                this
+            )
+        ) {
             startService(Intent(this, FloatingBubbleService::class.java))
         }
     }
@@ -640,13 +682,20 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         Toast.makeText(applicationContext, error, Toast.LENGTH_LONG).show()
     }
 
-    override fun onAuthenticationFailed() { /* no-op */ }
+    override fun onAuthenticationFailed() { /* no-op */
+    }
+
     override fun onAuthenticationCancelled() {
         mBiometricManager!!.cancelAuthentication()
         finish()
     }
-    override fun onAuthenticationSuccessful() { /* no-op */ }
-    override fun onAuthenticationHelp(helpCode: Int, helpString: CharSequence) { /* no-op */ }
+
+    override fun onAuthenticationSuccessful() { /* no-op */
+    }
+
+    override fun onAuthenticationHelp(helpCode: Int, helpString: CharSequence) { /* no-op */
+    }
+
     override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
         mBiometricManager!!.cancelAuthentication()
         finish()
