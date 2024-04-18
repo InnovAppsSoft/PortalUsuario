@@ -60,7 +60,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout.compose)
 
     // wifietecsa
-    implementation(libs.suitetecsa.sdk.kotlin)
+    implementation(libs.suitetecsa.sdk.kotlin.old)
 
     // ViewModel
     implementation(libs.androidx.lifecycle.runtime.ktx)

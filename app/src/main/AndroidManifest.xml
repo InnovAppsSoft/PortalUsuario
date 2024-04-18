@@ -191,17 +191,6 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-
-        <receiver
-            android:name=".trafficbubble.BootReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
-
         <service
             android:name="cu.suitetecsa.nautanav.service.CountdownServiceImpl"
             android:exported="false"

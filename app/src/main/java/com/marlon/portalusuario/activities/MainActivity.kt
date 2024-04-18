@@ -4,18 +4,18 @@ import android.Manifest
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Icon
 import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import android.net.Uri
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -27,12 +27,11 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ShareCompat.IntentBuilder
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
@@ -40,30 +39,24 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.preference.PreferenceManager
+import androidx.preference.PreferenceManager.getDefaultSharedPreferences
 import com.google.android.material.navigation.NavigationView
 import com.marlon.portalusuario.PUNotifications.PUNotificationsActivity
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ViewModel.PunViewModel
-import com.marlon.portalusuario.banner.etecsa_scraping.Promo
-import com.marlon.portalusuario.banner.etecsa_scraping.PromoSliderAdapter
-import com.marlon.portalusuario.trafficbubble.BootReceiver
-import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
+import com.marlon.portalusuario.banner.PromotionsConfig
+import com.marlon.portalusuario.banner.PromotionsViewModel
 import com.marlon.portalusuario.databinding.ActivityMainBinding
 import com.marlon.portalusuario.errores_log.JCLogging
 import com.marlon.portalusuario.errores_log.LogFileViewerActivity
 import com.marlon.portalusuario.huella.BiometricCallback
 import com.marlon.portalusuario.huella.BiometricManager
+import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
 import com.marlon.portalusuario.une.UneActivity
-import com.marlon.portalusuario.util.SSLHelper
-import com.marlon.portalusuario.util.Util
 import com.marlon.portalusuario.view.fragments.CuentasFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.ServiciosFragment
-import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
-import com.smarteist.autoimageslider.SliderAnimations
-import com.smarteist.autoimageslider.SliderView
 import cu.suitetecsa.nautanav.ui.ConnectivityFragment
 import cu.uci.apklisupdate.ApklisUpdate
 import cu.uci.apklisupdate.UpdateCallback
@@ -72,15 +65,70 @@ import cu.uci.apklisupdate.view.ApklisUpdateDialog
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.suitetecsa.sdk.android.utils.extractShortNumber
 import io.github.suitetecsa.sdk.android.utils.validateFormat
-import org.jsoup.Connection
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), BiometricCallback {
 
     private lateinit var binding: ActivityMainBinding
 
-    @Inject lateinit var connectivityFragment: ConnectivityFragment
+    @Inject
+    lateinit var connectivityFragment: ConnectivityFragment
+    private val promotionsViewModel by viewModels<PromotionsViewModel>()
+
+    // Promotions
+    private var showPromotions by Delegates.notNull<Boolean>()
+    private lateinit var promotionsConfig: PromotionsConfig
+
+    // Network change listener
+    private var showTrafficBubble by Delegates.notNull<Boolean>()
+    private lateinit var connectivityManager: ConnectivityManager
+    private val networkRequest = NetworkRequest.Builder()
+        .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+        .build()
+    private val networkCallback = object : ConnectivityManager.NetworkCallback() {
+
+        override fun onAvailable(network: Network) {
+            Log.d("NetworkCallback", "Network is available: $network")
+            val networkType = getNetworkType()
+            if (showTrafficBubble) {
+                Log.d("NetworkCallback", "Starting floating bubble service :: $networkType")
+                stopService(Intent(applicationContext, FloatingBubbleService::class.java))
+                startService(Intent(applicationContext, FloatingBubbleService::class.java).apply {
+                    this.putExtra("networkType", networkType)
+                })
+            }
+        }
+
+        override fun onLost(network: Network) {
+            // La red se ha perdido
+            Log.d("NetworkCallback", "Network is lost: $network")
+            val networkType = getNetworkType()
+            Log.d("NetworkCallback", "Stopping floating bubble service :: $networkType")
+            stopService(Intent(applicationContext, FloatingBubbleService::class.java))
+
+            networkType?.also {
+                Log.d("NetworkCallback", "Starting floating bubble service :: $it")
+                startService(Intent(applicationContext, FloatingBubbleService::class.java).apply {
+                    this.putExtra("networkType", it)
+                })
+            }
+        }
+
+        private fun getNetworkType(): String? {
+            val manager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+            return manager.activeNetwork?.let { network ->
+                manager.getNetworkCapabilities(network)?.let { capabilities ->
+                    when {
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> "WiFi"
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> "Mobile"
+                        else -> null
+                    }
+                }
+            }
+        }
+    }
 
     private var details: TextView? = null
     private var titleTextView: TextView? = null
@@ -93,12 +141,8 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     private var downloadApklis: Button? = null
     private var downloadPs: Button? = null
     private var remindMeLater: Button? = null
-    private var progressBar: ProgressBar? = null
-    private var errorLayout: LinearLayout? = null
-    private var tryAgain: TextView? = null
-    private var promoCache: List<Promo>? = null
     private var notificationBtn: FrameLayout? = null
-    private var menu: ImageView? = null
+    private lateinit var menu: ImageView
     private var cartBadge: TextView? = null
     private var drawer: DrawerLayout? = null
 
@@ -106,7 +150,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     private var appName: String? = null
 
     // SETTINGS
-    var settings: SharedPreferences? = null
+    lateinit var settings: SharedPreferences
 
     // LOGGING
     private var jcLogging: JCLogging? = null
@@ -126,22 +170,71 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     private var simPreferences: SharedPreferences? = null
     private var simCard: String? = null
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    private fun listenPreferences(preferences: SharedPreferences, key: String?) {
+        key?.let {
+            when (it) {
+                "show_etecsa_promo_carousel" -> {
+                    promotionsConfig.setCarouselVisibility(preferences.getBoolean(it, true))
+                }
+
+                "keynoche" -> when (preferences.getString("keynoche", "oscuro")) {
+                    "claro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    "oscuro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
+
+                "show_traffic_speed_bubble" -> {
+                    if (preferences.getBoolean("show_traffic_speed_bubble", false)) {
+                        if (!Settings.canDrawOverlays(this)) {
+                            Toast.makeText(
+                                this,
+                                "Otorgue a Portal Usuario los permisos requeridos",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            startActivityForResult(
+                                Intent(
+                                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                    Uri.parse("package:" + this.packageName)
+                                ), 0
+                            )
+                        } else {
+                            this.stopService(Intent(this, FloatingBubbleService::class.java))
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Shorcuts
         shorcut()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Settings preferences
+        settings = getDefaultSharedPreferences(this)
+
+        // Promotions
+        showPromotions = settings.getBoolean("show_etecsa_promo_carousel", true)
+        setupPromotions()
+
+        // Traffic bubble
+        showTrafficBubble = settings.getBoolean("show_traffic_speed_bubble", false)
+        connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
+
+        // Listen preferences
+        settings.registerOnSharedPreferenceChangeListener(::listenPreferences)
+
         punViewModel = ViewModelProvider(this)[PunViewModel::class.java]
         appName = packageName
+
         // VALORES POR DEFECTO EN LAS PREFERENCIAS
         PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions()
-        }
+        requestPermissions()
 
-        simPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        simPreferences = getDefaultSharedPreferences(this)
         context = this
         // drawer Layout
         drawer = findViewById(R.id.drawer_layout)
@@ -248,7 +341,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             false
         }
         menu = findViewById(R.id.menu)
-        menu!!.setOnClickListener { drawer!!.openDrawer(GravityCompat.START) }
+        menu.setOnClickListener { drawer!!.openDrawer(GravityCompat.START) }
         titleLayout = findViewById(R.id.titleLayout)
         titleTextView = findViewById(R.id.puTV)
         details = findViewById(R.id.details)
@@ -264,24 +357,14 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         downloadApklis = findViewById(R.id.download_apklis)
         downloadPs = findViewById(R.id.download_ps)
         remindMeLater = findViewById(R.id.remind_me_later)
-        settings = PreferenceManager.getDefaultSharedPreferences(this)
-
-        // Burbuja de Trafico
-        val bootReceiver = BootReceiver()
-        JCLogging.message("Registering networkStateReceiver", null)
-        LocalBroadcastManager.getInstance(this)
-            .registerReceiver(bootReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
-        if (settings!!.getBoolean("show_traffic_speed_bubble", false)) {
-            startFloatingBubbleService()
-        }
 
         // Huella Seguridad
-        if (settings!!.getBoolean("show_fingerprint", false)) {
+        if (settings.getBoolean("show_fingerprint", false)) {
             startFingerprint()
         }
 
         // Actualizacion de Aplicacion Apklis
-        if (settings!!.getBoolean("start_checking_for_updates", true)) {
+        if (settings.getBoolean("start_checking_for_updates", true)) {
             ApklisUpdate.hasAppUpdate(
                 this,
                 object : UpdateCallback {
@@ -304,16 +387,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             )
         }
 
-        // etecsa carousel
-        carouselLayout = findViewById(R.id.carouselLayout)
-        sliderView = findViewById(R.id.imageSlider)
-        progressBar = findViewById(R.id.progressBar)
-        errorLayout = findViewById(R.id.errorLayoutBanner)
-        tryAgain = findViewById(R.id.try_again)
-        tryAgain!!.paintFlags = tryAgain!!.paintFlags or Paint.UNDERLINE_TEXT_FLAG
-        tryAgain!!.setOnClickListener { loadPromo() }
-        loadPromo()
-        //
         // check if there are unseen notifications
         cartBadge = findViewById(R.id.cart_badge)
         setupBadge()
@@ -333,7 +406,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     }
 
     private fun setupBadge() {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val sharedPreferences = getDefaultSharedPreferences(this)
         val count = sharedPreferences.getInt("notifications_count", 0)
         Log.e("UNSEE NOTIFICATIONS", count.toString())
         if (count == 0) {
@@ -348,151 +421,23 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         cartBadge!!.text = count.toString()
     }
 
-    // Carrusel de ETECSA
-    private fun loadPromo() {
-        // hiding promos card view
-        val settings = PreferenceManager.getDefaultSharedPreferences(this)
-        val showEtecsaPromoCarousel = settings.getBoolean("show_etecsa_promo_carousel", true)
-        if (showEtecsaPromoCarousel) {
-            // mostrar progress && ocultar carrusel
-            sliderView!!.visibility = View.INVISIBLE
-            progressBar!!.visibility = View.VISIBLE
-            // mostrar error
-            errorLayout!!.visibility = View.INVISIBLE
-            //
-            if (promoCache != null && promoCache!!.isNotEmpty()) {
-                updatePromoSlider(promoCache!!)
-                return
-            }
-            //
-            if (Util.isConnected(this@MainActivity)) {
-                // llamada al metodo de scraping
-                try {
-                    SrapingPromo().execute()
-                } catch (ex: Exception) {
-                    ex.printStackTrace()
-                }
-            } else {
-                // ocultar progress && carrusel
-                sliderView!!.visibility = View.INVISIBLE
-                progressBar!!.visibility = View.INVISIBLE
-                // mostrar error
-                errorLayout!!.visibility = View.VISIBLE
-            }
-        }
-        setCarouselVisibility(showEtecsaPromoCarousel)
+    // setUp carousel state
+    private fun setupPromotions() {
+        promotionsConfig = PromotionsConfig.Builder()
+            .activity(this)
+            .viewModel(promotionsViewModel)
+            .binding(binding.contentMain)
+            .build()
+        promotionsConfig.setup(showPromotions)
     }
 
-    // scrapear Promo de Etecsa
-    inner class SrapingPromo : AsyncTask<Void?, Void?, List<Promo>>() {
-        private var success = false
-
-        // cuando se termine de ejecutar la accion doInBackground
-        @Deprecated("Deprecated in Java")
-        public override fun onPostExecute(promos: List<Promo>) {
-            super.onPostExecute(promos)
-            // adapter para cada item
-            if (success) {
-                try {
-                    // ocultar error
-                    errorLayout!!.visibility = View.INVISIBLE
-                    // mostrar card view
-                    sliderView!!.visibility = View.VISIBLE
-                    //
-                    updatePromoSlider(promos)
-                    // ocultar progress bar
-                    progressBar!!.visibility = View.INVISIBLE
-                } catch (ex: Exception) {
-                    ex.printStackTrace()
-                }
-            } else {
-                // ocultar progress bar
-                progressBar!!.visibility = View.INVISIBLE
-                // ocultar card view
-                sliderView!!.visibility = View.INVISIBLE
-                // mostrar error
-                errorLayout!!.visibility = View.VISIBLE
-            }
-        }
-
-        @Deprecated("Deprecated in Java")
-        override fun doInBackground(vararg p0: Void?): List<Promo> {
-            val promos: MutableList<Promo> = ArrayList()
-            try {
-                val response = SSLHelper.getConnection("https://www.etecsa.cu")
-                    .userAgent(
-                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.122 Safari/534.30"
-                    )
-                    .timeout(30000).ignoreContentType(true).method(
-                        Connection.Method.GET
-                    ).followRedirects(true).execute()
-                if (response.statusCode() == 200) {
-                    val parsed = response.parse()
-                    // CAROUSEL
-                    val carousel = parsed.select("div.carousel-inner").select("div.carousel-item")
-                    for (i in carousel.indices) {
-                        val items = carousel[i]
-                        val mipromoContent = items.selectFirst("div.carousel-item")
-                        val link = items.selectFirst("div.mipromocion-contenido")!!
-                            .select("a").attr("href")
-                        val toText = mipromoContent.toString()
-                        val idx1 = toText.indexOf("<div style=\"background: url(\'")
-                        val idx2 = toText.indexOf("\');")
-                        var divStyle = toText.substring(idx1, idx2)
-                        divStyle = divStyle.replace("<div style=\"background: url(\'", "")
-                        //
-                        val imageSvg = items.selectFirst("div.mipromocion-contenido")!!
-                            .selectFirst("img")
-                        val svg = imageSvg!!.attr("src")
-                        //
-                        promos.add(
-                            Promo(
-                                svg,
-                                divStyle,
-                                link
-                            )
-                        )
-                    }
-                    success = true
-                } else {
-                    success = false
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            return promos
-        }
-    }
-
-    fun updatePromoSlider(list: List<Promo>) {
-        if (list.isNotEmpty()) {
-            val adapter =
-                PromoSliderAdapter(
-                    this,
-                    list as ArrayList<Promo>
-                )
-            sliderView!!.setSliderAdapter(adapter)
-            // setting up el slider view
-            sliderView!!.setIndicatorAnimation(IndicatorAnimationType.WORM)
-            sliderView!!.setSliderTransformAnimation(SliderAnimations.CUBEINSCALINGTRANSFORMATION)
-            sliderView!!.autoCycleDirection = SliderView.AUTO_CYCLE_DIRECTION_RIGHT
-            sliderView!!.indicatorSelectedColor = Color.WHITE
-            sliderView!!.indicatorUnselectedColor = Color.GRAY
-            sliderView!!.scrollTimeInSec = 4
-            sliderView!!.startAutoCycle()
-        } else {
-            carouselLayout!!.visibility = View.GONE
-        }
-    }
-
-    private fun showMessage(c: Context?, message: String?) {
-        Toast.makeText(c, message, Toast.LENGTH_SHORT).show()
+    private fun String?.showMessage(c: Context?) {
+        Toast.makeText(c, this, Toast.LENGTH_SHORT).show()
     }
 
     // Huella de Seguridad
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    fun startFingerprint() {
-        val settings = PreferenceManager.getDefaultSharedPreferences(this)
+    private fun startFingerprint() {
+        val settings = getDefaultSharedPreferences(this)
         val showFingerprint = settings.getBoolean("show_fingerprint", false)
         if (showFingerprint) {
             mBiometricManager = BiometricManager.BiometricBuilder(this@MainActivity)
@@ -517,32 +462,31 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     }
 
     // Permisos Consedidos
-    @RequiresApi(api = Build.VERSION_CODES.M)
     fun requestPermissions() {
         if ((
-                (
                     (
-                        (
-                            ContextCompat.checkSelfPermission(
+                            (
+                                    (
+                                            ContextCompat.checkSelfPermission(
+                                                this,
+                                                Manifest.permission.CALL_PHONE
+                                            ) != PackageManager.PERMISSION_GRANTED
+                                            ) || ContextCompat.checkSelfPermission(
+                                        this,
+                                        Manifest.permission.CAMERA
+                                    ) != PackageManager.PERMISSION_GRANTED
+                                    ) || ContextCompat.checkSelfPermission(
                                 this,
-                                Manifest.permission.CALL_PHONE
+                                Manifest.permission.READ_CONTACTS
                             ) != PackageManager.PERMISSION_GRANTED
                             ) || ContextCompat.checkSelfPermission(
-                            this,
-                            Manifest.permission.CAMERA
-                        ) != PackageManager.PERMISSION_GRANTED
-                        ) || ContextCompat.checkSelfPermission(
                         this,
-                        Manifest.permission.READ_CONTACTS
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
                     ) != PackageManager.PERMISSION_GRANTED
                     ) || ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-                ) || ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
@@ -571,17 +515,20 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                         extractShortNumber(it)?.let { shortNumber ->
                             ServiciosFragment.phoneNumber.setText(shortNumber)
                         } ?: run {
-                            showMessage(this, errorMessage)
+                            errorMessage.showMessage(this)
                         }
                     } ?: run {
-                        showMessage(this, errorMessage)
+                        errorMessage.showMessage(this)
                     }
                 }
             }
         }
 
         // FLOATING BUBBLE SERVICE
-        if (requestCode == 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Settings.canDrawOverlays(this)) {
+        if (requestCode == 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Settings.canDrawOverlays(
+                this
+            )
+        ) {
             startService(Intent(this, FloatingBubbleService::class.java))
         }
     }
@@ -665,9 +612,9 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public override fun onResume() {
         super.onResume()
+        settings.registerOnSharedPreferenceChangeListener(::listenPreferences)
     }
 
     override fun onRequestPermissionsResult(
@@ -678,8 +625,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    fun startFloatingBubbleService() {
+    private fun startFloatingBubbleService() {
         if (FloatingBubbleService.isStarted) {
             return
         }
@@ -692,6 +638,12 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
 
     public override fun onPause() {
         super.onPause()
+        settings.unregisterOnSharedPreferenceChangeListener(::listenPreferences)
+    }
+
+    public override fun onDestroy() {
+        super.onDestroy()
+        settings.unregisterOnSharedPreferenceChangeListener(::listenPreferences)
     }
 
     override fun onSdkVersionNotSupported() {
@@ -730,13 +682,20 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         Toast.makeText(applicationContext, error, Toast.LENGTH_LONG).show()
     }
 
-    override fun onAuthenticationFailed() { /* no-op */ }
+    override fun onAuthenticationFailed() { /* no-op */
+    }
+
     override fun onAuthenticationCancelled() {
         mBiometricManager!!.cancelAuthentication()
         finish()
     }
-    override fun onAuthenticationSuccessful() { /* no-op */ }
-    override fun onAuthenticationHelp(helpCode: Int, helpString: CharSequence) { /* no-op */ }
+
+    override fun onAuthenticationSuccessful() { /* no-op */
+    }
+
+    override fun onAuthenticationHelp(helpCode: Int, helpString: CharSequence) { /* no-op */
+    }
+
     override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
         mBiometricManager!!.cancelAuthentication()
         finish()
@@ -774,6 +733,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 ).show()
             }
         }
+
     }
 
     // Promo ETECSA
@@ -781,9 +741,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         private var context: Context? = null
         private var titleLayout: LinearLayout? = null
 
-        // PROMO ETECSA CAROUSEL
-        private var carouselLayout: RelativeLayout? = null
-        private var sliderView: SliderView? = null
         var navigationView: NavigationView? = null
         private var punViewModel: PunViewModel? = null
 
@@ -803,15 +760,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                 context!!.startActivity(openUrl)
             } catch (e: Exception) {
                 e.printStackTrace()
-            }
-        }
-
-        @JvmStatic
-        fun setCarouselVisibility(b: Boolean) {
-            if (b) {
-                carouselLayout!!.visibility = View.VISIBLE
-            } else {
-                carouselLayout!!.visibility = View.GONE
             }
         }
     }

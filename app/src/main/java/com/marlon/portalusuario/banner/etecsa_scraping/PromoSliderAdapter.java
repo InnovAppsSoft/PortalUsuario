@@ -1,97 +1,85 @@
 package com.marlon.portalusuario.banner.etecsa_scraping;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYouListener;
-import com.marlon.portalusuario.activities.MainActivity;
 import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.errores_log.JCLogging;
-import com.smarteist.autoimageslider.SliderViewAdapter;
+import com.marlon.portalusuario.activities.MainActivity;
 import com.marlon.portalusuario.banner.etecsa_scraping.PromoSliderAdapter.SliderAdapterViewHolder;
+import com.marlon.portalusuario.databinding.PromoSliderLayoutBinding;
+import com.smarteist.autoimageslider.SliderViewAdapter;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class PromoSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolder> {
+import io.github.suitetecsa.sdk.promotion.model.Promotion;
 
-    private final List<Promo> mSliderItems;
+public class PromoSliderAdapter extends SliderViewAdapter<SliderAdapterViewHolder> {
+    private static final String TAG = "PromoSliderAdapter";
+    private final List<Promotion> promotions;
     private final Context context;
-    private final JCLogging Logging;
 
     // Constructor
-    public PromoSliderAdapter(Context context, ArrayList<Promo> promoArrayList) {
-        this.mSliderItems = promoArrayList;
+    public PromoSliderAdapter(Context context, List<Promotion> promotions) {
         this.context = context;
-        Logging = new JCLogging(context);
-        //
+        this.promotions = promotions;
     }
 
     // We are inflating the slider_layout
     // inside on Create View Holder method.
     @Override
-    public SliderAdapterViewHolder onCreateViewHolder(ViewGroup parent) {
-        @SuppressLint("InflateParams") View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.promo_slider_layout, null);
-        return new SliderAdapterViewHolder(inflate);
+    public SliderAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
+        PromoSliderLayoutBinding binding = PromoSliderLayoutBinding.inflate(LayoutInflater.from(parent.getContext()));
+        return new SliderAdapterViewHolder(binding.getRoot());
     }
 
     // Inside on bind view holder we will
     // set data to item of Slider View.
     @Override
-    public void onBindViewHolder(SliderAdapterViewHolder viewHolder, final int position) {
-        try {
-            final Promo sliderItem = mSliderItems.get(position);
-            // from url in your imageview.
-            Picasso.get()
-                    .load(sliderItem.getImage())
-                    .fit().centerInside()
-                    .into(viewHolder.imageViewBackground);
-            Uri uri = Uri.parse(sliderItem.getSvg());//"https://www.etecsa.cu/sites/default/files/promocion/IMAGENTOPSLAIDER_BIENBENIDA2_ETECSA_4.svg"
-            GlideToVectorYou
-                    .init()
-                    .with(context)
-                    .withListener(new GlideToVectorYouListener() {
-                        @Override
-                        public void onLoadFailed() {
-                            //Toast.makeText(context, "Load failed", Toast.LENGTH_SHORT).show();
-                        }
+    public void onBindViewHolder(@NonNull SliderAdapterViewHolder viewHolder, final int position) {
+        final Promotion promotion = promotions.get(position);
+        // from url in your imageview.
+        Picasso.get()
+                .load(promotion.getJpgUrl())
+                .fit().centerInside()
+                .into(viewHolder.imageViewBackground);
+        Uri uri = Uri.parse(promotion.getSvgUrl());
+        Log.d(TAG, "onBindViewHolder: " + uri);
+        GlideToVectorYou
+                .init()
+                .with(context)
+                .withListener(new GlideToVectorYouListener() {
+                    @Override
+                    public void onLoadFailed() {
+                        Log.e(TAG, "onLoadFailed: SVG load failed for url: " + uri);
+                    }
 
-                        @Override
-                        public void onResourceReady() {
-                            //Toast.makeText(context, "Image ready", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .load(uri, viewHolder.imageViewSVG);
-            // evento on click
-            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MainActivity.openLink(sliderItem.getLink());
-                }
-            });
-        }catch (Exception ex){
-            ex.printStackTrace();
-            JCLogging.error(null, null, ex);
-        }
+                    @Override
+                    public void onResourceReady() {
+                        Log.d(TAG, "onResourceReady: SVG load success");
+                    }
+                })
+                .load(uri, viewHolder.imageViewSVG);
+        viewHolder.itemView.setOnClickListener(v -> MainActivity.openLink(promotion.getPromotionUrl()));
     }
 
     // this method will return
     // the count of our list.
     @Override
     public int getCount() {
-        return mSliderItems.size();
+        return promotions.size();
     }
 
-    static class SliderAdapterViewHolder extends SliderViewAdapter.ViewHolder {
-        // Adapter class for initializing
-        // the views of our slider view.
+    public static class SliderAdapterViewHolder extends SliderViewAdapter.ViewHolder {
         View itemView;
         ImageView imageViewBackground;
         ImageView imageViewSVG;

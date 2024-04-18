@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,8 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import com.marlon.portalusuario.R;
 import com.marlon.portalusuario.trafficbubble.FloatingBubbleService;
+
+import java.util.Objects;
 
 public class SettingsActivity extends AppCompatActivity{
 
@@ -54,15 +57,14 @@ public class SettingsActivity extends AppCompatActivity{
             show_traffic_speed_bubble = findPreference("show_traffic_speed_bubble");
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
         public void onResume() {
             super.onResume();
             // Registrar escucha
-            getPreferenceScreen().getSharedPreferences()
+            Objects.requireNonNull(getPreferenceScreen().getSharedPreferences())
                     .registerOnSharedPreferenceChangeListener(this);
             //
-            show_traffic_speed_bubble.setEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M);
+            show_traffic_speed_bubble.setEnabled(true);
             //
             if (!Settings.canDrawOverlays(getContext())) {
                 show_traffic_speed_bubble.setChecked(false);
@@ -73,33 +75,30 @@ public class SettingsActivity extends AppCompatActivity{
         public void onPause() {
             super.onPause();
             // Eliminar registro de la escucha
-            getPreferenceScreen().getSharedPreferences()
+            Objects.requireNonNull(getPreferenceScreen().getSharedPreferences())
                     .unregisterOnSharedPreferenceChangeListener(this);
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (key.equals("keynoche")){
-                if (sharedPreferences.getString("keynoche", "").equals("claro")) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                }else if (sharedPreferences.getString("keynoche", "").equals("oscuro")) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                }else{
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                }
-            }else if (key.equals("show_traffic_speed_bubble")){
-                if (sharedPreferences.getBoolean("show_traffic_speed_bubble", false)) {
-                    if (!Settings.canDrawOverlays(getContext())) {
-                        Toast.makeText(getContext(), "Otorgue a Portal Usuario los permisos requeridos", Toast.LENGTH_SHORT).show();
-                        startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getContext().getPackageName())), 0);
+            switch (Objects.requireNonNull(key)) {
+                case "keynoche" -> {
+                    switch (sharedPreferences.getString("keynoche", "")) {
+                        case "claro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        case "oscuro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        default -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                     }
-                }else{
-                    getContext().stopService(new Intent(getContext(), FloatingBubbleService.class));
                 }
-            }else if(key.equals("show_etecsa_promo_carousel")){
-                boolean b = sharedPreferences.getBoolean("show_etecsa_promo_carousel", true);
-                MainActivity.setCarouselVisibility(b);
+                case "show_traffic_speed_bubble" -> {
+                    if (sharedPreferences.getBoolean("show_traffic_speed_bubble", false)) {
+                        if (!Settings.canDrawOverlays(getContext())) {
+                            Toast.makeText(getContext(), "Otorgue a Portal Usuario los permisos requeridos", Toast.LENGTH_SHORT).show();
+                            startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + requireContext().getPackageName())), 0);
+                        }
+                    } else {
+                        requireContext().stopService(new Intent(getContext(), FloatingBubbleService.class));
+                    }
+                }
             }
         }
     }

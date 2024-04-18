@@ -12,6 +12,7 @@ import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
 import com.marlon.portalusuario.errores_log.JCLogging;
@@ -41,7 +42,7 @@ public class Util {
     }
     
     // chequear conexion por wifi o datos
-    public static boolean isConnected(Context context2) {
+    public static boolean isConnected(@NonNull Context context2) {
         ConnectivityManager cm;
         NetworkInfo activeNetworks;
         cm = (ConnectivityManager) context2.getSystemService(Context.CONNECTIVITY_SERVICE);
