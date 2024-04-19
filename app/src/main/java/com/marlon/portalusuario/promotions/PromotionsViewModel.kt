@@ -1,8 +1,9 @@
-package com.marlon.portalusuario.banner
+package com.marlon.portalusuario.promotions
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.marlon.portalusuario.promotions.model.Promotion
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.suitetecsa.sdk.promotion.PromotionsCollector
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +18,7 @@ class PromotionsViewModel @Inject constructor() : ViewModel() {
 
     fun onEvent(event: PromotionEvent) {
         when (event) {
-            PromotionEvent.Reload -> loadPromotions()
+            PromotionEvent.Load -> loadPromotions()
         }
     }
 
@@ -27,7 +28,7 @@ class PromotionsViewModel @Inject constructor() : ViewModel() {
             state.value = withContext(Dispatchers.IO) {
                 runCatching {
                     val promotions = PromotionsCollector.collect()
-                    PromotionState(promotions)
+                    PromotionState(promotions.map { Promotion(it.svg, it.background, it.url) })
                 }.getOrNull() ?: PromotionState(onError = true)
             }
         }

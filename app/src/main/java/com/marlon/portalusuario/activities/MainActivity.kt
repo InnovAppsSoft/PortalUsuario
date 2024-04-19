@@ -45,8 +45,8 @@ import com.google.android.material.navigation.NavigationView
 import com.marlon.portalusuario.PUNotifications.PUNotificationsActivity
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ViewModel.PunViewModel
-import com.marlon.portalusuario.banner.PromotionsConfig
-import com.marlon.portalusuario.banner.PromotionsViewModel
+import com.marlon.portalusuario.promotions.PromotionsConfig
+import com.marlon.portalusuario.promotions.PromotionsViewModel
 import com.marlon.portalusuario.databinding.ActivityMainBinding
 import com.marlon.portalusuario.errores_log.JCLogging
 import com.marlon.portalusuario.errores_log.LogFileViewerActivity
@@ -525,10 +525,7 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
 
         // FLOATING BUBBLE SERVICE
-        if (requestCode == 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Settings.canDrawOverlays(
-                this
-            )
-        ) {
+        if (requestCode == 0 && Settings.canDrawOverlays(this)) {
             startService(Intent(this, FloatingBubbleService::class.java))
         }
     }
@@ -623,17 +620,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
-
-    private fun startFloatingBubbleService() {
-        if (FloatingBubbleService.isStarted) {
-            return
-        }
-        if (Settings.canDrawOverlays(this)) {
-            Log.i("CALLING ON MA", "STARTING SERVICE")
-            stopService(Intent(applicationContext, FloatingBubbleService::class.java))
-            startService(Intent(applicationContext, FloatingBubbleService::class.java))
-        }
     }
 
     public override fun onPause() {
@@ -750,17 +736,5 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
 
         const val PICK_CONTACT_REQUEST = 1
-
-        @JvmStatic
-        fun openLink(link: String?) {
-            try {
-                // JCLogging.message("Opening PROMO URL::url=" + link, null);
-                val url = Uri.parse(link)
-                val openUrl = Intent(Intent.ACTION_VIEW, url)
-                context!!.startActivity(openUrl)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
     }
 }

@@ -1,16 +1,16 @@
-package com.marlon.portalusuario.banner
+package com.marlon.portalusuario.promotions
 
 import android.graphics.Color
 import android.graphics.Paint
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.marlon.portalusuario.banner.etecsa_scraping.PromoSliderAdapter
+import com.marlon.portalusuario.promotions.adapter.PromoSliderAdapter
 import com.marlon.portalusuario.databinding.MainContentBinding
+import com.marlon.portalusuario.promotions.model.Promotion
 import com.marlon.portalusuario.util.Util
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
-import io.github.suitetecsa.sdk.promotion.model.Promotion
 
 private const val SCROLL_TIME = 4
 
@@ -53,13 +53,13 @@ class PromotionsConfig private constructor(
 
     private fun loadPromotions() {
         if (Util.isConnected(activity)) {
-            viewModel.onEvent(PromotionEvent.Reload)
+            viewModel.onEvent(PromotionEvent.Load)
         }
     }
 
     private fun updatePromoSlider(promotions: List<Promotion>) {
         if (promotions.isNotEmpty()) {
-            val adapter = PromoSliderAdapter(activity, promotions)
+            val adapter = PromoSliderAdapter(promotions)
             binding.imageSlider.setSliderAdapter(adapter)
             // setting up el slider view
             binding.imageSlider.setIndicatorAnimation(IndicatorAnimationType.WORM)
