@@ -1,6 +1,7 @@
-package com.marlon.portalusuario.banner
+package com.marlon.portalusuario.promotions
 
-import io.github.suitetecsa.sdk.promotion.model.Promotion
+import com.marlon.portalusuario.promotions.model.Promotion
+
 
 data class PromotionState(
     val promotions: List<Promotion> = listOf(),

@@ -1,9 +1,13 @@
 [versions]
 activity-ktx = "1.7.2"
+androidsvg-aar = "1.4"
+cameraxVersion = "1.2.3"
 constraintlayout-compose = "1.0.1"
+zxing-core = "3.5.1"
 firebase-appdistribution-gradle = "4.0.0"
 firebase-crashlytics-gradle = "2.9.9"
 fragment-ktx = "1.6.2"
+glide = "4.15.1"
 google-services = "4.4.0"
 gradle = "8.1.1"
 hilt-android = "2.46.1"
@@ -28,12 +32,16 @@ apklisupdate = "1.4"
 
 arturbosch-detekt = "1.23.6"
 
-suitetecsa-sdk-kotlin = "0.2.1"
+suitetecsa-sdk-kotlin = "0.2.3"
 suitetecsa-sdk-kotlin-old = "0.1.8"
 suitetecsa-sdk-android = "0.1.0-alpha01"
 
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity-ktx" }
+androidx-camera-camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraxVersion" }
+androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraxVersion" }
+androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "cameraxVersion" }
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraxVersion" }
 androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayout-compose" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment-ktx" }
 androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata", version.ref = "androidx-lifecycle" }
@@ -42,8 +50,11 @@ androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmode
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
 androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigation-safe-args-gradle-plugin" }
 androidx-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "runtime-livedata" }
+caverock-androidsvg-aar = { module = "com.caverock:androidsvg-aar", version.ref = "androidsvg-aar" }
+zxing-core = { module = "com.google.zxing:core", version.ref = "zxing-core" }
 firebase-appdistribution-gradle = { module = "com.google.firebase:firebase-appdistribution-gradle", version.ref = "firebase-appdistribution-gradle" }
 firebase-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebase-crashlytics-gradle" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 google-services = { module = "com.google.gms:google-services", version.ref = "google-services" }
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt-android" }

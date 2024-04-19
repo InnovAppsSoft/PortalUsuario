@@ -73,24 +73,13 @@ android {
 }
 
 dependencies {
-    implementation("androidx.multidex:multidex:2.0.1")
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("com.google.android.play:core:1.10.3")
-    implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.navigation:navigation-ui:2.5.3")
-    implementation("androidx.navigation:navigation-fragment:2.5.3")
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    implementation("de.hdodenhof:circleimageview:3.1.0")
-    implementation("com.google.code.gson:gson:2.10.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("androidx.cardview:cardview:1.0.0")
-    implementation("com.google.guava:guava:29.0-android")
+    //SuitEtecsa libs
+    implementation(libs.suitetecsa.sdk.android)
+    implementation(libs.suitetecsa.sdk.kotlin)
+    implementation(libs.suitetecsa.sdk.kotlin.old)
+
+    // Promotions
+    implementation(libs.caverock.androidsvg.aar)
 
     //Features
     implementation(project(":feature:nauta-nav"))
@@ -124,9 +113,44 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
 
+    // LiveData
+    implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.lifecycle.livedata)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+
+    // Camerax
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.camera.view)
+
+    // Glide
+    implementation(libs.glide)
+
+    // QR scanner
+    implementation(libs.zxing.core)
+
+    implementation("androidx.multidex:multidex:2.0.1")
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.google.android.play:core:1.10.3")
+    implementation("androidx.preference:preference-ktx:1.2.0")
+    implementation("androidx.core:core-ktx:1.10.1")
+    implementation("androidx.navigation:navigation-ui:2.5.3")
+    implementation("androidx.navigation:navigation-fragment:2.5.3")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("com.google.code.gson:gson:2.10.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation("com.google.android.material:material:1.9.0")
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation("com.google.guava:guava:29.0-android")
+
     implementation("androidx.work:work-runtime-ktx:2.8.1")
     implementation("androidx.work:work-runtime:2.8.1")
-
 
     // ViewPaper2
     implementation("androidx.viewpager2:viewpager2:1.0.0")
@@ -151,21 +175,6 @@ dependencies {
 
     // Navigation Compose
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
-
-    // LiveData
-    implementation(libs.androidx.runtime.livedata)
-    implementation(libs.androidx.lifecycle.livedata)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-
-    //Camerax
-    val camerax_version = "1.2.3"
-    implementation("androidx.camera:camera-core:${camerax_version}")
-    implementation("androidx.camera:camera-camera2:${camerax_version}")
-    implementation("androidx.camera:camera-lifecycle:${camerax_version}")
-    implementation("androidx.camera:camera-view:${camerax_version}")
-
-    // QR scanner
-    implementation("com.google.zxing:core:3.5.1")
 
     //Tap Tarjet
     implementation("com.getkeepsafe.taptargetview:taptargetview:1.13.3")
@@ -195,14 +204,6 @@ dependencies {
 
     implementation("com.github.2coffees1team:GlideToVectorYou:v2.0.0")
 
-
-    //Glide
-    implementation("com.github.bumptech.glide:glide:4.15.1")
-    implementation("com.github.bumptech.glide:annotations:4.15.1")
-    implementation("com.github.bumptech.glide:okhttp3-integration:4.15.1") {
-        exclude(group = "glide-parent")
-    }
-
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation("the.bot.box:appusagemonitor:2.1.0")
 
@@ -221,7 +222,6 @@ dependencies {
 
     implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
     implementation("io.reactivex.rxjava3:rxjava:3.1.6")
-
 
     implementation("com.github.kizitonwose.colorpreference:core:1.1.0")
     implementation("com.github.kizitonwose.colorpreference:support:1.1.0")
@@ -259,8 +259,4 @@ dependencies {
     implementation("com.github.amlcurran.showcaseview:library:5.4.3")
     //
 
-    //SuitEtecsa libs
-    implementation(libs.suitetecsa.sdk.android)
-    implementation(libs.suitetecsa.sdk.kotlin)
-    implementation(libs.suitetecsa.sdk.kotlin.old)
 }

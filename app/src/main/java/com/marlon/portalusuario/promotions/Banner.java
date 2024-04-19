@@ -1,4 +1,4 @@
-package com.marlon.portalusuario.banner;
+package com.marlon.portalusuario.promotions;
 
 public class Banner {
     private String title;
