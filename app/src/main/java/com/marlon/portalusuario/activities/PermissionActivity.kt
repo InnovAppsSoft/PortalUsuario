@@ -1,189 +1,191 @@
-package com.marlon.portalusuario.activities;
+package com.marlon.portalusuario.activities
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import android.Manifest
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.provider.Settings
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import com.marlon.portalusuario.R
+import com.marlon.portalusuario.util.Utils.hasPermissions
+import moe.feng.common.stepperview.IStepperAdapter
+import moe.feng.common.stepperview.VerticalStepperItemView
+import moe.feng.common.stepperview.VerticalStepperView
 
-import android.Manifest;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.provider.Settings;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+private const val CALL_PHONE = 0
+private const val CAMERA = 1
+private const val CONTACTS = 2
+private const val LOCATION = 3
+private const val OVERLAY = 4
+private const val SUCCESS = 5
+private const val RESULT_CALL: Int = 1001
 
-import com.marlon.portalusuario.R;
+class PermissionActivity : AppCompatActivity(), IStepperAdapter {
+    private lateinit var mVerticalStepperView: VerticalStepperView
 
-import moe.feng.common.stepperview.IStepperAdapter;
-import moe.feng.common.stepperview.VerticalStepperItemView;
-import moe.feng.common.stepperview.VerticalStepperView;
+    private lateinit var overlayPermissionLauncher: ActivityResultLauncher<Intent>
 
-public class PermissionActivity extends AppCompatActivity implements IStepperAdapter {
-    private VerticalStepperView mVerticalStepperView ;
-    int ResultCall = 1001;
-    private static final int REQUEST_VPN = 1;
-    private static final int REQUEST_OVERLAY = 0;
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_permission)
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_permission);
+        overlayPermissionLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result: ActivityResult ->
+            val idx = mVerticalStepperView.currentStep
+            if (result.resultCode == RESULT_OK) {
+                if (!Settings.canDrawOverlays(this)) {
+                    mVerticalStepperView.setErrorText(
+                        idx,
+                        "Permiso no concedido. Puede concederlo más adelante"
+                    )
+                    return@registerForActivityResult
+                }
+            }
+            mVerticalStepperView.setErrorText(idx, null)
+            mVerticalStepperView.nextStep()
+        }
+
         //
-        mVerticalStepperView  = findViewById(R.id.vertical_stepper_view);
-        mVerticalStepperView.setStepperAdapter(this);
+        mVerticalStepperView = findViewById(R.id.vertical_stepper_view)
+        mVerticalStepperView.setStepperAdapter(this)
     }
 
-    @NonNull
-    @Override
-    public CharSequence getTitle(int index) {
-        switch (index) {
-            case 0:
-                return "Permiso para realizar llamadas";
-            case 1:
-                return "Permiso para usar la cámara";
-            case 2:
-                return "Permiso para leer contactos";
-            case 3:
-                return "Permiso para obtener ubicación";
-            case 4:
-                return "Permiso de superposición";
-            case 5:
-                return "¡Permisos concedidos!";
-            default:
-                return "";
+    override fun getTitle(index: Int): CharSequence {
+        return when (index) {
+            CALL_PHONE -> "Permiso para realizar llamadas"
+            CAMERA -> "Permiso para usar la cámara"
+            CONTACTS -> "Permiso para leer contactos"
+            LOCATION -> "Permiso para obtener ubicación"
+            OVERLAY -> "Permiso de superposición"
+            SUCCESS -> "¡Permisos concedidos!"
+            else -> ""
         }
     }
 
-    @Nullable
-    @Override
-    public CharSequence getSummary(int index) {
-        return null;
+    override fun getSummary(index: Int): CharSequence? {
+        return null
     }
 
-    @Override
-    public int size() {
-        return 6;
+    override fun size(): Int {
+        return 6
     }
 
-    @Override
-    public View onCreateCustomView(int index, Context context, VerticalStepperItemView parent) {
-        View inflateView = LayoutInflater.from(context).inflate(R.layout.vertical_stepper_sample_item, parent, false);
-        TextView contentView = inflateView.findViewById(R.id.item_content);
+    override fun onCreateCustomView(
+        index: Int,
+        context: Context,
+        parent: VerticalStepperItemView
+    ): View {
+        val inflateView = LayoutInflater.from(context)
+            .inflate(R.layout.vertical_stepper_sample_item, parent, false)
+        val contentView = inflateView.findViewById<TextView>(R.id.item_content)
         contentView.setText(
-                index == 0 ? R.string.content_step_0 : (index == 1 ? R.string.content_step_1 : (index == 2 ? R.string.content_step_2 : (index == 3 ? R.string.content_step_3 : (index == 4 ? R.string.content_step_4 : R.string.content_step_7))))
-        );
-        Button nextButton = inflateView.findViewById(R.id.button_next);
-        nextButton.setText(index == size() - 1 ? "Comenzar" : "Conceder");
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View view) {
-                switch (index){
-                    case 0:
-                        ActivityCompat.requestPermissions(PermissionActivity.this, new String[]{
-                                Manifest.permission.CALL_PHONE}, ResultCall);
-                        break;
-                    case 1:
-                        ActivityCompat.requestPermissions(PermissionActivity.this, new String[]{
-                                Manifest.permission.CAMERA}, ResultCall);
-                        break;
-                    case 2:
-                        ActivityCompat.requestPermissions(PermissionActivity.this, new String[]{
-                                Manifest.permission.READ_CONTACTS}, ResultCall);
-                        break;
-                    case 3:
-                        ActivityCompat.requestPermissions(PermissionActivity.this, new String[]{
-                                Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_PHONE_STATE}, ResultCall);
-                        break;
-                    case 4:
-                        startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName())), REQUEST_OVERLAY);
-                        break;
-
-                    default:
-                        startActivity(new Intent(PermissionActivity.this, MainActivity.class));
-                        finish();
-                        break;
-                }
-//                    Snackbar.make(mVerticalStepperView, "Set!", Snackbar.LENGTH_LONG).show();
-//                }
+            when (index) {
+                CALL_PHONE -> R.string.content_step_0
+                CAMERA -> R.string.content_step_1
+                CONTACTS -> R.string.content_step_2
+                LOCATION -> R.string.content_step_3
+                OVERLAY -> R.string.content_step_4
+                else -> R.string.content_step_7
             }
-        });
-        Button prevButton = inflateView.findViewById(R.id.button_prev);
-        prevButton.setVisibility(index == 4 ? View.VISIBLE : View.GONE);
-        inflateView.findViewById(R.id.button_prev).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mVerticalStepperView.nextStep();
-            }
-        });
-        return inflateView;
+        )
+        val nextButton = inflateView.findViewById<Button>(R.id.button_next)
+        setUpNextButton(nextButton, index)
+        val prevButton = inflateView.findViewById<Button>(R.id.button_prev)
+        prevButton.visibility = if (index == OVERLAY) View.VISIBLE else View.GONE
+        inflateView.findViewById<View>(R.id.button_prev)
+            .setOnClickListener { mVerticalStepperView.nextStep() }
+        return inflateView
     }
 
-    @Override
-    public void onShow(int index) {
+    private fun setUpNextButton(nextButton: Button, index: Int) {
+        nextButton.text = if (index == size() - 1) "Comenzar" else "Conceder"
+        nextButton.setOnClickListener {
+            when (index) {
+                CALL_PHONE -> ActivityCompat.requestPermissions(
+                    this@PermissionActivity, arrayOf(Manifest.permission.CALL_PHONE), RESULT_CALL
+                )
 
-    }
+                CAMERA -> ActivityCompat.requestPermissions(
+                    this@PermissionActivity, arrayOf(Manifest.permission.CAMERA), RESULT_CALL
+                )
 
-    @Override
-    public void onHide(int index) {
+                CONTACTS -> ActivityCompat.requestPermissions(
+                    this@PermissionActivity, arrayOf(Manifest.permission.READ_CONTACTS), RESULT_CALL
+                )
 
-    }
+                LOCATION -> ActivityCompat.requestPermissions(
+                    this@PermissionActivity,
+                    arrayOf(
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.READ_PHONE_STATE
+                    ),
+                    RESULT_CALL
+                )
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == ResultCall){
-            int idx = mVerticalStepperView.getCurrentStep();
-            if (idx == 0) {
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    mVerticalStepperView.setErrorText(idx, "Sin este permiso la aplicación no puede funcionar");
-                    return;
+                OVERLAY -> overlayPermissionLauncher
+                    .launch(
+                        Intent(
+                            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                            Uri.parse("package:$packageName")
+                        )
+                    )
+
+                else -> {
+                    startActivity(Intent(this@PermissionActivity, MainActivity::class.java))
+                    finish()
                 }
-            }else if (idx == 1){
-                if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    mVerticalStepperView.setErrorText(idx, "Sin este permiso la aplicación no puede funcionar");
-                    return;
-                }
-            }else if (idx == 2){
-                if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-                    mVerticalStepperView.setErrorText(idx, "Sin este permiso la aplicación no puede funcionar");
-                    return;
-                }
-            }else if (idx == 3){
-                if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    mVerticalStepperView.setErrorText(idx, "Sin este permiso la aplicación no puede funcionar");
-                    return;
-                }
-            }else if (idx >= 4){
-                return;
-            }
-            mVerticalStepperView.setErrorText(idx, null);
-            mVerticalStepperView.nextStep();
-        }
-
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        int idx = mVerticalStepperView.getCurrentStep();
-        if (requestCode == REQUEST_OVERLAY){
-            if(!Settings.canDrawOverlays(this)) {
-                mVerticalStepperView.setErrorText(idx, "Permiso no concedido. Puede concederlo más adelante");
-                return;
             }
         }
-        mVerticalStepperView.setErrorText(idx, null);
-        mVerticalStepperView.nextStep();
+    }
+
+    override fun onShow(index: Int) {
+        // Do nothing
+    }
+
+    override fun onHide(index: Int) {
+        // Do nothing
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == RESULT_CALL) {
+            when(val idx = mVerticalStepperView.currentStep) {
+                CALL_PHONE ->
+                    if (hasPermissions(Manifest.permission.CALL_PHONE)) {
+                    mVerticalStepperView.setErrorText(idx, getString(R.string.permission_required_message))
+                }
+                CAMERA ->
+                    if (hasPermissions(Manifest.permission.CAMERA)) {
+                        mVerticalStepperView.setErrorText(idx, getString(R.string.permission_required_message))
+                }
+                CONTACTS ->
+                    if (hasPermissions(Manifest.permission.READ_CONTACTS)) {
+                        mVerticalStepperView.setErrorText(idx, getString(R.string.permission_required_message))
+                }
+                LOCATION ->
+                    if (hasPermissions(
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.READ_PHONE_STATE
+                    )) {
+                        mVerticalStepperView.setErrorText(idx, getString(R.string.permission_required_message))
+                    }
+                else -> {
+                    mVerticalStepperView.setErrorText(idx, null)
+                    mVerticalStepperView.nextStep()
+                }
+            }
+        }
     }
 }

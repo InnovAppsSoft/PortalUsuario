@@ -1124,5 +1124,6 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="promotion_background">Promotion background</string>
     <string name="error_message_unsupported_feature">Su dispositivo no admite esta funcionalidad, lamentamos las molestias :(</string>
     <string name="error_message_security_issue">Ha ocurrido un problema de seguridad.</string>
+    <string name="permission_required_message">Sin este permiso la aplicación no puede funcionar</string>
 
 </resources>

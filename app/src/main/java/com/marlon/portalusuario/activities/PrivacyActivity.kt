@@ -1,26 +1,15 @@
-package com.marlon.portalusuario.activities;
+package com.marlon.portalusuario.activities
 
-import android.os.Bundle;
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.marlon.portalusuario.databinding.ActivityPrivacyBinding
 
-import android.webkit.WebView;
+class PrivacyActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val binding = ActivityPrivacyBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import com.marlon.portalusuario.R;
-
-
-public class PrivacyActivity extends AppCompatActivity {
-
-    Toolbar mToolbar;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_privacy);
-
-        WebView myWebView = findViewById(R.id.webview_privacy);
-        myWebView.loadUrl("https://portalusuarioapp.blogspot.com/p/portal-usuario-mas-que-una-simple.html");
-
+        binding.webviewPrivacy.loadUrl("https://portalusuarioapp.blogspot.com/p/portal-usuario-mas-que-una-simple.html")
     }
 }

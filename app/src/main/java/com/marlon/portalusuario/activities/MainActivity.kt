@@ -47,6 +47,7 @@ import com.marlon.portalusuario.promotions.PromotionsConfig
 import com.marlon.portalusuario.promotions.PromotionsViewModel
 import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
 import com.marlon.portalusuario.une.UneActivity
+import com.marlon.portalusuario.util.Utils.hasPermissions
 import com.marlon.portalusuario.view.fragments.CuentasFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.ServiciosFragment
@@ -382,15 +383,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             )) {
             startActivity(Intent(this, PermissionActivity::class.java))
         }
-    }
-
-    private fun hasPermissions(vararg permissions: String): Boolean {
-        permissions.forEach { permission ->
-            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
-                return true
-            }
-        }
-        return false
     }
 
 

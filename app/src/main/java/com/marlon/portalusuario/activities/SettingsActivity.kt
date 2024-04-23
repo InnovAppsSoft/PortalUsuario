@@ -1,102 +1,99 @@
-package com.marlon.portalusuario.activities;
+package com.marlon.portalusuario.activities
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.provider.Settings;
-import android.widget.Toast;
+import android.content.Intent
+import android.content.SharedPreferences
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener
+import android.net.Uri
+import android.os.Bundle
+import android.provider.Settings
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreferenceCompat
+import com.marlon.portalusuario.R
+import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
+import java.util.Objects
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.SwitchPreferenceCompat;
-
-import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.trafficbubble.FloatingBubbleService;
-
-import java.util.Objects;
-
-public class SettingsActivity extends AppCompatActivity{
-
-    public SettingsActivity(){}
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_activity);
+class SettingsActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.settings_activity)
         if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.settings, new SettingsFragment())
-                    .commit();
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.settings, SettingsFragment())
+                .commit()
         }
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        val actionBar = supportActionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return super.onSupportNavigateUp();
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
-    public static class SettingsFragment extends PreferenceFragmentCompat  implements SharedPreferences.OnSharedPreferenceChangeListener{
-        private SwitchPreferenceCompat show_traffic_speed_bubble;
+    class SettingsFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListener {
+        private var showTrafficSpeedBubble: SwitchPreferenceCompat? = null
 
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.root_preferences, rootKey);
+
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            setPreferencesFromResource(R.xml.root_preferences, rootKey)
             // INIT
-            show_traffic_speed_bubble = findPreference("show_traffic_speed_bubble");
+            showTrafficSpeedBubble = findPreference("show_traffic_speed_bubble")
         }
 
-        @Override
-        public void onResume() {
-            super.onResume();
+        override fun onResume() {
+            super.onResume()
             // Registrar escucha
-            Objects.requireNonNull(getPreferenceScreen().getSharedPreferences())
-                    .registerOnSharedPreferenceChangeListener(this);
+            preferenceScreen.sharedPreferences?.registerOnSharedPreferenceChangeListener(this)
             //
-            show_traffic_speed_bubble.setEnabled(true);
+            showTrafficSpeedBubble!!.isEnabled = true
             //
-            if (!Settings.canDrawOverlays(getContext())) {
-                show_traffic_speed_bubble.setChecked(false);
+            if (!Settings.canDrawOverlays(context)) {
+                showTrafficSpeedBubble!!.isChecked = false
             }
         }
 
-        @Override
-        public void onPause() {
-            super.onPause();
+        override fun onPause() {
+            super.onPause()
             // Eliminar registro de la escucha
-            Objects.requireNonNull(getPreferenceScreen().getSharedPreferences())
-                    .unregisterOnSharedPreferenceChangeListener(this);
+            preferenceScreen.sharedPreferences?.unregisterOnSharedPreferenceChangeListener(this)
         }
 
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            switch (Objects.requireNonNull(key)) {
-                case "keynoche" -> {
-                    switch (sharedPreferences.getString("keynoche", "")) {
-                        case "claro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                        case "oscuro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                        default -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
+            when (Objects.requireNonNull(key)) {
+                "keynoche" -> {
+                    when (sharedPreferences.getString("keynoche", "")) {
+                        "claro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                        "oscuro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                        else -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                     }
                 }
-                case "show_traffic_speed_bubble" -> {
+
+                "show_traffic_speed_bubble" -> {
                     if (sharedPreferences.getBoolean("show_traffic_speed_bubble", false)) {
-                        if (!Settings.canDrawOverlays(getContext())) {
-                            Toast.makeText(getContext(), "Otorgue a Portal Usuario los permisos requeridos", Toast.LENGTH_SHORT).show();
-                            startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + requireContext().getPackageName())), 0);
+                        if (!Settings.canDrawOverlays(context)) {
+                            Toast.makeText(
+                                context,
+                                "Otorgue a Portal Usuario los permisos requeridos",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            startActivity(
+                                Intent(
+                                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                    Uri.parse("package:" + requireContext().packageName)
+                                )
+                            )
                         }
                     } else {
-                        requireContext().stopService(new Intent(getContext(), FloatingBubbleService.class));
+                        requireContext().stopService(
+                            Intent(
+                                context,
+                                FloatingBubbleService::class.java
+                            )
+                        )
                     }
                 }
             }

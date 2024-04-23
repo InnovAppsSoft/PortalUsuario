@@ -1,87 +1,31 @@
-package com.marlon.portalusuario.activities;
+package com.marlon.portalusuario.activities
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
+import android.Manifest
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.marlon.portalusuario.databinding.DialogPlanAmigosBinding
+import com.marlon.portalusuario.util.Utils.hasPermissions
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+private const val REQUEST_CALL = 1
 
-import com.marlon.portalusuario.R;
+class PlanAmigosActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val binding = DialogPlanAmigosBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-public class PlanAmigosActivity extends AppCompatActivity implements View.OnClickListener{
-
-    private CardView activar,adicionar,consultar;
-    private ImageView Atras;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialog_plan_amigos);
-
-        //Definiendo Card
-        activar = findViewById(R.id.activar);
-        adicionar = findViewById(R.id.adicionar);
-        consultar = findViewById(R.id.consultar);
-
-        //Añadiendo Clic a los Card
-        activar.setOnClickListener(this);
-        adicionar.setOnClickListener(this);
-        consultar.setOnClickListener(this);
-
-        Atras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PlanAmigosActivity.super.onBackPressed();
-            }
-        });
-
+        binding.activar.setOnClickListener { ussdCall("*133*4*1%23") }
+        binding.adicionar.setOnClickListener { ussdCall("*133*4*2%23") }
+        binding.consultar.setOnClickListener { ussdCall("*133*4*3%23") }
     }
 
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public void onClick(View v) {
-
-        int id = v.getId();
-        if (id == R.id.activar) {
-            USSDcall("*133*4*1%23");
-        } else if (id == R.id.adicionar) {
-            USSDcall("*133*4*2%23");
-        } else if (id == R.id.consultar) {
-            USSDcall("*133*4*3%23");
-        }
-
-    }
-
-    public void USSDcall(String ussd){
-
-        Intent r = new Intent();
-        r.setAction(Intent.ACTION_CALL); r.setData(Uri.parse("tel:"+ussd + ""));
-
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_DENIED ) {
-                requestPermissions(new String[] {Manifest.permission.CALL_PHONE}, 1000);
-
-
-            } else {
-
-                startActivity(r);
-
-            }
-
+    private fun ussdCall(ussd: String) {
+        if (hasPermissions(Manifest.permission.CALL_PHONE)) {
+            requestPermissions(arrayOf(Manifest.permission.CALL_PHONE), REQUEST_CALL)
         } else {
-
-            startActivity(r);
-
+            startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:$ussd")))
         }
-
     }
-
 }
-
