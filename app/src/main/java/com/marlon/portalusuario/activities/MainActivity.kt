@@ -207,8 +207,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Shorcuts
-        shorcut()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -527,85 +525,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         // FLOATING BUBBLE SERVICE
         if (requestCode == 0 && Settings.canDrawOverlays(this)) {
             startService(Intent(this, FloatingBubbleService::class.java))
-        }
-    }
-
-    private fun shorcut() {
-        if (Build.VERSION.SDK_INT >= 25) {
-            val shortcutManager: ShortcutManager? =
-                ContextCompat.getSystemService(this, ShortcutManager::class.java)
-            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:*222" + Uri.encode("#")))
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            intent.putExtra("com.android.phone.force.slot", true)
-            intent.putExtra("Cdma_Supp", true)
-            if (simCard == "0") {
-                for (s in CuentasFragment.simSlotName) {
-                    intent.putExtra(s, 0)
-                    intent.putExtra("com.android.phone.extra.slot", 0)
-                }
-            } else if (simCard == "1") {
-                for (s in CuentasFragment.simSlotName) {
-                    intent.putExtra(s, 1)
-                    intent.putExtra("com.android.phone.extra.slot", 1)
-                }
-            }
-            val saldoShortcut = ShortcutInfo.Builder(this, "shortcut_saldo")
-                .setShortLabel("Saldo")
-                .setLongLabel("Saldo")
-                .setIcon(Icon.createWithResource(this, R.drawable.saldosh))
-                .setIntent(intent)
-                .setRank(2)
-                .build()
-            // shrtcuts bonos
-            val bonos = Intent(Intent.ACTION_CALL, Uri.parse("tel:*222*266" + Uri.encode("#")))
-            bonos.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            bonos.putExtra("com.android.phone.force.slot", true)
-            bonos.putExtra("Cdma_Supp", true)
-            if (simCard == "0") {
-                for (s in CuentasFragment.simSlotName) {
-                    bonos.putExtra(s, 0)
-                    bonos.putExtra("com.android.phone.extra.slot", 0)
-                }
-            } else if (simCard == "1") {
-                for (s in CuentasFragment.simSlotName) {
-                    bonos.putExtra(s, 1)
-                    bonos.putExtra("com.android.phone.extra.slot", 1)
-                }
-            }
-            val bonosShortcut = ShortcutInfo.Builder(this, "shortcut_bono")
-                .setShortLabel("Bonos")
-                .setLongLabel("Bonos")
-                .setIcon(Icon.createWithResource(this, R.drawable.bolsash))
-                .setIntent(bonos)
-                .setRank(1)
-                .build()
-            // shrtcuts datos
-            val datos = Intent(Intent.ACTION_CALL, Uri.parse("tel:*222*328" + Uri.encode("#")))
-            datos.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            datos.putExtra("com.android.phone.force.slot", true)
-            datos.putExtra("Cdma_Supp", true)
-            if (simCard == "0") {
-                for (s in CuentasFragment.simSlotName) {
-                    datos.putExtra(s, 0)
-                    datos.putExtra("com.android.phone.extra.slot", 0)
-                }
-            } else if (simCard == "1") {
-                for (s in CuentasFragment.simSlotName) {
-                    datos.putExtra(s, 1)
-                    datos.putExtra("com.android.phone.extra.slot", 1)
-                }
-            }
-            val datosShortcut = ShortcutInfo.Builder(this, "shortcut_datos")
-                .setShortLabel("Datos")
-                .setLongLabel("Datos")
-                .setIcon(Icon.createWithResource(this, R.drawable.datossh))
-                .setIntent(datos)
-                .setRank(0)
-                .build()
-            if (shortcutManager != null) {
-                shortcutManager.dynamicShortcuts =
-                    listOf(saldoShortcut, bonosShortcut, datosShortcut)
-            }
         }
     }
 
