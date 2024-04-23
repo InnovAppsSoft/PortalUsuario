@@ -1,16 +1,15 @@
 package com.marlon.portalusuario.activities
 
 import android.Manifest
+import android.app.Activity
 import android.app.Dialog
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.content.pm.ShortcutInfo
-import android.content.pm.ShortcutManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Icon
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
@@ -18,16 +17,11 @@ import android.net.NetworkRequest
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -35,23 +29,22 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ShareCompat.IntentBuilder
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import androidx.preference.PreferenceManager.getDefaultSharedPreferences
-import com.google.android.material.navigation.NavigationView
 import com.marlon.portalusuario.PUNotifications.PUNotificationsActivity
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ViewModel.PunViewModel
-import com.marlon.portalusuario.promotions.PromotionsConfig
-import com.marlon.portalusuario.promotions.PromotionsViewModel
+import com.marlon.portalusuario.components.SetLTEModeDialog
 import com.marlon.portalusuario.databinding.ActivityMainBinding
-import com.marlon.portalusuario.errores_log.JCLogging
+import com.marlon.portalusuario.databinding.DialogSetOnlyLteBinding
 import com.marlon.portalusuario.errores_log.LogFileViewerActivity
 import com.marlon.portalusuario.huella.BiometricCallback
 import com.marlon.portalusuario.huella.BiometricManager
+import com.marlon.portalusuario.promotions.PromotionsConfig
+import com.marlon.portalusuario.promotions.PromotionsViewModel
 import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
 import com.marlon.portalusuario.une.UneActivity
 import com.marlon.portalusuario.view.fragments.CuentasFragment
@@ -63,8 +56,6 @@ import cu.uci.apklisupdate.UpdateCallback
 import cu.uci.apklisupdate.model.AppUpdateInfo
 import cu.uci.apklisupdate.view.ApklisUpdateDialog
 import dagger.hilt.android.AndroidEntryPoint
-import io.github.suitetecsa.sdk.android.utils.extractShortNumber
-import io.github.suitetecsa.sdk.android.utils.validateFormat
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
@@ -130,30 +121,11 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
     }
 
-    private var details: TextView? = null
-    private var titleTextView: TextView? = null
-    private var log: TextView? = null
-
-    private var nameTV: TextView? = null
-    private var mailTV: TextView? = null
-    private var profileIV: ImageView? = null
-
-    private var downloadApklis: Button? = null
-    private var downloadPs: Button? = null
-    private var remindMeLater: Button? = null
-    private var notificationBtn: FrameLayout? = null
-    private lateinit var menu: ImageView
-    private var cartBadge: TextView? = null
-    private var drawer: DrawerLayout? = null
-
     // VARS
     private var appName: String? = null
 
     // SETTINGS
     lateinit var settings: SharedPreferences
-
-    // LOGGING
-    private var jcLogging: JCLogging? = null
 
     private var mBiometricManager: BiometricManager? = null
 
@@ -163,12 +135,8 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .replace(R.id.fragmentContainer, fragment!!)
             .commit()
-        titleTextView!!.text = title
+        binding.contentMain.tvAppTitle.text = title
     }
-
-    // preference dualSim
-    private var simPreferences: SharedPreferences? = null
-    private var simCard: String? = null
 
     private fun listenPreferences(preferences: SharedPreferences, key: String?) {
         key?.let {
@@ -190,11 +158,11 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
                                 "Otorgue a Portal Usuario los permisos requeridos",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            startActivityForResult(
+                            startActivity(
                                 Intent(
                                     Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                                     Uri.parse("package:" + this.packageName)
-                                ), 0
+                                )
                             )
                         } else {
                             this.stopService(Intent(this, FloatingBubbleService::class.java))
@@ -232,129 +200,9 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false)
         requestPermissions()
 
-        simPreferences = getDefaultSharedPreferences(this)
         context = this
-        // drawer Layout
-        drawer = findViewById(R.id.drawer_layout)
         // drawer Nav View
-        navigationView = findViewById(R.id.nav_view)
-        navigationView!!.setNavigationItemSelectedListener { item ->
-
-            val i: Intent
-            when (item.itemId) {
-                R.id.micuenta -> setFragment(CuentasFragment(), "Mi Cuenta")
-                R.id.services -> setFragment(ServiciosFragment<Any?>(), "Servicios")
-                R.id.plans -> setFragment(PaquetesFragment(), "Planes")
-                R.id.connectivity -> setFragment(connectivityFragment, "Conectividad")
-
-                R.id.networkChange -> SetLTEModeDialog(context)
-                R.id.une -> {
-                    i = Intent(this@MainActivity, UneActivity::class.java)
-                    startActivity(i)
-                }
-
-                R.id.errors_register -> startActivity(
-                    Intent(
-                        this@MainActivity,
-                        LogFileViewerActivity::class.java
-                    ).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                )
-
-                R.id.feedback -> {
-                    var debugInfo = "\n\n\n---"
-                    debugInfo += "\nOS Version: " + System.getProperty("os.version") + " (" + Build.VERSION.INCREMENTAL + ")"
-                    debugInfo += "\nAndroid API: " + Build.VERSION.SDK_INT
-                    debugInfo += "\nModel (Device): " + Build.MODEL + " (" + Build.DEVICE + ")"
-                    debugInfo += "\nManufacturer: " + Build.MANUFACTURER
-                    debugInfo += "\n---"
-                    val intent = Intent(
-                        Intent.ACTION_SENDTO,
-                        Uri.fromParts("mailto", context!!.getString(R.string.feedback_email), null)
-                    )
-                    intent.putExtra(
-                        Intent.EXTRA_EMAIL,
-                        context!!.getString(R.string.feedback_email)
-                    )
-                    intent.putExtra(
-                        Intent.EXTRA_SUBJECT,
-                        context!!.getString(R.string.feedback_subject)
-                    )
-                    intent.putExtra(Intent.EXTRA_TEXT, debugInfo)
-                    startActivity(Intent.createChooser(intent, "Enviar Feedback usando..."))
-                }
-
-                R.id.telegram_channel -> {
-                    val telegramUrl = ("https://t.me/portalusuario")
-                    val telegramLaunch = Intent(Intent.ACTION_VIEW)
-                    telegramLaunch.data = Uri.parse(telegramUrl)
-                    startActivity(telegramLaunch)
-                }
-
-                R.id.facebook -> {
-                    val facebookUrl = ("https://www.facebook.com/portalusuario")
-                    val facebookLaunch = Intent(Intent.ACTION_VIEW)
-                    facebookLaunch.data = Uri.parse(facebookUrl)
-                    startActivity(facebookLaunch)
-                }
-
-                R.id.whatsapp -> {
-                    val betaUrl = ("https://chat.whatsapp.com/HT6bKjpXHrN4FAyTAcy1Xn")
-                    val betaLaunch = Intent(Intent.ACTION_VIEW)
-                    betaLaunch.data = Uri.parse(betaUrl)
-                    startActivity(betaLaunch)
-                }
-
-                R.id.betatesters -> {
-                    val betaUrl = ("https://t.me/portalusuarioBT")
-                    val betaLaunch = Intent(Intent.ACTION_VIEW)
-                    betaLaunch.data = Uri.parse(betaUrl)
-                    startActivity(betaLaunch)
-                }
-
-                R.id.invite -> {
-                    inviteUser()
-                }
-
-                R.id.politicadeprivacidad -> {
-                    i = Intent(this@MainActivity, PrivacyActivity::class.java)
-                    startActivity(i)
-                }
-
-                R.id.settings -> {
-                    i = Intent(this@MainActivity, SettingsActivity::class.java)
-                    startActivity(i)
-                }
-
-                R.id.about -> {
-                    i = Intent(this@MainActivity, AboutActivity::class.java)
-                    startActivity(i)
-                }
-
-                R.id.donate -> {
-                    i = Intent(this@MainActivity, DonationActivity::class.java)
-                    startActivity(i)
-                }
-            }
-            drawer!!.closeDrawer(GravityCompat.START)
-            false
-        }
-        menu = findViewById(R.id.menu)
-        menu.setOnClickListener { drawer!!.openDrawer(GravityCompat.START) }
-        titleLayout = findViewById(R.id.titleLayout)
-        titleTextView = findViewById(R.id.puTV)
-        details = findViewById(R.id.details)
-        log = findViewById(R.id.log)
-        downloadApklis = findViewById(R.id.download_apklis)
-        downloadApklis = findViewById(R.id.download_apklis)
-        remindMeLater = findViewById(R.id.remind_me_later)
-        nameTV = findViewById(R.id.textname)
-        mailTV = findViewById(R.id.correotext)
-        profileIV = findViewById(R.id.img_drawer_perfil)
-
-        jcLogging = JCLogging(this)
-        downloadApklis = findViewById(R.id.download_apklis)
-        downloadPs = findViewById(R.id.download_ps)
-        remindMeLater = findViewById(R.id.remind_me_later)
+        setUpDrawer()
 
         // Huella Seguridad
         if (settings.getBoolean("show_fingerprint", false)) {
@@ -386,10 +234,8 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
 
         // check if there are unseen notifications
-        cartBadge = findViewById(R.id.cart_badge)
         setupBadge()
-        notificationBtn = findViewById(R.id.notificationBtn)
-        notificationBtn!!.setOnClickListener {
+        binding.contentMain.btNotification.setOnClickListener {
             val i = Intent(this@MainActivity, PUNotificationsActivity::class.java)
             startActivity(i)
             Toast.makeText(
@@ -403,20 +249,90 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         setFragment(CuentasFragment(), "Servicios")
     }
 
+    private fun setUpDrawer() {
+        binding.navView.setNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.micuenta -> setFragment(CuentasFragment(), "Mi Cuenta")
+                R.id.services -> setFragment(ServiciosFragment<Any?>(), "Servicios")
+                R.id.plans -> setFragment(PaquetesFragment(), "Planes")
+                R.id.connectivity -> setFragment(connectivityFragment, "Conectividad")
+                R.id.networkChange -> SetLTEModeDialog(this)
+                R.id.une -> startActivity(Intent(this@MainActivity, UneActivity::class.java))
+                R.id.errors_register ->
+                    startActivity(
+                        Intent(
+                            this@MainActivity,
+                            LogFileViewerActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    )
+
+                R.id.feedback -> {
+                    val debugInfo = """
+                            
+                            
+                            ---
+                            OS Version: ${System.getProperty("os.version")} (${Build.VERSION.INCREMENTAL})}
+                            Android API: ${Build.VERSION.SDK_INT}
+                            Model (Device): ${Build.MODEL} (${Build.DEVICE})
+                            Manufacturer: ${Build.MANUFACTURER}
+                            ---
+                        """.trimIndent()
+                    val intent = Intent(
+                        Intent.ACTION_SENDTO,
+                        Uri.fromParts("mailto", getString(R.string.feedback_email), null)
+                    )
+                    intent.putExtra(Intent.EXTRA_EMAIL, getString(R.string.feedback_email))
+                    intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.feedback_subject))
+                    intent.putExtra(Intent.EXTRA_TEXT, debugInfo)
+                    startActivity(Intent.createChooser(intent, "Enviar Feedback usando..."))
+                }
+
+                R.id.telegram_channel -> startActivity(Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse("https://t.me/portalusuario") // TODO: Actualizar la url del canal
+                })
+
+                R.id.facebook -> startActivity(Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse("https://www.facebook.com/portalusuario")
+                })
+
+                R.id.whatsapp -> startActivity(Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse(
+                        "https://chat.whatsapp.com/HT6bKjpXHrN4FAyTAcy1Xn") // TODO: Creo que este grupo ya no existe
+                })
+
+                R.id.betatesters -> startActivity(Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse("https://t.me/portalusuarioBT") // TODO: Actualizar la url del grupo
+                })
+
+                R.id.invite ->  inviteUser()
+
+                R.id.politicadeprivacidad -> startActivity(Intent(this@MainActivity, PrivacyActivity::class.java))
+
+                R.id.settings -> startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
+
+                R.id.about -> startActivity(Intent(this@MainActivity, AboutActivity::class.java))
+
+                R.id.donate -> startActivity(Intent(this@MainActivity, DonationActivity::class.java))
+            }
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            false
+        }
+        binding.contentMain.menu.setOnClickListener { binding.drawerLayout.openDrawer(GravityCompat.START) }
+    }
+
     private fun setupBadge() {
         val sharedPreferences = getDefaultSharedPreferences(this)
         val count = sharedPreferences.getInt("notifications_count", 0)
         Log.e("UNSEE NOTIFICATIONS", count.toString())
         if (count == 0) {
-            if (cartBadge!!.visibility != View.GONE) {
-                cartBadge!!.visibility = View.GONE
+            if (binding.contentMain.cartBadgeCount.visibility != View.GONE) {
+                binding.contentMain.cartBadgeCount.visibility = View.GONE
             }
         } else {
-            if (cartBadge!!.visibility != View.VISIBLE) {
-                cartBadge!!.visibility = View.VISIBLE
+            if (binding.contentMain.cartBadgeCount.visibility != View.VISIBLE) {
+                binding.contentMain.cartBadgeCount.visibility = View.VISIBLE
             }
         }
-        cartBadge!!.text = count.toString()
+        binding.contentMain.cartBadgeCount.text = count.toString()
     }
 
     // setUp carousel state
@@ -427,10 +343,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             .binding(binding.contentMain)
             .build()
         promotionsConfig.setup(showPromotions)
-    }
-
-    private fun String?.showMessage(c: Context?) {
-        Toast.makeText(c, this, Toast.LENGTH_SHORT).show()
     }
 
     // Huella de Seguridad
@@ -461,72 +373,26 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
 
     // Permisos Consedidos
     fun requestPermissions() {
-        if ((
-                    (
-                            (
-                                    (
-                                            ContextCompat.checkSelfPermission(
-                                                this,
-                                                Manifest.permission.CALL_PHONE
-                                            ) != PackageManager.PERMISSION_GRANTED
-                                            ) || ContextCompat.checkSelfPermission(
-                                        this,
-                                        Manifest.permission.CAMERA
-                                    ) != PackageManager.PERMISSION_GRANTED
-                                    ) || ContextCompat.checkSelfPermission(
-                                this,
-                                Manifest.permission.READ_CONTACTS
-                            ) != PackageManager.PERMISSION_GRANTED
-                            ) || ContextCompat.checkSelfPermission(
-                        this,
-                        Manifest.permission.ACCESS_COARSE_LOCATION
-                    ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                        this,
-                        Manifest.permission.ACCESS_COARSE_LOCATION
-                    ) != PackageManager.PERMISSION_GRANTED
-                    ) || ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
+        if (hasPermissions(
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.CAMERA,
+                Manifest.permission.READ_CONTACTS,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )) {
             startActivity(Intent(this, PermissionActivity::class.java))
         }
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        val errorMessage =
-            "Cuidado... Faltan caracteres o su número seleccionado no es un número de telefonia móvil."
-        for (fragment in supportFragmentManager.fragments) {
-            fragment.onActivityResult(requestCode, resultCode, data)
-        }
-        if (requestCode == PICK_CONTACT_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                val uri = data!!.data
-                val cursor = contentResolver.query(uri!!, null, null, null, null)
-                if (cursor!!.moveToFirst()) {
-                    val numberColumn =
-                        cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
-                    val phoneNumber = cursor.getString(numberColumn)
-                    validateFormat(phoneNumber)?.let {
-                        extractShortNumber(it)?.let { shortNumber ->
-                            ServiciosFragment.phoneNumber.setText(shortNumber)
-                        } ?: run {
-                            errorMessage.showMessage(this)
-                        }
-                    } ?: run {
-                        errorMessage.showMessage(this)
-                    }
-                }
+    private fun hasPermissions(vararg permissions: String): Boolean {
+        permissions.forEach { permission ->
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                return true
             }
         }
-
-        // FLOATING BUBBLE SERVICE
-        if (requestCode == 0 && Settings.canDrawOverlays(this)) {
-            startService(Intent(this, FloatingBubbleService::class.java))
-        }
+        return false
     }
+
 
     public override fun onResume() {
         super.onResume()
@@ -606,54 +472,14 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         finish()
     }
 
-    // Dialogo de Cambiar red
-    inner class SetLTEModeDialog(context: Context?) {
-        private val set4GBtn: Button
-
-        init {
-            val simDialog = Dialog(context!!)
-            simDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            simDialog.setCancelable(true)
-            simDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            simDialog.setContentView(R.layout.dialog_set_only_lte)
-            set4GBtn = simDialog.findViewById(R.id.set_4g)
-            set4GBtn.setOnClickListener { v: View? -> openHiddenMenu() }
-            simDialog.show()
-        }
-
-        fun openHiddenMenu() {
-            try {
-                val intent = Intent("android.intent.action.MAIN")
-                if (Build.VERSION.SDK_INT >= 30) {
-                    intent.setClassName("com.android.phone", "com.android.phone.settings.RadioInfo")
-                } else {
-                    intent.setClassName("com.android.settings", "com.android.settings.RadioInfo")
-                }
-                startActivity(intent)
-            } catch (unused: Exception) {
-                Toast.makeText(
-                    context,
-                    "Su dispositivo no admite esta funcionalidad, lamentamos las molestias :(",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-
-    }
-
-    // Promo ETECSA
     companion object {
         private var context: Context? = null
-        private var titleLayout: LinearLayout? = null
 
-        var navigationView: NavigationView? = null
         private var punViewModel: PunViewModel? = null
 
         @JvmStatic
         fun insertNotification() {
             punViewModel!!.insertPUN(null)
         }
-
-        const val PICK_CONTACT_REQUEST = 1
     }
 }
