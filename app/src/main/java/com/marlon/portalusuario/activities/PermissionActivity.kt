@@ -111,7 +111,7 @@ class PermissionActivity : AppCompatActivity(), IStepperAdapter {
         nextButton.text = if (index == size() - 1) "Comenzar" else "Conceder"
         nextButton.setOnClickListener {
             when (index) {
-                CALL_PHONE -> ActivityCompat.requestPermissions(
+                CALL_PHONE ->ActivityCompat.requestPermissions(
                     this@PermissionActivity, arrayOf(Manifest.permission.CALL_PHONE), RESULT_CALL
                 )
 
@@ -164,15 +164,15 @@ class PermissionActivity : AppCompatActivity(), IStepperAdapter {
                 CALL_PHONE ->
                     if (hasPermissions(Manifest.permission.CALL_PHONE)) {
                     mVerticalStepperView.setErrorText(idx, getString(R.string.permission_required_message))
-                }
+                } else mVerticalStepperView.nextStep()
                 CAMERA ->
                     if (hasPermissions(Manifest.permission.CAMERA)) {
                         mVerticalStepperView.setErrorText(idx, getString(R.string.permission_required_message))
-                }
+                } else mVerticalStepperView.nextStep()
                 CONTACTS ->
                     if (hasPermissions(Manifest.permission.READ_CONTACTS)) {
                         mVerticalStepperView.setErrorText(idx, getString(R.string.permission_required_message))
-                }
+                } else mVerticalStepperView.nextStep()
                 LOCATION ->
                     if (hasPermissions(
                             Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -180,10 +180,9 @@ class PermissionActivity : AppCompatActivity(), IStepperAdapter {
                             Manifest.permission.READ_PHONE_STATE
                     )) {
                         mVerticalStepperView.setErrorText(idx, getString(R.string.permission_required_message))
-                    }
+                    } else mVerticalStepperView.nextStep()
                 else -> {
                     mVerticalStepperView.setErrorText(idx, null)
-                    mVerticalStepperView.nextStep()
                 }
             }
         }
