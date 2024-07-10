@@ -221,7 +221,7 @@ dependencies {
     implementation("com.github.smarteist:autoimageslider:1.4.0")
 
     implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
-    implementation("io.reactivex.rxjava3:rxjava:3.1.6")
+    implementation("io.reactivex.rxjava3:rxjava:3.1.8")
 
     implementation("com.github.kizitonwose.colorpreference:core:1.1.0")
     implementation("com.github.kizitonwose.colorpreference:support:1.1.0")
