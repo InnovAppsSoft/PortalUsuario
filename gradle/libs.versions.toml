@@ -1,56 +1,196 @@
 [versions]
-activity-ktx = "1.7.2"
+activity-ktx = "1.9.0"
+androidIntegration = "3.3.0"
 androidsvg-aar = "1.4"
-cameraxVersion = "1.2.3"
+appcompatVersion = "1.7.0"
+appusagemonitor = "2.1.0"
+autoimageslider = "1.4.0"
+bottomdrawer = "v1.0.0"
+cameraxVersion = "1.3.4"
+cardview = "1.0.0"
+carouselview = "0.1.5"
+circleimageview = "3.1.0"
+codeScanner = "2.1.0"
+coLibrary = "1.1"
+constraintlayout = "2.1.4"
 constraintlayout-compose = "1.0.1"
+coreKtx = "1.13.1"
+coreVersion = "1.1.0"
+customtabs = "28.0.0"
+deviceinfo = "0.1.5"
+dexter = "6.2.3"
+emojiMaterial = "0.16.0"
+espressoCore = "3.6.1"
+floatingactionbutton = "1.10.1"
+githubLibrary = "1.6.2"
+githubLibraryVersion = "5.4.3"
+glidetovectoryou = "v2.0.0"
+gson = "2.10.1"
+guava = "31.1-android"
+hiltNavigationCompose = "1.2.0"
+intentanimation = "1.0"
+jsoup = "1.18.1"
+junitVersion = "1.2.1"
+labelview = "v1.1.2"
+legacySupportV4 = "1.0.0"
+library = "2.1.4"
+libraryVersion = "1.6.1"
+lifecycleViewmodelKtx = "2.8.3"
+lobsterpicker = "1.0.1"
+log = "1.1.5"
+loggingInterceptor = "5.0.0-alpha.11"
+materialstepperview = "0.2.5"
+materialVersion = "1.12.0"
+mpandroidchart = "v3.0.3"
+multidex = "2.0.1"
+navigationFragment = "2.7.7"
+neumorphism = "0.3.0"
+palette = "1.0.0"
+picasso = "2.71828"
+pixplicityLibrary = "1.1.0"
+playServicesAds = "23.2.0"
+preferenceKtx = "1.2.1"
+prettytime = "5.0.6.Final"
+ratethisapp = "1.2.0"
+retrofit = "2.9.0"
+roundedimageview = "2.3.0"
+rxandroid = "3.0.2"
+rxjava = "3.1.7"
+sdpAndroid = "1.1.0"
+segmentedbarview = "1.1.6"
+signalstrengths = "0.0.4"
+signalview = "1.0"
+sspAndroid = "1.1.0"
+stickyswitch = "0.0.15"
+swiperefreshlayout = "1.2.0-alpha01"
+taptargetview = "1.13.3"
+toggleButtonGroup = "1.2.3"
+ucrop = "2.2.2"
+vectordrawable = "1.2.0"
+viewpager2 = "1.1.0"
+workRuntimeKtx = "2.9.0"
+zxing = "1.9.13"
 zxing-core = "3.5.1"
-firebase-appdistribution-gradle = "4.0.0"
-firebase-crashlytics-gradle = "2.9.9"
-fragment-ktx = "1.6.2"
+firebase-appdistribution-gradle = "5.0.0"
+firebase-crashlytics-gradle = "3.0.2"
+fragment-ktx = "1.8.1"
 glide = "4.15.1"
-google-services = "4.4.0"
-gradle = "8.1.1"
-hilt-android = "2.46.1"
+google-services = "4.4.2"
+gradle = "8.5.1"
+hilt-android = "2.49"
 kotlin-gradle-plugin = "1.8.10"
-androidx-lifecycle = "2.6.2"
-kotlinx-coroutines-android = "1.6.4"
-navigation-safe-args-gradle-plugin = "2.7.2"
-firebase-bom = "32.3.1"
-androidx-compose-bom = "2023.09.01"
-androidx-room = "2.5.2"
+androidx-lifecycle = "2.8.3"
+kotlinx-coroutines-android = "1.7.3"
+navigation-safe-args-gradle-plugin = "2.7.7"
+firebase-bom = "33.1.2"
+androidx-compose-bom = "2024.06.00"
+androidx-room = "2.6.1"
 devtools-ksp = "1.9.10-1.0.13"
-runtime-livedata = "1.5.1"
+runtime-livedata = "1.6.8"
 kotlin-android = "1.9.10"
-agp = "8.1.1"
-core-ktx = "1.12.0"
+agp = "8.5.1"
+coreKtxUpdated = "1.13.1"
 junit = "4.13.2"
-androidx-test-ext-junit = "1.1.5"
-espresso-core = "3.5.1"
-appcompat = "1.6.1"
-material = "1.9.0"
+androidx-test-ext-junit = "1.2.1"
+espressoCoreUpdated = "3.6.1"
+appcompat = "1.7.0"
+material = "1.12.0"
 apklisupdate = "1.4"
-
 arturbosch-detekt = "1.23.6"
-
 suitetecsa-sdk-kotlin = "0.2.3"
 suitetecsa-sdk-kotlin-old = "0.1.8"
 suitetecsa-sdk-android = "0.1.0-alpha01"
+gridlayout = "1.0.0"
 
 [libraries]
+android-integration = { module = "com.google.zxing:android-integration", version.ref = "androidIntegration" }
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity-ktx" }
+androidx-appcompat-v170 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
 androidx-camera-camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraxVersion" }
 androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraxVersion" }
 androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "cameraxVersion" }
 androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraxVersion" }
+androidx-cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
 androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayout-compose" }
+androidx-core-ktx-v1131 = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+androidx-core-ktx-updated = { module = "androidx.core:core-ktx", version.ref = "coreKtxUpdated" }
+androidx-espresso-core-v361 = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
+androidx-espresso-core-updated = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCoreUpdated" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment-ktx" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+androidx-junit-v121 = { module = "androidx.test.ext:junit", version.ref = "junitVersion" }
+androidx-legacy-support-v4 = { module = "androidx.legacy:legacy-support-v4", version.ref = "legacySupportV4" }
 androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
+androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment", version.ref = "navigationFragment" }
 androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigation-safe-args-gradle-plugin" }
+androidx-navigation-ui = { module = "androidx.navigation:navigation-ui", version.ref = "navigationFragment" }
+androidx-palette = { module = "androidx.palette:palette", version.ref = "palette" }
+androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "preferenceKtx" }
 androidx-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "runtime-livedata" }
+androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
+androidx-vectordrawable = { module = "androidx.vectordrawable:vectordrawable", version.ref = "vectordrawable" }
+androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
+androidx-work-runtime = { module = "androidx.work:work-runtime", version.ref = "workRuntimeKtx" }
+androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
+appusagemonitor = { module = "the.bot.box:appusagemonitor", version.ref = "appusagemonitor" }
+autoimageslider = { module = "com.github.smarteist:autoimageslider", version.ref = "autoimageslider" }
+bottomdrawer = { module = "com.github.HeyAlex:BottomDrawer", version.ref = "bottomdrawer" }
+carouselview = { module = "com.synnapps:carouselview", version.ref = "carouselview" }
 caverock-androidsvg-aar = { module = "com.caverock:androidsvg-aar", version.ref = "androidsvg-aar" }
+circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
+code-scanner = { module = "com.budiyev.android:code-scanner", version.ref = "codeScanner" }
+colorpreference-core = { module = "com.github.kizitonwose.colorpreference:core", version.ref = "coreVersion" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+customtabs = { module = "com.android.support:customtabs", version.ref = "customtabs" }
+deviceinfo = { module = "com.an.deviceinfo:deviceinfo", version.ref = "deviceinfo" }
+dexter = { module = "com.karumi:dexter", version.ref = "dexter" }
+emoji-material = { module = "com.vanniktech:emoji-material", version.ref = "emojiMaterial" }
+floatingactionbutton = { module = "com.getbase:floatingactionbutton", version.ref = "floatingactionbutton" }
+glidetovectoryou = { module = "com.github.2coffees1team:GlideToVectorYou", version.ref = "glidetovectoryou" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+intentanimation = { module = "com.github.hajiyevelnur92:intentanimation", version.ref = "intentanimation" }
+jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
+labelview = { module = "com.github.linger1216:labelview", version.ref = "labelview" }
+library = { module = "com.rengwuxian.materialedittext:library", version.ref = "library" }
+lobsterpicker = { module = "com.larswerkman:lobsterpicker", version.ref = "lobsterpicker" }
+log = { module = "co.trikita:log", version.ref = "log" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
+material-v1120 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+materialprogressbar-library = { module = "me.zhanghai.android.materialprogressbar:library", version.ref = "libraryVersion" }
+materialstepperview = { module = "moe.feng:MaterialStepperView", version.ref = "materialstepperview" }
+mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
+neumorphism = { module = "com.github.fornewid:neumorphism", version.ref = "neumorphism" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "loggingInterceptor" }
+picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
+play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAds" }
+prettytime = { module = "org.ocpsoft.prettytime:prettytime", version.ref = "prettytime" }
+ratethisapp = { module = "io.github.kobakei:ratethisapp", version.ref = "ratethisapp" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+roundedimageview = { module = "com.makeramen:roundedimageview", version.ref = "roundedimageview" }
+rxandroid = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxandroid" }
+rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava" }
+sdp-android = { module = "com.intuit.sdp:sdp-android", version.ref = "sdpAndroid" }
+segmentedbarview = { module = "mobi.gspd:segmentedbarview", version.ref = "segmentedbarview" }
+sharp-library = { module = "com.pixplicity.sharp:library", version.ref = "pixplicityLibrary" }
+showcaseview-library = { module = "com.github.amlcurran.showcaseview:library", version.ref = "githubLibraryVersion" }
+signalstrengths = { module = "james.signalstrengths:signalstrengths", version.ref = "signalstrengths" }
+signalview = { module = "com.praween.signalview:signalview", version.ref = "signalview" }
+ssp-android = { module = "com.intuit.ssp:ssp-android", version.ref = "sspAndroid" }
+stickyswitch = { module = "com.github.GwonHyeok:StickySwitch", version.ref = "stickyswitch" }
+support = { module = "com.github.kizitonwose.colorpreference:support", version.ref = "coreVersion" }
+sweetalert-library = { module = "com.github.f0ris.sweetalert:library", version.ref = "githubLibrary" }
+swipetoaction-library = { module = "co.dift.ui.swipetoaction:library", version.ref = "coLibrary" }
+taptargetview = { module = "com.getkeepsafe.taptargetview:taptargetview", version.ref = "taptargetview" }
+toggle-button-group = { module = "com.nex3z:toggle-button-group", version.ref = "toggleButtonGroup" }
+ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop" }
+zxing = { module = "me.dm7.barcodescanner:zxing", version.ref = "zxing" }
 zxing-core = { module = "com.google.zxing:core", version.ref = "zxing-core" }
 firebase-appdistribution-gradle = { module = "com.google.firebase:firebase-appdistribution-gradle", version.ref = "firebase-appdistribution-gradle" }
 firebase-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebase-crashlytics-gradle" }
@@ -79,10 +219,11 @@ kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx-room" }
-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+espresso-core-updated = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCoreUpdated" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 apklisupdate = {  group = "com.github.Z17-CU", name = "apklisupdate", version.ref = "apklisupdate" }
@@ -90,11 +231,12 @@ apklisupdate = {  group = "com.github.Z17-CU", name = "apklisupdate", version.re
 suitetecsa-sdk-kotlin = { module = "io.github.suitetecsa.sdk:kotlin", version.ref = "suitetecsa-sdk-kotlin" }
 suitetecsa-sdk-kotlin-old = { module = "com.github.suitetecsa:suitetecsa-sdk-kotlin", version.ref = "suitetecsa-sdk-kotlin-old" }
 suitetecsa-sdk-android = { group = "io.github.suitetecsa.sdk", name = "android", version.ref = "suitetecsa-sdk-android" }
+androidx-gridlayout = { group = "androidx.gridlayout", name = "gridlayout", version.ref = "gridlayout" }
 
 [plugins]
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt-android" }
 devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "devtools-ksp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin-android"}
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
-
 arturbosch-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "arturbosch-detekt" }
+

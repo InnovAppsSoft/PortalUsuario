@@ -90,16 +90,4 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="Seguridad">
-
-        <SwitchPreferenceCompat
-            app:key="show_fingerprint"
-            app:defaultValue="false"
-            app:icon="@drawable/outline_fingerprint_24"
-            app:title="Huella Dactilar" />
-
-    </PreferenceCategory>
-
-
-
 </PreferenceScreen>

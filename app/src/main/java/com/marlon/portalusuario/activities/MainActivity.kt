@@ -1,15 +1,9 @@
 package com.marlon.portalusuario.activities
 
 import android.Manifest
-import android.app.Activity
-import android.app.Dialog
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
@@ -20,8 +14,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.View
-import android.view.Window
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -39,10 +31,7 @@ import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ViewModel.PunViewModel
 import com.marlon.portalusuario.components.SetLTEModeDialog
 import com.marlon.portalusuario.databinding.ActivityMainBinding
-import com.marlon.portalusuario.databinding.DialogSetOnlyLteBinding
 import com.marlon.portalusuario.errores_log.LogFileViewerActivity
-import com.marlon.portalusuario.huella.BiometricCallback
-import com.marlon.portalusuario.huella.BiometricManager
 import com.marlon.portalusuario.promotions.PromotionsConfig
 import com.marlon.portalusuario.promotions.PromotionsViewModel
 import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
@@ -61,7 +50,7 @@ import javax.inject.Inject
 import kotlin.properties.Delegates
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), BiometricCallback {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -127,8 +116,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
 
     // SETTINGS
     lateinit var settings: SharedPreferences
-
-    private var mBiometricManager: BiometricManager? = null
 
     private fun setFragment(fragment: Fragment?, title: String?) {
         supportFragmentManager
@@ -204,48 +191,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         context = this
         // drawer Nav View
         setUpDrawer()
-
-        // Huella Seguridad
-        if (settings.getBoolean("show_fingerprint", false)) {
-            startFingerprint()
-        }
-
-        // Actualizacion de Aplicacion Apklis
-        if (settings.getBoolean("start_checking_for_updates", true)) {
-            ApklisUpdate.hasAppUpdate(
-                this,
-                object : UpdateCallback {
-                    override fun onError(e: Throwable) {
-                        // Not yet implemented
-                    }
-
-                    override fun onNewUpdate(appUpdateInfo: AppUpdateInfo) {
-                        ApklisUpdateDialog(
-                            this@MainActivity,
-                            appUpdateInfo,
-                            ContextCompat.getColor(this@MainActivity, R.color.colorPrimary)
-                        ).show()
-                    }
-
-                    override fun onOldUpdate(appUpdateInfo: AppUpdateInfo) {
-                        // Not yet implemented
-                    }
-                }
-            )
-        }
-
-        // check if there are unseen notifications
-        setupBadge()
-        binding.contentMain.btNotification.setOnClickListener {
-            val i = Intent(this@MainActivity, PUNotificationsActivity::class.java)
-            startActivity(i)
-            Toast.makeText(
-                this@MainActivity,
-                "Espera la nueva funcionalidad en próximas versiones 😉",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-
         //
         setFragment(CuentasFragment(), "Servicios")
     }
@@ -320,22 +265,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         binding.contentMain.menu.setOnClickListener { binding.drawerLayout.openDrawer(GravityCompat.START) }
     }
 
-    private fun setupBadge() {
-        val sharedPreferences = getDefaultSharedPreferences(this)
-        val count = sharedPreferences.getInt("notifications_count", 0)
-        Log.e("UNSEE NOTIFICATIONS", count.toString())
-        if (count == 0) {
-            if (binding.contentMain.cartBadgeCount.visibility != View.GONE) {
-                binding.contentMain.cartBadgeCount.visibility = View.GONE
-            }
-        } else {
-            if (binding.contentMain.cartBadgeCount.visibility != View.VISIBLE) {
-                binding.contentMain.cartBadgeCount.visibility = View.VISIBLE
-            }
-        }
-        binding.contentMain.cartBadgeCount.text = count.toString()
-    }
-
     // setUp carousel state
     private fun setupPromotions() {
         promotionsConfig = PromotionsConfig.Builder()
@@ -344,23 +273,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
             .binding(binding.contentMain)
             .build()
         promotionsConfig.setup(showPromotions)
-    }
-
-    // Huella de Seguridad
-    private fun startFingerprint() {
-        val settings = getDefaultSharedPreferences(this)
-        val showFingerprint = settings.getBoolean("show_fingerprint", false)
-        if (showFingerprint) {
-            mBiometricManager = BiometricManager.BiometricBuilder(this@MainActivity)
-                .setTitle(getString(R.string.biometric_title))
-                .setSubtitle(getString(R.string.biometric_subtitle))
-                .setDescription(getString(R.string.biometric_description))
-                .setNegativeButtonText(getString(R.string.biometric_negative_button_text))
-                .build()
-
-            // start authentication
-            mBiometricManager!!.authenticate(this@MainActivity)
-        }
     }
 
     // Invitar Usuario
@@ -385,7 +297,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
         }
     }
 
-
     public override fun onResume() {
         super.onResume()
         settings.registerOnSharedPreferenceChangeListener(::listenPreferences)
@@ -407,61 +318,6 @@ class MainActivity : AppCompatActivity(), BiometricCallback {
     public override fun onDestroy() {
         super.onDestroy()
         settings.unregisterOnSharedPreferenceChangeListener(::listenPreferences)
-    }
-
-    override fun onSdkVersionNotSupported() {
-        Toast.makeText(
-            applicationContext,
-            getString(R.string.biometric_error_sdk_not_supported),
-            Toast.LENGTH_LONG
-        ).show()
-    }
-
-    override fun onBiometricAuthenticationNotSupported() {
-        Toast.makeText(
-            applicationContext,
-            getString(R.string.biometric_error_hardware_not_supported),
-            Toast.LENGTH_LONG
-        ).show()
-    }
-
-    override fun onBiometricAuthenticationNotAvailable() {
-        Toast.makeText(
-            applicationContext,
-            getString(R.string.biometric_error_fingerprint_not_available),
-            Toast.LENGTH_LONG
-        ).show()
-    }
-
-    override fun onBiometricAuthenticationPermissionNotGranted() {
-        Toast.makeText(
-            applicationContext,
-            getString(R.string.biometric_error_permission_not_granted),
-            Toast.LENGTH_LONG
-        ).show()
-    }
-
-    override fun onBiometricAuthenticationInternalError(error: String) {
-        Toast.makeText(applicationContext, error, Toast.LENGTH_LONG).show()
-    }
-
-    override fun onAuthenticationFailed() { /* no-op */
-    }
-
-    override fun onAuthenticationCancelled() {
-        mBiometricManager!!.cancelAuthentication()
-        finish()
-    }
-
-    override fun onAuthenticationSuccessful() { /* no-op */
-    }
-
-    override fun onAuthenticationHelp(helpCode: Int, helpString: CharSequence) { /* no-op */
-    }
-
-    override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
-        mBiometricManager!!.cancelAuthentication()
-        finish()
     }
 
     companion object {

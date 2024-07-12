@@ -44,16 +44,17 @@ class PrivateCallActivity : AppCompatActivity() {
                 REQUEST_CODE
             )
         } else {
-            pickContactLauncher.launch(null)
+            pickContactLauncher.launch(Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI))
         }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE) {
-            pickContactLauncher.launch(null)
+            pickContactLauncher.launch(Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI))
         }
     }
+
     private fun processSelectedContact(uri: Uri) =
         contentResolver.query(uri, null, null, null, null)?.use { cursor ->
             if (cursor.moveToFirst()) {
@@ -64,7 +65,7 @@ class PrivateCallActivity : AppCompatActivity() {
 
     private fun makePhoneCall(numberToCall: String) {
         val intent = Intent(Intent.ACTION_CALL).apply {
-            data = Uri.parse("#31#$numberToCall")
+            data = Uri.parse("tel:#31#$numberToCall")
         }
         startActivity(intent)
         finish()
@@ -81,3 +82,4 @@ class PrivateCallActivity : AppCompatActivity() {
         null
     }
 }
+
