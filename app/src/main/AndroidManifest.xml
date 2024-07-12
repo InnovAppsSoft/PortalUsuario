@@ -65,7 +65,7 @@
         android:hardwareAccelerated="true">
 
         <activity
-            android:name=".intro_app.IntroActivity"
+            android:name=".Inicio.IntroActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
@@ -88,7 +88,7 @@
             android:name=".activities.DonationActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.PermissionActivity"
+            android:name=".Permisos.PermissionActivity"
             android:exported="true" />
         <activity
             android:name=".PUNotifications.PUNotificationsActivity"
@@ -100,7 +100,7 @@
             android:name=".errores_log.LogFileViewerActivity"
             android:theme="@style/Firewall"/>
         <activity
-            android:name=".activities.SplashActivity"
+            android:name=".Inicio.SplashActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity android:name=".escaner_recarga.ScannerActivity" />
