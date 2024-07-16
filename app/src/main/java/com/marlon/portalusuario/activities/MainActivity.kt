@@ -28,6 +28,7 @@ import com.marlon.portalusuario.Permisos.PermissionActivity
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ViewModel.PunViewModel
 import com.marlon.portalusuario.components.SetLTEModeDialog
+import com.marlon.portalusuario.creditos.AboutActivity
 import com.marlon.portalusuario.databinding.ActivityMainBinding
 import com.marlon.portalusuario.errores_log.LogFileViewerActivity
 import com.marlon.portalusuario.promotions.PromotionsConfig

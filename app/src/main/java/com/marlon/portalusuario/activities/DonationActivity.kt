@@ -24,18 +24,6 @@ class DonationActivity : AppCompatActivity() {
     }
 
     private fun initUI() {
-        binding.btn1.setOnClickListener {
-            val phoneNumber = "54871663"
-            val amount = binding.monto1.text.toString().trim { it <= ' ' }.ifBlank {
-                Toast.makeText(this@DonationActivity, AllFieldsAreRequired, Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            val password = binding.pass1.text.toString().trim { it <= ' ' }.ifBlank {
-                Toast.makeText(this@DonationActivity, AllFieldsAreRequired, Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            launchCall(phoneNumber, amount, password)
-        }
 
         binding.btn2.setOnClickListener {
             val phoneNumber = "58076608"
