@@ -86,7 +86,7 @@
     <string name="msg_sure">¿Estás seguro?</string>
 
     <string name="send_feedback">Enviar Feedback</string>
-    <string name="feedback_email" translatable="false">portalusuariosoporte@gmail.com</string>
+    <string name="feedback_email" translatable="false">innovapp.soft@gmail.com</string>
     <string name="feedback_subject">Feedback sobre la aplicación Portal Usuario</string>
 
 
@@ -1081,7 +1081,7 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="ultima_actualizacion_00_00">Ultima actualizacion: 00:00</string>
     <string name="numero">Numero</string>
     <string name="desliza_hacia_abajo_para_actualizar">Desliza hacia abajo para actualizar</string>
-    <string name="promociones_activas">Promociones activas</string>
+    <string name="promociones_activas">Promociones</string>
     <string name="donaciones_en_estados_unidos_via_zelle_marlonrivero1999_gmail_com">Donaciones en Estados Unidos via zelle: marlonrivero1999@gmail.com</string>
     <string name="change_password">Cambiar contraseña</string>
     <string name="new_password_example">Minuevacontraseña.1234*</string>
@@ -1125,5 +1125,8 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="error_message_unsupported_feature">Su dispositivo no admite esta funcionalidad, lamentamos las molestias :(</string>
     <string name="error_message_security_issue">Ha ocurrido un problema de seguridad.</string>
     <string name="permission_required_message">Sin este permiso la aplicación no puede funcionar</string>
+    <string name="mensajes">Mensajes</string>
+    <string name="actualizado_00_00">Actualizado: 00:00</string>
+    <string name="_0_00_cup">$0.00 CUP</string>
 
 </resources>
