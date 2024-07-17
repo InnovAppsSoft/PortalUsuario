@@ -70,6 +70,11 @@ android {
 
     ndkVersion = "22.0.7026061"
     namespace = "com.marlon.portalusuario"
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
 }
 
 dependencies {
@@ -95,6 +100,9 @@ dependencies {
     // apklisupdate
     implementation(libs.apklisupdate)
 
+    // Lottie
+    implementation(libs.lottie.compose)
+
     // Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.messaging)
@@ -115,7 +123,12 @@ dependencies {
     // Hilt
     implementation(libs.hilt.android)
     implementation(libs.androidx.gridlayout)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.datastore.preferences)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
     kapt(libs.hilt.android.compiler)
 
     // Room
@@ -229,10 +242,6 @@ dependencies {
     implementation(libs.floatingactionbutton)
     implementation(libs.sweetalert.library)
     implementation(libs.showcaseview.library)
-    implementation (libs.accompanist.pager)
-    implementation (libs.accompanist.pager.indicators)
-
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.pager.indicators)
 }
-
-
-

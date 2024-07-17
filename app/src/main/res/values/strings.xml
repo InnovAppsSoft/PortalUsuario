@@ -1128,5 +1128,16 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="mensajes">Mensajes</string>
     <string name="actualizado_00_00">Actualizado: 00:00</string>
     <string name="_0_00_cup">$0.00 CUP</string>
+    <string name="title_activity_auth">AuthActivity</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="not_have_account">¿No tienes cuenta?</string>
+    <string name="loading_captcha">Cargando captcha...</string>
+    <string name="captcha_load_error">Error al cargar el captcha!</string>
+    <string name="my_password_hint">Micontraseña*00</string>
+    <string name="confirm_code_message">Introduzca el código de confirmación que se ha enviado a su número de teléfono.</string>
+    <string name="reset_password_message">Introduzca una nueva contraseña para su cuenta.</string>
+    <string name="reset_password">Restablecer Contraseña</string>
+    <string name="dni">Número de Identidad</string>
+    <string name="create_an_account">Crear una cuenta.</string>
 
 </resources>
