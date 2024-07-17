@@ -1,59 +1,50 @@
-package com.marlon.portalusuario.Inicio
+package com.marlon.portalusuario.presentation.splash.screen
 
+import android.app.Activity
 import android.content.Intent
-import android.os.Bundle
-import android.os.CountDownTimer
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.preference.PreferenceManager
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.marlon.portalusuario.R
+import com.marlon.portalusuario.activities.AuthActivity
 import com.marlon.portalusuario.activities.MainActivity
+import com.marlon.portalusuario.presentation.splash.SplashViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-private const val MIN_TIME = 1000L
-
-class SplashActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val settings = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        // APP THEME
-        when (settings.getString("keynoche", "")) {
-            "claro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            "oscuro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            else -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-        }
-
-        setContent {
-            PortalUsuarioTheme {
-                SplashScreen {
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
-                }
-            }
-        }
-    }
-}
+private const val MinTime = 1000L
 
 @Composable
-fun SplashScreen(onTimeout: () -> Unit = {}) {
+fun SplashScreen(viewModel: SplashViewModel = hiltViewModel()) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+
+    val preference by viewModel.pref.collectAsState()
+
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -89,23 +80,16 @@ fun SplashScreen(onTimeout: () -> Unit = {}) {
         }
 
         LaunchedEffect(Unit) {
-            object : CountDownTimer(MIN_TIME, MIN_TIME) {
-                override fun onTick(l: Long) {
-                    // do nothing
+            scope.launch {
+                delay(MinTime)
+                preference.dataSession.idRequest?.let {
+                    context.startActivity(Intent(context, MainActivity::class.java))
+                    (context as Activity).finish()
+                } ?: run {
+                    context.startActivity(Intent(context, AuthActivity::class.java))
+                    (context as Activity).finish()
                 }
-
-                override fun onFinish() {
-                    onTimeout()
-                }
-            }.start()
+            }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun SplashScreenPreview() {
-    PortalUsuarioTheme {
-        SplashScreen()
     }
 }

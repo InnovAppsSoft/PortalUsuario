@@ -1,31 +1,38 @@
-package com.marlon.portalusuario.Inicio
+package com.marlon.portalusuario.intro
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.PowerManager
-import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.accompanist.pager.*
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.HorizontalPagerIndicator
+import com.google.accompanist.pager.rememberPagerState
 import com.marlon.portalusuario.Permisos.PermissionActivity
 import com.marlon.portalusuario.R
 import kotlinx.coroutines.launch
@@ -44,15 +51,6 @@ class IntroActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            consumoBateria()
-        }
-
-        if (restorePreData()) {
-            startActivity(Intent(this, SplashActivity::class.java))
-            finish()
-        }
-
         setContent {
             IntroScreen {
                 savePrefsData()
@@ -60,26 +58,6 @@ class IntroActivity : ComponentActivity() {
                 finish()
             }
         }
-    }
-
-    private fun consumoBateria() {
-        try {
-            val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
-            val intent = Intent()
-            if (Build.VERSION.SDK_INT < 23) return
-            if (powerManager.isIgnoringBatteryOptimizations(packageName)) {
-                intent.action = Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS
-                return
-            }
-            intent.action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
-            intent.data = Uri.parse("package:$packageName")
-            startActivity(intent)
-        } catch (ignored: Exception) {
-        }
-    }
-
-    private fun restorePreData(): Boolean {
-        return sharedPreferences.getBoolean("isIntroOpened", false)
     }
 
     private fun savePrefsData() {
@@ -92,7 +70,6 @@ class IntroActivity : ComponentActivity() {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun IntroScreen(onGetStarted: () -> Unit) {
-    val context = LocalContext.current
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
     val screens = listOf(
@@ -186,7 +163,6 @@ fun ScreenContent(screenItem: ScreenItem) {
     }
 }
 
-@OptIn(ExperimentalPagerApi::class)
 @Preview(showBackground = true)
 @Composable
 fun PreviewIntroScreen() {
