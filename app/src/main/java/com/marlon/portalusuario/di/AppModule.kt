@@ -2,11 +2,11 @@ package com.marlon.portalusuario.di
 
 import android.content.Context
 import androidx.room.Room
-import com.marlon.portalusuario.auth.AuthService
+import com.marlon.portalusuario.data.source.AuthService
 import com.marlon.portalusuario.data.ServicesDB
 import com.marlon.portalusuario.data.ServicesDao
 import com.marlon.portalusuario.data.preferences.AppPreferences
-import com.marlon.portalusuario.data.source.UserSource
+import com.marlon.portalusuario.data.source.UserService
 import com.marlon.portalusuario.data.user.UserRepositoryImpl
 import com.marlon.portalusuario.domain.data.UserRepository
 import dagger.Module
@@ -40,7 +40,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideNautaService() = UserSource(NautaApi.nautaService)
+    fun provideNautaService() = UserService(NautaApi.nautaService)
 
     @Singleton
     @Provides
@@ -49,9 +49,8 @@ class AppModule {
     @Singleton
     @Provides
     fun provideUserRepository(
-        userSource: UserSource,
-        preference: AppPreferences,
+        userService: UserService,
         servicesDao: ServicesDao
     ): UserRepository =
-        UserRepositoryImpl(userSource, preference, servicesDao)
+        UserRepositoryImpl(userService, servicesDao)
 }

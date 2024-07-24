@@ -1,12 +1,12 @@
 package com.marlon.portalusuario.Permisos
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
 class PermissionViewModel : ViewModel() {
-    var currentStep by mutableStateOf(0)
+    var currentStep by mutableIntStateOf(0)
         private set
 
     fun nextStep() {
@@ -19,4 +19,3 @@ class PermissionViewModel : ViewModel() {
         }
     }
 }
-

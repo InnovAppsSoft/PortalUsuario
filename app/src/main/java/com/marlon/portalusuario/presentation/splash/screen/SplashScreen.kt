@@ -47,8 +47,7 @@ fun SplashScreen(viewModel: SplashViewModel = hiltViewModel()) {
 
     Surface(
         modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFF5F5F5)),
+            .fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
         Column(
@@ -63,7 +62,6 @@ fun SplashScreen(viewModel: SplashViewModel = hiltViewModel()) {
                 contentDescription = null,
                 modifier = Modifier
                     .size(80.dp)
-                    .background(Color.White)
             )
             Spacer(modifier = Modifier.height(20.dp))
             Text(
@@ -82,7 +80,7 @@ fun SplashScreen(viewModel: SplashViewModel = hiltViewModel()) {
         LaunchedEffect(Unit) {
             scope.launch {
                 delay(MinTime)
-                preference.dataSession.idRequest?.let {
+                preference.dataSession?.let {
                     context.startActivity(Intent(context, MainActivity::class.java))
                     (context as Activity).finish()
                 } ?: run {

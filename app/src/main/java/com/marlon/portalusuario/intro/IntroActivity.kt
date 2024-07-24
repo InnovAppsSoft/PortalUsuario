@@ -3,7 +3,9 @@ package com.marlon.portalusuario.intro
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
+import android.os.PowerManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -51,12 +53,26 @@ class IntroActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) manageBatteryConsumption()
+
         setContent {
             IntroScreen {
                 savePrefsData()
                 startActivity(Intent(this, PermissionActivity::class.java))
                 finish()
             }
+        }
+    }
+
+    private fun manageBatteryConsumption() {
+        val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+        if (!powerManager.isIgnoringBatteryOptimizations(packageName)) {
+            startActivity(
+                Intent().apply {
+                    action = android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+                    data = android.net.Uri.parse("package:$packageName")
+                }
+            )
         }
     }
 
@@ -168,4 +184,3 @@ fun ScreenContent(screenItem: ScreenItem) {
 fun PreviewIntroScreen() {
     IntroScreen {}
 }
-

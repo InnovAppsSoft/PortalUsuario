@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ServicesDao {
-    @Query("SELECT * FROM client_profile")
-    fun getClientProfile(): Flow<List<ClientProfile>>
+    @Query("SELECT * FROM client_profile LIMIT 1")
+    fun getClientProfile(): Flow<ClientProfile>
 
     @Query("SELECT * FROM mobile_service")
     fun getMobileServices(): Flow<List<MobileService>>

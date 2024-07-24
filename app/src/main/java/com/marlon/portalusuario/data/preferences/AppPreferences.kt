@@ -13,8 +13,8 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 
-private const val appPreferences = "APP_PREFERENCES"
-private val Context.dataStore by preferencesDataStore(name = appPreferences)
+private const val AppPreferencesName = "APP_PREFERENCES"
+private val Context.dataStore by preferencesDataStore(name = AppPreferencesName)
 
 class AppPreferences(private val context: Context) {
     fun preferences(): Flow<AppPreferences> = context.dataStore.data
@@ -27,18 +27,28 @@ class AppPreferences(private val context: Context) {
         }.map { preferences ->
             val dataSession = preferences[AppPreferencesKeys.DATA_SESSION]?.let {
                 Gson().fromJson(it, DataSession::class.java)
-            } ?: DataSession()
+            }
+            val mobileServiceSelectedId = preferences[AppPreferencesKeys.MOBILE_SERVICE_SELECTED_ID]
 
-            AppPreferences(dataSession)
+            AppPreferences(dataSession, mobileServiceSelectedId)
         }
 
-    suspend fun updateDataSession(dataSession: DataSession) {
+    suspend fun updateDataSession(dataSession: DataSession?) {
         context.dataStore.edit { preferences ->
-            preferences[AppPreferencesKeys.DATA_SESSION] = Gson().toJson(dataSession)
+            dataSession?.let { preferences[AppPreferencesKeys.DATA_SESSION] = Gson().toJson(it) }
+                ?: preferences.remove(AppPreferencesKeys.DATA_SESSION)
+        }
+    }
+
+    suspend fun updateMobileServiceSelectedId(id: String?) {
+        context.dataStore.edit { preferences ->
+            id?.let { preferences[AppPreferencesKeys.MOBILE_SERVICE_SELECTED_ID] = it }
+                ?: preferences.remove(AppPreferencesKeys.MOBILE_SERVICE_SELECTED_ID)
         }
     }
 }
 
 private object AppPreferencesKeys {
+    val MOBILE_SERVICE_SELECTED_ID = stringPreferencesKey("MOBILE_SERVICE_SELECTED_ID")
     val DATA_SESSION = stringPreferencesKey("DATA_SESSION")
 }

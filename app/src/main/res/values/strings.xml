@@ -27,7 +27,7 @@
     <string name="bolsa_correo">Bolsa Correo</string>
     <string name="precio_1_cuc">Precio: 1 CUC</string>
     <string name="bolsa_diaria">Bolsa Diaria</string>
-    <string name="tarifa_por_consumo">Tarifa por Consumo</string>
+    <string name="usage_based_pricing">Tarifa por Consumo</string>
     <string name="precio_0_10_cuc_x_mb">Precio: 0.10 CUC x MB</string>
     <string name="c_digo_de_recarga">Código de Recarga</string>
     <string name="donar_a_portal_usuario">Donar a Portal Usuario</string>
@@ -176,7 +176,7 @@
     <string name="iniciar">Iniciar</string>
     <string name="tus_servicios_en_l_nea">Tus servicios en línea</string>
     <string name="utiles">Utiles</string>
-    <string name="saldo_pr_ncipal">Saldo Príncipal</string>
+    <string name="balance_credit">Saldo</string>
     <string name="datos_internet">Datos Internet</string>
     <string name="datos_nacionales">Datos Nacionales</string>
     <string name="cobro_revertido">Cobro Revertido</string>
@@ -1139,5 +1139,8 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="reset_password">Restablecer Contraseña</string>
     <string name="dni">Número de Identidad</string>
     <string name="create_an_account">Crear una cuenta.</string>
+    <string name="remaining">Restan</string>
+    <string name="sim_active_until">"Activa hasta"</string>
+    <string name="expires">"Vence"</string>
 
 </resources>

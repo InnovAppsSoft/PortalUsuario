@@ -4,8 +4,8 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marlon.portalusuario.auth.AuthService
 import com.marlon.portalusuario.data.preferences.AppPreferences
+import com.marlon.portalusuario.data.source.AuthService
 import com.marlon.portalusuario.domain.model.DataSession
 import com.marlon.portalusuario.util.Utils.toBitmap
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -55,19 +55,25 @@ class AuthViewModel @Inject constructor(
                 )
             }
                 .onSuccess {
-                    preferences.updateDataSession(
-                        DataSession(
-                            _state.value.phoneNumber,
-                            _state.value.password,
-                            _state.value.captchaCode,
-                            _state.value.idRequest!!,
-                            it.token,
-                            (it.user as User).lastUpdate,
-                            (it.user as User).client.portalUser
+                    if (it.result == "ok") {
+                        preferences.updateDataSession(
+                            DataSession(
+                                _state.value.phoneNumber,
+                                _state.value.password,
+                                _state.value.captchaCode,
+                                _state.value.idRequest!!,
+                                it.token,
+                                (it.user as User).lastUpdate,
+                                (it.user as User).client.portalUser,
+                                (it.user as User).updatedServices == "true"
+                            )
                         )
-                    )
-                    _isLoggedIn.value = true
+                        _isLoggedIn.value = true
+                    } else {
+                        println(it.result)
+                    }
                 }
+                .onFailure { it.printStackTrace() }
             _state.value = state.value.copy(isLoading = false)
         }
     }

@@ -30,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.app.ActivityCompat
+import com.marlon.portalusuario.activities.AuthActivity
 import com.marlon.portalusuario.activities.MainActivity
 
 private const val RESULT_CALL: Int = 1001
@@ -59,7 +60,7 @@ fun PermissionScreen(viewModel: PermissionViewModel, activity: Activity) {
     val context = LocalContext.current
     val overlayPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
-    ) { result ->
+    ) { _ ->
         val canDrawOverlays = Settings.canDrawOverlays(context)
         viewModel.onOverlayPermissionResult(canDrawOverlays)
     }
@@ -132,13 +133,19 @@ fun PermissionSteps(
                 onClick = {
                     when (index) {
                         0 -> ActivityCompat.requestPermissions(
-                            activity, arrayOf(Manifest.permission.CALL_PHONE), RESULT_CALL
+                            activity,
+                            arrayOf(Manifest.permission.CALL_PHONE),
+                            RESULT_CALL
                         )
                         1 -> ActivityCompat.requestPermissions(
-                            activity, arrayOf(Manifest.permission.CAMERA), RESULT_CALL
+                            activity,
+                            arrayOf(Manifest.permission.CAMERA),
+                            RESULT_CALL
                         )
                         2 -> ActivityCompat.requestPermissions(
-                            activity, arrayOf(Manifest.permission.READ_CONTACTS), RESULT_CALL
+                            activity,
+                            arrayOf(Manifest.permission.READ_CONTACTS),
+                            RESULT_CALL
                         )
                         3 -> ActivityCompat.requestPermissions(
                             activity,
@@ -157,7 +164,7 @@ fun PermissionSteps(
                             overlayPermissionLauncher.launch(intent)
                         }
                         else -> {
-                            context.startActivity(Intent(context, MainActivity::class.java))
+                            context.startActivity(Intent(context, AuthActivity::class.java))
                             (context as Activity).finish()
                         }
                     }
@@ -179,4 +186,3 @@ fun PermissionScreenPreview() {
     val viewModel = PermissionViewModel()
     PermissionScreen(viewModel, Activity())
 }
-

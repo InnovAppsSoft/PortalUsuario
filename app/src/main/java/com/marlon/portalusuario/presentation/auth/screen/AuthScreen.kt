@@ -52,6 +52,7 @@ fun AuthScreen(viewModel: AuthViewModel = hiltViewModel(), navController: NavHos
                 Column {
                     NautaUserField(
                         user = viewModel.state.value.phoneNumber,
+                        enabled = !viewModel.state.value.isLoading,
                         onChangedText = { viewModel.onEvent(AuthEvent.OnChangePhoneNumber(it)) }
                     )
                     Spacer(modifier = Modifier.padding(4.dp))
@@ -71,6 +72,7 @@ fun AuthScreen(viewModel: AuthViewModel = hiltViewModel(), navController: NavHos
                     Spacer(modifier = Modifier.padding(4.dp))
                     CaptchaField(
                         value = viewModel.state.value.captchaCode,
+                        enabled = !viewModel.state.value.isLoading,
                         onChangedValue = { viewModel.onEvent(AuthEvent.OnChangeCaptchaCode(it)) },
                         onDone = { viewModel.onEvent(AuthEvent.OnAuth) }
                     )

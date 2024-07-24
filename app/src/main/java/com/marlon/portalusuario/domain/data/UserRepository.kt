@@ -6,8 +6,8 @@ import com.marlon.portalusuario.domain.model.NavigationService
 import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
-    suspend fun fetchUser()
-    fun getClientProfile(): Flow<List<ClientProfile>>
+    suspend fun fetchUser(authToken: String, portalUser: String, lastUpdate: String)
+    fun getClientProfile(): Flow<ClientProfile>
     fun getMobileServices(): Flow<List<MobileService>>
     fun getNavServices(): Flow<List<NavigationService>>
 }

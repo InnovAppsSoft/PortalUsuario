@@ -35,7 +35,7 @@ import com.marlon.portalusuario.promotions.PromotionsViewModel
 import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
 import com.marlon.portalusuario.une.UneActivity
 import com.marlon.portalusuario.util.Utils.hasPermissions
-import com.marlon.portalusuario.view.fragments.CuentasFragment
+import com.marlon.portalusuario.presentation.mobileservices.MobileServicesFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.ServiciosFragment
 import cu.suitetecsa.nautanav.ui.ConnectivityFragment
@@ -186,13 +186,13 @@ class MainActivity : AppCompatActivity() {
         // drawer Nav View
         setUpDrawer()
         //
-        setFragment(CuentasFragment(), "Servicios")
+        setFragment(MobileServicesFragment(), "Servicios")
     }
 
     private fun setUpDrawer() {
         binding.navView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.micuenta -> setFragment(CuentasFragment(), "Mi Cuenta")
+                R.id.micuenta -> setFragment(MobileServicesFragment(), "Mi Cuenta")
                 R.id.services -> setFragment(ServiciosFragment<Any?>(), "Servicios")
                 R.id.plans -> setFragment(PaquetesFragment(), "Planes")
                 R.id.connectivity -> setFragment(connectivityFragment, "Conectividad")

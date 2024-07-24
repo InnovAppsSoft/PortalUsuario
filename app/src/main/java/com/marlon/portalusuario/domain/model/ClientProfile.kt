@@ -12,13 +12,12 @@ data class ClientProfile(
     val lastUpdate: String,
 )
 
-
 fun ClientProfile.asEntity() = EntityClientProfile(
-    this.email,
-    this.name,
-    this.mailNotifications,
-    this.mobileNotifications,
-    this.phoneNumber,
-    this.portalUser,
-    this.lastUpdate
+    email = email,
+    name = name,
+    mailNotifications = mailNotifications,
+    mobileNotifications = mobileNotifications,
+    phoneNumber = phoneNumber,
+    portalUser = portalUser,
+    lastUpdate = lastUpdate
 )
