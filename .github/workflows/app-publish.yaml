@@ -56,7 +56,7 @@ jobs:
         run: |
           jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore keystore.jks -storepass $KEYSTORE_PASSWORD -keypass $KEY_PASSWORD app/build/outputs/apk/release/app-release.apk $KEY_ALIAS
 
-      - name: Get CHANGELOG message
+      - name: Get CHANGELOG.md message
         id: changelog
         run: |
           MESSAGE=$(awk '/^## \[v/{flag=1;next}/^## \[/{flag=0}flag' CHANGELOG.md)
