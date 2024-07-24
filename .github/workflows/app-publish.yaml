@@ -1,0 +1,67 @@
+name: App Publish
+on:
+  push:
+    tags:
+      - v*
+    branches:
+      - master
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-22.04
+    if: ${{ startsWith(github.ref, 'refs/tags/v') && contains(github.repository_owner, 'InnovAppsSoft') }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
+      - name: Setup Java
+        uses: actions/setup-java@cd89f46ac9d01407894225f350157564c9c7cee2 # v3.12.0
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@ef76a971e2fa3f867b617efd72f2fbd72cf6f8bc # v2.8.0
+
+      - name: Generate App Version Name
+        run: echo "VERSION_NAME=$(git describe --tags | sed 's/\(.*\)-/\1./' | sed 's/\(.*\)-/\1+/')" >> $GITHUB_ENV
+
+      - name: Bump Version
+        uses: chkfung/android-version-actions@v1.1
+        with:
+          gradlePath: app/build.gradle.kts
+          versionCode: ${{ github.run_number }}
+          versionName: ${{ env.VERSION_NAME }}
+
+      - name: Restore keystore
+        run: echo $KEYSTORE_FILE | base64 -d > ./keystore
+      - name: Restore keystore
+        run: echo $KEYSTORE_PROPERTIES_FILE | base64 -d > ./keystore.properties
+
+      - name: Assemble release files
+        run: ./gradlew assembleRelease
+
+      - name: Sign APK
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        run: |
+          jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.jks app/build/outputs/apk/release/app-release-unsigned.apk $KEY_ALIAS
+
+      - name: Zipalign APK
+        run: |
+          zipalign -v 4 app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/app-release.apk
+
+      - name: Get CHANGELOG message
+        id: changelog
+        run: |
+          MESSAGE=$(awk '/^## \[v/{flag=1;next}/^## \[/{flag=0}flag' CHANGELOG.md)
+          echo "::set-output name=message::$MESSAGE"
+
+      - name: Upload APK to Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          curl -F document=@app/build/outputs/apk/release/app-release.apk \
+               -F "caption=${{ steps.changelog.outputs.message }}" \
+               https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&message_thread_id=${{ secrets.TELEGRAM_TOPIC_ID }}
