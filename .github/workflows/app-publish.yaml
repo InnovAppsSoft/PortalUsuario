@@ -62,11 +62,13 @@ jobs:
           MESSAGE=$(awk '/^## \[v/{flag=1;next}/^## \[/{flag=0}flag' CHANGELOG.md)
           echo "::set-output name=message::$MESSAGE"
 
-      - name: Upload APK to Telegram
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: |
-          curl -F document=@app/build/outputs/apk/release/app-release.apk \
-               -F "caption=${{ steps.changelog.outputs.message }}" \
-               https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&message_thread_id=${{ secrets.TELEGRAM_TOPIC_ID }}
+      - uses: xireiki/channel-post@v1
+        name: Post Files
+        with:
+          bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
+          topic_id: ${{ secrets.TELEGRAM_TOPIC_ID }}
+          context: "New Release"
+          path: app/build/outputs/apk/release/app-release.apk # Total size does not exceed 50M
+          parse_mode: Markdown # Optional
+          method: sendFile
