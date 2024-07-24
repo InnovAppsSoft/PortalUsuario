@@ -47,8 +47,7 @@ fun SplashScreen(viewModel: SplashViewModel = hiltViewModel()) {
 
     Surface(
         modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFF5F5F5)),
+            .fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
         Column(

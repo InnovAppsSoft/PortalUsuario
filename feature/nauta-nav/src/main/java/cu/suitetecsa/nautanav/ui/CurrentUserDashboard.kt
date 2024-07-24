@@ -26,12 +26,12 @@ import cu.suitetecsa.nautanav.domain.model.UserModel
 import cu.suitetecsa.nautanav.ui.components.CaptchaDialog
 import cu.suitetecsa.nautanav.ui.components.CardChangeEmailPassword
 import cu.suitetecsa.nautanav.ui.components.CardChangePassword
-import cu.suitetecsa.nautanav.ui.components.connectview.ConnectView
 import cu.suitetecsa.nautanav.ui.components.CardNautaDetails
 import cu.suitetecsa.nautanav.ui.components.CardNautaHomeDetails
 import cu.suitetecsa.nautanav.ui.components.CardRecharge
 import cu.suitetecsa.nautanav.ui.components.CardTransfer
 import cu.suitetecsa.nautanav.ui.components.UserDetailsHead
+import cu.suitetecsa.nautanav.ui.components.connectview.ConnectView
 import cu.suitetecsa.nautanav.ui.components.connectview.ConnectViewState
 import cu.suitetecsa.nautanav.ui.components.timepicker.TimePickerDialog
 
@@ -44,7 +44,7 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
     // ViewStates
     val connectViewState: ConnectViewState by viewModel.connectViewState.collectAsState()
 
-    //Update
+    // Update
     val captchaCode: String by viewModel.captchaCode.observeAsState(initial = "")
     val captchaImage: Bitmap? by viewModel.captchaImage.observeAsState(initial = null)
     val isLoadingCaptcha: Boolean by viewModel.isLoadingCaptcha.observeAsState(initial = false)
@@ -119,11 +119,13 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
         initial = Pair(true, null)
     )
     val (isAccessAccountPasswordChanged, accessAccountPasswordChangeError) = accessAccountChangePasswordStatus
-    if (!isAccessAccountPasswordChanged) Toast.makeText(
-        context,
-        accessAccountPasswordChangeError,
-        Toast.LENGTH_LONG
-    ).show()
+    if (!isAccessAccountPasswordChanged) {
+        Toast.makeText(
+            context,
+            accessAccountPasswordChangeError,
+            Toast.LENGTH_LONG
+        ).show()
+    }
 
     // ChangeEmailPassword
     val emailOldPassword: String by viewModel.emailOldPassword.observeAsState(initial = "")
@@ -133,16 +135,19 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
         initial = Pair(true, null)
     )
     val (isEmailPasswordChanged, emailPasswordChangeError) = emailChangePasswordStatus
-    if (!isEmailPasswordChanged) Toast.makeText(
-        context,
-        emailPasswordChangeError,
-        Toast.LENGTH_LONG
-    ).show()
+    if (!isEmailPasswordChanged) {
+        Toast.makeText(
+            context,
+            emailPasswordChangeError,
+            Toast.LENGTH_LONG
+        ).show()
+    }
 
     // Dialog
     val showTimePickerDialog: Boolean by viewModel.showTimePickerDialog.observeAsState(initial = false)
     val showCaptchaDialog: Pair<Boolean, () -> Unit> by viewModel.showCaptchaDialog.observeAsState(
-        initial = Pair(false) {})
+        initial = Pair(false) {}
+    )
     val (isShowCaptchaDialog, postLoginAction) = showCaptchaDialog
 
     val (hour, minute, _) = limitedTime.split(":")
@@ -159,7 +164,8 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
             } else {
                 Toast.makeText(context, "No dispones de tanto tiempo", Toast.LENGTH_LONG).show()
             }
-        })
+        }
+    )
 
     CaptchaDialog(
         show = isShowCaptchaDialog,
@@ -183,7 +189,6 @@ fun CurrentUserDashboard(viewModel: NautaViewModel) {
     )
 
     Column(modifier = Modifier.padding(bottom = 40.dp)) {
-
         UserDetailsHead(
             userName = currentUser.username,
             remainingTime = leftTime,

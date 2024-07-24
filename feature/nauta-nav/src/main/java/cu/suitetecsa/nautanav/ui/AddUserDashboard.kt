@@ -16,7 +16,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -34,7 +33,6 @@ import cu.suitetecsa.nautanav.ui.components.PasswordField
 import cu.suitetecsa.nautanav.ui.components.PrettyCard
 import cu.suitetecsa.nautanav.ui.components.UserField
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AddUserDashboard(viewModel: NautaViewModel) {
     val userName: TextFieldValue by viewModel.userName.collectAsState()
@@ -110,4 +108,3 @@ fun AddUserDashboard(viewModel: NautaViewModel) {
         }
     }
 }
-

@@ -12,7 +12,7 @@ import com.marlon.portalusuario.domain.model.AppPreferences as ModelAppPreferenc
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val preferences: AppPreferences
+    preferences: AppPreferences
 ) : ViewModel() {
     val pref = preferences.preferences().stateIn(
         viewModelScope,
