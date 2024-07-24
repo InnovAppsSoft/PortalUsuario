@@ -3,11 +3,13 @@ on:
   push:
     tags:
       - v*
+    branches:
+      - master
 jobs:
   publish:
     name: Publish
     runs-on: ubuntu-22.04
-    if: ${{ contains(github.repository_owner, 'InnovAppsSoft') }}
+    if: ${{ startsWith(github.ref, 'refs/tags/v') && contains(github.repository_owner, 'InnovAppsSoft') }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
@@ -37,23 +39,29 @@ jobs:
       - name: Assemble release files
         run: ./gradlew assembleRelease
 
-      - name: Release
-        id: create_release
-        uses: actions/create-release@v1
-        with:
-          release_name: Release v.${{ env.VERSION_NAME }}
-          draft: false
-          prerelease: false
+      - name: Sign APK
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        run: |
+          jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.jks app/build/outputs/apk/release/app-release-unsigned.apk $KEY_ALIAS
 
-      - name: Upload Release APK
-        id: upload_release_asset
-        uses: actions/upload-release-asset@v1.0.1
+      - name: Zipalign APK
+        run: |
+          zipalign -v 4 app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/app-release.apk
+
+      - name: Get CHANGELOG message
+        id: changelog
+        run: |
+          MESSAGE=$(awk '/^## \[v/{flag=1;next}/^## \[/{flag=0}flag' CHANGELOG.md)
+          echo "::set-output name=message::$MESSAGE"
+
+      - name: Upload APK to Telegram
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: app/build/outputs/apk/release/app-release.apk
-          asset_name: signed-artifact.apk
-          asset_content_type: application/zip
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          curl -F document=@app/build/outputs/apk/release/app-release.apk \
+               -F "caption=${{ steps.changelog.outputs.message }}" \
+               https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&message_thread_id=${{ secrets.TELEGRAM_TOPIC_ID }}
