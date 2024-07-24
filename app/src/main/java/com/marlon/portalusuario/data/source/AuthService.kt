@@ -1,4 +1,4 @@
-package com.marlon.portalusuario.auth
+package com.marlon.portalusuario.data.source
 
 import io.github.suitetecsa.sdk.nauta.api.NautaService
 import io.github.suitetecsa.sdk.nauta.model.login.LoginRequest

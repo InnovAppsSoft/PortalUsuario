@@ -7,7 +7,8 @@ import com.marlon.portalusuario.domain.model.ClientProfile as ModelClientProfile
 
 @Entity(tableName = "client_profile")
 data class ClientProfile(
-    @PrimaryKey val email: String,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val email: String,
     val name: String,
     @ColumnInfo(name = "mail_notifications") val mailNotifications: Boolean,
     @ColumnInfo(name = "mobile_notifications") val mobileNotifications: Boolean,

@@ -6,6 +6,8 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import androidx.core.content.ContextCompat
 import com.caverock.androidsvg.SVG
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 object Utils {
     fun Context.hasPermissions(vararg permissions: String): Boolean {
@@ -34,4 +36,9 @@ object Utils {
             bitmap
         }
     }.getOrNull()
+
+    fun String.fixDateFormat(): String =
+        SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).let { format ->
+            format.parse(this).let { format.format(it!!) }
+        }
 }

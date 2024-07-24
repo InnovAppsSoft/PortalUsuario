@@ -14,10 +14,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cu.suitetecsa.nautanav.util.INITIAL_USER
 import cu.suitetecsa.nautanav.data.network.Users
 import cu.suitetecsa.nautanav.domain.model.UserModel
 import cu.suitetecsa.nautanav.ui.components.CardUserManager
+import cu.suitetecsa.nautanav.util.INITIAL_USER
 
 @Composable
 fun NautaScreen(viewModel: NautaViewModel) {
@@ -28,10 +28,12 @@ fun NautaScreen(viewModel: NautaViewModel) {
     val isLoggedIn: Boolean by viewModel.isLoggedIn.observeAsState(initial = false)
     val userConnected: String by viewModel.userConnected.observeAsState(initial = "")
 
-    Column(modifier = Modifier
-        .background(color = MaterialTheme.colorScheme.background)
-        .height(intrinsicSize = IntrinsicSize.Min)
-        .verticalScroll(state = rememberScrollState())) {
+    Column(
+        modifier = Modifier
+            .background(color = MaterialTheme.colorScheme.background)
+            .height(intrinsicSize = IntrinsicSize.Min)
+            .verticalScroll(state = rememberScrollState())
+    ) {
         CardUserManager(
             users = users,
             selectedItem = currentUser,
@@ -44,7 +46,7 @@ fun NautaScreen(viewModel: NautaViewModel) {
             onDeleteUser = { viewModel.deleteUser() },
             modifier = Modifier.padding(16.dp)
         )
-        Column(modifier = Modifier.padding(horizontal = 16.dp)){
+        Column(modifier = Modifier.padding(horizontal = 16.dp)) {
             if (currentUser == INITIAL_USER) {
                 AddUserDashboard(viewModel = viewModel)
             } else {

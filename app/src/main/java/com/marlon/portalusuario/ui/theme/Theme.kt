@@ -15,13 +15,9 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import com.marlon.portalusuario.theme.Pink40
-import com.marlon.portalusuario.theme.Pink80
-import com.marlon.portalusuario.theme.Purple40
-import com.marlon.portalusuario.theme.Purple80
-import com.marlon.portalusuario.theme.PurpleGrey40
-import com.marlon.portalusuario.theme.PurpleGrey80
+import androidx.fragment.app.Fragment
 import com.marlon.portalusuario.theme.Typography
+import dagger.hilt.android.internal.managers.ViewComponentManager
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
@@ -65,11 +61,17 @@ fun PortalUsuarioTheme(
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
-            val window = (view.context as Activity).window
-            window.statusBarColor = Color.Transparent.toArgb()
-            window.navigationBarColor = Color.Transparent.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
-            WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = !darkTheme
+            try {
+                val window = (view.context as Activity).window
+                window.statusBarColor = Color.Transparent.toArgb()
+                window.navigationBarColor = Color.Transparent.toArgb()
+                WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars =
+                    !darkTheme
+                WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars =
+                    !darkTheme
+            } catch (e: ClassCastException) {
+                e.printStackTrace()
+            }
         }
     }
 

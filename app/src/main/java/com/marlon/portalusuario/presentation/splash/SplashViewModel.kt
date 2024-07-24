@@ -17,6 +17,6 @@ class SplashViewModel @Inject constructor(
     val pref = preferences.preferences().stateIn(
         viewModelScope,
         SharingStarted.Eagerly,
-        ModelAppPreferences(DataSession())
+        ModelAppPreferences()
     )
 }
