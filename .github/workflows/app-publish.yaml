@@ -56,10 +56,6 @@ jobs:
         run: |
           jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore keystore.jks -storepass $KEYSTORE_PASSWORD -keypass $KEY_PASSWORD app/build/outputs/apk/release/app-release.apk $KEY_ALIAS
 
-      - name: Zipalign APK
-        run: |
-          $ANDROID_HOME/build-tools/35.0.0-rc2/zipalign -v 4 app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/release.apk
-
       - name: Get CHANGELOG message
         id: changelog
         run: |
@@ -71,6 +67,6 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          curl -F document=@app/build/outputs/apk/release/release.apk \
+          curl -F document=@app/build/outputs/apk/release/app-release.apk \
                -F "caption=${{ steps.changelog.outputs.message }}" \
                https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&message_thread_id=${{ secrets.TELEGRAM_TOPIC_ID }}
