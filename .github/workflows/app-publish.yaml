@@ -20,41 +20,26 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v2
-        with:
-          api-level: 34
-          build-tools: 35.0.0-rc2
-
       - name: Setup Gradle
         uses: gradle/gradle-build-action@ef76a971e2fa3f867b617efd72f2fbd72cf6f8bc # v2.8.0
 
       - name: Generate App Version Name
         run: echo "VERSION_NAME=$(git describe --tags | sed 's/\(.*\)-/\1./' | sed 's/\(.*\)-/\1+/')" >> $GITHUB_ENV
 
-      - name: Bump Version
-        uses: chkfung/android-version-actions@v1.1
-        with:
-          gradlePath: app/build.gradle.kts
-          versionCode: ${{ github.run_number }}
-          versionName: ${{ env.VERSION_NAME }}
-
-      - name: Decode keystore
-        env:
-          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
-        run: |
-          echo $KEYSTORE_BASE64 | base64 --decode > keystore.jks
-
       - name: Assemble release files
-        run: ./gradlew assembleRelease
+        run: ./gradlew assemble
 
       - name: Sign APK
+        id: sign
+        uses: r0adkll/sign-android-release@v1
         env:
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-        run: |
-          jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore keystore.jks -storepass $KEYSTORE_PASSWORD -keypass $KEY_PASSWORD app/build/outputs/apk/release/app-release.apk $KEY_ALIAS
+          BUILD_TOOLS_VERSION: "34.0.0"
+        with:
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.KEYSTORE_BASE64 }}
+          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+          alias: ${{ secrets.KEY_ALIAS }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
 
       - name: Get CHANGELOG.md message
         id: changelog
@@ -69,6 +54,6 @@ jobs:
           chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
           topic_id: ${{ secrets.TELEGRAM_TOPIC_ID }}
           context: ${{ steps.changelog.outputs.message }}
-          path: app/build/outputs/apk/release/app-release.apk # Total size does not exceed 50M
+          path: ${{ steps.sign.outputs.signedReleaseFile }} # Total size does not exceed 50M
           parse_mode: Markdown # Optional
           method: sendFile
