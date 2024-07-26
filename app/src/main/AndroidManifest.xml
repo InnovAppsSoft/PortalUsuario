@@ -100,7 +100,7 @@
             android:name=".errores_log.LogFileViewerActivity"
             android:theme="@style/Firewall" />
         <activity
-            android:name=".intro.SplashActivity"
+            android:name=".presentation.splash.ActivitySplash"
             android:exported="true"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"

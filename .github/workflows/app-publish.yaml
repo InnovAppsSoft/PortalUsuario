@@ -53,7 +53,7 @@ jobs:
           bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
           topic_id: ${{ secrets.TELEGRAM_TOPIC_ID }}
-          context: ${{ steps.changelog.outputs.message }}
+          context: $(awk '/^## \[v/{flag=1;next}/^## \[/{flag=0}flag' CHANGELOG.md)
           path: ${{ steps.sign.outputs.signedReleaseFile }} # Total size does not exceed 50M
           parse_mode: Markdown # Optional
           method: sendFile
