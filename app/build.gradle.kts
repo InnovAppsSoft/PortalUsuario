@@ -17,10 +17,10 @@ android {
     defaultConfig {
         resourceConfigurations.add("en")
         applicationId = "com.marlon.portalusuario"
-        minSdk = 22
+        minSdk = 24
         targetSdk = 34
         versionCode = 60
-        versionName = "8.0-beta01"
+        versionName = "8.0-beta02"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled = true

@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -107,6 +108,21 @@ fun PermissionSteps(
 ) {
     val context = LocalContext.current
 
+    val locationArray = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.READ_PHONE_NUMBERS
+        )
+    } else {
+        arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.READ_PHONE_STATE,
+        )
+    }
+
     val steps = listOf(
         "Permiso para realizar llamadas",
         "Permiso para usar la cámara",
@@ -149,11 +165,7 @@ fun PermissionSteps(
                         )
                         3 -> ActivityCompat.requestPermissions(
                             activity,
-                            arrayOf(
-                                Manifest.permission.ACCESS_FINE_LOCATION,
-                                Manifest.permission.ACCESS_COARSE_LOCATION,
-                                Manifest.permission.READ_PHONE_STATE
-                            ),
+                            locationArray,
                             RESULT_CALL
                         )
                         4 -> {

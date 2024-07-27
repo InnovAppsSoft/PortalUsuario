@@ -26,15 +26,20 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.marlon.portalusuario.domain.model.MobileBonus
 import com.marlon.portalusuario.domain.model.MobilePlan
 import com.marlon.portalusuario.domain.model.MobileService
+import com.marlon.portalusuario.domain.model.SimPaired
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesEvent
+import com.marlon.portalusuario.presentation.mobileservices.MobileServicesEvent.OnHideServiceSettings
+import com.marlon.portalusuario.presentation.mobileservices.MobileServicesEvent.OnShowServiceSettings
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesState
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesViewModel
 import com.marlon.portalusuario.presentation.mobileservices.components.BalanceCard
 import com.marlon.portalusuario.presentation.mobileservices.components.BonusSection
 import com.marlon.portalusuario.presentation.mobileservices.components.MobileServiceSelector
 import com.marlon.portalusuario.presentation.mobileservices.components.PlansSection
+import com.marlon.portalusuario.presentation.mobileservices.components.servsettings.ServiceSettingsBottomSheet
 import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
 import com.marlon.portalusuario.util.Utils.fixDateFormat
+import io.github.suitetecsa.sdk.android.model.SimCard
 
 private const val TAG = "MobileServicesScreen"
 
@@ -44,6 +49,8 @@ fun MobileServicesScreen(viewModel: MobileServicesViewModel = hiltViewModel()) {
     val pullToRefreshState = rememberPullToRefreshState()
     val mobServices by viewModel.mobileServices.collectAsState()
     val preferences by viewModel.preferences.collectAsState()
+
+    Log.d(TAG, "MobileServicesScreen: ${viewModel.simCards}")
 
     if (pullToRefreshState.isRefreshing) {
         LaunchedEffect(key1 = true) {
@@ -71,7 +78,14 @@ fun MobileServicesScreen(viewModel: MobileServicesViewModel = hiltViewModel()) {
     ) {
         mobServices.takeIf { it.isNotEmpty() }?.let { services ->
             val serviceId = preferences.mssId ?: services.first().id
-            ScreenContent(services, serviceId, viewModel.state.value, viewModel::onEvent)
+            ScreenContent(
+                services = services,
+                currentServiceId = serviceId,
+                state = viewModel.state.value,
+                onEvent = viewModel::onEvent,
+                simsPaired = viewModel.servicesPaired,
+                simCards = viewModel.simCards
+            )
         }
 
         PullToRefreshContainer(state = pullToRefreshState, modifier = Modifier.align(Alignment.TopCenter))
@@ -84,13 +98,18 @@ fun ScreenContent(
     currentServiceId: String,
     state: MobileServicesState,
     onEvent: (MobileServicesEvent) -> Unit,
+    simsPaired: List<SimPaired> = listOf(),
+    simCards: List<SimCard> = listOf(),
 ) {
     val service = services.first { it.id == currentServiceId }
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         MobileServiceSelector(
             services = services,
             serviceSelected = service,
-            onServiceSelected = { onEvent(MobileServicesEvent.OnChangeCurrentMobileService(it.id)) }
+            onServiceSelected = { onEvent(MobileServicesEvent.OnChangeCurrentMobileService(it.id)) },
+            simsPaired = simsPaired,
+            simCards = simCards,
+            onShowServiceSettings = { onEvent(OnShowServiceSettings) }
         )
         Spacer(modifier = Modifier.height(4.dp))
         BalanceCard(
@@ -98,6 +117,7 @@ fun ScreenContent(
             balanceCredit = "${service.mainBalance} ${service.currency}",
             lockDate = service.lockDate,
             deletionDate = service.deletionDate,
+            isSimPaired = service.id in simsPaired.map { it.serviceId },
             onAddBalance = { /*TODO*/ },
             onSendBalance = { /*TODO*/ }
         )
@@ -106,6 +126,10 @@ fun ScreenContent(
         Spacer(modifier = Modifier.height(8.dp))
         BonusSection(service = service)
         Spacer(modifier = Modifier.height(32.dp))
+    }
+
+    if (state.isServiceSettingsVisible) {
+        ServiceSettingsBottomSheet(mobService = service, onDismiss = { onEvent(OnHideServiceSettings) })
     }
 }
 
@@ -148,6 +172,8 @@ private fun ScreenContentPreview() {
                 ),
                 currentServiceId = "5351872843",
                 state = MobileServicesState(),
+                simsPaired = listOf(),
+                simCards = listOf(),
                 onEvent = {}
             )
         }
