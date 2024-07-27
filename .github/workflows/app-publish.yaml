@@ -42,10 +42,7 @@ jobs:
           keyPassword: ${{ secrets.KEY_PASSWORD }}
 
       - name: Get CHANGELOG.md message
-        id: changelog
-        run: |
-          MESSAGE=$(awk '/^## \[v/{flag=1;next}/^## \[/{flag=0}flag' CHANGELOG.md)
-          echo "::set-output name=message::$MESSAGE"
+        run: echo "MESSAGE=$(awk '/^## \[v/{flag=1;next}/^## \[/{flag=0}flag' CHANGELOG.md)" >> $GITHUB_ENV
 
       - uses: xireiki/channel-post@v1
         name: Post Files
@@ -53,7 +50,7 @@ jobs:
           bot_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
           topic_id: ${{ secrets.TELEGRAM_TOPIC_ID }}
-          context: $(awk '/^## \[v/{flag=1;next}/^## \[/{flag=0}flag' CHANGELOG.md)
+          context: ${{ MESSAGE }}
           path: ${{ steps.sign.outputs.signedReleaseFile }} # Total size does not exceed 50M
           parse_mode: Markdown # Optional
           method: sendFile
