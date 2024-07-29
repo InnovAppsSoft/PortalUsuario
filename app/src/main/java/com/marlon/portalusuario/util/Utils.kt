@@ -4,9 +4,13 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.util.Base64
 import androidx.core.content.ContextCompat
+import com.auth0.android.jwt.JWT
 import com.caverock.androidsvg.SVG
+import java.security.MessageDigest
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 object Utils {
@@ -41,4 +45,25 @@ object Utils {
         SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).let { format ->
             format.parse(this).let { format.format(it!!) }
         }
+
+    fun String.isTokenExpired(): Boolean = JWT(this).expiresAt.let {
+        it != null && Date().after(it)
+    }
+
+    fun createPasswordApp(): String {
+        // Crea un objeto SimpleDateFormat para formatear la fecha actual
+        val dateFormatter = SimpleDateFormat("ddMMyyyyHH", Locale.getDefault())
+        // Obtiene la fecha actual como una cadena en el formato "ddMMyyyyHH"
+        val dateString = dateFormatter.format(Date())
+
+        // Construye la cadena de clave de la aplicación
+        val appKey = "portal" + dateString + "externalPortal"
+        // Convierte la cadena de clave de la aplicación en un objeto ByteArray
+        val appKeyData = appKey.toByteArray(Charsets.UTF_8)
+
+        // Calcula el hash SHA-512 de la cadena de clave de la aplicación
+        val hashedData = MessageDigest.getInstance("SHA-512").digest(appKeyData)
+        // Codifica el hash en formato Base64 y devuelve la cadena resultante
+        return "ApiKey ${Base64.encodeToString(hashedData, Base64.NO_WRAP)}"
+    }
 }

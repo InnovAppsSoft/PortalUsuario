@@ -97,7 +97,7 @@ appcompat = "1.7.0"
 material = "1.12.0"
 apklisupdate = "1.4"
 arturbosch-detekt = "1.23.6"
-suitetecsa-sdk-kotlin = "1.0.0-alpha02"
+suitetecsa-sdk-kotlin = "1.0.0-alpha04"
 suitetecsa-sdk-kotlin-old = "0.1.8"
 suitetecsa-sdk-android = "1.0.0-alpha01"
 gridlayout = "1.0.0"
@@ -106,6 +106,7 @@ activityCompose = "1.9.1"
 datastorePreferences = "1.1.1"
 
 lottie-compose = "6.0.1"
+jwtdecode = "2.0.2"
 
 [libraries]
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanistPager" }
@@ -241,6 +242,7 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastorePreferences" }
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie-compose" }
+jwtdecode = { group = "com.auth0.android", name = "jwtdecode", version.ref = "jwtdecode" }
 
 [plugins]
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt-android" }

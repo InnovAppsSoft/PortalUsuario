@@ -30,12 +30,12 @@ import com.marlon.portalusuario.ViewModel.PunViewModel
 import com.marlon.portalusuario.components.SetLTEModeDialog
 import com.marlon.portalusuario.databinding.ActivityMainBinding
 import com.marlon.portalusuario.errores_log.LogFileViewerActivity
+import com.marlon.portalusuario.presentation.mobileservices.MobileServicesFragment
 import com.marlon.portalusuario.promotions.PromotionsConfig
 import com.marlon.portalusuario.promotions.PromotionsViewModel
 import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
 import com.marlon.portalusuario.une.UneActivity
 import com.marlon.portalusuario.util.Utils.hasPermissions
-import com.marlon.portalusuario.presentation.mobileservices.MobileServicesFragment
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.ServiciosFragment
 import cu.suitetecsa.nautanav.ui.ConnectivityFragment
@@ -70,9 +70,11 @@ class MainActivity : AppCompatActivity() {
             if (showTrafficBubble) {
                 Log.d("NetworkCallback", "Starting floating bubble service :: $networkType")
                 stopService(Intent(applicationContext, FloatingBubbleService::class.java))
-                startService(Intent(applicationContext, FloatingBubbleService::class.java).apply {
-                    this.putExtra("networkType", networkType)
-                })
+                startService(
+                    Intent(applicationContext, FloatingBubbleService::class.java).apply {
+                        this.putExtra("networkType", networkType)
+                    }
+                )
             }
         }
 
@@ -85,19 +87,31 @@ class MainActivity : AppCompatActivity() {
 
             networkType?.also {
                 Log.d("NetworkCallback", "Starting floating bubble service :: $it")
-                startService(Intent(applicationContext, FloatingBubbleService::class.java).apply {
-                    this.putExtra("networkType", it)
-                })
+                startService(
+                    Intent(applicationContext, FloatingBubbleService::class.java).apply {
+                        this.putExtra("networkType", it)
+                    }
+                )
             }
         }
 
         private fun getNetworkType(): String? {
             val manager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-            return manager.activeNetwork?.let { network ->
-                manager.getNetworkCapabilities(network)?.let { capabilities ->
-                    when {
-                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> "WiFi"
-                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> "Mobile"
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                manager.activeNetwork?.let { network ->
+                    manager.getNetworkCapabilities(network)?.let { capabilities ->
+                        when {
+                            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> "WiFi"
+                            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> "Mobile"
+                            else -> null
+                        }
+                    }
+                }
+            } else {
+                manager.activeNetworkInfo?.let { networkInfo ->
+                    when (networkInfo.type) {
+                        ConnectivityManager.TYPE_WIFI -> "WiFi"
+                        ConnectivityManager.TYPE_MOBILE -> "Mobile"
                         else -> null
                     }
                 }
@@ -123,9 +137,8 @@ class MainActivity : AppCompatActivity() {
     private fun listenPreferences(preferences: SharedPreferences, key: String?) {
         key?.let {
             when (it) {
-                "show_etecsa_promo_carousel" -> {
+                "show_etecsa_promo_carousel" ->
                     promotionsConfig.setCarouselVisibility(preferences.getBoolean(it, true))
-                }
 
                 "keynoche" -> when (preferences.getString("keynoche", "oscuro")) {
                     "claro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -134,7 +147,7 @@ class MainActivity : AppCompatActivity() {
 
                 "show_traffic_speed_bubble" -> {
                     if (preferences.getBoolean("show_traffic_speed_bubble", false)) {
-                        if (!Settings.canDrawOverlays(this)) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
                             Toast.makeText(
                                 this,
                                 "Otorgue a Portal Usuario los permisos requeridos",
@@ -202,7 +215,8 @@ class MainActivity : AppCompatActivity() {
                     startActivity(
                         Intent(
                             this@MainActivity,
-                            LogFileViewerActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            LogFileViewerActivity::class.java
+                        ).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     )
 
                 R.id.feedback -> {
@@ -215,7 +229,7 @@ class MainActivity : AppCompatActivity() {
                             Model (Device): ${Build.MODEL} (${Build.DEVICE})
                             Manufacturer: ${Build.MANUFACTURER}
                             ---
-                        """.trimIndent()
+                    """.trimIndent()
                     val intent = Intent(
                         Intent.ACTION_SENDTO,
                         Uri.fromParts("mailto", getString(R.string.feedback_email), null)
@@ -226,24 +240,31 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent.createChooser(intent, "Enviar Feedback usando..."))
                 }
 
-                R.id.telegram_channel -> startActivity(Intent(Intent.ACTION_VIEW).apply {
-                    data = Uri.parse("https://t.me/portalusuario") // TODO: Actualizar la url del canal
-                })
+                R.id.telegram_channel -> startActivity(
+                    Intent(Intent.ACTION_VIEW).apply {
+                        data = Uri.parse("https://t.me/portalusuario")
+                    }
+                )
 
-                R.id.facebook -> startActivity(Intent(Intent.ACTION_VIEW).apply {
-                    data = Uri.parse("https://www.facebook.com/portalusuario")
-                })
+                R.id.facebook -> startActivity(
+                    Intent(Intent.ACTION_VIEW).apply {
+                        data = Uri.parse("https://www.facebook.com/portalusuario")
+                    }
+                )
 
-                R.id.whatsapp -> startActivity(Intent(Intent.ACTION_VIEW).apply {
-                    data = Uri.parse(
-                        "https://chat.whatsapp.com/HT6bKjpXHrN4FAyTAcy1Xn") // TODO: Creo que este grupo ya no existe
-                })
+                R.id.whatsapp -> startActivity(
+                    Intent(Intent.ACTION_VIEW).apply {
+                        data = Uri.parse("https://chat.whatsapp.com/HT6bKjpXHrN4FAyTAcy1Xn")
+                    }
+                )
 
-                R.id.betatesters -> startActivity(Intent(Intent.ACTION_VIEW).apply {
-                    data = Uri.parse("https://t.me/portalusuarioBT") // TODO: Actualizar la url del grupo
-                })
+                R.id.betatesters -> startActivity(
+                    Intent(Intent.ACTION_VIEW).apply {
+                        data = Uri.parse("https://t.me/portalusuarioBT")
+                    }
+                )
 
-                R.id.invite ->  inviteUser()
+                R.id.invite -> inviteUser()
 
                 R.id.politicadeprivacidad -> startActivity(Intent(this@MainActivity, PrivacyActivity::class.java))
 
@@ -286,7 +307,8 @@ class MainActivity : AppCompatActivity() {
                 Manifest.permission.READ_CONTACTS,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION
-            )) {
+            )
+        ) {
             startActivity(Intent(this, PermissionActivity::class.java))
         }
     }

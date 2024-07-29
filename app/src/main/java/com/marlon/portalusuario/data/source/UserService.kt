@@ -6,6 +6,7 @@ import com.marlon.portalusuario.domain.model.ClientProfile
 import com.marlon.portalusuario.domain.model.MobileService
 import com.marlon.portalusuario.domain.model.NavigationService
 import com.marlon.portalusuario.exceptions.SessionException
+import com.marlon.portalusuario.util.Utils.createPasswordApp
 import io.github.suitetecsa.sdk.nauta.api.NautaService
 import io.github.suitetecsa.sdk.nauta.model.User
 import io.github.suitetecsa.sdk.nauta.model.users.UsersRequest
@@ -14,7 +15,7 @@ private const val TAG = "UserService"
 
 class UserService(private val service: NautaService) {
     suspend fun getUser(authorization: String, userRequest: UsersRequest): ResponseUser =
-        service.users("Bearer $authorization", userRequest).let { response ->
+        service.users("Bearer $authorization", userRequest, createPasswordApp()).let { response ->
             Log.d(TAG, "getUser: $response")
             if (response.result != "ok") throw SessionException(response.result)
             (response.user as User).let { user ->

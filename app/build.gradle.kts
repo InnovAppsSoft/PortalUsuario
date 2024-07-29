@@ -17,7 +17,7 @@ android {
     defaultConfig {
         resourceConfigurations.add("en")
         applicationId = "com.marlon.portalusuario"
-        minSdk = 24
+        minSdk = 22
         targetSdk = 34
         versionCode = 60
         versionName = "8.0-beta01"
@@ -125,6 +125,7 @@ dependencies {
     implementation(libs.androidx.gridlayout)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.datastore.preferences)
+    implementation(libs.jwtdecode)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)

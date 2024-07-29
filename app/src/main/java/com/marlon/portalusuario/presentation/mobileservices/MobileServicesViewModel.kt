@@ -8,9 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.marlon.portalusuario.data.preferences.AppPreferences
 import com.marlon.portalusuario.domain.data.UserRepository
 import com.marlon.portalusuario.presentation.mobileservices.usecases.RefreshAuthToken
+import com.marlon.portalusuario.util.Utils.isTokenExpired
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.suitetecsa.sdk.exception.InvalidSessionException
-import io.github.suitetecsa.sdk.nauta.utils.NautaUtils.isValidToken
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
@@ -56,7 +56,7 @@ class MobileServicesViewModel @Inject constructor(
                 Log.d(TAG, "update: updating services with data: $data")
                 _state.value = _state.value.copy(isLoading = true)
                 runCatching {
-                    val authToken = data.authToken.takeIf { isValidToken(it) && !updateToken }
+                    val authToken = data.authToken.takeIf { !it.isTokenExpired() && !updateToken }
                         ?: refreshToken(
                             data.phoneNumber,
                             data.password,

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
@@ -37,7 +38,6 @@ class SettingsActivity : AppCompatActivity() {
     class SettingsFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListener {
         private var showTrafficSpeedBubble: SwitchPreferenceCompat? = null
 
-
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
             // INIT
@@ -51,7 +51,7 @@ class SettingsActivity : AppCompatActivity() {
             //
             showTrafficSpeedBubble!!.isEnabled = true
             //
-            if (!Settings.canDrawOverlays(context)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(context)) {
                 showTrafficSpeedBubble!!.isChecked = false
             }
         }
@@ -74,7 +74,7 @@ class SettingsActivity : AppCompatActivity() {
 
                 "show_traffic_speed_bubble" -> {
                     if (sharedPreferences.getBoolean("show_traffic_speed_bubble", false)) {
-                        if (!Settings.canDrawOverlays(context)) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(context)) {
                             Toast.makeText(
                                 context,
                                 "Otorgue a Portal Usuario los permisos requeridos",
