@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.PowerManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -37,6 +38,7 @@ import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 import com.marlon.portalusuario.Permisos.PermissionActivity
 import com.marlon.portalusuario.R
+import com.marlon.portalusuario.activities.AuthActivity
 import kotlinx.coroutines.launch
 
 data class ScreenItem(
@@ -58,12 +60,17 @@ class IntroActivity : ComponentActivity() {
         setContent {
             IntroScreen {
                 savePrefsData()
-                startActivity(Intent(this, PermissionActivity::class.java))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    startActivity(Intent(this, PermissionActivity::class.java))
+                } else {
+                    startActivity(Intent(this, AuthActivity::class.java))
+                }
                 finish()
             }
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun manageBatteryConsumption() {
         val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
         if (!powerManager.isIgnoringBatteryOptimizations(packageName)) {

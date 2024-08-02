@@ -8,6 +8,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.google.gson.Gson
 import com.marlon.portalusuario.domain.model.AppPreferences
 import com.marlon.portalusuario.domain.model.DataSession
+import com.marlon.portalusuario.domain.model.SimPaired
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
@@ -29,8 +30,11 @@ class AppPreferences(private val context: Context) {
                 Gson().fromJson(it, DataSession::class.java)
             }
             val mobileServiceSelectedId = preferences[AppPreferencesKeys.MOBILE_SERVICE_SELECTED_ID]
+            val simPaired = preferences[AppPreferencesKeys.SIMS_PAIRED]?.let {
+                Gson().fromJson(it, Array<SimPaired>::class.java).toList()
+            } ?: emptyList()
 
-            AppPreferences(dataSession, mobileServiceSelectedId)
+            AppPreferences(dataSession, mobileServiceSelectedId, simPaired)
         }
 
     suspend fun updateDataSession(dataSession: DataSession?) {
@@ -46,9 +50,16 @@ class AppPreferences(private val context: Context) {
                 ?: preferences.remove(AppPreferencesKeys.MOBILE_SERVICE_SELECTED_ID)
         }
     }
+
+    suspend fun updateIsSimCardsPaired(simsPaired: List<SimPaired>) {
+        context.dataStore.edit { preferences ->
+            preferences[AppPreferencesKeys.SIMS_PAIRED] = Gson().toJson(simsPaired)
+        }
+    }
 }
 
 private object AppPreferencesKeys {
-    val MOBILE_SERVICE_SELECTED_ID = stringPreferencesKey("MOBILE_SERVICE_SELECTED_ID")
     val DATA_SESSION = stringPreferencesKey("DATA_SESSION")
+    val MOBILE_SERVICE_SELECTED_ID = stringPreferencesKey("MOBILE_SERVICE_SELECTED_ID")
+    val SIMS_PAIRED = stringPreferencesKey("SIMS_PAIRED")
 }

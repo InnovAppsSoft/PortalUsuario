@@ -37,6 +37,7 @@ fun BalanceCard(
     balanceCredit: String = "1500.00 CUP",
     lockDate: String = "31/11/2024",
     deletionDate: String = "31/12/2024",
+    isSimPaired: Boolean = false,
     onAddBalance: () -> Unit = {},
     onSendBalance: () -> Unit = {}
 ) {
@@ -70,21 +71,26 @@ fun BalanceCard(
                 ExpirationView(stringResource(id = R.string.expires), deletionDate)
             }
             Spacer(modifier = Modifier.height(4.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconButton(onClick = onAddBalance) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Icon(imageVector = Icons.Outlined.Add, contentDescription = null)
-                        HorizontalDivider(thickness = 5.dp, color = VibrantGreen)
+            if (isSimPaired) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    IconButton(onClick = onAddBalance) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Icon(imageVector = Icons.Outlined.Add, contentDescription = null)
+                            HorizontalDivider(thickness = 5.dp, color = VibrantGreen)
+                        }
                     }
-                }
-                IconButton(onClick = onSendBalance) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Icon(imageVector = Icons.AutoMirrored.Outlined.Send, contentDescription = null)
-                        HorizontalDivider(thickness = 5.dp, color = VibrantGreen)
+                    IconButton(onClick = onSendBalance) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Outlined.Send,
+                                contentDescription = null
+                            )
+                            HorizontalDivider(thickness = 5.dp, color = VibrantGreen)
+                        }
                     }
                 }
             }

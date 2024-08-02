@@ -17,10 +17,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.presentation.resetpassword.ResetPasswordEvent
 import com.marlon.portalusuario.presentation.resetpassword.ResetPasswordState
-import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
 import com.marlon.portalusuario.ui.components.CaptchaCanvas
 import com.marlon.portalusuario.ui.components.CaptchaField
 import com.marlon.portalusuario.ui.components.NautaUserField
+import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
 import cu.suitetecsa.nautanav.ui.components.PrettyCard
 
 @Composable

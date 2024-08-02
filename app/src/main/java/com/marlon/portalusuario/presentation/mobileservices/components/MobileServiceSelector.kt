@@ -1,11 +1,16 @@
 package com.marlon.portalusuario.presentation.mobileservices.components
 
+import android.annotation.SuppressLint
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import android.os.Build
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
@@ -20,16 +25,23 @@ import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.domain.model.MobileBonus
 import com.marlon.portalusuario.domain.model.MobilePlan
 import com.marlon.portalusuario.domain.model.MobileService
+import com.marlon.portalusuario.domain.model.SimPaired
+import com.marlon.portalusuario.ui.theme.BrightCoralRed
 import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
+import com.marlon.portalusuario.ui.theme.TealBlue
 import com.marlon.portalusuario.util.Utils.fixDateFormat
 import cu.suitetecsa.nautanav.ui.components.PrettyCard
 import cu.suitetecsa.nautanav.ui.components.Spinner
+import io.github.suitetecsa.sdk.android.model.SimCard
 
 @Composable
 fun MobileServiceSelector(
     services: List<MobileService>,
     serviceSelected: MobileService,
     onServiceSelected: (MobileService) -> Unit,
+    simsPaired: List<SimPaired> = listOf(),
+    simCards: List<SimCard> = listOf(),
+    onShowServiceSettings: () -> Unit = {}
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -41,28 +53,56 @@ fun MobileServiceSelector(
                 items = services,
                 selectedItem = serviceSelected,
                 onItemSelected = onServiceSelected,
-                selectedItemFactory = { mod, item ->
-                    Box(
-                        modifier = mod
-                            .padding(8.dp)
-                            .wrapContentSize()
-                    ) {
-                        Text(text = item.phoneNumber)
-                    }
-                }
-            ) { item, _ ->
-                Text(text = item.phoneNumber)
-            }
+                selectedItemFactory = { mod, item -> ServiceItem(item, simsPaired, simCards, mod) },
+                dropdownItemFactory = { item, _ -> ServiceItem(item, simsPaired, simCards) }
+            )
         }
+
         PrettyCard(modifier = Modifier.padding(16.dp)) {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = onShowServiceSettings) {
                 Icon(imageVector = Icons.Outlined.Settings, contentDescription = null)
             }
         }
     }
 }
 
-@Preview
+@SuppressLint("MissingPermission", "HardwareIds")
+@Composable
+private fun ServiceItem(
+    item: MobileService,
+    simsPaired: List<SimPaired>,
+    simCards: List<SimCard>,
+    modifier: Modifier = Modifier
+) {
+    val simCard = simsPaired.firstOrNull { it.serviceId == item.id }?.let { paired ->
+        simCards.firstOrNull {
+            val simId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                it.slotIndex.toString()
+            } else {
+                it.telephony.subscriberId
+            }
+            paired.simId == simId
+        }
+    }
+    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
+        Box(modifier = Modifier.background(simCard?.let { TealBlue } ?: BrightCoralRed)) {
+            Text(
+                text = simCard?.let { sim ->
+                    sim.displayName?.let { "$it (SIM ${sim.slotIndex + 1})" }
+                        ?: "SIM ${sim.slotIndex + 1}"
+                } ?: "No SIM",
+                modifier = Modifier.padding(8.dp)
+            )
+        }
+        Spacer(modifier = Modifier.width(4.dp))
+        Text(
+            text = item.phoneNumber,
+            modifier = Modifier.padding(8.dp)
+        )
+    }
+}
+
+@Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable
 private fun MobileServiceSelectorPreview() {
     val services = listOf(

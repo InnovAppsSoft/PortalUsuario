@@ -28,10 +28,10 @@ import com.marlon.portalusuario.presentation.signup.SignupEvent.OnChangedDNI
 import com.marlon.portalusuario.presentation.signup.SignupEvent.OnChangedPhoneNumber
 import com.marlon.portalusuario.presentation.signup.SignupEvent.OnLoadCaptcha
 import com.marlon.portalusuario.presentation.signup.SignupState
-import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
 import com.marlon.portalusuario.ui.components.CaptchaCanvas
 import com.marlon.portalusuario.ui.components.CaptchaField
 import com.marlon.portalusuario.ui.components.NautaUserField
+import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
 import cu.suitetecsa.nautanav.commons.ui.AnimatedPlaceholder
 import cu.suitetecsa.nautanav.ui.components.PrettyCard
 
@@ -53,6 +53,7 @@ fun RegisterUserScreen(state: SignupState, onEvent: (SignupEvent) -> Unit) {
                 Spacer(modifier = Modifier.height(4.dp))
                 CaptchaField(
                     value = state.captchaCode,
+                    enabled = !state.isLoading,
                     onChangedValue = { onEvent(SignupEvent.OnChangedCaptchaCode(it)) }
                 ) { onEvent(SignupEvent.OnCreateUser) }
             }
