@@ -8,6 +8,7 @@ plugins {
     id("com.google.firebase.appdistribution")
     id("com.google.firebase.crashlytics")
     alias(libs.plugins.arturbosch.detekt)
+    alias(libs.plugins.compose)
 }
 
 android {
@@ -41,10 +42,6 @@ android {
         viewBinding = true
         compose = true
         buildConfig = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.13"
     }
 
     compileOptions {
@@ -130,7 +127,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
 
     // Room
     implementation(libs.androidx.room.ktx)
