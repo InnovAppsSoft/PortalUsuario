@@ -23,7 +23,7 @@
       "matchPackagePrefixes": [
         "org.jetbrains.kotlin"
       ],
-      "matchPackageNames": [
+      "matchDepNames": [
         "com.google.devtools.ksp"
       ]
     },
