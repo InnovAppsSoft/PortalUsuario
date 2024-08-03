@@ -26,7 +26,6 @@
     <string name="precio_45_cuc">Precio: 45 CUC</string>
     <string name="bolsa_correo">Bolsa Correo</string>
     <string name="precio_1_cuc">Precio: 1 CUC</string>
-    <string name="bolsa_diaria">Bolsa Diaria</string>
     <string name="usage_based_pricing">Tarifa por Consumo</string>
     <string name="precio_0_10_cuc_x_mb">Precio: 0.10 CUC x MB</string>
     <string name="c_digo_de_recarga">Código de Recarga</string>
@@ -175,7 +174,6 @@
     <string name="permission_location">Se requiere permiso de ubicación para proporcionarle la mejor información sobre su dispositivo</string>
     <string name="iniciar">Iniciar</string>
     <string name="tus_servicios_en_l_nea">Tus servicios en línea</string>
-    <string name="utiles">Utiles</string>
     <string name="balance_credit">Saldo</string>
     <string name="datos_internet">Datos Internet</string>
     <string name="datos_nacionales">Datos Nacionales</string>
@@ -1065,7 +1063,6 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="cuentas_message">Para actualizar sus cuentas debe deslizar hacia abajo, esperar a que la aplicación termine de sincronizar todos sus paquetes, bonos y saldo activos. En ocasiones puede que haya valores que no se actualicen, esto puede ocurrir debido a varios factores, uno de ellos es el problema en la red. Tenga en cuenta que usted está realizando varias consultas en segundos, por lo que su operador móvil puede devolver algunas consultas con «error» y la aplicación no lo tomará como información. Le recomendamos que vuelva a intentarlo.</string>
     <string name="msg_report_action">Reportar</string>
     <string name="title_cuenta">Cuentas</string>
-    <string name="sim_key">sim_key</string>
     <string name="saldo_disponible">Saldo Disponible</string>
     <string name="vence_minutos_y_sms">Vence Minutos y SMS</string>
     <string name="paquetes_lte1">Paquetes LTE</string>
@@ -1081,7 +1078,6 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="ultima_actualizacion_00_00">Ultima actualizacion: 00:00</string>
     <string name="numero">Numero</string>
     <string name="desliza_hacia_abajo_para_actualizar">Desliza hacia abajo para actualizar</string>
-    <string name="promociones_activas">Promociones</string>
     <string name="donaciones_en_estados_unidos_via_zelle_marlonrivero1999_gmail_com">Donaciones en Estados Unidos via zelle: marlonrivero1999@gmail.com</string>
     <string name="change_password">Cambiar contraseña</string>
     <string name="new_password_example">Minuevacontraseña.1234*</string>
@@ -1112,7 +1108,6 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="acerca_de1">Acerca de</string>
     <string name="hola">Hola</string>
     <string name="todo">TODO</string>
-    <string name="advertencia">Lo sentimos mucho!! este apartado solo funciona en versiones Android 8+ puede consultar su saldo y otras opciones en el apartado de Servicios </string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
@@ -1126,8 +1121,6 @@ Si has leído hasta aquí y estás de acuerdo con lo planteado, presione el bot�
     <string name="error_message_security_issue">Ha ocurrido un problema de seguridad.</string>
     <string name="permission_required_message">Sin este permiso la aplicación no puede funcionar</string>
     <string name="mensajes">Mensajes</string>
-    <string name="actualizado_00_00">Actualizado: 00:00</string>
-    <string name="_0_00_cup">$0.00 CUP</string>
     <string name="title_activity_auth">AuthActivity</string>
     <string name="forgot_password">¿Olvidaste tu contraseña?</string>
     <string name="not_have_account">¿No tienes cuenta?</string>
