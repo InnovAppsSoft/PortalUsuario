@@ -3,79 +3,28 @@
     <color name="colorPrimary">#212121</color>
     <color name="colorPrimaryDark">#212121</color>
     <color name="colorAccent">#4E4E4E</color>
-    <color name="colorBackground">#000000</color>
-    <color name="colorpink">#000000</color>
-    <color name="colorblue">#000000</color>
-    <color name="colorModoNoche">#ffffff</color>
     <color name="background_color_50">#212121</color>
 
-    <color name="downloadBackgroundStart">#000000</color>
-    <color name="downloadBackgroundEnd">#000000</color>
-
     <color name="transparent_white">#99000000</color>
-    <color name="botoncolorStart">#7041FF</color>
     <color name="bar">#99000000</color>
 
-    <color name="colorTextHit">#ffffff</color>
-
-    <color name="colorbanner">#ffffff</color>
-
     <color name="colorButtom">#212121</color>
-    <color name="color1">#4E4E4E</color>
-    <color name="color2">#4E4E4E</color>
-
-    <color name="red">#ff1aafff</color>
-
-    <color name="colorProgress">#304FFE</color>
 
     <color name="colorTest1">#212121</color>
-    <color name="colorTest3">#4E4E4E</color>
-    <color name="colorTest6">#4E4E4E</color>
-    <color name="colorTest7">#ffffff</color>
-    <color name="colorTest8">#2FB4FF</color>
-    <color name="colorRed1">#ffffff</color>
-    <color name="colorTest10">#ffffff</color>
 
     <color name="background">#000000</color>
     <color name="dark_shadow">#19191E</color>
 
-    <color name="colorFondo1">#808A8A8A</color>
 
 
-
-    <color name="gradient_start_color">#4E4E4E</color>
-    <color name="gradient_end_color">#4E4E4E</color>
-
-
-    <color name="colorCalendar">#8E8E8E</color>
 
     <color name="colorDes">#FFFFFF</color>
 
-    <color name="colorTexto">#FCFBFB</color>
-    <color name="colorDecripcion">#C0C0C0</color>
-    <color name="colorLetras">#C0C0C0</color>
-
-    //Login
-
-    <color name="colorPurple">#4E4E4E</color>
-    <color name="colorPurpleT">#4E4E4E</color>
-    <color name="colorBlue">#4E4E4E</color>
-    <color name="colorBlueT">#4E4E4E</color>
-
-    <color name="grey">#212121</color>
-    <color name="Icono">#FFFFFF</color>
     <color name="blue">#FFFFFF</color>
 
-    <color name="grey1">#C0C0C0</color>
-    <color name="grey2">#FFFFFF</color>
-    <color name="grey3">#4E4E4E</color>
 
-    <color name="configuracion">#212121</color>
-    <color name="separador">#C0C0C0</color>
 
-    <color name="uploadBackground">#ffffff</color>
 
-    <color name="colorbottom">#ffffff</color>
     <color name="dark_shadow1">#2E2E2E</color>
 
 
