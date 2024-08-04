@@ -8,7 +8,7 @@ plugins {
     id("com.google.firebase.appdistribution")
     id("com.google.firebase.crashlytics")
     alias(libs.plugins.arturbosch.detekt)
-    alias(libs.plugins.compose)
+    alias(libs.plugins.kotlin.plugin.compose)
 }
 
 android {
@@ -76,12 +76,12 @@ android {
 
 dependencies {
     // Compose
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.material.icons.extended)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.graphics)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.material.icons.extended)
 
     // SuitEtecsa libs
     implementation(libs.suitetecsa.sdk.android)
@@ -123,16 +123,16 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.jwtdecode)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    androidTestImplementation(platform(libs.compose.bom))
+    androidTestImplementation(libs.compose.ui.test.junit4)
+    debugImplementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.test.manifest)
     ksp(libs.hilt.android.compiler)
 
     // Room
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler)
+    implementation(libs.room.ktx)
+    implementation(libs.room.runtime)
+    ksp(libs.room.compiler)
 
     // LiveData
     implementation(libs.androidx.runtime.livedata)
@@ -161,19 +161,19 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.preference.ktx)
-    implementation(libs.androidx.core.ktx.v1131)
+    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.navigation.ui)
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.swiperefreshlayout)
 
     // Test Libraries
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit.v121)
-    androidTestImplementation(libs.androidx.espresso.core.updated)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 
     // UI Libraries
     implementation(libs.circleimageview)
-    implementation(libs.material.v1120)
+    implementation(libs.material)
     implementation(libs.androidx.cardview)
 
     // Additional Libraries
@@ -183,7 +183,7 @@ dependencies {
     implementation(libs.androidx.viewpager2)
     implementation(libs.stickyswitch)
     implementation(libs.ucrop)
-    implementation(libs.android.integration)
+    implementation(libs.zxing.android.integration)
     implementation(libs.zxing)
     implementation(libs.dexter)
     implementation(libs.library)
