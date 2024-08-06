@@ -23,10 +23,7 @@
  */
 package com.marlon.portalusuario.escaner_recarga;
 
-import android.os.Build;
-
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 /**
  * Common class for code scanner runtime exceptions
@@ -48,7 +45,6 @@ public final class CodeScannerException extends RuntimeException {
         super(cause);
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private CodeScannerException(@Nullable final String message, @Nullable final Throwable cause,
                                  final boolean enableSuppression, final boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);

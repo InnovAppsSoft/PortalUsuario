@@ -14,7 +14,7 @@ import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.LoadAdError
 import com.marlon.portalusuario.databinding.ActivityEmergencyCallsBinding
 
-private const val RequestCode = 1000
+private const val REQUEST_CODE = 1000
 
 class EmergencyCallsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEmergencyCallsBinding
@@ -78,12 +78,10 @@ class EmergencyCallsActivity : AppCompatActivity() {
         val r = Intent()
             .setAction(Intent.ACTION_CALL)
             .setData(Uri.parse("tel:$ussd"))
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_DENIED) {
-                requestPermissions(arrayOf(Manifest.permission.CALL_PHONE), RequestCode)
-            } else {
-                startActivity(r)
-            }
+        if (checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_DENIED) {
+            requestPermissions(arrayOf(Manifest.permission.CALL_PHONE),
+                REQUEST_CODE
+            )
         } else {
             startActivity(r)
         }

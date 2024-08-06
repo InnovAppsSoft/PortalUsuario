@@ -55,22 +55,17 @@ class IntroActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) manageBatteryConsumption()
+        manageBatteryConsumption()
 
         setContent {
             IntroScreen {
                 savePrefsData()
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    startActivity(Intent(this, PermissionActivity::class.java))
-                } else {
-                    startActivity(Intent(this, AuthActivity::class.java))
-                }
+                startActivity(Intent(this, PermissionActivity::class.java))
                 finish()
             }
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun manageBatteryConsumption() {
         val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
         if (!powerManager.isIgnoringBatteryOptimizations(packageName)) {

@@ -97,21 +97,11 @@ class MainActivity : AppCompatActivity() {
 
         private fun getNetworkType(): String? {
             val manager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                manager.activeNetwork?.let { network ->
-                    manager.getNetworkCapabilities(network)?.let { capabilities ->
-                        when {
-                            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> "WiFi"
-                            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> "Mobile"
-                            else -> null
-                        }
-                    }
-                }
-            } else {
-                manager.activeNetworkInfo?.let { networkInfo ->
-                    when (networkInfo.type) {
-                        ConnectivityManager.TYPE_WIFI -> "WiFi"
-                        ConnectivityManager.TYPE_MOBILE -> "Mobile"
+            return manager.activeNetwork?.let { network ->
+                manager.getNetworkCapabilities(network)?.let { capabilities ->
+                    when {
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> "WiFi"
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> "Mobile"
                         else -> null
                     }
                 }
@@ -147,7 +137,7 @@ class MainActivity : AppCompatActivity() {
 
                 "show_traffic_speed_bubble" -> {
                     if (preferences.getBoolean("show_traffic_speed_bubble", false)) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
+                        if (!Settings.canDrawOverlays(this)) {
                             Toast.makeText(
                                 this,
                                 "Otorgue a Portal Usuario los permisos requeridos",

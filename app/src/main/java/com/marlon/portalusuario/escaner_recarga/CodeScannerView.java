@@ -116,7 +116,6 @@ public final class CodeScannerView extends ViewGroup {
      *
      * @see CodeScanner
      */
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     public CodeScannerView(final Context context, final AttributeSet attrs,
             @AttrRes final int defStyleAttr, @StyleRes final int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);

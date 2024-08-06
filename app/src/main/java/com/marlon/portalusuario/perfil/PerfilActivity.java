@@ -147,22 +147,17 @@ public class PerfilActivity extends AppCompatActivity {
 
     private void select_profile() {
         if (Build.VERSION.SDK_INT < 32) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                // solicitar permisosn
-                if (ContextCompat.checkSelfPermission(
-                        this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(
-                            this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 22);
-                } else {
-                    // esta dado, continuar
-                    getPicture.launch("image/*");
-                }
-
+            // solicitar permisosn
+            if (ContextCompat.checkSelfPermission(
+                    this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                        this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 22);
             } else {
-                // < VERAION_CODES.M no solicitar permiso continuar
+                // esta dado, continuar
                 getPicture.launch("image/*");
             }
+
         } else {
             // SDK 32, no solicitar permisos y continuar
             getPicture.launch("image/*");

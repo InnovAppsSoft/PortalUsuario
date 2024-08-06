@@ -277,15 +277,8 @@ public class ServiciosFragment<b> extends Fragment {
         r.setAction(Intent.ACTION_CALL);
         r.setData(Uri.parse("tel:" + ussd + ""));
 
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (getContext().checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_DENIED) {
-                requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1000);
-
-            } else {
-
-                startActivity(r);
-
-            }
+        if (getContext().checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_DENIED) {
+            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1000);
 
         } else {
 

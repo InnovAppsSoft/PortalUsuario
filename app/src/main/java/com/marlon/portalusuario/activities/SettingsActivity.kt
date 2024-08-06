@@ -51,7 +51,7 @@ class SettingsActivity : AppCompatActivity() {
             //
             showTrafficSpeedBubble!!.isEnabled = true
             //
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(context)) {
+            if (!Settings.canDrawOverlays(context)) {
                 showTrafficSpeedBubble!!.isChecked = false
             }
         }
@@ -74,7 +74,7 @@ class SettingsActivity : AppCompatActivity() {
 
                 "show_traffic_speed_bubble" -> {
                     if (sharedPreferences.getBoolean("show_traffic_speed_bubble", false)) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(context)) {
+                        if (!Settings.canDrawOverlays(context)) {
                             Toast.makeText(
                                 context,
                                 "Otorgue a Portal Usuario los permisos requeridos",
