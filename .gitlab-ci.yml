@@ -9,6 +9,10 @@
 
 image: eclipse-temurin:17-jdk-jammy
 
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+
 variables:
 
   # ANDROID_COMPILE_SDK is the version of Android you're compiling with.
