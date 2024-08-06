@@ -92,7 +92,10 @@ androidx-test-ext-junit = "1.2.1"
 appcompat = "1.7.0"
 material = "1.12.0"
 apklisupdate = "1.4"
+
 arturbosch-detekt = "1.23.6"
+detekt-rules-compose = "1.3.0"
+
 suitetecsa-sdk-kotlin = "1.0.0-alpha04"
 suitetecsa-sdk-kotlin-old = "0.1.8"
 suitetecsa-sdk-android = "1.0.0-alpha03"
@@ -242,6 +245,8 @@ suitetecsa-sdk-kotlin-old = { module = "com.github.suitetecsa:suitetecsa-sdk-kot
 suitetecsa-sdk-android = { group = "io.github.suitetecsa.sdk", name = "android", version.ref = "suitetecsa-sdk-android" }
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie-compose" }
 jwtdecode = { group = "com.auth0.android", name = "jwtdecode", version.ref = "jwtdecode" }
+
+detekt-rules-compose = { group = "ru.kode", name = "detekt-rules-compose", version.ref = "detekt-rules-compose" }
 
 [plugins]
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
