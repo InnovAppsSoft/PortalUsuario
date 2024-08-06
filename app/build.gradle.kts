@@ -83,6 +83,9 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.compose.material.icons.extended)
 
+    // Detekt
+    detektPlugins(libs.detekt.rules.compose)
+
     // SuitEtecsa libs
     implementation(libs.suitetecsa.sdk.android)
     implementation(libs.suitetecsa.sdk.kotlin)
