@@ -70,6 +70,7 @@ lintDebug:
   artifacts:
     paths:
       - app/lint/reports/lint-results-debug.html
+      - app/lint/reports/lint-results-debug.sarif
     expose_as: "lint-report"
     when: always
 
