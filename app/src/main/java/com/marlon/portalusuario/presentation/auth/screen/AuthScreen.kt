@@ -33,6 +33,7 @@ import com.marlon.portalusuario.presentation.auth.AuthEvent.OnLoadCaptcha
 import com.marlon.portalusuario.presentation.auth.AuthViewModel
 import com.marlon.portalusuario.ui.components.CaptchaCanvas
 import com.marlon.portalusuario.ui.components.CaptchaField
+import com.marlon.portalusuario.ui.components.ErrorDialog
 import com.marlon.portalusuario.ui.components.NautaUserField
 import com.marlon.portalusuario.ui.components.PasswordField
 import cu.suitetecsa.nautanav.ui.components.PrettyCard
@@ -46,7 +47,10 @@ fun AuthScreen(viewModel: AuthViewModel = hiltViewModel(), navController: NavHos
     LaunchedEffect(key1 = viewModel.isLoggedIn.value) {
         if (viewModel.isLoggedIn.value) context.startActivity(Intent(context, MainActivity::class.java))
     }
-    Box(modifier = Modifier.fillMaxSize().padding(16.dp), contentAlignment = Alignment.Center) {
+
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .padding(16.dp), contentAlignment = Alignment.Center) {
         Column {
             PrettyCard(isLoading = viewModel.state.value.isLoading) {
                 Column {
@@ -79,6 +83,10 @@ fun AuthScreen(viewModel: AuthViewModel = hiltViewModel(), navController: NavHos
                 }
             }
             RestorePasswordAndCreateAccount(navController)
+
+            viewModel.state.value.error?.let {
+                ErrorDialog(errorText = it) { viewModel.onEvent(AuthEvent.OnErrorDismiss) }
+            }
 
             if (BuildConfig.DEBUG) {
                 Spacer(modifier = Modifier.height(32.dp))

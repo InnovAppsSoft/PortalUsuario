@@ -6,6 +6,7 @@ sealed class ResetPasswordEvent {
     data object OnValidateConfirmCode : ResetPasswordEvent()
     data object OnResetPassword : ResetPasswordEvent()
     data object OnTogglePasswordVisibility : ResetPasswordEvent()
+    data object OnErrorDismiss : ResetPasswordEvent()
 
     data class OnChangeUser(val value: String) : ResetPasswordEvent()
     data class OnChangeCaptchaCode(val value: String) : ResetPasswordEvent()

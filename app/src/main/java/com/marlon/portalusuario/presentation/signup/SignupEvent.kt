@@ -6,6 +6,7 @@ sealed class SignupEvent {
     data object OnConfirmCode : SignupEvent()
     data object OnCreateUser : SignupEvent()
     data object OnTogglePasswordVisibility : SignupEvent()
+    data object OnErrorDismiss : SignupEvent()
 
     data class OnChangedPhoneNumber(val value: String) : SignupEvent()
     data class OnChangedDNI(val value: String) : SignupEvent()

@@ -42,6 +42,8 @@ class ResetPasswordViewModel @Inject constructor(
                 _state.value = _state.value.copy(isPasswordVisible = !_state.value.isPasswordVisible)
             ResetPasswordEvent.OnValidateConfirmCode -> validateConfirmCode()
             ResetPasswordEvent.OnValidateUser -> validateUser()
+            ResetPasswordEvent.OnErrorDismiss ->
+                _state.value = _state.value.copy(error = null)
         }
     }
 
@@ -60,7 +62,10 @@ class ResetPasswordViewModel @Inject constructor(
             _state.value = _state.value.copy(isLoading = true)
             runCatching {
                 authService.resetPassword(_state.value.phoneNumber, _state.value.newPassword, _state.value.confirmCode)
-            }.onSuccess { if (it.result == "ok") _passwordRestored.value = true }
+            }.onSuccess {
+                if (it.result == "ok") _passwordRestored.value = true
+                else _state.value = _state.value.copy(error = it.detail)
+            }
             _state.value = _state.value.copy(isLoading = false)
         }
     }
@@ -70,7 +75,10 @@ class ResetPasswordViewModel @Inject constructor(
             _state.value = _state.value.copy(isLoading = true)
             runCatching {
                 authService.confirmCode(_state.value.phoneNumber, _state.value.confirmCode)
-            }.onSuccess { if (it.result == "ok") _currentStep.intValue += 1 }
+            }.onSuccess {
+                if (it.result == "ok") _currentStep.intValue += 1
+                else _state.value = _state.value.copy(error = it.detail)
+            }
             _state.value = _state.value.copy(isLoading = false)
         }
     }
@@ -85,7 +93,10 @@ class ResetPasswordViewModel @Inject constructor(
                         _state.value.captchaCode,
                         _state.value.idRequest
                     )
-                }.onSuccess { if (it.result == "ok") _currentStep.intValue += 1 }
+                }.onSuccess {
+                    if (it.result == "ok") _currentStep.intValue += 1
+                    else _state.value = _state.value.copy(error = it.detail)
+                }
             }
             _state.value = _state.value.copy(isLoading = false)
         }
