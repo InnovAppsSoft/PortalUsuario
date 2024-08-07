@@ -44,6 +44,9 @@ class SignupViewModel @Inject constructor(
             SignupEvent.OnRegisterUser -> registerUser()
             SignupEvent.OnTogglePasswordVisibility ->
                 _state.value = _state.value.copy(isPasswordVisible = !_state.value.isPasswordVisible)
+
+            SignupEvent.OnErrorDismiss ->
+                _state.value = _state.value.copy(error = null)
         }
     }
 
@@ -51,7 +54,10 @@ class SignupViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = _state.value.copy(isLoading = true)
             runCatching { service.validateCodeIdentity(_state.value.confirmCode, _state.value.dni) }
-                .onSuccess { if (it.result == "ok") _currentStep.intValue += 1 }
+                .onSuccess {
+                    if (it.result == "ok") _currentStep.intValue += 1
+                    else _state.value = _state.value.copy(error = it.detail)
+                }
             _state.value = _state.value.copy(isLoading = false)
         }
     }
@@ -60,7 +66,10 @@ class SignupViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = _state.value.copy(isLoading = true)
             runCatching { service.createUser(_state.value.password, _state.value.phoneNumber, _state.value.dni) }
-                .onSuccess { if (it.result == "ok") _userCreated.value = true }
+                .onSuccess {
+                    if (it.result == "ok") _userCreated.value = true
+                    else _state.value = _state.value.copy(error = it.detail)
+                }
             _state.value = _state.value.copy(isLoading = false)
         }
     }
@@ -88,7 +97,10 @@ class SignupViewModel @Inject constructor(
                     _state.value.captchaCode,
                     _state.value.idRequest
                 )
-            }.onSuccess { if (it.result == "ok") _currentStep.intValue += 1 }
+            }.onSuccess {
+                if (it.result == "ok") _currentStep.intValue += 1
+                else _state.value = _state.value.copy(error = it.detail)
+            }
             _state.value = _state.value.copy(isLoading = false)
         }
     }

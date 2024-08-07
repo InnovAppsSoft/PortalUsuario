@@ -10,6 +10,6 @@ import com.marlon.portalusuario.data.entity.NavigationService
 
 @Database(entities = [ClientProfile::class, MobileService::class, NavigationService::class], version = 1)
 @TypeConverters(Converters::class)
-abstract class ServicesDB : RoomDatabase()  {
+abstract class ServicesDB : RoomDatabase() {
     abstract val servicesDao: ServicesDao
 }

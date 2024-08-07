@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
     alias(libs.plugins.kotlin.android)
-    id("kotlin-kapt")
     alias(libs.plugins.devtools.ksp)
     id("com.google.dagger.hilt.android")
     id("com.google.firebase.appdistribution")

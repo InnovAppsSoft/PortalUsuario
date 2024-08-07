@@ -160,4 +160,6 @@
     <string name="remaining">Restan</string>
     <string name="sim_active_until">"Activa hasta"</string>
     <string name="expires">"Vence"</string>
+    <string name="error">Error</string>
+    <string name="accept">Aceptar</string>
 </resources>

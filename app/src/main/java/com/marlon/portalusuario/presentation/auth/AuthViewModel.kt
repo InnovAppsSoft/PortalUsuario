@@ -40,6 +40,9 @@ class AuthViewModel @Inject constructor(
             AuthEvent.OnTogglePasswordVisibility ->
                 _state.value =
                     _state.value.copy(isPasswordVisible = !_state.value.isPasswordVisible)
+
+            AuthEvent.OnErrorDismiss ->
+                _state.value = _state.value.copy(error = null)
         }
     }
 
@@ -55,22 +58,28 @@ class AuthViewModel @Inject constructor(
                 )
             }
                 .onSuccess {
-                    if (it.result == "ok") {
-                        preferences.updateDataSession(
-                            DataSession(
-                                _state.value.phoneNumber,
-                                _state.value.password,
-                                _state.value.captchaCode,
-                                _state.value.idRequest!!,
-                                it.token,
-                                (it.user as User).lastUpdate,
-                                (it.user as User).client.portalUser,
-                                (it.user as User).updatedServices == "true"
+                    when (it.result) {
+                        "ok" -> {
+                            preferences.updateDataSession(
+                                DataSession(
+                                    _state.value.phoneNumber,
+                                    _state.value.password,
+                                    _state.value.captchaCode,
+                                    _state.value.idRequest!!,
+                                    it.token,
+                                    (it.user as User).lastUpdate,
+                                    (it.user as User).client.portalUser,
+                                    (it.user as User).updatedServices == "true"
+                                )
                             )
-                        )
-                        _isLoggedIn.value = true
-                    } else {
-                        println(it.result)
+                            _isLoggedIn.value = true
+                        }
+                        "errorCaptcha" -> {
+                            _state.value = state.value.copy(error = "Codigo captcha incorrecto")
+                        }
+                        else -> {
+                            _state.value = state.value.copy(error = "Usuario o contraseña incorrectos")
+                        }
                     }
                 }
                 .onFailure { it.printStackTrace() }

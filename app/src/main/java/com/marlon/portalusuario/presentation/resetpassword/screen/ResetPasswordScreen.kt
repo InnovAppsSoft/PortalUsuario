@@ -14,6 +14,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.marlon.portalusuario.presentation.resetpassword.ResetPasswordEvent
 import com.marlon.portalusuario.presentation.resetpassword.ResetPasswordViewModel
+import com.marlon.portalusuario.ui.components.ErrorDialog
 import kotlinx.coroutines.launch
 
 private const val TotalPages = 3
@@ -56,6 +57,10 @@ fun ResetPasswordScreen(
                 )
             }
         }
+    }
+
+    viewModel.state.value.error?.let {
+        ErrorDialog(errorText = it) { viewModel.onEvent(ResetPasswordEvent.OnErrorDismiss) }
     }
 
     LaunchedEffect(key1 = viewModel.currentStep.value) {

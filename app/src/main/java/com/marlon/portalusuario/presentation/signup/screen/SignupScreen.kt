@@ -16,6 +16,7 @@ import com.marlon.portalusuario.presentation.resetpassword.screen.ConfirmCodeScr
 import com.marlon.portalusuario.presentation.resetpassword.screen.SetNewPasswordScreen
 import com.marlon.portalusuario.presentation.signup.SignupEvent
 import com.marlon.portalusuario.presentation.signup.SignupViewModel
+import com.marlon.portalusuario.ui.components.ErrorDialog
 import kotlinx.coroutines.launch
 
 private const val TotalPages = 3
@@ -58,6 +59,10 @@ fun SignupScreen(
                 )
             }
         }
+    }
+
+    viewModel.state.value.error?.let {
+        ErrorDialog(errorText = it) { viewModel.onEvent(SignupEvent.OnErrorDismiss) }
     }
 
     LaunchedEffect(key1 = viewModel.currentStep.value) {
