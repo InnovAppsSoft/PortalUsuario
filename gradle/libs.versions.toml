@@ -1,5 +1,5 @@
 [versions]
-accompanist-pager = "0.23.1"
+accompanist-pager = "0.34.0"
 androidx-activity-ktx = "1.9.1"
 zxing-android-integration = "3.3.0"
 androidsvg-aar = "1.4"
