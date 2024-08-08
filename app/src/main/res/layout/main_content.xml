@@ -93,28 +93,6 @@
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
                 </LinearLayout>
-                <!-- CARRUSEL -->
-                <com.smarteist.autoimageslider.SliderView
-                    android:id="@+id/imageSlider"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintDimensionRatio="315:103"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:sliderAnimationDuration="600"
-                    app:sliderAutoCycleDirection="back_and_forth"
-                    app:sliderAutoCycleEnabled="true"
-                    app:sliderIndicatorAnimationDuration="600"
-                    app:sliderIndicatorGravity="center_horizontal|bottom"
-                    app:sliderIndicatorMargin="10dp"
-                    app:sliderIndicatorOrientation="horizontal"
-                    app:sliderIndicatorRadius="1dp"
-                    app:sliderIndicatorSelectedColor="#5A5A5A"
-                    app:sliderIndicatorUnselectedColor="#FFF"
-                    app:sliderScrollTimeInSec="1"
-                    app:sliderStartAutoCycle="true" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
