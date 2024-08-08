@@ -222,7 +222,6 @@ dependencies {
     implementation(libs.androidx.palette)
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.carouselview)
-    implementation(libs.autoimageslider)
     implementation(libs.rxandroid)
     implementation(libs.rxjava)
     implementation(libs.colorpreference.core)

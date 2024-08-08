@@ -14,7 +14,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ShareCompat.IntentBuilder
@@ -31,8 +30,6 @@ import com.marlon.portalusuario.components.SetLTEModeDialog
 import com.marlon.portalusuario.databinding.ActivityMainBinding
 import com.marlon.portalusuario.errores_log.LogFileViewerActivity
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesFragment
-import com.marlon.portalusuario.promotions.PromotionsConfig
-import com.marlon.portalusuario.promotions.PromotionsViewModel
 import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
 import com.marlon.portalusuario.une.UneActivity
 import com.marlon.portalusuario.util.Utils.hasPermissions
@@ -50,11 +47,6 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var connectivityFragment: ConnectivityFragment
-    private val promotionsViewModel by viewModels<PromotionsViewModel>()
-
-    // Promotions
-    private var showPromotions by Delegates.notNull<Boolean>()
-    private lateinit var promotionsConfig: PromotionsConfig
 
     // Network change listener
     private var showTrafficBubble by Delegates.notNull<Boolean>()
@@ -127,8 +119,6 @@ class MainActivity : AppCompatActivity() {
     private fun listenPreferences(preferences: SharedPreferences, key: String?) {
         key?.let {
             when (it) {
-                "show_etecsa_promo_carousel" ->
-                    promotionsConfig.setCarouselVisibility(preferences.getBoolean(it, true))
 
                 "keynoche" -> when (preferences.getString("keynoche", "oscuro")) {
                     "claro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -165,10 +155,6 @@ class MainActivity : AppCompatActivity() {
 
         // Settings preferences
         settings = getDefaultSharedPreferences(this)
-
-        // Promotions
-        showPromotions = settings.getBoolean("show_etecsa_promo_carousel", true)
-        setupPromotions()
 
         // Traffic bubble
         showTrafficBubble = settings.getBoolean("show_traffic_speed_bubble", false)
@@ -268,16 +254,6 @@ class MainActivity : AppCompatActivity() {
             false
         }
         binding.contentMain.menu.setOnClickListener { binding.drawerLayout.openDrawer(GravityCompat.START) }
-    }
-
-    // setUp carousel state
-    private fun setupPromotions() {
-        promotionsConfig = PromotionsConfig.Builder()
-            .activity(this)
-            .viewModel(promotionsViewModel)
-            .binding(binding.contentMain)
-            .build()
-        promotionsConfig.setup(showPromotions)
     }
 
     // Invitar Usuario
