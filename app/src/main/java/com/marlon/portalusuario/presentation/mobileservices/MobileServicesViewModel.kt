@@ -9,14 +9,10 @@ import androidx.lifecycle.viewModelScope
 import com.marlon.portalusuario.data.preferences.AppPreferences
 import com.marlon.portalusuario.domain.data.UserRepository
 import com.marlon.portalusuario.domain.model.SimPaired
-import com.marlon.portalusuario.presentation.mobileservices.usecases.RefreshAuthToken
-import com.marlon.portalusuario.util.Utils.isTokenExpired
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.suitetecsa.sdk.android.SimCardCollector
 import io.github.suitetecsa.sdk.android.utils.extractShortNumber
-import io.github.suitetecsa.sdk.exception.InvalidSessionException
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,7 +25,6 @@ class MobileServicesViewModel @Inject constructor(
     private val appPreferences: AppPreferences,
     private val repository: UserRepository,
     simCardCollector: SimCardCollector,
-    private val refreshToken: RefreshAuthToken,
 ) : ViewModel() {
     val mobileServices = repository.getMobileServices().stateIn(
         scope = viewModelScope,
@@ -88,47 +83,11 @@ class MobileServicesViewModel @Inject constructor(
         }
     }
 
-    private fun update(updateToken: Boolean = false) {
+    private fun update() {
         viewModelScope.launch {
-            preferences.value.dataSession?.let { data ->
-                Log.d(TAG, "update: updating services with data: $data")
-                _state.value = _state.value.copy(isLoading = true)
-                runCatching {
-                    val authToken = data.authToken.takeIf { !it.isTokenExpired() && !updateToken }
-                        ?: refreshToken(
-                            data.phoneNumber,
-                            data.password,
-                            data.captchaCode,
-                            data.idRequest
-                        )
-                            .also {
-                                Log.d(TAG, "update: Triple :: $it")
-                                appPreferences.updateDataSession(
-                                    data.copy(
-                                        authToken = it.first,
-                                        lastUpdate = it.second,
-                                        updatedServices = it.third
-                                    )
-                                )
-                            }.first
-                    repository.fetchUser(authToken, data.portalUser, data.lastUpdate)
-                }.onFailure {
-                    it.printStackTrace()
-                    if (it is InvalidSessionException) {
-                        update(true)
-                    }
-                }.onSuccess {
-                    Log.d(TAG, "update: updating dataSession...")
-                    appPreferences.updateDataSession(
-                        data.copy(
-                            updatedServices = true,
-                            lastUpdate = repository.getClientProfile().first().lastUpdate
-                        )
-                    )
-                    Log.d(TAG, "update: dataSession updated!")
-                }
-                _state.value = _state.value.copy(isLoading = false)
-            }
+            _state.value = _state.value.copy(isLoading = true)
+            repository.fetchUser()
+            _state.value = _state.value.copy(isLoading = false)
         }
     }
 }

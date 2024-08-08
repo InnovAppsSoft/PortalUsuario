@@ -5,10 +5,12 @@ import androidx.room.Room
 import com.marlon.portalusuario.data.ServicesDB
 import com.marlon.portalusuario.data.ServicesDao
 import com.marlon.portalusuario.data.preferences.AppPreferences
+import com.marlon.portalusuario.data.preferences.SessionStorage
 import com.marlon.portalusuario.data.source.AuthService
 import com.marlon.portalusuario.data.source.UserService
 import com.marlon.portalusuario.data.user.UserRepositoryImpl
 import com.marlon.portalusuario.domain.data.UserRepository
+import com.marlon.portalusuario.presentation.mobileservices.usecases.RefreshAuthToken
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,6 +27,11 @@ class AppModule {
     @Provides
     fun provideAppPreference(@ApplicationContext context: Context) =
         AppPreferences(context)
+
+    @Singleton
+    @Provides
+    fun provideSessionStorage(@ApplicationContext context: Context) =
+        SessionStorage(context)
 
     @Singleton
     @Provides
@@ -51,9 +58,11 @@ class AppModule {
     @Provides
     fun provideUserRepository(
         userService: UserService,
-        servicesDao: ServicesDao
+        servicesDao: ServicesDao,
+        refreshAuthToken: RefreshAuthToken,
+        sessionStorage: SessionStorage
     ): UserRepository =
-        UserRepositoryImpl(userService, servicesDao)
+        UserRepositoryImpl(userService, servicesDao, refreshAuthToken, sessionStorage)
 
     @Singleton
     @Provides
