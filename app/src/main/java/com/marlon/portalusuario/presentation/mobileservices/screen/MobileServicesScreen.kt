@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -36,6 +38,7 @@ import com.marlon.portalusuario.presentation.mobileservices.components.BalanceCa
 import com.marlon.portalusuario.presentation.mobileservices.components.BonusSection
 import com.marlon.portalusuario.presentation.mobileservices.components.MobileServiceSelector
 import com.marlon.portalusuario.presentation.mobileservices.components.PlansSection
+import com.marlon.portalusuario.presentation.mobileservices.components.SimCardView
 import com.marlon.portalusuario.presentation.mobileservices.components.servsettings.ServiceSettingsBottomSheet
 import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
 import com.marlon.portalusuario.util.Utils.fixDateFormat
@@ -76,6 +79,11 @@ fun MobileServicesScreen(viewModel: MobileServicesViewModel = hiltViewModel()) {
             .fillMaxSize()
             .nestedScroll(pullToRefreshState.nestedScrollConnection)
     ) {
+        LazyRow {
+            items(viewModel.simCards) { sim ->
+                SimCardView(simCard = sim)
+            }
+        }
         mobServices.takeIf { it.isNotEmpty() }?.let { services ->
             val serviceId = preferences.mssId ?: services.first().id
             ScreenContent(
