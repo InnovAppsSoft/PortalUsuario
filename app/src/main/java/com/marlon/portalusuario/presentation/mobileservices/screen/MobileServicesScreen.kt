@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,8 +26,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.marlon.portalusuario.domain.model.MobileBonus
 import com.marlon.portalusuario.domain.model.MobilePlan
 import com.marlon.portalusuario.domain.model.MobileService
-import com.marlon.portalusuario.domain.model.SimPaired
+import com.marlon.portalusuario.domain.model.ServiceType
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesEvent
+import com.marlon.portalusuario.presentation.mobileservices.MobileServicesEvent.OnHideSImCardsSettings
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesEvent.OnHideServiceSettings
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesEvent.OnShowServiceSettings
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesState
@@ -38,7 +37,7 @@ import com.marlon.portalusuario.presentation.mobileservices.components.BalanceCa
 import com.marlon.portalusuario.presentation.mobileservices.components.BonusSection
 import com.marlon.portalusuario.presentation.mobileservices.components.MobileServiceSelector
 import com.marlon.portalusuario.presentation.mobileservices.components.PlansSection
-import com.marlon.portalusuario.presentation.mobileservices.components.SimCardView
+import com.marlon.portalusuario.presentation.mobileservices.components.configsimcards.ConfigSimCardsBottomSheet
 import com.marlon.portalusuario.presentation.mobileservices.components.servsettings.ServiceSettingsBottomSheet
 import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
 import com.marlon.portalusuario.util.Utils.fixDateFormat
@@ -61,15 +60,6 @@ fun MobileServicesScreen(viewModel: MobileServicesViewModel = hiltViewModel()) {
         }
     }
 
-    LaunchedEffect(key1 = preferences.dataSession) {
-        if (preferences.dataSession != null) {
-            Log.d(TAG, "updatedServices: ${preferences.dataSession!!.updatedServices}")
-            if (!preferences.dataSession!!.updatedServices && !viewModel.state.value.isLoading) {
-                viewModel.onEvent(MobileServicesEvent.OnUpdate)
-            }
-        }
-    }
-
     LaunchedEffect(key1 = viewModel.state.value.isLoading) {
         if (viewModel.state.value.isLoading) pullToRefreshState.startRefresh() else pullToRefreshState.endRefresh()
     }
@@ -79,11 +69,6 @@ fun MobileServicesScreen(viewModel: MobileServicesViewModel = hiltViewModel()) {
             .fillMaxSize()
             .nestedScroll(pullToRefreshState.nestedScrollConnection)
     ) {
-        LazyRow {
-            items(viewModel.simCards) { sim ->
-                SimCardView(simCard = sim)
-            }
-        }
         mobServices.takeIf { it.isNotEmpty() }?.let { services ->
             val serviceId = preferences.mssId ?: services.first().id
             ScreenContent(
@@ -91,9 +76,12 @@ fun MobileServicesScreen(viewModel: MobileServicesViewModel = hiltViewModel()) {
                 currentServiceId = serviceId,
                 state = viewModel.state.value,
                 onEvent = viewModel::onEvent,
-                simsPaired = viewModel.servicesPaired,
                 simCards = viewModel.simCards
             )
+        }
+
+        if (viewModel.state.value.isSimCardsSettingsVisible) {
+            ConfigSimCardsBottomSheet(onDismiss = { viewModel.onEvent(OnHideSImCardsSettings) })
         }
 
         PullToRefreshContainer(state = pullToRefreshState, modifier = Modifier.align(Alignment.TopCenter))
@@ -106,7 +94,6 @@ fun ScreenContent(
     currentServiceId: String,
     state: MobileServicesState,
     onEvent: (MobileServicesEvent) -> Unit,
-    simsPaired: List<SimPaired> = listOf(),
     simCards: List<SimCard> = listOf(),
 ) {
     val service = services.first { it.id == currentServiceId }
@@ -115,7 +102,6 @@ fun ScreenContent(
             services = services,
             serviceSelected = service,
             onServiceSelected = { onEvent(MobileServicesEvent.OnChangeCurrentMobileService(it.id)) },
-            simsPaired = simsPaired,
             simCards = simCards,
             onShowServiceSettings = { onEvent(OnShowServiceSettings) }
         )
@@ -125,7 +111,7 @@ fun ScreenContent(
             balanceCredit = "${service.mainBalance} ${service.currency}",
             lockDate = service.lockDate,
             deletionDate = service.deletionDate,
-            isSimPaired = service.id in simsPaired.map { it.serviceId },
+            isSimPaired = service.slotIndex != -1,
             onAddBalance = { /*TODO*/ },
             onSendBalance = { /*TODO*/ }
         )
@@ -175,14 +161,15 @@ private fun ScreenContentPreview() {
                         currency = "CUP",
                         phoneNumber = "51872843",
                         mainBalance = "10.00",
-                        consumptionRate = true
+                        consumptionRate = true,
+                        slotIndex = -1,
+                        type = ServiceType.Local
                     )
                 ),
                 currentServiceId = "5351872843",
                 state = MobileServicesState(),
-                simsPaired = listOf(),
-                simCards = listOf(),
-                onEvent = {}
+                onEvent = {},
+                simCards = listOf()
             )
         }
     }

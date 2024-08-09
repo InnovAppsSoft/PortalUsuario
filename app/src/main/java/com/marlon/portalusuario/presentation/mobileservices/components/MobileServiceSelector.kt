@@ -2,7 +2,6 @@ package com.marlon.portalusuario.presentation.mobileservices.components
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import android.os.Build
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.domain.model.MobileBonus
 import com.marlon.portalusuario.domain.model.MobilePlan
 import com.marlon.portalusuario.domain.model.MobileService
-import com.marlon.portalusuario.domain.model.SimPaired
+import com.marlon.portalusuario.domain.model.ServiceType
 import com.marlon.portalusuario.ui.theme.BrightCoralRed
 import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
 import com.marlon.portalusuario.ui.theme.TealBlue
@@ -39,7 +38,6 @@ fun MobileServiceSelector(
     services: List<MobileService>,
     serviceSelected: MobileService,
     onServiceSelected: (MobileService) -> Unit,
-    simsPaired: List<SimPaired> = listOf(),
     simCards: List<SimCard> = listOf(),
     onShowServiceSettings: () -> Unit = {}
 ) {
@@ -53,8 +51,8 @@ fun MobileServiceSelector(
                 items = services,
                 selectedItem = serviceSelected,
                 onItemSelected = onServiceSelected,
-                selectedItemFactory = { mod, item -> ServiceItem(item, simsPaired, simCards, mod) },
-                dropdownItemFactory = { item, _ -> ServiceItem(item, simsPaired, simCards) }
+                selectedItemFactory = { mod, item -> ServiceItem(item, simCards, mod) },
+                dropdownItemFactory = { item, _ -> ServiceItem(item, simCards) }
             )
         }
 
@@ -70,20 +68,10 @@ fun MobileServiceSelector(
 @Composable
 private fun ServiceItem(
     item: MobileService,
-    simsPaired: List<SimPaired>,
     simCards: List<SimCard>,
     modifier: Modifier = Modifier
 ) {
-    val simCard = simsPaired.firstOrNull { it.serviceId == item.id }?.let { paired ->
-        simCards.firstOrNull {
-            val simId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                it.slotIndex.toString()
-            } else {
-                it.telephony.subscriberId
-            }
-            paired.simId == simId
-        }
-    }
+    val simCard = simCards.firstOrNull { it.slotIndex == item.slotIndex }
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
         Box(modifier = Modifier.background(simCard?.let { TealBlue } ?: BrightCoralRed)) {
             Text(
@@ -133,7 +121,9 @@ private fun MobileServiceSelectorPreview() {
             currency = "CUP",
             phoneNumber = "51872843",
             mainBalance = "10.00",
-            consumptionRate = true
+            consumptionRate = true,
+            slotIndex = -1,
+            type = ServiceType.Local
         )
     )
     PortalUsuarioTheme {

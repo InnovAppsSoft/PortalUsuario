@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.room.Room
 import com.marlon.portalusuario.data.ServicesDB
 import com.marlon.portalusuario.data.ServicesDao
+import com.marlon.portalusuario.data.mappers.MobServMapper
 import com.marlon.portalusuario.data.preferences.AppPreferences
+import com.marlon.portalusuario.data.preferences.MobServicesPreferences
 import com.marlon.portalusuario.data.preferences.SessionStorage
 import com.marlon.portalusuario.data.source.AuthService
-import com.marlon.portalusuario.data.source.UserService
+import com.marlon.portalusuario.data.source.UserApiDataSource
 import com.marlon.portalusuario.data.user.UserRepositoryImpl
 import com.marlon.portalusuario.domain.data.UserRepository
 import com.marlon.portalusuario.presentation.mobileservices.usecases.RefreshAuthToken
@@ -48,7 +50,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideNautaService() = UserService(NautaApi.nautaService)
+    fun provideNautaService() = UserApiDataSource(NautaApi.nautaService)
 
     @Singleton
     @Provides
@@ -56,13 +58,24 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideMobServicesPreferences(@ApplicationContext context: Context) =
+        MobServicesPreferences(context)
+
+    @Singleton
+    @Provides
+    fun provideMobServMapper(preferences: MobServicesPreferences) =
+        MobServMapper(preferences)
+
+    @Singleton
+    @Provides
     fun provideUserRepository(
-        userService: UserService,
+        userApiDataSource: UserApiDataSource,
         servicesDao: ServicesDao,
         refreshAuthToken: RefreshAuthToken,
-        sessionStorage: SessionStorage
+        sessionStorage: SessionStorage,
+        mobServMapper: MobServMapper
     ): UserRepository =
-        UserRepositoryImpl(userService, servicesDao, refreshAuthToken, sessionStorage)
+        UserRepositoryImpl(userApiDataSource, servicesDao, refreshAuthToken, sessionStorage, mobServMapper)
 
     @Singleton
     @Provides

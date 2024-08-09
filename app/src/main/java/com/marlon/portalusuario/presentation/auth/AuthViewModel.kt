@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marlon.portalusuario.data.preferences.AppPreferences
+import com.marlon.portalusuario.data.preferences.SessionStorage
 import com.marlon.portalusuario.data.source.AuthService
 import com.marlon.portalusuario.domain.model.DataSession
 import com.marlon.portalusuario.util.Utils.toBitmap
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val service: AuthService,
-    private val preferences: AppPreferences
+    private val preferences: AppPreferences,
+    private val sessionStorage: SessionStorage
 ) : ViewModel() {
     private val _state = mutableStateOf(AuthState())
     val state: State<AuthState> get() = _state
@@ -43,6 +45,10 @@ class AuthViewModel @Inject constructor(
 
             AuthEvent.OnErrorDismiss ->
                 _state.value = _state.value.copy(error = null)
+
+            AuthEvent.OnSkipLogin -> viewModelScope.launch {
+                preferences.updateSkippedLogin(true)
+            }
         }
     }
 
@@ -60,7 +66,7 @@ class AuthViewModel @Inject constructor(
                 .onSuccess {
                     when (it.result) {
                         "ok" -> {
-                            preferences.updateDataSession(
+                            sessionStorage.updateDataSession(
                                 DataSession(
                                     _state.value.phoneNumber,
                                     _state.value.password,

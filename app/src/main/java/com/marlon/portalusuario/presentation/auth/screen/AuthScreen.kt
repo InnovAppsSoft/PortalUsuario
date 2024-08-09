@@ -1,18 +1,16 @@
 package com.marlon.portalusuario.presentation.auth.screen
 
+import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -48,9 +46,12 @@ fun AuthScreen(viewModel: AuthViewModel = hiltViewModel(), navController: NavHos
         if (viewModel.isLoggedIn.value) context.startActivity(Intent(context, MainActivity::class.java))
     }
 
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp), contentAlignment = Alignment.Center) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        contentAlignment = Alignment.Center
+    ) {
         Column {
             PrettyCard(isLoading = viewModel.state.value.isLoading) {
                 Column {
@@ -82,51 +83,51 @@ fun AuthScreen(viewModel: AuthViewModel = hiltViewModel(), navController: NavHos
                     )
                 }
             }
-            RestorePasswordAndCreateAccount(navController)
+
+            RestorePasswordAndCreateAccount(navController, context) { viewModel.onEvent(AuthEvent.OnSkipLogin) }
 
             viewModel.state.value.error?.let {
                 ErrorDialog(errorText = it) { viewModel.onEvent(AuthEvent.OnErrorDismiss) }
-            }
-
-            if (BuildConfig.DEBUG) {
-                Spacer(modifier = Modifier.height(32.dp))
-                Button(
-                    onClick = { context.startActivity(Intent(context, MainActivity::class.java)) }
-                ) {
-                    Text(text = "Saltar")
-                }
             }
         }
     }
 }
 
 @Composable
-private fun RestorePasswordAndCreateAccount(navController: NavHostController) {
+private fun RestorePasswordAndCreateAccount(
+    navController: NavHostController,
+    context: Context,
+    onShipLogin: () -> Unit
+) {
     Spacer(modifier = Modifier.height(32.dp))
-    Row(
+    Text(
+        text = stringResource(R.string.forgot_password),
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentWidth()
-    ) {
-        Text(text = stringResource(R.string.forgot_password))
-        Spacer(modifier = Modifier.width(8.dp))
-        Text(
-            modifier = Modifier.clickable { navController.navigate("reset_password") },
-            text = stringResource(R.string.reset_password),
-            textDecoration = TextDecoration.Underline
-        )
-    }
+            .clickable { navController.navigate("reset_password") },
+        textDecoration = TextDecoration.Underline
+    )
     Spacer(modifier = Modifier.padding(4.dp))
-    Row(
+    Text(
+        text = stringResource(R.string.not_have_account),
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentWidth()
-    ) {
-        Text(text = stringResource(R.string.not_have_account))
-        Spacer(modifier = Modifier.width(8.dp))
+            .clickable { navController.navigate("signup") },
+        textDecoration = TextDecoration.Underline
+    )
+    if (BuildConfig.DEBUG) {
+        Spacer(modifier = Modifier.padding(4.dp))
         Text(
-            modifier = Modifier.clickable { navController.navigate("signup") },
-            text = stringResource(R.string.create_an_account),
+            text = stringResource(R.string.continue_without_account),
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentWidth()
+                .clickable {
+                    onShipLogin()
+                    context.startActivity(Intent(context, MainActivity::class.java))
+                },
             textDecoration = TextDecoration.Underline
         )
     }

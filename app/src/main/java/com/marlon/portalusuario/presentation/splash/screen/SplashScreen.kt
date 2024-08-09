@@ -3,7 +3,6 @@ package com.marlon.portalusuario.presentation.splash.screen
 import android.app.Activity
 import android.content.Intent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -44,6 +43,7 @@ fun SplashScreen(viewModel: SplashViewModel = hiltViewModel()) {
     val scope = rememberCoroutineScope()
 
     val preference by viewModel.pref.collectAsState()
+    val session by viewModel.session.collectAsState()
 
     Surface(
         modifier = Modifier
@@ -80,12 +80,17 @@ fun SplashScreen(viewModel: SplashViewModel = hiltViewModel()) {
         LaunchedEffect(Unit) {
             scope.launch {
                 delay(MinTime)
-                preference.dataSession?.let {
+                session?.let {
                     context.startActivity(Intent(context, MainActivity::class.java))
                     (context as Activity).finish()
                 } ?: run {
-                    context.startActivity(Intent(context, AuthActivity::class.java))
-                    (context as Activity).finish()
+                    if (preference.skippedLogin) {
+                        context.startActivity(Intent(context, MainActivity::class.java))
+                        (context as Activity).finish()
+                    } else {
+                        context.startActivity(Intent(context, AuthActivity::class.java))
+                        (context as Activity).finish()
+                    }
                 }
             }
         }

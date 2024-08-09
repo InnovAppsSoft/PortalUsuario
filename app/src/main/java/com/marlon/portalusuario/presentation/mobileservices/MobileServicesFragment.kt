@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
+import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
 import com.marlon.portalusuario.presentation.mobileservices.screen.MobileServicesScreen
 import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
@@ -18,5 +19,10 @@ class MobileServicesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View = ComposeView(requireContext()).apply {
         setContent { PortalUsuarioTheme { MobileServicesScreen() } }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(requireActivity().window, false)
     }
 }

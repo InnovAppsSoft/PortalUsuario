@@ -7,12 +7,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marlon.portalusuario.data.preferences.AppPreferences
+import com.marlon.portalusuario.data.preferences.MobServicesPreferences
+import com.marlon.portalusuario.data.preferences.SessionStorage
 import com.marlon.portalusuario.domain.data.UserRepository
+import com.marlon.portalusuario.domain.model.DataSession
 import com.marlon.portalusuario.domain.model.SimPaired
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.suitetecsa.sdk.android.SimCardCollector
-import io.github.suitetecsa.sdk.android.utils.extractShortNumber
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,8 +27,10 @@ private const val TAG = "MobileServicesViewModel"
 @HiltViewModel
 class MobileServicesViewModel @Inject constructor(
     private val appPreferences: AppPreferences,
+    private val mobServicesPreferences: MobServicesPreferences,
     private val repository: UserRepository,
-    simCardCollector: SimCardCollector,
+    sessionStorage: SessionStorage,
+    simCardCollector: SimCardCollector
 ) : ViewModel() {
     val mobileServices = repository.getMobileServices().stateIn(
         scope = viewModelScope,
@@ -36,24 +42,37 @@ class MobileServicesViewModel @Inject constructor(
         started = SharingStarted.Eagerly,
         initialValue = ModelAppPreferences()
     )
+    val session: StateFlow<DataSession?> = sessionStorage.dataSession.stateIn(
+        viewModelScope,
+        SharingStarted.Eagerly,
+        null
+    )
+
     val simCards = simCardCollector.collect()
 
     private var _state = mutableStateOf(MobileServicesState())
     val state: State<MobileServicesState> get() = _state
 
-    val servicesPaired: List<SimPaired> get() {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            mobileServices.value.filter {
-                it.phoneNumber in simCards.map { sim -> extractShortNumber(sim.phoneNumber!!) }
-            }.map { service ->
-                SimPaired(
-                    simId = simCards.first { extractShortNumber(it.phoneNumber!!) == service.phoneNumber }
-                        .slotIndex.toString(),
-                    serviceId = service.id
-                )
+    init {
+        viewModelScope.launch {
+            val slotIndexInfoList = mobServicesPreferences.preferences.first().slotIndexInfoList
+
+            when {
+                slotIndexInfoList.isEmpty() && simCards.isNotEmpty() ->
+                    onEvent(MobileServicesEvent.OnShowSImCardsSettings)
+                mobileServices.value.isNotEmpty() -> {
+                    mobServicesPreferences.updateSlotIndexInfoList(
+                        slotIndexInfoList.filter { it.index in simCards.map { sim -> sim.slotIndex } }
+                    )
+                    update()
+                }
+                simCards.isNotEmpty() -> {
+                    mobServicesPreferences.updateSlotIndexInfoList(
+                        slotIndexInfoList.filter { it.index in simCards.map { sim -> sim.slotIndex } }
+                    )
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { update() }
+                }
             }
-        } else {
-            preferences.value.simsPaired
         }
     }
 
@@ -80,13 +99,29 @@ class MobileServicesViewModel @Inject constructor(
 
             MobileServicesEvent.OnShowServiceSettings ->
                 _state.value = _state.value.copy(isServiceSettingsVisible = true)
+
+            MobileServicesEvent.OnHideSImCardsSettings -> {
+                _state.value = _state.value.copy(isSimCardsSettingsVisible = false)
+                update(Build.VERSION.SDK_INT < Build.VERSION_CODES.O || session.value != null)
+            }
+            MobileServicesEvent.OnShowSImCardsSettings ->
+                _state.value = _state.value.copy(isSimCardsSettingsVisible = true)
         }
     }
 
-    private fun update() {
+    private fun update(onlyRemote: Boolean = false) {
         viewModelScope.launch {
             _state.value = _state.value.copy(isLoading = true)
-            repository.fetchUser()
+            repository.fetchUser(
+                if (onlyRemote) {
+                    null
+                } else {
+                    simCards.firstOrNull { sim ->
+                        sim.slotIndex == mobileServices.value
+                            .first { it.id == _state.value.currentServiceId }.slotIndex
+                    }
+                }
+            )
             _state.value = _state.value.copy(isLoading = false)
         }
     }

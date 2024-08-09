@@ -1,7 +1,5 @@
 package com.marlon.portalusuario.domain.model
 
-import com.marlon.portalusuario.data.entity.MobileService as EntityMobileService
-
 data class MobileService(
     val id: String,
     val lte: Boolean,
@@ -17,21 +15,6 @@ data class MobileService(
     val phoneNumber: String,
     val mainBalance: String,
     val consumptionRate: Boolean,
-)
-
-fun MobileService.asEntity() = EntityMobileService(
-    id,
-    lte,
-    advanceBalance,
-    status,
-    lockDate,
-    deletionDate,
-    saleDate,
-    internet,
-    plans,
-    bonuses,
-    currency,
-    phoneNumber,
-    mainBalance,
-    consumptionRate
+    val slotIndex: Int,
+    val type: ServiceType
 )

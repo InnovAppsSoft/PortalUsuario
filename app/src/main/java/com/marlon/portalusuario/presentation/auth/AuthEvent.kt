@@ -4,6 +4,7 @@ sealed class AuthEvent {
     data object OnTogglePasswordVisibility : AuthEvent()
     data object OnLoadCaptcha : AuthEvent()
     data object OnErrorDismiss : AuthEvent()
+    data object OnSkipLogin : AuthEvent()
 
     data class OnChangePhoneNumber(val value: String) : AuthEvent()
     data class OnChangePassword(val value: String) : AuthEvent()

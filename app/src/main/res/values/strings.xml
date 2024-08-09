@@ -162,4 +162,6 @@
     <string name="expires">"Vence"</string>
     <string name="error">Error</string>
     <string name="accept">Aceptar</string>
+    <string name="continue_without_account">Seguir sin cuenta</string>
+    <string name="config_sim_alert_message">La terjeta SIM%1$s no tiene un número de teléfono registrado. Por favor ingrese uno.</string>
 </resources>

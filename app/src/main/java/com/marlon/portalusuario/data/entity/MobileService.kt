@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.marlon.portalusuario.domain.model.MobileBonus
 import com.marlon.portalusuario.domain.model.MobilePlan
-import com.marlon.portalusuario.domain.model.MobileService as ModelMobileService
+import com.marlon.portalusuario.domain.model.ServiceType
 
 @Entity(tableName = "mobile_service")
 data class MobileService(
@@ -23,21 +23,6 @@ data class MobileService(
     @ColumnInfo(name = "phone_number") val phoneNumber: String,
     @ColumnInfo(name = "main_balance") val mainBalance: String,
     @ColumnInfo(name = "consumption_rate") val consumptionRate: Boolean,
-)
-
-fun MobileService.asModel() = ModelMobileService(
-    id,
-    lte,
-    advanceBalance,
-    status,
-    lockDate,
-    deletionDate,
-    saleDate,
-    internet,
-    plans,
-    bonuses,
-    currency,
-    phoneNumber,
-    mainBalance,
-    consumptionRate
+    @ColumnInfo(name = "slot_index") val slotIndex: Int = -1,
+    @ColumnInfo(name = "service_type") val type: ServiceType = ServiceType.Local
 )
