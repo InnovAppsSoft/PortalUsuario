@@ -50,7 +50,10 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideNautaService() = UserApiDataSource(NautaApi.nautaService)
+    fun provideNautaService(
+        refreshAuthToken: RefreshAuthToken,
+        sessionStorage: SessionStorage,
+    ) = UserApiDataSource(NautaApi.nautaService, refreshAuthToken, sessionStorage)
 
     @Singleton
     @Provides
@@ -71,11 +74,9 @@ class AppModule {
     fun provideUserRepository(
         userApiDataSource: UserApiDataSource,
         servicesDao: ServicesDao,
-        refreshAuthToken: RefreshAuthToken,
-        sessionStorage: SessionStorage,
         mobServMapper: MobServMapper
     ): UserRepository =
-        UserRepositoryImpl(userApiDataSource, servicesDao, refreshAuthToken, sessionStorage, mobServMapper)
+        UserRepositoryImpl(userApiDataSource, servicesDao, mobServMapper)
 
     @Singleton
     @Provides

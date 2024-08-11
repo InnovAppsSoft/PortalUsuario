@@ -6,27 +6,26 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marlon.portalusuario.data.preferences.AppPreferences
 import com.marlon.portalusuario.data.preferences.MobServicesPreferences
 import com.marlon.portalusuario.data.preferences.SessionStorage
 import com.marlon.portalusuario.domain.data.UserRepository
 import com.marlon.portalusuario.domain.model.DataSession
-import com.marlon.portalusuario.domain.model.SimPaired
+import com.marlon.portalusuario.domain.model.MobServPreferences
+import com.marlon.portalusuario.domain.model.MobileService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.suitetecsa.sdk.android.SimCardCollector
+import io.github.suitetecsa.sdk.android.model.SimCard
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import com.marlon.portalusuario.domain.model.AppPreferences as ModelAppPreferences
 
 private const val TAG = "MobileServicesViewModel"
 
 @HiltViewModel
 class MobileServicesViewModel @Inject constructor(
-    private val appPreferences: AppPreferences,
     private val mobServicesPreferences: MobServicesPreferences,
     private val repository: UserRepository,
     sessionStorage: SessionStorage,
@@ -37,12 +36,12 @@ class MobileServicesViewModel @Inject constructor(
         started = SharingStarted.Eagerly,
         initialValue = emptyList()
     )
-    val preferences = appPreferences.preferences().stateIn(
+    val preferences = mobServicesPreferences.preferences.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
-        initialValue = ModelAppPreferences()
+        initialValue = MobServPreferences(emptyList())
     )
-    val session: StateFlow<DataSession?> = sessionStorage.dataSession.stateIn(
+    private val session: StateFlow<DataSession?> = sessionStorage.dataSession.stateIn(
         viewModelScope,
         SharingStarted.Eagerly,
         null
@@ -55,20 +54,23 @@ class MobileServicesViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val slotIndexInfoList = mobServicesPreferences.preferences.first().slotIndexInfoList
+            val mobPreferences = mobServicesPreferences.preferences.first()
+            _state.value = _state.value.copy(currentServiceId = mobPreferences.mssId)
 
             when {
-                slotIndexInfoList.isEmpty() && simCards.isNotEmpty() ->
+                mobPreferences.slotIndexInfoList.isEmpty() && simCards.isNotEmpty() ->
                     onEvent(MobileServicesEvent.OnShowSImCardsSettings)
                 mobileServices.value.isNotEmpty() -> {
                     mobServicesPreferences.updateSlotIndexInfoList(
-                        slotIndexInfoList.filter { it.index in simCards.map { sim -> sim.slotIndex } }
+                        mobPreferences.slotIndexInfoList
+                            .filter { it.index in simCards.map { sim -> sim.slotIndex } }
                     )
                     update()
                 }
                 simCards.isNotEmpty() -> {
                     mobServicesPreferences.updateSlotIndexInfoList(
-                        slotIndexInfoList.filter { it.index in simCards.map { sim -> sim.slotIndex } }
+                        mobPreferences.slotIndexInfoList
+                            .filter { it.index in simCards.map { sim -> sim.slotIndex } }
                     )
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { update() }
                 }
@@ -80,18 +82,9 @@ class MobileServicesViewModel @Inject constructor(
         when (event) {
             MobileServicesEvent.OnUpdate -> update()
             is MobileServicesEvent.OnChangeCurrentMobileService -> viewModelScope.launch {
-                appPreferences.updateMobileServiceSelectedId(event.value)
+                _state.value = _state.value.copy(currentServiceId = event.value)
+                mobServicesPreferences.updateMobileServiceSelectedId(event.value)
                 Log.d(TAG, "onEvent: changed serviceId: ${event.value}")
-            }
-            is MobileServicesEvent.OnSimCardPaired -> viewModelScope.launch {
-                appPreferences.updateIsSimCardsPaired(
-                    preferences.value.simsPaired.let {
-                        val list = mutableListOf<SimPaired>()
-                        list.addAll(it)
-                        list.add(SimPaired(event.simId, event.serviceId))
-                        list
-                    }
-                )
             }
 
             MobileServicesEvent.OnHideServiceSettings ->
@@ -106,22 +99,24 @@ class MobileServicesViewModel @Inject constructor(
             }
             MobileServicesEvent.OnShowSImCardsSettings ->
                 _state.value = _state.value.copy(isSimCardsSettingsVisible = true)
+
+            MobileServicesEvent.OnErrorDismiss ->
+                _state.value = _state.value.copy(error = null)
         }
     }
+
+    private val currentService: MobileService
+        get() = mobileServices.value.first { it.id == _state.value.currentServiceId }
+
+    private val simCardForFetch: SimCard?
+        get() = simCards.firstOrNull { it.slotIndex == currentService.slotIndex }
+            ?.copy(phoneNumber = currentService.phoneNumber)
 
     private fun update(onlyRemote: Boolean = false) {
         viewModelScope.launch {
             _state.value = _state.value.copy(isLoading = true)
-            repository.fetchUser(
-                if (onlyRemote) {
-                    null
-                } else {
-                    simCards.firstOrNull { sim ->
-                        sim.slotIndex == mobileServices.value
-                            .first { it.id == _state.value.currentServiceId }.slotIndex
-                    }
-                }
-            )
+            runCatching { repository.fetchUser(if (onlyRemote) null else simCardForFetch) }
+                .onFailure { _state.value = _state.value.copy(error = it.message) }
             _state.value = _state.value.copy(isLoading = false)
         }
     }

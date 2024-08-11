@@ -6,7 +6,7 @@ sealed class MobileServicesEvent {
     data object OnHideServiceSettings : MobileServicesEvent()
     data object OnShowSImCardsSettings : MobileServicesEvent()
     data object OnHideSImCardsSettings : MobileServicesEvent()
+    data object OnErrorDismiss : MobileServicesEvent()
 
     data class OnChangeCurrentMobileService(val value: String?) : MobileServicesEvent()
-    data class OnSimCardPaired(val simId: String, val serviceId: String) : MobileServicesEvent()
 }
