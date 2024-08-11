@@ -25,9 +25,13 @@ class MobServicesPreferences(private val context: Context) {
                 throw exception
             }
         }.map { preferences ->
-            preferences[ServicesPreferencesKey.SLOT_INDEX_INFO_LIST]?.let {
-                MobServPreferences(Gson().fromJson(it, object : TypeToken<List<SlotIndexInfo>>() {}.type))
-            } ?: MobServPreferences(emptyList())
+            val slotIndexInfoList: List<SlotIndexInfo> =
+                preferences[ServicesPreferencesKey.SLOT_INDEX_INFO_LIST]?.let {
+                    Gson().fromJson(it, object : TypeToken<List<SlotIndexInfo>>() {}.type)
+                } ?: emptyList()
+            val mobileServiceSelectedId = preferences[ServicesPreferencesKey.MOBILE_SERVICE_SELECTED_ID]
+
+            MobServPreferences(slotIndexInfoList, mobileServiceSelectedId)
         }
 
     suspend fun updateSlotIndexInfoList(slotIndexInfoList: List<SlotIndexInfo>) {
@@ -35,8 +39,16 @@ class MobServicesPreferences(private val context: Context) {
             preferences[ServicesPreferencesKey.SLOT_INDEX_INFO_LIST] = Gson().toJson(slotIndexInfoList)
         }
     }
+
+    suspend fun updateMobileServiceSelectedId(id: String?) {
+        context.dataStore.edit { preferences ->
+            id?.let { preferences[ServicesPreferencesKey.MOBILE_SERVICE_SELECTED_ID] = it }
+                ?: preferences.remove(ServicesPreferencesKey.MOBILE_SERVICE_SELECTED_ID)
+        }
+    }
 }
 
 private object ServicesPreferencesKey {
     val SLOT_INDEX_INFO_LIST = stringPreferencesKey("SLOT_INDEX_INFO_LIST")
+    val MOBILE_SERVICE_SELECTED_ID = stringPreferencesKey("MOBILE_SERVICE_SELECTED_ID")
 }

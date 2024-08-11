@@ -39,6 +39,7 @@ import com.marlon.portalusuario.presentation.mobileservices.components.MobileSer
 import com.marlon.portalusuario.presentation.mobileservices.components.PlansSection
 import com.marlon.portalusuario.presentation.mobileservices.components.configsimcards.ConfigSimCardsBottomSheet
 import com.marlon.portalusuario.presentation.mobileservices.components.servsettings.ServiceSettingsBottomSheet
+import com.marlon.portalusuario.ui.components.ErrorDialog
 import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
 import com.marlon.portalusuario.util.Utils.fixDateFormat
 import io.github.suitetecsa.sdk.android.model.SimCard
@@ -70,7 +71,9 @@ fun MobileServicesScreen(viewModel: MobileServicesViewModel = hiltViewModel()) {
             .nestedScroll(pullToRefreshState.nestedScrollConnection)
     ) {
         mobServices.takeIf { it.isNotEmpty() }?.let { services ->
-            val serviceId = preferences.mssId ?: services.first().id
+            val serviceId = preferences.mssId ?: services.first().id.also {
+                viewModel.onEvent(MobileServicesEvent.OnChangeCurrentMobileService(it))
+            }
             ScreenContent(
                 services = services,
                 currentServiceId = serviceId,
@@ -82,6 +85,10 @@ fun MobileServicesScreen(viewModel: MobileServicesViewModel = hiltViewModel()) {
 
         if (viewModel.state.value.isSimCardsSettingsVisible) {
             ConfigSimCardsBottomSheet(onDismiss = { viewModel.onEvent(OnHideSImCardsSettings) })
+        }
+
+        viewModel.state.value.error?.let {
+            ErrorDialog(it) { viewModel.onEvent(MobileServicesEvent.OnErrorDismiss) }
         }
 
         PullToRefreshContainer(state = pullToRefreshState, modifier = Modifier.align(Alignment.TopCenter))

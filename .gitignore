@@ -43,3 +43,5 @@ obj/
 /.idea/
 /.gradle/
 local.properties
+
+app/release/
