@@ -114,7 +114,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".escaner_recarga.ScannerActivity" />
         <activity
             android:name=".activities.AboutActivity"
             android:screenOrientation="portrait"
