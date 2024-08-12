@@ -96,9 +96,6 @@ dependencies {
     // Features
     implementation(project(":feature:nauta-nav"))
 
-    // apklisupdate
-    implementation(libs.apklisupdate)
-
     // Lottie
     implementation(libs.lottie.compose)
 
@@ -186,7 +183,6 @@ dependencies {
     implementation(libs.stickyswitch)
     implementation(libs.ucrop)
     implementation(libs.zxing.android.integration)
-    implementation(libs.zxing)
     implementation(libs.dexter)
     implementation(libs.library)
     implementation(libs.circleimageview)
@@ -195,16 +191,10 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.taptargetview)
-    implementation(libs.deviceinfo)
-    implementation(libs.signalstrengths)
-    implementation(libs.signalview)
     implementation(libs.log)
-    implementation(libs.ratethisapp)
     implementation(libs.mpandroidchart)
     implementation(libs.materialprogressbar.library)
     implementation(libs.sdp.android)
-    implementation(libs.segmentedbarview)
-    implementation(libs.code.scanner)
     implementation(libs.intentanimation)
     implementation(libs.play.services.ads)
     implementation(libs.sdp.android)
@@ -213,7 +203,6 @@ dependencies {
     implementation(libs.roundedimageview)
     implementation(libs.glidetovectoryou)
     implementation(libs.picasso)
-    implementation(libs.appusagemonitor)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
@@ -221,7 +210,6 @@ dependencies {
     implementation(libs.androidx.vectordrawable)
     implementation(libs.androidx.palette)
     implementation(libs.androidx.legacy.support.v4)
-    implementation(libs.carouselview)
     implementation(libs.rxandroid)
     implementation(libs.rxjava)
     implementation(libs.colorpreference.core)
@@ -232,7 +220,6 @@ dependencies {
     implementation(libs.toggle.button.group)
     implementation(libs.bottomdrawer)
     implementation(libs.caverock.androidsvg.aar)
-    implementation(libs.sharp.library)
     implementation(libs.prettytime)
     implementation(libs.swipetoaction.library)
     implementation(libs.materialstepperview)

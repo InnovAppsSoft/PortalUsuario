@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
@@ -30,13 +29,12 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.marlon.portalusuario.R;
+import com.marlon.portalusuario.activities.CallForReverseChargeActivity;
 import com.marlon.portalusuario.activities.EmergencyCallsActivity;
 import com.marlon.portalusuario.activities.PrivateCallActivity;
-import com.marlon.portalusuario.activities.CallForReverseChargeActivity;
-import com.marlon.portalusuario.R;
 import com.marlon.portalusuario.activities.SmsActivity;
 import com.marlon.portalusuario.activities.VozActivity;
-import com.marlon.portalusuario.escaner_recarga.ScannerActivity;
 import com.marlon.portalusuario.errores_log.JCLogging;
 import com.marlon.portalusuario.util.Util;
 
@@ -102,13 +100,6 @@ public class ServiciosFragment<b> extends Fragment {
         MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-        scanQRRechargeCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              startActivityForResult(new Intent(getContext(), ScannerActivity.class),6932);
-
             }
         });
 
