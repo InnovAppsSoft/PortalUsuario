@@ -1,5 +1,6 @@
 package com.marlon.portalusuario.presentation.mobileservices.screen
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,7 +34,7 @@ import com.marlon.portalusuario.presentation.mobileservices.MobileServicesEvent.
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesEvent.OnShowServiceSettings
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesState
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesViewModel
-import com.marlon.portalusuario.presentation.mobileservices.components.BalanceCard
+import com.marlon.portalusuario.presentation.mobileservices.components.BalanceSection
 import com.marlon.portalusuario.presentation.mobileservices.components.BonusSection
 import com.marlon.portalusuario.presentation.mobileservices.components.MobileServiceSelector
 import com.marlon.portalusuario.presentation.mobileservices.components.PlansSection
@@ -113,7 +114,7 @@ fun ScreenContent(
             onShowServiceSettings = { onEvent(OnShowServiceSettings) }
         )
         Spacer(modifier = Modifier.height(4.dp))
-        BalanceCard(
+        BalanceSection(
             modifier = Modifier.padding(horizontal = 16.dp),
             balanceCredit = "${service.mainBalance} ${service.currency}",
             lockDate = service.lockDate,
@@ -123,9 +124,11 @@ fun ScreenContent(
             onSendBalance = { /*TODO*/ }
         )
         Spacer(modifier = Modifier.height(16.dp))
-        PlansSection(service = service)
-        Spacer(modifier = Modifier.height(8.dp))
-        BonusSection(service = service)
+        PlansSection(plans = service.plans)
+        service.bonuses.takeIf { it.isNotEmpty() }?.let {
+            Spacer(modifier = Modifier.height(8.dp))
+            BonusSection(bonuses = it)
+        }
         Spacer(modifier = Modifier.height(32.dp))
     }
 
@@ -134,7 +137,7 @@ fun ScreenContent(
     }
 }
 
-@Preview
+@Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable
 private fun ScreenContentPreview() {
     PortalUsuarioTheme {
@@ -146,23 +149,23 @@ private fun ScreenContentPreview() {
                         lte = false,
                         advanceBalance = "0",
                         status = "Activo",
-                        lockDate = "26/6/2024".fixDateFormat(),
-                        deletionDate = "26/7/2024".fixDateFormat(),
+                        lockDate = "26/11/2024".fixDateFormat(),
+                        deletionDate = "25/12/2024".fixDateFormat(),
                         saleDate = "19/8/2022".fixDateFormat(),
                         internet = true,
                         plans = listOf(
-                            MobilePlan("01:23:55", "MINUTOS", "01/08/2024".replace("/", "-")),
-                            MobilePlan("1560", "SMS", "01/08/2024".replace("/", "-")),
-                            MobilePlan("719.55 MB", "DATOS", "01/08/2024".replace("/", "-")),
-                            MobilePlan("0.00 B", "DATOS LTE", "01/08/2024".replace("/", "-")),
+                            MobilePlan("01:23:55", "MINUTOS", "16/09/2024".replace("/", "-")),
+                            MobilePlan("1560", "SMS", "16/09/2024".replace("/", "-")),
+                            MobilePlan("719.55 MB", "DATOS", "16/09/2024".replace("/", "-")),
+                            MobilePlan("0.00 B", "DATOS LTE", "16/09/2024".replace("/", "-")),
                         ),
                         bonuses = listOf(
-                            MobileBonus("296.61 MB", "", "DATOS NACIONALES", "01/08/2024".replace("/", "-")),
+                            MobileBonus("296.61 MB", "", "DATOS NACIONALES", "16/09/2024".replace("/", "-")),
                             MobileBonus(
                                 "0",
-                                "01/08/2024".replace("/", "-"),
+                                "16/09/2024".replace("/", "-"),
                                 "DATOS LTE",
-                                "01/08/2024".replace("/", "-")
+                                "16/09/2024".replace("/", "-")
                             ),
                         ),
                         currency = "CUP",
