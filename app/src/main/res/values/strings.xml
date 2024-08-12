@@ -158,8 +158,8 @@
     <string name="dni">Número de Identidad</string>
     <string name="create_an_account">Crear una cuenta.</string>
     <string name="remaining">Restan</string>
-    <string name="sim_active_until">"Activa hasta"</string>
-    <string name="expires">"Vence"</string>
+    <string name="elimination">"Se pierde: %1$s"</string>
+    <string name="expires">"Vence: %1$s"</string>
     <string name="error">Error</string>
     <string name="accept">Aceptar</string>
     <string name="continue_without_account">Seguir sin cuenta</string>
