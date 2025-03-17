@@ -22,6 +22,7 @@ plugins {
     alias(libs.plugins.devtools.ksp) apply false
     alias(libs.plugins.androidLibrary) apply false
     alias(libs.plugins.arturbosch.detekt) apply false
+    id("com.autonomousapps.dependency-analysis") version "2.12.0"
 }
 
 tasks.register("clean", Delete::class) {

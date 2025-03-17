@@ -8,6 +8,7 @@ plugins {
     id("com.google.firebase.crashlytics")
     alias(libs.plugins.arturbosch.detekt)
     alias(libs.plugins.kotlin.plugin.compose)
+    id("com.autonomousapps.dependency-analysis")
 }
 
 android {
