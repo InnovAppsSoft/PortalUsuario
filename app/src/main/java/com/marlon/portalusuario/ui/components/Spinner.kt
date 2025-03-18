@@ -1,4 +1,4 @@
-package cu.suitetecsa.nautanav.ui.components
+package com.marlon.portalusuario.ui.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

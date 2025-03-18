@@ -16,7 +16,6 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
-import cu.suitetecsa.nautanav.ui.components.PrettyCard
 
 @Composable
 fun ErrorDialog(

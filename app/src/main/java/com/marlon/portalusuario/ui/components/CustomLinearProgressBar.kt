@@ -1,4 +1,4 @@
-package cu.suitetecsa.nautanav.ui.components
+package com.marlon.portalusuario.ui.components
 
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme

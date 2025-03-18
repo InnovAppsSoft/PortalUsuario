@@ -1,10 +1,9 @@
-package cu.suitetecsa.nautanav.commons.ui
+package com.marlon.portalusuario.ui.components
 
 import android.graphics.Bitmap
 import android.renderscript.Allocation
 import android.renderscript.RenderScript
 import android.renderscript.ScriptIntrinsicBlur
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

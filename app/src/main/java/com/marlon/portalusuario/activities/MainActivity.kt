@@ -37,7 +37,6 @@ import com.marlon.portalusuario.une.UneActivity
 import com.marlon.portalusuario.util.Utils.hasPermissions
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.ServiciosFragment
-import cu.suitetecsa.nautanav.ui.ConnectivityFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlin.properties.Delegates
@@ -46,9 +45,6 @@ import kotlin.properties.Delegates
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
-    @Inject
-    lateinit var connectivityFragment: ConnectivityFragment
 
     // Network change listener
     private var showTrafficBubble by Delegates.notNull<Boolean>()
@@ -188,7 +184,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.micuenta -> setFragment(MobileServicesFragment(), "Mi Cuenta")
                 R.id.services -> setFragment(ServiciosFragment<Any?>(), "Servicios")
                 R.id.plans -> setFragment(PaquetesFragment(), "Planes")
-                R.id.connectivity -> setFragment(connectivityFragment, "Conectividad")
                 R.id.networkChange -> SetLTEModeDialog(this)
                 R.id.une -> startActivity(Intent(this@MainActivity, UneActivity::class.java))
                 R.id.errors_register ->

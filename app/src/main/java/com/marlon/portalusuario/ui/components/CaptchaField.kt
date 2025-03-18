@@ -15,7 +15,6 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import com.marlon.portalusuario.R
-import cu.suitetecsa.nautanav.commons.ui.AnimatedPlaceholder
 
 @Composable
 fun CaptchaField(value: String, enabled: Boolean = false, onChangedValue: (String) -> Unit, onDone: () -> Unit) {

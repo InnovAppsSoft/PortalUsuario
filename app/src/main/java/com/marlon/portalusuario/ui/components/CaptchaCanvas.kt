@@ -28,9 +28,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.R
-import cu.suitetecsa.nautanav.commons.ui.BlurImage
-import cu.suitetecsa.nautanav.commons.ui.LegacyBlurImage
-import cu.suitetecsa.nautanav.ui.components.CustomLinearProgressBar
 
 @Composable
 fun CaptchaCanvas(

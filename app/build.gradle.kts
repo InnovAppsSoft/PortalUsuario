@@ -89,16 +89,9 @@ dependencies {
     // SuitEtecsa libs
     implementation(libs.suitetecsa.sdk.android)
     implementation(libs.suitetecsa.sdk.kotlin)
-    implementation(libs.suitetecsa.sdk.kotlin.old)
 
     // Promotions
     implementation(libs.caverock.androidsvg.aar)
-
-    // Features
-    implementation(project(":feature:nauta-nav"))
-
-    // Lottie
-    implementation(libs.lottie.compose)
 
     // Firebase
     implementation(platform(libs.firebase.bom))
@@ -109,24 +102,21 @@ dependencies {
     implementation(libs.firebase.crashlytics.ktx)
 
     // ViewModel
-    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.activity.ktx)
 
     // Coroutines
-    implementation(libs.kotlinx.coroutines.android)
+    runtimeOnly(libs.kotlinx.coroutines.android)
 
     // Hilt
     implementation(libs.hilt.android)
-    implementation(libs.androidx.gridlayout)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.jwtdecode)
     androidTestImplementation(platform(libs.compose.bom))
-    androidTestImplementation(libs.compose.ui.test.junit4)
     debugImplementation(libs.compose.ui.tooling)
-    debugImplementation(libs.compose.ui.test.manifest)
+    debugRuntimeOnly(libs.compose.ui.test.manifest)
     ksp(libs.hilt.android.compiler)
 
     // Room
@@ -134,25 +124,12 @@ dependencies {
     implementation(libs.room.runtime)
     ksp(libs.room.compiler)
 
-    // LiveData
-    implementation(libs.androidx.runtime.livedata)
-    implementation(libs.androidx.lifecycle.livedata)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-
     // Camerax
-    implementation(libs.androidx.camera.core)
-    implementation(libs.androidx.camera.camera2)
-    implementation(libs.androidx.camera.lifecycle)
-    implementation(libs.androidx.camera.camera.view)
+    runtimeOnly(libs.androidx.camera.core)
+    runtimeOnly(libs.androidx.camera.camera2)
 
     // Glide
     implementation(libs.glide)
-
-    // QR scanner
-    implementation(libs.zxing.core)
-
-    // MultiDex
-    implementation(libs.androidx.multidex)
 
     // FileTree
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
@@ -162,14 +139,11 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.preference.ktx)
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.navigation.ui)
-    implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.swiperefreshlayout)
 
     // Test Libraries
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 
     // UI Libraries
     implementation(libs.circleimageview)
@@ -179,56 +153,84 @@ dependencies {
     // Additional Libraries
     implementation(libs.guava)
     implementation(libs.androidx.work.runtime.ktx)
-    implementation(libs.androidx.work.runtime)
-    implementation(libs.androidx.viewpager2)
+    runtimeOnly(libs.androidx.work.runtime)
     implementation(libs.stickyswitch)
-    implementation(libs.ucrop)
-    implementation(libs.zxing.android.integration)
     implementation(libs.dexter)
-    implementation(libs.library)
     implementation(libs.circleimageview)
     implementation(libs.customtabs)
-    implementation(libs.jsoup)
     implementation(libs.gson)
     implementation(libs.androidx.hilt.navigation.compose)
-    implementation(libs.taptargetview)
-    implementation(libs.log)
-    implementation(libs.mpandroidchart)
-    implementation(libs.materialprogressbar.library)
     implementation(libs.sdp.android)
     implementation(libs.intentanimation)
     implementation(libs.play.services.ads)
     implementation(libs.sdp.android)
     implementation(libs.ssp.android)
     implementation(libs.neumorphism)
-    implementation(libs.roundedimageview)
     implementation(libs.glidetovectoryou)
-    implementation(libs.picasso)
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    implementation(libs.logging.interceptor)
-    implementation(libs.okhttp)
-    implementation(libs.androidx.vectordrawable)
-    implementation(libs.androidx.palette)
-    implementation(libs.androidx.legacy.support.v4)
-    implementation(libs.rxandroid)
-    implementation(libs.rxjava)
+    runtimeOnly(libs.picasso)
     implementation(libs.colorpreference.core)
     implementation(libs.support)
-    implementation(libs.lobsterpicker)
     implementation(libs.emoji.material)
     implementation(libs.labelview)
-    implementation(libs.toggle.button.group)
     implementation(libs.bottomdrawer)
     implementation(libs.caverock.androidsvg.aar)
     implementation(libs.prettytime)
     implementation(libs.swipetoaction.library)
-    implementation(libs.materialstepperview)
     implementation(libs.androidx.lifecycle.viewmodel)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.floatingactionbutton)
     implementation(libs.sweetalert.library)
-    implementation(libs.showcaseview.library)
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.pager.indicators)
+
+    androidTestImplementation(libs.androidx.monitor)
+    androidTestImplementation(libs.junit)
+    implementation(libs.androidx.annotation)
+    implementation(libs.androidx.animation.core)
+    implementation(libs.androidx.animation)
+    implementation(libs.androidx.foundation.layout)
+    implementation(libs.androidx.foundation)
+    implementation(libs.androidx.material.icons.core)
+    implementation(libs.androidx.runtime)
+    implementation(libs.androidx.ui.geometry)
+    implementation(libs.androidx.ui.text)
+    implementation(libs.androidx.ui.unit)
+    implementation(libs.androidx.coordinatorlayout)
+    implementation(libs.androidx.datastore.core)
+    implementation(libs.androidx.datastore.preferences.core)
+    implementation(libs.androidx.drawerlayout)
+    implementation(libs.androidx.lifecycle.common)
+    implementation(libs.androidx.lifecycle.livedata.core)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.savedstate)
+    implementation(libs.androidx.navigation.common)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation.runtime)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.sqlite)
+    implementation(libs.dagger)
+    implementation(libs.hilt.core)
+    implementation(libs.materialish.progress)
+    implementation(libs.ui)
+    implementation(libs.javax.inject)
+    implementation(libs.kotlinx.coroutines.core)
+}
+
+dependencyAnalysis {
+    issues {
+        onUnusedDependencies {
+            severity("fail")
+        }
+        onUsedTransitiveDependencies {
+            severity("warn")
+        }
+        onIncorrectConfiguration {
+            severity("fail")
+        }
+        onUnusedAnnotationProcessors {
+            severity("fail")
+        }
+        onRedundantPlugins {
+            severity("fail")
+        }
+    }
 }

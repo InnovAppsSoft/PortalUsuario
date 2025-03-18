@@ -1,4 +1,4 @@
-package cu.suitetecsa.nautanav.commons.ui
+package com.marlon.portalusuario.ui.components
 
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.slideInVertically

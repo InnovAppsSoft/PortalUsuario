@@ -1,11 +1,10 @@
-package cu.suitetecsa.nautanav.commons.ui
+package com.marlon.portalusuario.ui.components
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
-import cu.suitetecsa.nautanav.commons.utils.doWhenHasNextOrPrevious
 
 @Composable
 fun AnimatedPlaceholder(

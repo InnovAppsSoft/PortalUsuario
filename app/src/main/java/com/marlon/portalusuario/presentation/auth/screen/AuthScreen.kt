@@ -34,7 +34,7 @@ import com.marlon.portalusuario.ui.components.CaptchaField
 import com.marlon.portalusuario.ui.components.ErrorDialog
 import com.marlon.portalusuario.ui.components.NautaUserField
 import com.marlon.portalusuario.ui.components.PasswordField
-import cu.suitetecsa.nautanav.ui.components.PrettyCard
+import com.marlon.portalusuario.ui.components.PrettyCard
 
 @Composable
 fun AuthScreen(viewModel: AuthViewModel = hiltViewModel(), navController: NavHostController) {

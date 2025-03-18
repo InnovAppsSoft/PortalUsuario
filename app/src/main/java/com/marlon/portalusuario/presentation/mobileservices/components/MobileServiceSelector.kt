@@ -25,12 +25,12 @@ import com.marlon.portalusuario.domain.model.MobileBonus
 import com.marlon.portalusuario.domain.model.MobilePlan
 import com.marlon.portalusuario.domain.model.MobileService
 import com.marlon.portalusuario.domain.model.ServiceType
+import com.marlon.portalusuario.ui.components.PrettyCard
+import com.marlon.portalusuario.ui.components.Spinner
 import com.marlon.portalusuario.ui.theme.BrightCoralRed
 import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
 import com.marlon.portalusuario.ui.theme.TealBlue
 import com.marlon.portalusuario.util.Utils.fixDateFormat
-import cu.suitetecsa.nautanav.ui.components.PrettyCard
-import cu.suitetecsa.nautanav.ui.components.Spinner
 import io.github.suitetecsa.sdk.android.model.SimCard
 
 @Composable

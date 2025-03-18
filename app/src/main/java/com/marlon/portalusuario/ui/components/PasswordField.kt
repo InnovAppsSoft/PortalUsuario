@@ -28,7 +28,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
-import cu.suitetecsa.nautanav.ui.components.PrettyCard
 
 @Composable
 fun PasswordField(

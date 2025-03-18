@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.marlon.portalusuario.ui.components.ArcProgressbar
 import com.marlon.portalusuario.ui.theme.VibrantPink
-import cu.suitetecsa.nautanav.ui.components.PrettyCard
+import com.marlon.portalusuario.ui.components.PrettyCard
 
 @Composable
 fun PlanCard(

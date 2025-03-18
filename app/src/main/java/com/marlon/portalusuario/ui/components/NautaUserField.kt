@@ -16,8 +16,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
-import cu.suitetecsa.nautanav.commons.ui.AnimatedPlaceholder
-import cu.suitetecsa.nautanav.ui.components.PrettyCard
 
 @Composable
 fun NautaUserField(user: String = "", enabled: Boolean = false, onChangedText: (String) -> Unit = {}) {

@@ -10,7 +10,7 @@ buildscript {
         classpath(libs.kotlin.gradle.plugin)
         classpath(libs.firebase.crashlytics.gradle)
         classpath(libs.firebase.appdistribution.gradle)
-
+        classpath(libs.dependency.analysis.gradle.plugin)
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -35,4 +35,12 @@ tasks.withType<Detekt>().configureEach {
 
 tasks.withType<DetektCreateBaselineTask>().configureEach {
     jvmTarget = "17"
+}
+
+
+
+dependencyAnalysis {
+    issues {
+        all { structure { ignoreKtx(true) } }
+    }
 }
