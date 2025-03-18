@@ -38,7 +38,11 @@ tasks.withType<DetektCreateBaselineTask>().configureEach {
 }
 
 dependencyAnalysis {
-    issues {
-        all { structure { ignoreKtx(true) } }
+    structure {
+        ignoreKtx(true) // default is false
+        bundle("kotlin-stdlib") {
+            includeGroup("org.jetbrains.kotlin")
+        }
     }
+
 }

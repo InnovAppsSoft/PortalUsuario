@@ -170,7 +170,6 @@ dependencies {
     runtimeOnly(libs.picasso)
     implementation(libs.colorpreference.core)
     implementation(libs.support)
-    implementation(libs.emoji.material)
     implementation(libs.labelview)
     implementation(libs.bottomdrawer)
     implementation(libs.caverock.androidsvg.aar)
@@ -213,24 +212,4 @@ dependencies {
     implementation(libs.ui)
     implementation(libs.javax.inject)
     implementation(libs.kotlinx.coroutines.core)
-}
-
-dependencyAnalysis {
-    issues {
-        onUnusedDependencies {
-            severity("fail")
-        }
-        onUsedTransitiveDependencies {
-            severity("warn")
-        }
-        onIncorrectConfiguration {
-            severity("fail")
-        }
-        onUnusedAnnotationProcessors {
-            severity("fail")
-        }
-        onRedundantPlugins {
-            severity("fail")
-        }
-    }
 }

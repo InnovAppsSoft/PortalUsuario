@@ -21,5 +21,11 @@ dependencyResolutionManagement {
     }
 }
 
+buildCache {
+    local {
+        isEnabled = true
+    }
+}
+
 include(":app")
 rootProject.name = "Portal Usuario"
