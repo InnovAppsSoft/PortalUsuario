@@ -25,10 +25,6 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.marlon.portalusuario.R;
 import com.marlon.portalusuario.activities.CallForReverseChargeActivity;
 import com.marlon.portalusuario.activities.EmergencyCallsActivity;
@@ -59,7 +55,6 @@ public class ServiciosFragment<b> extends Fragment {
     private JCLogging logging;
 
     static final int PICK_CONTACT_REQUEST = 1;
-    AdView mAdView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -94,14 +89,6 @@ public class ServiciosFragment<b> extends Fragment {
         //
         adelantaSaldoMount = view.findViewById(R.id.adesaldo);
         adelantaSaldoBtn = view.findViewById(R.id.adelantar);
-
-
-        // ADS //
-        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
 
 
         contactSBtn.setOnClickListener(new View.OnClickListener() {

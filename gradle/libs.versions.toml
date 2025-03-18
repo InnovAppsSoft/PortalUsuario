@@ -18,7 +18,6 @@ coreVersion = "1.1.0"
 customtabs = "28.0.0"
 dexter = "6.2.3"
 drawerlayout = "1.1.1"
-emojiMaterial = "0.16.0"
 foundation = "1.6.8"
 foundationLayout = "1.6.8"
 githubLibrary = "1.6.2"
@@ -38,7 +37,6 @@ navigationCommon = "2.5.1"
 navigationCompose = "2.5.1"
 neumorphism = "0.3.0"
 picasso = "2.71828"
-playServicesAds = "23.2.0"
 preferenceKtx = "1.2.1"
 prettytime = "5.0.9.Final"
 recyclerview = "1.3.0"
@@ -170,7 +168,6 @@ circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circ
 colorpreference-core = { module = "com.github.kizitonwose.colorpreference:core", version.ref = "coreVersion" }
 customtabs = { module = "com.android.support:customtabs", version.ref = "customtabs" }
 dexter = { module = "com.karumi:dexter", version.ref = "dexter" }
-emoji-material = { module = "com.vanniktech:emoji-material", version.ref = "emojiMaterial" }
 glidetovectoryou = { module = "com.github.2coffees1team:GlideToVectorYou", version.ref = "glidetovectoryou" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
@@ -178,7 +175,6 @@ intentanimation = { module = "com.github.hajiyevelnur92:intentanimation", versio
 labelview = { module = "com.github.linger1216:labelview", version.ref = "labelview" }
 neumorphism = { module = "com.github.fornewid:neumorphism", version.ref = "neumorphism" }
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
-play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAds" }
 prettytime = { module = "org.ocpsoft.prettytime:prettytime", version.ref = "prettytime" }
 sdp-android = { module = "com.intuit.sdp:sdp-android", version.ref = "sdpAndroid" }
 ssp-android = { module = "com.intuit.ssp:ssp-android", version.ref = "sspAndroid" }

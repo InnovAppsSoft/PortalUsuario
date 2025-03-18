@@ -162,7 +162,6 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.sdp.android)
     implementation(libs.intentanimation)
-    implementation(libs.play.services.ads)
     implementation(libs.sdp.android)
     implementation(libs.ssp.android)
     implementation(libs.neumorphism)

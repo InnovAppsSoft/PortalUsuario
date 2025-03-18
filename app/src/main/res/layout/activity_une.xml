@@ -207,19 +207,6 @@
 
             </androidx.cardview.widget.CardView>
 
-            <com.google.android.gms.ads.AdView
-                xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/adViewune"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
-                ads:adSize="BANNER"
-                ads:adUnitId="ca-app-pub-9665109922019776/5591970278">
-            </com.google.android.gms.ads.AdView>
-
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swiperefreshune"
                 android:layout_width="match_parent"
