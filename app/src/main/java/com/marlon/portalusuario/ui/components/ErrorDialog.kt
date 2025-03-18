@@ -30,9 +30,11 @@ fun ErrorDialog(
             decorFitsSystemWindows = false
         )
     ) {
-        PrettyCard(modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)) {
+        PrettyCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
             Column {
                 Text(
                     text = stringResource(R.string.error),
@@ -44,7 +46,8 @@ fun ErrorDialog(
                     modifier = Modifier.padding(16.dp)
                 )
                 TextButton(
-                    onClick = onDismiss, modifier = Modifier
+                    onClick = onDismiss,
+                    modifier = Modifier
                         .align(Alignment.End)
                         .padding(top = 8.dp)
                 ) {

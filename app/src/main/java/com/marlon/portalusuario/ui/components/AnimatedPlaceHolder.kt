@@ -19,7 +19,8 @@ fun AnimatedPlaceholder(
 
     AnimatedContent(
         targetState = target,
-        transitionSpec = { ScrollAnimation() }, label = ""
+        transitionSpec = { ScrollAnimation() },
+        label = ""
     ) { str ->
         Text(
             text = str

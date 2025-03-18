@@ -37,8 +37,6 @@ tasks.withType<DetektCreateBaselineTask>().configureEach {
     jvmTarget = "17"
 }
 
-
-
 dependencyAnalysis {
     issues {
         all { structure { ignoreKtx(true) } }

@@ -13,7 +13,6 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -38,8 +37,8 @@ import com.marlon.portalusuario.util.Utils.hasPermissions
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.ServiciosFragment
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 import kotlin.properties.Delegates
+import androidx.core.net.toUri
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -117,7 +116,6 @@ class MainActivity : AppCompatActivity() {
     private fun listenPreferences(preferences: SharedPreferences, key: String?) {
         key?.let {
             when (it) {
-
                 "keynoche" -> when (preferences.getString("keynoche", "oscuro")) {
                     "claro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     "oscuro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -217,25 +215,25 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.telegram_channel -> startActivity(
                     Intent(Intent.ACTION_VIEW).apply {
-                        data = Uri.parse("https://t.me/portalusuario")
+                        data = "https://t.me/portalusuario".toUri()
                     }
                 )
 
                 R.id.facebook -> startActivity(
                     Intent(Intent.ACTION_VIEW).apply {
-                        data = Uri.parse("https://www.facebook.com/portalusuario")
+                        data = "https://www.facebook.com/portalusuario".toUri()
                     }
                 )
 
                 R.id.whatsapp -> startActivity(
                     Intent(Intent.ACTION_VIEW).apply {
-                        data = Uri.parse("https://chat.whatsapp.com/HT6bKjpXHrN4FAyTAcy1Xn")
+                        data = "https://chat.whatsapp.com/HT6bKjpXHrN4FAyTAcy1Xn".toUri()
                     }
                 )
 
                 R.id.betatesters -> startActivity(
                     Intent(Intent.ACTION_VIEW).apply {
-                        data = Uri.parse("https://t.me/portalusuarioBT")
+                        data = "https://t.me/portalusuarioBT".toUri()
                     }
                 )
 

@@ -14,7 +14,7 @@ fun CustomLinearProgressBar(
 ) {
     if (progress != null) {
         LinearProgressIndicator(
-            progress = progress,
+            progress = { progress },
             modifier = modifier,
             color = color,
             trackColor = MaterialTheme.colorScheme.surface
@@ -26,5 +26,4 @@ fun CustomLinearProgressBar(
             trackColor = MaterialTheme.colorScheme.surface
         )
     }
-
 }
