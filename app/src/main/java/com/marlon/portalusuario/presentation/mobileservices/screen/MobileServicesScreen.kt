@@ -2,7 +2,6 @@ package com.marlon.portalusuario.presentation.mobileservices.screen
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.util.Log
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,15 +11,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
-import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
-import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -50,26 +45,16 @@ private const val TAG = "MobileServicesScreen"
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MobileServicesScreen(viewModel: MobileServicesViewModel = hiltViewModel()) {
-    val pullToRefreshState = rememberPullToRefreshState()
     val mobServices by viewModel.mobileServices.collectAsState()
     val preferences by viewModel.preferences.collectAsState()
 
     Log.d(TAG, "MobileServicesScreen: ${viewModel.simCards}")
 
-    if (pullToRefreshState.isRefreshing) {
-        LaunchedEffect(key1 = true) {
-            if (!viewModel.state.value.isLoading) { viewModel.onEvent(MobileServicesEvent.OnUpdate) }
-        }
-    }
-
-    LaunchedEffect(key1 = viewModel.state.value.isLoading) {
-        if (viewModel.state.value.isLoading) pullToRefreshState.startRefresh() else pullToRefreshState.endRefresh()
-    }
-
-    Box(
+    PullToRefreshBox(
+        isRefreshing = viewModel.state.value.isLoading,
+        onRefresh = { viewModel.onEvent(MobileServicesEvent.OnUpdate) },
         modifier = Modifier
             .fillMaxSize()
-            .nestedScroll(pullToRefreshState.nestedScrollConnection)
     ) {
         mobServices.takeIf { it.isNotEmpty() }?.let { services ->
             val serviceId = preferences.mssId ?: services.first().id.also {
@@ -91,8 +76,6 @@ fun MobileServicesScreen(viewModel: MobileServicesViewModel = hiltViewModel()) {
         viewModel.state.value.error?.let {
             ErrorDialog(it) { viewModel.onEvent(MobileServicesEvent.OnErrorDismiss) }
         }
-
-        PullToRefreshContainer(state = pullToRefreshState, modifier = Modifier.align(Alignment.TopCenter))
     }
 }
 
@@ -133,7 +116,10 @@ fun ScreenContent(
     }
 
     if (state.isServiceSettingsVisible) {
-        ServiceSettingsBottomSheet(mobService = service, onDismiss = { onEvent(OnHideServiceSettings) })
+        ServiceSettingsBottomSheet(
+            mobService = service,
+            onDismiss = { onEvent(OnHideServiceSettings) }
+        )
     }
 }
 
@@ -160,7 +146,12 @@ private fun ScreenContentPreview() {
                             MobilePlan("0.00 B", "DATOS LTE", "16/09/2024".replace("/", "-")),
                         ),
                         bonuses = listOf(
-                            MobileBonus("296.61 MB", "", "DATOS NACIONALES", "16/09/2024".replace("/", "-")),
+                            MobileBonus(
+                                "296.61 MB",
+                                "",
+                                "DATOS NACIONALES",
+                                "16/09/2024".replace("/", "-")
+                            ),
                             MobileBonus(
                                 "0",
                                 "16/09/2024".replace("/", "-"),

@@ -36,7 +36,7 @@ fun ServiceSettingsBottomSheet(
 
     ModalBottomSheet(
         sheetState = sheetState,
-        windowInsets = WindowInsets.ime,
+        contentWindowInsets = { WindowInsets.ime },
         dragHandle = { DragContent(isLoading = isLoading) },
         onDismissRequest = {
             scope.launch {

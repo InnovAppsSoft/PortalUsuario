@@ -36,7 +36,7 @@ fun ConfigSimCardsBottomSheet(onDismiss: () -> Unit) {
 
     ModalBottomSheet(
         sheetState = sheetState,
-        windowInsets = WindowInsets.ime,
+        contentWindowInsets = { WindowInsets.ime },
         dragHandle = {
             DragContent(
                 title = title,
