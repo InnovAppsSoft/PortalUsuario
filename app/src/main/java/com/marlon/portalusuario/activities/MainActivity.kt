@@ -4,19 +4,15 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.net.ConnectivityManager
-import android.net.Network
-import android.net.NetworkCapabilities
-import android.net.NetworkRequest
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ShareCompat.IntentBuilder
+import androidx.core.net.toUri
 import androidx.core.view.GravityCompat
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
@@ -33,70 +29,22 @@ import com.marlon.portalusuario.errores_log.LogFileViewerActivity
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesFragment
 import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
 import com.marlon.portalusuario.une.UneActivity
+import com.marlon.portalusuario.util.NetworkConnectivityObserver
 import com.marlon.portalusuario.util.Utils.hasPermissions
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.ServiciosFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.properties.Delegates
-import androidx.core.net.toUri
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private lateinit var networkConnectivityObserver: NetworkConnectivityObserver
+
     // Network change listener
     private var showTrafficBubble by Delegates.notNull<Boolean>()
-    private lateinit var connectivityManager: ConnectivityManager
-    private val networkRequest = NetworkRequest.Builder()
-        .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-        .build()
-    private val networkCallback = object : ConnectivityManager.NetworkCallback() {
-
-        override fun onAvailable(network: Network) {
-            Log.d("NetworkCallback", "Network is available: $network")
-            val networkType = getNetworkType()
-            if (showTrafficBubble) {
-                Log.d("NetworkCallback", "Starting floating bubble service :: $networkType")
-                stopService(Intent(applicationContext, FloatingBubbleService::class.java))
-                startService(
-                    Intent(applicationContext, FloatingBubbleService::class.java).apply {
-                        this.putExtra("networkType", networkType)
-                    }
-                )
-            }
-        }
-
-        override fun onLost(network: Network) {
-            // La red se ha perdido
-            Log.d("NetworkCallback", "Network is lost: $network")
-            val networkType = getNetworkType()
-            Log.d("NetworkCallback", "Stopping floating bubble service :: $networkType")
-            stopService(Intent(applicationContext, FloatingBubbleService::class.java))
-
-            networkType?.also {
-                Log.d("NetworkCallback", "Starting floating bubble service :: $it")
-                startService(
-                    Intent(applicationContext, FloatingBubbleService::class.java).apply {
-                        this.putExtra("networkType", it)
-                    }
-                )
-            }
-        }
-
-        private fun getNetworkType(): String? {
-            val manager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-            return manager.activeNetwork?.let { network ->
-                manager.getNetworkCapabilities(network)?.let { capabilities ->
-                    when {
-                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> "WiFi"
-                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> "Mobile"
-                        else -> null
-                    }
-                }
-            }
-        }
-    }
 
     // VARS
     private var appName: String? = null
@@ -132,11 +80,12 @@ class MainActivity : AppCompatActivity() {
                             startActivity(
                                 Intent(
                                     Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                                    Uri.parse("package:" + this.packageName)
+                                    ("package:" + this.packageName).toUri()
                                 )
                             )
                         } else {
-                            this.stopService(Intent(this, FloatingBubbleService::class.java))
+                            val serviceIntent = Intent(this, FloatingBubbleService::class.java)
+                            stopService(serviceIntent)
                         }
                     }
                 }
@@ -156,8 +105,8 @@ class MainActivity : AppCompatActivity() {
 
         // Traffic bubble
         showTrafficBubble = settings.getBoolean("show_traffic_speed_bubble", false)
-        connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
+        networkConnectivityObserver = NetworkConnectivityObserver(this, showTrafficBubble)
+        networkConnectivityObserver.startMonitoring()
 
         // Listen preferences
         settings.registerOnSharedPreferenceChangeListener(::listenPreferences)
@@ -297,6 +246,7 @@ class MainActivity : AppCompatActivity() {
     public override fun onDestroy() {
         super.onDestroy()
         settings.unregisterOnSharedPreferenceChangeListener(::listenPreferences)
+        networkConnectivityObserver.stopMonitoring()
     }
 
     companion object {
