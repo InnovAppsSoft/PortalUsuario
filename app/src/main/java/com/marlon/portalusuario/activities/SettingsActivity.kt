@@ -3,8 +3,6 @@ package com.marlon.portalusuario.activities
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
@@ -15,6 +13,7 @@ import androidx.preference.SwitchPreferenceCompat
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
 import java.util.Objects
+import androidx.core.net.toUri
 
 class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,11 +27,6 @@ class SettingsActivity : AppCompatActivity() {
         }
         val actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return super.onSupportNavigateUp()
     }
 
     class SettingsFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListener {
@@ -49,10 +43,10 @@ class SettingsActivity : AppCompatActivity() {
             // Registrar escucha
             preferenceScreen.sharedPreferences?.registerOnSharedPreferenceChangeListener(this)
             //
-            showTrafficSpeedBubble!!.isEnabled = true
+            showTrafficSpeedBubble?.isEnabled = true
             //
             if (!Settings.canDrawOverlays(context)) {
-                showTrafficSpeedBubble!!.isChecked = false
+                showTrafficSpeedBubble?.isChecked = false
             }
         }
 
@@ -83,17 +77,13 @@ class SettingsActivity : AppCompatActivity() {
                             startActivity(
                                 Intent(
                                     Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                                    Uri.parse("package:" + requireContext().packageName)
+                                    ("package:" + requireContext().packageName).toUri()
                                 )
                             )
                         }
                     } else {
-                        requireContext().stopService(
-                            Intent(
-                                context,
-                                FloatingBubbleService::class.java
-                            )
-                        )
+                        val serviceIntent = Intent(context, FloatingBubbleService::class.java)
+                        requireContext().stopService(serviceIntent)
                     }
                 }
             }

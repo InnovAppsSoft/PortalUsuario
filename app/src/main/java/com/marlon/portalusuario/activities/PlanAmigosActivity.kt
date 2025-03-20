@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.marlon.portalusuario.databinding.DialogPlanAmigosBinding
 import com.marlon.portalusuario.util.Utils.hasPermissions
+import androidx.core.net.toUri
 
 private const val REQUEST_CALL = 1
 
@@ -25,7 +26,7 @@ class PlanAmigosActivity : AppCompatActivity() {
         if (hasPermissions(Manifest.permission.CALL_PHONE)) {
             requestPermissions(arrayOf(Manifest.permission.CALL_PHONE), REQUEST_CALL)
         } else {
-            startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:$ussd")))
+            startActivity(Intent(Intent.ACTION_CALL, "tel:$ussd".toUri()))
         }
     }
 }

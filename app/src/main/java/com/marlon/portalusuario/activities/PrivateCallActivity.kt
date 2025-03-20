@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat.checkSelfPermission
 import com.marlon.portalusuario.databinding.ActivityPrivateCallBinding
 import io.github.suitetecsa.sdk.android.utils.extractShortNumber
 import io.github.suitetecsa.sdk.android.utils.validateFormat
+import androidx.core.net.toUri
 
 private const val REQUEST_CODE = 1000
 
@@ -65,7 +66,7 @@ class PrivateCallActivity : AppCompatActivity() {
 
     private fun makePhoneCall(numberToCall: String) {
         val intent = Intent(Intent.ACTION_CALL).apply {
-            data = Uri.parse("tel:#31#$numberToCall")
+            data = "tel:#31#$numberToCall".toUri()
         }
         startActivity(intent)
         finish()
