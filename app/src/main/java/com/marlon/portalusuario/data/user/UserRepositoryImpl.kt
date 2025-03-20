@@ -43,19 +43,18 @@ class UserRepositoryImpl(
         }
 
     @SuppressLint("MissingPermission")
-    @RequiresApi(Build.VERSION_CODES.O)
     private suspend fun fetchUserFromLocal(simCard: SimCard, isRemote: Boolean = false) =
         localDataSource.fetch(simCard, isRemote).let { dao.insertMobileServices(it) }
 
     override suspend fun fetchUser(simCard: SimCard?) {
         simCard?.also { sim ->
             when (getMobileServices().first().firstOrNull { it.id == "53${sim.phoneNumber!!}" }?.type ?: Local) {
-                Local -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) fetchUserFromLocal(sim)
+                Local -> fetchUserFromLocal(sim)
                 Remote -> fetchUserFromRemote()
                 LocalAndRemote -> {
                     runCatching { fetchUserFromRemote() }
                         .onFailure {
-                            if (hasReachedMaxAttempts(it) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            if (hasReachedMaxAttempts(it)) {
                                 fetchUserFromLocal(sim, true)
                             } else {
                                 throw it

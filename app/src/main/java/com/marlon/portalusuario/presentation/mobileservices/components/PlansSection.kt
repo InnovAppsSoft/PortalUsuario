@@ -73,7 +73,7 @@ internal fun PlansSection(plans: List<MobilePlan>, isSimPaired: Boolean = false,
                     modifier = Modifier.padding(horizontal = 4.dp),
                     planTitle = it.type,
                     dataCount = it.data,
-                    remainingDays = StringUtils.toDateMillis(it.expires.replace("/", "-")).asRemainingDays,
+                    remainingDays = it.expires.toInt(),
                     color = VibrantTangerineOrange
                 )
             }

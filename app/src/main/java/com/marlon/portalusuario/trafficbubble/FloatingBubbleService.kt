@@ -2,21 +2,17 @@ package com.marlon.portalusuario.trafficbubble
 
 import android.annotation.SuppressLint
 import android.app.Service
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.PixelFormat
-import android.net.ConnectivityManager
-import android.net.Network
-import android.net.NetworkCapabilities
 import android.net.TrafficStats
-import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.provider.Settings
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -37,8 +33,8 @@ import java.lang.ref.WeakReference
 
 private const val VIBRATE_TIME = 100L
 private const val GRAVITY_CENTER = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
-private const val INITIAL_POSITION_X = 0 // Posición inicial X para la burbuja
-private const val INITIAL_POSITION_Y = 0 // Posición inicial Y para la burbuja
+private const val INITIAL_POSITION_X = 0
+private const val INITIAL_POSITION_Y = 0
 
 class FloatingBubbleService : Service() {
     private lateinit var networkType: String
@@ -70,15 +66,32 @@ class FloatingBubbleService : Service() {
     private val preferenceChangeListener =
         SharedPreferences.OnSharedPreferenceChangeListener { prefs, key ->
             when (key) {
-                "saldo" -> {
-                    bubbleState.accountBalance = prefs.getString(key, "0.00 CUP")!!
+                PreferenceKeys.CREDIT -> {
+                    val newBalance = prefs.getString(key, PreferenceDefaults.DEFAULT_BALANCE)
+                    if (newBalance != null && newBalance != bubbleState.accountBalance) {
+                        bubbleState.accountBalance = newBalance
+                        Log.d("PreferenceChangeListener", "Updated account balance to: $newBalance")
+                        updateBubbleUI()
+                    } else {
+                        Log.w("PreferenceChangeListener", "Account balance not updated. Value is null or unchanged.")
+                    }
                 }
 
-                "paquete" -> {
-                    bubbleState.dataBalance = prefs.getString(key, "0 B")!!
+                PreferenceKeys.PACKAGE -> {
+                    val newDataBalance = prefs.getString(key, PreferenceDefaults.DEFAULT_DATA)
+                    if (newDataBalance != null && newDataBalance != bubbleState.dataBalance) {
+                        bubbleState.dataBalance = newDataBalance
+                        Log.d("PreferenceChangeListener", "Updated data balance to: $newDataBalance")
+                        updateBubbleUI()
+                    } else {
+                        Log.w("PreferenceChangeListener", "Data balance not updated. Value is null or unchanged.")
+                    }
+                }
+
+                else -> {
+                    Log.w("PreferenceChangeListener", "Unknown preference key: $key")
                 }
             }
-            updateBubbleUI()
         }
 
     private fun updateBubbleUI() {
@@ -96,13 +109,10 @@ class FloatingBubbleService : Service() {
 
     private fun setupUpdateRunnable() {
         updateRunnable = Runnable {
-            // Obtener una referencia fuerte al servicio; si ya no existe, no hacer nada
             val service = weakReference.get() ?: return@Runnable
 
-            // Actualiza lógica aquí, por ejemplo, actualizar UI o verificar conexiones
             service.performUpdate()
 
-            // Re-programar el mismo runnable para ejecutarse en el futuro
             1000L.also { handler.postDelayed(this@FloatingBubbleService.updateRunnable, it) }
         }
     }
@@ -110,8 +120,9 @@ class FloatingBubbleService : Service() {
     private fun performUpdate() {
         // Verificar conexión a Internet antes de continuar
         if (!Util.isConnected(applicationContext)) {
-            stopSelf() // Detener el servicio de manera más apropiada
-            return // Salir de la función si no hay conexión a internet
+            Log.w("NetworkMonitor", "No internet connection. Stopping update.")
+            stopSelf()
+            return
         }
 
         // Calcular el uso de datos desde la última actualización
@@ -136,6 +147,7 @@ class FloatingBubbleService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+
         isStarted = true
         weakReference = WeakReference(this)
         //
@@ -174,9 +186,7 @@ class FloatingBubbleService : Service() {
     private fun setUpLayouts() {
         // FLOATING BUBBLE LAYOUT PARAMS
         val type =
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-                WindowManager.LayoutParams.TYPE_PHONE
-            } else WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
         bubbleLayoutParams = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -328,18 +338,12 @@ class FloatingBubbleService : Service() {
         private fun startVibrate() {
             val vibrator =
                 ContextCompat.getSystemService(applicationContext, Vibrator::class.java) as Vibrator
-            // Para Android API nivel 26 (Oreo) o superior, use VibrationEffect.
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator.vibrate(
-                    VibrationEffect.createOneShot(
-                        VIBRATE_TIME,
-                        VibrationEffect.DEFAULT_AMPLITUDE
-                    )
+            vibrator.vibrate(
+                VibrationEffect.createOneShot(
+                    VIBRATE_TIME,
+                    VibrationEffect.DEFAULT_AMPLITUDE
                 )
-            } else {
-                // Métodos obsoletos para versiones anteriores a Android Oreo.
-                vibrator.vibrate(VIBRATE_TIME)
-            }
+            )
         }
     }
 

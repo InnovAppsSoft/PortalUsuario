@@ -29,7 +29,6 @@ private const val TAG = "UserLocalDataSource"
 
 class UserLocalDataSource {
     @SuppressLint("MissingPermission")
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun fetchUserFromSimCard(
         simCard: SimCard,
         isRemote: Boolean = false,
@@ -147,7 +146,6 @@ class UserLocalDataSource {
         })
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun fetch(simCard: SimCard, isRemote: Boolean): MobileService =
         suspendCoroutine { continuation ->
             fetchUserFromSimCard(simCard, isRemote) { continuation.resume(it) }

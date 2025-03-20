@@ -196,11 +196,6 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
-
-        <service
-            android:name="cu.suitetecsa.nautanav.service.CountdownServiceImpl"
-            android:exported="false"
-            android:permission="android.permission.INTERNET" />
     </application>
 
 </manifest>

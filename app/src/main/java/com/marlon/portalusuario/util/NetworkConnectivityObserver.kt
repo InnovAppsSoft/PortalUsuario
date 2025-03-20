@@ -133,7 +133,7 @@ class NetworkConnectivityObserver(
         val serviceIntent = Intent(context, FloatingBubbleService::class.java).apply {
             putExtra(NETWORK_TYPE_EXTRA, networkType)
         }
-        ContextCompat.startForegroundService(context, serviceIntent)
+        context.startService(serviceIntent)
     }
 
     private fun stopFloatingBubbleService() {
