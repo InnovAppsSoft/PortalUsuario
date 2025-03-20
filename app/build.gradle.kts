@@ -12,13 +12,13 @@ plugins {
 }
 
 android {
-    compileSdk = 34
+    compileSdk = 35
     buildToolsVersion = "34.0.0"
 
     defaultConfig {
         resourceConfigurations.add("en")
         applicationId = "com.marlon.portalusuario"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 81
         versionName = "8.0.0-beta04"

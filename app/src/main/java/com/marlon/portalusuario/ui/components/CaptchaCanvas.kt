@@ -52,7 +52,7 @@ fun CaptchaCanvas(
                 .fillMaxWidth()
         ) {
             captchaImage?.let {
-                val backgroundBlur = it.copy(it.config, true)
+                val backgroundBlur = it.copy(it.config!!, true)
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
                     if (backgroundBlur != null) {
                         LegacyBlurImage(

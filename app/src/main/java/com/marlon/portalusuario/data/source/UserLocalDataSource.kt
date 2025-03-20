@@ -10,6 +10,7 @@ import com.marlon.portalusuario.domain.model.MobilePlan
 import com.marlon.portalusuario.domain.model.ServiceType.Local
 import com.marlon.portalusuario.domain.model.ServiceType.LocalAndRemote
 import io.github.suitetecsa.sdk.android.balance.FetchBalanceCallBack
+import io.github.suitetecsa.sdk.android.balance.RequestState
 import io.github.suitetecsa.sdk.android.balance.consult.UssdRequest
 import io.github.suitetecsa.sdk.android.balance.response.BonusBalance
 import io.github.suitetecsa.sdk.android.balance.response.DataBalance
@@ -78,7 +79,11 @@ class UserLocalDataSource {
                 }
             }
 
-            override fun onFetching(request: UssdRequest) {
+            override fun onStateChanged(
+                request: UssdRequest,
+                state: RequestState,
+                retryCount: Int
+            ) {
                 Log.d(TAG, "onFetching: ${request.name}")
             }
 
@@ -122,8 +127,8 @@ class UserLocalDataSource {
                             resp.voice?.let { addToBonusList(it.data, "MINUTOS", it.expires) }
                             resp.sms?.let { addToBonusList(it.data, "SMS", it.expires) }
                             resp.data?.let { data ->
-                                data.data?.let { addToBonusList(it, "DATOS", data.expires) }
-                                data.dataLte?.let { addToBonusList(it, "DATOS LTE", data.expires) }
+                                data.data?.let { addToBonusList(it, "DATOS", data.expires!!) }
+                                data.dataLte?.let { addToBonusList(it, "DATOS LTE", data.expires!!) }
                             }
                             resp.dataCu?.let { addToBonusList(it.data, "DATOS CU", it.expires) }
                             resp.unlimitedData?.let {
