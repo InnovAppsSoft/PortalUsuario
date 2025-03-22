@@ -16,5 +16,6 @@ data class MobileService(
     val mainBalance: String,
     val consumptionRate: Boolean,
     val slotIndex: Int,
-    val type: ServiceType
+    val type: ServiceType,
+    val lastUpdated: Long = 0,
 )

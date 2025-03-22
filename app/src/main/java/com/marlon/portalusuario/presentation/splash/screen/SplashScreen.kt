@@ -31,6 +31,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.activities.AuthActivity
 import com.marlon.portalusuario.activities.MainActivity
+import com.marlon.portalusuario.intro.IntroActivity
 import com.marlon.portalusuario.presentation.splash.SplashViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -38,7 +39,9 @@ import kotlinx.coroutines.launch
 private const val MinTime = 1000L
 
 @Composable
-fun SplashScreen(viewModel: SplashViewModel = hiltViewModel()) {
+fun SplashScreen(
+    viewModel: SplashViewModel = hiltViewModel()
+) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
@@ -80,16 +83,21 @@ fun SplashScreen(viewModel: SplashViewModel = hiltViewModel()) {
         LaunchedEffect(Unit) {
             scope.launch {
                 delay(MinTime)
-                session?.let {
-                    context.startActivity(Intent(context, MainActivity::class.java))
+                if (!preference.isIntroOpened) {
+                    context.startActivity(Intent(context, IntroActivity::class.java))
                     (context as Activity).finish()
-                } ?: run {
-                    if (preference.skipLogin) {
+                } else {
+                    session?.let {
                         context.startActivity(Intent(context, MainActivity::class.java))
                         (context as Activity).finish()
-                    } else {
-                        context.startActivity(Intent(context, AuthActivity::class.java))
-                        (context as Activity).finish()
+                    } ?: run {
+                        if (preference.skipLogin) {
+                            context.startActivity(Intent(context, MainActivity::class.java))
+                            (context as Activity).finish()
+                        } else {
+                            context.startActivity(Intent(context, AuthActivity::class.java))
+                            (context as Activity).finish()
+                        }
                     }
                 }
             }

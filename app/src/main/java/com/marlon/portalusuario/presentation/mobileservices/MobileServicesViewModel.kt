@@ -1,6 +1,6 @@
 package com.marlon.portalusuario.presentation.mobileservices
 
-import android.os.Build
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -12,6 +12,7 @@ import com.marlon.portalusuario.domain.data.UserRepository
 import com.marlon.portalusuario.domain.model.DataSession
 import com.marlon.portalusuario.domain.model.MobServPreferences
 import com.marlon.portalusuario.domain.model.MobileService
+import com.marlon.portalusuario.util.Utils.isAtLeastOneHourElapsed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.suitetecsa.sdk.android.SimCardCollector
 import io.github.suitetecsa.sdk.android.model.SimCard
@@ -47,6 +48,7 @@ class MobileServicesViewModel @Inject constructor(
         null
     )
 
+    @SuppressLint("MissingPermission")
     val simCards = simCardCollector.collect()
 
     private var _state = mutableStateOf(MobileServicesState())
@@ -65,14 +67,14 @@ class MobileServicesViewModel @Inject constructor(
                         mobPreferences.slotIndexInfoList
                             .filter { it.index in simCards.map { sim -> sim.slotIndex } }
                     )
-                    update()
+                    if (mobileServices.value.first { it.id == _state.value.currentServiceId }.lastUpdated.isAtLeastOneHourElapsed()) update()
                 }
                 simCards.isNotEmpty() -> {
                     mobServicesPreferences.updateSlotIndexInfoList(
                         mobPreferences.slotIndexInfoList
                             .filter { it.index in simCards.map { sim -> sim.slotIndex } }
                     )
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { update() }
+                    if (mobileServices.value.first { it.id == _state.value.currentServiceId }.lastUpdated.isAtLeastOneHourElapsed()) update()
                 }
             }
         }
@@ -95,7 +97,7 @@ class MobileServicesViewModel @Inject constructor(
 
             MobileServicesEvent.OnHideSImCardsSettings -> {
                 _state.value = _state.value.copy(isSimCardsSettingsVisible = false)
-                update(Build.VERSION.SDK_INT < Build.VERSION_CODES.O || session.value != null)
+                update(session.value != null)
             }
             MobileServicesEvent.OnShowSImCardsSettings ->
                 _state.value = _state.value.copy(isSimCardsSettingsVisible = true)

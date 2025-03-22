@@ -1,6 +1,5 @@
 package com.marlon.portalusuario.presentation.mobileservices.screen
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,19 +9,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Surface
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.marlon.portalusuario.domain.model.MobileBonus
-import com.marlon.portalusuario.domain.model.MobilePlan
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.marlon.portalusuario.domain.model.MobileService
-import com.marlon.portalusuario.domain.model.ServiceType
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesEvent
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesEvent.OnHideSImCardsSettings
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesEvent.OnHideServiceSettings
@@ -36,8 +30,6 @@ import com.marlon.portalusuario.presentation.mobileservices.components.PlansSect
 import com.marlon.portalusuario.presentation.mobileservices.components.configsimcards.ConfigSimCardsBottomSheet
 import com.marlon.portalusuario.presentation.mobileservices.components.servsettings.ServiceSettingsBottomSheet
 import com.marlon.portalusuario.ui.components.ErrorDialog
-import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
-import com.marlon.portalusuario.util.Utils.fixDateFormat
 import io.github.suitetecsa.sdk.android.model.SimCard
 
 private const val TAG = "MobileServicesScreen"
@@ -45,8 +37,8 @@ private const val TAG = "MobileServicesScreen"
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MobileServicesScreen(viewModel: MobileServicesViewModel = hiltViewModel()) {
-    val mobServices by viewModel.mobileServices.collectAsState()
-    val preferences by viewModel.preferences.collectAsState()
+    val mobServices by viewModel.mobileServices.collectAsStateWithLifecycle()
+    val preferences by viewModel.preferences.collectAsStateWithLifecycle()
 
     Log.d(TAG, "MobileServicesScreen: ${viewModel.simCards}")
 
@@ -120,58 +112,5 @@ fun ScreenContent(
             mobService = service,
             onDismiss = { onEvent(OnHideServiceSettings) }
         )
-    }
-}
-
-@Preview(uiMode = UI_MODE_NIGHT_YES)
-@Composable
-private fun ScreenContentPreview() {
-    PortalUsuarioTheme {
-        Surface {
-            ScreenContent(
-                services = listOf(
-                    MobileService(
-                        id = "5351872843",
-                        lte = false,
-                        advanceBalance = "0",
-                        status = "Activo",
-                        lockDate = "26/11/2024".fixDateFormat(),
-                        deletionDate = "25/12/2024".fixDateFormat(),
-                        saleDate = "19/8/2022".fixDateFormat(),
-                        internet = true,
-                        plans = listOf(
-                            MobilePlan("01:23:55", "MINUTOS", "16/09/2024".replace("/", "-")),
-                            MobilePlan("1560", "SMS", "16/09/2024".replace("/", "-")),
-                            MobilePlan("719.55 MB", "DATOS", "16/09/2024".replace("/", "-")),
-                            MobilePlan("0.00 B", "DATOS LTE", "16/09/2024".replace("/", "-")),
-                        ),
-                        bonuses = listOf(
-                            MobileBonus(
-                                "296.61 MB",
-                                "",
-                                "DATOS NACIONALES",
-                                "16/09/2024".replace("/", "-")
-                            ),
-                            MobileBonus(
-                                "0",
-                                "16/09/2024".replace("/", "-"),
-                                "DATOS LTE",
-                                "16/09/2024".replace("/", "-")
-                            ),
-                        ),
-                        currency = "CUP",
-                        phoneNumber = "51872843",
-                        mainBalance = "10.00",
-                        consumptionRate = true,
-                        slotIndex = -1,
-                        type = ServiceType.Local
-                    )
-                ),
-                currentServiceId = "5351872843",
-                state = MobileServicesState(),
-                onEvent = {},
-                simCards = listOf()
-            )
-        }
     }
 }

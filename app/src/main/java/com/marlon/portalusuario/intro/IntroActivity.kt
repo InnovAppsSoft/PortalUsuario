@@ -32,6 +32,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
@@ -39,7 +40,10 @@ import com.google.accompanist.pager.rememberPagerState
 import com.marlon.portalusuario.Permisos.PermissionActivity
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.activities.AuthActivity
+import com.marlon.portalusuario.data.preferences.AppPreferencesManager
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 data class ScreenItem(
     val title: String,
@@ -47,10 +51,10 @@ data class ScreenItem(
     val screenImg: Int
 )
 
+@AndroidEntryPoint
 class IntroActivity : ComponentActivity() {
-    private val sharedPreferences: SharedPreferences by lazy {
-        getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-    }
+    @Inject
+    lateinit var appPreferencesManager: AppPreferencesManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,9 +83,9 @@ class IntroActivity : ComponentActivity() {
     }
 
     private fun savePrefsData() {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("isIntroOpened", true)
-        editor.apply()
+        lifecycleScope.launch {
+            appPreferencesManager.updateIsIntroOpened(true)
+        }
     }
 }
 

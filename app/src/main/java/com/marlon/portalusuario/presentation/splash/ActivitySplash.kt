@@ -1,6 +1,5 @@
 package com.marlon.portalusuario.presentation.splash
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -12,10 +11,10 @@ import androidx.compose.material3.Surface
 import androidx.lifecycle.lifecycleScope
 import com.marlon.portalusuario.data.preferences.AppPreferencesManager
 import com.marlon.portalusuario.domain.model.ModeNight
-import com.marlon.portalusuario.intro.IntroActivity
 import com.marlon.portalusuario.presentation.splash.screen.SplashScreen
 import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,36 +30,31 @@ class ActivitySplash : ComponentActivity() {
         enableEdgeToEdge()
 
         lifecycleScope.launch {
-            appPreferencesManager.preferences().collect { preferences ->
-                val uiMode = when (preferences.modeNight) {
-                    ModeNight.YES -> {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                        Log.i(TAG, "onCreate: Changed modeNight to Dark")
-                        true
-                    }
+            val preferences = appPreferencesManager.preferences().first()
 
-                    ModeNight.NO -> {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                        Log.i(TAG, "onCreate: Changed modeNight to Light")
-                        false
-                    }
-
-                    ModeNight.FOLLOW_SYSTEM -> {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                        Log.i(TAG, "onCreate: Changed modeNight to System")
-                        null
-                    }
+            val uiMode = when (preferences.modeNight) {
+                ModeNight.YES -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    Log.i(TAG, "onCreate: Changed modeNight to Dark")
+                    true
                 }
 
-                if (preferences.isIntroOpened) {
-                    startActivity(Intent(this@ActivitySplash, IntroActivity::class.java))
-                    finish()
+                ModeNight.NO -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    Log.i(TAG, "onCreate: Changed modeNight to Light")
+                    false
                 }
 
-                setContent {
-                    PortalUsuarioTheme(darkTheme = uiMode ?: isSystemInDarkTheme()) {
-                        Surface { SplashScreen() }
-                    }
+                ModeNight.FOLLOW_SYSTEM -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                    Log.i(TAG, "onCreate: Changed modeNight to System")
+                    null
+                }
+            }
+
+            setContent {
+                PortalUsuarioTheme(darkTheme = uiMode ?: isSystemInDarkTheme()) {
+                    Surface { SplashScreen() }
                 }
             }
         }
