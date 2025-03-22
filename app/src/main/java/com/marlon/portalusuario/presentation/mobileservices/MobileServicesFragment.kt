@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.material3.Surface
 import androidx.compose.ui.platform.ComposeView
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
@@ -18,7 +19,7 @@ class MobileServicesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View = ComposeView(requireContext()).apply {
-        setContent { PortalUsuarioTheme { MobileServicesScreen() } }
+        setContent { PortalUsuarioTheme { Surface { MobileServicesScreen() } } }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

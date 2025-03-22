@@ -15,7 +15,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -28,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.activities.AuthActivity
 import com.marlon.portalusuario.activities.MainActivity
@@ -42,8 +42,8 @@ fun SplashScreen(viewModel: SplashViewModel = hiltViewModel()) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
-    val preference by viewModel.pref.collectAsState()
-    val session by viewModel.session.collectAsState()
+    val preference by viewModel.pref.collectAsStateWithLifecycle()
+    val session by viewModel.session.collectAsStateWithLifecycle()
 
     Surface(
         modifier = Modifier
@@ -84,7 +84,7 @@ fun SplashScreen(viewModel: SplashViewModel = hiltViewModel()) {
                     context.startActivity(Intent(context, MainActivity::class.java))
                     (context as Activity).finish()
                 } ?: run {
-                    if (preference.skippedLogin) {
+                    if (preference.skipLogin) {
                         context.startActivity(Intent(context, MainActivity::class.java))
                         (context as Activity).finish()
                     } else {

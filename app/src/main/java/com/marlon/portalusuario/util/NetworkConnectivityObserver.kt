@@ -7,7 +7,6 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.util.Log
-import androidx.core.content.ContextCompat
 import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
 
 /**
@@ -17,17 +16,15 @@ import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
  * Optionally, it can manage a floating bubble service based on network status.
  *
  * @param context The application context.
- * @param showTrafficBubble Boolean indicating whether to show the floating bubble service when network is available.
  */
-class NetworkConnectivityObserver(
-    private val context: Context,
-    private val showTrafficBubble: Boolean
-) {
+class NetworkConnectivityObserver(private val context: Context) {
 
     companion object {
         private const val TAG = "NetworkObserver"
         private const val NETWORK_TYPE_EXTRA = "networkType"
     }
+
+    var isCallbackRegistered: Boolean = false
 
     private val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -93,6 +90,7 @@ class NetworkConnectivityObserver(
             .build()
 
         connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
+        isCallbackRegistered = true
     }
 
     /**
@@ -113,15 +111,15 @@ class NetworkConnectivityObserver(
      */
     fun stopMonitoring() {
         connectivityManager.unregisterNetworkCallback(networkCallback)
+        stopFloatingBubbleService()
+        isCallbackRegistered = false
     }
 
     private fun handleNetworkAvailability() {
         val networkType = getNetworkType()
-        if (showTrafficBubble) {
-            Log.d(TAG, "Starting floating bubble service :: $networkType")
-            stopFloatingBubbleService()
-            startFloatingBubbleService(networkType)
-        }
+        Log.d(TAG, "Starting floating bubble service :: $networkType")
+        stopFloatingBubbleService()
+        startFloatingBubbleService(networkType)
     }
 
     private fun handleNetworkLoss() {
