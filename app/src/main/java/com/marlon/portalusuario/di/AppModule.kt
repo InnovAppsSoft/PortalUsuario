@@ -12,7 +12,7 @@ import com.marlon.portalusuario.data.mappers.MobServiceApiToEntityMapper
 import com.marlon.portalusuario.data.mappers.MobServiceEntityToDomainMapper
 import com.marlon.portalusuario.data.mappers.NavServApiToEntityMapper
 import com.marlon.portalusuario.data.mappers.NavServEntityToDomainMapper
-import com.marlon.portalusuario.data.preferences.AppPreferences
+import com.marlon.portalusuario.data.preferences.AppPreferencesManager
 import com.marlon.portalusuario.data.preferences.MobServicesPreferences
 import com.marlon.portalusuario.data.preferences.SessionStorage
 import com.marlon.portalusuario.data.source.AuthService
