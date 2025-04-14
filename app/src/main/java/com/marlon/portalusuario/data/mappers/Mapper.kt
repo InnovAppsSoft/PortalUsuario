@@ -1,6 +1,5 @@
 package com.marlon.portalusuario.data.mappers
 
-interface Mapper<Domain, Entity, Api> {
-    fun Api.toEntity(): Entity
-    fun Entity.toDomain(): Domain
+interface Mapper<in From, out To> {
+    fun map(from: From): To
 }

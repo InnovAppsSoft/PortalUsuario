@@ -1,13 +1,13 @@
 package com.marlon.portalusuario.data.user
 
 import android.annotation.SuppressLint
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.marlon.portalusuario.data.ServicesDao
-import com.marlon.portalusuario.data.entity.asModel
-import com.marlon.portalusuario.data.mappers.ClientProfileMapper
-import com.marlon.portalusuario.data.mappers.MobServMapper
-import com.marlon.portalusuario.data.mappers.NavServMapper
+import com.marlon.portalusuario.data.mappers.ClientProfileApiToEntityMapper
+import com.marlon.portalusuario.data.mappers.ClientProfileEntityToDomainMapper
+import com.marlon.portalusuario.data.mappers.MobServiceApiToEntityMapper
+import com.marlon.portalusuario.data.mappers.MobServiceEntityToDomainMapper
+import com.marlon.portalusuario.data.mappers.NavServApiToEntityMapper
+import com.marlon.portalusuario.data.mappers.NavServEntityToDomainMapper
 import com.marlon.portalusuario.data.source.UserApiDataSource
 import com.marlon.portalusuario.data.source.UserLocalDataSource
 import com.marlon.portalusuario.domain.data.UserRepository
@@ -27,21 +27,27 @@ import com.marlon.portalusuario.domain.model.MobileService as MobServDomain
 class UserRepositoryImpl(
     private val apiDataSource: UserApiDataSource,
     private val dao: ServicesDao,
-    private val mobServMapper: MobServMapper,
+    private val mobServiceApiToEntityMapper: MobServiceApiToEntityMapper,
+    private val mobServiceEntityToDomainMapper: MobServiceEntityToDomainMapper,
+    private val clientProfileApiToEntityMapper: ClientProfileApiToEntityMapper,
+    private val clientProfileEntityToDomainMapper: ClientProfileEntityToDomainMapper,
+    private val navServApiToEntityMapper: NavServApiToEntityMapper,
+    private val navServEntityToDomainMapper: NavServEntityToDomainMapper,
     private val localDataSource: UserLocalDataSource = UserLocalDataSource()
 ) : UserRepository {
 
     private fun hasReachedMaxAttempts(throwable: Throwable) = throwable is NautaException &&
-        throwable.message?.endsWith("Máximo número de intentos alcanzado sin respuesta") == true
+            throwable.message?.endsWith("Máximo número de intentos alcanzado sin respuesta") == true
 
     private suspend fun fetchUserFromRemote() = apiDataSource.fetch()
         .let { response ->
-            val lastUpdated = response.lastUpdate.parseLastUpdated()
-            dao.insertClientProfile(with(ClientProfileMapper()) { response.toEntity() })
+            dao.insertClientProfile(clientProfileApiToEntityMapper.map(response))
             response.services.mobileServices
-                .forEach { dao.insertMobileServices(with(mobServMapper) { it.toEntity() }.copy(lastUpdated = lastUpdated)) }
+                .map(mobServiceApiToEntityMapper::map)
+                .forEach { dao.insertMobileServices(it) }
             response.services.navServices
-                .forEach { dao.insertNavigationServices(with(NavServMapper()) { it.toEntity() }) }
+                .map(navServApiToEntityMapper::map)
+                .forEach { dao.insertNavigationServices(it) }
         }
 
     @SuppressLint("MissingPermission")
@@ -53,7 +59,8 @@ class UserRepositoryImpl(
 
     override suspend fun fetchUser(simCard: SimCard?) {
         simCard?.also { sim ->
-            when (getMobileServices().first().firstOrNull { it.id == "53${sim.phoneNumber!!}" }?.type ?: Local) {
+            when (getMobileServices().first()
+                .firstOrNull { it.id == "53${sim.phoneNumber!!}" }?.type ?: Local) {
                 Local -> fetchUserFromLocal(sim)
                 Remote -> fetchUserFromRemote()
                 LocalAndRemote -> {
@@ -71,15 +78,15 @@ class UserRepositoryImpl(
     }
 
     override fun getClientProfile(): Flow<ClientProfile> =
-        dao.getClientProfile().map { it.asModel() }
+        dao.getClientProfile().map(clientProfileEntityToDomainMapper::map)
 
     override fun getMobileServices(): Flow<List<MobServDomain>> =
         dao.getMobileServices().map { services ->
-            services.map { with(mobServMapper) { it.toDomain() } }
+            services.map(mobServiceEntityToDomainMapper::map)
         }
 
     override fun getNavServices(): Flow<List<NavigationService>> =
         dao.getNavigationServices().map { services ->
-            services.map { with(NavServMapper()) { it.toDomain() } }
+            services.map(navServEntityToDomainMapper::map)
         }
 }
