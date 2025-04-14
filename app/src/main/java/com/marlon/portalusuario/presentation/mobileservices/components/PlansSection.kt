@@ -26,12 +26,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.marlon.portalusuario.data.asDateMillis
+import com.marlon.portalusuario.data.asRemainingDays
 import com.marlon.portalusuario.domain.model.MobilePlan
 import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
 import com.marlon.portalusuario.ui.theme.TealBlue
 import com.marlon.portalusuario.ui.theme.VibrantTangerineOrange
-import io.github.suitetecsa.sdk.android.utils.LongUtils.asRemainingDays
-import io.github.suitetecsa.sdk.android.utils.StringUtils
 
 @Composable
 internal fun PlansSection(plans: List<MobilePlan>, isSimPaired: Boolean = false,) {
@@ -73,7 +73,7 @@ internal fun PlansSection(plans: List<MobilePlan>, isSimPaired: Boolean = false,
                     modifier = Modifier.padding(horizontal = 4.dp),
                     planTitle = it.type,
                     dataCount = it.data,
-                    remainingDays = it.expires.toInt(),
+                    remainingDays = it.expires.asDateMillis?.asRemainingDays,
                     color = VibrantTangerineOrange
                 )
             }
@@ -89,10 +89,10 @@ private fun PlansSectionPreview() {
         Surface(modifier = Modifier.padding(vertical = 16.dp)) {
             PlansSection(
                 plans = listOf(
-                    MobilePlan("01:23:55", "MINUTOS", "01/08/2024".replace("/", "-")),
-                    MobilePlan("1560", "SMS", "01/08/2024".replace("/", "-")),
-                    MobilePlan("719.55 MB", "DATOS", "01/08/2024".replace("/", "-")),
-                    MobilePlan("0.00 B", "DATOS LTE", "01/08/2024".replace("/", "-")),
+                    MobilePlan("01:23:55", "MINUTOS", "30/04/2025"),
+                    MobilePlan("1560", "SMS", "30/04/2025"),
+                    MobilePlan("719.55 MB", "DATOS", "30/04/2025"),
+                    MobilePlan("0.00 B", "DATOS LTE", "30/04/2025"),
                 )
             )
         }

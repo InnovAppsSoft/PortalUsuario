@@ -1,10 +1,10 @@
 package com.marlon.portalusuario.data.source
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
+import com.marlon.portalusuario.data.asFutureDate
 import com.marlon.portalusuario.data.entity.MobileService
+import com.marlon.portalusuario.data.isActive
 import com.marlon.portalusuario.domain.model.MobileBonus
 import com.marlon.portalusuario.domain.model.MobilePlan
 import com.marlon.portalusuario.domain.model.ServiceType.Local
@@ -20,7 +20,6 @@ import io.github.suitetecsa.sdk.android.balance.response.UssdResponse
 import io.github.suitetecsa.sdk.android.balance.response.VoiceBalance
 import io.github.suitetecsa.sdk.android.model.SimCard
 import io.github.suitetecsa.sdk.android.utils.fixDate
-import io.github.suitetecsa.sdk.android.utils.isActive
 import io.github.suitetecsa.sdk.android.utils.smartFetchBalance
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -38,26 +37,26 @@ class UserLocalDataSource {
         simCard.smartFetchBalance(object : FetchBalanceCallBack {
             private lateinit var ussdRequest: UssdRequest
             var mobService = MobileService(
-                "53${simCard.phoneNumber!!}",
-                false,
-                "",
-                "Activo",
-                "",
-                "",
-                "",
-                false,
-                emptyList(),
-                emptyList(),
-                "CUP",
-                simCard.phoneNumber!!,
-                "",
-                false,
-                simCard.slotIndex,
-                if (isRemote) LocalAndRemote else Local
+                id = "53${simCard.phoneNumber!!}",
+                lte = false,
+                advanceBalance = "",
+                status = "Activo",
+                lockDate = "",
+                deletionDate = "",
+                saleDate = "",
+                internet = false,
+                plans = emptyList(),
+                bonuses = emptyList(),
+                currency = "CUP",
+                phoneNumber = simCard.phoneNumber!!,
+                mainBalance = "",
+                consumptionRate = false,
+                slotIndex = simCard.slotIndex,
+                type = if (isRemote) LocalAndRemote else Local
             )
 
             private fun addToPlanList(data: String, type: String, expires: String) {
-                val dateExpires = expires.takeIf { it.isActive }?.fixDate() ?: "No activos"
+                val dateExpires = expires.takeIf { it.isActive }?.toInt()?.asFutureDate ?: "no activos"
                 mobService = mobService.copy(
                     plans = mobService.plans.toMutableList()
                         .apply { add(MobilePlan(data, type, dateExpires)) }
@@ -65,7 +64,7 @@ class UserLocalDataSource {
             }
 
             private fun addToBonusList(data: String, type: String, expires: String) {
-                val dateExpires = expires.takeIf { it.isActive }?.fixDate() ?: "No activos"
+                val dateExpires = expires.takeIf { it.isActive }?.fixDate() ?: "no activos"
                 mobService = mobService.copy(
                     bonuses = mobService.bonuses.toMutableList()
                         .apply { add(MobileBonus(data, "", type, dateExpires)) }

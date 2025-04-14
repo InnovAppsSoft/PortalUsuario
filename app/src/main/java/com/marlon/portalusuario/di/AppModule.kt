@@ -4,8 +4,15 @@ import android.content.Context
 import androidx.room.Room
 import com.marlon.portalusuario.data.ServicesDB
 import com.marlon.portalusuario.data.ServicesDao
-import com.marlon.portalusuario.data.mappers.MobServMapper
-import com.marlon.portalusuario.data.preferences.AppPreferencesManager
+import com.marlon.portalusuario.data.mappers.ClientProfileApiToEntityMapper
+import com.marlon.portalusuario.data.mappers.ClientProfileEntityToDomainMapper
+import com.marlon.portalusuario.data.mappers.MobBonusApiToModelMapper
+import com.marlon.portalusuario.data.mappers.MobPlanApiToModelMapper
+import com.marlon.portalusuario.data.mappers.MobServiceApiToEntityMapper
+import com.marlon.portalusuario.data.mappers.MobServiceEntityToDomainMapper
+import com.marlon.portalusuario.data.mappers.NavServApiToEntityMapper
+import com.marlon.portalusuario.data.mappers.NavServEntityToDomainMapper
+import com.marlon.portalusuario.data.preferences.AppPreferences
 import com.marlon.portalusuario.data.preferences.MobServicesPreferences
 import com.marlon.portalusuario.data.preferences.SessionStorage
 import com.marlon.portalusuario.data.source.AuthService
@@ -72,17 +79,62 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideMobServMapper(preferences: MobServicesPreferences) =
-        MobServMapper(preferences)
+    fun provideMobPlanApiToDomainMapper() = MobPlanApiToModelMapper()
+
+    @Singleton
+    @Provides
+    fun provideMobBonusApiToDomainMapper() = MobBonusApiToModelMapper()
+
+    @Singleton
+    @Provides
+    fun provideMobServApiToEntityMapper(
+        preferences: MobServicesPreferences,
+        planApiToModelMapper: MobPlanApiToModelMapper,
+        bonusApiToModelMapper: MobBonusApiToModelMapper
+    ) = MobServiceApiToEntityMapper(preferences, planApiToModelMapper, bonusApiToModelMapper)
+
+    @Singleton
+    @Provides
+    fun provideMobServEntityToDomainMapper() = MobServiceEntityToDomainMapper()
+
+    @Singleton
+    @Provides
+    fun provideClientProfileApiToEntityMapper() = ClientProfileApiToEntityMapper()
+
+    @Singleton
+    @Provides
+    fun provideClientProfileEntityToDomainMapper() = ClientProfileEntityToDomainMapper()
+
+    @Singleton
+    @Provides
+    fun provideNavServApiToEntityMapper() = NavServApiToEntityMapper()
+
+    @Singleton
+    @Provides
+    fun provideNavServEntityToDomainMapper() = NavServEntityToDomainMapper()
 
     @Singleton
     @Provides
     fun provideUserRepository(
         userApiDataSource: UserApiDataSource,
         servicesDao: ServicesDao,
-        mobServMapper: MobServMapper
+        mobServiceApiToEntityMapper: MobServiceApiToEntityMapper,
+        mobServiceEntityToDomainMapper: MobServiceEntityToDomainMapper,
+        clientProfileApiToEntityMapper: ClientProfileApiToEntityMapper,
+        clientProfileEntityToDomainMapper: ClientProfileEntityToDomainMapper,
+        navServApiToEntityMapper: NavServApiToEntityMapper,
+        navServEntityToDomainMapper: NavServEntityToDomainMapper
     ): UserRepository =
-        UserRepositoryImpl(userApiDataSource, servicesDao, mobServMapper)
+        UserRepositoryImpl(
+            apiDataSource = userApiDataSource,
+            dao = servicesDao,
+            mobServiceApiToEntityMapper = mobServiceApiToEntityMapper,
+            mobServiceEntityToDomainMapper = mobServiceEntityToDomainMapper,
+            clientProfileApiToEntityMapper = clientProfileApiToEntityMapper,
+            clientProfileEntityToDomainMapper = clientProfileEntityToDomainMapper,
+            navServApiToEntityMapper = navServApiToEntityMapper,
+            navServEntityToDomainMapper = navServEntityToDomainMapper
+        )
 
     @Singleton
     @Provides
