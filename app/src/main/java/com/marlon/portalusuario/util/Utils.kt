@@ -5,14 +5,16 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.util.Base64
+import android.util.Log
 import androidx.core.content.ContextCompat
 import com.auth0.android.jwt.JWT
 import com.caverock.androidsvg.SVG
 import java.security.MessageDigest
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-
+private const val TAG = "Utils"
 object Utils {
     fun Context.hasPermissions(vararg permissions: String): Boolean {
         permissions.forEach { permission ->
@@ -65,5 +67,20 @@ object Utils {
         val hashedData = MessageDigest.getInstance("SHA-512").digest(appKeyData)
         // Codifica el hash en formato Base64 y devuelve la cadena resultante
         return "ApiKey ${Base64.encodeToString(hashedData, Base64.NO_WRAP)}"
+    }
+
+    fun String.parseLastUpdated(): Long {
+        val calendar = Calendar.getInstance()
+        calendar.time = SimpleDateFormat("yyyy-MM-dd HH:mm:SS", Locale.getDefault()).parse(this)!!
+        return calendar.timeInMillis
+    }
+
+    fun Long.isAtLeastOneHourElapsed(): Boolean {
+        Log.d(TAG, "isAtLeastOneHourElapsed: timestampMillis: $this")
+        val oneHourMillisThreshold = 3600 * 1000
+        Log.d(TAG, "isAtLeastOneHourElapsed: currentTimeMillis: ${System.currentTimeMillis()}")
+        val millisSinceTimestamp = System.currentTimeMillis() - this
+        Log.d(TAG, "isAtLeastOneHourElapsed: millisSinceTimestamp: $millisSinceTimestamp")
+        return millisSinceTimestamp >= oneHourMillisThreshold
     }
 }

@@ -96,7 +96,7 @@
     <string name="compruebe_su_conexi_n">Compruebe su conexión</string>
     <string name="volver_a_intentar">Volver a intentar</string>
     <string name="no_existen_registros">No existen registros</string>
-    <string name="apariecia_settings">Estilo de interfaz</string>
+    <string name="apariecia_settings">Apariencia</string>
     <string name="_0_0_kb">0.0 Kb</string>
     <string name="activar">Activar</string>
     <string name="todas_las_redes">Todas las Redes</string>
@@ -164,4 +164,8 @@
     <string name="accept">Aceptar</string>
     <string name="continue_without_account">Seguir sin cuenta</string>
     <string name="config_sim_alert_message">La terjeta SIM%1$s no tiene un número de teléfono registrado. Por favor ingrese uno.</string>
+    <string name="show_floating_bubble">Mostrar burbuja flotante</string>
+    <string name="ui_mode_dark">Oscuro</string>
+    <string name="ui_mode_light">Claro</string>
+    <string name="ui_mode_system">Sistema</string>
 </resources>

@@ -24,5 +24,6 @@ data class MobileService(
     @ColumnInfo(name = "main_balance") val mainBalance: String,
     @ColumnInfo(name = "consumption_rate") val consumptionRate: Boolean,
     @ColumnInfo(name = "slot_index") val slotIndex: Int = -1,
-    @ColumnInfo(name = "service_type") val type: ServiceType = ServiceType.Local
+    @ColumnInfo(name = "service_type") val type: ServiceType = ServiceType.Local,
+    @ColumnInfo(name = "last_updated") val lastUpdated: Long = 0,
 )

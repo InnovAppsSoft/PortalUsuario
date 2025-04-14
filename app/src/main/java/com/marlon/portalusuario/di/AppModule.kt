@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.marlon.portalusuario.data.ServicesDB
 import com.marlon.portalusuario.data.ServicesDao
 import com.marlon.portalusuario.data.mappers.MobServMapper
-import com.marlon.portalusuario.data.preferences.AppPreferences
+import com.marlon.portalusuario.data.preferences.AppPreferencesManager
 import com.marlon.portalusuario.data.preferences.MobServicesPreferences
 import com.marlon.portalusuario.data.preferences.SessionStorage
 import com.marlon.portalusuario.data.source.AuthService
@@ -13,6 +13,7 @@ import com.marlon.portalusuario.data.source.UserApiDataSource
 import com.marlon.portalusuario.data.user.UserRepositoryImpl
 import com.marlon.portalusuario.domain.data.UserRepository
 import com.marlon.portalusuario.presentation.mobileservices.usecases.RefreshAuthToken
+import com.marlon.portalusuario.util.NetworkConnectivityObserver
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,8 +28,13 @@ import javax.inject.Singleton
 class AppModule {
     @Singleton
     @Provides
+    fun provideNetworkConnectivityObserver(@ApplicationContext context: Context) =
+        NetworkConnectivityObserver(context)
+
+    @Singleton
+    @Provides
     fun provideAppPreference(@ApplicationContext context: Context) =
-        AppPreferences(context)
+        AppPreferencesManager(context)
 
     @Singleton
     @Provides

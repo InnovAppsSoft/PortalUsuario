@@ -8,7 +8,9 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ShareCompat.IntentBuilder
@@ -18,13 +20,17 @@ import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.preference.PreferenceManager.getDefaultSharedPreferences
 import com.marlon.portalusuario.Permisos.PermissionActivity
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ViewModel.PunViewModel
 import com.marlon.portalusuario.components.SetLTEModeDialog
+import com.marlon.portalusuario.data.preferences.AppPreferencesManager
+import com.marlon.portalusuario.data.preferences.AppPreferencesViewModel
 import com.marlon.portalusuario.databinding.ActivityMainBinding
+import com.marlon.portalusuario.domain.model.ModeNight
 import com.marlon.portalusuario.errores_log.LogFileViewerActivity
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesFragment
 import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
@@ -34,14 +40,21 @@ import com.marlon.portalusuario.util.Utils.hasPermissions
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.ServiciosFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.properties.Delegates
+
+private const val TAG = "MainActivity"
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    @Inject
+    lateinit var appPreferencesManager: AppPreferencesManager
+
+    @Inject
+    lateinit var networkConnectivityObserver: NetworkConnectivityObserver
 
     private lateinit var binding: ActivityMainBinding
-
-    private lateinit var networkConnectivityObserver: NetworkConnectivityObserver
 
     // Network change listener
     private var showTrafficBubble by Delegates.notNull<Boolean>()
@@ -64,11 +77,6 @@ class MainActivity : AppCompatActivity() {
     private fun listenPreferences(preferences: SharedPreferences, key: String?) {
         key?.let {
             when (it) {
-                "keynoche" -> when (preferences.getString("keynoche", "oscuro")) {
-                    "claro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    "oscuro" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                }
-
                 "show_traffic_speed_bubble" -> {
                     if (preferences.getBoolean("show_traffic_speed_bubble", false)) {
                         if (!Settings.canDrawOverlays(this)) {
@@ -98,6 +106,43 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        lifecycleScope.launch {
+            appPreferencesManager.preferences().collect { preferences ->
+                when (preferences.modeNight) {
+                    ModeNight.YES -> {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                        Log.i(TAG, "onCreate: Changed modeNight to Dark")
+                    }
+                    ModeNight.NO -> {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                        Log.i(TAG, "onCreate: Changed modeNight to Light")
+                    }
+                    ModeNight.FOLLOW_SYSTEM -> {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                        Log.i(TAG, "onCreate: Changed modeNight to System")
+                    }
+                }
+
+                if (preferences.isShowingTrafficBubble) {
+                    if (!Settings.canDrawOverlays(this@MainActivity)) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Otorgue a Portal Usuario los permisos requeridos",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        startActivity(
+                            Intent(
+                                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                ("package:" + this@MainActivity.packageName).toUri()
+                            )
+                        )
+                    } else if (!networkConnectivityObserver.isCallbackRegistered) networkConnectivityObserver.startMonitoring()
+                } else {
+                    if (networkConnectivityObserver.isCallbackRegistered) networkConnectivityObserver.stopMonitoring()
+                }
+            }
+        }
+
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         // Settings preferences
@@ -105,8 +150,6 @@ class MainActivity : AppCompatActivity() {
 
         // Traffic bubble
         showTrafficBubble = settings.getBoolean("show_traffic_speed_bubble", false)
-        networkConnectivityObserver = NetworkConnectivityObserver(this, showTrafficBubble)
-        networkConnectivityObserver.startMonitoring()
 
         // Listen preferences
         settings.registerOnSharedPreferenceChangeListener(::listenPreferences)
@@ -227,7 +270,6 @@ class MainActivity : AppCompatActivity() {
 
     public override fun onResume() {
         super.onResume()
-        settings.registerOnSharedPreferenceChangeListener(::listenPreferences)
     }
 
     override fun onRequestPermissionsResult(
@@ -240,13 +282,10 @@ class MainActivity : AppCompatActivity() {
 
     public override fun onPause() {
         super.onPause()
-        settings.unregisterOnSharedPreferenceChangeListener(::listenPreferences)
     }
 
     public override fun onDestroy() {
         super.onDestroy()
-        settings.unregisterOnSharedPreferenceChangeListener(::listenPreferences)
-        networkConnectivityObserver.stopMonitoring()
     }
 
     companion object {

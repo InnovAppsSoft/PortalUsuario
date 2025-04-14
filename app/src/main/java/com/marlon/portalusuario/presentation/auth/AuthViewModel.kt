@@ -4,7 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marlon.portalusuario.data.preferences.AppPreferences
+import com.marlon.portalusuario.data.preferences.AppPreferencesManager
 import com.marlon.portalusuario.data.preferences.SessionStorage
 import com.marlon.portalusuario.data.source.AuthService
 import com.marlon.portalusuario.domain.model.DataSession
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val service: AuthService,
-    private val preferences: AppPreferences,
+    private val preferences: AppPreferencesManager,
     private val sessionStorage: SessionStorage
 ) : ViewModel() {
     private val _state = mutableStateOf(AuthState())

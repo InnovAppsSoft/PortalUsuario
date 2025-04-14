@@ -3,9 +3,7 @@ package com.marlon.portalusuario.trafficbubble
 import android.annotation.SuppressLint
 import android.app.Service
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.PixelFormat
-import android.net.TrafficStats
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
@@ -24,11 +22,15 @@ import com.marlon.portalusuario.R
 import com.marlon.portalusuario.databinding.BackBurbujaDeleteOverBinding
 import com.marlon.portalusuario.databinding.FloatingBubbleBinding
 import com.marlon.portalusuario.databinding.FloatingBubbleDeleteBinding
-import com.marlon.portalusuario.trafficbubble.Util.calcDownSpeed
-import com.marlon.portalusuario.trafficbubble.Util.calcUpSpeed
 import com.marlon.portalusuario.trafficbubble.Util.humanReadableByteCount
 import com.marlon.portalusuario.util.Util
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
+import javax.inject.Inject
 
 
 private const val VIBRATE_TIME = 100L
@@ -36,7 +38,13 @@ private const val GRAVITY_CENTER = Gravity.CENTER_VERTICAL or Gravity.CENTER_HOR
 private const val INITIAL_POSITION_X = 0
 private const val INITIAL_POSITION_Y = 0
 
+@AndroidEntryPoint
 class FloatingBubbleService : Service() {
+    @Inject
+    lateinit var viewModel: FloatingBubbleViewModel
+
+    private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+
     private lateinit var networkType: String
 
     // UI
@@ -47,64 +55,28 @@ class FloatingBubbleService : Service() {
     private lateinit var trashBinding: FloatingBubbleDeleteBinding
     private lateinit var trashOverBinding: BackBurbujaDeleteOverBinding
 
-    private val bubbleState = BubbleState()
-
     private val handler: Handler = Handler(Looper.getMainLooper())
     private lateinit var updateRunnable: Runnable
     private lateinit var weakReference: WeakReference<FloatingBubbleService>
 
-    // VARS
-    private var mLastRxBytes: Long = 0
-    private var mLastTxBytes: Long = 0
-
-    private var mLastTime: Long = 0
     var screenWidth: Int = 0
     var screenHeight: Int = 0
 
-    private lateinit var sharedPreferences: SharedPreferences
-
-    private val preferenceChangeListener =
-        SharedPreferences.OnSharedPreferenceChangeListener { prefs, key ->
-            when (key) {
-                PreferenceKeys.CREDIT -> {
-                    val newBalance = prefs.getString(key, PreferenceDefaults.DEFAULT_BALANCE)
-                    if (newBalance != null && newBalance != bubbleState.accountBalance) {
-                        bubbleState.accountBalance = newBalance
-                        Log.d("PreferenceChangeListener", "Updated account balance to: $newBalance")
-                        updateBubbleUI()
-                    } else {
-                        Log.w("PreferenceChangeListener", "Account balance not updated. Value is null or unchanged.")
-                    }
-                }
-
-                PreferenceKeys.PACKAGE -> {
-                    val newDataBalance = prefs.getString(key, PreferenceDefaults.DEFAULT_DATA)
-                    if (newDataBalance != null && newDataBalance != bubbleState.dataBalance) {
-                        bubbleState.dataBalance = newDataBalance
-                        Log.d("PreferenceChangeListener", "Updated data balance to: $newDataBalance")
-                        updateBubbleUI()
-                    } else {
-                        Log.w("PreferenceChangeListener", "Data balance not updated. Value is null or unchanged.")
-                    }
-                }
-
-                else -> {
-                    Log.w("PreferenceChangeListener", "Unknown preference key: $key")
-                }
+    private fun updateBubbleUI() {
+        serviceScope.launch {
+            viewModel.state.collect { bubbleState ->
+                bubbleBinding.bubbleTrafficUploadText.text = getString(
+                    R.string.upload_traffic_template,
+                    humanReadableByteCount(bubbleState.uploadSpeed)
+                )
+                bubbleBinding.bubbleTrafficDownloadText.text = getString(
+                    R.string.download_traffic_template,
+                    humanReadableByteCount(bubbleState.downloadSpeed)
+                )
+                bubbleBinding.textCuentasSaldo.text = bubbleState.accountBalance
+                bubbleBinding.textCuentasDatos.text = bubbleState.dataBalance
             }
         }
-
-    private fun updateBubbleUI() {
-        bubbleBinding.bubbleTrafficUploadText.text = getString(
-            R.string.upload_traffic_template,
-            humanReadableByteCount(bubbleState.uploadSpeed)
-        )
-        bubbleBinding.bubbleTrafficDownloadText.text = getString(
-            R.string.download_traffic_template,
-            humanReadableByteCount(bubbleState.downloadSpeed)
-        )
-        bubbleBinding.textCuentasSaldo.text = bubbleState.accountBalance
-        bubbleBinding.textCuentasDatos.text = bubbleState.dataBalance
     }
 
     private fun setupUpdateRunnable() {
@@ -125,21 +97,7 @@ class FloatingBubbleService : Service() {
             return
         }
 
-        // Calcular el uso de datos desde la última actualización
-        val currentTime = System.currentTimeMillis()
-        val usedTime = currentTime - mLastTime
-        val currentRxBytes = TrafficStats.getTotalRxBytes()
-        val currentTxBytes = TrafficStats.getTotalTxBytes()
-        val usedRxBytes = currentRxBytes - mLastRxBytes
-        val usedTxBytes = currentTxBytes - mLastTxBytes
-
-        // Actualizar las referencias para la próxima ejecución
-        mLastRxBytes = currentRxBytes
-        mLastTxBytes = currentTxBytes
-        mLastTime = currentTime
-
-        bubbleState.uploadSpeed = calcUpSpeed(usedTime, usedTxBytes)
-        bubbleState.downloadSpeed = calcDownSpeed(usedTime, usedRxBytes)
+        viewModel.onEvent(FloatingBubbleEvent.OnCalculateDataUsage)
 
         // Actualizar UI
         updateBubbleUI()
@@ -160,13 +118,6 @@ class FloatingBubbleService : Service() {
                 WindowManager::class.java
             ) as WindowManager
 
-        sharedPreferences = applicationContext.getSharedPreferences("cuentas", MODE_PRIVATE).apply {
-            bubbleState.apply {
-                accountBalance = getString("saldo", "0.00 CUP").toString()
-                dataBalance = getString("paquete", "0 B").toString()
-            }
-        }
-        sharedPreferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
         //
         setUpLayouts()
     }

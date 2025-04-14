@@ -16,6 +16,7 @@ import com.marlon.portalusuario.domain.model.NavigationService
 import com.marlon.portalusuario.domain.model.ServiceType.Local
 import com.marlon.portalusuario.domain.model.ServiceType.LocalAndRemote
 import com.marlon.portalusuario.domain.model.ServiceType.Remote
+import com.marlon.portalusuario.util.Utils.parseLastUpdated
 import io.github.suitetecsa.sdk.android.model.SimCard
 import io.github.suitetecsa.sdk.exception.NautaException
 import kotlinx.coroutines.flow.Flow
@@ -35,16 +36,20 @@ class UserRepositoryImpl(
 
     private suspend fun fetchUserFromRemote() = apiDataSource.fetch()
         .let { response ->
+            val lastUpdated = response.lastUpdate.parseLastUpdated()
             dao.insertClientProfile(with(ClientProfileMapper()) { response.toEntity() })
             response.services.mobileServices
-                .forEach { dao.insertMobileServices(with(mobServMapper) { it.toEntity() }) }
+                .forEach { dao.insertMobileServices(with(mobServMapper) { it.toEntity() }.copy(lastUpdated = lastUpdated)) }
             response.services.navServices
                 .forEach { dao.insertNavigationServices(with(NavServMapper()) { it.toEntity() }) }
         }
 
     @SuppressLint("MissingPermission")
     private suspend fun fetchUserFromLocal(simCard: SimCard, isRemote: Boolean = false) =
-        localDataSource.fetch(simCard, isRemote).let { dao.insertMobileServices(it) }
+        localDataSource.fetch(simCard, isRemote).let { service ->
+            val lastUpdated = System.currentTimeMillis()
+            dao.insertMobileServices(service.copy(lastUpdated = lastUpdated))
+        }
 
     override suspend fun fetchUser(simCard: SimCard?) {
         simCard?.also { sim ->
