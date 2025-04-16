@@ -7,9 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marlon.portalusuario.data.preferences.MobServicesPreferences
-import com.marlon.portalusuario.data.preferences.SessionStorage
 import com.marlon.portalusuario.domain.data.UserRepository
-import com.marlon.portalusuario.domain.model.DataSession
 import com.marlon.portalusuario.domain.model.MobServPreferences
 import com.marlon.portalusuario.domain.model.MobileService
 import com.marlon.portalusuario.util.Utils.isAtLeastOneHourElapsed
@@ -17,7 +15,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.suitetecsa.sdk.android.SimCardCollector
 import io.github.suitetecsa.sdk.android.model.SimCard
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -29,7 +26,6 @@ private const val TAG = "MobileServicesViewModel"
 class MobileServicesViewModel @Inject constructor(
     private val mobServicesPreferences: MobServicesPreferences,
     private val repository: UserRepository,
-    sessionStorage: SessionStorage,
     simCardCollector: SimCardCollector
 ) : ViewModel() {
     val mobileServices = repository.getMobileServices().stateIn(
@@ -41,11 +37,6 @@ class MobileServicesViewModel @Inject constructor(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
         initialValue = MobServPreferences(emptyList())
-    )
-    private val session: StateFlow<DataSession?> = sessionStorage.dataSession.stateIn(
-        viewModelScope,
-        SharingStarted.Eagerly,
-        null
     )
 
     @SuppressLint("MissingPermission")
@@ -97,7 +88,6 @@ class MobileServicesViewModel @Inject constructor(
 
             MobileServicesEvent.OnHideSImCardsSettings -> {
                 _state.value = _state.value.copy(isSimCardsSettingsVisible = false)
-                update(session.value != null)
             }
             MobileServicesEvent.OnShowSImCardsSettings ->
                 _state.value = _state.value.copy(isSimCardsSettingsVisible = true)

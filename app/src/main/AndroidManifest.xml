@@ -67,12 +67,6 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
         <activity
-            android:name=".activities.AuthActivity"
-            android:exported="false"
-            android:label="@string/title_activity_auth"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustResize"/>
-        <activity
             android:name=".intro.IntroActivity"
             android:exported="false"
             android:screenOrientation="portrait"

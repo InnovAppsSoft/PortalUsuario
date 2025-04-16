@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.marlon.portalusuario.R
-import com.marlon.portalusuario.activities.AuthActivity
 import com.marlon.portalusuario.activities.MainActivity
 import com.marlon.portalusuario.intro.IntroActivity
 import com.marlon.portalusuario.presentation.splash.SplashViewModel
@@ -46,7 +45,6 @@ fun SplashScreen(
     val scope = rememberCoroutineScope()
 
     val preference by viewModel.pref.collectAsStateWithLifecycle()
-    val session by viewModel.session.collectAsStateWithLifecycle()
 
     Surface(
         modifier = Modifier
@@ -87,18 +85,8 @@ fun SplashScreen(
                     context.startActivity(Intent(context, IntroActivity::class.java))
                     (context as Activity).finish()
                 } else {
-                    session?.let {
-                        context.startActivity(Intent(context, MainActivity::class.java))
-                        (context as Activity).finish()
-                    } ?: run {
-                        if (preference.skipLogin) {
-                            context.startActivity(Intent(context, MainActivity::class.java))
-                            (context as Activity).finish()
-                        } else {
-                            context.startActivity(Intent(context, AuthActivity::class.java))
-                            (context as Activity).finish()
-                        }
-                    }
+                    context.startActivity(Intent(context, MainActivity::class.java))
+                    (context as Activity).finish()
                 }
             }
         }
