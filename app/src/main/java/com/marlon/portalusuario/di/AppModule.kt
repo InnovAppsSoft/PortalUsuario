@@ -14,12 +14,8 @@ import com.marlon.portalusuario.data.mappers.NavServApiToEntityMapper
 import com.marlon.portalusuario.data.mappers.NavServEntityToDomainMapper
 import com.marlon.portalusuario.data.preferences.AppPreferencesManager
 import com.marlon.portalusuario.data.preferences.MobServicesPreferences
-import com.marlon.portalusuario.data.preferences.SessionStorage
-import com.marlon.portalusuario.data.source.AuthService
-import com.marlon.portalusuario.data.source.UserApiDataSource
 import com.marlon.portalusuario.data.user.UserRepositoryImpl
 import com.marlon.portalusuario.domain.data.UserRepository
-import com.marlon.portalusuario.presentation.mobileservices.usecases.RefreshAuthToken
 import com.marlon.portalusuario.util.NetworkConnectivityObserver
 import dagger.Module
 import dagger.Provides
@@ -27,7 +23,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.github.suitetecsa.sdk.android.SimCardCollector
-import io.github.suitetecsa.sdk.nauta.api.NautaApi
 import javax.inject.Singleton
 
 @Module
@@ -45,11 +40,6 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideSessionStorage(@ApplicationContext context: Context) =
-        SessionStorage(context)
-
-    @Singleton
-    @Provides
     fun provideServicesDB(@ApplicationContext context: Context) =
         Room.databaseBuilder(
             context,
@@ -60,17 +50,6 @@ class AppModule {
     @Singleton
     @Provides
     fun provideServicesDao(servicesDB: ServicesDB) = servicesDB.servicesDao
-
-    @Singleton
-    @Provides
-    fun provideNautaService(
-        refreshAuthToken: RefreshAuthToken,
-        sessionStorage: SessionStorage,
-    ) = UserApiDataSource(NautaApi.nautaService, refreshAuthToken, sessionStorage)
-
-    @Singleton
-    @Provides
-    fun provideAuthService() = AuthService(NautaApi.nautaService)
 
     @Singleton
     @Provides
@@ -116,23 +95,15 @@ class AppModule {
     @Singleton
     @Provides
     fun provideUserRepository(
-        userApiDataSource: UserApiDataSource,
         servicesDao: ServicesDao,
-        mobServiceApiToEntityMapper: MobServiceApiToEntityMapper,
         mobServiceEntityToDomainMapper: MobServiceEntityToDomainMapper,
-        clientProfileApiToEntityMapper: ClientProfileApiToEntityMapper,
         clientProfileEntityToDomainMapper: ClientProfileEntityToDomainMapper,
-        navServApiToEntityMapper: NavServApiToEntityMapper,
         navServEntityToDomainMapper: NavServEntityToDomainMapper
     ): UserRepository =
         UserRepositoryImpl(
-            apiDataSource = userApiDataSource,
             dao = servicesDao,
-            mobServiceApiToEntityMapper = mobServiceApiToEntityMapper,
             mobServiceEntityToDomainMapper = mobServiceEntityToDomainMapper,
-            clientProfileApiToEntityMapper = clientProfileApiToEntityMapper,
             clientProfileEntityToDomainMapper = clientProfileEntityToDomainMapper,
-            navServApiToEntityMapper = navServApiToEntityMapper,
             navServEntityToDomainMapper = navServEntityToDomainMapper
         )
 

@@ -20,6 +20,7 @@ class MobServiceEntityToDomainMapper : Mapper<Entity, Domain> {
         mainBalance = from.mainBalance,
         consumptionRate = from.consumptionRate,
         slotIndex = from.slotIndex,
-        type = from.type
+        type = from.type,
+        lastUpdated = from.lastUpdated
     )
 }
