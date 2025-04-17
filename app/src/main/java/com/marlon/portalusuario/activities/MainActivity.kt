@@ -124,6 +124,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if (preferences.isShowingTrafficBubble) {
+                    Log.d(TAG, "onCreate: isShowingTrafficBubble = true")
                     if (!Settings.canDrawOverlays(this@MainActivity)) {
                         Toast.makeText(
                             this@MainActivity,
@@ -136,8 +137,12 @@ class MainActivity : AppCompatActivity() {
                                 ("package:" + this@MainActivity.packageName).toUri()
                             )
                         )
-                    } else if (!networkConnectivityObserver.isCallbackRegistered) networkConnectivityObserver.startMonitoring()
+                    } else if (!networkConnectivityObserver.isCallbackRegistered) {
+                        Log.d(TAG, "onCreate: isCallbackRegistered = false")
+                        networkConnectivityObserver.startMonitoring()
+                    }
                 } else {
+                    Log.d(TAG, "onCreate: isShowingTrafficBubble = false")
                     if (networkConnectivityObserver.isCallbackRegistered) networkConnectivityObserver.stopMonitoring()
                 }
             }
