@@ -1,6 +1,5 @@
 package com.marlon.portalusuario.presentation.mobileservices.components.configsimcards
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,7 +27,6 @@ import kotlinx.coroutines.launch
 fun rememberConfigSimCardsViewState(viewModel: ConfigSimCardsViewModel = hiltViewModel()) =
     remember { ConfigSimCardsViewState(viewModel) }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ConfigSimCardsView(
     state: ConfigSimCardsViewState,

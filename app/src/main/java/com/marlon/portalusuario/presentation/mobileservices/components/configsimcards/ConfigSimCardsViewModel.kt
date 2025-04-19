@@ -1,6 +1,6 @@
 package com.marlon.portalusuario.presentation.mobileservices.components.configsimcards
 
-import android.os.Build
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -30,6 +30,7 @@ class ConfigSimCardsViewModel @Inject constructor(
     private val simCardCollector: SimCardCollector
 ) : ViewModel() {
     private val simCards: List<SimCard>
+        @SuppressLint("MissingPermission")
         get() = runBlocking {
             preferences.preferences.first().slotIndexInfoList.let { indexes ->
                 simCardCollector.collect().filter {
@@ -76,9 +77,7 @@ class ConfigSimCardsViewModel @Inject constructor(
                             )
                         }
                     )
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        repository.fetchUser(_state.value.currentSimCard.copy(phoneNumber = _state.value.phoneNumber))
-                    }
+                    repository.fetchUser(_state.value.currentSimCard.copy(phoneNumber = _state.value.phoneNumber))
                     Log.d(
                         TAG,
                         "onEvent: current slotIndex :: ${_state.value.currentSimCard.slotIndex}"
