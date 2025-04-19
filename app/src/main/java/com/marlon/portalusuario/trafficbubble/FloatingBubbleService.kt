@@ -77,18 +77,18 @@ class FloatingBubbleService : Service() {
                 )
 
                 if (bubbleState.isShowingAccountBalance) {
-                    bubbleBinding.textCuentasSaldo.visibility = View.VISIBLE
-                    bubbleBinding.textCuentasSaldo.text = bubbleState.accountBalance
+                    bubbleBinding.timeLayout.visibility = View.VISIBLE
                 } else {
-                    bubbleBinding.textCuentasSaldo.visibility = View.GONE
+                    bubbleBinding.timeLayout.visibility = View.GONE
                 }
+                bubbleBinding.textCuentasSaldo.text = bubbleState.accountBalance
 
                 if (bubbleState.isShowingDataBalance) {
-                    bubbleBinding.textCuentasDatos.visibility = View.VISIBLE
-                    bubbleBinding.textCuentasDatos.text = bubbleState.dataBalance
+                    bubbleBinding.dataLayout.visibility = View.VISIBLE
                 } else {
-                    bubbleBinding.textCuentasDatos.visibility = View.GONE
+                    bubbleBinding.dataLayout.visibility = View.GONE
                 }
+                bubbleBinding.textCuentasDatos.text = bubbleState.dataBalance
             }
         }
     }
@@ -118,6 +118,8 @@ class FloatingBubbleService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+
+        Log.d(TAG, "onCreate: Service is creating...")
 
         isStarted = true
         weakReference = WeakReference(this)
@@ -254,18 +256,29 @@ class FloatingBubbleService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
+        Log.d(TAG, "onDestroy: Service is destroying...")
         destroyFloatingWindow()
-        isStarted = false
     }
 
     private fun destroyFloatingWindow() {
-        // Detener todas las ejecuciones futuras del runnable para evitar fugas de memoria
         handler.removeCallbacks(updateRunnable)
-        windowManager.removeView(bubbleBinding.root)
-        windowManager.removeView(trashBinding.root)
-        windowManager.removeView(trashOverBinding.root)
-        isStarted = false
-        stopSelf()
+
+        try {
+            removeViewSafely(bubbleBinding.root, "bubble")
+            removeViewSafely(trashBinding.root, "trash")
+            removeViewSafely(trashOverBinding.root, "trashOver")
+        } finally {
+            isStarted = false
+            stopSelf()
+        }
+    }
+
+    private fun removeViewSafely(view: View, viewName: String) {
+        try {
+            windowManager.removeView(view)
+        } catch (e: IllegalArgumentException) {
+            Log.w("destroyFloatingWindow", "$viewName view not attached", e)
+        }
     }
 
     private inner class FloatingOnTouchListener : OnTouchListener {

@@ -117,9 +117,11 @@ class NetworkConnectivityObserver(private val context: Context) {
 
     private fun handleNetworkAvailability() {
         val networkType = getNetworkType()
-        Log.d(TAG, "Starting floating bubble service :: $networkType")
-        stopFloatingBubbleService()
-        startFloatingBubbleService(networkType)
+        if (!FloatingBubbleService.isStarted) {
+            Log.d(TAG, "Starting floating bubble service :: $networkType")
+            stopFloatingBubbleService()
+            startFloatingBubbleService(networkType)
+        }
     }
 
     private fun handleNetworkLoss() {
