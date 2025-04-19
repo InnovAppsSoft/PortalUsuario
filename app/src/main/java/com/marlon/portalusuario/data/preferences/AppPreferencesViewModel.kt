@@ -26,8 +26,7 @@ class AppPreferencesViewModel @Inject constructor(
                     appPreferencesManager.updateIsShowingTrafficBubble(event.value)
                 is AppPreferencesEvent.OnUpdateModeNight ->
                     appPreferencesManager.updateModeNight(event.value)
-                is AppPreferencesEvent.OnUpdateSkippedLogin ->
-                    appPreferencesManager.updateSkippedLogin(event.value)
+                is AppPreferencesEvent.OnUpdateSkippedLogin -> {}
                 is AppPreferencesEvent.OnUpdateIsIntroOpened ->
                     appPreferencesManager.updateIsIntroOpened(event.value)
             }

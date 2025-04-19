@@ -38,6 +38,8 @@ private const val GRAVITY_CENTER = Gravity.CENTER_VERTICAL or Gravity.CENTER_HOR
 private const val INITIAL_POSITION_X = 0
 private const val INITIAL_POSITION_Y = 0
 
+private const val TAG = "FloatingBubbleService"
+
 @AndroidEntryPoint
 class FloatingBubbleService : Service() {
     @Inject
@@ -73,8 +75,20 @@ class FloatingBubbleService : Service() {
                     R.string.download_traffic_template,
                     humanReadableByteCount(bubbleState.downloadSpeed)
                 )
-                bubbleBinding.textCuentasSaldo.text = bubbleState.accountBalance
-                bubbleBinding.textCuentasDatos.text = bubbleState.dataBalance
+
+                if (bubbleState.isShowingAccountBalance) {
+                    bubbleBinding.textCuentasSaldo.visibility = View.VISIBLE
+                    bubbleBinding.textCuentasSaldo.text = bubbleState.accountBalance
+                } else {
+                    bubbleBinding.textCuentasSaldo.visibility = View.GONE
+                }
+
+                if (bubbleState.isShowingDataBalance) {
+                    bubbleBinding.textCuentasDatos.visibility = View.VISIBLE
+                    bubbleBinding.textCuentasDatos.text = bubbleState.dataBalance
+                } else {
+                    bubbleBinding.textCuentasDatos.visibility = View.GONE
+                }
             }
         }
     }
@@ -90,7 +104,6 @@ class FloatingBubbleService : Service() {
     }
 
     private fun performUpdate() {
-        // Verificar conexión a Internet antes de continuar
         if (!Util.isConnected(applicationContext)) {
             Log.w("NetworkMonitor", "No internet connection. Stopping update.")
             stopSelf()
@@ -134,8 +147,42 @@ class FloatingBubbleService : Service() {
         return START_STICKY // - return START_NOT_STICKY;
     }
 
+    /**
+     * Sets up the layout parameters for the bubble and delete bubble views.
+     *
+     * This function initializes two `WindowManager.LayoutParams` objects:
+     * - `bubbleLayoutParams`: Defines the layout parameters for the main floating bubble.
+     * - `deleteBubbleLayoutParams`: Defines the layout parameters for the delete zone bubble.
+     *
+     * It configures these parameters as follows:
+     *
+     * **Common Settings:**
+     * - `type`: Set to `WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY` to ensure the bubbles
+     *   float above other applications.
+     * - `flags`: Set to `WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE` to prevent the bubbles
+     *   from taking input focus. This ensures that clicks can pass through the bubbles to the
+     *   underlying app.
+     * - `format`: Set to `PixelFormat.TRANSLUCENT` to allow for transparency in the bubble views.
+     * - `width` and `height`: Set to `WindowManager.LayoutParams.WRAP_CONTENT` so the bubbles
+     *    will resize depending on their content.
+     *
+     * **Bubble Layout Parameters (`bubbleLayoutParams`) Specific Settings:**
+     * - `gravity`: Set to `Gravity.CENTER` to position the bubble in the center of the screen.
+     * - `x`: Set to `INITIAL_POSITION_X` to define the initial horizontal position.
+     * - `y`: Set to `INITIAL_POSITION_Y` to define the initial vertical position.
+     *
+     * **Delete Bubble Layout Parameters (`deleteBubbleLayoutParams`) Specific Settings:**
+     * - `gravity`: Set to `Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL` to position the delete zone bubble
+     *   at the bottom center of the screen.
+     * - `y`: Set to `20` to position the delete bubble 20 pixels from the bottom of the screen. This offset helps it
+     * to be slightly above the bottom edge.
+     *
+     * **Note:**
+     * - `INITIAL_POSITION_X` and `INITIAL_POSITION_Y` are assumed to be pre-defined constants that specify the initial
+     *   coordinates for the main floating bubble.
+     * - The values for `x` and `y` are in pixels.
+     */
     private fun setUpLayouts() {
-        // FLOATING BUBBLE LAYOUT PARAMS
         val type =
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
         bubbleLayoutParams = WindowManager.LayoutParams(
@@ -145,15 +192,13 @@ class FloatingBubbleService : Service() {
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
             PixelFormat.TRANSLUCENT
         )
-        //
+
         bubbleLayoutParams.gravity = GRAVITY_CENTER
 
-        // Configurar la posición inicial de la burbuja flotante en el centro de la pantalla
+
         bubbleLayoutParams.x = INITIAL_POSITION_X
         bubbleLayoutParams.y = INITIAL_POSITION_Y
-        //
-        // TRASH ICON LAYOUT PARAMS
-        //
+
         deleteBubbleLayoutParams = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT,

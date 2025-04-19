@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ShareCompat.IntentBuilder
@@ -28,7 +27,6 @@ import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ViewModel.PunViewModel
 import com.marlon.portalusuario.components.SetLTEModeDialog
 import com.marlon.portalusuario.data.preferences.AppPreferencesManager
-import com.marlon.portalusuario.data.preferences.AppPreferencesViewModel
 import com.marlon.portalusuario.databinding.ActivityMainBinding
 import com.marlon.portalusuario.domain.model.ModeNight
 import com.marlon.portalusuario.errores_log.LogFileViewerActivity
@@ -166,7 +164,6 @@ class MainActivity : AppCompatActivity() {
         PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false)
         requestPermissions()
 
-        context = this
         // drawer Nav View
         setUpDrawer()
         //
@@ -294,8 +291,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private var context: Context? = null
-
         private var punViewModel: PunViewModel? = null
 
         @JvmStatic

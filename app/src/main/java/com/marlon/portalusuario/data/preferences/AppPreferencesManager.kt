@@ -16,6 +16,21 @@ import java.io.IOException
 private const val AppPreferencesName = "APP_PREFERENCES"
 private val Context.dataStore by preferencesDataStore(name = AppPreferencesName)
 
+/**
+ * Manages application preferences using Android DataStore.
+ *
+ * This class provides methods to read and update various application settings, such as:
+ * - Night mode (light, dark, follow system).
+ * - Visibility of the traffic bubble.
+ * - Visibility of account balance on the traffic bubble.
+ * - Visibility of data balance on the traffic bubble.
+ * - Whether the intro screen has been opened.
+ *
+ * The preferences are stored using the DataStore mechanism, providing a type-safe and asynchronous
+ * way to persist data.
+ *
+ * @property context The application context, required for accessing DataStore.
+ */
 class AppPreferencesManager(private val context: Context) {
     fun preferences(): Flow<AppSettings> = context.dataStore.data
         .catch { exception ->
@@ -25,22 +40,30 @@ class AppPreferencesManager(private val context: Context) {
                 throw exception
             }
         }.map { preferences ->
-            val skippedLogin = preferences[AppPreferencesKeys.SKIPPED_LOGIN] ?: false
             val modeNight = (preferences[AppPreferencesKeys.MODE_NIGHT] ?: "FOLLOW_SYSTEM").let { ModeNight.valueOf(it) }
             val isShowingTrafficBubble = preferences[AppPreferencesKeys.IS_SHOWING_TRAFFIC_BUBBLE] ?: false
+            val isShowingAccountBalanceOnTrafficBubble = preferences[AppPreferencesKeys.IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE] ?: false
+            val isShowingDataBalanceOnTrafficBubble = preferences[AppPreferencesKeys.IS_SHOWING_DATA_BALANCE_ON_TRAFFIC_BUBBLE] ?: false
             val isIntroOpened = preferences[AppPreferencesKeys.IS_INTRO_OPENED] ?: false
 
             AppSettings(
-                skipLogin = skippedLogin,
                 modeNight = modeNight,
                 isShowingTrafficBubble = isShowingTrafficBubble,
+                isShowingAccountBalanceOnTrafficBubble = isShowingAccountBalanceOnTrafficBubble,
+                isShowingDataBalanceOnTrafficBubble = isShowingDataBalanceOnTrafficBubble,
                 isIntroOpened = isIntroOpened
             )
         }
 
-    suspend fun updateSkippedLogin(skippedLogin: Boolean) {
+    suspend fun updateIsShowingAccountBalanceOnTrafficBubble(isShowingAccountBalanceOnTrafficBubble: Boolean) {
         context.dataStore.edit { preferences ->
-            preferences[AppPreferencesKeys.SKIPPED_LOGIN] = skippedLogin
+            preferences[AppPreferencesKeys.IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE] = isShowingAccountBalanceOnTrafficBubble
+        }
+    }
+
+    suspend fun updateIsShowingDataBalanceOnTrafficBubble(isShowingDataBalanceOnTrafficBubble: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[AppPreferencesKeys.IS_SHOWING_DATA_BALANCE_ON_TRAFFIC_BUBBLE] = isShowingDataBalanceOnTrafficBubble
         }
     }
 
@@ -64,8 +87,9 @@ class AppPreferencesManager(private val context: Context) {
 }
 
 private object AppPreferencesKeys {
-    val SKIPPED_LOGIN = booleanPreferencesKey("SKIPPED_LOGIN")
     val MODE_NIGHT = stringPreferencesKey("MODE_NIGHT")
     val IS_SHOWING_TRAFFIC_BUBBLE = booleanPreferencesKey("IS_SHOWING_TRAFFIC_BUBBLE")
+    val IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE = booleanPreferencesKey("IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE")
+    val IS_SHOWING_DATA_BALANCE_ON_TRAFFIC_BUBBLE = booleanPreferencesKey("IS_SHOWING_DATA_BALANCE_ON_TRAFFIC_BUBBLE")
     val IS_INTRO_OPENED = booleanPreferencesKey("IS_INTRO_OPENED")
 }
