@@ -18,4 +18,5 @@ data class MobileService(
     val slotIndex: Int,
     val type: ServiceType,
     val lastUpdated: Long = 0,
+    val subscriptionId: Int? = null,
 )

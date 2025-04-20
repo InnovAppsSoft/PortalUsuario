@@ -26,7 +26,7 @@ private const val TAG = "MobileServicesViewModel"
 class MobileServicesViewModel @Inject constructor(
     private val mobServicesPreferences: MobServicesPreferences,
     private val repository: UserRepository,
-    simCardCollector: SimCardCollector
+    private val simCardCollector: SimCardCollector
 ) : ViewModel() {
     val mobileServices = repository.getMobileServices().stateIn(
         scope = viewModelScope,

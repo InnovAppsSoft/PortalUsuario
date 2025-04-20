@@ -8,6 +8,7 @@ import com.marlon.portalusuario.data.mappers.NavServEntityToDomainMapper
 import com.marlon.portalusuario.data.source.UserLocalDataSource
 import com.marlon.portalusuario.domain.data.UserRepository
 import com.marlon.portalusuario.domain.model.ClientProfile
+import com.marlon.portalusuario.domain.model.MobileService
 import com.marlon.portalusuario.domain.model.NavigationService
 import com.marlon.portalusuario.domain.model.ServiceType.Local
 import com.marlon.portalusuario.domain.model.ServiceType.LocalAndRemote
@@ -34,14 +35,7 @@ class UserRepositoryImpl(
         }
 
     override suspend fun fetchUser(simCard: SimCard?) {
-        simCard?.also { sim ->
-            when (getMobileServices().first()
-                .firstOrNull { it.id == "53${sim.phoneNumber!!}" }?.type ?: Local) {
-                Local -> fetchUserFromLocal(sim)
-                Remote -> {}
-                LocalAndRemote -> fetchUserFromLocal(sim, true)
-            }
-        }
+        simCard?.also { fetchUserFromLocal(it) }
     }
 
     override fun getClientProfile(): Flow<ClientProfile> =
