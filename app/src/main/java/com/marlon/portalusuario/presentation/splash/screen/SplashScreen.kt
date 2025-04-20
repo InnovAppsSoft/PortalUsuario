@@ -78,15 +78,17 @@ fun SplashScreen(
             )
         }
 
-        LaunchedEffect(Unit) {
+        LaunchedEffect(preference) {
             scope.launch {
                 delay(MinTime)
-                if (!preference.isIntroOpened) {
-                    context.startActivity(Intent(context, IntroActivity::class.java))
-                    (context as Activity).finish()
-                } else {
-                    context.startActivity(Intent(context, MainActivity::class.java))
-                    (context as Activity).finish()
+                preference?.also {
+                    if (!it.isIntroOpened) {
+                        context.startActivity(Intent(context, IntroActivity::class.java))
+                        (context as Activity).finish()
+                    } else {
+                        context.startActivity(Intent(context, MainActivity::class.java))
+                        (context as Activity).finish()
+                    }
                 }
             }
         }
