@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Surface
@@ -28,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -49,16 +51,43 @@ fun SettingsScreen(viewModel: AppPreferencesViewModel = hiltViewModel()) {
     val context = LocalContext.current
 
     Column(modifier = Modifier.fillMaxSize()) {
-        SettingsItem(stringResource(R.string.apariecia_settings), getModeNightName(context, state.modeNight)) {
+        Text(
+            text = stringResource(R.string.ajustes1),
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold,
+
+            )
+        SettingsItem(
+            stringResource(R.string.apariecia_settings),
+            getModeNightName(context, state.modeNight)
+        ) {
             isShowingModeNightDialog = true
         }
-        SettingsItemCheckable(stringResource(R.string.show_floating_bubble), state.isShowingTrafficBubble) {
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = "Burbuja flotante",
+                modifier = Modifier.padding(horizontal = 8.dp),
+                color = TextFieldDefaults.colors().disabledTextColor
+            )
+            HorizontalDivider()
+        }
+
+        SettingsItemCheckable(
+            stringResource(R.string.show_floating_bubble),
+            state.isShowingTrafficBubble
+        ) {
             viewModel.onEvent(AppPreferencesEvent.OnUpdateIsShowingTrafficBubble(!state.isShowingTrafficBubble))
         }
-        SettingsItemCheckable("", state.isShowingAccountBalanceOnTrafficBubble) {
-            viewModel.onEvent(AppPreferencesEvent.OnSwitchingAccountBalanceOnTrafficBubbleVisibility(!state.isShowingAccountBalanceOnTrafficBubble))
+        SettingsItemCheckable("Mostrar saldo", state.isShowingAccountBalanceOnTrafficBubble) {
+            viewModel.onEvent(
+                AppPreferencesEvent.OnSwitchingAccountBalanceOnTrafficBubbleVisibility(
+                    !state.isShowingAccountBalanceOnTrafficBubble
+                )
+            )
         }
-        SettingsItemCheckable("", state.isShowingDataBalanceOnTrafficBubble) {
+        SettingsItemCheckable("Mostrar datos", state.isShowingDataBalanceOnTrafficBubble) {
             viewModel.onEvent(AppPreferencesEvent.OnSwitchingDataBalanceOnTrafficBubbleVisibility(!state.isShowingDataBalanceOnTrafficBubble))
         }
     }
@@ -84,7 +113,7 @@ fun SettingsItemCheckable(title: String, isChecked: Boolean, onCheckedChange: (B
             .padding(horizontal = 16.dp)
             .fillMaxWidth()
     ) {
-        Text(text = title)
+        Text(text = title, modifier = Modifier.padding(horizontal = 8.dp))
         Switch(
             checked = isChecked,
             onCheckedChange = onCheckedChange
@@ -120,9 +149,11 @@ fun ModeNightDialog(
     val selectedOption = options.first { it.second == currentModeNight }
 
     Dialog(onDismissRequest = onDismissRequest) {
-        Card(modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
             Column(
                 modifier = Modifier
                     .padding(16.dp)
@@ -156,10 +187,10 @@ fun ModeNightDialog(
 }
 
 fun getModeNightName(context: Context, modeNight: ModeNight) = when (modeNight) {
-        ModeNight.YES -> context.getString(R.string.ui_mode_dark)
-        ModeNight.NO -> context.getString(R.string.ui_mode_light)
-        ModeNight.FOLLOW_SYSTEM -> context.getString(R.string.ui_mode_system)
-    }
+    ModeNight.YES -> context.getString(R.string.ui_mode_dark)
+    ModeNight.NO -> context.getString(R.string.ui_mode_light)
+    ModeNight.FOLLOW_SYSTEM -> context.getString(R.string.ui_mode_system)
+}
 
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
