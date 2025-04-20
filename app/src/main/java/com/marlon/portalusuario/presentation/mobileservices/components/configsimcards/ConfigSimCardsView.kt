@@ -37,7 +37,7 @@ fun ConfigSimCardsView(
     val coroutineScope = rememberCoroutineScope()
     val pagerState = rememberPagerState { state.viewModel.state.simCards.size }
 
-    LaunchedEffect(key1 = state.viewModel.state.isLoading) {
+    LaunchedEffect(state.viewModel.state.isLoading) {
         onSetIsLoading(state.viewModel.state.isLoading)
     }
 

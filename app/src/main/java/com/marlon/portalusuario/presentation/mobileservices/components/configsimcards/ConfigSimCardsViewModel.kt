@@ -67,6 +67,7 @@ class ConfigSimCardsViewModel @Inject constructor(
                 )
             is ConfigSimCardsEvent.OnSimCardAdd -> viewModelScope.launch {
                 if (isPhoneNumberValid) {
+                    _state.value = _state.value.copy(isLoading = true)
                     preferences.updateSlotIndexInfoList(
                         pref.value.slotIndexInfoList.toMutableList().apply {
                             add(
@@ -86,6 +87,7 @@ class ConfigSimCardsViewModel @Inject constructor(
                         TAG,
                         "onEvent: last slotIndex :: ${_state.value.simCards.last().slotIndex}"
                     )
+                    _state.value = _state.value.copy(isLoading = false)
                     if (_state.value.currentSimCard.slotIndex == _state.value.simCards.last().slotIndex) {
                         event.onFinish()
                     } else {
