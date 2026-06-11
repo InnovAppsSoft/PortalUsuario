@@ -1,18 +1,13 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
     dependencies {
-        classpath(libs.androidx.navigation.safe.args.gradle.plugin)
-        classpath(libs.gradle)
-        classpath(libs.google.services)
-        classpath(libs.kotlin.gradle.plugin)
-        classpath(libs.firebase.crashlytics.gradle)
-        classpath(libs.firebase.appdistribution.gradle)
-        classpath(libs.dependency.analysis.gradle.plugin)
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath("com.android.tools.build:gradle:8.5.1")
     }
 }
 
@@ -20,9 +15,7 @@ plugins {
     alias(libs.plugins.hilt.android) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.devtools.ksp) apply false
-    alias(libs.plugins.androidLibrary) apply false
     alias(libs.plugins.arturbosch.detekt) apply false
-    id("com.autonomousapps.dependency-analysis") version "2.12.0"
 }
 
 tasks.register("clean", Delete::class) {
@@ -35,14 +28,4 @@ tasks.withType<Detekt>().configureEach {
 
 tasks.withType<DetektCreateBaselineTask>().configureEach {
     jvmTarget = "17"
-}
-
-dependencyAnalysis {
-    structure {
-        ignoreKtx(true) // default is false
-        bundle("kotlin-stdlib") {
-            includeGroup("org.jetbrains.kotlin")
-        }
-    }
-
 }
