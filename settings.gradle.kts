@@ -6,8 +6,6 @@ pluginManagement {
     }
 
     plugins {
-        id("com.autonomousapps.build-health") version "2.12.0"
-        id("com.android.application") apply false
         id("org.jetbrains.kotlin.android") apply false
     }
 }
