@@ -32,7 +32,6 @@ import com.marlon.portalusuario.activities.PrivateCallActivity;
 import com.marlon.portalusuario.activities.SmsActivity;
 import com.marlon.portalusuario.activities.VozActivity;
 import com.marlon.portalusuario.errores_log.JCLogging;
-import com.marlon.portalusuario.util.Util;
 
 public class ServiciosFragment<b> extends Fragment {
 
@@ -50,8 +49,6 @@ public class ServiciosFragment<b> extends Fragment {
     private TextView networkClass,Fecha;
     private TelephonyManager telephonyManager;
     private TextView tvSignal;
-    private Util util;
-
     private JCLogging logging;
 
     static final int PICK_CONTACT_REQUEST = 1;
@@ -60,7 +57,6 @@ public class ServiciosFragment<b> extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_servicios, container, false);
 
-        util = new Util();
         logging = new JCLogging(getActivity());
         // ui components init
 
