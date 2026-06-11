@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <issue id="MissingTranslation" severity="informational" />
+    <issue id="ExtraTranslation" severity="ignore" />
+    <issue id="TypographyDashes" severity="informational" />
+    <issue id="IconMissingDensityFolder" severity="ignore" />
+    <issue id="GoogleAppIndexingWarning" severity="ignore" />
+    <issue id="StaticFieldLeak" severity="warning" />
+    <issue id="DefaultLocale" severity="warning" />
+    <issue id="SetTextI18n" severity="informational" />
+</lint>

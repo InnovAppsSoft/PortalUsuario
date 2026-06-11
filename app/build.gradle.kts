@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.arturbosch.detekt)
     alias(libs.plugins.kotlin.plugin.compose)
+    alias(libs.plugins.ktlint)
 }
 
 android {
