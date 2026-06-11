@@ -1,0 +1,72 @@
+package com.marlon.portalusuario.util
+
+import android.net.Uri
+
+object CodigosUSSD {
+    const val ActivarBolsaDiaria = "*133*1*3"
+    const val ActivarPlan10MIN = "*133*3*2"
+    const val ActivarPlan10SMS = "*133*2*1"
+    const val ActivarPlan15MIN = "*133*3*3"
+    const val ActivarPlan1gb = "*133*1*3*3"
+    const val ActivarPlan1gb4G = "*133*1*4*3"
+    const val ActivarPlan20SMS = "*133*2*2"
+    const val ActivarPlan25MIN = "*133*3*4"
+    const val ActivarPlan25gb = "*133*1*3*4"
+    const val ActivarPlan25gb4G = "*133*1*4*4"
+    const val ActivarPlan35SMS = "*133*2*3"
+    const val ActivarPlan400mb = "*133*1*3*1"
+    const val ActivarPlan400mb4G = "*133*1*4*1"
+    const val ActivarPlan40MIN = "*133*3*5"
+    const val ActivarPlan45SMS = "*133*2*4"
+    const val ActivarPlan4gb = "*133*1*3*5"
+    const val ActivarPlan4gb4G = "*133*1*4*5"
+    const val ActivarPlan5MIN = "*133*3*1"
+    const val ActivarPlan600mb = "*133*1*3*2"
+    const val ActivarPlan600mb4G = "*133*1*4*2"
+    const val ActivarPlanAmigos = "*133*4*1*1"
+    const val ActivarPlanLTE14gb4G = "*133*1*5*3"
+    const val ActivarPlanLTE1gb4G = "*133*1*5*1"
+    const val ActivarPlanLTE2punto5gb4G = "*133*1*5*2"
+    const val ActivarTarifaPorConsumo = "*133*1*1*1"
+    const val AdelantaSaldo = "*234*3*1"
+    const val AdicionarNumerosPlanAmigos = "*133*4*2*1*"
+    const val AtencionAlCliente = "*2266"
+    const val BolsaCorreo = "*133*1*2"
+    const val BonoDatos = "*222*266"
+    const val CONTACTO_OBTENIDO = -1
+    const val CambiarClaveTransferir = "*234*2*"
+    const val ConsultarBono = "*222*266"
+    const val ConsultarEstadoAdelantaSaldo = "*222*233"
+    const val ConsultarSaldo = "*222"
+    const val ConsultarSaldoPospago = "*111"
+    const val DesactivarPlanAmigos = "*133*4*1*2"
+    const val DesactivarTarifaPorConsumo = "*133*1*1*2"
+    const val Donar = "*234*1*58734011*"
+    const val EliminarNumerosPlanAmigos = "*133*4*2*2*"
+    const val EstadoInternet = "*222*468"
+    const val EstadoPlanAmigos = "*222*264"
+    const val ListaDeAmigos = "*133*4*3"
+    const val LlamadasAmbulancias = "104"
+    const val LlamadasAsterisco99 = "*99"
+    const val LlamadasAsteriscoPlus99 = "*+99"
+    const val LlamadasBomberos = "105"
+    const val LlamadasCubacel = "52642266"
+    const val LlamadasInfo = "118"
+    const val LlamadasLineaAntidrogas = "103"
+    val LlamadasNumeroOculto get() = "${Uri.encode("#")}31${Uri.encode("#")}"
+    const val LlamadasPolicia = "106"
+    const val LlamadasSalvamentoMaritimo = "107"
+    const val PHONE_CALL_CODE = 100
+    const val PICK_CONTACT_REQUEST = 10
+    const val READ_CONTACTS_AND_PHONE_CALL_CODE = 10000
+    const val READ_CONTACTS_CODE = 10
+    const val READ_PHONE_STATE_CODE = 1000
+    const val RecargarSaldo = "*662*"
+    const val SaldoDatos = "*222*328"
+    const val SaldoSMS = "*222*767"
+    const val SaldoVoz = "*222*869"
+    const val ServiciosSMSGratis = "2266"
+    const val TransferirSaldo = "*234*1*"
+    val encodeHash get() = Uri.encode("#")
+    const val f0LlamadasAtencinAlCliente = "*2266"
+}

@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>CyclomaticComplexMethod:MainActivity.kt$MainActivity$private fun setUpDrawer()</ID>
+    <ID>InvalidPackageDeclaration:Type.kt$package com.marlon.portalusuario.theme</ID>
+    <ID>LongMethod:MainActivity.kt$MainActivity$private fun setUpDrawer()</ID>
+    <ID>LongMethod:PermissionActivity.kt$@Composable fun PermissionSteps( viewModel: PermissionViewModel, overlayPermissionLauncher: ActivityResultLauncher&lt;Intent&gt;, activity: Activity )</ID>
+    <ID>MagicNumber:PermissionActivity.kt$0xFF3A3A3A</ID>
+    <ID>MagicNumber:PermissionActivity.kt$0xFFF5F5F5</ID>
+    <ID>MagicNumber:PrettyCard.kt$0xFFFF4747</ID>
+    <ID>MagicNumber:Utils.kt$Utils$1000</ID>
+    <ID>MagicNumber:Utils.kt$Utils$3600</ID>
+    <ID>MaxLineLength:AboutActivity.kt$AboutActivity$experienceButton.findViewById&lt;android.widget.TextView&gt;(R.id.experiencebtn).setTextColor(if (experienceActive) activeColor else inactiveColor)</ID>
+    <ID>MaxLineLength:AboutActivity.kt$AboutActivity$reviewButton.findViewById&lt;android.widget.TextView&gt;(R.id.reviewbtn).setTextColor(if (!experienceActive) activeColor else inactiveColor)</ID>
+    <ID>MaxLineLength:AppPreferencesManager.kt$AppPreferencesKeys$val IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE = booleanPreferencesKey("IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE")</ID>
+    <ID>MaxLineLength:AppPreferencesManager.kt$AppPreferencesManager$preferences[AppPreferencesKeys.IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE] = isShowingAccountBalanceOnTrafficBubble</ID>
+    <ID>MaxLineLength:AppPreferencesManager.kt$AppPreferencesManager$preferences[AppPreferencesKeys.IS_SHOWING_DATA_BALANCE_ON_TRAFFIC_BUBBLE] = isShowingDataBalanceOnTrafficBubble</ID>
+    <ID>MaxLineLength:AppPreferencesManager.kt$AppPreferencesManager$val isShowingAccountBalanceOnTrafficBubble = preferences[AppPreferencesKeys.IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE] ?: false</ID>
+    <ID>MaxLineLength:AppPreferencesManager.kt$AppPreferencesManager$val isShowingDataBalanceOnTrafficBubble = preferences[AppPreferencesKeys.IS_SHOWING_DATA_BALANCE_ON_TRAFFIC_BUBBLE] ?: false</ID>
+    <ID>MaxLineLength:AppPreferencesManager.kt$AppPreferencesManager$val modeNight = (preferences[AppPreferencesKeys.MODE_NIGHT] ?: "FOLLOW_SYSTEM").let { ModeNight.valueOf(it) }</ID>
+    <ID>MaxLineLength:BubbleState.kt$BubbleState$*</ID>
+    <ID>MaxLineLength:FloatingBubbleViewModel.kt$FloatingBubbleViewModel$*</ID>
+    <ID>MaxLineLength:FloatingBubbleViewModel.kt$FloatingBubbleViewModel$DataAvailable.DATA_AND_DATA_LTE -&gt; "${service.plans.first { it.type == "DATOS" }.data} + ${service.plans.first { it.type == "DATOS LTE" }.data} LTE"</ID>
+    <ID>MaxLineLength:FloatingBubbleViewModel.kt$FloatingBubbleViewModel$if</ID>
+    <ID>MaxLineLength:MobileServicesViewModel.kt$MobileServicesViewModel$if (mobileServices.value.first { it.id == _state.value.currentServiceId }.lastUpdated.isAtLeastOneHourElapsed()) update()</ID>
+    <ID>MaxLineLength:SettingsActivity.kt$SettingsActivity$}</ID>
+    <ID>MaxLineLength:SettingsScreen.kt$viewModel.onEvent(AppPreferencesEvent.OnSwitchingDataBalanceOnTrafficBubbleVisibility(!state.isShowingDataBalanceOnTrafficBubble))</ID>
+    <ID>NestedBlockDepth:MainActivity.kt$MainActivity$private fun listenPreferences(preferences: SharedPreferences, key: String?)</ID>
+    <ID>NewLineAtEndOfFile:FloatingBubbleViewModel.kt$com.marlon.portalusuario.trafficbubble.FloatingBubbleViewModel.kt</ID>
+    <ID>NewLineAtEndOfFile:NetworkConnectivityObserver.kt$com.marlon.portalusuario.util.NetworkConnectivityObserver.kt</ID>
+    <ID>NewLineAtEndOfFile:ServiceModule.kt$com.marlon.portalusuario.di.ServiceModule.kt</ID>
+    <ID>NewLineAtEndOfFile:SetLTEModeDialog.kt$com.marlon.portalusuario.components.SetLTEModeDialog.kt</ID>
+    <ID>NewLineAtEndOfFile:Type.kt$com.marlon.portalusuario.theme.Type.kt</ID>
+    <ID>PackageNaming:PermissionActivity.kt$package com.marlon.portalusuario.Permisos</ID>
+    <ID>PackageNaming:PermissionViewModel.kt$package com.marlon.portalusuario.Permisos</ID>
+    <ID>ReturnCount:NetworkConnectivityObserver.kt$NetworkConnectivityObserver$private fun getNetworkType(): String?</ID>
+    <ID>SwallowedException:Save.kt$e: Exception</ID>
+    <ID>SwallowedException:Util.kt$Util$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:Save.kt$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:Util.kt$Util$e: Exception</ID>
+    <ID>TooManyFunctions:AppModule.kt$AppModule</ID>
+    <ID>TooManyFunctions:FloatingBubbleService.kt$FloatingBubbleService : Service</ID>
+    <ID>TopLevelPropertyNaming:CallForReverseChargeActivity.kt$private const val REQUEST_CODE = 1000</ID>
+    <ID>TopLevelPropertyNaming:DonationActivity.kt$private const val ALL_FIELDS_ARE_REQUIRED = "Todos los campos son obligatorios"</ID>
+    <ID>TopLevelPropertyNaming:DonationActivity.kt$private const val REQUEST_CODE = 1000</ID>
+    <ID>TopLevelPropertyNaming:EmergencyCallsActivity.kt$private const val REQUEST_CODE = 1000</ID>
+    <ID>TopLevelPropertyNaming:FloatingBubbleService.kt$private const val GRAVITY_CENTER = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL</ID>
+    <ID>TopLevelPropertyNaming:FloatingBubbleService.kt$private const val INITIAL_POSITION_X = 0</ID>
+    <ID>TopLevelPropertyNaming:FloatingBubbleService.kt$private const val INITIAL_POSITION_Y = 0</ID>
+    <ID>TopLevelPropertyNaming:FloatingBubbleService.kt$private const val VIBRATE_TIME = 100L</ID>
+    <ID>TopLevelPropertyNaming:FloatingBubbleViewModel.kt$private const val BYTE_UNIT_SI = 1000</ID>
+    <ID>TopLevelPropertyNaming:PermissionActivity.kt$private const val RESULT_CALL: Int = 1001</ID>
+    <ID>TopLevelPropertyNaming:PlanAmigosActivity.kt$private const val REQUEST_CALL = 1</ID>
+    <ID>TopLevelPropertyNaming:PrivateCallActivity.kt$private const val REQUEST_CODE = 1000</ID>
+    <ID>TopLevelPropertyNaming:Save.kt$private const val IMAGE_QUALITY = 85</ID>
+    <ID>TopLevelPropertyNaming:SmsActivity.kt$private const val REQUEST_CALL = 1</ID>
+    <ID>TopLevelPropertyNaming:Util.kt$private const val BYTE_UNIT = 1024</ID>
+    <ID>TopLevelPropertyNaming:Util.kt$private const val BYTE_UNIT_SI = 1000</ID>
+    <ID>TopLevelPropertyNaming:Utils.kt$private const val DEFAULT_DATE_FORMAT = "dd/MM/yyyy"</ID>
+    <ID>TopLevelPropertyNaming:Utils.kt$private const val HOURS_PER_DAY = 24</ID>
+    <ID>TopLevelPropertyNaming:Utils.kt$private const val MINUTES_PER_HOUR = 60</ID>
+    <ID>TopLevelPropertyNaming:Utils.kt$private const val SECONDS_IN_HOUR = 3600</ID>
+    <ID>TopLevelPropertyNaming:Utils.kt$private const val SECONDS_IN_MINUTE = 60</ID>
+    <ID>TopLevelPropertyNaming:Utils.kt$private const val SIZE_UNIT_MAX_LENGTH = 1024.0</ID>
+    <ID>TopLevelPropertyNaming:VozActivity.kt$private const val REQUEST_CALL = 1</ID>
+    <ID>UnusedPrivateProperty:ExpirationSection.kt$private const val ElevenMonths = 330</ID>
+    <ID>UnusedPrivateProperty:ExpirationSection.kt$private const val TwelveMonths = 360</ID>
+  </CurrentIssues>
+</SmellBaseline>
