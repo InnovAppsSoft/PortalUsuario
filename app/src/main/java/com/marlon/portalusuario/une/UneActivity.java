@@ -17,13 +17,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.ViewModel.UneViewModel;
+import com.marlon.portalusuario.viewmodel.UneViewModel;
 import com.marlon.portalusuario.errores_log.JCLogging;
 import com.marlon.portalusuario.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class UneActivity extends AppCompatActivity {
 
     private final int lecturaActual = 0;
@@ -114,7 +117,7 @@ public class UneActivity extends AppCompatActivity {
         //
         // VIEW MODEL
         uneViewModel = new ViewModelProvider(this).get(UneViewModel.class);
-        uneViewModel.getAllUnes().observe(this, une -> {
+        uneViewModel.getAllUnesLiveData().observe(this, une -> {
             setAdapter(une);
         });
     }

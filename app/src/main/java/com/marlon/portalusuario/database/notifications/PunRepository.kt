@@ -2,17 +2,17 @@ package com.marlon.portalusuario.database.notifications
 
 import android.app.Application
 import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.preference.PreferenceManager
 import com.marlon.portalusuario.PUNotifications.PUNotification
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class PunRepository(application: Application) {
     private val punDao: PunDAO
     private val database: PunDataBase
-    val allPUN: LiveData<List<PUNotification>>
+    val allPUN: Flow<List<PUNotification>>
     private val app: Application = application
 
     init {

@@ -1,16 +1,16 @@
 package com.marlon.portalusuario.database.une
 
 import android.app.Application
-import androidx.lifecycle.LiveData
 import com.marlon.portalusuario.une.Une
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class UneRepository(application: Application) {
     private val uneDao: UneDAO
     private val database: UneDataBase
-    val allUnes: LiveData<List<Une>>
+    val allUnes: Flow<List<Une>>
 
     init {
         database = UneDataBase.getInstance(application)
