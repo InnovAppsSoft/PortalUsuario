@@ -62,6 +62,9 @@ sealed class Route(
     /** Perfil del usuario */
     data object Perfil : Route("perfil")
 
+    /** Servicios móviles (saldo, bonos, planes) */
+    data object MobileServices : Route("mobile_services")
+
     /** Visor de logs de depuración */
     data object LogFileViewer : Route("log_file_viewer")
 
