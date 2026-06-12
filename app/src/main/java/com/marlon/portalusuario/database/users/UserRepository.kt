@@ -1,16 +1,16 @@
 package com.marlon.portalusuario.database.users
 
 import android.app.Application
-import androidx.lifecycle.LiveData
 import com.marlon.portalusuario.model.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class UserRepository(application: Application) {
     private val userDao: UserDAO
     private val database: UserDataBase
-    val allUsers: LiveData<List<User>>
+    val allUsers: Flow<List<User>>
 
     init {
         database = UserDataBase.getInstance(application)

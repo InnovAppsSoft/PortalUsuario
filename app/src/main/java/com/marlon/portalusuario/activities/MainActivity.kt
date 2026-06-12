@@ -22,7 +22,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.preference.PreferenceManager.getDefaultSharedPreferences
 import com.marlon.portalusuario.R
-import com.marlon.portalusuario.ViewModel.PunViewModel
 import com.marlon.portalusuario.components.SetLTEModeDialog
 import com.marlon.portalusuario.data.preferences.AppPreferencesManager
 import com.marlon.portalusuario.databinding.ActivityMainBinding
@@ -36,6 +35,7 @@ import com.marlon.portalusuario.util.NetworkConnectivityObserver
 import com.marlon.portalusuario.util.Utils.hasPermissions
 import com.marlon.portalusuario.view.fragments.PaquetesFragment
 import com.marlon.portalusuario.view.fragments.ServiciosFragment
+import com.marlon.portalusuario.viewmodel.PunViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -1,6 +1,5 @@
 package com.marlon.portalusuario.PUNotifications;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
@@ -21,12 +20,14 @@ import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.marlon.portalusuario.R;
-import com.marlon.portalusuario.ViewModel.PunViewModel;
-import com.marlon.portalusuario.database.notifications.PunDAO;
+import com.marlon.portalusuario.viewmodel.PunViewModel;
 
 import java.util.List;
 
 import co.dift.ui.SwipeToAction;
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 
 public class PUNotificationsActivity extends AppCompatActivity {
     private PunViewModel punViewModel;
@@ -65,7 +66,7 @@ public class PUNotificationsActivity extends AppCompatActivity {
         //
         // observer
         punViewModel = new ViewModelProvider(this).get(PunViewModel.class);
-        punViewModel.getAllPUNotifications().observe(this, new Observer<List<PUNotification>>() {
+        punViewModel.getAllPUNLiveData().observe(this, new Observer<List<PUNotification>>() {
             @Override
             public void onChanged(List<PUNotification> puNotifications) {
                 if (!puNotifications.isEmpty()){
