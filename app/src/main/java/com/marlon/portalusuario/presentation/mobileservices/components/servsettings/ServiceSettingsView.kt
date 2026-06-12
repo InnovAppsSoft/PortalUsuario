@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marlon.portalusuario.domain.model.MobileService
-import com.marlon.portalusuario.presentation.mobileservices.components.servsettings.ServiceSettingsEvent
 
 private typealias OnTurnConsumptionRate = ServiceSettingsEvent.OnTurnConsumptionRate
 

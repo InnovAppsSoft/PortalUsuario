@@ -34,9 +34,9 @@ import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
-import com.marlon.portalusuario.permisos.PermissionActivity
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.data.preferences.AppPreferencesManager
+import com.marlon.portalusuario.permisos.PermissionActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject

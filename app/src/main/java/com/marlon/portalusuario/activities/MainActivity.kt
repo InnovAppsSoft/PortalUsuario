@@ -21,7 +21,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.preference.PreferenceManager.getDefaultSharedPreferences
-import com.marlon.portalusuario.permisos.PermissionActivity
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ViewModel.PunViewModel
 import com.marlon.portalusuario.components.SetLTEModeDialog
@@ -29,6 +28,7 @@ import com.marlon.portalusuario.data.preferences.AppPreferencesManager
 import com.marlon.portalusuario.databinding.ActivityMainBinding
 import com.marlon.portalusuario.domain.model.ModeNight
 import com.marlon.portalusuario.errores_log.LogFileViewerActivity
+import com.marlon.portalusuario.permisos.PermissionActivity
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesFragment
 import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
 import com.marlon.portalusuario.une.UneActivity
