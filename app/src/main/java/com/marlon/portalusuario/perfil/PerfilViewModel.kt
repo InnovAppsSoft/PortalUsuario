@@ -9,6 +9,7 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import androidx.core.content.edit
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -97,11 +98,11 @@ class PerfilViewModel
             viewModelScope.launch {
                 val state = _uiState.value
                 prefs
-                    .edit()
-                    .putString("nombre", state.name)
-                    .putString("numero", state.number)
-                    .putString("nauta", state.nauta)
-                    .apply()
+                    .edit {
+                        putString("nombre", state.name)
+                            .putString("numero", state.number)
+                            .putString("nauta", state.nauta)
+                    }
             }
         }
 

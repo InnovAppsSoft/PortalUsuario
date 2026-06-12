@@ -84,7 +84,7 @@
             android:name=".activities.DonationActivity"
             android:exported="false" />
         <activity
-            android:name=".Permisos.PermissionActivity"
+            android:name=".permisos.PermissionActivity"
             android:exported="true" />
         <activity
             android:name=".PUNotifications.PUNotificationsActivity"
