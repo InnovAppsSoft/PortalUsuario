@@ -17,10 +17,16 @@ import androidx.navigation.navArgument
 import com.marlon.portalusuario.paquetes.PaquetesScreen
 import com.marlon.portalusuario.perfil.PerfilScreen
 import com.marlon.portalusuario.presentation.about.AboutScreen
+import com.marlon.portalusuario.presentation.callforreversecharge.CallForReverseChargeScreen
 import com.marlon.portalusuario.presentation.donation.DonationScreen
+import com.marlon.portalusuario.presentation.emergencycalls.EmergencyCallsScreen
 import com.marlon.portalusuario.presentation.mobileservices.screen.MobileServicesScreen
+import com.marlon.portalusuario.presentation.planamigos.PlanAmigosScreen
 import com.marlon.portalusuario.presentation.privacy.PrivacyScreen
+import com.marlon.portalusuario.presentation.privatecall.PrivateCallScreen
 import com.marlon.portalusuario.presentation.settings.SettingsScreen
+import com.marlon.portalusuario.presentation.sms.SmsScreen
+import com.marlon.portalusuario.presentation.voz.VozScreen
 import com.marlon.portalusuario.servicios.ServiciosScreen
 import com.marlon.portalusuario.une.UneScreen
 
@@ -48,19 +54,23 @@ fun PortalUsuarioNavHost(
         composable(Route.About.route) { AboutScreen() }
         composable(Route.Donation.route) { DonationScreen() }
         composable(Route.Privacy.route) { PrivacyScreen() }
-        composable(Route.Sms.route) { PlaceholderScreen("Sms") }
-        composable(Route.Voz.route) { PlaceholderScreen("Voz") }
-        composable(Route.PlanAmigos.route) { PlaceholderScreen("Plan Amigos") }
-        composable(Route.PrivateCall.route) { PlaceholderScreen("Private Call") }
-        composable(Route.CallForReverseCharge.route) {
-            PlaceholderScreen("Call for Reverse Charge")
+        composable(Route.Sms.route) { SmsScreen() }
+        composable(Route.Voz.route) { VozScreen() }
+        composable(Route.PlanAmigos.route) { PlanAmigosScreen() }
+        composable(Route.PrivateCall.route) {
+            PrivateCallScreen(onBack = { navController.popBackStack() })
         }
-        composable(Route.EmergencyCalls.route) { PlaceholderScreen("Emergency Calls") }
+        composable(Route.CallForReverseCharge.route) {
+            CallForReverseChargeScreen(onBack = { navController.popBackStack() })
+        }
+        composable(Route.EmergencyCalls.route) { EmergencyCallsScreen() }
         composable(Route.Une.route) {
             UneScreen(onBack = { navController.popBackStack() })
         }
         composable(Route.Perfil.route) { PerfilScreen() }
-        composable(Route.Servicios.route) { ServiciosScreen() }
+        composable(Route.Servicios.route) {
+            ServiciosScreen(onNavigate = { route -> navController.navigate(route) })
+        }
         composable(Route.Paquetes.route) { PaquetesScreen() }
         composable(Route.LogFileViewer.route) { PlaceholderScreen("Log File Viewer") }
         composable(Route.MobileServices.route) { MobileServicesScreen() }
