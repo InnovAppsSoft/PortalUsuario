@@ -31,8 +31,8 @@ import com.bumptech.glide.request.transition.Transition;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.marlon.portalusuario.activities.MainActivity;
-import com.marlon.portalusuario.PUNotifications.PUNotification;
-import com.marlon.portalusuario.PUNotifications.PUNotificationsActivity;
+import com.marlon.portalusuario.punotifications.PUNotification;
+import com.marlon.portalusuario.punotifications.PUNotificationsActivity;
 import com.marlon.portalusuario.R;
 
 import java.io.File;

@@ -5,7 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.marlon.portalusuario.PUNotifications.PUNotification
+import com.marlon.portalusuario.punotifications.PUNotification
 import kotlinx.coroutines.flow.Flow
 
 @Dao
