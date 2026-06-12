@@ -1,6 +1,6 @@
 package com.marlon.portalusuario.data.user
 
-import com.marlon.portalusuario.database.users.UserDAO
+import com.marlon.portalusuario.data.ServicesDao
 import com.marlon.portalusuario.domain.data.UserAccountRepository
 import com.marlon.portalusuario.model.User
 import kotlinx.coroutines.flow.Flow
@@ -9,23 +9,23 @@ import javax.inject.Inject
 class UserAccountRepositoryImpl
     @Inject
     constructor(
-        private val userDao: UserDAO,
+        private val dao: ServicesDao,
     ) : UserAccountRepository {
-        override val allUsers: Flow<List<User>> = userDao.getAllUser()
+        override val allUsers: Flow<List<User>> = dao.getAllUsers()
 
         override suspend fun insertUser(user: User) {
-            userDao.insertUser(user)
+            dao.insertUser(user)
         }
 
         override suspend fun updateUser(user: User) {
-            userDao.updateUser(user)
+            dao.updateUser(user)
         }
 
         override suspend fun deleteUser(user: User) {
-            userDao.deleteUser(user)
+            dao.deleteUser(user)
         }
 
         override suspend fun deleteAllUsers() {
-            userDao.deleteAllUser()
+            dao.deleteAllUsers()
         }
     }
