@@ -3,7 +3,6 @@ package com.marlon.portalusuario.data.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.marlon.portalusuario.domain.model.NavigationService as ModelNavigationService
 
 @Entity(tableName = "navigation_service")
 data class NavigationService(
@@ -20,19 +19,3 @@ data class NavigationService(
     @ColumnInfo(name = "access_type") val accessType: String,
     @ColumnInfo(name = "product_type") val productType: String,
 )
-
-fun NavigationService.asModel() =
-    ModelNavigationService(
-        id,
-        bonusToEnjoy,
-        accessAccount,
-        status,
-        lockDate,
-        deletionDate,
-        saleDate,
-        bonusHours,
-        currency,
-        balance,
-        accessType,
-        productType,
-    )
