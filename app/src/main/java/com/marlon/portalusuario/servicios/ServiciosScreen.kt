@@ -74,14 +74,14 @@ private data class ServiceItem(
 private sealed class ActionType {
     data class USSD(val code: String) : ActionType()
 
-    data class Activity(val activityClass: Class<*>) : ActionType()
+    data class Navigate(val route: String) : ActionType()
 
     data object PlanAmigos : ActionType()
 }
 
 @Suppress("LongMethod")
 @Composable
-fun ServiciosScreen() {
+fun ServiciosScreen(onNavigate: (String) -> Unit = {}) {
     val context = LocalContext.current
     var rechargeCode by remember { mutableStateOf("") }
     var advanceAmount by remember { mutableStateOf("") }
@@ -125,19 +125,13 @@ fun ServiciosScreen() {
                 "llamar99",
                 "Llamar *99",
                 BrightOrange,
-                ActionType.Activity(
-                    com.marlon.portalusuario.activities
-                        .CallForReverseChargeActivity::class.java,
-                ),
+                ActionType.Navigate("call_for_reverse_charge"),
             ),
             ServiceItem(
                 "llamarPrivado",
                 "Llamar\nPrivado",
                 VibrantPink,
-                ActionType.Activity(
-                    com.marlon.portalusuario.activities
-                        .PrivateCallActivity::class.java,
-                ),
+                ActionType.Navigate("private_call"),
             ),
             ServiceItem(
                 "pospago",
@@ -157,32 +151,13 @@ fun ServiciosScreen() {
                 DeepPurple,
                 ActionType.PlanAmigos,
             ),
-            ServiceItem(
-                "sms",
-                "Plan SMS",
-                BrightSkyBlue,
-                ActionType.Activity(
-                    com.marlon.portalusuario.activities
-                        .SmsActivity::class.java,
-                ),
-            ),
-            ServiceItem(
-                "voz",
-                "Plan Voz",
-                VibrantGreen,
-                ActionType.Activity(
-                    com.marlon.portalusuario.activities
-                        .VozActivity::class.java,
-                ),
-            ),
+            ServiceItem("sms", "Plan SMS", BrightSkyBlue, ActionType.Navigate("sms")),
+            ServiceItem("voz", "Plan Voz", VibrantGreen, ActionType.Navigate("voz")),
             ServiceItem(
                 "emergencia",
                 "Emergencias",
                 VividRed,
-                ActionType.Activity(
-                    com.marlon.portalusuario.activities
-                        .EmergencyCallsActivity::class.java,
-                ),
+                ActionType.Navigate("emergency_calls"),
             ),
         )
 
@@ -198,12 +173,6 @@ fun ServiciosScreen() {
                 Intent(Intent.ACTION_CALL).apply { data = Uri.parse("tel:$code") },
             )
         }
-    }
-
-    fun openActivity(cls: Class<*>) {
-        context.startActivity(
-            Intent(context, cls).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP),
-        )
     }
 
     Column(
@@ -235,7 +204,7 @@ fun ServiciosScreen() {
                     onClick = {
                         when (val action = service.action) {
                             is ActionType.USSD -> ussdCall(action.code)
-                            is ActionType.Activity -> openActivity(action.activityClass)
+                            is ActionType.Navigate -> onNavigate(action.route)
                             is ActionType.PlanAmigos -> showPlanAmigos = true
                         }
                     },
