@@ -3,7 +3,6 @@ package com.marlon.portalusuario.data.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.marlon.portalusuario.domain.model.ClientProfile as ModelClientProfile
 
 @Entity(tableName = "client_profile")
 data class ClientProfile(
@@ -16,14 +15,3 @@ data class ClientProfile(
     @ColumnInfo(name = "portal_user") val portalUser: String,
     @ColumnInfo(name = "last_update") val lastUpdate: String,
 )
-
-fun ClientProfile.asModel() =
-    ModelClientProfile(
-        this.email,
-        this.name,
-        this.mailNotifications,
-        this.mobileNotifications,
-        this.phoneNumber,
-        this.portalUser,
-        this.lastUpdate,
-    )
