@@ -179,7 +179,7 @@ class MainActivity : AppCompatActivity() {
         binding.navView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.micuenta -> setFragment(MobileServicesFragment(), "Mi Cuenta")
-                R.id.services -> setFragment(ServiciosFragment<Any?>(), "Servicios")
+                R.id.services -> setFragment(ServiciosFragment(), "Servicios")
                 R.id.plans -> setFragment(PaquetesFragment(), "Planes")
                 R.id.networkChange -> SetLTEModeDialog(this)
                 R.id.une -> startActivity(Intent(this@MainActivity, UneActivity::class.java))
