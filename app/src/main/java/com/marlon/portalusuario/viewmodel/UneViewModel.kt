@@ -4,7 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.marlon.portalusuario.database.une.UneRepository
-import com.marlon.portalusuario.une.TarifaElect
+import com.marlon.portalusuario.domain.usecases.CalculateElectricityCostUseCase
+import com.marlon.portalusuario.domain.usecases.ElectricityCostResult
 import com.marlon.portalusuario.une.Une
 import com.marlon.portalusuario.util.Util
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,6 +32,7 @@ class UneViewModel
     @Inject
     constructor(
         application: Application,
+        private val calculateElectricityCost: CalculateElectricityCostUseCase,
     ) : AndroidViewModel(application) {
         private val uneRepository = UneRepository(application)
 
@@ -55,66 +57,29 @@ class UneViewModel
 
         fun calculate() {
             val state = _uiState.value
-            val previousText = state.previousReading.trim()
-            val currentText = state.currentReading.trim()
-
-            val errors = mutableListOf<String>()
-            val previous = previousText.toDoubleOrNull()
-            if (previous == null) errors.add("Lectura Anterior: Valor inválido")
-
-            val current = currentText.toDoubleOrNull()
-            if (current == null) errors.add("Lectura Actual: Valor inválido")
-
-            if (errors.isNotEmpty()) {
-                _uiState.update { it.copy(errorMessage = errors.joinToString("\n")) }
-                return
-            }
-
-            if (current!! < 0) {
-                _uiState.update { it.copy(errorMessage = "Lectura Actual: Valor inválido") }
-                return
-            }
-            if (previous!! < 0) {
-                _uiState.update { it.copy(errorMessage = "Lectura Anterior: Valor inválido") }
-                return
-            }
-            if (current < previous) {
-                _uiState.update {
-                    it.copy(
-                        errorMessage = "La lectura Anterior no puede ser mayor a la Actual",
+            when (val result = calculateElectricityCost(state.previousReading, state.currentReading)) {
+                is ElectricityCostResult.Success -> {
+                    _uiState.update {
+                        it.copy(
+                            consumption = result.consumption,
+                            totalToPay = result.totalToPay,
+                            errorMessage = null,
+                        )
+                    }
+                    insertUne(
+                        Une(
+                            date = Util.currentDate2Long(),
+                            lastRegister = state.previousReading.toDoubleOrNull() ?: 0.0,
+                            currentRegister = state.currentReading.toDoubleOrNull() ?: 0.0,
+                            totalConsumption = result.consumption,
+                            totalToPay = result.totalToPay,
+                        ),
                     )
                 }
-                return
-            }
-            if (current == previous) {
-                _uiState.update {
-                    it.copy(
-                        errorMessage = "Lectura anterior y Lectura Actual no deben ser iguales",
-                    )
+                is ElectricityCostResult.Error -> {
+                    _uiState.update { it.copy(errorMessage = result.message) }
                 }
-                return
             }
-
-            val consumption = Util.roundDouble(current - previous)
-            val totalToPay = Util.roundDouble(TarifaElect.calculateCost(consumption))
-
-            _uiState.update {
-                it.copy(
-                    consumption = consumption,
-                    totalToPay = totalToPay,
-                    errorMessage = null,
-                )
-            }
-
-            insertUne(
-                Une(
-                    date = Util.currentDate2Long(),
-                    lastRegister = previous,
-                    currentRegister = current,
-                    totalConsumption = consumption,
-                    totalToPay = totalToPay,
-                ),
-            )
         }
 
         fun clear() {
