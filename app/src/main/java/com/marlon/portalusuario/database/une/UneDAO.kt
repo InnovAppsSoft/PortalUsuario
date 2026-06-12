@@ -11,17 +11,17 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface UneDAO {
     @Insert
-    fun insertUne(une: Une)
+    suspend fun insertUne(une: Une)
 
     @Update
-    fun updateUne(une: Une)
+    suspend fun updateUne(une: Une)
 
     @Delete
-    fun deleteUne(une: Une)
+    suspend fun deleteUne(une: Une)
 
     @Query("SELECT * FROM une")
     fun getAllUne(): Flow<List<Une>>
 
     @Query("DELETE FROM une")
-    fun deleteAllUne()
+    suspend fun deleteAllUne()
 }
