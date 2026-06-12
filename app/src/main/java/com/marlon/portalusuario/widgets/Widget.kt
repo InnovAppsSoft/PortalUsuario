@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.widget.RemoteViews
+import androidx.core.net.toUri
 import com.marlon.portalusuario.R
 
 /**
@@ -47,7 +48,7 @@ internal fun updateAppWidget(
         PendingIntent.getActivity(
             context,
             0,
-            Intent(Intent.ACTION_CALL, Uri.parse("tel:*222${Uri.encode("#")}")),
+            Intent(Intent.ACTION_CALL, "tel:*222${Uri.encode("#")}".toUri()),
             0,
         )
 
@@ -55,7 +56,7 @@ internal fun updateAppWidget(
         PendingIntent.getActivity(
             context,
             0,
-            Intent(Intent.ACTION_CALL, Uri.parse("tel:*222*266${Uri.encode("#")}")),
+            Intent(Intent.ACTION_CALL, "tel:*222*266${Uri.encode("#")}".toUri()),
             0,
         )
 
@@ -63,7 +64,7 @@ internal fun updateAppWidget(
         PendingIntent.getActivity(
             context,
             0,
-            Intent(Intent.ACTION_CALL, Uri.parse("tel:*222*328${Uri.encode("#")}")),
+            Intent(Intent.ACTION_CALL, "tel:*222*328${Uri.encode("#")}".toUri()),
             0,
         )
 
@@ -71,7 +72,7 @@ internal fun updateAppWidget(
         PendingIntent.getActivity(
             context,
             0,
-            Intent(Intent.ACTION_CALL, Uri.parse("tel:*222*869${Uri.encode("#")}")),
+            Intent(Intent.ACTION_CALL, "tel:*222*869${Uri.encode("#")}".toUri()),
             0,
         )
 
@@ -79,7 +80,7 @@ internal fun updateAppWidget(
         PendingIntent.getActivity(
             context,
             0,
-            Intent(Intent.ACTION_CALL, Uri.parse("tel:*222*767${Uri.encode("#")}")),
+            Intent(Intent.ACTION_CALL, "tel:*222*767${Uri.encode("#")}".toUri()),
             0,
         )
 
