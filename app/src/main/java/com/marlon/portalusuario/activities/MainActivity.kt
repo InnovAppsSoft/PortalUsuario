@@ -26,7 +26,7 @@ import com.marlon.portalusuario.components.SetLTEModeDialog
 import com.marlon.portalusuario.data.preferences.AppPreferencesManager
 import com.marlon.portalusuario.databinding.ActivityMainBinding
 import com.marlon.portalusuario.domain.model.ModeNight
-import com.marlon.portalusuario.errores_log.LogFileViewerActivity
+import com.marlon.portalusuario.erroreslog.LogFileViewerActivity
 import com.marlon.portalusuario.permisos.PermissionActivity
 import com.marlon.portalusuario.presentation.mobileservices.MobileServicesFragment
 import com.marlon.portalusuario.trafficbubble.FloatingBubbleService

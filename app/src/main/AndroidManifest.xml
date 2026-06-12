@@ -93,7 +93,7 @@
             android:name=".activities.SettingsActivity"
             android:label="Configuración" />
         <activity
-            android:name=".errores_log.LogFileViewerActivity"
+            android:name=".erroreslog.LogFileViewerActivity"
             android:theme="@style/Firewall" />
         <activity
             android:name=".presentation.splash.ActivitySplash"
