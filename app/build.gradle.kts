@@ -1,3 +1,5 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
 plugins {
     id("com.android.application")
     alias(libs.plugins.google.services)
