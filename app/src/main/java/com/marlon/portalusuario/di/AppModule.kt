@@ -18,12 +18,6 @@ import com.marlon.portalusuario.data.preferences.MobServicesPreferences
 import com.marlon.portalusuario.data.une.UneRepositoryImpl
 import com.marlon.portalusuario.data.user.UserAccountRepositoryImpl
 import com.marlon.portalusuario.data.user.UserRepositoryImpl
-import com.marlon.portalusuario.database.notifications.PunDAO
-import com.marlon.portalusuario.database.notifications.PunDataBase
-import com.marlon.portalusuario.database.une.UneDAO
-import com.marlon.portalusuario.database.une.UneDataBase
-import com.marlon.portalusuario.database.users.UserDAO
-import com.marlon.portalusuario.database.users.UserDataBase
 import com.marlon.portalusuario.domain.data.PunRepository
 import com.marlon.portalusuario.domain.data.UneRepository
 import com.marlon.portalusuario.domain.data.UserAccountRepository
@@ -56,11 +50,13 @@ class AppModule {
     @Provides
     fun provideServicesDB(
         @ApplicationContext context: Context,
-    ) = Room.databaseBuilder(
-        context,
-        ServicesDB::class.java,
-        "services_db",
-    ).build()
+    ) = Room
+        .databaseBuilder(
+            context,
+            ServicesDB::class.java,
+            "services_db",
+        ).addMigrations(ServicesDB.MIGRATION_1_2)
+        .build()
 
     @Singleton
     @Provides
@@ -129,52 +125,18 @@ class AppModule {
         @ApplicationContext context: Context,
     ) = SimCardCollector.Builder().build(context)
 
-    // Legacy databases
-
     @Singleton
     @Provides
-    fun provideUserDataBase(
-        @ApplicationContext context: Context,
-    ): UserDataBase = UserDataBase.getInstance(context)
-
-    @Singleton
-    @Provides
-    fun provideUserDAO(userDataBase: UserDataBase): UserDAO = userDataBase.dao()
-
-    @Singleton
-    @Provides
-    fun provideUneDataBase(
-        @ApplicationContext context: Context,
-    ): UneDataBase = UneDataBase.getInstance(context)
-
-    @Singleton
-    @Provides
-    fun provideUneDAO(uneDataBase: UneDataBase): UneDAO = uneDataBase.dao()
-
-    @Singleton
-    @Provides
-    fun providePunDataBase(
-        @ApplicationContext context: Context,
-    ): PunDataBase = PunDataBase.getInstance(context)
-
-    @Singleton
-    @Provides
-    fun providePunDAO(punDataBase: PunDataBase): PunDAO = punDataBase.dao()
-
-    // Legacy repositories (new pattern)
-
-    @Singleton
-    @Provides
-    fun provideUneRepository(uneDao: UneDAO): UneRepository = UneRepositoryImpl(uneDao)
+    fun provideUneRepository(dao: ServicesDao): UneRepository = UneRepositoryImpl(dao)
 
     @Singleton
     @Provides
     fun providePunRepository(
-        punDao: PunDAO,
+        dao: ServicesDao,
         @ApplicationContext context: Context,
-    ): PunRepository = PunRepositoryImpl(punDao, context)
+    ): PunRepository = PunRepositoryImpl(dao, context)
 
     @Singleton
     @Provides
-    fun provideUserAccountRepository(userDao: UserDAO): UserAccountRepository = UserAccountRepositoryImpl(userDao)
+    fun provideUserAccountRepository(dao: ServicesDao): UserAccountRepository = UserAccountRepositoryImpl(dao)
 }
