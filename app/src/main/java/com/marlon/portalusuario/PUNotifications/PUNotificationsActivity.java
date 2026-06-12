@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.marlon.portalusuario.R;
+import com.marlon.portalusuario.database.notifications.PunDAO;
 import com.marlon.portalusuario.viewmodel.PunViewModel;
 
 import java.util.List;

@@ -34,7 +34,11 @@ val String.isActive get() = this != "no activos"
 
 @Throws(ParseException::class)
 fun String.asDate(pattern: String = DEFAULT_DATE_FORMAT): Date? =
-    SimpleDateFormat(pattern, Locale.getDefault()).parse(this)
+    try {
+        SimpleDateFormat(pattern, Locale.getDefault()).parse(this)
+    } catch (_: ParseException) {
+        null
+    }
 
 @get:Throws(ParseException::class)
 val String.asDateMillis
