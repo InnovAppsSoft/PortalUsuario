@@ -12,9 +12,21 @@ import com.marlon.portalusuario.data.mappers.MobServiceApiToEntityMapper
 import com.marlon.portalusuario.data.mappers.MobServiceEntityToDomainMapper
 import com.marlon.portalusuario.data.mappers.NavServApiToEntityMapper
 import com.marlon.portalusuario.data.mappers.NavServEntityToDomainMapper
+import com.marlon.portalusuario.data.notifications.PunRepositoryImpl
 import com.marlon.portalusuario.data.preferences.AppPreferencesManager
 import com.marlon.portalusuario.data.preferences.MobServicesPreferences
+import com.marlon.portalusuario.data.une.UneRepositoryImpl
+import com.marlon.portalusuario.data.user.UserAccountRepositoryImpl
 import com.marlon.portalusuario.data.user.UserRepositoryImpl
+import com.marlon.portalusuario.database.notifications.PunDAO
+import com.marlon.portalusuario.database.notifications.PunDataBase
+import com.marlon.portalusuario.database.une.UneDAO
+import com.marlon.portalusuario.database.une.UneDataBase
+import com.marlon.portalusuario.database.users.UserDAO
+import com.marlon.portalusuario.database.users.UserDataBase
+import com.marlon.portalusuario.domain.data.PunRepository
+import com.marlon.portalusuario.domain.data.UneRepository
+import com.marlon.portalusuario.domain.data.UserAccountRepository
 import com.marlon.portalusuario.domain.data.UserRepository
 import com.marlon.portalusuario.util.NetworkConnectivityObserver
 import dagger.Module
@@ -116,4 +128,53 @@ class AppModule {
     fun provideSimCollector(
         @ApplicationContext context: Context,
     ) = SimCardCollector.Builder().build(context)
+
+    // Legacy databases
+
+    @Singleton
+    @Provides
+    fun provideUserDataBase(
+        @ApplicationContext context: Context,
+    ): UserDataBase = UserDataBase.getInstance(context)
+
+    @Singleton
+    @Provides
+    fun provideUserDAO(userDataBase: UserDataBase): UserDAO = userDataBase.dao()
+
+    @Singleton
+    @Provides
+    fun provideUneDataBase(
+        @ApplicationContext context: Context,
+    ): UneDataBase = UneDataBase.getInstance(context)
+
+    @Singleton
+    @Provides
+    fun provideUneDAO(uneDataBase: UneDataBase): UneDAO = uneDataBase.dao()
+
+    @Singleton
+    @Provides
+    fun providePunDataBase(
+        @ApplicationContext context: Context,
+    ): PunDataBase = PunDataBase.getInstance(context)
+
+    @Singleton
+    @Provides
+    fun providePunDAO(punDataBase: PunDataBase): PunDAO = punDataBase.dao()
+
+    // Legacy repositories (new pattern)
+
+    @Singleton
+    @Provides
+    fun provideUneRepository(uneDao: UneDAO): UneRepository = UneRepositoryImpl(uneDao)
+
+    @Singleton
+    @Provides
+    fun providePunRepository(
+        punDao: PunDAO,
+        @ApplicationContext context: Context,
+    ): PunRepository = PunRepositoryImpl(punDao, context)
+
+    @Singleton
+    @Provides
+    fun provideUserAccountRepository(userDao: UserDAO): UserAccountRepository = UserAccountRepositoryImpl(userDao)
 }

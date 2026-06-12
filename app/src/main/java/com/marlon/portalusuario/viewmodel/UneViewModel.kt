@@ -1,9 +1,8 @@
 package com.marlon.portalusuario.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marlon.portalusuario.database.une.UneRepository
+import com.marlon.portalusuario.domain.data.UneRepository
 import com.marlon.portalusuario.domain.usecases.CalculateElectricityCostUseCase
 import com.marlon.portalusuario.domain.usecases.ElectricityCostResult
 import com.marlon.portalusuario.une.Une
@@ -31,11 +30,9 @@ data class UneUiState(
 class UneViewModel
     @Inject
     constructor(
-        application: Application,
+        private val uneRepository: UneRepository,
         private val calculateElectricityCost: CalculateElectricityCostUseCase,
-    ) : AndroidViewModel(application) {
-        private val uneRepository = UneRepository(application)
-
+    ) : ViewModel() {
         val allUnes: StateFlow<List<Une>> =
             uneRepository.allUnes
                 .stateIn(

@@ -1,13 +1,12 @@
 package com.marlon.portalusuario.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.marlon.portalusuario.database.notifications.PunRepository
-import com.marlon.portalusuario.database.une.UneRepository
-import com.marlon.portalusuario.database.users.UserRepository
+import com.marlon.portalusuario.domain.data.PunRepository
+import com.marlon.portalusuario.domain.data.UneRepository
+import com.marlon.portalusuario.domain.data.UserAccountRepository
 import com.marlon.portalusuario.model.User
 import com.marlon.portalusuario.punotifications.PUNotification
 import com.marlon.portalusuario.une.Une
@@ -23,12 +22,10 @@ import javax.inject.Inject
 class PunViewModel
     @Inject
     constructor(
-        application: Application,
-    ) : AndroidViewModel(application) {
-        private val punRepository = PunRepository(application)
-        private val userRepository = UserRepository(application)
-        private val uneRepository = UneRepository(application)
-
+        private val punRepository: PunRepository,
+        private val userRepository: UserAccountRepository,
+        private val uneRepository: UneRepository,
+    ) : ViewModel() {
         // PUN
         val allPUN: StateFlow<List<PUNotification>> =
             punRepository.allPUN

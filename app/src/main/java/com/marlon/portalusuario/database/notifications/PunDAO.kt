@@ -11,17 +11,17 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PunDAO {
     @Insert
-    fun insertPUNotification(post: PUNotification)
+    suspend fun insertPUNotification(post: PUNotification)
 
     @Update
-    fun updatePUNotification(post: PUNotification)
+    suspend fun updatePUNotification(post: PUNotification)
 
     @Delete
-    fun deletePUNotification(post: PUNotification)
+    suspend fun deletePUNotification(post: PUNotification)
 
     @Query("SELECT * FROM notifications")
     fun getAllPUNotification(): Flow<List<PUNotification>>
 
     @Query("DELETE FROM notifications")
-    fun deleteAllPUNotification()
+    suspend fun deleteAllPUNotification()
 }
