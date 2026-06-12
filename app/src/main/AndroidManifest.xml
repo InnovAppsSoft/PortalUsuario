@@ -90,6 +90,9 @@
             android:name=".punotifications.PUNotificationsActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.mobileservices.MobileServicesActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.SettingsActivity"
             android:label="Configuración" />
         <activity

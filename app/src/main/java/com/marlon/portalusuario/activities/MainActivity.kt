@@ -11,6 +11,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.material3.Surface
+import androidx.compose.ui.platform.ComposeView
 import androidx.core.app.ShareCompat.IntentBuilder
 import androidx.core.net.toUri
 import androidx.core.view.GravityCompat
@@ -28,8 +30,10 @@ import com.marlon.portalusuario.databinding.ActivityMainBinding
 import com.marlon.portalusuario.domain.model.ModeNight
 import com.marlon.portalusuario.erroreslog.LogFileViewerActivity
 import com.marlon.portalusuario.permisos.PermissionActivity
-import com.marlon.portalusuario.presentation.mobileservices.MobileServicesFragment
+import com.marlon.portalusuario.presentation.mobileservices.MobileServicesActivity
+import com.marlon.portalusuario.presentation.mobileservices.screen.MobileServicesScreen
 import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
+import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
 import com.marlon.portalusuario.une.UneActivity
 import com.marlon.portalusuario.util.NetworkConnectivityObserver
 import com.marlon.portalusuario.util.Utils.hasPermissions
@@ -172,13 +176,25 @@ class MainActivity : AppCompatActivity() {
         // drawer Nav View
         setUpDrawer()
         //
-        setFragment(MobileServicesFragment(), "Servicios")
+        ComposeView(this).apply {
+            setContent {
+                PortalUsuarioTheme {
+                    Surface {
+                        MobileServicesScreen()
+                    }
+                }
+            }
+        }.also { composeView ->
+            binding.contentMain.fragmentContainer.removeAllViews()
+            binding.contentMain.fragmentContainer.addView(composeView)
+            binding.contentMain.tvAppTitle.text = "Servicios"
+        }
     }
 
     private fun setUpDrawer() {
         binding.navView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.micuenta -> setFragment(MobileServicesFragment(), "Mi Cuenta")
+                R.id.micuenta -> startActivity(Intent(this@MainActivity, MobileServicesActivity::class.java))
                 R.id.services -> setFragment(ServiciosFragment(), "Servicios")
                 R.id.plans -> setFragment(PaquetesFragment(), "Planes")
                 R.id.networkChange -> SetLTEModeDialog(this)

@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.marlon.portalusuario.presentation.mobileservices.screen.MobileServicesScreen
 
 /**
  * NavHost centralizado con todas las rutas de la aplicación.
@@ -48,6 +49,7 @@ fun PortalUsuarioNavHost(
         composable(Route.Une.route) { PlaceholderScreen("UNE") }
         composable(Route.Perfil.route) { PlaceholderScreen("Perfil") }
         composable(Route.LogFileViewer.route) { PlaceholderScreen("Log File Viewer") }
+        composable(Route.MobileServices.route) { MobileServicesScreen() }
         composable(
             route = Route.PUNotifications.route,
             arguments =
