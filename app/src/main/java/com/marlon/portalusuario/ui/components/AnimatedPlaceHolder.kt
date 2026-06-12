@@ -7,9 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 
 @Composable
-fun AnimatedPlaceholder(
-    hints: List<String>
-) {
+fun AnimatedPlaceholder(hints: List<String>) {
     val iterator = hints.listIterator()
     val target by produceState(initialValue = hints.first()) {
         iterator.doWhenHasNextOrPrevious {
@@ -20,10 +18,10 @@ fun AnimatedPlaceholder(
     AnimatedContent(
         targetState = target,
         transitionSpec = { ScrollAnimation() },
-        label = ""
+        label = "",
     ) { str ->
         Text(
-            text = str
+            text = str,
         )
     }
 }

@@ -17,40 +17,50 @@ import androidx.compose.ui.text.input.KeyboardType
 import com.marlon.portalusuario.R
 
 @Composable
-fun CaptchaField(value: String, enabled: Boolean = false, onChangedValue: (String) -> Unit, onDone: () -> Unit) {
+fun CaptchaField(
+    value: String,
+    enabled: Boolean = false,
+    onChangedValue: (String) -> Unit,
+    onDone: () -> Unit,
+) {
     val keyboardController = LocalSoftwareKeyboardController.current
     TextField(
         value = value,
         onValueChange = onChangedValue,
         placeholder = {
             AnimatedPlaceholder(
-                hints = listOf(
-                    stringResource(R.string.captcha_code),
-                    "HL46Fr"
-                )
+                hints =
+                    listOf(
+                        stringResource(R.string.captcha_code),
+                        "HL46Fr",
+                    ),
             )
         },
-        modifier = Modifier
-            .fillMaxWidth(),
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Text,
-            capitalization = KeyboardCapitalization.Characters,
-            imeAction = ImeAction.Done
-        ),
-        keyboardActions = KeyboardActions(
-            onDone = {
-                keyboardController?.hide()
-                onDone()
-            }
-        ),
+        modifier =
+            Modifier
+                .fillMaxWidth(),
+        keyboardOptions =
+            KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                capitalization = KeyboardCapitalization.Characters,
+                imeAction = ImeAction.Done,
+            ),
+        keyboardActions =
+            KeyboardActions(
+                onDone = {
+                    keyboardController?.hide()
+                    onDone()
+                },
+            ),
         singleLine = true,
         maxLines = 1,
-        colors = TextFieldDefaults.colors(
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            disabledIndicatorColor = Color.Transparent
-        ),
+        colors =
+            TextFieldDefaults.colors(
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
+            ),
         shape = MaterialTheme.shapes.small,
-        enabled = enabled
+        enabled = enabled,
     )
 }

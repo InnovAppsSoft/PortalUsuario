@@ -43,9 +43,15 @@ class AutoCompleteAdapter(context: Context, resource: Int) : ArrayAdapter<String
                 return results
             }
 
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                if (results != null && results.count > 0) notifyDataSetChanged()
-                else notifyDataSetInvalidated()
+            override fun publishResults(
+                constraint: CharSequence?,
+                results: FilterResults?,
+            ) {
+                if (results != null && results.count > 0) {
+                    notifyDataSetChanged()
+                } else {
+                    notifyDataSetInvalidated()
+                }
             }
         }
     }

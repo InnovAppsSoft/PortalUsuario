@@ -14,7 +14,11 @@ import com.marlon.portalusuario.R
  * Implementation of App Widget functionality.
  */
 class Widget : AppWidgetProvider() {
-    override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
+    override fun onUpdate(
+        context: Context,
+        appWidgetManager: AppWidgetManager,
+        appWidgetIds: IntArray,
+    ) {
         // There may be multiple widgets active, so update all of them
         for (appWidgetId in appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId)
@@ -31,24 +35,53 @@ class Widget : AppWidgetProvider() {
 }
 
 @SuppressLint("UnspecifiedImmutableFlag")
-internal fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
+internal fun updateAppWidget(
+    context: Context,
+    appWidgetManager: AppWidgetManager,
+    appWidgetId: Int,
+) {
     // Construct the RemoteViews object
     val views = RemoteViews(context.packageName, R.layout.widget)
 
-    val pendingIntentSaldo = PendingIntent.getActivity(context, 0,
-        Intent(Intent.ACTION_CALL, Uri.parse("tel:*222${Uri.encode("#")}")), 0)
+    val pendingIntentSaldo =
+        PendingIntent.getActivity(
+            context,
+            0,
+            Intent(Intent.ACTION_CALL, Uri.parse("tel:*222${Uri.encode("#")}")),
+            0,
+        )
 
-    val pendingIntentBono = PendingIntent.getActivity(context, 0,
-        Intent(Intent.ACTION_CALL, Uri.parse("tel:*222*266${Uri.encode("#")}")), 0)
+    val pendingIntentBono =
+        PendingIntent.getActivity(
+            context,
+            0,
+            Intent(Intent.ACTION_CALL, Uri.parse("tel:*222*266${Uri.encode("#")}")),
+            0,
+        )
 
-    val pendingIntentDatos = PendingIntent.getActivity(context, 0,
-        Intent(Intent.ACTION_CALL, Uri.parse("tel:*222*328${Uri.encode("#")}")), 0)
+    val pendingIntentDatos =
+        PendingIntent.getActivity(
+            context,
+            0,
+            Intent(Intent.ACTION_CALL, Uri.parse("tel:*222*328${Uri.encode("#")}")),
+            0,
+        )
 
-    val pendingIntentVoz = PendingIntent.getActivity(context, 0,
-        Intent(Intent.ACTION_CALL, Uri.parse("tel:*222*869${Uri.encode("#")}")), 0)
+    val pendingIntentVoz =
+        PendingIntent.getActivity(
+            context,
+            0,
+            Intent(Intent.ACTION_CALL, Uri.parse("tel:*222*869${Uri.encode("#")}")),
+            0,
+        )
 
-    val pendingIntentSms = PendingIntent.getActivity(context, 0,
-        Intent(Intent.ACTION_CALL, Uri.parse("tel:*222*767${Uri.encode("#")}")), 0)
+    val pendingIntentSms =
+        PendingIntent.getActivity(
+            context,
+            0,
+            Intent(Intent.ACTION_CALL, Uri.parse("tel:*222*767${Uri.encode("#")}")),
+            0,
+        )
 
     views.setOnClickPendingIntent(R.id.widget_button_saldo, pendingIntentSaldo)
     views.setOnClickPendingIntent(R.id.widget_button_bonos, pendingIntentBono)

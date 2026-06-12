@@ -13,8 +13,8 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 
-private const val AppPreferencesName = "APP_PREFERENCES"
-private val Context.dataStore by preferencesDataStore(name = AppPreferencesName)
+private const val APP_PREFERENCES_NAME = "APP_PREFERENCES"
+private val Context.dataStore by preferencesDataStore(name = APP_PREFERENCES_NAME)
 
 /**
  * Manages application preferences using Android DataStore.
@@ -32,38 +32,48 @@ private val Context.dataStore by preferencesDataStore(name = AppPreferencesName)
  * @property context The application context, required for accessing DataStore.
  */
 class AppPreferencesManager(private val context: Context) {
-    fun preferences(): Flow<AppSettings> = context.dataStore.data
-        .catch { exception ->
-            if (exception is IOException) {
-                emit(emptyPreferences())
-            } else {
-                throw exception
-            }
-        }.map { preferences ->
-            val modeNight = (preferences[AppPreferencesKeys.MODE_NIGHT] ?: "FOLLOW_SYSTEM").let { ModeNight.valueOf(it) }
-            val isShowingTrafficBubble = preferences[AppPreferencesKeys.IS_SHOWING_TRAFFIC_BUBBLE] ?: false
-            val isShowingAccountBalanceOnTrafficBubble = preferences[AppPreferencesKeys.IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE] ?: false
-            val isShowingDataBalanceOnTrafficBubble = preferences[AppPreferencesKeys.IS_SHOWING_DATA_BALANCE_ON_TRAFFIC_BUBBLE] ?: false
-            val isIntroOpened = preferences[AppPreferencesKeys.IS_INTRO_OPENED] ?: false
+    fun preferences(): Flow<AppSettings> =
+        context.dataStore.data
+            .catch { exception ->
+                if (exception is IOException) {
+                    emit(emptyPreferences())
+                } else {
+                    throw exception
+                }
+            }.map { preferences ->
+                val modeNight =
+                    (preferences[AppPreferencesKeys.MODE_NIGHT] ?: "FOLLOW_SYSTEM").let {
+                        ModeNight.valueOf(
+                            it,
+                        )
+                    }
+                val isShowingTrafficBubble = preferences[AppPreferencesKeys.IS_SHOWING_TRAFFIC_BUBBLE] ?: false
+                val isShowingAccountBalanceOnTrafficBubble =
+                    preferences[AppPreferencesKeys.IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE] ?: false
+                val isShowingDataBalanceOnTrafficBubble =
+                    preferences[AppPreferencesKeys.IS_SHOWING_DATA_BALANCE_ON_TRAFFIC_BUBBLE] ?: false
+                val isIntroOpened = preferences[AppPreferencesKeys.IS_INTRO_OPENED] ?: false
 
-            AppSettings(
-                modeNight = modeNight,
-                isShowingTrafficBubble = isShowingTrafficBubble,
-                isShowingAccountBalanceOnTrafficBubble = isShowingAccountBalanceOnTrafficBubble,
-                isShowingDataBalanceOnTrafficBubble = isShowingDataBalanceOnTrafficBubble,
-                isIntroOpened = isIntroOpened
-            )
-        }
+                AppSettings(
+                    modeNight = modeNight,
+                    isShowingTrafficBubble = isShowingTrafficBubble,
+                    isShowingAccountBalanceOnTrafficBubble = isShowingAccountBalanceOnTrafficBubble,
+                    isShowingDataBalanceOnTrafficBubble = isShowingDataBalanceOnTrafficBubble,
+                    isIntroOpened = isIntroOpened,
+                )
+            }
 
     suspend fun updateIsShowingAccountBalanceOnTrafficBubble(isShowingAccountBalanceOnTrafficBubble: Boolean) {
         context.dataStore.edit { preferences ->
-            preferences[AppPreferencesKeys.IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE] = isShowingAccountBalanceOnTrafficBubble
+            preferences[AppPreferencesKeys.IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE] =
+                isShowingAccountBalanceOnTrafficBubble
         }
     }
 
     suspend fun updateIsShowingDataBalanceOnTrafficBubble(isShowingDataBalanceOnTrafficBubble: Boolean) {
         context.dataStore.edit { preferences ->
-            preferences[AppPreferencesKeys.IS_SHOWING_DATA_BALANCE_ON_TRAFFIC_BUBBLE] = isShowingDataBalanceOnTrafficBubble
+            preferences[AppPreferencesKeys.IS_SHOWING_DATA_BALANCE_ON_TRAFFIC_BUBBLE] =
+                isShowingDataBalanceOnTrafficBubble
         }
     }
 
@@ -89,7 +99,8 @@ class AppPreferencesManager(private val context: Context) {
 private object AppPreferencesKeys {
     val MODE_NIGHT = stringPreferencesKey("MODE_NIGHT")
     val IS_SHOWING_TRAFFIC_BUBBLE = booleanPreferencesKey("IS_SHOWING_TRAFFIC_BUBBLE")
-    val IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE = booleanPreferencesKey("IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE")
+    val IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE =
+        booleanPreferencesKey("IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE")
     val IS_SHOWING_DATA_BALANCE_ON_TRAFFIC_BUBBLE = booleanPreferencesKey("IS_SHOWING_DATA_BALANCE_ON_TRAFFIC_BUBBLE")
     val IS_INTRO_OPENED = booleanPreferencesKey("IS_INTRO_OPENED")
 }

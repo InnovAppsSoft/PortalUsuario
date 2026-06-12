@@ -32,7 +32,7 @@ fun ConfigSimCardsView(
     state: ConfigSimCardsViewState,
     onSetIsLoading: (Boolean) -> Unit,
     onSetTitle: (String) -> Unit,
-    onSetCanGoNext: (Boolean) -> Unit
+    onSetCanGoNext: (Boolean) -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val pagerState = rememberPagerState { state.viewModel.state.simCards.size }
@@ -50,7 +50,7 @@ fun ConfigSimCardsView(
             simCard = state.viewModel.state.currentSimCard,
             phoneNumber = state.viewModel.state.phoneNumber,
             isLoading = state.viewModel.state.isLoading,
-            onChangePhoneNumber = { state.viewModel.onEvent(ConfigSimCardsEvent.OnChangedPhoneNumber(it)) }
+            onChangePhoneNumber = { state.viewModel.onEvent(ConfigSimCardsEvent.OnChangedPhoneNumber(it)) },
         )
     }
 
@@ -59,7 +59,7 @@ fun ConfigSimCardsView(
         if (state.viewModel.state.simCards.indexOf(state.viewModel.state.currentSimCard) != pagerState.currentPage) {
             coroutineScope.launch {
                 pagerState.animateScrollToPage(
-                    state.viewModel.state.simCards.indexOf(state.viewModel.state.currentSimCard)
+                    state.viewModel.state.simCards.indexOf(state.viewModel.state.currentSimCard),
                 )
             }
         }
@@ -71,15 +71,16 @@ fun ServiceSettingsView(
     simCard: SimCard,
     phoneNumber: String,
     isLoading: Boolean = false,
-    onChangePhoneNumber: (String) -> Unit
+    onChangePhoneNumber: (String) -> Unit,
 ) {
     Column(modifier = Modifier.padding(16.dp)) {
         Box(
-            modifier = Modifier
-                .background(
-                    MaterialTheme.colorScheme.error.copy(alpha = 0.3f),
-                    shape = MaterialTheme.shapes.small
-                ),
+            modifier =
+                Modifier
+                    .background(
+                        MaterialTheme.colorScheme.error.copy(alpha = 0.3f),
+                        shape = MaterialTheme.shapes.small,
+                    ),
         ) {
             Text(
                 text = stringResource(R.string.config_sim_alert_message, simCard.slotIndex + 1),

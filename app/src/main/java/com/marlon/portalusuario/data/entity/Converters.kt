@@ -7,7 +7,6 @@ import com.marlon.portalusuario.domain.model.MobileBonus
 import com.marlon.portalusuario.domain.model.MobilePlan
 
 class Converters {
-
     @TypeConverter
     fun fromMobilePlanList(value: List<MobilePlan>): String {
         val gson = Gson()

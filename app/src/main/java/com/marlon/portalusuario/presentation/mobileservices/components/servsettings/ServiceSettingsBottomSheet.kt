@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun ServiceSettingsBottomSheet(
     mobService: MobileService,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
 ) {
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState()
@@ -43,7 +43,7 @@ fun ServiceSettingsBottomSheet(
                 sheetState.hide()
                 onDismiss()
             }
-        }
+        },
     ) { ServiceSettingsView(mobService = mobService, onSetIsLoading = { isLoading = it }) }
 }
 
@@ -54,11 +54,12 @@ private fun DragContent(isLoading: Boolean) {
         BottomSheetDefaults.DragHandle()
         Box(modifier = Modifier.fillMaxWidth()) {
             Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentWidth(),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .wrapContentWidth(),
                 text = "Configuracion",
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleLarge,
             )
         }
         if (isLoading) {

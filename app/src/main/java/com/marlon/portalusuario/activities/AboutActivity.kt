@@ -46,12 +46,20 @@ class AboutActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateButtonColors(experienceButton: View, reviewButton: View, experienceActive: Boolean) {
+    private fun updateButtonColors(
+        experienceButton: View,
+        reviewButton: View,
+        experienceActive: Boolean,
+    ) {
         val activeColor = ContextCompat.getColor(this, R.color.blue)
         val inactiveColor = ContextCompat.getColor(this, R.color.colorDes)
 
-        experienceButton.findViewById<android.widget.TextView>(R.id.experiencebtn).setTextColor(if (experienceActive) activeColor else inactiveColor)
-        reviewButton.findViewById<android.widget.TextView>(R.id.reviewbtn).setTextColor(if (!experienceActive) activeColor else inactiveColor)
+        experienceButton.findViewById<android.widget.TextView>(
+            R.id.experiencebtn,
+        ).setTextColor(if (experienceActive) activeColor else inactiveColor)
+        reviewButton.findViewById<android.widget.TextView>(
+            R.id.reviewbtn,
+        ).setTextColor(if (!experienceActive) activeColor else inactiveColor)
     }
 
     private fun setupNavigation() {
@@ -59,11 +67,12 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private fun setupAppLinks() {
-        val appLinks = mapOf(
-            binding.google to "https://play.google.com/store/apps/details?id=com.marlon.portalusuario",
-            binding.apklis to "https://www.apklis.cu/application/com.marlon.portalusuario",
-            binding.politicadeprivacidad to "https://m.apkpure.com/es/portal-usuario/com.marlon.portalusuario"
-        )
+        val appLinks =
+            mapOf(
+                binding.google to "https://play.google.com/store/apps/details?id=com.marlon.portalusuario",
+                binding.apklis to "https://www.apklis.cu/application/com.marlon.portalusuario",
+                binding.politicadeprivacidad to "https://m.apkpure.com/es/portal-usuario/com.marlon.portalusuario",
+            )
 
         appLinks.forEach { (view, url) ->
             view.setOnClickListener { openLinkInBrowser(url) }
@@ -71,14 +80,15 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private fun setupSocialMediaLinks() {
-        val socialLinks = mapOf(
-            binding.javierFacebook to "https://facebook.com/javyalejandro99",
-            binding.javierInsta to "https://www.instagram.com/jalexoasismusic/?hl=es",
-            binding.javierTwitter to "https://twitter.com/javyalejandro99",
-            binding.javierTelegram to "https://t.me/jalexcode",
-            binding.javierTelegramChannel to "https://t.me/oasismusicofficial",
-            binding.javierGithub to "https://github.com/jalexcode"
-        )
+        val socialLinks =
+            mapOf(
+                binding.javierFacebook to "https://facebook.com/javyalejandro99",
+                binding.javierInsta to "https://www.instagram.com/jalexoasismusic/?hl=es",
+                binding.javierTwitter to "https://twitter.com/javyalejandro99",
+                binding.javierTelegram to "https://t.me/jalexcode",
+                binding.javierTelegramChannel to "https://t.me/oasismusicofficial",
+                binding.javierGithub to "https://github.com/jalexcode",
+            )
 
         socialLinks.forEach { (view, url) ->
             view.setOnClickListener { openLinkInBrowser(url) }

@@ -35,21 +35,23 @@ fun CaptchaCanvas(
     captchaImage: Bitmap?,
     isLoading: Boolean,
     error: String?,
-    onReload: () -> Unit
+    onReload: () -> Unit,
 ) {
     Surface(
-        modifier = modifier
-            .height(130.dp)
-            .clickable { if (!isLoading) onReload() },
-        shape = MaterialTheme.shapes.small
+        modifier =
+            modifier
+                .height(130.dp)
+                .clickable { if (!isLoading) onReload() },
+        shape = MaterialTheme.shapes.small,
     ) {
         if (isLoading) {
             CustomLinearProgressBar(modifier = Modifier.fillMaxSize())
         }
         Surface(
-            modifier = Modifier
-                .padding(if (isLoading) 5.dp else 0.dp)
-                .fillMaxWidth()
+            modifier =
+                Modifier
+                    .padding(if (isLoading) 5.dp else 0.dp)
+                    .fillMaxWidth(),
         ) {
             captchaImage?.let {
                 val backgroundBlur = it.copy(it.config!!, true)
@@ -58,23 +60,24 @@ fun CaptchaCanvas(
                         LegacyBlurImage(
                             modifier = Modifier.fillMaxSize(),
                             bitmap = backgroundBlur,
-                            blurRadio = 25f
+                            blurRadio = 25f,
                         )
                     }
                 } else {
                     if (backgroundBlur != null) {
                         BlurImage(
                             bitmap = backgroundBlur,
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .blur(radiusX = 15.dp, radiusY = 15.dp)
+                            modifier =
+                                Modifier
+                                    .fillMaxSize()
+                                    .blur(radiusX = 15.dp, radiusY = 15.dp),
                         )
                     }
                 }
                 Image(
                     bitmap = it.asImageBitmap(),
                     contentDescription = null,
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
                 )
             } ?: run {
                 CaptchaStatusMessage(isLoading = isLoading, error = error)
@@ -84,27 +87,32 @@ fun CaptchaCanvas(
 }
 
 @Composable
-fun CaptchaStatusMessage(isLoading: Boolean, error: String?) {
+fun CaptchaStatusMessage(
+    isLoading: Boolean,
+    error: String?,
+) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.align(Alignment.Center)) {
             Text(
-                text = if (isLoading) {
-                    stringResource(R.string.loading_captcha)
-                } else {
-                    error ?: stringResource(R.string.captcha_load_error)
-                },
-                color = if (isLoading) {
-                    TextFieldDefaults.colors().unfocusedTextColor
-                } else {
-                    MaterialTheme.colorScheme.error
-                },
-                textAlign = TextAlign.Center
+                text =
+                    if (isLoading) {
+                        stringResource(R.string.loading_captcha)
+                    } else {
+                        error ?: stringResource(R.string.captcha_load_error)
+                    },
+                color =
+                    if (isLoading) {
+                        TextFieldDefaults.colors().unfocusedTextColor
+                    } else {
+                        MaterialTheme.colorScheme.error
+                    },
+                textAlign = TextAlign.Center,
             )
             Icon(
                 imageVector = if (isLoading) Icons.Outlined.Downloading else Icons.Outlined.ErrorOutline,
                 contentDescription = null,
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                tint = if (isLoading) LocalContentColor.current else MaterialTheme.colorScheme.error
+                tint = if (isLoading) LocalContentColor.current else MaterialTheme.colorScheme.error,
             )
         }
     }

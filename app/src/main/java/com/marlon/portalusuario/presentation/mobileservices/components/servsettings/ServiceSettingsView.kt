@@ -18,21 +18,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marlon.portalusuario.domain.model.MobileService
-import com.marlon.portalusuario.presentation.mobileservices.components.servsettings.ServiceSettingsEvent.OnTurnConsumptionRate
+
+private typealias OnTurnConsumptionRate = ServiceSettingsEvent.OnTurnConsumptionRate
 
 @SuppressLint("MissingPermission", "HardwareIds")
 @Composable
 fun ServiceSettingsView(
     viewModel: ServiceSettingsViewModel = hiltViewModel(),
     mobService: MobileService,
-    onSetIsLoading: (Boolean) -> Unit
+    onSetIsLoading: (Boolean) -> Unit,
 ) {
     onSetIsLoading(viewModel.state.value.isLoading)
 
     Column {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(horizontal = 8.dp)
+            modifier = Modifier.padding(horizontal = 8.dp),
         ) {
             Text(text = "Estado")
             Spacer(modifier = Modifier.width(4.dp))
@@ -42,7 +43,7 @@ fun ServiceSettingsView(
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceAround
+            horizontalArrangement = Arrangement.SpaceAround,
         ) {
             Text(text = "Tarifa por Consumo")
             Spacer(modifier = Modifier.width(8.dp))
@@ -52,11 +53,11 @@ fun ServiceSettingsView(
                     viewModel.onEvent(
                         OnTurnConsumptionRate(
                             viewModel.simCards.firstOrNull { it.slotIndex == mobService.slotIndex },
-                            mobService
-                        )
+                            mobService,
+                        ),
                     )
                 },
-                enabled = !viewModel.state.value.isLoading
+                enabled = !viewModel.state.value.isLoading,
             )
         }
         Spacer(modifier = Modifier.height(64.dp))

@@ -1,4 +1,4 @@
-package com.marlon.portalusuario.Permisos
+package com.marlon.portalusuario.permisos
 
 import android.Manifest
 import android.app.Activity
@@ -50,7 +50,11 @@ class PermissionActivity : AppCompatActivity() {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray,
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == RESULT_CALL) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -61,21 +65,27 @@ class PermissionActivity : AppCompatActivity() {
 }
 
 @Composable
-fun PermissionScreen(viewModel: PermissionViewModel, activity: Activity) {
+fun PermissionScreen(
+    viewModel: PermissionViewModel,
+    activity: Activity,
+) {
     val context = LocalContext.current
-    val overlayPermissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult()
-    ) { _ ->
-        val canDrawOverlays = Settings.canDrawOverlays(context)
-        viewModel.onOverlayPermissionResult(canDrawOverlays)
-    }
+    val overlayPermissionLauncher =
+        rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.StartActivityForResult(),
+        ) { _ ->
+            val canDrawOverlays = Settings.canDrawOverlays(context)
+            viewModel.onOverlayPermissionResult(canDrawOverlays)
+        }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(10.dp)
-            .verticalScroll(rememberScrollState())
-            .background(color = Color(0xFFF5F5F5)) // Color de fondo claro
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(10.dp)
+                .verticalScroll(rememberScrollState())
+                // Color de fondo claro
+                .background(color = Color(0xFFF5F5F5)),
     ) {
         Text(
             text = "Permisos",
@@ -83,20 +93,22 @@ fun PermissionScreen(viewModel: PermissionViewModel, activity: Activity) {
             color = Color(0xFF3A3A3A),
             fontFamily = FontFamily.Default,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .padding(bottom = 16.dp)
-                .fillMaxWidth(),
-            textAlign = TextAlign.Center
+            modifier =
+                Modifier
+                    .padding(bottom = 16.dp)
+                    .fillMaxWidth(),
+            textAlign = TextAlign.Center,
         )
         Card(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier =
+                Modifier
+                    .fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = Color.White),
             shape = RoundedCornerShape(16.dp),
-            elevation = CardDefaults.cardElevation(8.dp)
+            elevation = CardDefaults.cardElevation(8.dp),
         ) {
             Column(
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(16.dp),
             ) {
                 PermissionSteps(viewModel, overlayPermissionLauncher, activity)
             }
@@ -108,7 +120,7 @@ fun PermissionScreen(viewModel: PermissionViewModel, activity: Activity) {
 fun PermissionSteps(
     viewModel: PermissionViewModel,
     overlayPermissionLauncher: ActivityResultLauncher<Intent>,
-    activity: Activity
+    activity: Activity,
 ) {
     val context = LocalContext.current
 
@@ -117,17 +129,18 @@ fun PermissionSteps(
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.READ_PHONE_NUMBERS
+            Manifest.permission.READ_PHONE_NUMBERS,
         )
 
-    val steps = listOf(
-        "Permiso para realizar llamadas",
-        "Permiso para usar la cámara",
-        "Permiso para leer contactos",
-        "Permiso para obtener ubicación",
-        "Permiso de superposición",
-        "¡Permisos concedidos!"
-    )
+    val steps =
+        listOf(
+            "Permiso para realizar llamadas",
+            "Permiso para usar la cámara",
+            "Permiso para leer contactos",
+            "Permiso para obtener ubicación",
+            "Permiso de superposición",
+            "¡Permisos concedidos!",
+        )
 
     Column {
         steps.forEachIndexed { index, step ->
@@ -135,41 +148,47 @@ fun PermissionSteps(
 
             Text(
                 text = step,
-                modifier = Modifier
-                    .padding(vertical = 8.dp)
-                    .fillMaxWidth(),
+                modifier =
+                    Modifier
+                        .padding(vertical = 8.dp)
+                        .fillMaxWidth(),
                 color = Color(0xFF3A3A3A),
                 fontSize = 18.sp,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Medium,
             )
             Button(
                 onClick = {
                     when (index) {
-                        0 -> ActivityCompat.requestPermissions(
-                            activity,
-                            arrayOf(Manifest.permission.CALL_PHONE),
-                            RESULT_CALL
-                        )
-                        1 -> ActivityCompat.requestPermissions(
-                            activity,
-                            arrayOf(Manifest.permission.CAMERA),
-                            RESULT_CALL
-                        )
-                        2 -> ActivityCompat.requestPermissions(
-                            activity,
-                            arrayOf(Manifest.permission.READ_CONTACTS),
-                            RESULT_CALL
-                        )
-                        3 -> ActivityCompat.requestPermissions(
-                            activity,
-                            locationArray,
-                            RESULT_CALL
-                        )
-                        4 -> {
-                            val intent = Intent(
-                                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                                "package:${context.packageName}".toUri()
+                        0 ->
+                            ActivityCompat.requestPermissions(
+                                activity,
+                                arrayOf(Manifest.permission.CALL_PHONE),
+                                RESULT_CALL,
                             )
+                        1 ->
+                            ActivityCompat.requestPermissions(
+                                activity,
+                                arrayOf(Manifest.permission.CAMERA),
+                                RESULT_CALL,
+                            )
+                        2 ->
+                            ActivityCompat.requestPermissions(
+                                activity,
+                                arrayOf(Manifest.permission.READ_CONTACTS),
+                                RESULT_CALL,
+                            )
+                        3 ->
+                            ActivityCompat.requestPermissions(
+                                activity,
+                                locationArray,
+                                RESULT_CALL,
+                            )
+                        4 -> {
+                            val intent =
+                                Intent(
+                                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                    "package:${context.packageName}".toUri(),
+                                )
                             overlayPermissionLauncher.launch(intent)
                         }
                         else -> {
@@ -179,9 +198,10 @@ fun PermissionSteps(
                     }
                 },
                 enabled = isButtonEnabled,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 4.dp)
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp),
             ) {
                 Text(text = if (index == steps.size - 1) "Comenzar" else "Conceder")
             }

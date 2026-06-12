@@ -2,12 +2,11 @@ package com.marlon.portalusuario.activities
 
 import android.Manifest
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import com.marlon.portalusuario.databinding.DialogPlanAmigosBinding
 import com.marlon.portalusuario.util.Utils.hasPermissions
-import androidx.core.net.toUri
 
 private const val REQUEST_CALL = 1
 

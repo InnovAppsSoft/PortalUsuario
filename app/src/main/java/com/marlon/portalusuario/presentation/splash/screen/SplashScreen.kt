@@ -35,52 +35,53 @@ import com.marlon.portalusuario.presentation.splash.SplashViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-private const val MinTime = 1000L
+private const val MIN_TIME = 1000L
 
 @Composable
-fun SplashScreen(
-    viewModel: SplashViewModel = hiltViewModel()
-) {
+fun SplashScreen(viewModel: SplashViewModel = hiltViewModel()) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
     val preference by viewModel.pref.collectAsStateWithLifecycle()
 
     Surface(
-        modifier = Modifier
-            .fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+        modifier =
+            Modifier
+                .fillMaxSize(),
+        color = MaterialTheme.colorScheme.background,
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Image(
                 painter = painterResource(id = R.drawable.portal),
                 contentDescription = null,
-                modifier = Modifier
-                    .size(80.dp)
+                modifier =
+                    Modifier
+                        .size(80.dp),
             )
             Spacer(modifier = Modifier.height(20.dp))
             Text(
                 text = stringResource(id = R.string.portal_usuario),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.Gray
+                color = Color.Gray,
             )
             Text(
                 text = stringResource(id = R.string.sencillo_r_pido_y_cubano),
                 fontSize = 13.sp,
-                color = Color.Gray
+                color = Color.Gray,
             )
         }
 
         LaunchedEffect(preference) {
             scope.launch {
-                delay(MinTime)
+                delay(MIN_TIME)
                 preference?.also {
                     if (!it.isIntroOpened) {
                         context.startActivity(Intent(context, IntroActivity::class.java))

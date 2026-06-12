@@ -28,17 +28,18 @@ internal fun BonusSection(bonuses: List<MobileBonus>) {
         Text(
             text = "Bonus",
             style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-            color = MaterialTheme.colorScheme.onBackground
+            color = MaterialTheme.colorScheme.onBackground,
         )
         Spacer(modifier = Modifier.width(8.dp))
         HorizontalDivider(modifier = Modifier.weight(1f))
     }
     Spacer(modifier = Modifier.padding(4.dp))
     LazyRow(
-        modifier = Modifier
-            .fillMaxWidth(),
+        modifier =
+            Modifier
+                .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly,
-        contentPadding = PaddingValues(horizontal = 16.dp)
+        contentPadding = PaddingValues(horizontal = 16.dp),
     ) {
         items(bonuses) {
             PlanCard(
@@ -46,7 +47,7 @@ internal fun BonusSection(bonuses: List<MobileBonus>) {
                 planTitle = it.type,
                 dataCount = it.data,
                 remainingDays = StringUtils.toDateMillis(it.expires.replace("/", "-")).asRemainingDays,
-                color = TropicalAquamarineGreen
+                color = TropicalAquamarineGreen,
             )
         }
     }

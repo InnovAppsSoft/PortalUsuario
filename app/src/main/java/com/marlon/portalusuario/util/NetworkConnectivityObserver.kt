@@ -18,7 +18,6 @@ import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
  * @param context The application context.
  */
 class NetworkConnectivityObserver(private val context: Context) {
-
     companion object {
         private const val TAG = "NetworkObserver"
         private const val NETWORK_TYPE_EXTRA = "networkType"
@@ -31,29 +30,30 @@ class NetworkConnectivityObserver(private val context: Context) {
 
     private var isNetworkAvailable = false
 
-    private val networkCallback = object : ConnectivityManager.NetworkCallback() {
-        override fun onAvailable(network: Network) {
-            Log.d(TAG, "Network is available: $network")
-            isNetworkAvailable = true
-            handleNetworkAvailability()
-        }
-
-        override fun onLost(network: Network) {
-            Log.d(TAG, "Network is lost: $network")
-            isNetworkAvailable = false
-            handleNetworkLoss()
-        }
-
-        override fun onCapabilitiesChanged(
-            network: Network,
-            networkCapabilities: NetworkCapabilities
-        ) {
-            Log.d(TAG, "Network capabilities changed: $networkCapabilities")
-            if (isNetworkAvailable) {
+    private val networkCallback =
+        object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                Log.d(TAG, "Network is available: $network")
+                isNetworkAvailable = true
                 handleNetworkAvailability()
             }
+
+            override fun onLost(network: Network) {
+                Log.d(TAG, "Network is lost: $network")
+                isNetworkAvailable = false
+                handleNetworkLoss()
+            }
+
+            override fun onCapabilitiesChanged(
+                network: Network,
+                networkCapabilities: NetworkCapabilities,
+            ) {
+                Log.d(TAG, "Network capabilities changed: $networkCapabilities")
+                if (isNetworkAvailable) {
+                    handleNetworkAvailability()
+                }
+            }
         }
-    }
 
     /**
      * Starts monitoring the network connectivity status.
@@ -85,9 +85,10 @@ class NetworkConnectivityObserver(private val context: Context) {
      * @see ConnectivityManager.unregisterNetworkCallback
      */
     fun startMonitoring() {
-        val networkRequest = NetworkRequest.Builder()
-            .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-            .build()
+        val networkRequest =
+            NetworkRequest.Builder()
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                .build()
 
         connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
         isCallbackRegistered = true
@@ -130,9 +131,10 @@ class NetworkConnectivityObserver(private val context: Context) {
     }
 
     private fun startFloatingBubbleService(networkType: String?) {
-        val serviceIntent = Intent(context, FloatingBubbleService::class.java).apply {
-            putExtra(NETWORK_TYPE_EXTRA, networkType)
-        }
+        val serviceIntent =
+            Intent(context, FloatingBubbleService::class.java).apply {
+                putExtra(NETWORK_TYPE_EXTRA, networkType)
+            }
         context.startService(serviceIntent)
     }
 

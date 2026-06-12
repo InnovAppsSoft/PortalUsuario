@@ -2,9 +2,9 @@ package com.marlon.portalusuario.ui.components
 
 import kotlinx.coroutines.delay
 
-suspend fun <T>ListIterator<T>.doWhenHasNextOrPrevious(
+suspend fun <T> ListIterator<T>.doWhenHasNextOrPrevious(
     delayMills: Long = 3000,
-    doWork: suspend (T) -> Unit
+    doWork: suspend (T) -> Unit,
 ) {
     while (hasNext() || hasPrevious()) {
         while (hasNext()) {

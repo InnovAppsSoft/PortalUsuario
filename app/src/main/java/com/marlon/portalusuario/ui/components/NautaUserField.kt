@@ -18,26 +18,32 @@ import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
 
 @Composable
-fun NautaUserField(user: String = "", enabled: Boolean = false, onChangedText: (String) -> Unit = {}) {
+fun NautaUserField(
+    user: String = "",
+    enabled: Boolean = false,
+    onChangedText: (String) -> Unit = {},
+) {
     TextField(
         value = user,
         onValueChange = onChangedText,
         placeholder = { AnimatedPlaceholder(hints = listOf("51234567", "61234567")) },
         modifier = Modifier.fillMaxWidth(),
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Phone,
-            imeAction = ImeAction.Next
-        ),
+        keyboardOptions =
+            KeyboardOptions(
+                keyboardType = KeyboardType.Phone,
+                imeAction = ImeAction.Next,
+            ),
         leadingIcon = { Text(text = "+53") },
         singleLine = true,
         maxLines = 1,
-        colors = TextFieldDefaults.colors(
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            disabledIndicatorColor = Color.Transparent
-        ),
+        colors =
+            TextFieldDefaults.colors(
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
+            ),
         shape = RoundedCornerShape(8.dp),
-        enabled = enabled
+        enabled = enabled,
     )
 }
 

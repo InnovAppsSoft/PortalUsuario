@@ -20,36 +20,39 @@ import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
 @Composable
 fun ErrorDialog(
     errorText: String = "Error",
-    onDismiss: () -> Unit = {}
+    onDismiss: () -> Unit = {},
 ) {
     Dialog(
         onDismissRequest = onDismiss,
-        properties = DialogProperties(
-            dismissOnBackPress = false,
-            dismissOnClickOutside = false,
-            decorFitsSystemWindows = false
-        )
+        properties =
+            DialogProperties(
+                dismissOnBackPress = false,
+                dismissOnClickOutside = false,
+                decorFitsSystemWindows = false,
+            ),
     ) {
         PrettyCard(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
         ) {
             Column {
                 Text(
                     text = stringResource(R.string.error),
                     modifier = Modifier.padding(8.dp),
-                    style = MaterialTheme.typography.titleLarge
+                    style = MaterialTheme.typography.titleLarge,
                 )
                 Text(
                     text = errorText,
-                    modifier = Modifier.padding(16.dp)
+                    modifier = Modifier.padding(16.dp),
                 )
                 TextButton(
                     onClick = onDismiss,
-                    modifier = Modifier
-                        .align(Alignment.End)
-                        .padding(top = 8.dp)
+                    modifier =
+                        Modifier
+                            .align(Alignment.End)
+                            .padding(top = 8.dp),
                 ) {
                     Text(text = stringResource(R.string.accept))
                 }

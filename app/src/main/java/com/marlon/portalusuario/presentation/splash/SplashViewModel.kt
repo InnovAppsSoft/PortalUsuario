@@ -13,16 +13,18 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SplashViewModel @Inject constructor(
-    private val preferences: AppPreferencesManager
-) : ViewModel() {
-    private val _pref: MutableStateFlow<AppSettings?> = MutableStateFlow(null)
-    val pref: StateFlow<AppSettings?>
-        get() = _pref.asStateFlow()
+class SplashViewModel
+    @Inject
+    constructor(
+        private val preferences: AppPreferencesManager,
+    ) : ViewModel() {
+        private val _pref: MutableStateFlow<AppSettings?> = MutableStateFlow(null)
+        val pref: StateFlow<AppSettings?>
+            get() = _pref.asStateFlow()
 
-    init {
-        viewModelScope.launch {
-            _pref.value = preferences.preferences().first()
+        init {
+            viewModelScope.launch {
+                _pref.value = preferences.preferences().first()
+            }
         }
     }
-}

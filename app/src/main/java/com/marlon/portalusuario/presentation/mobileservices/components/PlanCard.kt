@@ -14,8 +14,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.marlon.portalusuario.ui.components.ArcProgressbar
-import com.marlon.portalusuario.ui.theme.VibrantPink
 import com.marlon.portalusuario.ui.components.PrettyCard
+import com.marlon.portalusuario.ui.theme.VibrantPink
 
 @Composable
 fun PlanCard(
@@ -29,11 +29,11 @@ fun PlanCard(
     PrettyCard(modifier = modifier) {
         Column(
             modifier = Modifier.padding(4.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
                 text = planTitle,
-                style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold)
+                style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
             )
             Spacer(modifier = Modifier.padding(horizontal = 68.dp))
             ArcProgressbar(
@@ -45,7 +45,7 @@ fun PlanCard(
                 bigTextSuffix = if (!isDailyData) "D" else "H",
                 backgroundIndicatorStrokeWidth = 30f,
                 foregroundIndicatorStrokeWidth = 30f,
-                foregroundIndicatorColor = color
+                foregroundIndicatorColor = color,
             )
             Text(text = dataCount)
         }

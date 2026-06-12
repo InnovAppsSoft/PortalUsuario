@@ -49,7 +49,7 @@ fun ConfigSimCardsBottomSheet(onDismiss: () -> Unit) {
                     }
                 },
                 isLoading = isLoading,
-                canConfirm = canConfirm
+                canConfirm = canConfirm,
             )
         },
         onDismissRequest = {
@@ -57,7 +57,7 @@ fun ConfigSimCardsBottomSheet(onDismiss: () -> Unit) {
                 sheetState.hide()
                 onDismiss()
             }
-        }
+        },
     ) {
         ConfigSimCardsView(configViewState, { isLoading = it }, { title = it }, { canConfirm = it })
     }
@@ -65,21 +65,27 @@ fun ConfigSimCardsBottomSheet(onDismiss: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun DragContent(title: String, onConfirm: () -> Unit, isLoading: Boolean, canConfirm: Boolean) {
+private fun DragContent(
+    title: String,
+    onConfirm: () -> Unit,
+    isLoading: Boolean,
+    canConfirm: Boolean,
+) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         BottomSheetDefaults.DragHandle()
         Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
             Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentWidth(),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .wrapContentWidth(),
                 text = title,
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleLarge,
             )
             TextButton(
                 onClick = onConfirm,
                 enabled = !isLoading && canConfirm,
-                modifier = Modifier.align(Alignment.CenterEnd)
+                modifier = Modifier.align(Alignment.CenterEnd),
             ) {
                 Text(text = "Confirmar")
             }

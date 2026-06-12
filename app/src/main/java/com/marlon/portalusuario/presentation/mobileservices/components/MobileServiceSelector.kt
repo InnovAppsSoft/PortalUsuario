@@ -39,12 +39,12 @@ fun MobileServiceSelector(
     serviceSelected: MobileService,
     onServiceSelected: (MobileService) -> Unit,
     simCards: List<SimCard> = listOf(),
-    onShowServiceSettings: () -> Unit = {}
+    onShowServiceSettings: () -> Unit = {},
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.End,
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         PrettyCard(modifier = Modifier.padding(horizontal = 16.dp)) {
             Spinner(
@@ -52,7 +52,7 @@ fun MobileServiceSelector(
                 selectedItem = serviceSelected,
                 onItemSelected = onServiceSelected,
                 selectedItemFactory = { mod, item -> ServiceItem(item, simCards, mod) },
-                dropdownItemFactory = { item, _ -> ServiceItem(item, simCards) }
+                dropdownItemFactory = { item, _ -> ServiceItem(item, simCards) },
             )
         }
 
@@ -69,23 +69,24 @@ fun MobileServiceSelector(
 private fun ServiceItem(
     item: MobileService,
     simCards: List<SimCard>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val simCard = simCards.firstOrNull { it.slotIndex == item.slotIndex }
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
         Box(modifier = Modifier.background(simCard?.let { TealBlue } ?: BrightCoralRed)) {
             Text(
-                text = simCard?.let { sim ->
-                    sim.displayName?.let { "$it (SIM ${sim.slotIndex + 1})" }
-                        ?: "SIM ${sim.slotIndex + 1}"
-                } ?: "No SIM",
-                modifier = Modifier.padding(8.dp)
+                text =
+                    simCard?.let { sim ->
+                        sim.displayName?.let { "$it (SIM ${sim.slotIndex + 1})" }
+                            ?: "SIM ${sim.slotIndex + 1}"
+                    } ?: "No SIM",
+                modifier = Modifier.padding(8.dp),
             )
         }
         Spacer(modifier = Modifier.width(4.dp))
         Text(
             text = item.phoneNumber,
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(8.dp),
         )
     }
 }
@@ -93,45 +94,48 @@ private fun ServiceItem(
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable
 private fun MobileServiceSelectorPreview() {
-    val services = listOf(
-        MobileService(
-            id = "5351872843",
-            lte = false,
-            advanceBalance = "0",
-            status = "Activo",
-            lockDate = "26/6/2024".fixDateFormat(),
-            deletionDate = "26/7/2024".fixDateFormat(),
-            saleDate = "19/8/2022".fixDateFormat(),
-            internet = true,
-            plans = listOf(
-                MobilePlan("01:23:55", "MINUTOS", "31/08/2023".replace("/", "-")),
-                MobilePlan("1560", "SMS", "31/08/2023".replace("/", "-")),
-                MobilePlan("719.55 MB", "DATOS", "31/08/2023".replace("/", "-")),
-                MobilePlan("0.00 B", "DATOS LTE", "31/08/2023".replace("/", "-")),
+    val services =
+        listOf(
+            MobileService(
+                id = "5351872843",
+                lte = false,
+                advanceBalance = "0",
+                status = "Activo",
+                lockDate = "26/6/2024".fixDateFormat(),
+                deletionDate = "26/7/2024".fixDateFormat(),
+                saleDate = "19/8/2022".fixDateFormat(),
+                internet = true,
+                plans =
+                    listOf(
+                        MobilePlan("01:23:55", "MINUTOS", "31/08/2023".replace("/", "-")),
+                        MobilePlan("1560", "SMS", "31/08/2023".replace("/", "-")),
+                        MobilePlan("719.55 MB", "DATOS", "31/08/2023".replace("/", "-")),
+                        MobilePlan("0.00 B", "DATOS LTE", "31/08/2023".replace("/", "-")),
+                    ),
+                bonuses =
+                    listOf(
+                        MobileBonus("296.61 MB", "", "DATOS NACIONALES", "31/08/2023".replace("/", "-")),
+                        MobileBonus(
+                            "0",
+                            "18/03/2023".replace("/", "-"),
+                            "DATOS LTE",
+                            "31/08/2023".replace("/", "-"),
+                        ),
+                    ),
+                currency = "CUP",
+                phoneNumber = "51872843",
+                mainBalance = "10.00",
+                consumptionRate = true,
+                slotIndex = -1,
+                type = ServiceType.Local,
             ),
-            bonuses = listOf(
-                MobileBonus("296.61 MB", "", "DATOS NACIONALES", "31/08/2023".replace("/", "-")),
-                MobileBonus(
-                    "0",
-                    "18/03/2023".replace("/", "-"),
-                    "DATOS LTE",
-                    "31/08/2023".replace("/", "-")
-                ),
-            ),
-            currency = "CUP",
-            phoneNumber = "51872843",
-            mainBalance = "10.00",
-            consumptionRate = true,
-            slotIndex = -1,
-            type = ServiceType.Local
         )
-    )
     PortalUsuarioTheme {
         Surface {
             MobileServiceSelector(
                 services = services,
                 serviceSelected = services.first { it.id == "5351872843" },
-                onServiceSelected = {}
+                onServiceSelected = {},
             )
         }
     }

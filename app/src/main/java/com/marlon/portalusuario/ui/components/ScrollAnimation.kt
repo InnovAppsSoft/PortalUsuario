@@ -13,13 +13,13 @@ object ScrollAnimation {
         return (
             slideInVertically(
                 initialOffsetY = { 50 },
-                animationSpec = tween()
+                animationSpec = tween(),
             ) + fadeIn()
-            ).togetherWith(
+        ).togetherWith(
             slideOutVertically(
                 targetOffsetY = { -50 },
-                animationSpec = tween()
-            ) + fadeOut()
+                animationSpec = tween(),
+            ) + fadeOut(),
         )
     }
 }

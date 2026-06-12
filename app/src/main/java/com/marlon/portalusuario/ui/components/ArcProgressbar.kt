@@ -34,9 +34,9 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.R
 
-private const val OneSecondMillis = 1000
-private const val Hundred = 100
-private const val SomeFloatNumber = 1.25f
+private const val ONE_SECOND_MILLIS = 1000
+private const val HUNDRED = 100
+private const val SOME_FLOAT_NUMBER = 1.25f
 
 @Composable
 fun ArcProgressbar(
@@ -52,57 +52,64 @@ fun ArcProgressbar(
     bigTextSuffix: String = "GB",
     smallText: String = stringResource(R.string.remaining),
     smallTextFontSize: TextUnit = MaterialTheme.typography.titleSmall.fontSize,
-    smallTextColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+    smallTextColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f),
 ) {
     var allowedIndicatorValue by remember { mutableIntStateOf(maxIndicatorValue) }
-    allowedIndicatorValue = if (indicatorValue <= maxIndicatorValue) { indicatorValue } else { maxIndicatorValue }
+    allowedIndicatorValue =
+        if (indicatorValue <= maxIndicatorValue) {
+            indicatorValue
+        } else {
+            maxIndicatorValue
+        }
 
     var animatedIndicatorValue by remember { mutableFloatStateOf(0f) }
     LaunchedEffect(key1 = allowedIndicatorValue) { animatedIndicatorValue = allowedIndicatorValue.toFloat() }
 
-    val percentage = (animatedIndicatorValue / maxIndicatorValue) * Hundred
+    val percentage = (animatedIndicatorValue / maxIndicatorValue) * HUNDRED
 
     val sweepAngle by animateFloatAsState(
         targetValue = (2.4 * percentage).toFloat(),
-        animationSpec = tween(OneSecondMillis),
-        label = ""
+        animationSpec = tween(ONE_SECOND_MILLIS),
+        label = "",
     )
 
     val receivedValue by animateIntAsState(
         targetValue = allowedIndicatorValue,
-        animationSpec = tween(OneSecondMillis),
-        label = ""
+        animationSpec = tween(ONE_SECOND_MILLIS),
+        label = "",
     )
 
     val animatedBigTextColor by animateColorAsState(
-        targetValue = if (allowedIndicatorValue == 0) {
-            MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
-        } else {
-            bigTextColor
-        },
-        animationSpec = tween(OneSecondMillis),
-        label = ""
+        targetValue =
+            if (allowedIndicatorValue == 0) {
+                MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+            } else {
+                bigTextColor
+            },
+        animationSpec = tween(ONE_SECOND_MILLIS),
+        label = "",
     )
 
     Column(
-        modifier = Modifier
-            .size(canvasSize)
-            .drawBehind {
-                val componentSize = size / SomeFloatNumber
-                backgroundIndicator(
-                    componentSize = componentSize,
-                    indicatorColor = backgroundIndicatorColor,
-                    indicatorStrokeWidth = backgroundIndicatorStrokeWidth,
-                )
-                foregroundIndicator(
-                    sweepAngle = sweepAngle,
-                    componentSize = componentSize,
-                    indicatorColor = foregroundIndicatorColor,
-                    indicatorStrokeWidth = foregroundIndicatorStrokeWidth,
-                )
-            },
+        modifier =
+            Modifier
+                .size(canvasSize)
+                .drawBehind {
+                    val componentSize = size / SOME_FLOAT_NUMBER
+                    backgroundIndicator(
+                        componentSize = componentSize,
+                        indicatorColor = backgroundIndicatorColor,
+                        indicatorStrokeWidth = backgroundIndicatorStrokeWidth,
+                    )
+                    foregroundIndicator(
+                        sweepAngle = sweepAngle,
+                        componentSize = componentSize,
+                        indicatorColor = foregroundIndicatorColor,
+                        indicatorStrokeWidth = foregroundIndicatorStrokeWidth,
+                    )
+                },
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         EmbeddedElements(
             bigText = receivedValue,
@@ -111,7 +118,7 @@ fun ArcProgressbar(
             bigTextSuffix = bigTextSuffix,
             smallText = smallText,
             smallTextColor = smallTextColor,
-            smallTextFontSize = smallTextFontSize
+            smallTextFontSize = smallTextFontSize,
         )
     }
 }
@@ -127,14 +134,16 @@ fun DrawScope.backgroundIndicator(
         startAngle = 150f,
         sweepAngle = 240f,
         useCenter = false,
-        style = Stroke(
-            width = indicatorStrokeWidth,
-            cap = StrokeCap.Round
-        ),
-        topLeft = Offset(
-            x = (size.width - componentSize.width) / 2f,
-            y = (size.height - componentSize.height) / 2f
-        )
+        style =
+            Stroke(
+                width = indicatorStrokeWidth,
+                cap = StrokeCap.Round,
+            ),
+        topLeft =
+            Offset(
+                x = (size.width - componentSize.width) / 2f,
+                y = (size.height - componentSize.height) / 2f,
+            ),
     )
 }
 
@@ -150,14 +159,16 @@ fun DrawScope.foregroundIndicator(
         startAngle = 150f,
         sweepAngle = sweepAngle,
         useCenter = false,
-        style = Stroke(
-            width = indicatorStrokeWidth,
-            cap = StrokeCap.Round
-        ),
-        topLeft = Offset(
-            x = (size.width - componentSize.width) / 2f,
-            y = (size.height - componentSize.height) / 2f
-        )
+        style =
+            Stroke(
+                width = indicatorStrokeWidth,
+                cap = StrokeCap.Round,
+            ),
+        topLeft =
+            Offset(
+                x = (size.width - componentSize.width) / 2f,
+                y = (size.height - componentSize.height) / 2f,
+            ),
     )
 }
 
@@ -169,20 +180,20 @@ fun EmbeddedElements(
     bigTextSuffix: String,
     smallText: String,
     smallTextColor: Color,
-    smallTextFontSize: TextUnit
+    smallTextFontSize: TextUnit,
 ) {
     Text(
         text = smallText,
         color = smallTextColor,
         fontSize = smallTextFontSize,
-        textAlign = TextAlign.Center
+        textAlign = TextAlign.Center,
     )
     Text(
         text = if (bigText == 0) stringResource(R.string.not_active) else "$bigText ${bigTextSuffix.take(2)}",
         color = bigTextColor,
         fontSize = bigTextFontSize,
         textAlign = TextAlign.Center,
-        fontWeight = FontWeight.Bold
+        fontWeight = FontWeight.Bold,
     )
 }
 

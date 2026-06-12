@@ -4,5 +4,5 @@ data class MobileBonus(
     val data: String,
     val startDate: String,
     val type: String,
-    val expires: String
+    val expires: String,
 )

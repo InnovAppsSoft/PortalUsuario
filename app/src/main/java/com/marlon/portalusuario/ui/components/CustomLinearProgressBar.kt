@@ -10,20 +10,20 @@ import androidx.compose.ui.graphics.Color
 fun CustomLinearProgressBar(
     modifier: Modifier,
     color: Color = MaterialTheme.colorScheme.primary,
-    progress: Float? = null
+    progress: Float? = null,
 ) {
     if (progress != null) {
         LinearProgressIndicator(
             progress = { progress },
             modifier = modifier,
             color = color,
-            trackColor = MaterialTheme.colorScheme.surface
+            trackColor = MaterialTheme.colorScheme.surface,
         )
     } else {
         LinearProgressIndicator(
             modifier = modifier,
             color = color,
-            trackColor = MaterialTheme.colorScheme.surface
+            trackColor = MaterialTheme.colorScheme.surface,
         )
     }
 }

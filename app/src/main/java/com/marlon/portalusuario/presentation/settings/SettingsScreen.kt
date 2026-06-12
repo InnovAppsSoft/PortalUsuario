@@ -56,11 +56,10 @@ fun SettingsScreen(viewModel: AppPreferencesViewModel = hiltViewModel()) {
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
-
-            )
+        )
         SettingsItem(
             stringResource(R.string.apariecia_settings),
-            getModeNightName(context, state.modeNight)
+            getModeNightName(context, state.modeNight),
         ) {
             isShowingModeNightDialog = true
         }
@@ -69,26 +68,30 @@ fun SettingsScreen(viewModel: AppPreferencesViewModel = hiltViewModel()) {
             Text(
                 text = "Burbuja flotante",
                 modifier = Modifier.padding(horizontal = 8.dp),
-                color = TextFieldDefaults.colors().disabledTextColor
+                color = TextFieldDefaults.colors().disabledTextColor,
             )
             HorizontalDivider()
         }
 
         SettingsItemCheckable(
             stringResource(R.string.show_floating_bubble),
-            state.isShowingTrafficBubble
+            state.isShowingTrafficBubble,
         ) {
             viewModel.onEvent(AppPreferencesEvent.OnUpdateIsShowingTrafficBubble(!state.isShowingTrafficBubble))
         }
         SettingsItemCheckable("Mostrar saldo", state.isShowingAccountBalanceOnTrafficBubble) {
             viewModel.onEvent(
                 AppPreferencesEvent.OnSwitchingAccountBalanceOnTrafficBubbleVisibility(
-                    !state.isShowingAccountBalanceOnTrafficBubble
-                )
+                    !state.isShowingAccountBalanceOnTrafficBubble,
+                ),
             )
         }
         SettingsItemCheckable("Mostrar datos", state.isShowingDataBalanceOnTrafficBubble) {
-            viewModel.onEvent(AppPreferencesEvent.OnSwitchingDataBalanceOnTrafficBubbleVisibility(!state.isShowingDataBalanceOnTrafficBubble))
+            viewModel.onEvent(
+                AppPreferencesEvent.OnSwitchingDataBalanceOnTrafficBubbleVisibility(
+                    !state.isShowingDataBalanceOnTrafficBubble,
+                ),
+            )
         }
     }
 
@@ -97,40 +100,51 @@ fun SettingsScreen(viewModel: AppPreferencesViewModel = hiltViewModel()) {
             state.modeNight,
             {
                 viewModel.onEvent(AppPreferencesEvent.OnUpdateModeNight(it))
-            }) {
+            },
+        ) {
             isShowingModeNightDialog = false
         }
     }
 }
 
 @Composable
-fun SettingsItemCheckable(title: String, isChecked: Boolean, onCheckedChange: (Boolean) -> Unit) {
+fun SettingsItemCheckable(
+    title: String,
+    isChecked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier
-            .height(50.dp)
-            .padding(horizontal = 16.dp)
-            .fillMaxWidth()
+        modifier =
+            Modifier
+                .height(50.dp)
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth(),
     ) {
         Text(text = title, modifier = Modifier.padding(horizontal = 8.dp))
         Switch(
             checked = isChecked,
-            onCheckedChange = onCheckedChange
+            onCheckedChange = onCheckedChange,
         )
     }
 }
 
 @Composable
-fun SettingsItem(title: String, currentValue: String, onValueChange: () -> Unit) {
+fun SettingsItem(
+    title: String,
+    currentValue: String,
+    onValueChange: () -> Unit,
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier
-            .height(50.dp)
-            .padding(horizontal = 16.dp)
-            .fillMaxWidth()
-            .clickable { onValueChange() }
+        modifier =
+            Modifier
+                .height(50.dp)
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+                .clickable { onValueChange() },
     ) {
         Text(text = title, modifier = Modifier.padding(horizontal = 8.dp))
         Text(text = currentValue, color = TextFieldDefaults.colors().disabledTextColor)
@@ -141,7 +155,7 @@ fun SettingsItem(title: String, currentValue: String, onValueChange: () -> Unit)
 fun ModeNightDialog(
     currentModeNight: ModeNight,
     onModeNightChange: (ModeNight) -> Unit,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -150,35 +164,40 @@ fun ModeNightDialog(
 
     Dialog(onDismissRequest = onDismissRequest) {
         Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
         ) {
             Column(
-                modifier = Modifier
-                    .padding(16.dp)
+                modifier =
+                    Modifier
+                        .padding(16.dp),
             ) {
                 options.forEach { option ->
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 8.dp)
-                            .clickable {
-                                Log.i(TAG, "ModeNightDialog: changing modeNight to ${option.first}")
-                                onModeNightChange(option.second)
-                            }) {
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 8.dp)
+                                .clickable {
+                                    Log.i(TAG, "ModeNightDialog: changing modeNight to ${option.first}")
+                                    onModeNightChange(option.second)
+                                },
+                    ) {
                         Text(
                             text = option.first,
-                            textAlign = TextAlign.Start
+                            textAlign = TextAlign.Start,
                         )
                         RadioButton(
                             selected = option == selectedOption,
                             onClick = {
                                 Log.i(TAG, "ModeNightDialog: changing modeNight to ${option.first}")
                                 onModeNightChange(option.second)
-                            })
+                            },
+                        )
                     }
                 }
             }
@@ -186,7 +205,10 @@ fun ModeNightDialog(
     }
 }
 
-fun getModeNightName(context: Context, modeNight: ModeNight) = when (modeNight) {
+fun getModeNightName(
+    context: Context,
+    modeNight: ModeNight,
+) = when (modeNight) {
     ModeNight.YES -> context.getString(R.string.ui_mode_dark)
     ModeNight.NO -> context.getString(R.string.ui_mode_light)
     ModeNight.FOLLOW_SYSTEM -> context.getString(R.string.ui_mode_system)
@@ -197,9 +219,10 @@ fun getModeNightName(context: Context, modeNight: ModeNight) = when (modeNight) 
 private fun ModeNightDialogPreview() {
     PortalUsuarioTheme {
         Surface(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.surface)
-                .padding(16.dp)
+            modifier =
+                Modifier
+                    .background(MaterialTheme.colorScheme.surface)
+                    .padding(16.dp),
         ) { ModeNightDialog(ModeNight.YES, {}) {} }
     }
 }
@@ -209,9 +232,10 @@ private fun ModeNightDialogPreview() {
 private fun SettingsItemCheckablePreview() {
     PortalUsuarioTheme {
         Surface(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.surface)
-                .padding(16.dp)
+            modifier =
+                Modifier
+                    .background(MaterialTheme.colorScheme.surface)
+                    .padding(16.dp),
         ) {
             SettingsItemCheckable(stringResource(R.string.show_floating_bubble), false) {}
         }

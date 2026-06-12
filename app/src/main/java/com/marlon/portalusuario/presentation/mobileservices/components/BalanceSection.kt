@@ -39,59 +39,62 @@ fun BalanceSection(
     deletionDate: String = "31/12/2024",
     isSimPaired: Boolean = false,
     onAddBalance: () -> Unit = {},
-    onSendBalance: () -> Unit = {}
+    onSendBalance: () -> Unit = {},
 ) {
     Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 4.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(horizontal = 4.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = stringResource(id = R.string.balance_credit),
-            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
         )
         Text(
             text = balanceCredit,
-            style = MaterialTheme.typography.titleLarge.copy(
-                fontWeight = FontWeight.Bold,
-                fontSize = 32.sp
-            )
+            style =
+                MaterialTheme.typography.titleLarge.copy(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 32.sp,
+                ),
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(text = stringResource(id = R.string.expires, PrettyTime().format(lockDate.replace("/", "-").asDate)))
         Text(
-            text = stringResource(
-                id = R.string.elimination,
-                PrettyTime().format(deletionDate.replace("/", "-").asDate)
-            )
+            text =
+                stringResource(
+                    id = R.string.elimination,
+                    PrettyTime().format(deletionDate.replace("/", "-").asDate),
+                ),
         )
         Spacer(modifier = Modifier.height(8.dp))
         if (isSimPaired) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 IconButton(
                     onClick = onAddBalance,
-                    modifier = Modifier.background(TealBlue, shape = MaterialTheme.shapes.small)
+                    modifier = Modifier.background(TealBlue, shape = MaterialTheme.shapes.small),
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.Add,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.background
+                        tint = MaterialTheme.colorScheme.background,
                     )
                 }
                 IconButton(
                     onClick = onSendBalance,
-                    modifier = Modifier.background(TealBlue, shape = MaterialTheme.shapes.small)
+                    modifier = Modifier.background(TealBlue, shape = MaterialTheme.shapes.small),
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Outlined.Send,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.background
+                        tint = MaterialTheme.colorScheme.background,
                     )
                 }
             }

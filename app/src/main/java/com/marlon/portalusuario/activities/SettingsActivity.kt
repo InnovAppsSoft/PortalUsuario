@@ -36,40 +36,43 @@ class SettingsActivity : ComponentActivity() {
 
         lifecycleScope.launch {
             appPreferencesManager.preferences().collect { preferences ->
-                val uiMode = when (preferences.modeNight) {
-                    ModeNight.YES -> {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                        Log.i(TAG, "onCreate: Changed modeNight to Dark")
-                        true
-                    }
+                val uiMode =
+                    when (preferences.modeNight) {
+                        ModeNight.YES -> {
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                            Log.i(TAG, "onCreate: Changed modeNight to Dark")
+                            true
+                        }
 
-                    ModeNight.NO -> {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                        Log.i(TAG, "onCreate: Changed modeNight to Light")
-                        false
-                    }
+                        ModeNight.NO -> {
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                            Log.i(TAG, "onCreate: Changed modeNight to Light")
+                            false
+                        }
 
-                    ModeNight.FOLLOW_SYSTEM -> {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                        Log.i(TAG, "onCreate: Changed modeNight to System")
-                        null
+                        ModeNight.FOLLOW_SYSTEM -> {
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                            Log.i(TAG, "onCreate: Changed modeNight to System")
+                            null
+                        }
                     }
-                }
 
                 if (preferences.isShowingTrafficBubble) {
                     if (!Settings.canDrawOverlays(this@SettingsActivity)) {
                         Toast.makeText(
                             this@SettingsActivity,
                             "Otorgue a Portal Usuario los permisos requeridos",
-                            Toast.LENGTH_SHORT
+                            Toast.LENGTH_SHORT,
                         ).show()
                         startActivity(
                             Intent(
                                 Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                                ("package:" + this@SettingsActivity.packageName).toUri()
-                            )
+                                ("package:" + this@SettingsActivity.packageName).toUri(),
+                            ),
                         )
-                    } else if (!networkConnectivityObserver.isCallbackRegistered) networkConnectivityObserver.startMonitoring()
+                    } else if (!networkConnectivityObserver.isCallbackRegistered) {
+                        networkConnectivityObserver.startMonitoring()
+                    }
                 } else {
                     if (networkConnectivityObserver.isCallbackRegistered) networkConnectivityObserver.stopMonitoring()
                 }

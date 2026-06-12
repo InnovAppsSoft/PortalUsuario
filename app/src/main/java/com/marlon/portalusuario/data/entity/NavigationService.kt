@@ -21,17 +21,18 @@ data class NavigationService(
     @ColumnInfo(name = "product_type") val productType: String,
 )
 
-fun NavigationService.asModel() = ModelNavigationService(
-    id,
-    bonusToEnjoy,
-    accessAccount,
-    status,
-    lockDate,
-    deletionDate,
-    saleDate,
-    bonusHours,
-    currency,
-    balance,
-    accessType,
-    productType
-)
+fun NavigationService.asModel() =
+    ModelNavigationService(
+        id,
+        bonusToEnjoy,
+        accessAccount,
+        status,
+        lockDate,
+        deletionDate,
+        saleDate,
+        bonusHours,
+        currency,
+        balance,
+        accessType,
+        productType,
+    )

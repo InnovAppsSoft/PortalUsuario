@@ -32,7 +32,6 @@ import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
-
 private const val VIBRATE_TIME = 100L
 private const val GRAVITY_CENTER = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
 private const val INITIAL_POSITION_X = 0
@@ -67,14 +66,16 @@ class FloatingBubbleService : Service() {
     private fun updateBubbleUI() {
         serviceScope.launch {
             viewModel.state.collect { bubbleState ->
-                bubbleBinding.bubbleTrafficUploadText.text = getString(
-                    R.string.upload_traffic_template,
-                    humanReadableByteCount(bubbleState.uploadSpeed)
-                )
-                bubbleBinding.bubbleTrafficDownloadText.text = getString(
-                    R.string.download_traffic_template,
-                    humanReadableByteCount(bubbleState.downloadSpeed)
-                )
+                bubbleBinding.bubbleTrafficUploadText.text =
+                    getString(
+                        R.string.upload_traffic_template,
+                        humanReadableByteCount(bubbleState.uploadSpeed),
+                    )
+                bubbleBinding.bubbleTrafficDownloadText.text =
+                    getString(
+                        R.string.download_traffic_template,
+                        humanReadableByteCount(bubbleState.downloadSpeed),
+                    )
 
                 if (bubbleState.isShowingAccountBalance) {
                     bubbleBinding.timeLayout.visibility = View.VISIBLE
@@ -94,13 +95,14 @@ class FloatingBubbleService : Service() {
     }
 
     private fun setupUpdateRunnable() {
-        updateRunnable = Runnable {
-            val service = weakReference.get() ?: return@Runnable
+        updateRunnable =
+            Runnable {
+                val service = weakReference.get() ?: return@Runnable
 
-            service.performUpdate()
+                service.performUpdate()
 
-            1000L.also { handler.postDelayed(this@FloatingBubbleService.updateRunnable, it) }
-        }
+                1000L.also { handler.postDelayed(this@FloatingBubbleService.updateRunnable, it) }
+            }
     }
 
     private fun performUpdate() {
@@ -130,7 +132,7 @@ class FloatingBubbleService : Service() {
         windowManager =
             ContextCompat.getSystemService(
                 applicationContext,
-                WindowManager::class.java
+                WindowManager::class.java,
             ) as WindowManager
 
         //
@@ -141,7 +143,11 @@ class FloatingBubbleService : Service() {
         return null
     }
 
-    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+    override fun onStartCommand(
+        intent: Intent,
+        flags: Int,
+        startId: Int,
+    ): Int {
         super.onStartCommand(intent, flags, startId)
         networkType = intent.getStringExtra("networkType").toString()
         // UTIL
@@ -187,27 +193,28 @@ class FloatingBubbleService : Service() {
     private fun setUpLayouts() {
         val type =
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-        bubbleLayoutParams = WindowManager.LayoutParams(
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            type,
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-            PixelFormat.TRANSLUCENT
-        )
+        bubbleLayoutParams =
+            WindowManager.LayoutParams(
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                type,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                PixelFormat.TRANSLUCENT,
+            )
 
         bubbleLayoutParams.gravity = GRAVITY_CENTER
-
 
         bubbleLayoutParams.x = INITIAL_POSITION_X
         bubbleLayoutParams.y = INITIAL_POSITION_Y
 
-        deleteBubbleLayoutParams = WindowManager.LayoutParams(
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            type,
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-            PixelFormat.TRANSLUCENT
-        )
+        deleteBubbleLayoutParams =
+            WindowManager.LayoutParams(
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                type,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                PixelFormat.TRANSLUCENT,
+            )
         deleteBubbleLayoutParams.gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
         20.also { deleteBubbleLayoutParams.y = it }
     }
@@ -219,7 +226,7 @@ class FloatingBubbleService : Service() {
             val layoutInflater =
                 ContextCompat.getSystemService(
                     applicationContext,
-                    LayoutInflater::class.java
+                    LayoutInflater::class.java,
                 ) as LayoutInflater
 
             // INFLATING BUBBLE LAYOUT
@@ -273,7 +280,10 @@ class FloatingBubbleService : Service() {
         }
     }
 
-    private fun removeViewSafely(view: View, viewName: String) {
+    private fun removeViewSafely(
+        view: View,
+        viewName: String,
+    ) {
         try {
             windowManager.removeView(view)
         } catch (e: IllegalArgumentException) {
@@ -288,9 +298,11 @@ class FloatingBubbleService : Service() {
         private var initialY = 0
         private var erase = false
 
-
         @SuppressLint("ClickableViewAccessibility")
-        override fun onTouch(v: View, event: MotionEvent): Boolean {
+        override fun onTouch(
+            v: View,
+            event: MotionEvent,
+        ): Boolean {
             return when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     initialX = bubbleLayoutParams.x
@@ -310,7 +322,7 @@ class FloatingBubbleService : Service() {
                     windowManager.updateViewLayout(bubbleBinding.root, bubbleLayoutParams)
                     //
                     trashBinding.root.visibility = View.VISIBLE
-                    //int LESS_SPACE = 100;
+                    // int LESS_SPACE = 100;
                     val topLimit = 6.let { screenHeight / it * 2 }
                     val leftLimit = 6.let { -1 * (screenWidth / it) }
                     val rightLimit = 6.let { screenWidth / it }
@@ -332,13 +344,14 @@ class FloatingBubbleService : Service() {
                     true
                 }
 
-                MotionEvent.ACTION_UP -> if (erase) {
-                    onDestroy()
-                    true
-                } else {
-                    trashBinding.root.visibility = View.GONE
-                    true
-                }
+                MotionEvent.ACTION_UP ->
+                    if (erase) {
+                        onDestroy()
+                        true
+                    } else {
+                        trashBinding.root.visibility = View.GONE
+                        true
+                    }
 
                 else -> false
             }
@@ -350,8 +363,8 @@ class FloatingBubbleService : Service() {
             vibrator.vibrate(
                 VibrationEffect.createOneShot(
                     VIBRATE_TIME,
-                    VibrationEffect.DEFAULT_AMPLITUDE
-                )
+                    VibrationEffect.DEFAULT_AMPLITUDE,
+                ),
             )
         }
     }

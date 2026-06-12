@@ -1,4 +1,4 @@
-package com.marlon.portalusuario.Permisos
+package com.marlon.portalusuario.permisos
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf

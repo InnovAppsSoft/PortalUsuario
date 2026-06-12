@@ -1,3 +1,5 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
 plugins {
     id("com.android.application")
     alias(libs.plugins.google.services)
@@ -8,6 +10,13 @@ plugins {
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.arturbosch.detekt)
     alias(libs.plugins.kotlin.plugin.compose)
+    alias(libs.plugins.ktlint)
+}
+
+ktlint {
+    reporters {
+        reporter(ReporterType.PLAIN)
+    }
 }
 
 android {
@@ -31,7 +40,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
             signingConfig = signingConfigs.getByName("debug")
         }

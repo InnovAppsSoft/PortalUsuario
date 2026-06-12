@@ -24,77 +24,86 @@ import javax.inject.Inject
 private const val TAG = "ConfigSimCardsViewModel"
 
 @HiltViewModel
-class ConfigSimCardsViewModel @Inject constructor(
-    private val preferences: MobServicesPreferences,
-    private val repository: UserRepository,
-    private val simCardCollector: SimCardCollector
-) : ViewModel() {
-    private val simCards: List<SimCard>
-        @SuppressLint("MissingPermission")
-        get() = runBlocking {
-            preferences.preferences.first().slotIndexInfoList.let { indexes ->
-                simCardCollector.collect().filter {
-                    it.slotIndex !in indexes.map { index -> index.index }
-                }
-            }
-        }
-
-    private val pref = preferences.preferences.stateIn(
-        viewModelScope,
-        SharingStarted.Eagerly,
-        MobServPreferences(emptyList())
-    )
-
-    private val _state = mutableStateOf(
-        ConfigSimCardsState(
-            simCards.first(),
-            simCards = simCards,
-            phoneNumber = simCards.first().phoneNumber?.let { extractShortNumber(it) } ?: ""
-        )
-    )
-    val state get() = _state.value
-
-    val isPhoneNumberValid: Boolean
-        get() = validateFormat(_state.value.phoneNumber)?.length == 8
-
-    fun onEvent(event: ConfigSimCardsEvent) {
-        when (event) {
-            is ConfigSimCardsEvent.OnChangedPhoneNumber ->
-                _state.value = _state.value.copy(phoneNumber = event.value)
-            ConfigSimCardsEvent.OnNext ->
-                _state.value = _state.value.copy(
-                    currentSimCard = simCards[simCards.indexOf(_state.value.currentSimCard) + 1]
-                )
-            is ConfigSimCardsEvent.OnSimCardAdd -> viewModelScope.launch {
-                if (isPhoneNumberValid) {
-                    _state.value = _state.value.copy(isLoading = true)
-                    preferences.updateSlotIndexInfoList(
-                        pref.value.slotIndexInfoList.toMutableList().apply {
-                            add(
-                                SlotIndexInfo(
-                                    _state.value.currentSimCard.slotIndex,
-                                    _state.value.phoneNumber
-                                )
-                            )
+class ConfigSimCardsViewModel
+    @Inject
+    constructor(
+        private val preferences: MobServicesPreferences,
+        private val repository: UserRepository,
+        private val simCardCollector: SimCardCollector,
+    ) : ViewModel() {
+        private val simCards: List<SimCard>
+            @SuppressLint("MissingPermission")
+            get() =
+                runBlocking {
+                    preferences.preferences.first().slotIndexInfoList.let { indexes ->
+                        simCardCollector.collect().filter {
+                            it.slotIndex !in indexes.map { index -> index.index }
                         }
-                    )
-                    repository.fetchUser(_state.value.currentSimCard.copy(phoneNumber = _state.value.phoneNumber))
-                    Log.d(
-                        TAG,
-                        "onEvent: current slotIndex :: ${_state.value.currentSimCard.slotIndex}"
-                    )
-                    Log.d(
-                        TAG,
-                        "onEvent: last slotIndex :: ${_state.value.simCards.last().slotIndex}"
-                    )
-                    _state.value = _state.value.copy(isLoading = false)
-                    if (_state.value.currentSimCard.slotIndex == _state.value.simCards.last().slotIndex) {
-                        event.onFinish()
-                    } else {
-                        onEvent(ConfigSimCardsEvent.OnNext)
                     }
                 }
+
+        private val pref =
+            preferences.preferences.stateIn(
+                viewModelScope,
+                SharingStarted.Eagerly,
+                MobServPreferences(emptyList()),
+            )
+
+        private val _state =
+            mutableStateOf(
+                ConfigSimCardsState(
+                    simCards.first(),
+                    simCards = simCards,
+                    phoneNumber = simCards.first().phoneNumber?.let { extractShortNumber(it) } ?: "",
+                ),
+            )
+        val state get() = _state.value
+
+        val isPhoneNumberValid: Boolean
+            get() = validateFormat(_state.value.phoneNumber)?.length == 8
+
+        fun onEvent(event: ConfigSimCardsEvent) {
+            when (event) {
+                is ConfigSimCardsEvent.OnChangedPhoneNumber ->
+                    _state.value = _state.value.copy(phoneNumber = event.value)
+                ConfigSimCardsEvent.OnNext ->
+                    _state.value =
+                        _state.value.copy(
+                            currentSimCard = simCards[simCards.indexOf(_state.value.currentSimCard) + 1],
+                        )
+                is ConfigSimCardsEvent.OnSimCardAdd ->
+                    viewModelScope.launch {
+                        if (isPhoneNumberValid) {
+                            _state.value = _state.value.copy(isLoading = true)
+                            preferences.updateSlotIndexInfoList(
+                                pref.value.slotIndexInfoList.toMutableList().apply {
+                                    add(
+                                        SlotIndexInfo(
+                                            _state.value.currentSimCard.slotIndex,
+                                            _state.value.phoneNumber,
+                                        ),
+                                    )
+                                },
+                            )
+                            repository.fetchUser(
+                                _state.value.currentSimCard.copy(phoneNumber = _state.value.phoneNumber),
+                            )
+                            Log.d(
+                                TAG,
+                                "onEvent: current slotIndex :: ${_state.value.currentSimCard.slotIndex}",
+                            )
+                            Log.d(
+                                TAG,
+                                "onEvent: last slotIndex :: ${_state.value.simCards.last().slotIndex}",
+                            )
+                            _state.value = _state.value.copy(isLoading = false)
+                            if (_state.value.currentSimCard.slotIndex == _state.value.simCards.last().slotIndex) {
+                                event.onFinish()
+                            } else {
+                                onEvent(ConfigSimCardsEvent.OnNext)
+                            }
+                        }
+                    }
             }
         }
     }
-}
