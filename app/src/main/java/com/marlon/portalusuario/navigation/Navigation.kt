@@ -14,7 +14,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.marlon.portalusuario.paquetes.PaquetesScreen
 import com.marlon.portalusuario.presentation.mobileservices.screen.MobileServicesScreen
+import com.marlon.portalusuario.servicios.ServiciosScreen
 
 /**
  * NavHost centralizado con todas las rutas de la aplicación.
@@ -25,15 +27,17 @@ import com.marlon.portalusuario.presentation.mobileservices.screen.MobileService
 fun PortalUsuarioNavHost(
     navController: NavHostController = rememberNavController(),
     startDestination: String = Route.Splash.route,
+    modifier: Modifier = Modifier,
 ) {
     NavHost(
         navController = navController,
         startDestination = startDestination,
+        modifier = modifier,
     ) {
         composable(Route.Splash.route) { PlaceholderScreen("Splash") }
         composable(Route.Intro.route) { PlaceholderScreen("Intro") }
         composable(Route.Permissions.route) { PlaceholderScreen("Permissions") }
-        composable(Route.Main.route) { PlaceholderScreen("Main") }
+        composable(Route.Main.route) { MobileServicesScreen() }
         composable(Route.Settings.route) { PlaceholderScreen("Settings") }
         composable(Route.About.route) { PlaceholderScreen("About") }
         composable(Route.Donation.route) { PlaceholderScreen("Donation") }
@@ -48,6 +52,8 @@ fun PortalUsuarioNavHost(
         composable(Route.EmergencyCalls.route) { PlaceholderScreen("Emergency Calls") }
         composable(Route.Une.route) { PlaceholderScreen("UNE") }
         composable(Route.Perfil.route) { PlaceholderScreen("Perfil") }
+        composable(Route.Servicios.route) { ServiciosScreen() }
+        composable(Route.Paquetes.route) { PaquetesScreen() }
         composable(Route.LogFileViewer.route) { PlaceholderScreen("Log File Viewer") }
         composable(Route.MobileServices.route) { MobileServicesScreen() }
         composable(

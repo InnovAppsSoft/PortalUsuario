@@ -65,6 +65,12 @@ sealed class Route(
     /** Servicios móviles (saldo, bonos, planes) */
     data object MobileServices : Route("mobile_services")
 
+    /** Planes y paquetes de datos */
+    data object Paquetes : Route("paquetes")
+
+    /** Servicios de red (saldo, llamadas, recargas) */
+    data object Servicios : Route("servicios")
+
     /** Visor de logs de depuración */
     data object LogFileViewer : Route("log_file_viewer")
 
