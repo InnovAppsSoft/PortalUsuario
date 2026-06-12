@@ -5,11 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.marlon.portalusuario.PUNotifications.PUNotification
 import com.marlon.portalusuario.database.notifications.PunRepository
 import com.marlon.portalusuario.database.une.UneRepository
 import com.marlon.portalusuario.database.users.UserRepository
 import com.marlon.portalusuario.model.User
+import com.marlon.portalusuario.punotifications.PUNotification
 import com.marlon.portalusuario.une.Une
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted

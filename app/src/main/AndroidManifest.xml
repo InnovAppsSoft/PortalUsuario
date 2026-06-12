@@ -87,7 +87,7 @@
             android:name=".permisos.PermissionActivity"
             android:exported="true" />
         <activity
-            android:name=".PUNotifications.PUNotificationsActivity"
+            android:name=".punotifications.PUNotificationsActivity"
             android:exported="false" />
         <activity
             android:name=".activities.SettingsActivity"

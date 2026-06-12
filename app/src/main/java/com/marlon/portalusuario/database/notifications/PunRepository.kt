@@ -3,7 +3,7 @@ package com.marlon.portalusuario.database.notifications
 import android.app.Application
 import android.widget.Toast
 import androidx.preference.PreferenceManager
-import com.marlon.portalusuario.PUNotifications.PUNotification
+import com.marlon.portalusuario.punotifications.PUNotification
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
