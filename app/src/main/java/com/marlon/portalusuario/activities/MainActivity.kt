@@ -11,17 +11,34 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.BugReport
+import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Calculate
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Send
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.SignalCellularAlt
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -40,6 +57,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -304,6 +322,13 @@ private sealed class DrawerAction {
     class ShowDialog(val show: (android.content.Context) -> Unit) : DrawerAction()
 }
 
+private data class DrawerItem(
+    val label: String,
+    val icon: ImageVector? = null,
+    val route: String? = null,
+    val onClick: () -> DrawerAction,
+)
+
 @Composable
 private fun DrawerContent(
     currentRoute: String?,
@@ -311,6 +336,12 @@ private fun DrawerContent(
 ) {
     val context = LocalContext.current
     val inviteText = context.getString(R.string.invite_user)
+    val versionName =
+        try {
+            context.packageManager.getPackageInfo(context.packageName, 0).versionName
+        } catch (_: Exception) {
+            "?"
+        }
 
     val feedbackBody =
         buildString {
@@ -330,103 +361,164 @@ private fun DrawerContent(
                 .fillMaxHeight()
                 .verticalScroll(rememberScrollState()),
     ) {
-        Spacer(modifier = Modifier.height(48.dp))
-        Text(
-            text = "Portal Usuario",
-            modifier = Modifier.padding(horizontal = 28.dp, vertical = 8.dp),
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp,
-        )
-        HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+        Box(
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.primaryContainer)
+                    .padding(horizontal = 28.dp, vertical = 24.dp),
+        ) {
+            Column {
+                Icon(
+                    imageVector = Icons.Default.Star,
+                    contentDescription = null,
+                    modifier =
+                        Modifier
+                            .size(48.dp)
+                            .clip(MaterialTheme.shapes.medium)
+                            .background(MaterialTheme.colorScheme.primary)
+                            .padding(8.dp),
+                    tint = MaterialTheme.colorScheme.onPrimary,
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+                Text(
+                    text = "Portal Usuario",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                )
+                Text(
+                    text = "v$versionName",
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
+                )
+            }
+        }
 
-        DrawerSection(
-            items =
-                listOf(
-                    DrawerItem("Donar al proyecto", Icons.Default.Favorite) {
-                        DrawerAction.Navigate(Route.Donation)
-                    },
+        val sections =
+            listOf(
+                DrawerSectionData(
+                    items =
+                        listOf(
+                            DrawerItem("Donar al proyecto", Icons.Default.Favorite, Route.Donation.route) {
+                                DrawerAction.Navigate(Route.Donation)
+                            },
+                        ),
                 ),
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        DrawerSection(
-            header = "Mi Cuenta",
-            items =
-                listOf(
-                    DrawerItem("Mi Cuenta") { DrawerAction.Navigate(Route.MobileServices) },
-                    DrawerItem("Servicios") { DrawerAction.Navigate(Route.Servicios) },
-                    DrawerItem("Planes") { DrawerAction.Navigate(Route.Paquetes) },
+                DrawerSectionData(
+                    header = "Mi Cuenta",
+                    items =
+                        listOf(
+                            DrawerItem("Mi Cuenta", Icons.Default.Person, Route.MobileServices.route) {
+                                DrawerAction.Navigate(Route.MobileServices)
+                            },
+                            DrawerItem("Servicios", Icons.Default.Build, Route.Servicios.route) {
+                                DrawerAction.Navigate(Route.Servicios)
+                            },
+                            DrawerItem("Planes", Icons.Default.List, Route.Paquetes.route) {
+                                DrawerAction.Navigate(Route.Paquetes)
+                            },
+                        ),
                 ),
-        )
-
-        DrawerSection(
-            header = "Útiles",
-            items =
-                listOf(
-                    DrawerItem("Forzar 4G") {
-                        DrawerAction.ShowDialog { ctx ->
-                            SetLTEModeDialog(ctx as android.app.Activity)
-                        }
-                    },
-                    DrawerItem("Calculadora UNE") { DrawerAction.Navigate(Route.Une) },
+                DrawerSectionData(
+                    header = "Útiles",
+                    items =
+                        listOf(
+                            DrawerItem("Forzar 4G", Icons.Default.SignalCellularAlt) {
+                                DrawerAction.ShowDialog { ctx ->
+                                    SetLTEModeDialog(ctx as android.app.Activity)
+                                }
+                            },
+                            DrawerItem("Calculadora UNE", Icons.Default.Calculate, Route.Une.route) {
+                                DrawerAction.Navigate(Route.Une)
+                            },
+                        ),
                 ),
-        )
-
-        DrawerSection(
-            header = "Feedback",
-            items =
-                listOf(
-                    DrawerItem("Errores") { DrawerAction.Navigate(Route.LogFileViewer) },
-                    DrawerItem("Enviar Feedback") {
-                        DrawerAction.SendEmail(
-                            email = "portalusuarioapp@gmail.com",
-                            subject = "Feedback Portal Usuario App",
-                            body = feedbackBody,
-                        )
-                    },
+                DrawerSectionData(
+                    header = "Feedback",
+                    items =
+                        listOf(
+                            DrawerItem("Errores", Icons.Default.BugReport, Route.LogFileViewer.route) {
+                                DrawerAction.Navigate(Route.LogFileViewer)
+                            },
+                            DrawerItem("Enviar Feedback", Icons.Default.Email) {
+                                DrawerAction.SendEmail(
+                                    email = "portalusuarioapp@gmail.com",
+                                    subject = "Feedback Portal Usuario App",
+                                    body = feedbackBody,
+                                )
+                            },
+                        ),
                 ),
-        )
-
-        DrawerSection(
-            header = "Redes Sociales",
-            items =
-                listOf(
-                    DrawerItem("Canal Telegram") { DrawerAction.ExternalUrl("https://t.me/portalusuario") },
-                    DrawerItem("Facebook") { DrawerAction.ExternalUrl("https://www.facebook.com/portalusuario") },
-                    DrawerItem("Beta Testers") { DrawerAction.ExternalUrl("https://t.me/portalusuarioBT") },
-                    DrawerItem(
-                        "WhatsApp",
-                    ) { DrawerAction.ExternalUrl("https://chat.whatsapp.com/HT6bKjpXHrN4FAyTAcy1Xn") },
-                    DrawerItem("Invitar") { DrawerAction.ShareText(inviteText) },
+                DrawerSectionData(
+                    header = "Redes Sociales",
+                    items =
+                        listOf(
+                            DrawerItem("Canal Telegram", Icons.Default.Send) {
+                                DrawerAction.ExternalUrl("https://t.me/portalusuario")
+                            },
+                            DrawerItem("Facebook", Icons.Default.Share) {
+                                DrawerAction.ExternalUrl("https://www.facebook.com/portalusuario")
+                            },
+                            DrawerItem("Beta Testers", Icons.Default.Person) {
+                                DrawerAction.ExternalUrl("https://t.me/portalusuarioBT")
+                            },
+                            DrawerItem("WhatsApp", Icons.Default.Send) {
+                                DrawerAction.ExternalUrl("https://chat.whatsapp.com/HT6bKjpXHrN4FAyTAcy1Xn")
+                            },
+                            DrawerItem("Invitar", Icons.Default.Person) {
+                                DrawerAction.ShareText(inviteText)
+                            },
+                        ),
                 ),
-        )
-
-        DrawerSection(
-            header = "Política",
-            items =
-                listOf(
-                    DrawerItem("Política de Privacidad") { DrawerAction.Navigate(Route.Privacy) },
+                DrawerSectionData(
+                    header = "Política",
+                    items =
+                        listOf(
+                            DrawerItem("Política de Privacidad", Icons.Default.Lock, Route.Privacy.route) {
+                                DrawerAction.Navigate(Route.Privacy)
+                            },
+                        ),
                 ),
-        )
-
-        DrawerSection(
-            header = "Ajustes",
-            items =
-                listOf(
-                    DrawerItem("Configuración") { DrawerAction.Navigate(Route.Settings) },
-                    DrawerItem("Acerca de") { DrawerAction.Navigate(Route.About) },
+                DrawerSectionData(
+                    header = "Ajustes",
+                    items =
+                        listOf(
+                            DrawerItem("Configuración", Icons.Default.Settings, Route.Settings.route) {
+                                DrawerAction.Navigate(Route.Settings)
+                            },
+                            DrawerItem("Acerca de", Icons.Default.Info, Route.About.route) {
+                                DrawerAction.Navigate(Route.About)
+                            },
+                        ),
                 ),
-        )
+            )
+
+        sections.forEachIndexed { index, section ->
+            if (index > 0) {
+                HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp))
+            }
+            DrawerSection(
+                header = section.header,
+                items = section.items,
+                currentRoute = currentRoute,
+            )
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
+private data class DrawerSectionData(
+    val header: String? = null,
+    val items: List<DrawerItem>,
+)
+
 @Composable
 private fun DrawerSection(
     header: String? = null,
     items: List<DrawerItem>,
+    currentRoute: String?,
 ) {
     header?.let {
         Text(
@@ -438,21 +530,16 @@ private fun DrawerSection(
         )
     }
     items.forEach { item ->
+        val isSelected = item.route != null && item.route == currentRoute
         NavigationDrawerItem(
             label = { Text(item.label) },
             icon = item.icon?.let { icon -> { Icon(icon, contentDescription = null) } },
-            selected = false,
+            selected = isSelected,
             onClick = { item.onClick() },
             modifier = Modifier.padding(horizontal = 12.dp),
         )
     }
 }
-
-private data class DrawerItem(
-    val label: String,
-    val icon: ImageVector? = null,
-    val onClick: () -> DrawerAction,
-)
 
 @Composable
 private fun routeTitle(route: String?): String {
