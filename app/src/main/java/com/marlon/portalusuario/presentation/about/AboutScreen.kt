@@ -2,6 +2,7 @@ package com.marlon.portalusuario.presentation.about
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
 
 @Composable
 fun AboutScreen() {
@@ -101,7 +101,7 @@ private fun SocialLinkCard(
 
     Card(
         onClick = {
-            context.startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
+            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
         },
         modifier =
             Modifier
