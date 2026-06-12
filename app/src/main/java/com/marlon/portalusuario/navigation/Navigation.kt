@@ -15,8 +15,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.marlon.portalusuario.paquetes.PaquetesScreen
+import com.marlon.portalusuario.perfil.PerfilScreen
+import com.marlon.portalusuario.presentation.about.AboutScreen
+import com.marlon.portalusuario.presentation.donation.DonationScreen
 import com.marlon.portalusuario.presentation.mobileservices.screen.MobileServicesScreen
+import com.marlon.portalusuario.presentation.privacy.PrivacyScreen
+import com.marlon.portalusuario.presentation.settings.SettingsScreen
 import com.marlon.portalusuario.servicios.ServiciosScreen
+import com.marlon.portalusuario.une.UneScreen
 
 /**
  * NavHost centralizado con todas las rutas de la aplicación.
@@ -38,10 +44,10 @@ fun PortalUsuarioNavHost(
         composable(Route.Intro.route) { PlaceholderScreen("Intro") }
         composable(Route.Permissions.route) { PlaceholderScreen("Permissions") }
         composable(Route.Main.route) { MobileServicesScreen() }
-        composable(Route.Settings.route) { PlaceholderScreen("Settings") }
-        composable(Route.About.route) { PlaceholderScreen("About") }
-        composable(Route.Donation.route) { PlaceholderScreen("Donation") }
-        composable(Route.Privacy.route) { PlaceholderScreen("Privacy") }
+        composable(Route.Settings.route) { SettingsScreen() }
+        composable(Route.About.route) { AboutScreen() }
+        composable(Route.Donation.route) { DonationScreen() }
+        composable(Route.Privacy.route) { PrivacyScreen() }
         composable(Route.Sms.route) { PlaceholderScreen("Sms") }
         composable(Route.Voz.route) { PlaceholderScreen("Voz") }
         composable(Route.PlanAmigos.route) { PlaceholderScreen("Plan Amigos") }
@@ -50,8 +56,10 @@ fun PortalUsuarioNavHost(
             PlaceholderScreen("Call for Reverse Charge")
         }
         composable(Route.EmergencyCalls.route) { PlaceholderScreen("Emergency Calls") }
-        composable(Route.Une.route) { PlaceholderScreen("UNE") }
-        composable(Route.Perfil.route) { PlaceholderScreen("Perfil") }
+        composable(Route.Une.route) {
+            UneScreen(onBack = { navController.popBackStack() })
+        }
+        composable(Route.Perfil.route) { PerfilScreen() }
         composable(Route.Servicios.route) { ServiciosScreen() }
         composable(Route.Paquetes.route) { PaquetesScreen() }
         composable(Route.LogFileViewer.route) { PlaceholderScreen("Log File Viewer") }
