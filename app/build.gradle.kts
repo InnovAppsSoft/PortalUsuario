@@ -11,6 +11,13 @@ plugins {
     alias(libs.plugins.ktlint)
 }
 
+ktlint {
+    reporters {
+        reporter(ReporterType.SARIF)
+        reporter(ReporterType.PLAIN)
+    }
+}
+
 android {
     compileSdk = 35
     buildToolsVersion = "35.0.0"
