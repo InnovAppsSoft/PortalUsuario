@@ -78,23 +78,11 @@
             android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".perfil.PerfilActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.DonationActivity"
-            android:exported="false" />
-        <activity
             android:name=".permisos.PermissionActivity"
             android:exported="true" />
         <activity
             android:name=".punotifications.PUNotificationsActivity"
             android:exported="false" />
-        <activity
-            android:name=".presentation.mobileservices.MobileServicesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.SettingsActivity"
-            android:label="Configuración" />
         <activity
             android:name=".erroreslog.LogFileViewerActivity"
             android:theme="@style/Firewall" />
@@ -111,30 +99,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.AboutActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".activities.SmsActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".activities.VozActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".activities.PlanAmigosActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".activities.PrivateCallActivity" />
-        <activity android:name=".activities.CallForReverseChargeActivity" />
-        <activity android:name=".activities.EmergencyCallsActivity" />
-        <activity android:name=".activities.PrivacyActivity" />
-        <activity
-            android:name=".une.UneActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" /> <!-- AdMob -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-9665109922019776~6118514078" />
