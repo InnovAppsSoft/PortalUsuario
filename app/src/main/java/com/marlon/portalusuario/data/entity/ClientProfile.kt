@@ -17,12 +17,13 @@ data class ClientProfile(
     @ColumnInfo(name = "last_update") val lastUpdate: String,
 )
 
-fun ClientProfile.asModel() = ModelClientProfile(
-    this.email,
-    this.name,
-    this.mailNotifications,
-    this.mobileNotifications,
-    this.phoneNumber,
-    this.portalUser,
-    this.lastUpdate
-)
+fun ClientProfile.asModel() =
+    ModelClientProfile(
+        this.email,
+        this.name,
+        this.mailNotifications,
+        this.mobileNotifications,
+        this.phoneNumber,
+        this.portalUser,
+        this.lastUpdate,
+    )

@@ -12,9 +12,10 @@ import dagger.hilt.android.scopes.ServiceScoped
 @Module
 @InstallIn(ServiceComponent::class)
 class ServiceModule {
-
     @Provides
     @ServiceScoped
-    fun provideFloatingBubbleViewModel(preferencesManager: AppPreferencesManager, repository: UserRepository) =
-        FloatingBubbleViewModel(preferencesManager, repository)
+    fun provideFloatingBubbleViewModel(
+        preferencesManager: AppPreferencesManager,
+        repository: UserRepository,
+    ) = FloatingBubbleViewModel(preferencesManager, repository)
 }

@@ -13,25 +13,26 @@ import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.domain.model.MobileService
 
-private const val ElevenMonths = 330
-private const val TwelveMonths = 360
+private const val ELEVEN_MONTHS = 330
+private const val TWELVE_MONTHS = 360
 
 @Composable
 internal fun ExpirationSection(service: MobileService) {
     Spacer(modifier = Modifier.padding(horizontal = 4.dp))
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         ExpirationView(
             stringResource(id = R.string.elimination),
-            service.lockDate
+            service.lockDate,
         )
         ExpirationView(
             stringResource(id = R.string.expires),
-            service.deletionDate
+            service.deletionDate,
         )
     }
 }
@@ -39,7 +40,7 @@ internal fun ExpirationSection(service: MobileService) {
 @Composable
 fun ExpirationView(
     title: String,
-    date: String
+    date: String,
 ) {
     Text(text = "$title: $date")
 }

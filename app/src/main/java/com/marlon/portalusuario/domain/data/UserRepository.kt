@@ -8,7 +8,10 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
     suspend fun fetchUser(simCard: SimCard? = null)
+
     fun getClientProfile(): Flow<ClientProfile>
+
     fun getMobileServices(): Flow<List<MobileService>>
+
     fun getNavServices(): Flow<List<NavigationService>>
 }

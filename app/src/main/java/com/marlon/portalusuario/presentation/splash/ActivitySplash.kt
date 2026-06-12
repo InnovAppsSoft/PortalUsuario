@@ -32,25 +32,26 @@ class ActivitySplash : ComponentActivity() {
         lifecycleScope.launch {
             val preferences = appPreferencesManager.preferences().first()
 
-            val uiMode = when (preferences.modeNight) {
-                ModeNight.YES -> {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    Log.i(TAG, "onCreate: Changed modeNight to Dark")
-                    true
-                }
+            val uiMode =
+                when (preferences.modeNight) {
+                    ModeNight.YES -> {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                        Log.i(TAG, "onCreate: Changed modeNight to Dark")
+                        true
+                    }
 
-                ModeNight.NO -> {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    Log.i(TAG, "onCreate: Changed modeNight to Light")
-                    false
-                }
+                    ModeNight.NO -> {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                        Log.i(TAG, "onCreate: Changed modeNight to Light")
+                        false
+                    }
 
-                ModeNight.FOLLOW_SYSTEM -> {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                    Log.i(TAG, "onCreate: Changed modeNight to System")
-                    null
+                    ModeNight.FOLLOW_SYSTEM -> {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                        Log.i(TAG, "onCreate: Changed modeNight to System")
+                        null
+                    }
                 }
-            }
 
             setContent {
                 PortalUsuarioTheme(darkTheme = uiMode ?: isSystemInDarkTheme()) {

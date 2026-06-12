@@ -32,8 +32,8 @@
     <ID>NewLineAtEndOfFile:ServiceModule.kt$com.marlon.portalusuario.di.ServiceModule.kt</ID>
     <ID>NewLineAtEndOfFile:SetLTEModeDialog.kt$com.marlon.portalusuario.components.SetLTEModeDialog.kt</ID>
     <ID>NewLineAtEndOfFile:Type.kt$com.marlon.portalusuario.theme.Type.kt</ID>
-    <ID>PackageNaming:PermissionActivity.kt$package com.marlon.portalusuario.Permisos</ID>
-    <ID>PackageNaming:PermissionViewModel.kt$package com.marlon.portalusuario.Permisos</ID>
+    <ID>PackageNaming:PermissionActivity.kt$package com.marlon.portalusuario.permisos</ID>
+    <ID>PackageNaming:PermissionViewModel.kt$package com.marlon.portalusuario.permisos</ID>
     <ID>ReturnCount:NetworkConnectivityObserver.kt$NetworkConnectivityObserver$private fun getNetworkType(): String?</ID>
     <ID>SwallowedException:Save.kt$e: Exception</ID>
     <ID>SwallowedException:Util.kt$Util$e: Exception</ID>
@@ -64,7 +64,7 @@
     <ID>TopLevelPropertyNaming:Utils.kt$private const val SECONDS_IN_MINUTE = 60</ID>
     <ID>TopLevelPropertyNaming:Utils.kt$private const val SIZE_UNIT_MAX_LENGTH = 1024.0</ID>
     <ID>TopLevelPropertyNaming:VozActivity.kt$private const val REQUEST_CALL = 1</ID>
-    <ID>UnusedPrivateProperty:ExpirationSection.kt$private const val ElevenMonths = 330</ID>
-    <ID>UnusedPrivateProperty:ExpirationSection.kt$private const val TwelveMonths = 360</ID>
+    <ID>UnusedPrivateProperty:ExpirationSection.kt$private const val ELEVEN_MONTHS = 330</ID>
+    <ID>UnusedPrivateProperty:ExpirationSection.kt$private const val TWELVE_MONTHS = 360</ID>
   </CurrentIssues>
 </SmellBaseline>

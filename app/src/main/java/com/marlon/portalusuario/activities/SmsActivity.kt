@@ -2,10 +2,8 @@ package com.marlon.portalusuario.activities
 
 import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.marlon.portalusuario.databinding.ActivitySmsBinding
 import com.marlon.portalusuario.util.Utils.hasPermissions

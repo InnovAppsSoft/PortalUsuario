@@ -1,8 +1,8 @@
 package com.marlon.portalusuario.data
 
-import java.util.Calendar
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import kotlin.math.pow
@@ -38,20 +38,22 @@ fun String.asDate(pattern: String = DEFAULT_DATE_FORMAT): Date? =
 
 @get:Throws(ParseException::class)
 val String.asDateMillis
-    get() = asDate()?.let {
-        val calendar = Calendar.getInstance()
-        calendar.time = it
-        calendar.timeInMillis
-    }
+    get() =
+        asDate()?.let {
+            val calendar = Calendar.getInstance()
+            calendar.time = it
+            calendar.timeInMillis
+        }
 
 val String.asBytes
     get(): Long {
         val count = this.replace("[GMKBT]".toRegex(), "")
-        val unit = this.split(" ".toRegex()).dropLastWhile { it.isEmpty() }
-            .toTypedArray()[
+        val unit =
             this.split(" ".toRegex()).dropLastWhile { it.isEmpty() }
-                .toTypedArray().size - 1
-        ].uppercase(Locale.getDefault())
+                .toTypedArray()[
+                this.split(" ".toRegex()).dropLastWhile { it.isEmpty() }
+                    .toTypedArray().size - 1,
+            ].uppercase(Locale.getDefault())
         return (count.toDouble() * 1024.0.pow("BKMGT".indexOf(unit[0]).toDouble())).toLong()
     }
 

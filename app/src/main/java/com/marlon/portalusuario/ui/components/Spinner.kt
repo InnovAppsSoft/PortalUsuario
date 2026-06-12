@@ -29,13 +29,13 @@ fun <T> Spinner(
         selectedItemFactory(
             Modifier
                 .clickable { expanded = true },
-            selectedItem
+            selectedItem,
         )
 
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
-            modifier = dropDownModifier
+            modifier = dropDownModifier,
         ) {
             items.forEachIndexed { index, element ->
                 DropdownMenuItem(
@@ -45,7 +45,7 @@ fun <T> Spinner(
                     onClick = {
                         onItemSelected(items[index])
                         expanded = false
-                    }
+                    },
                 )
             }
         }

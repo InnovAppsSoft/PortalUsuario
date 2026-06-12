@@ -31,121 +31,143 @@ class UserLocalDataSource {
     private fun fetchUserFromSimCard(
         simCard: SimCard,
         isRemote: Boolean = false,
-        callback: (MobileService) -> Unit
+        callback: (MobileService) -> Unit,
     ) {
         Log.d(TAG, "fetchUserFromLocal: Fetching user from local using sim card")
-        simCard.smartFetchBalance(object : FetchBalanceCallBack {
-            private lateinit var ussdRequest: UssdRequest
-            var mobService = MobileService(
-                id = "53${simCard.phoneNumber!!}",
-                lte = false,
-                advanceBalance = "",
-                status = "Activo",
-                lockDate = "",
-                deletionDate = "",
-                saleDate = "",
-                internet = false,
-                plans = emptyList(),
-                bonuses = emptyList(),
-                currency = "CUP",
-                phoneNumber = simCard.phoneNumber!!,
-                mainBalance = "",
-                consumptionRate = false,
-                slotIndex = simCard.slotIndex,
-                type = if (isRemote) LocalAndRemote else Local
-            )
+        simCard.smartFetchBalance(
+            object : FetchBalanceCallBack {
+                private lateinit var ussdRequest: UssdRequest
+                var mobService =
+                    MobileService(
+                        id = "53${simCard.phoneNumber!!}",
+                        lte = false,
+                        advanceBalance = "",
+                        status = "Activo",
+                        lockDate = "",
+                        deletionDate = "",
+                        saleDate = "",
+                        internet = false,
+                        plans = emptyList(),
+                        bonuses = emptyList(),
+                        currency = "CUP",
+                        phoneNumber = simCard.phoneNumber!!,
+                        mainBalance = "",
+                        consumptionRate = false,
+                        slotIndex = simCard.slotIndex,
+                        type = if (isRemote) LocalAndRemote else Local,
+                    )
 
-            private fun addToPlanList(data: String, type: String, expires: String) {
-                val dateExpires = expires.takeIf { it.isActive }?.toInt()?.asFutureDate ?: "no activos"
-                mobService = mobService.copy(
-                    plans = mobService.plans.toMutableList()
-                        .apply { add(MobilePlan(data, type, dateExpires)) }
-                )
-            }
-
-            private fun addToBonusList(data: String, type: String, expires: String) {
-                val dateExpires = expires.takeIf { it.isActive }?.fixDate() ?: "no activos"
-                mobService = mobService.copy(
-                    bonuses = mobService.bonuses.toMutableList()
-                        .apply { add(MobileBonus(data, "", type, dateExpires)) }
-                )
-            }
-
-            override fun onFailure(throwable: Throwable) {
-                if (ussdRequest == UssdRequest.BONUS_BALANCE) {
-                    callback(mobService)
-                }
-            }
-
-            override fun onStateChanged(
-                request: UssdRequest,
-                state: RequestState,
-                retryCount: Int
-            ) {
-                Log.d(TAG, "onFetching: ${request.name}")
-            }
-
-            override fun onSuccess(request: UssdRequest, response: UssdResponse) {
-                when (request) {
-                    UssdRequest.PRINCIPAL_BALANCE -> {
-                        mobService = mobService.copy(
-                            lockDate = (response as PrincipalBalance).blockDate.fixDate(),
-                            deletionDate = response.deletionDate.fixDate(),
-                            mainBalance = response.balance
+                private fun addToPlanList(
+                    data: String,
+                    type: String,
+                    expires: String,
+                ) {
+                    val dateExpires = expires.takeIf { it.isActive }?.toInt()?.asFutureDate ?: "no activos"
+                    mobService =
+                        mobService.copy(
+                            plans =
+                                mobService.plans.toMutableList()
+                                    .apply { add(MobilePlan(data, type, dateExpires)) },
                         )
-                    }
-                    UssdRequest.DATA_BALANCE -> {
-                        (response as DataBalance).let { resp ->
-                            mobService = mobService.copy(consumptionRate = resp.usageBasedPricing)
-                            resp.data?.let { addToPlanList(it, "DATOS", resp.expires!!) }
-                            resp.dataLte?.let { addToPlanList(it, "DATOS LTE", resp.expires!!) }
-                            resp.mailData?.let {
-                                addToPlanList(
-                                    it.data,
-                                    "BOLSA MENSAJERIA",
-                                    resp.expires!!
-                                )
-                            }
-                            resp.dailyData?.let {
-                                addToPlanList(
-                                    it.data,
-                                    "BOLSA DIARIA",
-                                    resp.expires!!
-                                )
-                            }
-                        }
-                    }
-                    UssdRequest.VOICE_BALANCE ->
-                        addToPlanList((response as VoiceBalance).data, "MINUTOS", response.expires)
-                    UssdRequest.MESSAGES_BALANCE ->
-                        addToPlanList((response as MessagesBalance).data, "SMS", response.expires)
-                    UssdRequest.BONUS_BALANCE -> {
-                        (response as BonusBalance).let { resp ->
-                            resp.credit?.let { addToBonusList(it.data, "SALDO", it.expires) }
-                            resp.voice?.let { addToBonusList(it.data, "MINUTOS", it.expires) }
-                            resp.sms?.let { addToBonusList(it.data, "SMS", it.expires) }
-                            resp.data?.let { data ->
-                                data.data?.let { addToBonusList(it, "DATOS", data.expires!!) }
-                                data.dataLte?.let { addToBonusList(it, "DATOS LTE", data.expires!!) }
-                            }
-                            resp.dataCu?.let { addToBonusList(it.data, "DATOS CU", it.expires) }
-                            resp.unlimitedData?.let {
-                                addToBonusList(
-                                    "",
-                                    "DATOS ILIMITADOS",
-                                    it.expires
-                                )
-                            }
-                        }
+                }
+
+                private fun addToBonusList(
+                    data: String,
+                    type: String,
+                    expires: String,
+                ) {
+                    val dateExpires = expires.takeIf { it.isActive }?.fixDate() ?: "no activos"
+                    mobService =
+                        mobService.copy(
+                            bonuses =
+                                mobService.bonuses.toMutableList()
+                                    .apply { add(MobileBonus(data, "", type, dateExpires)) },
+                        )
+                }
+
+                override fun onFailure(throwable: Throwable) {
+                    if (ussdRequest == UssdRequest.BONUS_BALANCE) {
                         callback(mobService)
                     }
-                    UssdRequest.CUSTOM -> {}
                 }
-            }
-        })
+
+                override fun onStateChanged(
+                    request: UssdRequest,
+                    state: RequestState,
+                    retryCount: Int,
+                ) {
+                    Log.d(TAG, "onFetching: ${request.name}")
+                }
+
+                override fun onSuccess(
+                    request: UssdRequest,
+                    response: UssdResponse,
+                ) {
+                    when (request) {
+                        UssdRequest.PRINCIPAL_BALANCE -> {
+                            mobService =
+                                mobService.copy(
+                                    lockDate = (response as PrincipalBalance).blockDate.fixDate(),
+                                    deletionDate = response.deletionDate.fixDate(),
+                                    mainBalance = response.balance,
+                                )
+                        }
+                        UssdRequest.DATA_BALANCE -> {
+                            (response as DataBalance).let { resp ->
+                                mobService = mobService.copy(consumptionRate = resp.usageBasedPricing)
+                                resp.data?.let { addToPlanList(it, "DATOS", resp.expires!!) }
+                                resp.dataLte?.let { addToPlanList(it, "DATOS LTE", resp.expires!!) }
+                                resp.mailData?.let {
+                                    addToPlanList(
+                                        it.data,
+                                        "BOLSA MENSAJERIA",
+                                        resp.expires!!,
+                                    )
+                                }
+                                resp.dailyData?.let {
+                                    addToPlanList(
+                                        it.data,
+                                        "BOLSA DIARIA",
+                                        resp.expires!!,
+                                    )
+                                }
+                            }
+                        }
+                        UssdRequest.VOICE_BALANCE ->
+                            addToPlanList((response as VoiceBalance).data, "MINUTOS", response.expires)
+                        UssdRequest.MESSAGES_BALANCE ->
+                            addToPlanList((response as MessagesBalance).data, "SMS", response.expires)
+                        UssdRequest.BONUS_BALANCE -> {
+                            (response as BonusBalance).let { resp ->
+                                resp.credit?.let { addToBonusList(it.data, "SALDO", it.expires) }
+                                resp.voice?.let { addToBonusList(it.data, "MINUTOS", it.expires) }
+                                resp.sms?.let { addToBonusList(it.data, "SMS", it.expires) }
+                                resp.data?.let { data ->
+                                    data.data?.let { addToBonusList(it, "DATOS", data.expires!!) }
+                                    data.dataLte?.let { addToBonusList(it, "DATOS LTE", data.expires!!) }
+                                }
+                                resp.dataCu?.let { addToBonusList(it.data, "DATOS CU", it.expires) }
+                                resp.unlimitedData?.let {
+                                    addToBonusList(
+                                        "",
+                                        "DATOS ILIMITADOS",
+                                        it.expires,
+                                    )
+                                }
+                            }
+                            callback(mobService)
+                        }
+                        UssdRequest.CUSTOM -> {}
+                    }
+                }
+            },
+        )
     }
 
-    suspend fun fetch(simCard: SimCard, isRemote: Boolean): MobileService =
+    suspend fun fetch(
+        simCard: SimCard,
+        isRemote: Boolean,
+    ): MobileService =
         suspendCoroutine { continuation ->
             fetchUserFromSimCard(simCard, isRemote) { continuation.resume(it) }
         }

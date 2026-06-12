@@ -34,7 +34,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
-import com.marlon.portalusuario.Permisos.PermissionActivity
+import com.marlon.portalusuario.permisos.PermissionActivity
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.data.preferences.AppPreferencesManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,7 +44,7 @@ import javax.inject.Inject
 data class ScreenItem(
     val title: String,
     val description: String,
-    val screenImg: Int
+    val screenImg: Int,
 )
 
 @AndroidEntryPoint
@@ -73,7 +73,7 @@ class IntroActivity : ComponentActivity() {
                 Intent().apply {
                     action = android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
                     data = "package:$packageName".toUri()
-                }
+                },
             )
         }
     }
@@ -89,42 +89,46 @@ class IntroActivity : ComponentActivity() {
 fun IntroScreen(onGetStarted: () -> Unit) {
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
-    val screens = listOf(
-        ScreenItem("Seguro", "Garantizamos la seguridad de tus datos\nY un funcionamiento óptimo", R.drawable.img2),
-        ScreenItem("Útil", "Portal Usuario gestiona y asiste\nSerá tu herramienta #1", R.drawable.img1),
-        ScreenItem("Sencillo", "Interfaz amigable y agradable\nExperiencia de usuario única", R.drawable.img3)
-    )
+    val screens =
+        listOf(
+            ScreenItem("Seguro", "Garantizamos la seguridad de tus datos\nY un funcionamiento óptimo", R.drawable.img2),
+            ScreenItem("Útil", "Portal Usuario gestiona y asiste\nSerá tu herramienta #1", R.drawable.img1),
+            ScreenItem("Sencillo", "Interfaz amigable y agradable\nExperiencia de usuario única", R.drawable.img3),
+        )
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .padding(16.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+                .padding(16.dp),
         verticalArrangement = Arrangement.SpaceBetween,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         HorizontalPager(
             state = pagerState,
             count = screens.size,
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth()
+            modifier =
+                Modifier
+                    .weight(1f)
+                    .fillMaxWidth(),
         ) { page ->
             ScreenContent(screenItem = screens[page])
         }
 
         HorizontalPagerIndicator(
             pagerState = pagerState,
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp),
         )
 
         if (pagerState.currentPage == screens.size - 1) {
             Button(
                 onClick = onGetStarted,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp),
-                shape = RoundedCornerShape(24.dp)
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(48.dp),
+                shape = RoundedCornerShape(24.dp),
             ) {
                 Text(text = "Continuar")
             }
@@ -135,10 +139,11 @@ fun IntroScreen(onGetStarted: () -> Unit) {
                         pagerState.scrollToPage(pagerState.currentPage + 1)
                     }
                 },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp),
-                shape = RoundedCornerShape(24.dp)
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(48.dp),
+                shape = RoundedCornerShape(24.dp),
             ) {
                 Text(text = "Siguiente")
             }
@@ -149,18 +154,20 @@ fun IntroScreen(onGetStarted: () -> Unit) {
 @Composable
 fun ScreenContent(screenItem: ScreenItem) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
             painter = painterResource(id = screenItem.screenImg),
             contentDescription = null,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
@@ -168,14 +175,14 @@ fun ScreenContent(screenItem: ScreenItem) {
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = screenItem.description,
             fontSize = 16.sp,
             color = MaterialTheme.colorScheme.onBackground,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
     }
 }

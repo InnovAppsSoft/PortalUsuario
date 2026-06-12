@@ -36,7 +36,7 @@ fun PasswordField(
     onChangedText: (String) -> Unit = {},
     onChangePasswordVisibility: () -> Unit = {},
     imeAction: ImeAction = ImeAction.Next,
-    onDone: () -> Unit = {}
+    onDone: () -> Unit = {},
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     TextField(
@@ -44,14 +44,16 @@ fun PasswordField(
         onValueChange = onChangedText,
         placeholder = { Text(text = stringResource(R.string.my_password_hint)) },
         modifier = Modifier.fillMaxWidth(),
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Password,
-            imeAction = imeAction
-        ),
-        keyboardActions = KeyboardActions(onDone = {
-            keyboardController?.hide()
-            onDone()
-        }),
+        keyboardOptions =
+            KeyboardOptions(
+                keyboardType = KeyboardType.Password,
+                imeAction = imeAction,
+            ),
+        keyboardActions =
+            KeyboardActions(onDone = {
+                keyboardController?.hide()
+                onDone()
+            }),
         visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
         leadingIcon = { Icon(imageVector = Icons.Outlined.Lock, contentDescription = "") },
         trailingIcon = {
@@ -62,7 +64,7 @@ fun PasswordField(
                     stringResource(id = R.string.hide_password)
                 } else {
                     stringResource(
-                        id = R.string.show_password
+                        id = R.string.show_password,
                     )
                 }
             IconButton(onClick = onChangePasswordVisibility) {
@@ -71,11 +73,12 @@ fun PasswordField(
         },
         singleLine = true,
         maxLines = 1,
-        colors = TextFieldDefaults.colors(
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
-        ),
-        shape = MaterialTheme.shapes.small
+        colors =
+            TextFieldDefaults.colors(
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+            ),
+        shape = MaterialTheme.shapes.small,
     )
 }
 

@@ -13,26 +13,27 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 
-private const val PreferencesName = "MOB_SERVICES"
-private val Context.dataStore by preferencesDataStore(name = PreferencesName)
+private const val PREFERENCES_NAME = "MOB_SERVICES"
+private val Context.dataStore by preferencesDataStore(name = PREFERENCES_NAME)
 
 class MobServicesPreferences(private val context: Context) {
-    val preferences = context.dataStore.data
-        .catch { exception ->
-            if (exception is IOException) {
-                emit(emptyPreferences())
-            } else {
-                throw exception
-            }
-        }.map { preferences ->
-            val slotIndexInfoList: List<SlotIndexInfo> =
-                preferences[ServicesPreferencesKey.SLOT_INDEX_INFO_LIST]?.let {
-                    Gson().fromJson(it, object : TypeToken<List<SlotIndexInfo>>() {}.type)
-                } ?: emptyList()
-            val mobileServiceSelectedId = preferences[ServicesPreferencesKey.MOBILE_SERVICE_SELECTED_ID]
+    val preferences =
+        context.dataStore.data
+            .catch { exception ->
+                if (exception is IOException) {
+                    emit(emptyPreferences())
+                } else {
+                    throw exception
+                }
+            }.map { preferences ->
+                val slotIndexInfoList: List<SlotIndexInfo> =
+                    preferences[ServicesPreferencesKey.SLOT_INDEX_INFO_LIST]?.let {
+                        Gson().fromJson(it, object : TypeToken<List<SlotIndexInfo>>() {}.type)
+                    } ?: emptyList()
+                val mobileServiceSelectedId = preferences[ServicesPreferencesKey.MOBILE_SERVICE_SELECTED_ID]
 
-            MobServPreferences(slotIndexInfoList, mobileServiceSelectedId)
-        }
+                MobServPreferences(slotIndexInfoList, mobileServiceSelectedId)
+            }
 
     suspend fun updateSlotIndexInfoList(slotIndexInfoList: List<SlotIndexInfo>) {
         context.dataStore.edit { preferences ->

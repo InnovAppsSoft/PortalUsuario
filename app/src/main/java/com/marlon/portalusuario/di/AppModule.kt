@@ -30,22 +30,25 @@ import javax.inject.Singleton
 class AppModule {
     @Singleton
     @Provides
-    fun provideNetworkConnectivityObserver(@ApplicationContext context: Context) =
-        NetworkConnectivityObserver(context)
+    fun provideNetworkConnectivityObserver(
+        @ApplicationContext context: Context,
+    ) = NetworkConnectivityObserver(context)
 
     @Singleton
     @Provides
-    fun provideAppPreference(@ApplicationContext context: Context) =
-        AppPreferencesManager(context)
+    fun provideAppPreference(
+        @ApplicationContext context: Context,
+    ) = AppPreferencesManager(context)
 
     @Singleton
     @Provides
-    fun provideServicesDB(@ApplicationContext context: Context) =
-        Room.databaseBuilder(
-            context,
-            ServicesDB::class.java,
-            "services_db"
-        ).build()
+    fun provideServicesDB(
+        @ApplicationContext context: Context,
+    ) = Room.databaseBuilder(
+        context,
+        ServicesDB::class.java,
+        "services_db",
+    ).build()
 
     @Singleton
     @Provides
@@ -53,8 +56,9 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideMobServicesPreferences(@ApplicationContext context: Context) =
-        MobServicesPreferences(context)
+    fun provideMobServicesPreferences(
+        @ApplicationContext context: Context,
+    ) = MobServicesPreferences(context)
 
     @Singleton
     @Provides
@@ -69,7 +73,7 @@ class AppModule {
     fun provideMobServApiToEntityMapper(
         preferences: MobServicesPreferences,
         planApiToModelMapper: MobPlanApiToModelMapper,
-        bonusApiToModelMapper: MobBonusApiToModelMapper
+        bonusApiToModelMapper: MobBonusApiToModelMapper,
     ) = MobServiceApiToEntityMapper(preferences, planApiToModelMapper, bonusApiToModelMapper)
 
     @Singleton
@@ -98,17 +102,18 @@ class AppModule {
         servicesDao: ServicesDao,
         mobServiceEntityToDomainMapper: MobServiceEntityToDomainMapper,
         clientProfileEntityToDomainMapper: ClientProfileEntityToDomainMapper,
-        navServEntityToDomainMapper: NavServEntityToDomainMapper
+        navServEntityToDomainMapper: NavServEntityToDomainMapper,
     ): UserRepository =
         UserRepositoryImpl(
             dao = servicesDao,
             mobServiceEntityToDomainMapper = mobServiceEntityToDomainMapper,
             clientProfileEntityToDomainMapper = clientProfileEntityToDomainMapper,
-            navServEntityToDomainMapper = navServEntityToDomainMapper
+            navServEntityToDomainMapper = navServEntityToDomainMapper,
         )
 
     @Singleton
     @Provides
-    fun provideSimCollector(@ApplicationContext context: Context) =
-        SimCardCollector.Builder().build(context)
+    fun provideSimCollector(
+        @ApplicationContext context: Context,
+    ) = SimCardCollector.Builder().build(context)
 }

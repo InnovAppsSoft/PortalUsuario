@@ -22,7 +22,7 @@ fun PrettyCard(
     isLoading: Boolean = false,
     isFoundErrors: Boolean = false,
     backgroundColor: Color? = null,
-    content: (@Composable () -> Unit)
+    content: (@Composable () -> Unit),
 ) {
     val shadowColor =
         if (isFoundErrors) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface
@@ -30,23 +30,25 @@ fun PrettyCard(
     val privateModifier = if (backgroundColor != null) Modifier.background(color = backgroundColor) else Modifier
 
     Card(
-        modifier = modifier
-            .wrapContentSize()
-            .shadow(elevation = 8.dp, ambientColor = shadowColor),
-        shape = RoundedCornerShape(8.dp)
+        modifier =
+            modifier
+                .wrapContentSize()
+                .shadow(elevation = 8.dp, ambientColor = shadowColor),
+        shape = RoundedCornerShape(8.dp),
     ) {
         Surface(
             shape = RoundedCornerShape(8.dp),
-            modifier = privateModifier
+            modifier = privateModifier,
         ) {
             Box(modifier = privateModifier) {
                 if (isLoading) {
                     CustomLinearProgressBar(modifier = Modifier.matchParentSize())
                 }
                 Surface(
-                    modifier = privateModifier
-                        .padding(5.dp),
-                    shape = RoundedCornerShape(8.dp)
+                    modifier =
+                        privateModifier
+                            .padding(5.dp),
+                    shape = RoundedCornerShape(8.dp),
                 ) {
                     Box(modifier = privateModifier) {
                         content()

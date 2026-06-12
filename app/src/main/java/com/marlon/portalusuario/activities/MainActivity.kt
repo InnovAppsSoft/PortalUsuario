@@ -1,7 +1,6 @@
 package com.marlon.portalusuario.activities
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
@@ -22,7 +21,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.preference.PreferenceManager.getDefaultSharedPreferences
-import com.marlon.portalusuario.Permisos.PermissionActivity
+import com.marlon.portalusuario.permisos.PermissionActivity
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.ViewModel.PunViewModel
 import com.marlon.portalusuario.components.SetLTEModeDialog
@@ -63,7 +62,10 @@ class MainActivity : AppCompatActivity() {
     // SETTINGS
     lateinit var settings: SharedPreferences
 
-    private fun setFragment(fragment: Fragment?, title: String?) {
+    private fun setFragment(
+        fragment: Fragment?,
+        title: String?,
+    ) {
         supportFragmentManager
             .beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -72,7 +74,10 @@ class MainActivity : AppCompatActivity() {
         binding.contentMain.tvAppTitle.text = title
     }
 
-    private fun listenPreferences(preferences: SharedPreferences, key: String?) {
+    private fun listenPreferences(
+        preferences: SharedPreferences,
+        key: String?,
+    ) {
         key?.let {
             when (it) {
                 "show_traffic_speed_bubble" -> {
@@ -81,13 +86,13 @@ class MainActivity : AppCompatActivity() {
                             Toast.makeText(
                                 this,
                                 "Otorgue a Portal Usuario los permisos requeridos",
-                                Toast.LENGTH_SHORT
+                                Toast.LENGTH_SHORT,
                             ).show()
                             startActivity(
                                 Intent(
                                     Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                                    ("package:" + this.packageName).toUri()
-                                )
+                                    ("package:" + this.packageName).toUri(),
+                                ),
                             )
                         } else {
                             val serviceIntent = Intent(this, FloatingBubbleService::class.java)
@@ -127,13 +132,13 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(
                             this@MainActivity,
                             "Otorgue a Portal Usuario los permisos requeridos",
-                            Toast.LENGTH_SHORT
+                            Toast.LENGTH_SHORT,
                         ).show()
                         startActivity(
                             Intent(
                                 Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                                ("package:" + this@MainActivity.packageName).toUri()
-                            )
+                                ("package:" + this@MainActivity.packageName).toUri(),
+                            ),
                         )
                     } else if (!networkConnectivityObserver.isCallbackRegistered) {
                         Log.d(TAG, "onCreate: isCallbackRegistered = false")
@@ -182,54 +187,60 @@ class MainActivity : AppCompatActivity() {
                     startActivity(
                         Intent(
                             this@MainActivity,
-                            LogFileViewerActivity::class.java
-                        ).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            LogFileViewerActivity::class.java,
+                        ).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP),
                     )
 
                 R.id.feedback -> {
-                    val debugInfo = """
-                            
-                            
-                            ---
-                            OS Version: ${System.getProperty("os.version")} (${Build.VERSION.INCREMENTAL})}
-                            Android API: ${Build.VERSION.SDK_INT}
-                            Model (Device): ${Build.MODEL} (${Build.DEVICE})
-                            Manufacturer: ${Build.MANUFACTURER}
-                            ---
-                    """.trimIndent()
-                    val intent = Intent(
-                        Intent.ACTION_SENDTO,
-                        Uri.fromParts("mailto", getString(R.string.feedback_email), null)
-                    )
+                    val debugInfo =
+                        """
+                        
+                        
+                        ---
+                        OS Version: ${System.getProperty("os.version")} (${Build.VERSION.INCREMENTAL})}
+                        Android API: ${Build.VERSION.SDK_INT}
+                        Model (Device): ${Build.MODEL} (${Build.DEVICE})
+                        Manufacturer: ${Build.MANUFACTURER}
+                        ---
+                        """.trimIndent()
+                    val intent =
+                        Intent(
+                            Intent.ACTION_SENDTO,
+                            Uri.fromParts("mailto", getString(R.string.feedback_email), null),
+                        )
                     intent.putExtra(Intent.EXTRA_EMAIL, getString(R.string.feedback_email))
                     intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.feedback_subject))
                     intent.putExtra(Intent.EXTRA_TEXT, debugInfo)
                     startActivity(Intent.createChooser(intent, "Enviar Feedback usando..."))
                 }
 
-                R.id.telegram_channel -> startActivity(
-                    Intent(Intent.ACTION_VIEW).apply {
-                        data = "https://t.me/portalusuario".toUri()
-                    }
-                )
+                R.id.telegram_channel ->
+                    startActivity(
+                        Intent(Intent.ACTION_VIEW).apply {
+                            data = "https://t.me/portalusuario".toUri()
+                        },
+                    )
 
-                R.id.facebook -> startActivity(
-                    Intent(Intent.ACTION_VIEW).apply {
-                        data = "https://www.facebook.com/portalusuario".toUri()
-                    }
-                )
+                R.id.facebook ->
+                    startActivity(
+                        Intent(Intent.ACTION_VIEW).apply {
+                            data = "https://www.facebook.com/portalusuario".toUri()
+                        },
+                    )
 
-                R.id.whatsapp -> startActivity(
-                    Intent(Intent.ACTION_VIEW).apply {
-                        data = "https://chat.whatsapp.com/HT6bKjpXHrN4FAyTAcy1Xn".toUri()
-                    }
-                )
+                R.id.whatsapp ->
+                    startActivity(
+                        Intent(Intent.ACTION_VIEW).apply {
+                            data = "https://chat.whatsapp.com/HT6bKjpXHrN4FAyTAcy1Xn".toUri()
+                        },
+                    )
 
-                R.id.betatesters -> startActivity(
-                    Intent(Intent.ACTION_VIEW).apply {
-                        data = "https://t.me/portalusuarioBT".toUri()
-                    }
-                )
+                R.id.betatesters ->
+                    startActivity(
+                        Intent(Intent.ACTION_VIEW).apply {
+                            data = "https://t.me/portalusuarioBT".toUri()
+                        },
+                    )
 
                 R.id.invite -> inviteUser()
 
@@ -263,7 +274,7 @@ class MainActivity : AppCompatActivity() {
                 Manifest.permission.CAMERA,
                 Manifest.permission.READ_CONTACTS,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
+                Manifest.permission.ACCESS_FINE_LOCATION,
             )
         ) {
             startActivity(Intent(this, PermissionActivity::class.java))
@@ -277,7 +288,7 @@ class MainActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }

@@ -14,7 +14,9 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+
 private const val TAG = "Utils"
+
 object Utils {
     fun Context.hasPermissions(vararg permissions: String): Boolean {
         permissions.forEach { permission ->
@@ -25,32 +27,34 @@ object Utils {
         return false
     }
 
-    fun String.toBitmap(): Bitmap? = runCatching {
-        return@runCatching SVG.getFromString(this)?.let { svg ->
-            // Obtener el ancho y el alto del documento SVG
-            val width = svg.documentWidth.toInt()
-            val height = svg.documentHeight.toInt()
+    fun String.toBitmap(): Bitmap? =
+        runCatching {
+            return@runCatching SVG.getFromString(this)?.let { svg ->
+                // Obtener el ancho y el alto del documento SVG
+                val width = svg.documentWidth.toInt()
+                val height = svg.documentHeight.toInt()
 
-            // Crear un bitmap en blanco con las dimensiones obtenidas
-            val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+                // Crear un bitmap en blanco con las dimensiones obtenidas
+                val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
 
-            // Crear un canvas para dibujar en el bitmap
-            val canvas = Canvas(bitmap)
+                // Crear un canvas para dibujar en el bitmap
+                val canvas = Canvas(bitmap)
 
-            // Renderizar el SVG en el canvas
-            svg.renderToCanvas(canvas)
-            bitmap
-        }
-    }.getOrNull()
+                // Renderizar el SVG en el canvas
+                svg.renderToCanvas(canvas)
+                bitmap
+            }
+        }.getOrNull()
 
     fun String.fixDateFormat(): String =
         SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).let { format ->
             format.parse(this).let { format.format(it!!) }
         }
 
-    fun String.isTokenExpired(): Boolean = JWT(this).expiresAt.let {
-        it != null && Date().after(it)
-    }
+    fun String.isTokenExpired(): Boolean =
+        JWT(this).expiresAt.let {
+            it != null && Date().after(it)
+        }
 
     fun createPasswordApp(): String {
         // Crea un objeto SimpleDateFormat para formatear la fecha actual

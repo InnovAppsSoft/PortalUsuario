@@ -11,10 +11,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.core.net.toUri
 import com.marlon.portalusuario.databinding.ActivityPrivateCallBinding
 import io.github.suitetecsa.sdk.android.utils.extractShortNumber
 import io.github.suitetecsa.sdk.android.utils.validateFormat
-import androidx.core.net.toUri
 
 private const val REQUEST_CODE = 1000
 
@@ -41,15 +41,21 @@ class PrivateCallActivity : AppCompatActivity() {
 
     private fun initialize() {
         if (checkSelfPermission(this, CALL_PHONE) == PERMISSION_DENIED) {
-            requestPermissions(this, arrayOf(CALL_PHONE),
-                REQUEST_CODE
+            requestPermissions(
+                this,
+                arrayOf(CALL_PHONE),
+                REQUEST_CODE,
             )
         } else {
             pickContactLauncher.launch(Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI))
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray,
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE) {
             pickContactLauncher.launch(Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI))
@@ -61,26 +67,29 @@ class PrivateCallActivity : AppCompatActivity() {
             if (cursor.moveToFirst()) {
                 val phoneNumberColumn = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
                 getNumberToCall(cursor.getString(phoneNumberColumn))
-            } else null
+            } else {
+                null
+            }
         }
 
     private fun makePhoneCall(numberToCall: String) {
-        val intent = Intent(Intent.ACTION_CALL).apply {
-            data = "tel:#31#$numberToCall".toUri()
-        }
+        val intent =
+            Intent(Intent.ACTION_CALL).apply {
+                data = "tel:#31#$numberToCall".toUri()
+            }
         startActivity(intent)
         finish()
     }
 
-    private fun getNumberToCall(phoneNumber: String) = validateFormat(phoneNumber)?.let {
-        extractShortNumber(it)
-    } ?: run {
-        Toast.makeText(
-            this,
-            "No es un número de telefonia móvil de ETECSA",
-            Toast.LENGTH_LONG
-        ).show()
-        null
-    }
+    private fun getNumberToCall(phoneNumber: String) =
+        validateFormat(phoneNumber)?.let {
+            extractShortNumber(it)
+        } ?: run {
+            Toast.makeText(
+                this,
+                "No es un número de telefonia móvil de ETECSA",
+                Toast.LENGTH_LONG,
+            ).show()
+            null
+        }
 }
-

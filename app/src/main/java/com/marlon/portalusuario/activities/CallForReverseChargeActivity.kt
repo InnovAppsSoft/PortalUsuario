@@ -19,7 +19,6 @@ import io.github.suitetecsa.sdk.android.utils.validateFormat
 private const val REQUEST_CODE = 1000
 
 class CallForReverseChargeActivity : AppCompatActivity() {
-
     private val pickContactLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
@@ -49,7 +48,7 @@ class CallForReverseChargeActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE) {
@@ -57,9 +56,10 @@ class CallForReverseChargeActivity : AppCompatActivity() {
         }
     }
 
-    private fun createIntent() = Intent(Intent.ACTION_PICK).apply {
-        setDataAndType(Uri.parse("content://contacts"), CONTENT_TYPE)
-    }
+    private fun createIntent() =
+        Intent(Intent.ACTION_PICK).apply {
+            setDataAndType(Uri.parse("content://contacts"), CONTENT_TYPE)
+        }
 
     private fun processSelectedContact(uri: Uri) =
         contentResolver.query(uri, null, null, null, null)?.use { cursor ->
@@ -71,30 +71,36 @@ class CallForReverseChargeActivity : AppCompatActivity() {
             }
         }
 
-    private fun recoverPrefix() =
-        getSharedPreferences("share_99", MODE_PRIVATE).getString("key99", "")
+    private fun recoverPrefix() = getSharedPreferences("share_99", MODE_PRIVATE).getString("key99", "")
 
-
-    private fun makePhoneCall(numberToCall: String, callPrefix: String?) {
-        val intent = Intent(Intent.ACTION_CALL).apply {
-            data = getCallUri(callPrefix, numberToCall)
-        }
+    private fun makePhoneCall(
+        numberToCall: String,
+        callPrefix: String?,
+    ) {
+        val intent =
+            Intent(Intent.ACTION_CALL).apply {
+                data = getCallUri(callPrefix, numberToCall)
+            }
         startActivity(intent)
         finish()
     }
 
-    private fun getNumberToCall(phoneNumber: String) = validateFormat(phoneNumber)?.let {
-        extractShortNumber(it)
-    } ?: run {
-        Toast.makeText(
-            this,
-            "No es un número de telefonia móvil de ETECSA",
-            Toast.LENGTH_LONG
-        ).show()
-        null
-    }
+    private fun getNumberToCall(phoneNumber: String) =
+        validateFormat(phoneNumber)?.let {
+            extractShortNumber(it)
+        } ?: run {
+            Toast.makeText(
+                this,
+                "No es un número de telefonia móvil de ETECSA",
+                Toast.LENGTH_LONG,
+            ).show()
+            null
+        }
 
-    private fun getCallUri(key99: String?, numberToCall: String): Uri {
+    private fun getCallUri(
+        key99: String?,
+        numberToCall: String,
+    ): Uri {
         return when (key99) {
             null, "", "null", "1" -> Uri.parse("tel:*99$numberToCall")
             "2" -> Uri.parse("tel:*+99$numberToCall")

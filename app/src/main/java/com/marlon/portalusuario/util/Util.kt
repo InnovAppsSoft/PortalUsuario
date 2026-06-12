@@ -3,7 +3,6 @@ package com.marlon.portalusuario.util
 import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.GregorianCalendar
@@ -35,8 +34,7 @@ object Util {
         SimpleDateFormat("dd/MM/yyyy hh:mm aa", Locale.getDefault()).format(date.time)
 
     @JvmStatic
-    fun long2Date(timestamp: Long): GregorianCalendar =
-        GregorianCalendar().apply { timeInMillis = timestamp }
+    fun long2Date(timestamp: Long): GregorianCalendar = GregorianCalendar().apply { timeInMillis = timestamp }
 
     @JvmStatic
     fun currentDate2Long(): Long = GregorianCalendar().timeInMillis

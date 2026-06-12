@@ -34,14 +34,17 @@ import com.marlon.portalusuario.ui.theme.TealBlue
 import com.marlon.portalusuario.ui.theme.VibrantTangerineOrange
 
 @Composable
-internal fun PlansSection(plans: List<MobilePlan>, isSimPaired: Boolean = false,) {
+internal fun PlansSection(
+    plans: List<MobilePlan>,
+    isSimPaired: Boolean = false,
+) {
     Column {
         Row(modifier = Modifier.padding(start = 16.dp), verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = "Planes",
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground
+                color = MaterialTheme.colorScheme.onBackground,
             )
             Spacer(modifier = Modifier.width(8.dp))
             HorizontalDivider(modifier = Modifier.weight(1f))
@@ -49,24 +52,26 @@ internal fun PlansSection(plans: List<MobilePlan>, isSimPaired: Boolean = false,
                 Spacer(modifier = Modifier.width(8.dp))
                 IconButton(
                     onClick = { /*TODO*/ },
-                    modifier = Modifier
-                        .padding(end = 16.dp)
-                        .background(TealBlue, shape = MaterialTheme.shapes.small)
+                    modifier =
+                        Modifier
+                            .padding(end = 16.dp)
+                            .background(TealBlue, shape = MaterialTheme.shapes.small),
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.Add,
                         contentDescription = "Add plan",
-                        tint = MaterialTheme.colorScheme.background
+                        tint = MaterialTheme.colorScheme.background,
                     )
                 }
             }
         }
         Spacer(modifier = Modifier.height(8.dp))
         LazyRow(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier =
+                Modifier
+                    .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly,
-            contentPadding = PaddingValues(horizontal = 16.dp)
+            contentPadding = PaddingValues(horizontal = 16.dp),
         ) {
             items(plans) {
                 PlanCard(
@@ -74,7 +79,7 @@ internal fun PlansSection(plans: List<MobilePlan>, isSimPaired: Boolean = false,
                     planTitle = it.type,
                     dataCount = it.data,
                     remainingDays = it.expires.asDateMillis?.asRemainingDays,
-                    color = VibrantTangerineOrange
+                    color = VibrantTangerineOrange,
                 )
             }
         }
@@ -88,12 +93,13 @@ private fun PlansSectionPreview() {
     PortalUsuarioTheme {
         Surface(modifier = Modifier.padding(vertical = 16.dp)) {
             PlansSection(
-                plans = listOf(
-                    MobilePlan("01:23:55", "MINUTOS", "30/04/2025"),
-                    MobilePlan("1560", "SMS", "30/04/2025"),
-                    MobilePlan("719.55 MB", "DATOS", "30/04/2025"),
-                    MobilePlan("0.00 B", "DATOS LTE", "30/04/2025"),
-                )
+                plans =
+                    listOf(
+                        MobilePlan("01:23:55", "MINUTOS", "30/04/2025"),
+                        MobilePlan("1560", "SMS", "30/04/2025"),
+                        MobilePlan("719.55 MB", "DATOS", "30/04/2025"),
+                        MobilePlan("0.00 B", "DATOS LTE", "30/04/2025"),
+                    ),
             )
         }
     }

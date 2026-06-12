@@ -17,17 +17,18 @@ data class NavigationService(
     val productType: String,
 )
 
-fun NavigationService.asEntity() = EntityNavigationService(
-    id,
-    bonusToEnjoy,
-    accessAccount,
-    status,
-    lockDate,
-    deletionDate,
-    saleDate,
-    bonusHours,
-    currency,
-    balance,
-    accessType,
-    productType
-)
+fun NavigationService.asEntity() =
+    EntityNavigationService(
+        id,
+        bonusToEnjoy,
+        accessAccount,
+        status,
+        lockDate,
+        deletionDate,
+        saleDate,
+        bonusHours,
+        currency,
+        balance,
+        accessType,
+        productType,
+    )

@@ -45,19 +45,21 @@ fun MobileServicesScreen(viewModel: MobileServicesViewModel = hiltViewModel()) {
     PullToRefreshBox(
         isRefreshing = viewModel.state.value.isLoading,
         onRefresh = { viewModel.onEvent(MobileServicesEvent.OnUpdate) },
-        modifier = Modifier
-            .fillMaxSize()
+        modifier =
+            Modifier
+                .fillMaxSize(),
     ) {
         mobServices.takeIf { it.isNotEmpty() }?.let { services ->
-            val serviceId = preferences.mssId ?: services.first().id.also {
-                viewModel.onEvent(MobileServicesEvent.OnChangeCurrentMobileService(it))
-            }
+            val serviceId =
+                preferences.mssId ?: services.first().id.also {
+                    viewModel.onEvent(MobileServicesEvent.OnChangeCurrentMobileService(it))
+                }
             ScreenContent(
                 services = services,
                 currentServiceId = serviceId,
                 state = viewModel.state.value,
                 onEvent = viewModel::onEvent,
-                simCards = viewModel.simCards
+                simCards = viewModel.simCards,
             )
         }
 
@@ -86,7 +88,7 @@ fun ScreenContent(
             serviceSelected = service,
             onServiceSelected = { onEvent(MobileServicesEvent.OnChangeCurrentMobileService(it.id)) },
             simCards = simCards,
-            onShowServiceSettings = { onEvent(OnShowServiceSettings) }
+            onShowServiceSettings = { onEvent(OnShowServiceSettings) },
         )
         Spacer(modifier = Modifier.height(4.dp))
         BalanceSection(
@@ -96,7 +98,7 @@ fun ScreenContent(
             deletionDate = service.deletionDate,
             isSimPaired = service.slotIndex != -1,
             onAddBalance = { /*TODO*/ },
-            onSendBalance = { /*TODO*/ }
+            onSendBalance = { /*TODO*/ },
         )
         Spacer(modifier = Modifier.height(16.dp))
         PlansSection(plans = service.plans)
@@ -110,7 +112,7 @@ fun ScreenContent(
     if (state.isServiceSettingsVisible) {
         ServiceSettingsBottomSheet(
             mobService = service,
-            onDismiss = { onEvent(OnHideServiceSettings) }
+            onDismiss = { onEvent(OnHideServiceSettings) },
         )
     }
 }

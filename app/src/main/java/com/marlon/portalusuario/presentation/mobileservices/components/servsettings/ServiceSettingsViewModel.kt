@@ -15,29 +15,35 @@ import io.github.suitetecsa.sdk.android.model.SimCard
 import javax.inject.Inject
 
 @HiltViewModel
-class ServiceSettingsViewModel @Inject constructor(
-    simCardCollector: SimCardCollector,
-    private val ussdExecute: UssdExecute
-) : ViewModel() {
-    val simCards = simCardCollector.collect()
-    private val _state = mutableStateOf(ServiceSettingsState())
-    val state: State<ServiceSettingsState> get() = _state
+class ServiceSettingsViewModel
+    @Inject
+    constructor(
+        simCardCollector: SimCardCollector,
+        private val ussdExecute: UssdExecute,
+    ) : ViewModel() {
+        val simCards = simCardCollector.collect()
+        private val _state = mutableStateOf(ServiceSettingsState())
+        val state: State<ServiceSettingsState> get() = _state
 
-    @SuppressLint("MissingPermission")
-    fun onEvent(event: ServiceSettingsEvent) {
-        when (event) {
-            is ServiceSettingsEvent.OnTurnConsumptionRate ->
-                turnConsumptionRate(event.simCard, event.service)
+        @SuppressLint("MissingPermission")
+        fun onEvent(event: ServiceSettingsEvent) {
+            when (event) {
+                is ServiceSettingsEvent.OnTurnConsumptionRate ->
+                    turnConsumptionRate(event.simCard, event.service)
+            }
+        }
+
+        @RequiresPermission(Manifest.permission.CALL_PHONE)
+        private fun turnConsumptionRate(
+            simCard: SimCard?,
+            service: MobileService,
+        ) {
+            val ussdCode =
+                if (service.consumptionRate) {
+                    "*133*1*1*1${Uri.parse("#")}"
+                } else {
+                    "*133*1*1*2${Uri.parse("#")}"
+                }
+            simCard?.let { ussdExecute(it, ussdCode) }
         }
     }
-
-    @RequiresPermission(Manifest.permission.CALL_PHONE)
-    private fun turnConsumptionRate(simCard: SimCard?, service: MobileService) {
-        val ussdCode = if (service.consumptionRate) {
-            "*133*1*1*1${Uri.parse("#")}"
-        } else {
-            "*133*1*1*2${Uri.parse("#")}"
-        }
-        simCard?.let { ussdExecute(it, ussdCode) }
-    }
-}
