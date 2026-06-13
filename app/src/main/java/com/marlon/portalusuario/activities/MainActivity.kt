@@ -55,7 +55,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -97,6 +99,7 @@ class MainActivity : ComponentActivity() {
     lateinit var networkConnectivityObserver: NetworkConnectivityObserver
 
     private lateinit var settings: SharedPreferences
+    private var isDynamicColor by mutableStateOf(true)
 
     private fun listenPreferences(
         preferences: SharedPreferences,
@@ -134,6 +137,7 @@ class MainActivity : ComponentActivity() {
 
         lifecycleScope.launch {
             appPreferencesManager.preferences().collect { preferences ->
+                isDynamicColor = preferences.isDynamicColor
                 when (preferences.modeNight) {
                     ModeNight.YES -> {
                         androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(
@@ -207,7 +211,7 @@ class MainActivity : ComponentActivity() {
         punViewModel = ViewModelProvider(this)[PunViewModel::class.java]
 
         setContent {
-            PortalUsuarioTheme {
+            PortalUsuarioTheme(dynamicColor = isDynamicColor) {
                 MainScreen()
             }
         }

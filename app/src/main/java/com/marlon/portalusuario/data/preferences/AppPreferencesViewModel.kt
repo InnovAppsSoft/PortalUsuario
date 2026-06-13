@@ -58,6 +58,8 @@ class AppPreferencesViewModel
                         appPreferencesManager.updateIsShowingTrafficBubble(event.value)
                     is AppPreferencesEvent.OnUpdateModeNight ->
                         appPreferencesManager.updateModeNight(event.value)
+                    is AppPreferencesEvent.OnUpdateDynamicColor ->
+                        appPreferencesManager.updateIsDynamicColor(event.value)
                     is AppPreferencesEvent.OnUpdateSkippedLogin -> {}
                     is AppPreferencesEvent.OnUpdateIsIntroOpened ->
                         appPreferencesManager.updateIsIntroOpened(event.value)
