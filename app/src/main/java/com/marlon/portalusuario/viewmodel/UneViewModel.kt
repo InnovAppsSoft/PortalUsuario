@@ -3,8 +3,8 @@ package com.marlon.portalusuario.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marlon.portalusuario.domain.data.UneRepository
-import com.marlon.portalusuario.domain.usecases.CalculateElectricityCostUseCase
-import com.marlon.portalusuario.domain.usecases.ElectricityCostResult
+import com.marlon.portalusuario.feature.une.domain.usecases.CalculateElectricityCostUseCase
+import com.marlon.portalusuario.feature.une.domain.usecases.ElectricityCostResult
 import com.marlon.portalusuario.une.Une
 import com.marlon.portalusuario.util.Util
 import dagger.hilt.android.lifecycle.HiltViewModel
