@@ -7,12 +7,11 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.MainActivity"
-    android:layout_marginStart="@dimen/_8sdp"
-    android:layout_marginTop="@dimen/_8sdp"
-    android:layout_marginEnd="@dimen/_8sdp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
     app:cardCornerRadius="10dp"
-    app:cardBackgroundColor="@color/background"
-    app:neumorph_shadowElevation="@dimen/_5sdp">
+    app:cardBackgroundColor="@color/background">
     <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -31,11 +30,9 @@
 
             <androidx.cardview.widget.CardView
                 app:cardBackgroundColor="@color/background_color_50"
-                app:cardCornerRadius="@dimen/_16sdp"
+                app:cardCornerRadius="16dp"
                 android:layout_width="match_parent"
-                app:neumorph_backgroundColor="@color/background"
                 android:layout_height="wrap_content"
-                app:neumorph_shapeType="flat"
                 android:layout_marginBottom="10dp">
 
                 <RelativeLayout
@@ -61,7 +58,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tvLTE"
                         android:layout_marginStart="@dimen/activity_horizontal_margin"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginTop="5dp"
                         android:fontFamily="@font/displaybold"
                         android:text="@string/se_al1"
                         android:textColor="@color/colorDes"

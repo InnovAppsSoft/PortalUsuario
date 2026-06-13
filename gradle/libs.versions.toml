@@ -56,9 +56,9 @@ monitor = "1.7.1"
 
 # Tools/Utilities
 accompanist-pager = "0.34.0"
-neumorphism = "0.3.0"
+
 androidsvg-aar = "1.4"
-circleimageview = "3.1.0"
+
 co-library = "1.1"
 customtabs = "28.0.0"
 dexter = "6.2.3"
@@ -69,8 +69,7 @@ guava = "31.1-android"
 jwtdecode = "2.0.2"
 picasso = "2.71828"
 prettytime = "5.0.9.Final"
-sdp-android = "1.1.0"
-ssp-android = "1.1.0"
+
 ui-library = "0.5.0"
 
 # Lint/QA
@@ -166,7 +165,7 @@ jwtdecode = { group = "com.auth0.android", name = "jwtdecode", version.ref = "jw
 accompanist-pager = { group = "com.google.accompanist", name = "accompanist-pager", version.ref = "accompanist-pager" }
 accompanist-pager-indicators = { group = "com.google.accompanist", name = "accompanist-pager-indicators", version.ref = "accompanist-pager" }
 caverock-androidsvg-aar = { group = "com.caverock", name = "androidsvg-aar", version.ref = "androidsvg-aar" }
-circleimageview = { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleimageview" }
+
 customtabs = { group = "com.android.support", name = "customtabs", version.ref = "customtabs" }
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "hilt" }
 dexter = { group = "com.karumi", name = "dexter", version.ref = "dexter" }
@@ -175,11 +174,10 @@ glidetovectoryou = { group = "com.github.2coffees1team", name = "GlideToVectorYo
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-neumorphism = { group = "com.github.fornewid", name = "neumorphism", version.ref = "neumorphism" }
+
 picasso = { group = "com.squareup.picasso", name = "picasso", version.ref = "picasso" }
 prettytime = { group = "org.ocpsoft.prettytime", name = "prettytime", version.ref = "prettytime" }
-sdp-android = { group = "com.intuit.sdp", name = "sdp-android", version.ref = "sdp-android" }
-ssp-android = { group = "com.intuit.ssp", name = "ssp-android", version.ref = "ssp-android" }
+
 swipetoaction-library = { group = "co.dift.ui.swipetoaction", name = "library", version.ref = "co-library" }
 ui-library = { group = "com.vanniktech", name = "ui", version.ref = "ui-library" }
 

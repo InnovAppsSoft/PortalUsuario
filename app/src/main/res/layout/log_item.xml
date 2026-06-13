@@ -12,7 +12,7 @@
         android:ellipsize="end"
         android:singleLine="false"
         android:textColor="@color/colorDes"
-        android:textSize="@dimen/_10ssp"
+        android:textSize="10sp"
         android:longClickable="true"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         android:textStyle="bold"
