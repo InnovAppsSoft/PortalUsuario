@@ -1,6 +1,6 @@
 package com.marlon.portalusuario.data.mappers
 
-import com.marlon.portalusuario.data.preferences.MobServicesPreferences
+import com.marlon.portalusuario.data.preferences.IMobServicesPreferences
 import com.marlon.portalusuario.domain.model.ServiceType
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -8,7 +8,7 @@ import com.marlon.portalusuario.data.entity.MobileService as MobEntity
 import io.github.suitetecsa.sdk.nauta.model.MobileService as MobApi
 
 class MobServiceApiToEntityMapper(
-    private val preferences: MobServicesPreferences,
+    private val preferences: IMobServicesPreferences,
     private val mobPlanMapper: MobPlanApiToModelMapper,
     private val mobBonusMapper: MobBonusApiToModelMapper,
 ) : Mapper<MobApi, MobEntity> {

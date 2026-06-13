@@ -73,6 +73,10 @@ android {
         jvmTarget = "17"
     }
 
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
+
     ndkVersion = "22.0.7026061"
     namespace = "com.marlon.portalusuario"
     packaging {
@@ -176,6 +180,7 @@ dependencies {
 
     // ── Testing ──
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.androidx.test.ext.junit)
     debugImplementation(libs.compose.ui.tooling)

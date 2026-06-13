@@ -1,6 +1,6 @@
 package com.marlon.portalusuario.di
 
-import com.marlon.portalusuario.data.preferences.AppPreferencesManager
+import com.marlon.portalusuario.data.preferences.IAppPreferencesManager
 import com.marlon.portalusuario.domain.data.UserRepository
 import com.marlon.portalusuario.trafficbubble.FloatingBubbleViewModel
 import dagger.Module
@@ -15,7 +15,7 @@ class ServiceModule {
     @Provides
     @ServiceScoped
     fun provideFloatingBubbleViewModel(
-        preferencesManager: AppPreferencesManager,
+        preferencesManager: IAppPreferencesManager,
         repository: UserRepository,
     ) = FloatingBubbleViewModel(preferencesManager, repository)
 }

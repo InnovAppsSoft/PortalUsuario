@@ -13,8 +13,12 @@ import com.marlon.portalusuario.data.mappers.MobServiceEntityToDomainMapper
 import com.marlon.portalusuario.data.mappers.NavServApiToEntityMapper
 import com.marlon.portalusuario.data.mappers.NavServEntityToDomainMapper
 import com.marlon.portalusuario.data.notifications.PunRepositoryImpl
+import com.marlon.portalusuario.data.preferences.IAppPreferencesManager
+import com.marlon.portalusuario.data.preferences.IMobServicesPreferences
 import com.marlon.portalusuario.data.preferences.AppPreferencesManager
 import com.marlon.portalusuario.data.preferences.MobServicesPreferences
+import com.marlon.portalusuario.feature.mobileservices.domain.usecases.IUssdExecute
+import com.marlon.portalusuario.feature.mobileservices.domain.usecases.UssdExecute
 import com.marlon.portalusuario.data.une.UneRepositoryImpl
 import com.marlon.portalusuario.data.user.UserAccountRepositoryImpl
 import com.marlon.portalusuario.data.user.UserRepositoryImpl
@@ -44,7 +48,7 @@ class AppModule {
     @Provides
     fun provideAppPreference(
         @ApplicationContext context: Context,
-    ) = AppPreferencesManager(context)
+    ): IAppPreferencesManager = AppPreferencesManager(context)
 
     @Singleton
     @Provides
@@ -66,7 +70,7 @@ class AppModule {
     @Provides
     fun provideMobServicesPreferences(
         @ApplicationContext context: Context,
-    ) = MobServicesPreferences(context)
+    ): IMobServicesPreferences = MobServicesPreferences(context)
 
     @Singleton
     @Provides
@@ -79,7 +83,7 @@ class AppModule {
     @Singleton
     @Provides
     fun provideMobServApiToEntityMapper(
-        preferences: MobServicesPreferences,
+        preferences: IMobServicesPreferences,
         planApiToModelMapper: MobPlanApiToModelMapper,
         bonusApiToModelMapper: MobBonusApiToModelMapper,
     ) = MobServiceApiToEntityMapper(preferences, planApiToModelMapper, bonusApiToModelMapper)
@@ -118,6 +122,10 @@ class AppModule {
             clientProfileEntityToDomainMapper = clientProfileEntityToDomainMapper,
             navServEntityToDomainMapper = navServEntityToDomainMapper,
         )
+
+    @Singleton
+    @Provides
+    fun provideUssdExecute(impl: UssdExecute): IUssdExecute = impl
 
     @Singleton
     @Provides

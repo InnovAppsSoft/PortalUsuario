@@ -75,7 +75,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.preference.PreferenceManager
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.components.SetLTEModeDialog
-import com.marlon.portalusuario.data.preferences.AppPreferencesManager
+import com.marlon.portalusuario.data.preferences.IAppPreferencesManager
 import com.marlon.portalusuario.domain.model.ModeNight
 import com.marlon.portalusuario.navigation.PortalUsuarioNavHost
 import com.marlon.portalusuario.navigation.Route
@@ -93,7 +93,7 @@ private const val TAG = "MainActivity"
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @Inject
-    lateinit var appPreferencesManager: AppPreferencesManager
+    lateinit var appPreferencesManager: IAppPreferencesManager
 
     @Inject
     lateinit var networkConnectivityObserver: NetworkConnectivityObserver

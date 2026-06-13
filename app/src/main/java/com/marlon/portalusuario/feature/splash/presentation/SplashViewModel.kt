@@ -2,7 +2,7 @@ package com.marlon.portalusuario.feature.splash.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marlon.portalusuario.data.preferences.AppPreferencesManager
+import com.marlon.portalusuario.data.preferences.IAppPreferencesManager
 import com.marlon.portalusuario.domain.model.AppSettings
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +16,7 @@ import javax.inject.Inject
 class SplashViewModel
     @Inject
     constructor(
-        private val preferences: AppPreferencesManager,
+        private val preferences: IAppPreferencesManager,
     ) : ViewModel() {
         private val _pref: MutableStateFlow<AppSettings?> = MutableStateFlow(null)
         val pref: StateFlow<AppSettings?>

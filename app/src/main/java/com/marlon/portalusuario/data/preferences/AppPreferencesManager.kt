@@ -31,8 +31,8 @@ private val Context.dataStore by preferencesDataStore(name = APP_PREFERENCES_NAM
  *
  * @property context The application context, required for accessing DataStore.
  */
-class AppPreferencesManager(private val context: Context) {
-    fun preferences(): Flow<AppSettings> =
+open class AppPreferencesManager(private val context: Context) : IAppPreferencesManager {
+    override fun preferences(): Flow<AppSettings> =
         context.dataStore.data
             .catch { exception ->
                 if (exception is IOException) {
@@ -65,39 +65,39 @@ class AppPreferencesManager(private val context: Context) {
                 )
             }
 
-    suspend fun updateIsShowingAccountBalanceOnTrafficBubble(isShowingAccountBalanceOnTrafficBubble: Boolean) {
+    override suspend fun updateIsShowingAccountBalanceOnTrafficBubble(isShowingAccountBalanceOnTrafficBubble: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[AppPreferencesKeys.IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE] =
                 isShowingAccountBalanceOnTrafficBubble
         }
     }
 
-    suspend fun updateIsShowingDataBalanceOnTrafficBubble(isShowingDataBalanceOnTrafficBubble: Boolean) {
+    override suspend fun updateIsShowingDataBalanceOnTrafficBubble(isShowingDataBalanceOnTrafficBubble: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[AppPreferencesKeys.IS_SHOWING_DATA_BALANCE_ON_TRAFFIC_BUBBLE] =
                 isShowingDataBalanceOnTrafficBubble
         }
     }
 
-    suspend fun updateModeNight(modeNight: ModeNight) {
+    override suspend fun updateModeNight(modeNight: ModeNight) {
         context.dataStore.edit { preferences ->
             preferences[AppPreferencesKeys.MODE_NIGHT] = modeNight.name
         }
     }
 
-    suspend fun updateIsDynamicColor(isDynamicColor: Boolean) {
+    override suspend fun updateIsDynamicColor(isDynamicColor: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[AppPreferencesKeys.IS_DYNAMIC_COLOR] = isDynamicColor
         }
     }
 
-    suspend fun updateIsShowingTrafficBubble(isShowingTrafficBubble: Boolean) {
+    override suspend fun updateIsShowingTrafficBubble(isShowingTrafficBubble: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[AppPreferencesKeys.IS_SHOWING_TRAFFIC_BUBBLE] = isShowingTrafficBubble
         }
     }
 
-    suspend fun updateIsIntroOpened(isIntroOpened: Boolean) {
+    override suspend fun updateIsIntroOpened(isIntroOpened: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[AppPreferencesKeys.IS_INTRO_OPENED] = isIntroOpened
         }
