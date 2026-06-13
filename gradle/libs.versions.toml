@@ -48,6 +48,7 @@ suitetecsa-sdk-android = "2.0.0-beta.1"
 junit = "4.13.2"
 androidx-test-ext-junit = "1.2.1"
 monitor = "1.7.1"
+kotlinx-coroutines-test = "1.8.0"
 
 # Plugins
 # AGP version is hardcoded in build.gradle.kts buildscript block
@@ -153,6 +154,7 @@ androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navig
 # ── Kotlin ──
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test-jvm", version.ref = "kotlinx-coroutines-test" }
 
 # ── SuiteTecsa SDK ──
 suitetecsa-sdk-kotlin = { group = "io.github.suitetecsa.sdk", name = "kotlin", version.ref = "suitetecsa-sdk-kotlin" }
@@ -188,6 +190,7 @@ ui-library = { group = "com.vanniktech", name = "ui", version.ref = "ui-library"
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 androidx-monitor = { group = "androidx.test", name = "monitor", version.ref = "monitor" }
+
 
 # ── Plugins (Gradle) ──
 google-services = { group = "com.google.gms", name = "google-services", version.ref = "google-services" }

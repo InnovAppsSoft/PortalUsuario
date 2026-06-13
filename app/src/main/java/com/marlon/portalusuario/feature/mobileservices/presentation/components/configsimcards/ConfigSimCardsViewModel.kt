@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marlon.portalusuario.data.preferences.MobServicesPreferences
+import com.marlon.portalusuario.data.preferences.IMobServicesPreferences
 import com.marlon.portalusuario.domain.data.UserRepository
 import com.marlon.portalusuario.domain.model.MobServPreferences
 import com.marlon.portalusuario.domain.model.SlotIndexInfo
@@ -27,7 +27,7 @@ private const val TAG = "ConfigSimCardsViewModel"
 class ConfigSimCardsViewModel
     @Inject
     constructor(
-        private val preferences: MobServicesPreferences,
+        private val preferences: IMobServicesPreferences,
         private val repository: UserRepository,
         private val simCardCollector: SimCardCollector,
     ) : ViewModel() {

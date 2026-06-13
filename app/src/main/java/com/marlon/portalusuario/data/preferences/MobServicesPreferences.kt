@@ -16,8 +16,8 @@ import java.io.IOException
 private const val PREFERENCES_NAME = "MOB_SERVICES"
 private val Context.dataStore by preferencesDataStore(name = PREFERENCES_NAME)
 
-class MobServicesPreferences(private val context: Context) {
-    val preferences =
+open class MobServicesPreferences(private val context: Context) : IMobServicesPreferences {
+    override val preferences =
         context.dataStore.data
             .catch { exception ->
                 if (exception is IOException) {
@@ -35,13 +35,13 @@ class MobServicesPreferences(private val context: Context) {
                 MobServPreferences(slotIndexInfoList, mobileServiceSelectedId)
             }
 
-    suspend fun updateSlotIndexInfoList(slotIndexInfoList: List<SlotIndexInfo>) {
+    override suspend fun updateSlotIndexInfoList(slotIndexInfoList: List<SlotIndexInfo>) {
         context.dataStore.edit { preferences ->
             preferences[ServicesPreferencesKey.SLOT_INDEX_INFO_LIST] = Gson().toJson(slotIndexInfoList)
         }
     }
 
-    suspend fun updateMobileServiceSelectedId(id: String?) {
+    override suspend fun updateMobileServiceSelectedId(id: String?) {
         context.dataStore.edit { preferences ->
             id?.let { preferences[ServicesPreferencesKey.MOBILE_SERVICE_SELECTED_ID] = it }
                 ?: preferences.remove(ServicesPreferencesKey.MOBILE_SERVICE_SELECTED_ID)

@@ -13,7 +13,7 @@ import javax.inject.Inject
 class AppPreferencesViewModel
     @Inject
     constructor(
-        private val appPreferencesManager: AppPreferencesManager,
+        private val appPreferencesManager: IAppPreferencesManager,
     ) : ViewModel() {
         val state =
             appPreferencesManager.preferences().stateIn(

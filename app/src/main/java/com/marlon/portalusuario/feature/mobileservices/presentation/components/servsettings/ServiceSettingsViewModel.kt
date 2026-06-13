@@ -8,7 +8,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.marlon.portalusuario.domain.model.MobileService
-import com.marlon.portalusuario.feature.mobileservices.domain.usecases.UssdExecute
+import com.marlon.portalusuario.feature.mobileservices.domain.usecases.IUssdExecute
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.suitetecsa.sdk.android.SimCardCollector
 import io.github.suitetecsa.sdk.android.model.SimCard
@@ -19,7 +19,7 @@ class ServiceSettingsViewModel
     @Inject
     constructor(
         simCardCollector: SimCardCollector,
-        private val ussdExecute: UssdExecute,
+        private val ussdExecute: IUssdExecute,
     ) : ViewModel() {
         val simCards = simCardCollector.collect()
         private val _state = mutableStateOf(ServiceSettingsState())

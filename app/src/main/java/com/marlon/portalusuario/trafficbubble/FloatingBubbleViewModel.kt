@@ -4,7 +4,7 @@ import android.net.TrafficStats
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marlon.portalusuario.data.preferences.AppPreferencesManager
+import com.marlon.portalusuario.data.preferences.IAppPreferencesManager
 import com.marlon.portalusuario.domain.data.UserRepository
 import com.marlon.portalusuario.trafficbubble.Util.calcDownSpeed
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +22,7 @@ private const val TAG = "FloatingBubbleViewModel"
 class FloatingBubbleViewModel
     @Inject
     constructor(
-        private val appSettings: AppPreferencesManager,
+        private val appSettings: IAppPreferencesManager,
         private val mobileServicesRepository: UserRepository,
     ) : ViewModel() {
         private val _state = MutableStateFlow(BubbleState())

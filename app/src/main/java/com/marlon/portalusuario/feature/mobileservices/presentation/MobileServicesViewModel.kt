@@ -6,7 +6,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marlon.portalusuario.data.preferences.MobServicesPreferences
+import com.marlon.portalusuario.data.preferences.IMobServicesPreferences
 import com.marlon.portalusuario.domain.data.UserRepository
 import com.marlon.portalusuario.domain.model.MobServPreferences
 import com.marlon.portalusuario.domain.model.MobileService
@@ -26,7 +26,7 @@ private const val TAG = "MobileServicesViewModel"
 class MobileServicesViewModel
     @Inject
     constructor(
-        private val mobServicesPreferences: MobServicesPreferences,
+        private val mobServicesPreferences: IMobServicesPreferences,
         private val repository: UserRepository,
         private val simCardCollector: SimCardCollector,
     ) : ViewModel() {

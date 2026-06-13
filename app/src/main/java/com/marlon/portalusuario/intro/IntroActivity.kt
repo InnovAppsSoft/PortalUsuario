@@ -35,7 +35,7 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 import com.marlon.portalusuario.R
-import com.marlon.portalusuario.data.preferences.AppPreferencesManager
+import com.marlon.portalusuario.data.preferences.IAppPreferencesManager
 import com.marlon.portalusuario.permisos.PermissionActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -50,7 +50,7 @@ data class ScreenItem(
 @AndroidEntryPoint
 class IntroActivity : ComponentActivity() {
     @Inject
-    lateinit var appPreferencesManager: AppPreferencesManager
+    lateinit var appPreferencesManager: IAppPreferencesManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

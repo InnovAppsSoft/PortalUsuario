@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.Surface
 import androidx.lifecycle.lifecycleScope
-import com.marlon.portalusuario.data.preferences.AppPreferencesManager
+import com.marlon.portalusuario.data.preferences.IAppPreferencesManager
 import com.marlon.portalusuario.domain.model.ModeNight
 import com.marlon.portalusuario.feature.splash.presentation.screen.SplashScreen
 import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
@@ -23,7 +23,7 @@ private const val TAG = "ActivitySplash"
 @AndroidEntryPoint
 class ActivitySplash : ComponentActivity() {
     @Inject
-    lateinit var appPreferencesManager: AppPreferencesManager
+    lateinit var appPreferencesManager: IAppPreferencesManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

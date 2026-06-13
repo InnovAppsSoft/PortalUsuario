@@ -8,13 +8,13 @@ import io.github.suitetecsa.sdk.android.model.SimCard
 import io.github.suitetecsa.sdk.android.utils.makeCall
 import javax.inject.Inject
 
-class UssdExecute
+open class UssdExecute
     @Inject
     constructor(
         @ApplicationContext private val context: Context,
-    ) {
+    ) : IUssdExecute {
         @RequiresPermission(Manifest.permission.CALL_PHONE)
-        operator fun invoke(
+        override operator fun invoke(
             simCard: SimCard,
             ussdCode: String,
         ) {
