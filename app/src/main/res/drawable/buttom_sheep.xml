@@ -5,7 +5,7 @@
     <solid android:color="@color/colorButtom" />
 
     <corners
-        android:topLeftRadius="@dimen/_16sdp"
-        android:topRightRadius="@dimen/_16sdp" />
+        android:topLeftRadius="16dp"
+        android:topRightRadius="16dp" />
 
 </shape>

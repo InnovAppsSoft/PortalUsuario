@@ -155,13 +155,9 @@ dependencies {
     runtimeOnly(libs.androidx.camera.camera2)
 
     // ── UI Libraries ──
-    implementation(libs.circleimageview)
-    implementation(libs.sdp.android)
-    implementation(libs.ssp.android)
     implementation(libs.glidetovectoryou)
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.pager.indicators)
-    implementation(libs.neumorphism)
 
     // ── Image Loading ──
     implementation(libs.glide)

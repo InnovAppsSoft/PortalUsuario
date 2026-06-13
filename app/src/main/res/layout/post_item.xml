@@ -152,7 +152,7 @@
                         android:layout_height="wrap_content"
                         android:text="Sin datos"
                         android:layout_marginTop="10dp"
-                        android:textSize="@dimen/_10ssp"
+                        android:textSize="10sp"
                         android:textColor="@color/colorDes"
                         style="@style/TextAppearance.AppCompat.Medium"
                         app:layout_constraintTop_toBottomOf="@id/big_image"

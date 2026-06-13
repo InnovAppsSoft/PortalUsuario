@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:text="@string/no_existen_registros"
         android:textAlignment="center"
-        android:textSize="@dimen/_13ssp"
+        android:textSize="13sp"
         android:fontFamily="@font/displaybold"
         android:textColor="@color/colorDes"
         android:gravity="center_vertical"
