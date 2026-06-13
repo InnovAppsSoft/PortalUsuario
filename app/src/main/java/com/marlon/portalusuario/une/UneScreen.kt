@@ -43,6 +43,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.marlon.portalusuario.ui.components.EmptyState
+import com.marlon.portalusuario.ui.components.ErrorState
 import com.marlon.portalusuario.ui.theme.VibrantGreen
 import com.marlon.portalusuario.util.Util
 import com.marlon.portalusuario.viewmodel.UneViewModel
@@ -193,10 +195,8 @@ fun UneScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             if (allUnes.isEmpty()) {
-                Text(
-                    text = "No hay registros aún",
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(vertical = 16.dp),
+                EmptyState(
+                    message = "No hay registros aún",
                 )
             } else {
                 LazyColumn(
