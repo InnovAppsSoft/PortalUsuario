@@ -7,6 +7,8 @@ sealed class AppPreferencesEvent {
 
     data class OnUpdateModeNight(val value: ModeNight) : AppPreferencesEvent()
 
+    data class OnUpdateDynamicColor(val value: Boolean) : AppPreferencesEvent()
+
     data class OnUpdateIsShowingTrafficBubble(val value: Boolean) : AppPreferencesEvent()
 
     data class OnUpdateIsIntroOpened(val value: Boolean) : AppPreferencesEvent()

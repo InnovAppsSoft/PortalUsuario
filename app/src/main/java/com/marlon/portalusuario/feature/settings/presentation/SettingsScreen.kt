@@ -63,6 +63,12 @@ fun SettingsScreen(viewModel: AppPreferencesViewModel = hiltViewModel()) {
         ) {
             isShowingModeNightDialog = true
         }
+        SettingsItemCheckable(
+            "Colores dinámicos (Material You)",
+            state.isDynamicColor,
+        ) {
+            viewModel.onEvent(AppPreferencesEvent.OnUpdateDynamicColor(it))
+        }
 
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(

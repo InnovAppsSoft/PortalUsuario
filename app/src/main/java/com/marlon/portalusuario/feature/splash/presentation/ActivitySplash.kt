@@ -54,7 +54,10 @@ class ActivitySplash : ComponentActivity() {
                 }
 
             setContent {
-                PortalUsuarioTheme(darkTheme = uiMode ?: isSystemInDarkTheme()) {
+                PortalUsuarioTheme(
+                    darkTheme = uiMode ?: isSystemInDarkTheme(),
+                    dynamicColor = preferences.isDynamicColor,
+                ) {
                     Surface { SplashScreen() }
                 }
             }

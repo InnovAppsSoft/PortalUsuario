@@ -47,6 +47,7 @@ class AppPreferencesManager(private val context: Context) {
                             it,
                         )
                     }
+                val isDynamicColor = preferences[AppPreferencesKeys.IS_DYNAMIC_COLOR] ?: true
                 val isShowingTrafficBubble = preferences[AppPreferencesKeys.IS_SHOWING_TRAFFIC_BUBBLE] ?: false
                 val isShowingAccountBalanceOnTrafficBubble =
                     preferences[AppPreferencesKeys.IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE] ?: false
@@ -56,6 +57,7 @@ class AppPreferencesManager(private val context: Context) {
 
                 AppSettings(
                     modeNight = modeNight,
+                    isDynamicColor = isDynamicColor,
                     isShowingTrafficBubble = isShowingTrafficBubble,
                     isShowingAccountBalanceOnTrafficBubble = isShowingAccountBalanceOnTrafficBubble,
                     isShowingDataBalanceOnTrafficBubble = isShowingDataBalanceOnTrafficBubble,
@@ -83,6 +85,12 @@ class AppPreferencesManager(private val context: Context) {
         }
     }
 
+    suspend fun updateIsDynamicColor(isDynamicColor: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[AppPreferencesKeys.IS_DYNAMIC_COLOR] = isDynamicColor
+        }
+    }
+
     suspend fun updateIsShowingTrafficBubble(isShowingTrafficBubble: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[AppPreferencesKeys.IS_SHOWING_TRAFFIC_BUBBLE] = isShowingTrafficBubble
@@ -98,6 +106,7 @@ class AppPreferencesManager(private val context: Context) {
 
 private object AppPreferencesKeys {
     val MODE_NIGHT = stringPreferencesKey("MODE_NIGHT")
+    val IS_DYNAMIC_COLOR = booleanPreferencesKey("IS_DYNAMIC_COLOR")
     val IS_SHOWING_TRAFFIC_BUBBLE = booleanPreferencesKey("IS_SHOWING_TRAFFIC_BUBBLE")
     val IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE =
         booleanPreferencesKey("IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE")
