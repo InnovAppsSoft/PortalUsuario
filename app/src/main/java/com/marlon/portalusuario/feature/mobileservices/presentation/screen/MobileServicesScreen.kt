@@ -29,6 +29,7 @@ import com.marlon.portalusuario.feature.mobileservices.presentation.components.M
 import com.marlon.portalusuario.feature.mobileservices.presentation.components.PlansSection
 import com.marlon.portalusuario.feature.mobileservices.presentation.components.configsimcards.ConfigSimCardsBottomSheet
 import com.marlon.portalusuario.feature.mobileservices.presentation.components.servsettings.ServiceSettingsBottomSheet
+import com.marlon.portalusuario.ui.components.EmptyState
 import com.marlon.portalusuario.ui.components.ErrorDialog
 import io.github.suitetecsa.sdk.android.model.SimCard
 
@@ -49,13 +50,15 @@ fun MobileServicesScreen(viewModel: MobileServicesViewModel = hiltViewModel()) {
             Modifier
                 .fillMaxSize(),
     ) {
-        mobServices.takeIf { it.isNotEmpty() }?.let { services ->
+        if (mobServices.isEmpty()) {
+            EmptyState(message = "No hay servicios móviles disponibles")
+        } else {
             val serviceId =
-                preferences.mssId ?: services.first().id.also {
+                preferences.mssId ?: mobServices.first().id.also {
                     viewModel.onEvent(MobileServicesEvent.OnChangeCurrentMobileService(it))
                 }
             ScreenContent(
-                services = services,
+                services = mobServices,
                 currentServiceId = serviceId,
                 state = viewModel.state.value,
                 onEvent = viewModel::onEvent,
