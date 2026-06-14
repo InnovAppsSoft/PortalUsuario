@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.arturbosch.detekt)
     alias(libs.plugins.kotlin.plugin.compose)
     alias(libs.plugins.ktlint)
+    alias(libs.plugins.roborazzi)
 }
 
 ktlint {
@@ -20,7 +21,7 @@ ktlint {
 }
 
 android {
-    compileSdk = 35
+    compileSdk = 37
     buildToolsVersion = "35.0.0"
 
     defaultConfig {
@@ -74,7 +75,9 @@ android {
     }
 
     testOptions {
-        unitTests.isReturnDefaultValues = true
+        unitTests {
+            isIncludeAndroidResources = true
+        }
     }
 
     ndkVersion = "22.0.7026061"
@@ -185,6 +188,15 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit)
     debugImplementation(libs.compose.ui.tooling)
     debugRuntimeOnly(libs.compose.ui.test.manifest)
+
+    // ── Screenshot Testing (Roborazzi + Robolectric) ──
+    testImplementation(libs.roborazzi)
+    testImplementation(libs.roborazzi.compose)
+    testImplementation(libs.roborazzi.junit.rule)
+    testImplementation(libs.robolectric)
+    testImplementation(platform(libs.compose.bom))
+    testImplementation(libs.androidx.ui.test.junit4)
+    testImplementation(libs.espresso.core)
 
     // ── JARs ──
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))

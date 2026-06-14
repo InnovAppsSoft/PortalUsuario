@@ -7,7 +7,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:9.2.1")
+        classpath(libs.gradle)
     }
 }
 
