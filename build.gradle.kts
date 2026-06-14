@@ -7,7 +7,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:8.5.1")
+        classpath("com.android.tools.build:gradle:9.2.1")
     }
 }
 
@@ -20,6 +20,7 @@ plugins {
 }
 
 tasks.register("clean", Delete::class) {
+    description = ""
     delete(rootProject.layout.buildDirectory.get().asFile)
 }
 
