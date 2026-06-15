@@ -6,7 +6,12 @@ import com.marlon.portalusuario.testhelpers.FakeSimCardCollector
 import com.marlon.portalusuario.testhelpers.FakeUssdExecute
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
+@RunWith(RobolectricTestRunner::class)
+@Config(application = android.app.Application::class)
 class ServiceSettingsViewModelTest {
 
     private val simCard = FakeSimCardCollector.createSimCard(
