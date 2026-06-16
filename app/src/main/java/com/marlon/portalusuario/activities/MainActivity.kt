@@ -2,7 +2,6 @@ package com.marlon.portalusuario.activities
 
 import android.Manifest
 import android.content.Intent
-import android.content.SharedPreferences
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Build
@@ -73,7 +72,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.preference.PreferenceManager
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.components.SetLTEModeDialog
 import com.marlon.portalusuario.data.preferences.IAppPreferencesManager
@@ -99,39 +97,7 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var networkConnectivityObserver: NetworkConnectivityObserver
 
-    private lateinit var settings: SharedPreferences
     private var isDynamicColor by mutableStateOf(true)
-
-    private fun listenPreferences(
-        preferences: SharedPreferences,
-        key: String?,
-    ) {
-        key?.let {
-            when (it) {
-                "show_traffic_speed_bubble" -> {
-                    if (preferences.getBoolean("show_traffic_speed_bubble", false)) {
-                        if (!Settings.canDrawOverlays(this)) {
-                            Toast
-                                .makeText(
-                                    this,
-                                    "Otorgue a Portal Usuario los permisos requeridos",
-                                    Toast.LENGTH_SHORT,
-                                ).show()
-                            startActivity(
-                                Intent(
-                                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                                    ("package:" + this.packageName).toUri(),
-                                ),
-                            )
-                        } else {
-                            val serviceIntent = Intent(this, FloatingBubbleService::class.java)
-                            stopService(serviceIntent)
-                        }
-                    }
-                }
-            }
-        }
-    }
 
     @Suppress("LongMethod")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -184,14 +150,29 @@ class MainActivity : ComponentActivity() {
                     Log.d(TAG, "onCreate: isShowingTrafficBubble = false")
                     if (networkConnectivityObserver.isCallbackRegistered) networkConnectivityObserver.stopMonitoring()
                 }
+
+                if (preferences.isShowingTrafficSpeedBubble) {
+                    if (!Settings.canDrawOverlays(this@MainActivity)) {
+                        Toast
+                            .makeText(
+                                this@MainActivity,
+                                "Otorgue a Portal Usuario los permisos requeridos",
+                                Toast.LENGTH_SHORT,
+                            ).show()
+                        startActivity(
+                            Intent(
+                                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                ("package:" + this@MainActivity.packageName).toUri(),
+                            ),
+                        )
+                    } else {
+                        stopService(Intent(this@MainActivity, FloatingBubbleService::class.java))
+                    }
+                }
             }
         }
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
-
-        settings = PreferenceManager.getDefaultSharedPreferences(this)
-
-        settings.registerOnSharedPreferenceChangeListener(::listenPreferences)
 
         if (hasPermissions(
                 Manifest.permission.CALL_PHONE,
@@ -209,8 +190,6 @@ class MainActivity : ComponentActivity() {
             )
         }
 
-        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false)
-
         punViewModel = ViewModelProvider(this)[PunViewModel::class.java]
 
         setContent {
@@ -218,11 +197,6 @@ class MainActivity : ComponentActivity() {
                 MainScreen()
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        settings.unregisterOnSharedPreferenceChangeListener(::listenPreferences)
     }
 
     companion object {

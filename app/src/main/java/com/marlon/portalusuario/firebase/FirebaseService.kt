@@ -17,7 +17,6 @@ import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.preference.PreferenceManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -25,17 +24,17 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.activities.MainActivity
+import com.marlon.portalusuario.data.preferences.showNotificationsFlow
+import com.marlon.portalusuario.data.preferences.storageAdsFlow
 import com.marlon.portalusuario.punotifications.PUNotification
 import com.marlon.portalusuario.punotifications.PUNotificationsActivity
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import java.io.File
 import java.io.FileOutputStream
 import java.util.GregorianCalendar
 
 class FirebaseService : FirebaseMessagingService() {
-    private val sharedPreferences by lazy {
-        PreferenceManager.getDefaultSharedPreferences(applicationContext)
-    }
-
     override fun onNewToken(token: String) {
         super.onNewToken(token)
     }
@@ -59,7 +58,7 @@ class FirebaseService : FirebaseMessagingService() {
                 ex.printStackTrace()
             }
 
-            val storageADS = sharedPreferences.getBoolean("storage_ads", true)
+            val storageADS = runBlocking { storageAdsFlow().first() }
             Log.e("STORAGE ADS", storageADS.toString())
 
             val title = notification.title ?: ""
@@ -123,7 +122,7 @@ class FirebaseService : FirebaseMessagingService() {
 
     @Suppress("DEPRECATION")
     private fun sendNotification(pun: PUNotification) {
-        if (!sharedPreferences.getBoolean("show_notifications", true)) return
+        if (!runBlocking { showNotificationsFlow().first() }) return
 
         val resultIntent = Intent(this, PUNotificationsActivity::class.java)
         val stackBuilder = TaskStackBuilder.create(this)

@@ -55,6 +55,8 @@ open class AppPreferencesManager(
                     preferences[AppPreferencesKeys.IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE] ?: false
                 val isShowingDataBalanceOnTrafficBubble =
                     preferences[AppPreferencesKeys.IS_SHOWING_DATA_BALANCE_ON_TRAFFIC_BUBBLE] ?: false
+                val isShowingTrafficSpeedBubble =
+                    preferences[AppPreferencesKeys.IS_SHOWING_TRAFFIC_SPEED_BUBBLE] ?: false
                 val isIntroOpened = preferences[AppPreferencesKeys.IS_INTRO_OPENED] ?: false
 
                 AppSettings(
@@ -63,6 +65,7 @@ open class AppPreferencesManager(
                     isShowingTrafficBubble = isShowingTrafficBubble,
                     isShowingAccountBalanceOnTrafficBubble = isShowingAccountBalanceOnTrafficBubble,
                     isShowingDataBalanceOnTrafficBubble = isShowingDataBalanceOnTrafficBubble,
+                    isShowingTrafficSpeedBubble = isShowingTrafficSpeedBubble,
                     isIntroOpened = isIntroOpened,
                 )
             }
@@ -99,6 +102,12 @@ open class AppPreferencesManager(
         }
     }
 
+    override suspend fun updateIsShowingTrafficSpeedBubble(isShowingTrafficSpeedBubble: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[AppPreferencesKeys.IS_SHOWING_TRAFFIC_SPEED_BUBBLE] = isShowingTrafficSpeedBubble
+        }
+    }
+
     override suspend fun updateIsIntroOpened(isIntroOpened: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[AppPreferencesKeys.IS_INTRO_OPENED] = isIntroOpened
@@ -113,5 +122,6 @@ private object AppPreferencesKeys {
     val IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE =
         booleanPreferencesKey("IS_SHOWING_ACCOUNT_BALANCE_ON_TRAFFIC_BUBBLE")
     val IS_SHOWING_DATA_BALANCE_ON_TRAFFIC_BUBBLE = booleanPreferencesKey("IS_SHOWING_DATA_BALANCE_ON_TRAFFIC_BUBBLE")
+    val IS_SHOWING_TRAFFIC_SPEED_BUBBLE = booleanPreferencesKey("IS_SHOWING_TRAFFIC_SPEED_BUBBLE")
     val IS_INTRO_OPENED = booleanPreferencesKey("IS_INTRO_OPENED")
 }

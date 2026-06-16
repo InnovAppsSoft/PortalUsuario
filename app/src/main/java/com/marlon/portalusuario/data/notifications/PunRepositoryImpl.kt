@@ -2,10 +2,13 @@ package com.marlon.portalusuario.data.notifications
 
 import android.content.Context
 import android.widget.Toast
-import androidx.preference.PreferenceManager
 import com.marlon.portalusuario.data.ServicesDao
 import com.marlon.portalusuario.data.notifications.PunRepositoryImpl.Companion.NOTIFICATIONS_COUNT_KEY
+import com.marlon.portalusuario.data.preferences.notificationsCountFlow
+import com.marlon.portalusuario.data.preferences.setNotificationsCount
 import com.marlon.portalusuario.domain.data.PunRepository
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import com.marlon.portalusuario.punotifications.PUNotification
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
@@ -22,10 +25,8 @@ class PunRepositoryImpl
         @Suppress("TooGenericExceptionCaught")
         override suspend fun insertPUNotification(pun: PUNotification) {
             dao.insertPUNotification(pun)
-            val sharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(appContext)
-            val count = sharedPreferences.getInt(NOTIFICATIONS_COUNT_KEY, 0)
-            sharedPreferences.edit().putInt(NOTIFICATIONS_COUNT_KEY, count + 1).apply()
+            val count = runBlocking { appContext.notificationsCountFlow().first() }
+            runBlocking { appContext.setNotificationsCount(count + 1) }
             try {
                 Toast
                     .makeText(
