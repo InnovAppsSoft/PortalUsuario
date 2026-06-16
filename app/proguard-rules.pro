@@ -1,32 +1,90 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.kts.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
-
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
-
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
-
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
-
-# You can specify any path and filename.
-
-# jsoup
--keeppackagenames org.jsoup.nodes
-
+# ============================================================
+# Hilt ViewModels
+# ============================================================
 -keepnames @dagger.hilt.android.lifecycle.HiltViewModel class * extends androidx.lifecycle.ViewModel
 
--keep class cu.suitetecsa.sdk.**{
-*;
+# ============================================================
+# SuiteTecsa SDK
+# ============================================================
+-keep class io.github.suitetecsa.sdk.** { *; }
+
+# ============================================================
+# Room
+# ============================================================
+-keep @androidx.room.Entity class * { *; }
+-keep @androidx.room.Dao class * { *; }
+-keep class * extends androidx.room.RoomDatabase { *; }
+-keep class com.marlon.portalusuario.data.entity.Converters { *; }
+
+# ============================================================
+# Gson — classes serialized via @SerializedName or TypeConverters
+# ============================================================
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class com.marlon.portalusuario.domain.model.DataSession { *; }
+-keep class com.marlon.portalusuario.domain.model.SimPaired { *; }
+-keep class com.marlon.portalusuario.domain.model.SlotIndexInfo { *; }
+-keep class com.marlon.portalusuario.domain.model.MobileBonus { *; }
+-keep class com.marlon.portalusuario.domain.model.MobilePlan { *; }
+-keep class com.marlon.portalusuario.domain.model.MobServPreferences { *; }
+
+# ============================================================
+# AndroidManifest components
+# ============================================================
+-keep class com.marlon.portalusuario.intro.IntroActivity { *; }
+-keep class com.marlon.portalusuario.activities.MainActivity { *; }
+-keep class com.marlon.portalusuario.permisos.PermissionActivity { *; }
+-keep class com.marlon.portalusuario.punotifications.PUNotificationsActivity { *; }
+-keep class com.marlon.portalusuario.erroreslog.LogFileViewerActivity { *; }
+-keep class com.marlon.portalusuario.feature.splash.presentation.ActivitySplash { *; }
+-keep class com.marlon.portalusuario.firebase.FirebaseService { *; }
+-keep class com.marlon.portalusuario.trafficbubble.FloatingBubbleService { *; }
+-keep class com.marlon.portalusuario.widgets.Widget { *; }
+-keep class com.marlon.portalusuario.widgets.WidgetDark { *; }
+-keep class com.marlon.portalusuario.widgets.WidgetUSSD { *; }
+
+# ============================================================
+# JWT Decode
+# ============================================================
+-keep class com.auth0.android.jwt.** { *; }
+
+# ============================================================
+# Glide
+# ============================================================
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep class com.bumptech.glide.** { *; }
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+    **[] $VALUES;
+    public *;
 }
+
+# ============================================================
+# PrettyTime
+# ============================================================
+-keep class org.ocpsoft.prettytime.** { *; }
+
+# ============================================================
+# DataStore preferences
+# ============================================================
+-keep class com.marlon.portalusuario.data.preferences.** { *; }
+
+# ============================================================
+# Hilt / Dagger
+# ============================================================
+-keep class dagger.hilt.** { *; }
+-keep class javax.inject.** { *; }
+
+# ============================================================
+# Enums
+# ============================================================
+-keepclassmembers enum com.marlon.portalusuario.** { *; }
+
+# ============================================================
+# Navigation Compose — NavType argument serialization
+# ============================================================
+-keep class androidx.navigation.NavType { *; }
+
+# ============================================================
+# Application class
+# ============================================================
+-keep class com.marlon.portalusuario.util.PortalUsuarioApplication { *; }
