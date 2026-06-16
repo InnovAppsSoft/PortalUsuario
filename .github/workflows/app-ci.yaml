@@ -35,7 +35,7 @@ jobs:
           distribution: temurin
           java-version: 21
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@94baf225fe0a508e581a5644670bed812f53a9ad # v4.3.1
+        uses: gradle/actions/setup-gradle@3f131e8634966bd73d06cc69884922b02e6faf92 # v6.2.0
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/master' }}
       - name: Decode Google Services JSON
@@ -61,7 +61,7 @@ jobs:
           distribution: temurin
           java-version: 21
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@94baf225fe0a508e581a5644670bed812f53a9ad # v4.3.1
+        uses: gradle/actions/setup-gradle@3f131e8634966bd73d06cc69884922b02e6faf92 # v6.2.0
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/master' }}
       - name: Decode Google Services JSON
@@ -99,7 +99,7 @@ jobs:
           distribution: temurin
           java-version: 21
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@94baf225fe0a508e581a5644670bed812f53a9ad # v4.3.1
+        uses: gradle/actions/setup-gradle@3f131e8634966bd73d06cc69884922b02e6faf92 # v6.2.0
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/master' }}
       - name: Decode Google Services JSON
