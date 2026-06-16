@@ -54,17 +54,16 @@ class LogFileViewerActivity : AppCompatActivity() {
             recyclerView.visibility = View.INVISIBLE
             errorMessage.visibility = View.INVISIBLE
 
-            val result =
-                withContext(Dispatchers.IO) {
-                    val file = File(JCLogging.getDirectory(), "log.txt")
-                    if (!file.exists()) return@withContext emptyList<String>()
-                    try {
-                        JCLogging.readFromFile(file)
-                    } catch (ex: IOException) {
-                        JCLogging.error(null, null, ex)
-                        null
-                    }
+            val result = withContext(Dispatchers.IO) {
+                val file = File(JCLogging.getDirectory(), "log.txt")
+                if (!file.exists()) return@withContext emptyList<String>()
+                try {
+                    JCLogging.readFromFile(file)
+                } catch (ex: IOException) {
+                    JCLogging.error(null, null, ex)
+                    null
                 }
+            }
 
             loadingBar.visibility = View.GONE
             when {
