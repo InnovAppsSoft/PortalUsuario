@@ -22,7 +22,6 @@ ktlint {
 
 android {
     compileSdk = 37
-    buildToolsVersion = "35.0.0"
 
     defaultConfig {
         resourceConfigurations.add("en")
