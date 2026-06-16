@@ -49,7 +49,7 @@ internal fun updateAppWidget(
             context,
             0,
             Intent(Intent.ACTION_CALL, "tel:*222${Uri.encode("#")}".toUri()),
-            0,
+            PendingIntent.FLAG_IMMUTABLE,
         )
 
     val pendingIntentBono =
@@ -57,7 +57,7 @@ internal fun updateAppWidget(
             context,
             0,
             Intent(Intent.ACTION_CALL, "tel:*222*266${Uri.encode("#")}".toUri()),
-            0,
+            PendingIntent.FLAG_IMMUTABLE,
         )
 
     val pendingIntentDatos =
@@ -65,7 +65,7 @@ internal fun updateAppWidget(
             context,
             0,
             Intent(Intent.ACTION_CALL, "tel:*222*328${Uri.encode("#")}".toUri()),
-            0,
+            PendingIntent.FLAG_IMMUTABLE,
         )
 
     val pendingIntentVoz =
@@ -73,7 +73,7 @@ internal fun updateAppWidget(
             context,
             0,
             Intent(Intent.ACTION_CALL, "tel:*222*869${Uri.encode("#")}".toUri()),
-            0,
+            PendingIntent.FLAG_IMMUTABLE,
         )
 
     val pendingIntentSms =
@@ -81,7 +81,7 @@ internal fun updateAppWidget(
             context,
             0,
             Intent(Intent.ACTION_CALL, "tel:*222*767${Uri.encode("#")}".toUri()),
-            0,
+            PendingIntent.FLAG_IMMUTABLE,
         )
 
     views.setOnClickPendingIntent(R.id.widget_button_saldo, pendingIntentSaldo)

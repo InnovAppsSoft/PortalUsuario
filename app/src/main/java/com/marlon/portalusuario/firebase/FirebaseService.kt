@@ -129,7 +129,7 @@ class FirebaseService : FirebaseMessagingService() {
         val stackBuilder = TaskStackBuilder.create(this)
         stackBuilder.addNextIntentWithParentStack(resultIntent)
         val resultPendingIntent =
-            stackBuilder.getPendingIntent(0, PendingIntent.FLAG_ONE_SHOT)
+            stackBuilder.getPendingIntent(0, PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationManager = getSystemService(NotificationManager::class.java)
