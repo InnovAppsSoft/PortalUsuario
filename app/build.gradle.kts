@@ -109,7 +109,6 @@ dependencies {
     // ── Hilt ──
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
-    implementation(libs.dagger)
     ksp(libs.hilt.android.compiler)
 
     // ── Room ──
@@ -157,25 +156,16 @@ dependencies {
     implementation(libs.androidx.preference.ktx)
     implementation(libs.material)
 
-    // ── CameraX ──
-    runtimeOnly(libs.androidx.camera.core)
-    runtimeOnly(libs.androidx.camera.camera2)
-
     // ── UI Libraries ──
-    implementation(libs.glidetovectoryou)
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.pager.indicators)
 
     // ── Image Loading ──
     implementation(libs.glide)
-    runtimeOnly(libs.picasso)
 
     // ── Utilities ──
     implementation(libs.caverock.androidsvg.aar)
-    implementation(libs.customtabs)
-    implementation(libs.dexter)
     implementation(libs.gson)
-    implementation(libs.guava)
     implementation(libs.jwtdecode)
     implementation(libs.prettytime)
     implementation(libs.swipetoaction.library)
@@ -196,8 +186,6 @@ dependencies {
     testImplementation(libs.robolectric)
     testImplementation(platform(libs.compose.bom))
     testImplementation(libs.androidx.ui.test.junit4)
-    testImplementation(libs.espresso.core)
 
-    // ── JARs ──
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+
 }
