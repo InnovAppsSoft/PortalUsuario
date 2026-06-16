@@ -24,36 +24,6 @@
     <ID>TooGenericExceptionCaught:Util.kt$Util$e: Exception</ID>
     <ID>TooManyFunctions:AppModule.kt$AppModule</ID>
     <ID>TooManyFunctions:FloatingBubbleService.kt$FloatingBubbleService : Service</ID>
-    <ID>TopLevelPropertyNaming:AppPreferencesManager.kt$private const val APP_PREFERENCES_NAME = "APP_PREFERENCES"</ID>
-    <ID>TopLevelPropertyNaming:ArcProgressbar.kt$private const val ONE_SECOND_MILLIS = 1000</ID>
-    <ID>TopLevelPropertyNaming:ArcProgressbar.kt$private const val SOME_FLOAT_NUMBER = 1.25f</ID>
-    <ID>TopLevelPropertyNaming:CallForReverseChargeActivity.kt$private const val REQUEST_CODE = 1000</ID>
-    <ID>TopLevelPropertyNaming:DonationActivity.kt$private const val ALL_FIELDS_ARE_REQUIRED = "Todos los campos son obligatorios"</ID>
-    <ID>TopLevelPropertyNaming:DonationActivity.kt$private const val REQUEST_CODE = 1000</ID>
-    <ID>TopLevelPropertyNaming:EmergencyCallsActivity.kt$private const val REQUEST_CODE = 1000</ID>
-    <ID>TopLevelPropertyNaming:ExpirationSection.kt$private const val ELEVEN_MONTHS = 330</ID>
-    <ID>TopLevelPropertyNaming:ExpirationSection.kt$private const val TWELVE_MONTHS = 360</ID>
-    <ID>TopLevelPropertyNaming:FloatingBubbleService.kt$private const val GRAVITY_CENTER = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL</ID>
-    <ID>TopLevelPropertyNaming:FloatingBubbleService.kt$private const val INITIAL_POSITION_X = 0</ID>
-    <ID>TopLevelPropertyNaming:FloatingBubbleService.kt$private const val INITIAL_POSITION_Y = 0</ID>
-    <ID>TopLevelPropertyNaming:FloatingBubbleService.kt$private const val VIBRATE_TIME = 100L</ID>
-    <ID>TopLevelPropertyNaming:FloatingBubbleViewModel.kt$private const val BYTE_UNIT_SI = 1000</ID>
-    <ID>TopLevelPropertyNaming:MobServicesPreferences.kt$private const val PREFERENCES_NAME = "MOB_SERVICES"</ID>
-    <ID>TopLevelPropertyNaming:PermissionActivity.kt$private const val RESULT_CALL: Int = 1001</ID>
-    <ID>TopLevelPropertyNaming:PlanAmigosActivity.kt$private const val REQUEST_CALL = 1</ID>
-    <ID>TopLevelPropertyNaming:PrivateCallActivity.kt$private const val REQUEST_CODE = 1000</ID>
-    <ID>TopLevelPropertyNaming:Save.kt$private const val IMAGE_QUALITY = 85</ID>
-    <ID>TopLevelPropertyNaming:SmsActivity.kt$private const val REQUEST_CALL = 1</ID>
-    <ID>TopLevelPropertyNaming:SplashScreen.kt$private const val MIN_TIME = 1000L</ID>
-    <ID>TopLevelPropertyNaming:Util.kt$private const val BYTE_UNIT = 1024</ID>
-    <ID>TopLevelPropertyNaming:Util.kt$private const val BYTE_UNIT_SI = 1000</ID>
-    <ID>TopLevelPropertyNaming:Utils.kt$private const val DEFAULT_DATE_FORMAT = "dd/MM/yyyy"</ID>
-    <ID>TopLevelPropertyNaming:Utils.kt$private const val HOURS_PER_DAY = 24</ID>
-    <ID>TopLevelPropertyNaming:Utils.kt$private const val MINUTES_PER_HOUR = 60</ID>
-    <ID>TopLevelPropertyNaming:Utils.kt$private const val SECONDS_IN_HOUR = 3600</ID>
-    <ID>TopLevelPropertyNaming:Utils.kt$private const val SECONDS_IN_MINUTE = 60</ID>
-    <ID>TopLevelPropertyNaming:Utils.kt$private const val SIZE_UNIT_MAX_LENGTH = 1024.0</ID>
-    <ID>TopLevelPropertyNaming:VozActivity.kt$private const val REQUEST_CALL = 1</ID>
     <ID>UnusedPrivateProperty:ExpirationSection.kt$private const val ELEVEN_MONTHS = 330</ID>
     <ID>UnusedPrivateProperty:ExpirationSection.kt$private const val TWELVE_MONTHS = 360</ID>
   </CurrentIssues>
