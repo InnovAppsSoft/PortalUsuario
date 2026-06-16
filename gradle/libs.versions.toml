@@ -1,85 +1,117 @@
 [versions]
-# AndroidX
+# ═══════════════════════════════════════════
+# AndroidX — Core & Lifecycle
+# ═══════════════════════════════════════════
 activity-compose = "1.9.1"
 activity-ktx = "1.9.1"
 annotation = "1.8.1"
 appcompat = "1.7.0"
+core-ktx = "1.13.1"
+fragment-ktx = "1.8.6"
+lifecycle = "2.8.7"
+
+# ═══════════════════════════════════════════
+# AndroidX — UI
+# ═══════════════════════════════════════════
 cardview = "1.0.0"
 constraintlayout = "2.1.4"
-core-ktx = "1.13.1"
 coordinatorlayout = "1.1.0"
-datastore-preferences = "1.1.3"
 drawerlayout = "1.1.1"
-fragment-ktx = "1.8.6"
-gradle = "9.2.1"
-lifecycle = "2.8.7"
-navigation = "2.5.1"
 preference-ktx = "1.2.1"
 recyclerview = "1.3.0"
-room = "2.8.4"
-sqlite = "2.4.0"
 swiperefreshlayout = "1.2.0-alpha01"
-work = "2.9.0"
+material = "1.12.0"
 
-# Compose (managed by BOM — versions only for non-BOM artifacts)
+# ═══════════════════════════════════════════
+# Compose (managed by BOM — only version for non-BOM artifact)
+# ═══════════════════════════════════════════
 compose-bom = "2026.05.01"
 hilt-navigation-compose = "1.3.0"
 
-# Google/Firebase
+# ═══════════════════════════════════════════
+# Google / Firebase
+# ═══════════════════════════════════════════
 firebase-bom = "33.1.2"
 google-services = "4.4.2"
 firebase-appdistribution-gradle = "5.0.0"
 firebase-crashlytics-gradle = "3.0.2"
-material = "1.12.0"
 
-# Hilt/Dagger
+# ═══════════════════════════════════════════
+# AGP / Hilt / Dagger
+# ═══════════════════════════════════════════
+gradle = "9.2.1"           # Android Gradle Plugin
 hilt = "2.59.2"
 
-# Kotlin
+# ═══════════════════════════════════════════
+# Kotlin & Coroutines
+# ═══════════════════════════════════════════
 kotlin = "2.2.10"
 kotlinx-coroutines = "1.7.3"
+kotlinx-coroutines-test = "1.8.0"
 ksp = "2.3.2"
 
+# ═══════════════════════════════════════════
+# Navigation
+# ═══════════════════════════════════════════
+navigation = "2.5.1"
+
+# ═══════════════════════════════════════════
+# Room
+# ═══════════════════════════════════════════
+room = "2.8.4"
+
+# ═══════════════════════════════════════════
+# DataStore
+# ═══════════════════════════════════════════
+datastore-preferences = "1.1.3"
+
+# ═══════════════════════════════════════════
+# WorkManager
+# ═══════════════════════════════════════════
+work = "2.9.0"
+
+# ═══════════════════════════════════════════
 # SuiteTecsa SDK
+# ═══════════════════════════════════════════
 suitetecsa-sdk-kotlin = "1.0.0-alpha04"
 suitetecsa-sdk-android = "2.0.0-beta.1"
 
-# Testing
-junit = "4.13.2"
-androidx-test-ext-junit = "1.2.1"
-monitor = "1.7.1"
-kotlinx-coroutines-test = "1.8.0"
-
-# Plugins
-# AGP version is hardcoded in build.gradle.kts buildscript block
-# to avoid classpath conflicts with Firebase plugins
-# agp = "8.5.1"
-
-# Tools/Utilities
+# ═══════════════════════════════════════════
+# Utilities
+# ═══════════════════════════════════════════
 accompanist-pager = "0.34.0"
-
 androidsvg-aar = "1.4"
-
-co-library = "1.1"
 glide = "4.15.1"
 gson = "2.11.0"
 jwtdecode = "2.0.2"
 prettytime = "5.0.9.Final"
+co-library = "1.1"       # swipetoaction (legacy)
+ui-library = "0.5.0"     # vanniktech (legacy)
 
-ui-library = "0.5.0"
+# ═══════════════════════════════════════════
+# Testing
+# ═══════════════════════════════════════════
+junit = "4.13.2"
+androidx-test-ext-junit = "1.2.1"
 
+# ═══════════════════════════════════════════
 # Screenshot Testing
+# ═══════════════════════════════════════════
 roborazzi = "1.64.0"
 robolectric = "4.16.1"
 
-# Lint/QA
+# ═══════════════════════════════════════════
+# Lint / QA
+# ═══════════════════════════════════════════
 arturbosch-detekt = "1.23.8"
 ktlint-gradle = "14.2.0"
 
 
 [libraries]
-# ── Compose (managed by BOM, no version ref needed) ──
-androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+
+# ─────────────────────────────────────────────
+# Compose (BOM manages versions)
+# ─────────────────────────────────────────────
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
 compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
@@ -88,53 +120,58 @@ compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 
-# ── Core AndroidX ──
+# ─────────────────────────────────────────────
+# Core AndroidX
+# ─────────────────────────────────────────────
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
 androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity-ktx" }
 androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment-ktx" }
 androidx-cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-coordinatorlayout = { group = "androidx.coordinatorlayout", name = "coordinatorlayout", version.ref = "coordinatorlayout" }
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 androidx-drawerlayout = { group = "androidx.drawerlayout", name = "drawerlayout", version.ref = "drawerlayout" }
-androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment-ktx" }
 androidx-preference-ktx = { group = "androidx.preference", name = "preference-ktx", version.ref = "preference-ktx" }
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 
-# ── Lifecycle ──
-androidx-lifecycle-common = { group = "androidx.lifecycle", name = "lifecycle-common", version.ref = "lifecycle" }
-androidx-lifecycle-livedata-core = { group = "androidx.lifecycle", name = "lifecycle-livedata-core", version.ref = "lifecycle" }
+# ─────────────────────────────────────────────
+# Lifecycle
+# ─────────────────────────────────────────────
 androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "lifecycle" }
 androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }
-androidx-lifecycle-viewmodel-savedstate = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-savedstate", version.ref = "lifecycle" }
 
-# ── Navigation ──
+# ─────────────────────────────────────────────
+# Navigation
+# ─────────────────────────────────────────────
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 androidx-navigation-runtime = { group = "androidx.navigation", name = "navigation-runtime", version.ref = "navigation" }
 
-# ── Room ──
-androidx-room-common = { group = "androidx.room", name = "room-common", version.ref = "room" }
+# ─────────────────────────────────────────────
+# Room
+# ─────────────────────────────────────────────
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 
-# ── DataStore ──
-androidx-datastore-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "datastore-preferences" }
-androidx-datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastore-preferences" }
+# ─────────────────────────────────────────────
+# DataStore
+# ─────────────────────────────────────────────
 androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore-preferences" }
 
-# ── WorkManager ──
-androidx-work-runtime = { group = "androidx.work", name = "work-runtime", version.ref = "work" }
+# ─────────────────────────────────────────────
+# WorkManager
+# ─────────────────────────────────────────────
 androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work" }
 
-# ── Room (SQLite) ──
-androidx-sqlite = { group = "androidx.sqlite", name = "sqlite", version.ref = "sqlite" }
-
-# ── Firebase ──
+# ─────────────────────────────────────────────
+# Firebase
+# ─────────────────────────────────────────────
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-analytics-ktx = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
@@ -142,57 +179,62 @@ firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashly
 firebase-crashlytics-ktx = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
 
-# ── Hilt ──
+# ─────────────────────────────────────────────
+# Hilt / Dagger
+# ─────────────────────────────────────────────
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
-hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hilt" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
 
-# ── Kotlin ──
-kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+# ─────────────────────────────────────────────
+# Kotlin / Coroutines
+# ─────────────────────────────────────────────
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test-jvm", version.ref = "kotlinx-coroutines-test" }
 
-# ── SuiteTecsa SDK ──
+# ─────────────────────────────────────────────
+# SuiteTecsa SDK
+# ─────────────────────────────────────────────
 suitetecsa-sdk-kotlin = { group = "io.github.suitetecsa.sdk", name = "kotlin", version.ref = "suitetecsa-sdk-kotlin" }
 suitetecsa-sdk-android = { group = "io.github.suitetecsa.sdk", name = "android", version.ref = "suitetecsa-sdk-android" }
 
-# ── JWT ──
-jwtdecode = { group = "com.auth0.android", name = "jwtdecode", version.ref = "jwtdecode" }
-
-# ── UI / Utilities ──
+# ─────────────────────────────────────────────
+# UI / Utilities
+# ─────────────────────────────────────────────
 accompanist-pager = { group = "com.google.accompanist", name = "accompanist-pager", version.ref = "accompanist-pager" }
 accompanist-pager-indicators = { group = "com.google.accompanist", name = "accompanist-pager-indicators", version.ref = "accompanist-pager" }
 caverock-androidsvg-aar = { group = "com.caverock", name = "androidsvg-aar", version.ref = "androidsvg-aar" }
-
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+jwtdecode = { group = "com.auth0.android", name = "jwtdecode", version.ref = "jwtdecode" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 prettytime = { group = "org.ocpsoft.prettytime", name = "prettytime", version.ref = "prettytime" }
 
+# ─── Legacy UI (pendiente de migrar) ───
 swipetoaction-library = { group = "co.dift.ui.swipetoaction", name = "library", version.ref = "co-library" }
 ui-library = { group = "com.vanniktech", name = "ui", version.ref = "ui-library" }
 
-# ── WorkManager ──
-# (defined above)
-
-# ── Testing ──
+# ─────────────────────────────────────────────
+# Testing
+# ─────────────────────────────────────────────
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
-androidx-monitor = { group = "androidx.test", name = "monitor", version.ref = "monitor" }
 
-# ── Screenshot Testing ──
+# ─────────────────────────────────────────────
+# Screenshot Testing
+# ─────────────────────────────────────────────
 roborazzi = { group = "io.github.takahirom.roborazzi", name = "roborazzi", version.ref = "roborazzi" }
 roborazzi-compose = { group = "io.github.takahirom.roborazzi", name = "roborazzi-compose", version.ref = "roborazzi" }
 roborazzi-junit-rule = { group = "io.github.takahirom.roborazzi", name = "roborazzi-junit-rule", version.ref = "roborazzi" }
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 
-# ── Plugins (Gradle) ──
+# ─────────────────────────────────────────────
+# Plugins (Gradle)
+# ─────────────────────────────────────────────
 google-services = { group = "com.google.gms", name = "google-services", version.ref = "google-services" }
 firebase-appdistribution-gradle = { group = "com.google.firebase", name = "firebase-appdistribution-gradle", version.ref = "firebase-appdistribution-gradle" }
 firebase-crashlytics-gradle = { group = "com.google.firebase", name = "firebase-crashlytics-gradle", version.ref = "firebase-crashlytics-gradle" }
-kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
 
 [plugins]
