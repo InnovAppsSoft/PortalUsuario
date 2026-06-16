@@ -45,7 +45,7 @@ hilt = "2.59.2"
 # ═══════════════════════════════════════════
 # Kotlin & Coroutines
 # ═══════════════════════════════════════════
-kotlin = "2.2.10"
+kotlin = "2.4.0"
 kotlinx-coroutines = "1.7.3"
 kotlinx-coroutines-test = "1.8.0"
 ksp = "2.3.2"

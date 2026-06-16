@@ -1,13 +1,18 @@
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
+configurations.all {
+    resolutionStrategy {
+        force("org.jetbrains.kotlin:kotlin-metadata-jvm:2.4.0")
+    }
+}
+
 plugins {
     id("com.android.application")
     alias(libs.plugins.google.services)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.hilt.android)
-    alias(libs.plugins.firebase.appdistribution)
     alias(libs.plugins.firebase.crashlytics)
+    // alias(libs.plugins.firebase.appdistribution)
     alias(libs.plugins.arturbosch.detekt)
     alias(libs.plugins.kotlin.plugin.compose)
     alias(libs.plugins.ktlint)
@@ -24,7 +29,7 @@ android {
     compileSdk = 37
 
     defaultConfig {
-        resourceConfigurations.add("en")
+        androidResources.localeFilters.add("en")
         applicationId = "com.marlon.portalusuario"
         minSdk = 26
         targetSdk = 34
@@ -69,8 +74,10 @@ android {
         autoCorrect = true
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        }
     }
 
     testOptions {
