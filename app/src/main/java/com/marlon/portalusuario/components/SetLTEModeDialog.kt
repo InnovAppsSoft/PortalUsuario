@@ -13,7 +13,9 @@ import com.marlon.portalusuario.databinding.DialogSetOnlyLteBinding
 import com.vanniktech.ui.Color
 import com.vanniktech.ui.ColorDrawable
 
-class SetLTEModeDialog(private val activity: Activity) {
+class SetLTEModeDialog(
+    private val activity: Activity,
+) {
     private lateinit var binding: DialogSetOnlyLteBinding
     private lateinit var simDialog: Dialog
 
@@ -48,18 +50,20 @@ class SetLTEModeDialog(private val activity: Activity) {
                 }
             activity.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
-            Toast.makeText(
-                activity,
-                activity.getString(R.string.error_message_unsupported_feature),
-                Toast.LENGTH_SHORT,
-            ).show()
+            Toast
+                .makeText(
+                    activity,
+                    activity.getString(R.string.error_message_unsupported_feature),
+                    Toast.LENGTH_SHORT,
+                ).show()
             Log.e("SetLTEModeDialog", "Failed to open hidden menu", e)
         } catch (e: SecurityException) {
-            Toast.makeText(
-                activity,
-                activity.getString(R.string.error_message_security_issue),
-                Toast.LENGTH_SHORT,
-            ).show()
+            Toast
+                .makeText(
+                    activity,
+                    activity.getString(R.string.error_message_security_issue),
+                    Toast.LENGTH_SHORT,
+                ).show()
             Log.e("SetLTEModeDialog", "Security issue when trying to open hidden menu", e)
         }
     }

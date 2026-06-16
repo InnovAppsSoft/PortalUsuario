@@ -24,11 +24,10 @@ class PUNAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): PUNViewHolder {
-        return PUNViewHolder(
+    ): PUNViewHolder =
+        PUNViewHolder(
             LayoutInflater.from(context).inflate(R.layout.post_item, parent, false),
         )
-    }
 
     override fun onBindViewHolder(
         holder: PUNViewHolder,
@@ -58,8 +57,16 @@ class PUNAdapter(
 
         val image = pun.image
         if (image.isNotEmpty()) {
-            Glide.with(context).load(image).centerCrop().into(holder.circleImage)
-            Glide.with(context).load(image).centerCrop().into(holder.bigImage)
+            Glide
+                .with(context)
+                .load(image)
+                .centerCrop()
+                .into(holder.circleImage)
+            Glide
+                .with(context)
+                .load(image)
+                .centerCrop()
+                .into(holder.bigImage)
         }
 
         holder.arrowBtn.setOnClickListener(
@@ -94,7 +101,9 @@ class PUNAdapter(
 
     override fun getItemCount(): Int = notificationsList.size
 
-    inner class PUNViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class PUNViewHolder(
+        itemView: View,
+    ) : RecyclerView.ViewHolder(itemView) {
         val circleImage: ImageView = itemView.findViewById(R.id.circleImage)
         val titleTv: TextView = itemView.findViewById(R.id.title)
         val dateTv: TextView = itemView.findViewById(R.id.date)

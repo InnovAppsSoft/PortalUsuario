@@ -16,22 +16,23 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(application = android.app.Application::class)
 class SplashViewModelTest {
-
     @get:Rule
     val mainCoroutineRule = MainCoroutineRule()
 
-    private val appSettings = AppSettings(
-        modeNight = ModeNight.NO,
-        isDynamicColor = false,
-        isIntroOpened = true,
-    )
+    private val appSettings =
+        AppSettings(
+            modeNight = ModeNight.NO,
+            isDynamicColor = false,
+            isIntroOpened = true,
+        )
 
     @Test
-    fun `pref emits AppSettings from preferences`() = runTest {
-        val preferences = FakeAppPreferencesManager(appSettings)
-        val viewModel = SplashViewModel(preferences)
+    fun `pref emits AppSettings from preferences`() =
+        runTest {
+            val preferences = FakeAppPreferencesManager(appSettings)
+            val viewModel = SplashViewModel(preferences)
 
-        val result = viewModel.pref.first()
-        assertEquals(appSettings, result)
-    }
+            val result = viewModel.pref.first()
+            assertEquals(appSettings, result)
+        }
 }

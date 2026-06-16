@@ -62,9 +62,11 @@ class MobileServicesViewModel
                             mobPreferences.slotIndexInfoList
                                 .filter { it.index in simCards.map { sim -> sim.slotIndex } },
                         )
-                        if (mobileServices.value.first {
-                                it.id == _state.value.currentServiceId
-                            }.lastUpdated.isAtLeastOneHourElapsed()
+                        if (mobileServices.value
+                                .first {
+                                    it.id == _state.value.currentServiceId
+                                }.lastUpdated
+                                .isAtLeastOneHourElapsed()
                         ) {
                             update()
                         }
@@ -74,9 +76,11 @@ class MobileServicesViewModel
                             mobPreferences.slotIndexInfoList
                                 .filter { it.index in simCards.map { sim -> sim.slotIndex } },
                         )
-                        if (mobileServices.value.first {
-                                it.id == _state.value.currentServiceId
-                            }.lastUpdated.isAtLeastOneHourElapsed()
+                        if (mobileServices.value
+                                .first {
+                                    it.id == _state.value.currentServiceId
+                                }.lastUpdated
+                                .isAtLeastOneHourElapsed()
                         ) {
                             update()
                         }
@@ -117,7 +121,8 @@ class MobileServicesViewModel
 
         private val simCardForFetch: SimCard?
             get() =
-                simCards.firstOrNull { it.slotIndex == currentService.slotIndex }
+                simCards
+                    .firstOrNull { it.slotIndex == currentService.slotIndex }
                     ?.copy(phoneNumber = currentService.phoneNumber)
 
         private fun update(onlyRemote: Boolean = false) {

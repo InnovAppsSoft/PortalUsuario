@@ -19,7 +19,8 @@ class WidgetDark : AppWidgetProvider() {
             val intent = Intent(context, WidgetDark::class.java)
             intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
             val ids =
-                AppWidgetManager.getInstance(context.applicationContext)
+                AppWidgetManager
+                    .getInstance(context.applicationContext)
                     .getAppWidgetIds(
                         ComponentName(context.applicationContext, WidgetDark::class.java),
                     )

@@ -129,11 +129,12 @@ class LogFileViewerActivity : AppCompatActivity() {
                     val clipboard =
                         getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                     clipboard.setPrimaryClip(ClipData.newPlainText("log", log))
-                    Toast.makeText(
-                        this,
-                        "Registro copiado al portapapeles",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                    Toast
+                        .makeText(
+                            this,
+                            "Registro copiado al portapapeles",
+                            Toast.LENGTH_SHORT,
+                        ).show()
 
                     val share =
                         Intent(Intent.ACTION_SEND).apply {
@@ -161,18 +162,19 @@ class LogFileViewerActivity : AppCompatActivity() {
                 return true
             }
             R.id.menu_clear -> {
-                AlertDialog.Builder(this)
+                AlertDialog
+                    .Builder(this)
                     .setMessage(R.string.msg_sure)
                     .setPositiveButton(android.R.string.yes) { _, _ ->
                         JCLogging.clearLog()
                         refreshLog()
-                        Toast.makeText(
-                            this,
-                            "Archivo de registro limpiado",
-                            Toast.LENGTH_LONG,
-                        ).show()
-                    }
-                    .setNegativeButton(android.R.string.no, null)
+                        Toast
+                            .makeText(
+                                this,
+                                "Archivo de registro limpiado",
+                                Toast.LENGTH_LONG,
+                            ).show()
+                    }.setNegativeButton(android.R.string.no, null)
                     .show()
                 return true
             }

@@ -126,11 +126,12 @@ private fun DonationCard(
             Button(
                 onClick = {
                     if (amount.isBlank() || password.isBlank()) {
-                        Toast.makeText(
-                            context,
-                            "Todos los campos son obligatorios",
-                            Toast.LENGTH_SHORT,
-                        ).show()
+                        Toast
+                            .makeText(
+                                context,
+                                "Todos los campos son obligatorios",
+                                Toast.LENGTH_SHORT,
+                            ).show()
                     } else {
                         onDonate(amount, password)
                     }

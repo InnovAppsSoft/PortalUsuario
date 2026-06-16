@@ -5,7 +5,11 @@ import android.widget.ArrayAdapter
 import android.widget.Filter
 import android.widget.Filterable
 
-class AutoCompleteAdapter(context: Context, resource: Int) : ArrayAdapter<String>(context, resource), Filterable {
+class AutoCompleteAdapter(
+    context: Context,
+    resource: Int,
+) : ArrayAdapter<String>(context, resource),
+    Filterable {
     var data: MutableList<String> = mutableListOf()
 
     override fun getCount() = data.size

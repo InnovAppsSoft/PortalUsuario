@@ -4,14 +4,18 @@ import com.marlon.portalusuario.feature.mobileservices.domain.usecases.IUssdExec
 import io.github.suitetecsa.sdk.android.model.SimCard
 
 class FakeUssdExecute : IUssdExecute {
-    private var _lastSimCard: SimCard? = null
-    private var _lastCode: String? = null
+    private var lastSimCard: SimCard? = null
+    private var lastCode: String? = null
 
-    override fun invoke(simCard: SimCard, ussdCode: String) {
-        _lastSimCard = simCard
-        _lastCode = ussdCode
+    override fun invoke(
+        simCard: SimCard,
+        ussdCode: String,
+    ) {
+        lastSimCard = simCard
+        lastCode = ussdCode
     }
 
-    fun lastSimCard(): SimCard? = _lastSimCard
-    fun lastCode(): String? = _lastCode
+    fun lastSimCard(): SimCard? = lastSimCard
+
+    fun lastCode(): String? = lastCode
 }

@@ -17,9 +17,10 @@ class FakeUserAccountRepository(
     }
 
     override suspend fun updateUser(user: User) {
-        _allUsers.value = _allUsers.value.map {
-            if (it.id == user.id) user else it
-        }
+        _allUsers.value =
+            _allUsers.value.map {
+                if (it.id == user.id) user else it
+            }
     }
 
     override suspend fun deleteUser(user: User) {

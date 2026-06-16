@@ -53,10 +53,15 @@ val String.asBytes
     get(): Long {
         val count = this.replace("[GMKBT]".toRegex(), "")
         val unit =
-            this.split(" ".toRegex()).dropLastWhile { it.isEmpty() }
+            this
+                .split(" ".toRegex())
+                .dropLastWhile { it.isEmpty() }
                 .toTypedArray()[
-                this.split(" ".toRegex()).dropLastWhile { it.isEmpty() }
-                    .toTypedArray().size - 1,
+                this
+                    .split(" ".toRegex())
+                    .dropLastWhile { it.isEmpty() }
+                    .toTypedArray()
+                    .size - 1,
             ].uppercase(Locale.getDefault())
         return (count.toDouble() * 1024.0.pow("BKMGT".indexOf(unit[0]).toDouble())).toLong()
     }

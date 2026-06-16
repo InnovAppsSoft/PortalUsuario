@@ -53,7 +53,8 @@ class FloatingBubbleViewModel
                         val dataAvailable =
                             if (service.plans.firstOrNull {
                                     it.type == "DATOS"
-                                } != null && service.plans.firstOrNull { it.type == "DATOS LTE" } != null
+                                } != null &&
+                                service.plans.firstOrNull { it.type == "DATOS LTE" } != null
                             ) {
                                 DataAvailable.DATA_AND_DATA_LTE
                             } else if (service.plans.firstOrNull { it.type == "DATOS" } != null) {

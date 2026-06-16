@@ -11,25 +11,23 @@ import kotlinx.coroutines.flow.MutableStateFlow
 class FakeUserRepository(
     initialMobileServices: List<MobileService> = emptyList(),
 ) : UserRepository {
-    private val _mobileServices = MutableStateFlow(initialMobileServices)
-    private var _fetchUserCallCount = 0
-    private var _lastSimCard: SimCard? = null
+    private val mobileServices = MutableStateFlow(initialMobileServices)
+    private var fetchUserCallCount = 0
+    private var lastSimCard: SimCard? = null
 
     override suspend fun fetchUser(simCard: SimCard?) {
-        _fetchUserCallCount++
-        _lastSimCard = simCard
+        fetchUserCallCount++
+        lastSimCard = simCard
     }
 
-    override fun getClientProfile(): Flow<ClientProfile> {
+    override fun getClientProfile(): Flow<ClientProfile> = throw UnsupportedOperationException("Not used in tests")
+
+    override fun getMobileServices(): Flow<List<MobileService>> = mobileServices
+
+    override fun getNavServices(): Flow<List<NavigationService>> =
         throw UnsupportedOperationException("Not used in tests")
-    }
 
-    override fun getMobileServices(): Flow<List<MobileService>> = _mobileServices
+    fun fetchUserCallCount(): Int = fetchUserCallCount
 
-    override fun getNavServices(): Flow<List<NavigationService>> {
-        throw UnsupportedOperationException("Not used in tests")
-    }
-
-    fun fetchUserCallCount(): Int = _fetchUserCallCount
-    fun lastSimCard(): SimCard? = _lastSimCard
+    fun lastSimCard(): SimCard? = lastSimCard
 }

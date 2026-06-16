@@ -31,7 +31,9 @@ private val Context.dataStore by preferencesDataStore(name = APP_PREFERENCES_NAM
  *
  * @property context The application context, required for accessing DataStore.
  */
-open class AppPreferencesManager(private val context: Context) : IAppPreferencesManager {
+open class AppPreferencesManager(
+    private val context: Context,
+) : IAppPreferencesManager {
     override fun preferences(): Flow<AppSettings> =
         context.dataStore.data
             .catch { exception ->

@@ -72,7 +72,8 @@ class FirebaseService : FirebaseMessagingService() {
                 val image = pun.image
                 if (image.isNotEmpty()) {
                     try {
-                        Glide.with(applicationContext)
+                        Glide
+                            .with(applicationContext)
                             .asBitmap()
                             .load(image)
                             .into(
@@ -84,9 +85,10 @@ class FirebaseService : FirebaseMessagingService() {
                                         val start = image.lastIndexOf("/")
                                         val filename = image.substring(start + 1)
                                         val filepath =
-                                            applicationContext.getExternalFilesDir(
-                                                Environment.getDataDirectory().absolutePath,
-                                            )?.absolutePath + "/pun/$filename"
+                                            applicationContext
+                                                .getExternalFilesDir(
+                                                    Environment.getDataDirectory().absolutePath,
+                                                )?.absolutePath + "/pun/$filename"
                                         val file = File(filepath)
                                         Log.e("IMAGE FILEPATH", filepath)
                                         try {
@@ -143,7 +145,8 @@ class FirebaseService : FirebaseMessagingService() {
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
         val builder =
-            NotificationCompat.Builder(this, CHANNEL_ID)
+            NotificationCompat
+                .Builder(this, CHANNEL_ID)
                 .setSmallIcon(getNotificationIcon())
                 .setContentTitle(pun.title)
                 .setContentText(pun.title)

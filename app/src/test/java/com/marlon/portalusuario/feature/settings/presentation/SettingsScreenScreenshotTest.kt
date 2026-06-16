@@ -21,22 +21,22 @@ import org.robolectric.annotation.GraphicsMode
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(application = Application::class)
 class SettingsScreenScreenshotTest {
-
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
 
     @Test
     fun settingsScreen() {
-        val preferences = FakeAppPreferencesManager(
-            AppSettings(
-                modeNight = ModeNight.FOLLOW_SYSTEM,
-                isDynamicColor = true,
-                isShowingTrafficBubble = true,
-                isShowingAccountBalanceOnTrafficBubble = true,
-                isShowingDataBalanceOnTrafficBubble = false,
-                isIntroOpened = true,
-            ),
-        )
+        val preferences =
+            FakeAppPreferencesManager(
+                AppSettings(
+                    modeNight = ModeNight.FOLLOW_SYSTEM,
+                    isDynamicColor = true,
+                    isShowingTrafficBubble = true,
+                    isShowingAccountBalanceOnTrafficBubble = true,
+                    isShowingDataBalanceOnTrafficBubble = false,
+                    isIntroOpened = true,
+                ),
+            )
         val viewModel = AppPreferencesViewModel(preferences)
 
         composeTestRule.setContent {

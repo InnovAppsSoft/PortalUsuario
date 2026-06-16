@@ -97,7 +97,11 @@ class ConfigSimCardsViewModel
                                 "onEvent: last slotIndex :: ${_state.value.simCards.last().slotIndex}",
                             )
                             _state.value = _state.value.copy(isLoading = false)
-                            if (_state.value.currentSimCard.slotIndex == _state.value.simCards.last().slotIndex) {
+                            if (_state.value.currentSimCard.slotIndex ==
+                                _state.value.simCards
+                                    .last()
+                                    .slotIndex
+                            ) {
                                 event.onFinish()
                             } else {
                                 onEvent(ConfigSimCardsEvent.OnNext)

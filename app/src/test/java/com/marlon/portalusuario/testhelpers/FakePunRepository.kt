@@ -17,9 +17,10 @@ class FakePunRepository(
     }
 
     override suspend fun updatePUNotification(pun: PUNotification) {
-        _allPUN.value = _allPUN.value.map {
-            if (it.id == pun.id) pun else it
-        }
+        _allPUN.value =
+            _allPUN.value.map {
+                if (it.id == pun.id) pun else it
+            }
     }
 
     override suspend fun deletePUNotification(pun: PUNotification) {

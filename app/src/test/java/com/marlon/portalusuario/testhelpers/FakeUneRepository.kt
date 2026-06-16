@@ -17,9 +17,10 @@ class FakeUneRepository(
     }
 
     override suspend fun updateUne(une: Une) {
-        _allUnes.value = _allUnes.value.map {
-            if (it.id == une.id) une else it
-        }
+        _allUnes.value =
+            _allUnes.value.map {
+                if (it.id == une.id) une else it
+            }
     }
 
     override suspend fun deleteUne(une: Une) {

@@ -13,5 +13,7 @@ sealed class MobileServicesEvent {
 
     data object OnErrorDismiss : MobileServicesEvent()
 
-    data class OnChangeCurrentMobileService(val value: String?) : MobileServicesEvent()
+    data class OnChangeCurrentMobileService(
+        val value: String?,
+    ) : MobileServicesEvent()
 }

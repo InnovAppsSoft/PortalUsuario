@@ -26,8 +26,12 @@ class MobServiceApiToEntityMapper(
             deletionDate = from.profile.deletionDate,
             saleDate = from.profile.saleDate,
             internet = from.profile.internet == "true",
-            plans = from.profile.lists.plans.map(mobPlanMapper::map),
-            bonuses = from.profile.lists.bonuses.map(mobBonusMapper::map),
+            plans =
+                from.profile.lists.plans
+                    .map(mobPlanMapper::map),
+            bonuses =
+                from.profile.lists.bonuses
+                    .map(mobBonusMapper::map),
             currency = from.profile.currency,
             phoneNumber = from.profile.phoneNumber,
             mainBalance = from.profile.mainBalance,

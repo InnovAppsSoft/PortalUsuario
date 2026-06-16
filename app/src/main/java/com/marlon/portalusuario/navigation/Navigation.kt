@@ -14,8 +14,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.marlon.portalusuario.paquetes.PaquetesScreen
-import com.marlon.portalusuario.perfil.PerfilScreen
 import com.marlon.portalusuario.feature.mobileservices.presentation.DonationScreen
 import com.marlon.portalusuario.feature.mobileservices.presentation.PlanAmigosScreen
 import com.marlon.portalusuario.feature.mobileservices.presentation.screen.MobileServicesScreen
@@ -27,6 +25,8 @@ import com.marlon.portalusuario.feature.telephony.presentation.EmergencyCallsScr
 import com.marlon.portalusuario.feature.telephony.presentation.PrivateCallScreen
 import com.marlon.portalusuario.feature.telephony.presentation.SmsScreen
 import com.marlon.portalusuario.feature.telephony.presentation.VozScreen
+import com.marlon.portalusuario.paquetes.PaquetesScreen
+import com.marlon.portalusuario.perfil.PerfilScreen
 import com.marlon.portalusuario.servicios.ServiciosScreen
 import com.marlon.portalusuario.une.UneScreen
 

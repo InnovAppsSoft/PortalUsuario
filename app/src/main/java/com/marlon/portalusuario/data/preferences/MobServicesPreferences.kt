@@ -16,7 +16,9 @@ import java.io.IOException
 private const val PREFERENCES_NAME = "MOB_SERVICES"
 private val Context.dataStore by preferencesDataStore(name = PREFERENCES_NAME)
 
-open class MobServicesPreferences(private val context: Context) : IMobServicesPreferences {
+open class MobServicesPreferences(
+    private val context: Context,
+) : IMobServicesPreferences {
     override val preferences =
         context.dataStore.data
             .catch { exception ->

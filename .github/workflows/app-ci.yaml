@@ -26,6 +26,7 @@ jobs:
     strategy:
       matrix:
         task: [ detekt, lint, ktlintCheck ]
+      max-parallel: 1
     steps:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -35,7 +36,7 @@ jobs:
           distribution: temurin
           java-version: 21
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@94baf225fe0a508e581a5644670bed812f53a9ad # v4.3.1
+        uses: gradle/actions/setup-gradle@3f131e8634966bd73d06cc69884922b02e6faf92 # v6.2.0
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/master' }}
       - name: Decode Google Services JSON
@@ -51,6 +52,7 @@ jobs:
 
   test:
     name: Test
+    needs: [ lint ]
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
@@ -61,7 +63,7 @@ jobs:
           distribution: temurin
           java-version: 21
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@94baf225fe0a508e581a5644670bed812f53a9ad # v4.3.1
+        uses: gradle/actions/setup-gradle@3f131e8634966bd73d06cc69884922b02e6faf92 # v6.2.0
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/master' }}
       - name: Decode Google Services JSON
@@ -89,6 +91,7 @@ jobs:
 
   build:
     name: Build
+    needs: [ test ]
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
@@ -99,7 +102,7 @@ jobs:
           distribution: temurin
           java-version: 21
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@94baf225fe0a508e581a5644670bed812f53a9ad # v4.3.1
+        uses: gradle/actions/setup-gradle@3f131e8634966bd73d06cc69884922b02e6faf92 # v6.2.0
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/master' }}
       - name: Decode Google Services JSON

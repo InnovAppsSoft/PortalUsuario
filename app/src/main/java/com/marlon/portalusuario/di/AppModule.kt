@@ -13,12 +13,10 @@ import com.marlon.portalusuario.data.mappers.MobServiceEntityToDomainMapper
 import com.marlon.portalusuario.data.mappers.NavServApiToEntityMapper
 import com.marlon.portalusuario.data.mappers.NavServEntityToDomainMapper
 import com.marlon.portalusuario.data.notifications.PunRepositoryImpl
+import com.marlon.portalusuario.data.preferences.AppPreferencesManager
 import com.marlon.portalusuario.data.preferences.IAppPreferencesManager
 import com.marlon.portalusuario.data.preferences.IMobServicesPreferences
-import com.marlon.portalusuario.data.preferences.AppPreferencesManager
 import com.marlon.portalusuario.data.preferences.MobServicesPreferences
-import com.marlon.portalusuario.feature.mobileservices.domain.usecases.IUssdExecute
-import com.marlon.portalusuario.feature.mobileservices.domain.usecases.UssdExecute
 import com.marlon.portalusuario.data.une.UneRepositoryImpl
 import com.marlon.portalusuario.data.user.UserAccountRepositoryImpl
 import com.marlon.portalusuario.data.user.UserRepositoryImpl
@@ -26,6 +24,8 @@ import com.marlon.portalusuario.domain.data.PunRepository
 import com.marlon.portalusuario.domain.data.UneRepository
 import com.marlon.portalusuario.domain.data.UserAccountRepository
 import com.marlon.portalusuario.domain.data.UserRepository
+import com.marlon.portalusuario.feature.mobileservices.domain.usecases.IUssdExecute
+import com.marlon.portalusuario.feature.mobileservices.domain.usecases.UssdExecute
 import com.marlon.portalusuario.util.NetworkConnectivityObserver
 import dagger.Module
 import dagger.Provides

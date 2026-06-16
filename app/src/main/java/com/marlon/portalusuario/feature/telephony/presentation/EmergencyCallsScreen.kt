@@ -116,7 +116,8 @@ private fun launchCall(
 ) {
     val denied =
         ContextCompat.checkSelfPermission(
-            context, Manifest.permission.CALL_PHONE,
+            context,
+            Manifest.permission.CALL_PHONE,
         ) == PackageManager.PERMISSION_DENIED
     if (denied) {
         launcher.launch(Manifest.permission.CALL_PHONE)

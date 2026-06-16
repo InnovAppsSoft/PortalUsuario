@@ -4,7 +4,13 @@ naming:
     ignoreAnnotated: ['Composable']
 
   TopLevelPropertyNaming:
-    constantPattern: '[A-Z][A-Za-z0-9]*'
+    constantPattern: '[A-Z][A-Z0-9_]*'
+
+comments:
+  CommentOverPrivateFunction:
+    active: false
+  CommentOverPrivateProperty:
+    active: false
 
 complexity:
   LongParameterList:
@@ -18,6 +24,11 @@ style:
   MagicNumber:
     ignorePropertyDeclaration: true
     ignoreCompanionObjectPropertyDeclaration: true
+    ignoreAnnotated:
+      - 'Composable'
+
+  MaxLineLength:
+    maxLineLength: 120
 
   UnusedPrivateMember:
     ignoreAnnotated: ['Preview']

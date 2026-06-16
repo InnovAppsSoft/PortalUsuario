@@ -139,9 +139,7 @@ class FloatingBubbleService : Service() {
         setUpLayouts()
     }
 
-    override fun onBind(intent: Intent): IBinder? {
-        return null
-    }
+    override fun onBind(intent: Intent): IBinder? = null
 
     override fun onStartCommand(
         intent: Intent,
@@ -302,8 +300,8 @@ class FloatingBubbleService : Service() {
         override fun onTouch(
             v: View,
             event: MotionEvent,
-        ): Boolean {
-            return when (event.action) {
+        ): Boolean =
+            when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     initialX = bubbleLayoutParams.x
                     initialY = bubbleLayoutParams.y
@@ -355,7 +353,6 @@ class FloatingBubbleService : Service() {
 
                 else -> false
             }
-        }
 
         private fun startVibrate() {
             val vibrator =

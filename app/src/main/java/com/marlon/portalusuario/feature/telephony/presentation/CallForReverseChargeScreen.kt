@@ -65,7 +65,8 @@ fun CallForReverseChargeScreen(onBack: () -> Unit = {}) {
                                 errorMessage = null
                                 val denied =
                                     ContextCompat.checkSelfPermission(
-                                        context, Manifest.permission.CALL_PHONE,
+                                        context,
+                                        Manifest.permission.CALL_PHONE,
                                     ) == PackageManager.PERMISSION_DENIED
                                 if (denied) {
                                     callPermissionLauncher.launch(Manifest.permission.CALL_PHONE)
@@ -128,7 +129,8 @@ fun CallForReverseChargeScreen(onBack: () -> Unit = {}) {
                 onClick = {
                     val denied =
                         ContextCompat.checkSelfPermission(
-                            context, Manifest.permission.CALL_PHONE,
+                            context,
+                            Manifest.permission.CALL_PHONE,
                         ) == PackageManager.PERMISSION_DENIED
                     if (denied) {
                         callPermissionLauncher.launch(Manifest.permission.CALL_PHONE)
@@ -172,7 +174,8 @@ fun CallForReverseChargeScreen(onBack: () -> Unit = {}) {
 
 private fun getCallPrefix(context: android.content.Context): String {
     val key99 =
-        context.getSharedPreferences("share_99", android.content.Context.MODE_PRIVATE)
+        context
+            .getSharedPreferences("share_99", android.content.Context.MODE_PRIVATE)
             .getString("key99", "") ?: ""
     return when (key99) {
         "", "null", "1" -> "*99"

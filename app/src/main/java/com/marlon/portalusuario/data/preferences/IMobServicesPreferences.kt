@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface IMobServicesPreferences {
     val preferences: Flow<MobServPreferences>
+
     suspend fun updateSlotIndexInfoList(slotIndexInfoList: List<SlotIndexInfo>)
+
     suspend fun updateMobileServiceSelectedId(id: String?)
 }
