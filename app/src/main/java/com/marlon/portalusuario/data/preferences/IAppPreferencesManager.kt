@@ -17,5 +17,7 @@ interface IAppPreferencesManager {
 
     suspend fun updateIsShowingTrafficBubble(value: Boolean)
 
+    suspend fun updateIsShowingTrafficSpeedBubble(value: Boolean)
+
     suspend fun updateIsIntroOpened(value: Boolean)
 }

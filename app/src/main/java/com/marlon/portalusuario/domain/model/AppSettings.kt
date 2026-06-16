@@ -6,5 +6,6 @@ data class AppSettings(
     val isShowingTrafficBubble: Boolean = false,
     val isShowingAccountBalanceOnTrafficBubble: Boolean = false,
     val isShowingDataBalanceOnTrafficBubble: Boolean = false,
+    val isShowingTrafficSpeedBubble: Boolean = false,
     val isIntroOpened: Boolean = false,
 )

@@ -3,7 +3,7 @@ package com.marlon.portalusuario.erroreslog
 import android.content.Context
 import android.os.Environment
 import android.util.Log
-import androidx.preference.PreferenceManager
+import com.marlon.portalusuario.data.preferences.saveLogsFlow
 import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.File
@@ -13,6 +13,8 @@ import java.io.IOException
 import java.io.PrintWriter
 import java.text.SimpleDateFormat
 import java.util.Date
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import java.util.Locale
 
 object JCLogging {
@@ -143,8 +145,7 @@ object JCLogging {
         if (PRINT_ON_FILE) {
             val ctx = context ?: return
             try {
-                val prefs = PreferenceManager.getDefaultSharedPreferences(ctx)
-                if (prefs.getBoolean("save_logs", true)) {
+                if (runBlocking { ctx.saveLogsFlow().first() }) {
                     val formatString = "%s | %c | %s: %s\n"
                     writer?.format(formatString, DATE_FORMAT.format(Date()), type, resolvedMsg, resolvedObj)
                     if (type == 'E' && th != null) {
