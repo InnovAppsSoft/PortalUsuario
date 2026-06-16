@@ -26,6 +26,7 @@ fun AboutScreen() {
     val context = LocalContext.current
     val versionName =
         try {
+            @Suppress("DEPRECATION")
             context.packageManager.getPackageInfo(context.packageName, 0).versionName
         } catch (_: PackageManager.NameNotFoundException) {
             "?"
