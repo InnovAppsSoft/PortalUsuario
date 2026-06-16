@@ -17,7 +17,9 @@ import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
  *
  * @param context The application context.
  */
-class NetworkConnectivityObserver(private val context: Context) {
+class NetworkConnectivityObserver(
+    private val context: Context,
+) {
     companion object {
         private const val TAG = "NetworkObserver"
         private const val NETWORK_TYPE_EXTRA = "networkType"
@@ -86,7 +88,8 @@ class NetworkConnectivityObserver(private val context: Context) {
      */
     fun startMonitoring() {
         val networkRequest =
-            NetworkRequest.Builder()
+            NetworkRequest
+                .Builder()
                 .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
                 .build()
 

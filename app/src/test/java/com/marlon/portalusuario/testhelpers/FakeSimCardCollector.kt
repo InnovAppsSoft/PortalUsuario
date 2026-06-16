@@ -16,10 +16,11 @@ class FakeSimCardCollector(
             slotIndex: Int = 0,
             subscriptionId: Int = 0,
         ): SimCard {
-            val telephonyManager = TelephonyManager::class.java
-                .getDeclaredConstructor()
-                .apply { isAccessible = true }
-                .newInstance()
+            val telephonyManager =
+                TelephonyManager::class.java
+                    .getDeclaredConstructor()
+                    .apply { isAccessible = true }
+                    .newInstance()
             return SimCard(
                 displayName = displayName,
                 phoneNumber = phoneNumber,

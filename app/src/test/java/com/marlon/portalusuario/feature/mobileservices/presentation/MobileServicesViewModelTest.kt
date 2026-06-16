@@ -1,7 +1,7 @@
 package com.marlon.portalusuario.feature.mobileservices.presentation
 
-import com.marlon.portalusuario.domain.model.MobileService
 import com.marlon.portalusuario.domain.model.MobServPreferences
+import com.marlon.portalusuario.domain.model.MobileService
 import com.marlon.portalusuario.domain.model.ServiceType
 import com.marlon.portalusuario.domain.model.SlotIndexInfo
 import com.marlon.portalusuario.testhelpers.FakeMobServicesPreferences
@@ -14,56 +14,60 @@ import org.junit.Rule
 import org.junit.Test
 
 class MobileServicesViewModelTest {
-
     @get:Rule
     val mainCoroutineRule = MainCoroutineRule()
 
-    private val simCard = FakeSimCardCollector.createSimCard(
-        phoneNumber = "12345678",
-        slotIndex = 0,
-    )
-    private val mobileService = MobileService(
-        id = "service1",
-        lte = false,
-        advanceBalance = "0.00",
-        status = "Active",
-        lockDate = "",
-        deletionDate = "",
-        saleDate = "",
-        internet = true,
-        plans = emptyList(),
-        bonuses = emptyList(),
-        currency = "CUP",
-        phoneNumber = "12345678",
-        mainBalance = "100.00",
-        consumptionRate = false,
-        slotIndex = 0,
-        type = ServiceType.Remote,
-        lastUpdated = System.currentTimeMillis(),
-    )
-    private val mobServPreferencesData = MobServPreferences(
-        slotIndexInfoList = listOf(SlotIndexInfo(0, "12345678")),
-        mssId = "service1",
-    )
+    private val simCard =
+        FakeSimCardCollector.createSimCard(
+            phoneNumber = "12345678",
+            slotIndex = 0,
+        )
+    private val mobileService =
+        MobileService(
+            id = "service1",
+            lte = false,
+            advanceBalance = "0.00",
+            status = "Active",
+            lockDate = "",
+            deletionDate = "",
+            saleDate = "",
+            internet = true,
+            plans = emptyList(),
+            bonuses = emptyList(),
+            currency = "CUP",
+            phoneNumber = "12345678",
+            mainBalance = "100.00",
+            consumptionRate = false,
+            slotIndex = 0,
+            type = ServiceType.Remote,
+            lastUpdated = System.currentTimeMillis(),
+        )
+    private val mobServPreferencesData =
+        MobServPreferences(
+            slotIndexInfoList = listOf(SlotIndexInfo(0, "12345678")),
+            mssId = "service1",
+        )
 
     @Test
     fun `init sets currentServiceId from preferences`() {
-        val viewModel = MobileServicesViewModel(
-            mobServicesPreferences = FakeMobServicesPreferences(mobServPreferencesData),
-            repository = FakeUserRepository(listOf(mobileService)),
-            simCardCollector = FakeSimCardCollector(listOf(simCard)),
-        )
+        val viewModel =
+            MobileServicesViewModel(
+                mobServicesPreferences = FakeMobServicesPreferences(mobServPreferencesData),
+                repository = FakeUserRepository(listOf(mobileService)),
+                simCardCollector = FakeSimCardCollector(listOf(simCard)),
+            )
 
         assertEquals("service1", viewModel.state.value.currentServiceId)
     }
 
     @Test
     fun `onEvent OnShowServiceSettings updates state`() {
-        val viewModel = MobileServicesViewModel(
-            mobServicesPreferences = FakeMobServicesPreferences(),
-            repository = FakeUserRepository(),
-            simCardCollector = FakeSimCardCollector(),
-        )
+        val viewModel =
+            MobileServicesViewModel(
+                mobServicesPreferences = FakeMobServicesPreferences(),
+                repository = FakeUserRepository(),
+                simCardCollector = FakeSimCardCollector(),
+            )
 
         viewModel.onEvent(MobileServicesEvent.OnShowServiceSettings)
 
@@ -72,11 +76,12 @@ class MobileServicesViewModelTest {
 
     @Test
     fun `onEvent OnHideServiceSettings updates state`() {
-        val viewModel = MobileServicesViewModel(
-            mobServicesPreferences = FakeMobServicesPreferences(),
-            repository = FakeUserRepository(),
-            simCardCollector = FakeSimCardCollector(),
-        )
+        val viewModel =
+            MobileServicesViewModel(
+                mobServicesPreferences = FakeMobServicesPreferences(),
+                repository = FakeUserRepository(),
+                simCardCollector = FakeSimCardCollector(),
+            )
 
         viewModel.onEvent(MobileServicesEvent.OnShowServiceSettings)
         viewModel.onEvent(MobileServicesEvent.OnHideServiceSettings)
@@ -86,11 +91,12 @@ class MobileServicesViewModelTest {
 
     @Test
     fun `onEvent OnShowSImCardsSettings updates state`() {
-        val viewModel = MobileServicesViewModel(
-            mobServicesPreferences = FakeMobServicesPreferences(),
-            repository = FakeUserRepository(),
-            simCardCollector = FakeSimCardCollector(),
-        )
+        val viewModel =
+            MobileServicesViewModel(
+                mobServicesPreferences = FakeMobServicesPreferences(),
+                repository = FakeUserRepository(),
+                simCardCollector = FakeSimCardCollector(),
+            )
 
         viewModel.onEvent(MobileServicesEvent.OnShowSImCardsSettings)
 
@@ -99,11 +105,12 @@ class MobileServicesViewModelTest {
 
     @Test
     fun `onEvent OnHideSImCardsSettings updates state`() {
-        val viewModel = MobileServicesViewModel(
-            mobServicesPreferences = FakeMobServicesPreferences(),
-            repository = FakeUserRepository(),
-            simCardCollector = FakeSimCardCollector(),
-        )
+        val viewModel =
+            MobileServicesViewModel(
+                mobServicesPreferences = FakeMobServicesPreferences(),
+                repository = FakeUserRepository(),
+                simCardCollector = FakeSimCardCollector(),
+            )
 
         viewModel.onEvent(MobileServicesEvent.OnShowSImCardsSettings)
         viewModel.onEvent(MobileServicesEvent.OnHideSImCardsSettings)
@@ -113,11 +120,12 @@ class MobileServicesViewModelTest {
 
     @Test
     fun `onEvent OnErrorDismiss clears error`() {
-        val viewModel = MobileServicesViewModel(
-            mobServicesPreferences = FakeMobServicesPreferences(),
-            repository = FakeUserRepository(),
-            simCardCollector = FakeSimCardCollector(),
-        )
+        val viewModel =
+            MobileServicesViewModel(
+                mobServicesPreferences = FakeMobServicesPreferences(),
+                repository = FakeUserRepository(),
+                simCardCollector = FakeSimCardCollector(),
+            )
 
         viewModel.onEvent(MobileServicesEvent.OnErrorDismiss)
 
@@ -127,11 +135,12 @@ class MobileServicesViewModelTest {
     @Test
     fun `onEvent OnChangeCurrentMobileService updates serviceId and persists`() {
         val mobServicesPreferences = FakeMobServicesPreferences(mobServPreferencesData)
-        val viewModel = MobileServicesViewModel(
-            mobServicesPreferences = mobServicesPreferences,
-            repository = FakeUserRepository(),
-            simCardCollector = FakeSimCardCollector(),
-        )
+        val viewModel =
+            MobileServicesViewModel(
+                mobServicesPreferences = mobServicesPreferences,
+                repository = FakeUserRepository(),
+                simCardCollector = FakeSimCardCollector(),
+            )
 
         viewModel.onEvent(MobileServicesEvent.OnChangeCurrentMobileService("service2"))
 

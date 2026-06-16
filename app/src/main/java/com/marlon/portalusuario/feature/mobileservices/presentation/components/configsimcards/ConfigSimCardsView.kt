@@ -56,10 +56,13 @@ fun ConfigSimCardsView(
 
     LaunchedEffect(key1 = state.viewModel.state.currentSimCard) {
         onSetTitle("Configurar SIM${state.viewModel.state.currentSimCard.slotIndex + 1}")
-        if (state.viewModel.state.simCards.indexOf(state.viewModel.state.currentSimCard) != pagerState.currentPage) {
+        if (state.viewModel.state.simCards
+                .indexOf(state.viewModel.state.currentSimCard) != pagerState.currentPage
+        ) {
             coroutineScope.launch {
                 pagerState.animateScrollToPage(
-                    state.viewModel.state.simCards.indexOf(state.viewModel.state.currentSimCard),
+                    state.viewModel.state.simCards
+                        .indexOf(state.viewModel.state.currentSimCard),
                 )
             }
         }

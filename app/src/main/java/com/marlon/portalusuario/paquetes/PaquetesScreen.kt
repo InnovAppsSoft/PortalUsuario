@@ -52,7 +52,8 @@ fun PaquetesScreen() {
     fun ussdCall(code: String) {
         if (
             ContextCompat.checkSelfPermission(
-                context, Manifest.permission.CALL_PHONE,
+                context,
+                Manifest.permission.CALL_PHONE,
             ) == PackageManager.PERMISSION_DENIED
         ) {
             callPermissionLauncher.launch(Manifest.permission.CALL_PHONE)

@@ -65,7 +65,8 @@ fun PrivateCallScreen(onBack: () -> Unit = {}) {
                                 errorMessage = null
                                 val denied =
                                     ContextCompat.checkSelfPermission(
-                                        context, Manifest.permission.CALL_PHONE,
+                                        context,
+                                        Manifest.permission.CALL_PHONE,
                                     ) == PackageManager.PERMISSION_DENIED
                                 if (denied) {
                                     callPermissionLauncher.launch(Manifest.permission.CALL_PHONE)
@@ -127,7 +128,8 @@ fun PrivateCallScreen(onBack: () -> Unit = {}) {
                 onClick = {
                     val denied =
                         ContextCompat.checkSelfPermission(
-                            context, Manifest.permission.CALL_PHONE,
+                            context,
+                            Manifest.permission.CALL_PHONE,
                         ) == PackageManager.PERMISSION_DENIED
                     if (denied) {
                         callPermissionLauncher.launch(Manifest.permission.CALL_PHONE)

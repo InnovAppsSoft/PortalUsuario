@@ -66,7 +66,8 @@ class UserLocalDataSource {
                     mobService =
                         mobService.copy(
                             plans =
-                                mobService.plans.toMutableList()
+                                mobService.plans
+                                    .toMutableList()
                                     .apply { add(MobilePlan(data, type, dateExpires)) },
                         )
                 }
@@ -80,7 +81,8 @@ class UserLocalDataSource {
                     mobService =
                         mobService.copy(
                             bonuses =
-                                mobService.bonuses.toMutableList()
+                                mobService.bonuses
+                                    .toMutableList()
                                     .apply { add(MobileBonus(data, "", type, dateExpires)) },
                         )
                 }

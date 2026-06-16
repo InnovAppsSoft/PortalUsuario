@@ -110,11 +110,12 @@ class MainActivity : ComponentActivity() {
                 "show_traffic_speed_bubble" -> {
                     if (preferences.getBoolean("show_traffic_speed_bubble", false)) {
                         if (!Settings.canDrawOverlays(this)) {
-                            Toast.makeText(
-                                this,
-                                "Otorgue a Portal Usuario los permisos requeridos",
-                                Toast.LENGTH_SHORT,
-                            ).show()
+                            Toast
+                                .makeText(
+                                    this,
+                                    "Otorgue a Portal Usuario los permisos requeridos",
+                                    Toast.LENGTH_SHORT,
+                                ).show()
                             startActivity(
                                 Intent(
                                     Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
@@ -162,11 +163,12 @@ class MainActivity : ComponentActivity() {
                 if (preferences.isShowingTrafficBubble) {
                     Log.d(TAG, "onCreate: isShowingTrafficBubble = true")
                     if (!Settings.canDrawOverlays(this@MainActivity)) {
-                        Toast.makeText(
-                            this@MainActivity,
-                            "Otorgue a Portal Usuario los permisos requeridos",
-                            Toast.LENGTH_SHORT,
-                        ).show()
+                        Toast
+                            .makeText(
+                                this@MainActivity,
+                                "Otorgue a Portal Usuario los permisos requeridos",
+                                Toast.LENGTH_SHORT,
+                            ).show()
                         startActivity(
                             Intent(
                                 Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
@@ -272,7 +274,8 @@ private fun MainScreen() {
                                 context.startActivity(Intent.createChooser(intent, "Enviar Feedback usando..."))
                             }
                             is DrawerAction.ShareText -> {
-                                ShareCompat.IntentBuilder(context as android.app.Activity)
+                                ShareCompat
+                                    .IntentBuilder(context as android.app.Activity)
                                     .setText(action.text)
                                     .setType("text/plain")
                                     .setChooserTitle("Compartir:")
@@ -311,9 +314,13 @@ private fun MainScreen() {
 }
 
 private sealed class DrawerAction {
-    class Navigate(val route: Route) : DrawerAction()
+    class Navigate(
+        val route: Route,
+    ) : DrawerAction()
 
-    class ExternalUrl(val url: String) : DrawerAction()
+    class ExternalUrl(
+        val url: String,
+    ) : DrawerAction()
 
     class SendEmail(
         val email: String,
@@ -321,9 +328,13 @@ private sealed class DrawerAction {
         val body: String,
     ) : DrawerAction()
 
-    class ShareText(val text: String) : DrawerAction()
+    class ShareText(
+        val text: String,
+    ) : DrawerAction()
 
-    class ShowDialog(val show: (android.content.Context) -> Unit) : DrawerAction()
+    class ShowDialog(
+        val show: (android.content.Context) -> Unit,
+    ) : DrawerAction()
 }
 
 private data class DrawerItem(
@@ -546,8 +557,8 @@ private fun DrawerSection(
 }
 
 @Composable
-private fun routeTitle(route: String?): String {
-    return when (route) {
+private fun routeTitle(route: String?): String =
+    when (route) {
         Route.Servicios.route -> "Servicios"
         Route.Paquetes.route -> "Planes"
         Route.MobileServices.route -> "Mi Cuenta"
@@ -559,4 +570,3 @@ private fun routeTitle(route: String?): String {
         Route.Donation.route -> "Donar"
         else -> "Portal Usuario"
     }
-}

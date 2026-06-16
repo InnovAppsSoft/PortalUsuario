@@ -19,11 +19,10 @@ class LogAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): ViewHolder {
-        return ViewHolder(
+    ): ViewHolder =
+        ViewHolder(
             LayoutInflater.from(context).inflate(R.layout.log_item, parent, false),
         )
-    }
 
     override fun onBindViewHolder(
         holder: ViewHolder,
@@ -51,7 +50,9 @@ class LogAdapter(
 
     override fun getItemCount(): Int = logsList.size
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(
+        itemView: View,
+    ) : RecyclerView.ViewHolder(itemView) {
         val tvLog: TextView = itemView.findViewById(R.id.tvLog)
     }
 }

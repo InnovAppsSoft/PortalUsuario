@@ -9,8 +9,8 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
 
 object ScrollAnimation {
-    operator fun invoke(): ContentTransform {
-        return (
+    operator fun invoke(): ContentTransform =
+        (
             slideInVertically(
                 initialOffsetY = { 50 },
                 animationSpec = tween(),
@@ -21,5 +21,4 @@ object ScrollAnimation {
                 animationSpec = tween(),
             ) + fadeOut(),
         )
-    }
 }

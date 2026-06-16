@@ -8,7 +8,9 @@ import android.util.Log
 import java.io.File
 import java.io.IOException
 
-class ImageSaver(private val context: Context) {
+class ImageSaver(
+    private val context: Context,
+) {
     private var directoryName = "PortalUsuario"
     private var fileName = ""
     private var external = false
@@ -34,8 +36,8 @@ class ImageSaver(private val context: Context) {
         }
     }
 
-    fun load(): Bitmap? {
-        return try {
+    fun load(): Bitmap? =
+        try {
             createFile().inputStream().use { inputStream ->
                 BitmapFactory.decodeStream(inputStream)
             }
@@ -43,11 +45,8 @@ class ImageSaver(private val context: Context) {
             Log.e("ImageSaver", "Error loading image", e)
             null
         }
-    }
 
-    fun deleteFile(): Boolean {
-        return createFile().delete()
-    }
+    fun deleteFile(): Boolean = createFile().delete()
 
     private fun createFile(): File {
         val directory =

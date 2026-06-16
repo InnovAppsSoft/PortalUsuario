@@ -19,7 +19,8 @@ class WidgetUSSD : AppWidgetProvider() {
             val intent = Intent(context, WidgetUSSD::class.java)
             intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
             val ids =
-                AppWidgetManager.getInstance(context.applicationContext)
+                AppWidgetManager
+                    .getInstance(context.applicationContext)
                     .getAppWidgetIds(
                         ComponentName(context.applicationContext, WidgetUSSD::class.java),
                     )

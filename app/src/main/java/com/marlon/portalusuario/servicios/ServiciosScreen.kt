@@ -72,9 +72,13 @@ private data class ServiceItem(
 )
 
 private sealed class ActionType {
-    data class USSD(val code: String) : ActionType()
+    data class USSD(
+        val code: String,
+    ) : ActionType()
 
-    data class Navigate(val route: String) : ActionType()
+    data class Navigate(
+        val route: String,
+    ) : ActionType()
 
     data object PlanAmigos : ActionType()
 }
@@ -164,7 +168,8 @@ fun ServiciosScreen(onNavigate: (String) -> Unit = {}) {
     fun ussdCall(code: String) {
         if (
             ContextCompat.checkSelfPermission(
-                context, Manifest.permission.CALL_PHONE,
+                context,
+                Manifest.permission.CALL_PHONE,
             ) == PackageManager.PERMISSION_DENIED
         ) {
             callPermissionLauncher.launch(Manifest.permission.CALL_PHONE)
@@ -248,11 +253,12 @@ fun ServiciosScreen(onNavigate: (String) -> Unit = {}) {
                         if (rechargeCode.isNotBlank()) {
                             ussdCall("*662*$rechargeCode%23")
                         } else {
-                            Toast.makeText(
-                                context,
-                                "Escriba el código de la recarga",
-                                Toast.LENGTH_SHORT,
-                            ).show()
+                            Toast
+                                .makeText(
+                                    context,
+                                    "Escriba el código de la recarga",
+                                    Toast.LENGTH_SHORT,
+                                ).show()
                         }
                     }) {
                         Icon(Icons.Default.Send, contentDescription = "Enviar")
@@ -291,11 +297,12 @@ fun ServiciosScreen(onNavigate: (String) -> Unit = {}) {
                         if (advanceAmount.isNotBlank()) {
                             ussdCall("*234*3*1*$advanceAmount%23")
                         } else {
-                            Toast.makeText(
-                                context,
-                                "Escriba 25 o 50 CUP",
-                                Toast.LENGTH_SHORT,
-                            ).show()
+                            Toast
+                                .makeText(
+                                    context,
+                                    "Escriba 25 o 50 CUP",
+                                    Toast.LENGTH_SHORT,
+                                ).show()
                         }
                     }) {
                         Icon(Icons.Default.Send, contentDescription = "Adelantar")
@@ -368,11 +375,12 @@ fun ServiciosScreen(onNavigate: (String) -> Unit = {}) {
                                 transferPhone.isBlank() ||
                                     transferPin.isBlank() ||
                                     transferAmount.isBlank() ->
-                                    Toast.makeText(
-                                        context,
-                                        "Todos los campos son obligatorios",
-                                        Toast.LENGTH_SHORT,
-                                    ).show()
+                                    Toast
+                                        .makeText(
+                                            context,
+                                            "Todos los campos son obligatorios",
+                                            Toast.LENGTH_SHORT,
+                                        ).show()
                                 else ->
                                     ussdCall(
                                         "*234*1*$transferPhone*$transferPin*$transferAmount%23",

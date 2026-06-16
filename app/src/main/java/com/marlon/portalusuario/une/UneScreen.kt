@@ -44,7 +44,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.marlon.portalusuario.ui.components.EmptyState
-import com.marlon.portalusuario.ui.components.ErrorState
 import com.marlon.portalusuario.ui.theme.VibrantGreen
 import com.marlon.portalusuario.util.Util
 import com.marlon.portalusuario.viewmodel.UneViewModel

@@ -41,11 +41,10 @@ object JCLogging {
         }
     }
 
-    fun getDirectory(): String {
-        return context?.let {
+    fun getDirectory(): String =
+        context?.let {
             it.getExternalFilesDir(Environment.getDataDirectory().absolutePath)?.absolutePath ?: ""
         } ?: ""
-    }
 
     fun readFromFile(file: File): List<String> {
         val lines = mutableListOf<String>()

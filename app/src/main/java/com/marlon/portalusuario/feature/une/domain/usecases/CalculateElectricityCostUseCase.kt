@@ -10,7 +10,9 @@ sealed class ElectricityCostResult {
         val totalToPay: Double,
     ) : ElectricityCostResult()
 
-    data class Error(val message: String) : ElectricityCostResult()
+    data class Error(
+        val message: String,
+    ) : ElectricityCostResult()
 }
 
 class CalculateElectricityCostUseCase

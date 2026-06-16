@@ -1,12 +1,10 @@
 package com.marlon.portalusuario.feature.une.domain.usecases
 
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class CalculateElectricityCostUseCaseTest {
-
     private val useCase = CalculateElectricityCostUseCase()
 
     @Test

@@ -192,6 +192,4 @@ dependencies {
     testImplementation(libs.robolectric)
     testImplementation(platform(libs.compose.bom))
     testImplementation(libs.androidx.ui.test.junit4)
-
-
 }

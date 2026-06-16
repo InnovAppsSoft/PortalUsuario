@@ -140,8 +140,8 @@ class PerfilViewModel
             }
         }
 
-        private fun getBitmapFromUri(uri: Uri): Bitmap? {
-            return try {
+        private fun getBitmapFromUri(uri: Uri): Bitmap? =
+            try {
                 val context = getApplication<Application>()
                 if (Build.VERSION.SDK_INT < API_29) {
                     MediaStore.Images.Media.getBitmap(context.contentResolver, uri)
@@ -153,5 +153,4 @@ class PerfilViewModel
                 android.util.Log.e("PerfilViewModel", "Error loading bitmap from URI", e)
                 null
             }
-        }
     }
