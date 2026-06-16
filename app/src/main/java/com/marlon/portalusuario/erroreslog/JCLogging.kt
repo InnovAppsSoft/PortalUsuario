@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Environment
 import android.util.Log
 import com.marlon.portalusuario.data.preferences.saveLogsFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.File
@@ -13,8 +15,6 @@ import java.io.IOException
 import java.io.PrintWriter
 import java.text.SimpleDateFormat
 import java.util.Date
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
 import java.util.Locale
 
 object JCLogging {

@@ -20,11 +20,9 @@ object AppDataStoreKeys {
 fun Context.showNotificationsFlow(): Flow<Boolean> =
     appDataStore.data.map { it[AppDataStoreKeys.SHOW_NOTIFICATIONS] ?: true }
 
-fun Context.saveLogsFlow(): Flow<Boolean> =
-    appDataStore.data.map { it[AppDataStoreKeys.SAVE_LOGS] ?: true }
+fun Context.saveLogsFlow(): Flow<Boolean> = appDataStore.data.map { it[AppDataStoreKeys.SAVE_LOGS] ?: true }
 
-fun Context.storageAdsFlow(): Flow<Boolean> =
-    appDataStore.data.map { it[AppDataStoreKeys.STORAGE_ADS] ?: true }
+fun Context.storageAdsFlow(): Flow<Boolean> = appDataStore.data.map { it[AppDataStoreKeys.STORAGE_ADS] ?: true }
 
 fun Context.notificationsCountFlow(): Flow<Int> =
     appDataStore.data.map { it[AppDataStoreKeys.NOTIFICATIONS_COUNT] ?: 0 }

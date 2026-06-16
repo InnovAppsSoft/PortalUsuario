@@ -2,8 +2,8 @@ package com.marlon.portalusuario.util
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.os.Environment
 import android.media.MediaScannerConnection
+import android.os.Environment
 import android.widget.Toast
 import java.io.File
 import java.io.FileOutputStream
