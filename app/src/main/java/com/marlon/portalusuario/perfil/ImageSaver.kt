@@ -61,9 +61,7 @@ class ImageSaver(
     private fun getAlbumStorageDir(albumName: String): File {
         val file =
             File(
-                Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES,
-                ),
+                context.getExternalFilesDir(Environment.DIRECTORY_PICTURES),
                 albumName,
             )
         if (!file.mkdirs()) {

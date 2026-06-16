@@ -2,8 +2,8 @@ package com.marlon.portalusuario.util
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.media.MediaScannerConnection
 import android.os.Environment
+import android.media.MediaScannerConnection
 import android.widget.Toast
 import java.io.File
 import java.io.FileOutputStream
@@ -16,9 +16,8 @@ private const val IMAGE_QUALITY = 85
 fun Bitmap.saveToGallery(context: Context) {
     val folderName = "/PortaUsuario"
     val fileName = "imagen"
-    val filePath = Environment.getExternalStorageDirectory().absolutePath + folderName
+    val dir = File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!, folderName)
     val dateStamp = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.US).format(Calendar.getInstance().time)
-    val dir = File(filePath)
 
     if (!dir.exists()) dir.mkdirs()
 
