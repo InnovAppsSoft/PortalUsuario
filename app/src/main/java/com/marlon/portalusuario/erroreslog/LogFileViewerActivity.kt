@@ -1,23 +1,25 @@
 package com.marlon.portalusuario.erroreslog
 
-import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marlon.portalusuario.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.IOException
 
@@ -25,7 +27,7 @@ class LogFileViewerActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var logAdapter: LogAdapter
     private lateinit var errorMessage: TextView
-    private lateinit var loadingBar: ProgressDialog
+    private lateinit var loadingBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,52 +43,29 @@ class LogFileViewerActivity : AppCompatActivity() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
         errorMessage = findViewById(R.id.tvNoLogs)
-        loadingBar =
-            ProgressDialog(this).apply {
-                setMessage("Cargando archivo de Logs")
-                setCanceledOnTouchOutside(false)
-            }
+        loadingBar = findViewById(R.id.loadingBar)
 
         refreshLog()
     }
 
     private fun refreshLog() {
-        LoadLogsTask().execute()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        refreshLog()
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return super.onSupportNavigateUp()
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private inner class LoadLogsTask : AsyncTask<Void, Void, List<String>?>() {
-        override fun onPreExecute() {
-            super.onPreExecute()
-            loadingBar.show()
+        lifecycleScope.launch {
+            loadingBar.visibility = View.VISIBLE
             recyclerView.visibility = View.INVISIBLE
             errorMessage.visibility = View.INVISIBLE
-        }
 
-        override fun doInBackground(vararg params: Void): List<String>? {
-            val file = File(JCLogging.getDirectory(), "log.txt")
-            if (!file.exists()) return emptyList()
-            return try {
-                JCLogging.readFromFile(file)
-            } catch (ex: IOException) {
-                JCLogging.error(null, null, ex)
-                null
+            val result = withContext(Dispatchers.IO) {
+                val file = File(JCLogging.getDirectory(), "log.txt")
+                if (!file.exists()) return@withContext emptyList<String>()
+                try {
+                    JCLogging.readFromFile(file)
+                } catch (ex: IOException) {
+                    JCLogging.error(null, null, ex)
+                    null
+                }
             }
-        }
 
-        override fun onPostExecute(result: List<String>?) {
-            super.onPostExecute(result)
-            recyclerView.visibility = View.INVISIBLE
+            loadingBar.visibility = View.GONE
             when {
                 result == null -> {
                     errorMessage.visibility = View.VISIBLE
@@ -102,8 +81,17 @@ class LogFileViewerActivity : AppCompatActivity() {
                     recyclerView.visibility = View.VISIBLE
                 }
             }
-            loadingBar.dismiss()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refreshLog()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
     private fun setAdapter(logs: List<String>) {
