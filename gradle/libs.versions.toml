@@ -79,7 +79,6 @@ suitetecsa-sdk-android = "2.0.0-beta.1"
 # ═══════════════════════════════════════════
 # Utilities
 # ═══════════════════════════════════════════
-accompanist-pager = "0.34.0"
 androidsvg-aar = "1.4"
 glide = "4.15.1"
 gson = "2.11.0"
@@ -202,8 +201,6 @@ suitetecsa-sdk-android = { group = "io.github.suitetecsa.sdk", name = "android",
 # ─────────────────────────────────────────────
 # UI / Utilities
 # ─────────────────────────────────────────────
-accompanist-pager = { group = "com.google.accompanist", name = "accompanist-pager", version.ref = "accompanist-pager" }
-accompanist-pager-indicators = { group = "com.google.accompanist", name = "accompanist-pager-indicators", version.ref = "accompanist-pager" }
 caverock-androidsvg-aar = { group = "com.caverock", name = "androidsvg-aar", version.ref = "androidsvg-aar" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
