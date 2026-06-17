@@ -4,14 +4,14 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.util.Log
 import android.view.Window
 import android.widget.Toast
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.databinding.DialogSetOnlyLteBinding
-import com.vanniktech.ui.Color
-import com.vanniktech.ui.ColorDrawable
 
 class SetLTEModeDialog(
     private val activity: Activity,

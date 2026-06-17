@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import co.dift.ui.SwipeToAction
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.util.Util
 import com.marlon.portalusuario.viewmodel.PunViewModel
@@ -69,18 +68,5 @@ class PUNotificationsActivity : AppCompatActivity() {
         val punAdapter = PUNAdapter(notifications, this)
         recyclerView.adapter = punAdapter
         recyclerView.scheduleLayoutAnimation()
-
-        SwipeToAction(
-            recyclerView,
-            object : SwipeToAction.SwipeListener<PUNAdapter> {
-                override fun swipeLeft(itemData: PUNAdapter): Boolean = true
-
-                override fun swipeRight(itemData: PUNAdapter): Boolean = true
-
-                override fun onClick(itemData: PUNAdapter) {}
-
-                override fun onLongClick(itemData: PUNAdapter) {}
-            },
-        )
     }
 }

@@ -170,8 +170,6 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.jwtdecode)
     implementation(libs.prettytime)
-    implementation(libs.swipetoaction.library)
-    implementation(libs.ui.library)
 
     // ── Testing ──
     testImplementation(libs.junit)
