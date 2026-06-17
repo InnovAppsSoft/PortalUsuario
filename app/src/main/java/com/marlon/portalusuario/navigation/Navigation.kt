@@ -30,6 +30,8 @@ import com.marlon.portalusuario.intro.IntroScreen
 import com.marlon.portalusuario.intro.IntroViewModel
 import com.marlon.portalusuario.paquetes.PaquetesScreen
 import com.marlon.portalusuario.perfil.PerfilScreen
+import com.marlon.portalusuario.permisos.PermissionScreen
+import com.marlon.portalusuario.permisos.PermissionViewModel
 import com.marlon.portalusuario.servicios.ServiciosScreen
 import com.marlon.portalusuario.une.UneScreen
 
@@ -55,13 +57,23 @@ fun PortalUsuarioNavHost(
             IntroScreen(
                 onGetStarted = {
                     viewModel.onIntroCompleted()
-                    navController.navigate(Route.MobileServices.route) {
+                    navController.navigate(Route.Permissions.route) {
                         popUpTo(Route.Intro.route) { inclusive = true }
                     }
                 },
             )
         }
-        composable(Route.Permissions.route) { PlaceholderScreen("Permissions") }
+        composable(Route.Permissions.route) {
+            val viewModel: PermissionViewModel = hiltViewModel()
+            PermissionScreen(
+                viewModel = viewModel,
+                onFinish = {
+                    navController.navigate(Route.MobileServices.route) {
+                        popUpTo(Route.Permissions.route) { inclusive = true }
+                    }
+                },
+            )
+        }
         composable(Route.Main.route) { MobileServicesScreen() }
         composable(Route.Settings.route) { SettingsScreen() }
         composable(Route.About.route) { AboutScreen() }
