@@ -3,7 +3,7 @@ package com.marlon.portalusuario.feature.mobileservices.presentation.components.
 import io.github.suitetecsa.sdk.android.model.SimCard
 
 data class ConfigSimCardsState(
-    val currentSimCard: SimCard,
+    val currentSimCard: SimCard? = null,
     val simCards: List<SimCard> = emptyList(),
     val isLoading: Boolean = false,
     val phoneNumber: String = "",
