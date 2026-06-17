@@ -88,6 +88,7 @@ import com.marlon.portalusuario.viewmodel.PunViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import androidx.compose.ui.res.stringResource
 
 private const val TAG = "MainActivity"
 
@@ -106,6 +107,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val startIntro = intent.getBooleanExtra("start_intro", false)
+        val permissionsMissing =
+            hasPermissions(
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.CAMERA,
+                Manifest.permission.READ_CONTACTS,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+            )
         manageBatteryConsumption()
 
         lifecycleScope.launch {
@@ -179,27 +188,17 @@ class MainActivity : ComponentActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        if (hasPermissions(
-                Manifest.permission.CALL_PHONE,
-                Manifest.permission.CAMERA,
-                Manifest.permission.READ_CONTACTS,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-            )
-        ) {
-            startActivity(
-                Intent(
-                    this,
-                    com.marlon.portalusuario.permisos.PermissionActivity::class.java,
-                ),
-            )
-        }
-
         punViewModel = ViewModelProvider(this)[PunViewModel::class.java]
 
         setContent {
             PortalUsuarioTheme(dynamicColor = isDynamicColor) {
-                MainScreen(startDestination = if (startIntro) Route.Intro.route else Route.MobileServices.route)
+                val startDestination =
+                    when {
+                        startIntro -> Route.Intro.route
+                        permissionsMissing -> Route.Permissions.route
+                        else -> Route.MobileServices.route
+                    }
+                MainScreen(startDestination = startDestination)
             }
         }
     }
@@ -342,7 +341,7 @@ private fun DrawerContent(
     onItemClick: (DrawerAction) -> Unit,
 ) {
     val context = LocalContext.current
-    val inviteText = context.getString(R.string.invite_user)
+    val inviteText = stringResource(R.string.invite_user)
     val versionName =
         try {
             @Suppress("DEPRECATION")

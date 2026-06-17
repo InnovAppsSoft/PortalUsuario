@@ -32,7 +32,6 @@
 # AndroidManifest components
 # ============================================================
 -keep class com.marlon.portalusuario.activities.MainActivity { *; }
--keep class com.marlon.portalusuario.permisos.PermissionActivity { *; }
 -keep class com.marlon.portalusuario.punotifications.PUNotificationsActivity { *; }
 -keep class com.marlon.portalusuario.erroreslog.LogFileViewerActivity { *; }
 -keep class com.marlon.portalusuario.feature.splash.presentation.ActivitySplash { *; }

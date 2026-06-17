@@ -2,11 +2,8 @@ package com.marlon.portalusuario.permisos
 
 import android.Manifest
 import android.content.Intent
-import android.os.Bundle
 import android.provider.Settings
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -31,20 +28,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
-import com.marlon.portalusuario.activities.MainActivity
-
-class PermissionActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val viewModel = PermissionViewModel()
-        setContent {
-            PermissionScreen(viewModel)
-        }
-    }
-}
 
 @Composable
-fun PermissionScreen(viewModel: PermissionViewModel) {
+fun PermissionScreen(
+    viewModel: PermissionViewModel,
+    onFinish: () -> Unit,
+) {
     val context = LocalContext.current
 
     val callPermissionLauncher =
@@ -123,10 +112,7 @@ fun PermissionScreen(viewModel: PermissionViewModel) {
                             )
                         overlayPermissionLauncher.launch(intent)
                     },
-                    onFinish = {
-                        context.startActivity(Intent(context, MainActivity::class.java))
-                        (context as ComponentActivity).finish()
-                    },
+                    onFinish = onFinish,
                 )
             }
         }
@@ -193,5 +179,5 @@ fun PermissionSteps(
 @Preview(showBackground = true)
 @Composable
 fun PermissionScreenPreview() {
-    PermissionScreen(PermissionViewModel())
+    PermissionScreen(PermissionViewModel()) {}
 }
