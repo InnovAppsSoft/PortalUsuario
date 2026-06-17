@@ -4,17 +4,19 @@ import com.marlon.portalusuario.data.preferences.IMobServicesPreferences
 import com.marlon.portalusuario.domain.model.ServiceType
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-import com.marlon.portalusuario.data.entity.MobileService as MobEntity
 import io.github.suitetecsa.sdk.nauta.model.MobileService as MobApi
+import com.marlon.portalusuario.data.entity.MobileService as MobEntity
 
 class MobServiceApiToEntityMapper(
-    private val preferences: IMobServicesPreferences,
+    preferences: IMobServicesPreferences,
     private val mobPlanMapper: MobPlanApiToModelMapper,
     private val mobBonusMapper: MobBonusApiToModelMapper,
 ) : Mapper<MobApi, MobEntity> {
+    private val slotIndexInfoList = runBlocking { preferences.preferences.first().slotIndexInfoList }
+
     override fun map(from: MobApi): MobEntity {
         val slotIndex =
-            runBlocking { preferences.preferences.first().slotIndexInfoList }
+            slotIndexInfoList
                 .firstOrNull { it.phoneNumber == from.profile.phoneNumber }
 
         return MobEntity(

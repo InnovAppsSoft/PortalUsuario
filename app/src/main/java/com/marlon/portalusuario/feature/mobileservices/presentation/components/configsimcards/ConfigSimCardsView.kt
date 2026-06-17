@@ -4,16 +4,19 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -34,11 +37,21 @@ fun ConfigSimCardsView(
     onSetTitle: (String) -> Unit,
     onSetCanGoNext: (Boolean) -> Unit,
 ) {
-    val coroutineScope = rememberCoroutineScope()
-    val pagerState = rememberPagerState { state.viewModel.state.simCards.size }
+    val viewState = state.viewModel.state
+    val currentSimCard = viewState.currentSimCard
 
-    LaunchedEffect(state.viewModel.state.isLoading) {
-        onSetIsLoading(state.viewModel.state.isLoading)
+    if (currentSimCard == null) {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator()
+        }
+        return
+    }
+
+    val coroutineScope = rememberCoroutineScope()
+    val pagerState = rememberPagerState { viewState.simCards.size }
+
+    LaunchedEffect(viewState.isLoading) {
+        onSetIsLoading(viewState.isLoading)
     }
 
     LaunchedEffect(state.viewModel.isPhoneNumberValid) {
@@ -47,23 +60,18 @@ fun ConfigSimCardsView(
 
     HorizontalPager(state = pagerState, userScrollEnabled = false) {
         ServiceSettingsView(
-            simCard = state.viewModel.state.currentSimCard,
-            phoneNumber = state.viewModel.state.phoneNumber,
-            isLoading = state.viewModel.state.isLoading,
+            simCard = currentSimCard,
+            phoneNumber = viewState.phoneNumber,
+            isLoading = viewState.isLoading,
             onChangePhoneNumber = { state.viewModel.onEvent(ConfigSimCardsEvent.OnChangedPhoneNumber(it)) },
         )
     }
 
-    LaunchedEffect(key1 = state.viewModel.state.currentSimCard) {
-        onSetTitle("Configurar SIM${state.viewModel.state.currentSimCard.slotIndex + 1}")
-        if (state.viewModel.state.simCards
-                .indexOf(state.viewModel.state.currentSimCard) != pagerState.currentPage
-        ) {
+    LaunchedEffect(key1 = currentSimCard) {
+        onSetTitle("Configurar SIM${currentSimCard.slotIndex + 1}")
+        if (viewState.simCards.indexOf(currentSimCard) != pagerState.currentPage) {
             coroutineScope.launch {
-                pagerState.animateScrollToPage(
-                    state.viewModel.state.simCards
-                        .indexOf(state.viewModel.state.currentSimCard),
-                )
+                pagerState.animateScrollToPage(viewState.simCards.indexOf(currentSimCard))
             }
         }
     }
