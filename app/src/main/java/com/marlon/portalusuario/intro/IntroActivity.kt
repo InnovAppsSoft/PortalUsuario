@@ -9,12 +9,18 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -23,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -31,9 +38,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.HorizontalPagerIndicator
-import com.google.accompanist.pager.rememberPagerState
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.data.preferences.IAppPreferencesManager
 import com.marlon.portalusuario.permisos.PermissionActivity
@@ -87,7 +91,6 @@ class IntroActivity : ComponentActivity() {
 
 @Composable
 fun IntroScreen(onGetStarted: () -> Unit) {
-    val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
     val screens =
         listOf(
@@ -95,6 +98,7 @@ fun IntroScreen(onGetStarted: () -> Unit) {
             ScreenItem("Útil", "Portal Usuario gestiona y asiste\nSerá tu herramienta #1", R.drawable.img1),
             ScreenItem("Sencillo", "Interfaz amigable y agradable\nExperiencia de usuario única", R.drawable.img3),
         )
+    val pagerState = rememberPagerState(pageCount = { screens.size })
 
     Column(
         modifier =
@@ -107,7 +111,6 @@ fun IntroScreen(onGetStarted: () -> Unit) {
     ) {
         HorizontalPager(
             state = pagerState,
-            count = screens.size,
             modifier =
                 Modifier
                     .weight(1f)
@@ -116,10 +119,27 @@ fun IntroScreen(onGetStarted: () -> Unit) {
             ScreenContent(screenItem = screens[page])
         }
 
-        HorizontalPagerIndicator(
-            pagerState = pagerState,
+        Row(
             modifier = Modifier.padding(16.dp),
-        )
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            repeat(screens.size) { index ->
+                Box(
+                    modifier =
+                        Modifier
+                            .size(if (pagerState.currentPage == index) 10.dp else 8.dp)
+                            .clip(CircleShape)
+                            .background(
+                                if (pagerState.currentPage == index) {
+                                    MaterialTheme.colorScheme.primary
+                                } else {
+                                    MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
+                                },
+                            ),
+                )
+            }
+        }
 
         if (pagerState.currentPage == screens.size - 1) {
             Button(

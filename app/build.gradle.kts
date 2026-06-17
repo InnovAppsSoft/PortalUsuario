@@ -162,10 +162,6 @@ dependencies {
     implementation(libs.androidx.preference.ktx)
     implementation(libs.material)
 
-    // ── UI Libraries ──
-    implementation(libs.accompanist.pager)
-    implementation(libs.accompanist.pager.indicators)
-
     // ── Image Loading ──
     implementation(libs.glide)
 
