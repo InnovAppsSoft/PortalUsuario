@@ -1,11 +1,5 @@
 package com.marlon.portalusuario.intro
 
-import android.content.Context
-import android.content.Intent
-import android.os.Bundle
-import android.os.PowerManager
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -36,58 +30,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.net.toUri
-import androidx.lifecycle.lifecycleScope
 import com.marlon.portalusuario.R
-import com.marlon.portalusuario.data.preferences.IAppPreferencesManager
-import com.marlon.portalusuario.permisos.PermissionActivity
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 data class ScreenItem(
     val title: String,
     val description: String,
     val screenImg: Int,
 )
-
-@AndroidEntryPoint
-class IntroActivity : ComponentActivity() {
-    @Inject
-    lateinit var appPreferencesManager: IAppPreferencesManager
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        manageBatteryConsumption()
-
-        setContent {
-            IntroScreen {
-                savePrefsData()
-                startActivity(Intent(this, PermissionActivity::class.java))
-                finish()
-            }
-        }
-    }
-
-    private fun manageBatteryConsumption() {
-        val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
-        if (!powerManager.isIgnoringBatteryOptimizations(packageName)) {
-            startActivity(
-                Intent().apply {
-                    action = android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
-                    data = "package:$packageName".toUri()
-                },
-            )
-        }
-    }
-
-    private fun savePrefsData() {
-        lifecycleScope.launch {
-            appPreferencesManager.updateIsIntroOpened(true)
-        }
-    }
-}
 
 @Composable
 fun IntroScreen(onGetStarted: () -> Unit) {
