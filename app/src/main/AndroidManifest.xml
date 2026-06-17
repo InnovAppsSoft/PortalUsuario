@@ -76,9 +76,6 @@
             android:name=".punotifications.PUNotificationsActivity"
             android:exported="false" />
         <activity
-            android:name=".erroreslog.LogFileViewerActivity"
-            android:theme="@style/Firewall" />
-        <activity
             android:name=".feature.splash.presentation.ActivitySplash"
             android:exported="true"
             android:screenOrientation="portrait"
