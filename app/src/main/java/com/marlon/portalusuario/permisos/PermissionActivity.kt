@@ -1,17 +1,13 @@
 package com.marlon.portalusuario.permisos
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.Settings
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,46 +30,45 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.app.ActivityCompat
 import androidx.core.net.toUri
 import com.marlon.portalusuario.activities.MainActivity
 
-private const val RESULT_CALL: Int = 1001
-
-class PermissionActivity : AppCompatActivity() {
-    private val viewModel: PermissionViewModel by viewModels()
-
+class PermissionActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val viewModel = PermissionViewModel()
         setContent {
-            PermissionScreen(viewModel, this)
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray,
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == RESULT_CALL) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                viewModel.nextStep()
-            }
+            PermissionScreen(viewModel)
         }
     }
 }
 
 @Composable
-fun PermissionScreen(
-    viewModel: PermissionViewModel,
-    activity: Activity,
-) {
+fun PermissionScreen(viewModel: PermissionViewModel) {
     val context = LocalContext.current
+
+    val callPermissionLauncher =
+        rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) viewModel.nextStep()
+        }
+
+    val cameraPermissionLauncher =
+        rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) viewModel.nextStep()
+        }
+
+    val contactsPermissionLauncher =
+        rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) viewModel.nextStep()
+        }
+
+    val locationPermissionLauncher =
+        rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
+            if (result.values.all { it }) viewModel.nextStep()
+        }
+
     val overlayPermissionLauncher =
-        rememberLauncherForActivityResult(
-            contract = ActivityResultContracts.StartActivityForResult(),
-        ) { _ ->
+        rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { _ ->
             val canDrawOverlays = Settings.canDrawOverlays(context)
             viewModel.onOverlayPermissionResult(canDrawOverlays)
         }
@@ -84,7 +79,6 @@ fun PermissionScreen(
                 .fillMaxSize()
                 .padding(10.dp)
                 .verticalScroll(rememberScrollState())
-                // Color de fondo claro
                 .background(color = Color(0xFFF5F5F5)),
     ) {
         Text(
@@ -100,17 +94,40 @@ fun PermissionScreen(
             textAlign = TextAlign.Center,
         )
         Card(
-            modifier =
-                Modifier
-                    .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = Color.White),
             shape = RoundedCornerShape(16.dp),
             elevation = CardDefaults.cardElevation(8.dp),
         ) {
-            Column(
-                modifier = Modifier.padding(16.dp),
-            ) {
-                PermissionSteps(viewModel, overlayPermissionLauncher, activity)
+            Column(modifier = Modifier.padding(16.dp)) {
+                PermissionSteps(
+                    viewModel = viewModel,
+                    onRequestCallPermission = { callPermissionLauncher.launch(Manifest.permission.CALL_PHONE) },
+                    onRequestCameraPermission = { cameraPermissionLauncher.launch(Manifest.permission.CAMERA) },
+                    onRequestContactsPermission = { contactsPermissionLauncher.launch(Manifest.permission.READ_CONTACTS) },
+                    onRequestLocationPermission = {
+                        locationPermissionLauncher.launch(
+                            arrayOf(
+                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.ACCESS_COARSE_LOCATION,
+                                Manifest.permission.READ_PHONE_STATE,
+                                Manifest.permission.READ_PHONE_NUMBERS,
+                            ),
+                        )
+                    },
+                    onRequestOverlayPermission = {
+                        val intent =
+                            Intent(
+                                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                "package:${context.packageName}".toUri(),
+                            )
+                        overlayPermissionLauncher.launch(intent)
+                    },
+                    onFinish = {
+                        context.startActivity(Intent(context, MainActivity::class.java))
+                        (context as ComponentActivity).finish()
+                    },
+                )
             }
         }
     }
@@ -119,19 +136,13 @@ fun PermissionScreen(
 @Composable
 fun PermissionSteps(
     viewModel: PermissionViewModel,
-    overlayPermissionLauncher: ActivityResultLauncher<Intent>,
-    activity: Activity,
+    onRequestCallPermission: () -> Unit,
+    onRequestCameraPermission: () -> Unit,
+    onRequestContactsPermission: () -> Unit,
+    onRequestLocationPermission: () -> Unit,
+    onRequestOverlayPermission: () -> Unit,
+    onFinish: () -> Unit,
 ) {
-    val context = LocalContext.current
-
-    val locationArray =
-        arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.READ_PHONE_NUMBERS,
-        )
-
     val steps =
         listOf(
             "Permiso para realizar llamadas",
@@ -159,42 +170,12 @@ fun PermissionSteps(
             Button(
                 onClick = {
                     when (index) {
-                        0 ->
-                            ActivityCompat.requestPermissions(
-                                activity,
-                                arrayOf(Manifest.permission.CALL_PHONE),
-                                RESULT_CALL,
-                            )
-                        1 ->
-                            ActivityCompat.requestPermissions(
-                                activity,
-                                arrayOf(Manifest.permission.CAMERA),
-                                RESULT_CALL,
-                            )
-                        2 ->
-                            ActivityCompat.requestPermissions(
-                                activity,
-                                arrayOf(Manifest.permission.READ_CONTACTS),
-                                RESULT_CALL,
-                            )
-                        3 ->
-                            ActivityCompat.requestPermissions(
-                                activity,
-                                locationArray,
-                                RESULT_CALL,
-                            )
-                        4 -> {
-                            val intent =
-                                Intent(
-                                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                                    "package:${context.packageName}".toUri(),
-                                )
-                            overlayPermissionLauncher.launch(intent)
-                        }
-                        else -> {
-                            context.startActivity(Intent(context, MainActivity::class.java))
-                            (context as Activity).finish()
-                        }
+                        0 -> onRequestCallPermission()
+                        1 -> onRequestCameraPermission()
+                        2 -> onRequestContactsPermission()
+                        3 -> onRequestLocationPermission()
+                        4 -> onRequestOverlayPermission()
+                        else -> onFinish()
                     }
                 },
                 enabled = isButtonEnabled,
@@ -212,6 +193,5 @@ fun PermissionSteps(
 @Preview(showBackground = true)
 @Composable
 fun PermissionScreenPreview() {
-    val viewModel = PermissionViewModel()
-    PermissionScreen(viewModel, Activity())
+    PermissionScreen(PermissionViewModel())
 }
