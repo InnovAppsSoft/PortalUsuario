@@ -3,7 +3,6 @@ package com.marlon.portalusuario.data.notifications
 import android.content.Context
 import android.widget.Toast
 import com.marlon.portalusuario.data.ServicesDao
-import com.marlon.portalusuario.data.notifications.PunRepositoryImpl.Companion.NOTIFICATIONS_COUNT_KEY
 import com.marlon.portalusuario.data.preferences.notificationsCountFlow
 import com.marlon.portalusuario.data.preferences.setNotificationsCount
 import com.marlon.portalusuario.domain.data.PunRepository
@@ -49,9 +48,5 @@ class PunRepositoryImpl
 
         override suspend fun deleteAllPUNotifications() {
             dao.deleteAllPUNotifications()
-        }
-
-        companion object {
-            const val NOTIFICATIONS_COUNT_KEY = "notifications_count"
         }
     }

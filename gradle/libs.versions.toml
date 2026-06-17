@@ -84,8 +84,6 @@ glide = "4.15.1"
 gson = "2.11.0"
 jwtdecode = "2.0.2"
 prettytime = "5.0.9.Final"
-co-library = "1.1"       # swipetoaction (legacy)
-ui-library = "0.5.0"     # vanniktech (legacy)
 
 # ═══════════════════════════════════════════
 # Testing
@@ -207,10 +205,6 @@ gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 jwtdecode = { group = "com.auth0.android", name = "jwtdecode", version.ref = "jwtdecode" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 prettytime = { group = "org.ocpsoft.prettytime", name = "prettytime", version.ref = "prettytime" }
-
-# ─── Legacy UI (pendiente de migrar) ───
-swipetoaction-library = { group = "co.dift.ui.swipetoaction", name = "library", version.ref = "co-library" }
-ui-library = { group = "com.vanniktech", name = "ui", version.ref = "ui-library" }
 
 # ─────────────────────────────────────────────
 # Testing
