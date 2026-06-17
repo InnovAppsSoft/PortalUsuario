@@ -31,7 +31,6 @@
 # ============================================================
 # AndroidManifest components
 # ============================================================
--keep class com.marlon.portalusuario.intro.IntroActivity { *; }
 -keep class com.marlon.portalusuario.activities.MainActivity { *; }
 -keep class com.marlon.portalusuario.permisos.PermissionActivity { *; }
 -keep class com.marlon.portalusuario.punotifications.PUNotificationsActivity { *; }

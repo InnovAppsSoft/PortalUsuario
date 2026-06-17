@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -25,6 +26,8 @@ import com.marlon.portalusuario.feature.telephony.presentation.EmergencyCallsScr
 import com.marlon.portalusuario.feature.telephony.presentation.PrivateCallScreen
 import com.marlon.portalusuario.feature.telephony.presentation.SmsScreen
 import com.marlon.portalusuario.feature.telephony.presentation.VozScreen
+import com.marlon.portalusuario.intro.IntroScreen
+import com.marlon.portalusuario.intro.IntroViewModel
 import com.marlon.portalusuario.paquetes.PaquetesScreen
 import com.marlon.portalusuario.perfil.PerfilScreen
 import com.marlon.portalusuario.servicios.ServiciosScreen
@@ -47,7 +50,17 @@ fun PortalUsuarioNavHost(
         modifier = modifier,
     ) {
         composable(Route.Splash.route) { PlaceholderScreen("Splash") }
-        composable(Route.Intro.route) { PlaceholderScreen("Intro") }
+        composable(Route.Intro.route) {
+            val viewModel: IntroViewModel = hiltViewModel()
+            IntroScreen(
+                onGetStarted = {
+                    viewModel.onIntroCompleted()
+                    navController.navigate(Route.MobileServices.route) {
+                        popUpTo(Route.Intro.route) { inclusive = true }
+                    }
+                },
+            )
+        }
         composable(Route.Permissions.route) { PlaceholderScreen("Permissions") }
         composable(Route.Main.route) { MobileServicesScreen() }
         composable(Route.Settings.route) { SettingsScreen() }

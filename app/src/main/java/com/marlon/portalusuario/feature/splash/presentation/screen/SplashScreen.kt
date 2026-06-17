@@ -31,7 +31,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.marlon.portalusuario.R
 import com.marlon.portalusuario.activities.MainActivity
 import com.marlon.portalusuario.feature.splash.presentation.SplashViewModel
-import com.marlon.portalusuario.intro.IntroActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -83,13 +82,12 @@ fun SplashScreen(viewModel: SplashViewModel = hiltViewModel()) {
             scope.launch {
                 delay(MIN_TIME)
                 preference?.also {
-                    if (!it.isIntroOpened) {
-                        context.startActivity(Intent(context, IntroActivity::class.java))
-                        (context as Activity).finish()
-                    } else {
-                        context.startActivity(Intent(context, MainActivity::class.java))
-                        (context as Activity).finish()
-                    }
+                    val intent =
+                        Intent(context, MainActivity::class.java).apply {
+                            putExtra("start_intro", !it.isIntroOpened)
+                        }
+                    context.startActivity(intent)
+                    (context as Activity).finish()
                 }
             }
         }

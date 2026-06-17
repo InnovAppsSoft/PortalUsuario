@@ -1,11 +1,13 @@
 package com.marlon.portalusuario.activities
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.PowerManager
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
@@ -103,6 +105,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val startIntro = intent.getBooleanExtra("start_intro", false)
+        manageBatteryConsumption()
+
         lifecycleScope.launch {
             appPreferencesManager.preferences().collect { preferences ->
                 isDynamicColor = preferences.isDynamicColor
@@ -194,8 +199,20 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             PortalUsuarioTheme(dynamicColor = isDynamicColor) {
-                MainScreen()
+                MainScreen(startDestination = if (startIntro) Route.Intro.route else Route.MobileServices.route)
             }
+        }
+    }
+
+    private fun manageBatteryConsumption() {
+        val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+        if (!powerManager.isIgnoringBatteryOptimizations(packageName)) {
+            startActivity(
+                Intent().apply {
+                    action = android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+                    data = "package:$packageName".toUri()
+                },
+            )
         }
     }
 
@@ -211,7 +228,7 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun MainScreen() {
+private fun MainScreen(startDestination: String = Route.MobileServices.route) {
     val navController = rememberNavController()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -282,7 +299,7 @@ private fun MainScreen() {
             PortalUsuarioNavHost(
                 navController = navController,
                 modifier = Modifier.padding(padding),
-                startDestination = Route.MobileServices.route,
+                startDestination = startDestination,
             )
         }
     }
