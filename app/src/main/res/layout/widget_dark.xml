@@ -50,7 +50,7 @@
                             android:id="@+id/widgetvencesaldo"
                             android:layout_height="wrap_content"
                             android:text="00/00/00"
-                            android:textColor="@color/white"
+                            android:textColor="@android:color/white"
                             android:ellipsize="marquee"
                             android:layout_marginStart="2dp"
                             android:marqueeRepeatLimit="marquee_forever"
@@ -72,7 +72,7 @@
                             android:scrollHorizontally="true"
                             android:singleLine="true"
                             android:fontFamily="@font/displaybold"
-                            android:textColor="@color/white"
+                            android:textColor="@android:color/white"
                             android:textSize="13sp" />
 
 
@@ -106,7 +106,7 @@
                             android:id="@+id/widgetvencedatos"
                             android:layout_height="wrap_content"
                             android:text="0 dias"
-                            android:textColor="@color/white"
+                            android:textColor="@android:color/white"
                             android:ellipsize="marquee"
                             android:layout_marginStart="2dp"
                             android:marqueeRepeatLimit="marquee_forever"
@@ -127,7 +127,7 @@
                             android:scrollHorizontally="true"
                             android:singleLine="true"
                             android:fontFamily="@font/displaybold"
-                            android:textColor="@color/white"
+                            android:textColor="@android:color/white"
                             android:textSize="13sp" />
 
 
@@ -170,7 +170,7 @@
                             android:id="@+id/widgetvencenacionales"
                             android:layout_height="wrap_content"
                             android:text="0 dias"
-                            android:textColor="@color/white"
+                            android:textColor="@android:color/white"
                             android:ellipsize="marquee"
                             android:layout_marginStart="2dp"
                             android:marqueeRepeatLimit="marquee_forever"
@@ -192,7 +192,7 @@
                             android:scrollHorizontally="true"
                             android:singleLine="true"
                             android:fontFamily="@font/displaybold"
-                            android:textColor="@color/white"
+                            android:textColor="@android:color/white"
                             android:textSize="13sp" />
 
 
@@ -224,7 +224,7 @@
                             android:id="@+id/widgetvencenlte"
                             android:layout_height="wrap_content"
                             android:text="0 dias"
-                            android:textColor="@color/white"
+                            android:textColor="@android:color/white"
                             android:ellipsize="marquee"
                             android:layout_marginStart="2dp"
                             android:marqueeRepeatLimit="marquee_forever"
@@ -245,7 +245,7 @@
                             android:scrollHorizontally="true"
                             android:singleLine="true"
                             android:fontFamily="@font/displaybold"
-                            android:textColor="@color/white"
+                            android:textColor="@android:color/white"
                             android:textSize="13sp" />
 
 

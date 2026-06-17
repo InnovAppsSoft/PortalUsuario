@@ -14,7 +14,7 @@
         android:textAlignment="center"
         android:textSize="13sp"
         android:fontFamily="@font/displaybold"
-        android:textColor="@color/colorDes"
+        android:textColor="?android:attr/textColorSecondary"
         android:gravity="center_vertical"
         tools:ignore="RtlCompat" />
 
