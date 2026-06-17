@@ -48,7 +48,7 @@
                         android:gravity="center_vertical"
                         android:paddingStart="@dimen/activity_horizontal_margin"
                         android:text="Configurar modo Solo LTE"
-                        android:textColor="@color/colorDes"
+                        android:textColor="?android:attr/textColorSecondary"
                         android:textSize="16sp"
                         tools:ignore="RtlSymmetry,TextContrastCheck" />
 
@@ -61,7 +61,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/displaybold"
                         android:text="@string/se_al1"
-                        android:textColor="@color/colorDes"
+                        android:textColor="?android:attr/textColorSecondary"
                         android:textSize="13sp" />
 
                 </RelativeLayout>
@@ -77,7 +77,7 @@
                 android:background="@drawable/my_gradient_drawable4"
                 android:layout_margin="10dp"
                 android:textSize="13sp"
-                android:textColor="@color/white"
+                android:textColor="@android:color/white"
                 android:fontFamily="@font/displaybold"
                 android:text="@string/configurar_solo_4g" />
 

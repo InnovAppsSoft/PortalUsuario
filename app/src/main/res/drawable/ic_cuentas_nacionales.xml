@@ -6,7 +6,7 @@
     android:viewportHeight="1536"
     android:width="24dp"
     android:height="24dp"
-    android:tint="@color/white">
+    android:tint="?attr/colorOnSurface">
     <path
         android:pathData="M413.5 397L442 397.5L413.5 398L413.5 397Z"
         android:fillColor="#FFFFFF"

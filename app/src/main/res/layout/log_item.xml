@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:ellipsize="end"
         android:singleLine="false"
-        android:textColor="@color/colorDes"
+        android:textColor="?android:attr/textColorSecondary"
         android:textSize="10sp"
         android:longClickable="true"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
