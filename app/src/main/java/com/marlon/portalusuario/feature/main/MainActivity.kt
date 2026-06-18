@@ -503,6 +503,7 @@ private fun DrawerContent(
                 header = section.header,
                 items = section.items,
                 currentRoute = currentRoute,
+                onItemClick = onItemClick,
             )
         }
 
@@ -520,6 +521,7 @@ private fun DrawerSection(
     header: String? = null,
     items: List<DrawerItem>,
     currentRoute: String?,
+    onItemClick: (DrawerAction) -> Unit,
 ) {
     header?.let {
         Text(
@@ -536,7 +538,7 @@ private fun DrawerSection(
             label = { Text(item.label) },
             icon = item.icon?.let { icon -> { Icon(icon, contentDescription = null) } },
             selected = isSelected,
-            onClick = { item.onClick() },
+            onClick = { onItemClick(item.onClick()) },
             modifier = Modifier.padding(horizontal = 12.dp),
         )
     }
