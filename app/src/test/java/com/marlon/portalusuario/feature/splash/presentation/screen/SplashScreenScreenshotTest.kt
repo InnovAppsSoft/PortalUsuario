@@ -8,7 +8,7 @@ import com.github.takahirom.roborazzi.captureRoboImage
 import com.marlon.portalusuario.domain.model.AppSettings
 import com.marlon.portalusuario.feature.splash.presentation.SplashViewModel
 import com.marlon.portalusuario.testhelpers.FakeAppPreferencesManager
-import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
+import com.marlon.portalusuario.core.theme.PortalUsuarioTheme
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

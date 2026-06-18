@@ -39,7 +39,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
-import com.marlon.portalusuario.ui.theme.VibrantTangerineOrange
+import com.marlon.portalusuario.core.theme.VibrantTangerineOrange
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

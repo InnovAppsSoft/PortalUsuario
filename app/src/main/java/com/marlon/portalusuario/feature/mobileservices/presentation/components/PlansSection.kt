@@ -29,9 +29,9 @@ import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.data.asDateMillis
 import com.marlon.portalusuario.data.asRemainingDays
 import com.marlon.portalusuario.domain.model.MobilePlan
-import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
-import com.marlon.portalusuario.ui.theme.TealBlue
-import com.marlon.portalusuario.ui.theme.VibrantTangerineOrange
+import com.marlon.portalusuario.core.theme.PortalUsuarioTheme
+import com.marlon.portalusuario.core.theme.TealBlue
+import com.marlon.portalusuario.core.theme.VibrantTangerineOrange
 
 @Composable
 internal fun PlansSection(

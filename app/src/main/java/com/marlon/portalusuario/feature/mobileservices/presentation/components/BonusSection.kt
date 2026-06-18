@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.marlon.portalusuario.domain.model.MobileBonus
-import com.marlon.portalusuario.ui.theme.TropicalAquamarineGreen
+import com.marlon.portalusuario.core.theme.TropicalAquamarineGreen
 import io.github.suitetecsa.sdk.android.utils.LongUtils.asRemainingDays
 import io.github.suitetecsa.sdk.android.utils.StringUtils
 

@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.marlon.portalusuario.data.preferences.IAppPreferencesManager
 import com.marlon.portalusuario.domain.model.ModeNight
 import com.marlon.portalusuario.feature.splash.presentation.screen.SplashScreen
-import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
+import com.marlon.portalusuario.core.theme.PortalUsuarioTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch

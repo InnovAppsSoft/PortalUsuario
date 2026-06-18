@@ -29,8 +29,8 @@ import com.marlon.portalusuario.feature.mobileservices.presentation.components.M
 import com.marlon.portalusuario.feature.mobileservices.presentation.components.PlansSection
 import com.marlon.portalusuario.feature.mobileservices.presentation.components.configsimcards.ConfigSimCardsBottomSheet
 import com.marlon.portalusuario.feature.mobileservices.presentation.components.servsettings.ServiceSettingsBottomSheet
-import com.marlon.portalusuario.ui.components.EmptyState
-import com.marlon.portalusuario.ui.components.ErrorDialog
+import com.marlon.portalusuario.core.components.EmptyState
+import com.marlon.portalusuario.core.components.ErrorDialog
 import io.github.suitetecsa.sdk.android.model.SimCard
 
 private const val TAG = "MobileServicesScreen"

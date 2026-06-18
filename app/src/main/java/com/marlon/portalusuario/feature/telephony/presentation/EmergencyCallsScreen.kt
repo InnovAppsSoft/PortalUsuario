@@ -27,12 +27,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
-import com.marlon.portalusuario.ui.theme.BrightOrange
-import com.marlon.portalusuario.ui.theme.TealBlue
-import com.marlon.portalusuario.ui.theme.VibrantGreen
-import com.marlon.portalusuario.ui.theme.VibrantPink
-import com.marlon.portalusuario.ui.theme.VibrantTangerineOrange
-import com.marlon.portalusuario.ui.theme.VividRed
+import com.marlon.portalusuario.core.theme.BrightOrange
+import com.marlon.portalusuario.core.theme.TealBlue
+import com.marlon.portalusuario.core.theme.VibrantGreen
+import com.marlon.portalusuario.core.theme.VibrantPink
+import com.marlon.portalusuario.core.theme.VibrantTangerineOrange
+import com.marlon.portalusuario.core.theme.VividRed
 
 @Composable
 fun EmergencyCallsScreen() {

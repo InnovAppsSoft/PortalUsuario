@@ -13,9 +13,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.marlon.portalusuario.ui.components.ArcProgressbar
-import com.marlon.portalusuario.ui.components.PrettyCard
-import com.marlon.portalusuario.ui.theme.VibrantPink
+import com.marlon.portalusuario.core.components.ArcProgressbar
+import com.marlon.portalusuario.core.components.PrettyCard
+import com.marlon.portalusuario.core.theme.VibrantPink
 
 @Composable
 fun PlanCard(

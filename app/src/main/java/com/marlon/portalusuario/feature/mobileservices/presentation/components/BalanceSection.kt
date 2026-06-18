@@ -26,8 +26,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.marlon.portalusuario.R
-import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
-import com.marlon.portalusuario.ui.theme.TealBlue
+import com.marlon.portalusuario.core.theme.PortalUsuarioTheme
+import com.marlon.portalusuario.core.theme.TealBlue
 import io.github.suitetecsa.sdk.android.utils.asDate
 import org.ocpsoft.prettytime.PrettyTime
 

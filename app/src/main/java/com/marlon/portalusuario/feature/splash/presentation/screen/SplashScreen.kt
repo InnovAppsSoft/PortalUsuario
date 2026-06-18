@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.marlon.portalusuario.R
-import com.marlon.portalusuario.activities.MainActivity
+import com.marlon.portalusuario.feature.main.MainActivity
 import com.marlon.portalusuario.feature.splash.presentation.SplashViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
