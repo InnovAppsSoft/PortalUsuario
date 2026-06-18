@@ -10,10 +10,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,16 +23,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.marlon.portalusuario.domain.model.MobileBonus
-import com.marlon.portalusuario.domain.model.MobilePlan
-import com.marlon.portalusuario.domain.model.MobileService
-import com.marlon.portalusuario.domain.model.ServiceType
 import com.marlon.portalusuario.core.components.PrettyCard
 import com.marlon.portalusuario.core.components.Spinner
 import com.marlon.portalusuario.core.theme.BrightCoralRed
 import com.marlon.portalusuario.core.theme.PortalUsuarioTheme
 import com.marlon.portalusuario.core.theme.TealBlue
 import com.marlon.portalusuario.core.util.Utils.fixDateFormat
+import com.marlon.portalusuario.domain.model.MobileBonus
+import com.marlon.portalusuario.domain.model.MobilePlan
+import com.marlon.portalusuario.domain.model.MobileService
+import com.marlon.portalusuario.domain.model.ServiceType
 import io.github.suitetecsa.sdk.android.model.SimCard
 
 @Composable
@@ -42,11 +44,13 @@ fun MobileServiceSelector(
     onShowServiceSettings: () -> Unit = {},
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.End,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        PrettyCard(modifier = Modifier.padding(horizontal = 16.dp)) {
+        PrettyCard(modifier = Modifier.weight(1f)) {
             Spinner(
                 items = services,
                 selectedItem = serviceSelected,
@@ -55,8 +59,8 @@ fun MobileServiceSelector(
                 dropdownItemFactory = { item, _ -> ServiceItem(item, simCards) },
             )
         }
-
-        PrettyCard(modifier = Modifier.padding(16.dp)) {
+        Spacer(modifier = Modifier.width(8.dp))
+        PrettyCard(modifier = Modifier.padding(0.dp)) {
             IconButton(onClick = onShowServiceSettings) {
                 Icon(imageVector = Icons.Outlined.Settings, contentDescription = null)
             }
@@ -73,17 +77,24 @@ private fun ServiceItem(
 ) {
     val simCard = simCards.firstOrNull { it.slotIndex == item.slotIndex }
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
-        Box(modifier = Modifier.background(simCard?.let { TealBlue } ?: BrightCoralRed)) {
+        Box(
+            modifier = Modifier
+                .background(
+                    color = simCard?.let { TealBlue } ?: BrightCoralRed,
+                    shape = RoundedCornerShape(4.dp),
+                ),
+        ) {
             Text(
                 text =
                     simCard?.let { sim ->
                         sim.displayName?.let { "$it (SIM ${sim.slotIndex + 1})" }
                             ?: "SIM ${sim.slotIndex + 1}"
                     } ?: "No SIM",
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                color = MaterialTheme.colorScheme.background,
             )
         }
-        Spacer(modifier = Modifier.width(4.dp))
+        Spacer(modifier = Modifier.width(8.dp))
         Text(
             text = item.phoneNumber,
             modifier = Modifier.padding(8.dp),
