@@ -59,7 +59,7 @@ class AppModule {
             context,
             ServicesDB::class.java,
             "services_db",
-        ).addMigrations(ServicesDB.MIGRATION_1_2)
+        ).addMigrations(ServicesDB.MIGRATION_1_2, ServicesDB.MIGRATION_2_3)
         .build()
 
     @Singleton
