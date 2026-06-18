@@ -164,6 +164,7 @@ dependencies {
 
     // ── Image Loading ──
     implementation(libs.glide)
+    implementation(libs.coil.compose)
 
     // ── Utilities ──
     implementation(libs.caverock.androidsvg.aar)

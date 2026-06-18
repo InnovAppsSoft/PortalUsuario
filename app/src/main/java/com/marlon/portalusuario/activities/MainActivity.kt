@@ -70,7 +70,6 @@ import androidx.compose.ui.unit.sp
 import androidx.core.app.ShareCompat
 import androidx.core.net.toUri
 import androidx.core.view.WindowCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -84,7 +83,6 @@ import com.marlon.portalusuario.trafficbubble.FloatingBubbleService
 import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
 import com.marlon.portalusuario.util.NetworkConnectivityObserver
 import com.marlon.portalusuario.util.Utils.hasPermissions
-import com.marlon.portalusuario.viewmodel.PunViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -107,6 +105,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val startIntro = intent.getBooleanExtra("start_intro", false)
+        val openNotifications = intent.getBooleanExtra("open_notifications", false)
         val permissionsMissing =
             hasPermissions(
                 Manifest.permission.CALL_PHONE,
@@ -188,12 +187,11 @@ class MainActivity : ComponentActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        punViewModel = ViewModelProvider(this)[PunViewModel::class.java]
-
         setContent {
             PortalUsuarioTheme(dynamicColor = isDynamicColor) {
                 val startDestination =
                     when {
+                        openNotifications -> Route.PUNotifications.createRoute()
                         startIntro -> Route.Intro.route
                         permissionsMissing -> Route.Permissions.route
                         else -> Route.MobileServices.route
@@ -212,15 +210,6 @@ class MainActivity : ComponentActivity() {
                     data = "package:$packageName".toUri()
                 },
             )
-        }
-    }
-
-    companion object {
-        private var punViewModel: PunViewModel? = null
-
-        @JvmStatic
-        fun insertNotification() {
-            punViewModel!!.insertPUN(null)
         }
     }
 }

@@ -26,15 +26,21 @@ import com.marlon.portalusuario.R
 import com.marlon.portalusuario.activities.MainActivity
 import com.marlon.portalusuario.data.preferences.showNotificationsFlow
 import com.marlon.portalusuario.data.preferences.storageAdsFlow
+import com.marlon.portalusuario.domain.data.PunRepository
 import com.marlon.portalusuario.punotifications.PUNotification
-import com.marlon.portalusuario.punotifications.PUNotificationsActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import java.io.File
 import java.io.FileOutputStream
 import java.util.GregorianCalendar
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class FirebaseService : FirebaseMessagingService() {
+    @Inject
+    lateinit var punRepository: PunRepository
+
     override fun onNewToken(token: String) {
         super.onNewToken(token)
     }
@@ -114,7 +120,7 @@ class FirebaseService : FirebaseMessagingService() {
                         ex.printStackTrace()
                     }
                 }
-                MainActivity.insertNotification()
+                runBlocking { punRepository.insertPUNotification(pun) }
             }
             sendNotification(pun)
         }
@@ -124,7 +130,10 @@ class FirebaseService : FirebaseMessagingService() {
     private fun sendNotification(pun: PUNotification) {
         if (!runBlocking { showNotificationsFlow().first() }) return
 
-        val resultIntent = Intent(this, PUNotificationsActivity::class.java)
+        val resultIntent =
+            Intent(this, MainActivity::class.java).apply {
+                putExtra("open_notifications", true)
+            }
         val stackBuilder = TaskStackBuilder.create(this)
         stackBuilder.addNextIntentWithParentStack(resultIntent)
         val resultPendingIntent =
