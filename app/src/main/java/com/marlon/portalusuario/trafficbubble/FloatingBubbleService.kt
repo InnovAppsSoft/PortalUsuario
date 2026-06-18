@@ -17,11 +17,10 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
 import android.view.WindowManager
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.marlon.portalusuario.R
-import com.marlon.portalusuario.databinding.BackBurbujaDeleteOverBinding
-import com.marlon.portalusuario.databinding.FloatingBubbleBinding
-import com.marlon.portalusuario.databinding.FloatingBubbleDeleteBinding
 import com.marlon.portalusuario.trafficbubble.Util.humanReadableByteCount
 import com.marlon.portalusuario.util.Util
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,9 +51,16 @@ class FloatingBubbleService : Service() {
     private lateinit var windowManager: WindowManager
     private lateinit var bubbleLayoutParams: WindowManager.LayoutParams
     private lateinit var deleteBubbleLayoutParams: WindowManager.LayoutParams
-    private lateinit var bubbleBinding: FloatingBubbleBinding
-    private lateinit var trashBinding: FloatingBubbleDeleteBinding
-    private lateinit var trashOverBinding: BackBurbujaDeleteOverBinding
+    private lateinit var bubbleRoot: View
+    private lateinit var trashRoot: View
+    private lateinit var trashOverRoot: View
+    private lateinit var bubbleTrafficUploadText: TextView
+    private lateinit var bubbleTrafficDownloadText: TextView
+    private lateinit var timeLayout: View
+    private lateinit var textCuentasSaldo: TextView
+    private lateinit var dataLayout: View
+    private lateinit var textCuentasDatos: TextView
+    private lateinit var connectionTypeImage: ImageView
 
     private val handler: Handler = Handler(Looper.getMainLooper())
     private lateinit var updateRunnable: Runnable
@@ -66,30 +72,30 @@ class FloatingBubbleService : Service() {
     private fun updateBubbleUI() {
         serviceScope.launch {
             viewModel.state.collect { bubbleState ->
-                bubbleBinding.bubbleTrafficUploadText.text =
+                bubbleTrafficUploadText.text =
                     getString(
                         R.string.upload_traffic_template,
                         humanReadableByteCount(bubbleState.uploadSpeed),
                     )
-                bubbleBinding.bubbleTrafficDownloadText.text =
+                bubbleTrafficDownloadText.text =
                     getString(
                         R.string.download_traffic_template,
                         humanReadableByteCount(bubbleState.downloadSpeed),
                     )
 
                 if (bubbleState.isShowingAccountBalance) {
-                    bubbleBinding.timeLayout.visibility = View.VISIBLE
+                    timeLayout.visibility = View.VISIBLE
                 } else {
-                    bubbleBinding.timeLayout.visibility = View.GONE
+                    timeLayout.visibility = View.GONE
                 }
-                bubbleBinding.textCuentasSaldo.text = bubbleState.accountBalance
+                textCuentasSaldo.text = bubbleState.accountBalance
 
                 if (bubbleState.isShowingDataBalance) {
-                    bubbleBinding.dataLayout.visibility = View.VISIBLE
+                    dataLayout.visibility = View.VISIBLE
                 } else {
-                    bubbleBinding.dataLayout.visibility = View.GONE
+                    dataLayout.visibility = View.GONE
                 }
-                bubbleBinding.textCuentasDatos.text = bubbleState.dataBalance
+                textCuentasDatos.text = bubbleState.dataBalance
             }
         }
     }
@@ -153,41 +159,6 @@ class FloatingBubbleService : Service() {
         return START_STICKY // - return START_NOT_STICKY;
     }
 
-    /**
-     * Sets up the layout parameters for the bubble and delete bubble views.
-     *
-     * This function initializes two `WindowManager.LayoutParams` objects:
-     * - `bubbleLayoutParams`: Defines the layout parameters for the main floating bubble.
-     * - `deleteBubbleLayoutParams`: Defines the layout parameters for the delete zone bubble.
-     *
-     * It configures these parameters as follows:
-     *
-     * **Common Settings:**
-     * - `type`: Set to `WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY` to ensure the bubbles
-     *   float above other applications.
-     * - `flags`: Set to `WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE` to prevent the bubbles
-     *   from taking input focus. This ensures that clicks can pass through the bubbles to the
-     *   underlying app.
-     * - `format`: Set to `PixelFormat.TRANSLUCENT` to allow for transparency in the bubble views.
-     * - `width` and `height`: Set to `WindowManager.LayoutParams.WRAP_CONTENT` so the bubbles
-     *    will resize depending on their content.
-     *
-     * **Bubble Layout Parameters (`bubbleLayoutParams`) Specific Settings:**
-     * - `gravity`: Set to `Gravity.CENTER` to position the bubble in the center of the screen.
-     * - `x`: Set to `INITIAL_POSITION_X` to define the initial horizontal position.
-     * - `y`: Set to `INITIAL_POSITION_Y` to define the initial vertical position.
-     *
-     * **Delete Bubble Layout Parameters (`deleteBubbleLayoutParams`) Specific Settings:**
-     * - `gravity`: Set to `Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL` to position the delete zone bubble
-     *   at the bottom center of the screen.
-     * - `y`: Set to `20` to position the delete bubble 20 pixels from the bottom of the screen. This offset helps it
-     * to be slightly above the bottom edge.
-     *
-     * **Note:**
-     * - `INITIAL_POSITION_X` and `INITIAL_POSITION_Y` are assumed to be pre-defined constants that specify the initial
-     *   coordinates for the main floating bubble.
-     * - The values for `x` and `y` are in pixels.
-     */
     private fun setUpLayouts() {
         val type =
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
@@ -228,30 +199,36 @@ class FloatingBubbleService : Service() {
                 ) as LayoutInflater
 
             // INFLATING BUBBLE LAYOUT
-            bubbleBinding = FloatingBubbleBinding.inflate(layoutInflater)
+            bubbleRoot = layoutInflater.inflate(R.layout.floating_bubble, null)
+            trashRoot = layoutInflater.inflate(R.layout.floating_bubble_delete, null)
+            trashOverRoot = layoutInflater.inflate(R.layout.back_burbuja_delete_over, null)
 
-            // TRASH ICON
-            trashBinding = FloatingBubbleDeleteBinding.inflate(layoutInflater)
-            trashOverBinding = BackBurbujaDeleteOverBinding.inflate(layoutInflater)
+            bubbleTrafficUploadText = bubbleRoot.findViewById(R.id.bubble_traffic_upload_text)
+            bubbleTrafficDownloadText = bubbleRoot.findViewById(R.id.bubble_traffic_download_text)
+            timeLayout = bubbleRoot.findViewById(R.id.time_layout)
+            textCuentasSaldo = bubbleRoot.findViewById(R.id.text_cuentas_saldo)
+            dataLayout = bubbleRoot.findViewById(R.id.data_layout)
+            textCuentasDatos = bubbleRoot.findViewById(R.id.text_cuentas_datos)
+            connectionTypeImage = bubbleRoot.findViewById(R.id.ConnectionTypeImage)
 
             //
             when (networkType) {
-                "Mobile" -> bubbleBinding.ConnectionTypeImage.setImageResource(R.drawable.ic_round_signal_cellular)
-                "WiFi" -> bubbleBinding.ConnectionTypeImage.setImageResource(R.drawable.ic_round_wifi_24)
-                else -> bubbleBinding.ConnectionTypeImage.visibility = View.GONE
+                "Mobile" -> connectionTypeImage.setImageResource(R.drawable.ic_round_signal_cellular)
+                "WiFi" -> connectionTypeImage.setImageResource(R.drawable.ic_round_wifi_24)
+                else -> connectionTypeImage.visibility = View.GONE
             }
 
             //
-            bubbleBinding.root.setOnTouchListener(FloatingOnTouchListener())
+            bubbleRoot.setOnTouchListener(FloatingOnTouchListener())
 
             //
-            windowManager.addView(trashBinding.root, deleteBubbleLayoutParams)
-            windowManager.addView(trashOverBinding.root, deleteBubbleLayoutParams)
-            windowManager.addView(bubbleBinding.root, bubbleLayoutParams)
+            windowManager.addView(trashRoot, deleteBubbleLayoutParams)
+            windowManager.addView(trashOverRoot, deleteBubbleLayoutParams)
+            windowManager.addView(bubbleRoot, bubbleLayoutParams)
 
             // OCULTANDO BURBUJA DE ELIMINACION
-            trashBinding.root.visibility = View.GONE
-            trashOverBinding.root.visibility = View.INVISIBLE
+            trashRoot.visibility = View.GONE
+            trashOverRoot.visibility = View.INVISIBLE
 
             setupUpdateRunnable()
             // Iniciar la primera ejecución del runnable
@@ -269,9 +246,9 @@ class FloatingBubbleService : Service() {
         handler.removeCallbacks(updateRunnable)
 
         try {
-            removeViewSafely(bubbleBinding.root, "bubble")
-            removeViewSafely(trashBinding.root, "trash")
-            removeViewSafely(trashOverBinding.root, "trashOver")
+            removeViewSafely(bubbleRoot, "bubble")
+            removeViewSafely(trashRoot, "trash")
+            removeViewSafely(trashOverRoot, "trashOver")
         } finally {
             isStarted = false
             stopSelf()
@@ -308,7 +285,7 @@ class FloatingBubbleService : Service() {
 
                     initialTouchX = event.rawX
                     initialTouchY = event.rawY
-                    trashBinding.root.visibility = View.VISIBLE
+                    trashRoot.visibility = View.VISIBLE
                     true
                 }
 
@@ -317,9 +294,9 @@ class FloatingBubbleService : Service() {
                     bubbleLayoutParams.x = initialX + (event.rawX - initialTouchX).toInt()
                     bubbleLayoutParams.y = initialY + (event.rawY - initialTouchY).toInt()
                     // actualizar vista de la ventana flotante
-                    windowManager.updateViewLayout(bubbleBinding.root, bubbleLayoutParams)
+                    windowManager.updateViewLayout(bubbleRoot, bubbleLayoutParams)
                     //
-                    trashBinding.root.visibility = View.VISIBLE
+                    trashRoot.visibility = View.VISIBLE
                     // int LESS_SPACE = 100;
                     val topLimit = 6.let { screenHeight / it * 2 }
                     val leftLimit = 6.let { -1 * (screenWidth / it) }
@@ -327,8 +304,8 @@ class FloatingBubbleService : Service() {
                     if (bubbleLayoutParams.y > topLimit &&
                         (bubbleLayoutParams.x in (leftLimit + 1)..<rightLimit)
                     ) {
-                        trashBinding.root.visibility = View.GONE
-                        trashOverBinding.root.visibility = View.VISIBLE
+                        trashRoot.visibility = View.GONE
+                        trashOverRoot.visibility = View.VISIBLE
                         //
                         if (!erase) {
                             startVibrate()
@@ -336,8 +313,8 @@ class FloatingBubbleService : Service() {
                         erase = true
                     } else {
                         erase = false
-                        trashOverBinding.root.visibility = View.GONE
-                        trashBinding.root.visibility = View.VISIBLE
+                        trashOverRoot.visibility = View.GONE
+                        trashRoot.visibility = View.VISIBLE
                     }
                     true
                 }
@@ -347,7 +324,7 @@ class FloatingBubbleService : Service() {
                         onDestroy()
                         true
                     } else {
-                        trashBinding.root.visibility = View.GONE
+                        trashRoot.visibility = View.GONE
                         true
                     }
 

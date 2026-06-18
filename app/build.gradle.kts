@@ -146,13 +146,11 @@ dependencies {
     implementation(libs.suitetecsa.sdk.kotlin)
 
     // ── AndroidX Core ──
-    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.annotation)
 
     // ── Views / Layouts (XML legacy) ──
-    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.coordinatorlayout)
     implementation(libs.androidx.drawerlayout)

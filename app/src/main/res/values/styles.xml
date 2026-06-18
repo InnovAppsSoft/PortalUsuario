@@ -21,13 +21,6 @@
         <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
     </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="Firewall" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/bar</item>
-        <item name="colorPrimaryDark">@color/bar</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowDisablePreview">true</item>
-    </style>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.Material3.Light" />
 
 </resources>
