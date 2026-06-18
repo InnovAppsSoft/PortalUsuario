@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.marlon.portalusuario.erroreslog.LogFileViewerScreen
 import com.marlon.portalusuario.feature.mobileservices.presentation.DonationScreen
 import com.marlon.portalusuario.feature.mobileservices.presentation.PlanAmigosScreen
 import com.marlon.portalusuario.feature.mobileservices.presentation.screen.MobileServicesScreen
@@ -97,7 +98,7 @@ fun PortalUsuarioNavHost(
             ServiciosScreen(onNavigate = { route -> navController.navigate(route) })
         }
         composable(Route.Paquetes.route) { PaquetesScreen() }
-        composable(Route.LogFileViewer.route) { PlaceholderScreen("Log File Viewer") }
+        composable(Route.LogFileViewer.route) { LogFileViewerScreen() }
         composable(Route.MobileServices.route) { MobileServicesScreen() }
         composable(
             route = Route.PUNotifications.route,

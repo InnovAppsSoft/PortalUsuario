@@ -4,169 +4,162 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.marlon.portalusuario.R
-import kotlinx.coroutines.Dispatchers
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.io.File
-import java.io.IOException
 
-class LogFileViewerActivity : AppCompatActivity() {
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var logAdapter: LogAdapter
-    private lateinit var errorMessage: TextView
-    private lateinit var loadingBar: ProgressBar
+@Composable
+fun LogFileViewerScreen(viewModel: LogFileViewerViewModel = hiltViewModel()) {
+    val context = LocalContext.current.applicationContext
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val listState = rememberLazyListState()
+    val scope = rememberCoroutineScope()
+    var showClearDialog by remember { mutableStateOf(false) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_logs)
-
-        supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            title = "Registro de depuración"
-        }
-
-        JCLogging.init(this)
-        recyclerView = findViewById(R.id.rvLogs)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        errorMessage = findViewById(R.id.tvNoLogs)
-        loadingBar = findViewById(R.id.loadingBar)
-
-        refreshLog()
+    LaunchedEffect(Unit) {
+        JCLogging.init(context)
     }
 
-    private fun refreshLog() {
-        lifecycleScope.launch {
-            loadingBar.visibility = View.VISIBLE
-            recyclerView.visibility = View.INVISIBLE
-            errorMessage.visibility = View.INVISIBLE
+    if (showClearDialog) {
+        AlertDialog(
+            onDismissRequest = { showClearDialog = false },
+            title = { Text("¿Estás seguro?") },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        viewModel.clearLog()
+                        showClearDialog = false
+                    },
+                ) { Text("Sí") }
+            },
+            dismissButton = {
+                TextButton(onClick = { showClearDialog = false }) { Text("No") }
+            },
+        )
+    }
 
-            val result = withContext(Dispatchers.IO) {
-                val file = File(JCLogging.getDirectory(), "log.txt")
-                if (!file.exists()) return@withContext emptyList<String>()
-                try {
-                    JCLogging.readFromFile(file)
-                } catch (ex: IOException) {
-                    JCLogging.error(null, null, ex)
-                    null
-                }
+    Column(modifier = Modifier.fillMaxSize()) {
+        Row(
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 4.dp),
+            horizontalArrangement = Arrangement.End,
+        ) {
+            IconButton(onClick = { viewModel.refresh() }) {
+                Icon(Icons.Default.Refresh, contentDescription = "Actualizar")
             }
-
-            loadingBar.visibility = View.GONE
-            when {
-                result == null -> {
-                    errorMessage.visibility = View.VISIBLE
-                    errorMessage.text = "No existe archivo de registro"
-                }
-                result.isEmpty() -> {
-                    errorMessage.visibility = View.VISIBLE
-                    errorMessage.text = "El archivo de registro está vacío"
-                }
-                else -> {
-                    errorMessage.visibility = View.INVISIBLE
-                    setAdapter(result)
-                    recyclerView.visibility = View.VISIBLE
-                }
-            }
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        refreshLog()
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressedDispatcher.onBackPressed()
-        return super.onSupportNavigateUp()
-    }
-
-    private fun setAdapter(logs: List<String>) {
-        logAdapter = LogAdapter(logs, this)
-        recyclerView.adapter = logAdapter
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main_log, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menu_refresh -> {
-                refreshLog()
-                return true
-            }
-            R.id.menu_share_log -> {
-                try {
-                    val log =
-                        JCLogging.readAllFromFile(File(JCLogging.getDirectory(), "log.txt"))
+            IconButton(
+                onClick = {
+                    val allLogs = state.logs.joinToString("\n")
                     val clipboard =
-                        getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                    clipboard.setPrimaryClip(ClipData.newPlainText("log", log))
-                    Toast
-                        .makeText(
-                            this,
-                            "Registro copiado al portapapeles",
-                            Toast.LENGTH_SHORT,
-                        ).show()
-
+                        context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                    clipboard.setPrimaryClip(ClipData.newPlainText("log", allLogs))
+                    Toast.makeText(context, "Registro copiado al portapapeles", Toast.LENGTH_SHORT).show()
                     val share =
                         Intent(Intent.ACTION_SEND).apply {
                             type = "text/plain"
-                            putExtra(
-                                Intent.EXTRA_SUBJECT,
-                                "Registro de actividades de Portal Usuario",
-                            )
-                            putExtra(Intent.EXTRA_TEXT, log)
+                            putExtra(Intent.EXTRA_SUBJECT, "Registro de actividades de Portal Usuario")
+                            putExtra(Intent.EXTRA_TEXT, allLogs)
                         }
-                    startActivity(
+                    context.startActivity(
                         Intent.createChooser(share, "Enviar registro de Portal Usuario"),
                     )
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                    JCLogging.error(null, null, e)
-                }
-                return true
+                },
+            ) {
+                Icon(Icons.Default.Share, contentDescription = "Compartir registro")
             }
-            R.id.menu_go_to_final -> {
-                val pos = logAdapter.itemCount
-                if (pos > 0) {
-                    recyclerView.scrollToPosition(pos - 1)
-                }
-                return true
+            IconButton(
+                onClick = {
+                    val lastIndex = state.logs.size - 1
+                    if (lastIndex >= 0) {
+                        scope.launch { listState.animateScrollToItem(lastIndex) }
+                    }
+                },
+            ) {
+                Icon(Icons.Default.KeyboardArrowDown, contentDescription = "Ir al final")
             }
-            R.id.menu_clear -> {
-                AlertDialog
-                    .Builder(this)
-                    .setMessage(R.string.msg_sure)
-                    .setPositiveButton(android.R.string.yes) { _, _ ->
-                        JCLogging.clearLog()
-                        refreshLog()
-                        Toast
-                            .makeText(
-                                this,
-                                "Archivo de registro limpiado",
-                                Toast.LENGTH_LONG,
-                            ).show()
-                    }.setNegativeButton(android.R.string.no, null)
-                    .show()
-                return true
+            IconButton(onClick = { showClearDialog = true }) {
+                Icon(Icons.Default.Delete, contentDescription = "Limpiar registro")
             }
         }
-        return super.onOptionsItemSelected(item)
+
+        when {
+            state.isLoading -> {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    CircularProgressIndicator()
+                }
+            }
+            state.errorMessage != null -> {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(
+                        text = state.errorMessage!!,
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
+            }
+            else -> {
+                LazyColumn(state = listState, modifier = Modifier.fillMaxSize()) {
+                    items(state.logs) { log ->
+                        val textColor =
+                            when {
+                                log.contains("| E |") -> Color.Red
+                                log.contains("| W |") -> Color(0xFFFF9800)
+                                else -> Color(0xFF646464)
+                            }
+                        Text(
+                            text = log,
+                            color = textColor,
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+                        )
+                    }
+                }
+            }
+        }
     }
 }
