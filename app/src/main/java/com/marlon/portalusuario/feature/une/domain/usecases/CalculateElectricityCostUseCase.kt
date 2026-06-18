@@ -1,7 +1,7 @@
 package com.marlon.portalusuario.feature.une.domain.usecases
 
-import com.marlon.portalusuario.une.TarifaElect
-import com.marlon.portalusuario.util.Util
+import com.marlon.portalusuario.feature.une.TarifaElect
+import com.marlon.portalusuario.core.util.Util
 import javax.inject.Inject
 
 sealed class ElectricityCostResult {

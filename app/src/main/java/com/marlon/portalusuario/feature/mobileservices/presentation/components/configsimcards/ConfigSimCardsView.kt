@@ -22,7 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marlon.portalusuario.R
-import com.marlon.portalusuario.ui.components.NautaUserField
+import com.marlon.portalusuario.core.components.NautaUserField
 import io.github.suitetecsa.sdk.android.model.SimCard
 import kotlinx.coroutines.launch
 

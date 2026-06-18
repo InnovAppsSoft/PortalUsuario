@@ -2,7 +2,7 @@ package com.marlon.portalusuario.data.une
 
 import com.marlon.portalusuario.data.ServicesDao
 import com.marlon.portalusuario.domain.data.UneRepository
-import com.marlon.portalusuario.une.Une
+import com.marlon.portalusuario.feature.une.Une
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

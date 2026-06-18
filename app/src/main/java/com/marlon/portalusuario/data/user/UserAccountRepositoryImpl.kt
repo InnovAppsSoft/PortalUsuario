@@ -2,7 +2,7 @@ package com.marlon.portalusuario.data.user
 
 import com.marlon.portalusuario.data.ServicesDao
 import com.marlon.portalusuario.domain.data.UserAccountRepository
-import com.marlon.portalusuario.model.User
+import com.marlon.portalusuario.domain.model.User
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

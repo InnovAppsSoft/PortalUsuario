@@ -40,7 +40,7 @@ import com.marlon.portalusuario.R
 import com.marlon.portalusuario.data.preferences.AppPreferencesEvent
 import com.marlon.portalusuario.data.preferences.AppPreferencesViewModel
 import com.marlon.portalusuario.domain.model.ModeNight
-import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
+import com.marlon.portalusuario.core.theme.PortalUsuarioTheme
 
 private const val TAG = "SettingsScreen"
 

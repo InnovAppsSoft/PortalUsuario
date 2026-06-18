@@ -1,7 +1,7 @@
 package com.marlon.portalusuario.testhelpers
 
 import com.marlon.portalusuario.domain.data.UneRepository
-import com.marlon.portalusuario.une.Une
+import com.marlon.portalusuario.feature.une.Une
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 

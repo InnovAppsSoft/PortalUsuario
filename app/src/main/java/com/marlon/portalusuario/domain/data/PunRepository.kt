@@ -1,6 +1,6 @@
 package com.marlon.portalusuario.domain.data
 
-import com.marlon.portalusuario.punotifications.PUNotification
+import com.marlon.portalusuario.feature.notifications.PUNotification
 import kotlinx.coroutines.flow.Flow
 
 interface PunRepository {

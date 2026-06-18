@@ -1,7 +1,7 @@
 package com.marlon.portalusuario.testhelpers
 
 import com.marlon.portalusuario.domain.data.PunRepository
-import com.marlon.portalusuario.punotifications.PUNotification
+import com.marlon.portalusuario.feature.notifications.PUNotification
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 

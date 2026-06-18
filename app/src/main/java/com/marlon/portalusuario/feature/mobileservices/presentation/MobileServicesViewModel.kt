@@ -10,7 +10,7 @@ import com.marlon.portalusuario.data.preferences.IMobServicesPreferences
 import com.marlon.portalusuario.domain.data.UserRepository
 import com.marlon.portalusuario.domain.model.MobServPreferences
 import com.marlon.portalusuario.domain.model.MobileService
-import com.marlon.portalusuario.util.Utils.isAtLeastOneHourElapsed
+import com.marlon.portalusuario.core.util.Utils.isAtLeastOneHourElapsed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.suitetecsa.sdk.android.SimCardCollector
 import io.github.suitetecsa.sdk.android.model.SimCard

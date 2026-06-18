@@ -1,7 +1,7 @@
 package com.marlon.portalusuario.testhelpers
 
 import com.marlon.portalusuario.domain.data.UserAccountRepository
-import com.marlon.portalusuario.model.User
+import com.marlon.portalusuario.domain.model.User
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 

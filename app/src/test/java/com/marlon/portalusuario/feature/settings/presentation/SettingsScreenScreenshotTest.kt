@@ -10,7 +10,7 @@ import com.marlon.portalusuario.data.preferences.AppPreferencesViewModel
 import com.marlon.portalusuario.domain.model.AppSettings
 import com.marlon.portalusuario.domain.model.ModeNight
 import com.marlon.portalusuario.testhelpers.FakeAppPreferencesManager
-import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
+import com.marlon.portalusuario.core.theme.PortalUsuarioTheme
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

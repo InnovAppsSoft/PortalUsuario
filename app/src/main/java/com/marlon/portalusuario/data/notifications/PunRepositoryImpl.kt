@@ -8,7 +8,7 @@ import com.marlon.portalusuario.data.preferences.setNotificationsCount
 import com.marlon.portalusuario.domain.data.PunRepository
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-import com.marlon.portalusuario.punotifications.PUNotification
+import com.marlon.portalusuario.feature.notifications.PUNotification
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

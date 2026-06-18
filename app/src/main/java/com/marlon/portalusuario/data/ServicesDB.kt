@@ -9,9 +9,9 @@ import com.marlon.portalusuario.data.entity.ClientProfile
 import com.marlon.portalusuario.data.entity.Converters
 import com.marlon.portalusuario.data.entity.MobileService
 import com.marlon.portalusuario.data.entity.NavigationService
-import com.marlon.portalusuario.model.User
-import com.marlon.portalusuario.punotifications.PUNotification
-import com.marlon.portalusuario.une.Une
+import com.marlon.portalusuario.domain.model.User
+import com.marlon.portalusuario.feature.notifications.PUNotification
+import com.marlon.portalusuario.feature.une.Une
 
 @Database(
     entities = [

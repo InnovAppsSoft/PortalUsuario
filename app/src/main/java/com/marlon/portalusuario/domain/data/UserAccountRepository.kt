@@ -1,6 +1,6 @@
 package com.marlon.portalusuario.domain.data
 
-import com.marlon.portalusuario.model.User
+import com.marlon.portalusuario.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
 interface UserAccountRepository {

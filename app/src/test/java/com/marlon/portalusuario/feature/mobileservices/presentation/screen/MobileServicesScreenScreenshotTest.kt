@@ -11,7 +11,7 @@ import com.marlon.portalusuario.domain.model.MobilePlan
 import com.marlon.portalusuario.domain.model.MobileService
 import com.marlon.portalusuario.domain.model.ServiceType
 import com.marlon.portalusuario.feature.mobileservices.presentation.MobileServicesState
-import com.marlon.portalusuario.ui.theme.PortalUsuarioTheme
+import com.marlon.portalusuario.core.theme.PortalUsuarioTheme
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

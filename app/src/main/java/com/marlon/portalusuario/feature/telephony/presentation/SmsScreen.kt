@@ -24,10 +24,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
-import com.marlon.portalusuario.ui.theme.BrightSkyBlue
-import com.marlon.portalusuario.ui.theme.DeepLavender
-import com.marlon.portalusuario.ui.theme.TealBlue
-import com.marlon.portalusuario.ui.theme.VibrantGreen
+import com.marlon.portalusuario.core.theme.BrightSkyBlue
+import com.marlon.portalusuario.core.theme.DeepLavender
+import com.marlon.portalusuario.core.theme.TealBlue
+import com.marlon.portalusuario.core.theme.VibrantGreen
 
 @Composable
 fun SmsScreen() {
