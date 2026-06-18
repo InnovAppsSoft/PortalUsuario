@@ -68,7 +68,7 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".feature.main.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity" />
@@ -90,7 +90,7 @@
             android:value="ca-app-pub-9665109922019776~6118514078" />
 
         <receiver
-            android:name=".widgets.WidgetDark"
+            android:name=".feature.widgets.WidgetDark"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -101,7 +101,7 @@
                 android:resource="@xml/widget_dark_info" />
         </receiver>
         <receiver
-            android:name=".widgets.WidgetUSSD"
+            android:name=".feature.widgets.WidgetUSSD"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -112,7 +112,7 @@
                 android:resource="@xml/widget_u_s_s_d_info" />
         </receiver>
         <receiver
-            android:name=".widgets.Widget"
+            android:name=".feature.widgets.Widget"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -124,7 +124,7 @@
         </receiver>
 
         <service
-            android:name=".firebase.FirebaseService"
+            android:name=".feature.notifications.FirebaseService"
             android:enabled="true"
             android:exported="true"
             android:stopWithTask="false">
@@ -133,7 +133,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".trafficbubble.FloatingBubbleService"
+            android:name=".feature.trafficbubble.FloatingBubbleService"
             android:enabled="true"
             android:exported="true" />
 
