@@ -58,6 +58,7 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -74,7 +75,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.marlon.portalusuario.R
-import com.marlon.portalusuario.components.SetLTEModeDialog
+import com.marlon.portalusuario.components.ShowSetLTEModeDialog
 import com.marlon.portalusuario.data.preferences.IAppPreferencesManager
 import com.marlon.portalusuario.domain.model.ModeNight
 import com.marlon.portalusuario.navigation.PortalUsuarioNavHost
@@ -224,6 +225,7 @@ private fun MainScreen(startDestination: String = Route.MobileServices.route) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     val currentTitle = routeTitle(currentRoute)
+    var showLteDialog by remember { mutableStateOf(false) }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -231,6 +233,7 @@ private fun MainScreen(startDestination: String = Route.MobileServices.route) {
             ModalDrawerSheet(modifier = Modifier.width(280.dp)) {
                 DrawerContent(
                     currentRoute = currentRoute,
+                    onForce4G = { showLteDialog = true },
                     onItemClick = { action ->
                         when (action) {
                             is DrawerAction.Navigate -> {
@@ -291,6 +294,9 @@ private fun MainScreen(startDestination: String = Route.MobileServices.route) {
             )
         }
     }
+    if (showLteDialog) {
+        ShowSetLTEModeDialog(onDismiss = { showLteDialog = false })
+    }
 }
 
 private sealed class DrawerAction {
@@ -328,6 +334,7 @@ private data class DrawerItem(
 private fun DrawerContent(
     currentRoute: String?,
     onItemClick: (DrawerAction) -> Unit,
+    onForce4G: () -> Unit,
 ) {
     val context = LocalContext.current
     val inviteText = stringResource(R.string.invite_user)
@@ -421,9 +428,7 @@ private fun DrawerContent(
                     items =
                         listOf(
                             DrawerItem("Forzar 4G", Icons.Default.SignalCellularAlt) {
-                                DrawerAction.ShowDialog { ctx ->
-                                    SetLTEModeDialog(ctx as android.app.Activity)
-                                }
+                                DrawerAction.ShowDialog { onForce4G() }
                             },
                             DrawerItem("Calculadora UNE", Icons.Default.Calculate, Route.Une.route) {
                                 DrawerAction.Navigate(Route.Une)
