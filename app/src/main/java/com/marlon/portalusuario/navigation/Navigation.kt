@@ -33,6 +33,7 @@ import com.marlon.portalusuario.paquetes.PaquetesScreen
 import com.marlon.portalusuario.perfil.PerfilScreen
 import com.marlon.portalusuario.permisos.PermissionScreen
 import com.marlon.portalusuario.permisos.PermissionViewModel
+import com.marlon.portalusuario.punotifications.PUNotificationsScreen
 import com.marlon.portalusuario.servicios.ServiciosScreen
 import com.marlon.portalusuario.une.UneScreen
 
@@ -109,9 +110,8 @@ fun PortalUsuarioNavHost(
                         defaultValue = ""
                     },
                 ),
-        ) { backStackEntry ->
-            val notificationId = backStackEntry.arguments?.getString("notificationId") ?: ""
-            PlaceholderScreen("PU Notifications (id=$notificationId)")
+        ) { _ ->
+            PUNotificationsScreen()
         }
     }
 }

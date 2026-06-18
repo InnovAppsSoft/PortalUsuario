@@ -86,6 +86,11 @@ jwtdecode = "2.0.2"
 prettytime = "5.0.9.Final"
 
 # ═══════════════════════════════════════════
+# Compose Image Loading
+# ═══════════════════════════════════════════
+coil = "2.7.0"
+
+# ═══════════════════════════════════════════
 # Testing
 # ═══════════════════════════════════════════
 junit = "4.13.2"
@@ -205,6 +210,11 @@ gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 jwtdecode = { group = "com.auth0.android", name = "jwtdecode", version.ref = "jwtdecode" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 prettytime = { group = "org.ocpsoft.prettytime", name = "prettytime", version.ref = "prettytime" }
+
+# ─────────────────────────────────────────────
+# Compose Image Loading
+# ─────────────────────────────────────────────
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 # ─────────────────────────────────────────────
 # Testing

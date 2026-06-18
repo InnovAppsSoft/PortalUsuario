@@ -73,9 +73,6 @@
             android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".punotifications.PUNotificationsActivity"
-            android:exported="false" />
-        <activity
             android:name=".feature.splash.presentation.ActivitySplash"
             android:exported="true"
             android:screenOrientation="portrait"
