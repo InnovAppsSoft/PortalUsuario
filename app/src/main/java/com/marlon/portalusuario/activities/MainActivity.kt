@@ -13,6 +13,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -100,6 +101,7 @@ class MainActivity : ComponentActivity() {
     lateinit var networkConnectivityObserver: NetworkConnectivityObserver
 
     private var isDynamicColor by mutableStateOf(true)
+    private var darkTheme: Boolean? by mutableStateOf(null)
 
     @Suppress("LongMethod")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -120,26 +122,21 @@ class MainActivity : ComponentActivity() {
         lifecycleScope.launch {
             appPreferencesManager.preferences().collect { preferences ->
                 isDynamicColor = preferences.isDynamicColor
-                when (preferences.modeNight) {
-                    ModeNight.YES -> {
-                        androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(
-                            androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES,
-                        )
-                        Log.i(TAG, "onCreate: Changed modeNight to Dark")
+                darkTheme =
+                    when (preferences.modeNight) {
+                        ModeNight.YES -> {
+                            Log.i(TAG, "onCreate: Changed modeNight to Dark")
+                            true
+                        }
+                        ModeNight.NO -> {
+                            Log.i(TAG, "onCreate: Changed modeNight to Light")
+                            false
+                        }
+                        ModeNight.FOLLOW_SYSTEM -> {
+                            Log.i(TAG, "onCreate: Changed modeNight to System")
+                            null
+                        }
                     }
-                    ModeNight.NO -> {
-                        androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(
-                            androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO,
-                        )
-                        Log.i(TAG, "onCreate: Changed modeNight to Light")
-                    }
-                    ModeNight.FOLLOW_SYSTEM -> {
-                        androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(
-                            androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM,
-                        )
-                        Log.i(TAG, "onCreate: Changed modeNight to System")
-                    }
-                }
 
                 if (preferences.isShowingTrafficBubble) {
                     Log.d(TAG, "onCreate: isShowingTrafficBubble = true")
@@ -189,7 +186,10 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
-            PortalUsuarioTheme(dynamicColor = isDynamicColor) {
+            PortalUsuarioTheme(
+                darkTheme = darkTheme ?: isSystemInDarkTheme(),
+                dynamicColor = isDynamicColor,
+            ) {
                 val startDestination =
                     when {
                         openNotifications -> Route.PUNotifications.createRoute()
