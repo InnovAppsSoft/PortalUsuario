@@ -79,7 +79,6 @@ internal fun PlansSection(
                     planTitle = it.type,
                     dataCount = it.data,
                     remainingDays = it.expires.asDateMillis?.asRemainingDays,
-                    color = VibrantTangerineOrange,
                 )
             }
         }

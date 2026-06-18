@@ -15,7 +15,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.marlon.portalusuario.core.components.ArcProgressbar
 import com.marlon.portalusuario.core.components.PrettyCard
-import com.marlon.portalusuario.core.theme.VibrantPink
+import com.marlon.portalusuario.core.theme.BrightOrange
+import com.marlon.portalusuario.core.theme.VibrantGreen
+import com.marlon.portalusuario.core.theme.VividRed
 
 @Composable
 fun PlanCard(
@@ -23,9 +25,10 @@ fun PlanCard(
     planTitle: String = "Data",
     dataCount: String = "3.50 GB + 4.50 GB",
     remainingDays: Int? = null,
-    color: Color = VibrantPink,
     isDailyData: Boolean = false,
 ) {
+    val color = progressColor(remainingDays, 30)
+
     PrettyCard(modifier = modifier) {
         Column(
             modifier = Modifier.padding(4.dp),
@@ -49,6 +52,15 @@ fun PlanCard(
             )
             Text(text = dataCount)
         }
+    }
+}
+
+private fun progressColor(remainingDays: Int?, maxDays: Int): Color {
+    val ratio = if (remainingDays != null && maxDays > 0) remainingDays.toFloat() / maxDays else 1f
+    return when {
+        ratio > 0.5f -> VibrantGreen
+        ratio > 0.16f -> BrightOrange
+        else -> VividRed
     }
 }
 

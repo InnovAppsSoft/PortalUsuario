@@ -47,7 +47,6 @@ internal fun BonusSection(bonuses: List<MobileBonus>) {
                 planTitle = it.type,
                 dataCount = it.data,
                 remainingDays = StringUtils.toDateMillis(it.expires.replace("/", "-")).asRemainingDays,
-                color = TropicalAquamarineGreen,
             )
         }
     }

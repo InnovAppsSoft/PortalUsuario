@@ -76,7 +76,11 @@ fun PortalUsuarioNavHost(
                 },
             )
         }
-        composable(Route.Main.route) { MobileServicesScreen() }
+        composable(Route.Main.route) {
+            MobileServicesScreen(
+                onNavigateToServicios = { navController.navigate(Route.Servicios.route) },
+            )
+        }
         composable(Route.Settings.route) { SettingsScreen() }
         composable(Route.About.route) { AboutScreen() }
         composable(Route.Donation.route) { DonationScreen() }
@@ -100,7 +104,11 @@ fun PortalUsuarioNavHost(
         }
         composable(Route.Paquetes.route) { PaquetesScreen() }
         composable(Route.LogFileViewer.route) { LogFileViewerScreen() }
-        composable(Route.MobileServices.route) { MobileServicesScreen() }
+        composable(Route.MobileServices.route) {
+            MobileServicesScreen(
+                onNavigateToServicios = { navController.navigate(Route.Servicios.route) },
+            )
+        }
         composable(
             route = Route.PUNotifications.route,
             arguments =
